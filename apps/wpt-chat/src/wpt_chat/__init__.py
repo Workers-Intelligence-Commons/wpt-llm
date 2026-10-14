@@ -9,6 +9,8 @@ generated text, and the sources the model learned from.
 """
 
 import argparse
+import io
+import sys
 from pathlib import Path
 
 from wpt_device import describe, select_device
@@ -48,6 +50,10 @@ def about(folder) -> str:
 
 
 def main(argv=None):
+    # notices and generated text can hold any character; Windows pipes default to a narrower code page
+    for stream in (sys.stdout, sys.stdin):
+        if isinstance(stream, io.TextIOWrapper):  # not when a caller replaced it (a test, a host program)
+            stream.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("model", nargs="?", default="runs/default", help="model folder (default: runs/default)")
     parser.add_argument("--max-new-tokens", type=int, default=MAX_NEW_TOKENS, help="length limit of each continuation")

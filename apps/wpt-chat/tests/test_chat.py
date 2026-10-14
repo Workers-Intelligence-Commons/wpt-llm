@@ -1,3 +1,6 @@
+import subprocess
+import sys
+
 from wpt_chat import main
 from wpt_model import ModelConfig, TinyGPT, save_model
 from wpt_tokenizer import Tokenizer
@@ -35,3 +38,13 @@ def test_a_folder_without_notice_still_names_the_licenses(tmp_path, monkeypatch,
     monkeypatch.setattr("builtins.input", lambda prompt: "")
     main([str(folder)])
     assert "this folder has no NOTICE; notices and sources: https://github.com/inayayousfi/wpt-llm" in capsys.readouterr().out
+
+
+def test_notices_reach_a_pipe_as_utf8(tmp_path):
+    # a NOTICE names authors in any script; sent to a file or another program
+    # (a pipe), it must arrive whole, on Windows too
+    folder = model_folder(tmp_path / "model")
+    (folder / "NOTICE").write_text("Ada Writer \u2192 Fox Stories, \u00e9t\u00e9\n", encoding="utf-8")
+    out = subprocess.run([sys.executable, "-c", "from wpt_chat import main; main()", str(folder), "--about"],
+                         capture_output=True, check=True).stdout
+    assert out.replace(b"\r\n", b"\n") == "Ada Writer \u2192 Fox Stories, \u00e9t\u00e9\n".encode()
