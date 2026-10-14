@@ -2,8 +2,8 @@
 
     download (address, else each mirror) -> upstream tree, checked against `checksum`
                                             (an "empty" source has no files and downloads nothing;
-                                            a robots.txt that forbids an address refuses the source,
-                                            see robots.py)
+                                            an address whose robots.txt forbids it, or cannot be
+                                            read, is skipped for the next mirror, see robots.py)
     erasure cuts, in the order listed     -> each checked by sha256_after
     patches, in file-name order           -> applied with `git apply`
 
@@ -25,7 +25,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from . import manifest, robots
-from .errors import ChecksumMismatch, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed
+from .errors import ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match
 from .programs import program
 from .repo import Source
@@ -46,10 +46,13 @@ def upstream_tree(source: Source, store) -> dict[str, Entry]:
     if known:
         return manifest.parse_manifest(store.get_bytes(known))
     addresses = [source.data["address"]] + [m["address"] for m in source.data.get("mirrors", [])]
-    unreachable, mismatched = [], []
+    unreachable, forbidden, mismatched = [], [], []
     for address in addresses:
         try:
             tree = _fetch(source.data, address, store)
+        except CrawlForbidden as error:  # that site's wish only; another site may allow it
+            forbidden.append(str(error))
+            continue
         except (OSError, urllib.error.URLError, subprocess.CalledProcessError) as error:
             detail = error.stderr.decode(errors="replace").strip() if isinstance(error, subprocess.CalledProcessError) and error.stderr else error
             unreachable.append(f"{address}: {detail}")
@@ -59,9 +62,11 @@ def upstream_tree(source: Source, store) -> dict[str, Entry]:
             store.set_ref("upstream", expected.removeprefix("sha256:"), store.put_bytes(manifest.manifest_bytes(tree)))
             return tree
         mismatched.append(f"{address}: {actual}")
+    others = "".join(f"; refused {f}" for f in forbidden) + "".join(f"; unreachable {u}" for u in unreachable)
     if mismatched:
-        raise ChecksumMismatch(f"{source.id}: expected {expected}, got " + "; ".join(mismatched)
-                               + ("".join(f"; unreachable {u}" for u in unreachable)))
+        raise ChecksumMismatch(f"{source.id}: expected {expected}, got " + "; ".join(mismatched) + others)
+    if forbidden:
+        raise CrawlForbidden(f"{source.id}: every address failed{others}")
     raise FetchFailed(f"{source.id}: " + "; ".join(unreachable))
 
 

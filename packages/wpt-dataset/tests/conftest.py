@@ -13,7 +13,7 @@ from pathlib import Path
 import pytest
 
 from wpt_dataset import manifest
-from wpt_dataset.repo import Repo, address_hash, dump_json
+from wpt_dataset.repo import CURRENT_SCHEMA, Repo, address_hash, dump_json
 from wpt_dataset.sources import compute_upstream
 from wpt_store import open_store
 
@@ -123,7 +123,7 @@ def repo(tmp_path):
     return Repo(root)
 
 
-DECISION = {"decision": "admitted", "by": "Test Reviewer", "date": "2026-10-14", "reason": "MIT, read in full"}
+DECISION = {"decision": "admitted", "by": "Test Reviewer", "date": "2026-10-14"}  # an admission needs no reason
 ATTRIBUTION = "Copyright (c) 2026 Test Author, https://example.org/project"
 
 
@@ -146,7 +146,7 @@ def add_source(repo, store, origin, item, data, patches=(), compute_checksum=Tru
 
 def write_recipe(repo, kind, name, document):
     path = repo.recipe_path(kind, name)
-    path.write_text(json.dumps({"schema": 1, **document}, indent=2) + "\n", encoding="utf-8", newline="\n")
+    path.write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}, indent=2) + "\n", encoding="utf-8", newline="\n")
     return path
 
 

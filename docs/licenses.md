@@ -260,21 +260,30 @@ keeping attribution, so the copyright notices of a source stay in its tree.
   work's country of origin (the Wikimedia Commons rule). A work can still be
   protected in the country someone publishes from.
 - **"No AI training" wishes are honored** even when the license would allow
-  use: a statement in a README, robots.txt, or a machine-readable
+  use: a statement by the owner in a README or a machine-readable
   text-and-data-mining reservation (EU Directive 2019/790, article 4) leaves
   the content out. Review looks for them on every source.
 - **robots.txt is enforced in the code**, with no setting to turn it off:
   before any download from an http(s) address, `wpt-dataset` reads the
-  site's robots.txt (RFC 9309) and refuses the source when it forbids the
-  address to every crawler (`*`), to `wpt-dataset` itself, or to an AI
-  training crawler. Those are the crawlers whose operator documents that
+  site's robots.txt (RFC 9309) and does not download from that address when
+  it is forbidden to every crawler (`*`), to `wpt-dataset` itself, or to an
+  AI training crawler. Those are the crawlers whose operator documents that
   they gather training data, listed with the link to that statement in
-  `packages/wpt-dataset/src/wpt_dataset/robots.py`. A refusal stops the
-  source; no mirror is tried instead. Crawlers that only fetch a page for a
-  person using an AI assistant (Claude-User, ChatGPT-User...) are not on the
-  list: a site that refuses only them has not refused training. A
-  robots.txt that cannot be read makes that address unusable, and the next
-  mirror is tried.
+  `packages/wpt-dataset/src/wpt_dataset/robots.py`. Crawlers that only fetch
+  a page for a person using an AI assistant (Claude-User, ChatGPT-User...)
+  are not on the list: a site that refuses only them has not refused
+  training.
+- **A robots.txt speaks for its own site.** Whoever runs a site writes its
+  robots.txt, and that is not always the owner of the content: a hosting
+  platform can block every AI crawler while the author's own site allows
+  them. So a refused address is skipped and the source's next mirror is
+  tried, read with its own robots.txt; the source fails (`CrawlForbidden`)
+  only when no address works and one of them refused. A statement by the
+  owner (above) still leaves the content out wherever it is hosted.
+- **Only a missing robots.txt means no rules**: an answer 404 (not found)
+  or 410 (gone), since some sites publish no policy. Any other answer
+  (401, 403, 429, a server error, a timeout, an unreachable site) leaves the
+  policy unknown, so that address is not used and the next mirror is tried.
 - **No personal data**: sources made of personal data are not accepted.
 - A machine can check that a license is written and allowed, not that it is
   true. If the source page lies, only human review catches it.
@@ -282,7 +291,8 @@ keeping attribution, so the copyright notices of a source stay in its tree.
 ## Who decides
 
 A human decides every source; the decision is recorded in `source.json`
-(`decision`) and its commit must be signed by an allowed key (see
+(`decision`, with a reason for a refusal, a retirement or an exceptional
+admission) and its commit must be signed by an allowed key (see
 [CONTRIBUTING.md](../CONTRIBUTING.md)). There is no automatic filtering or
 tagging.
 

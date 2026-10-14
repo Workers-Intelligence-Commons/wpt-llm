@@ -4,15 +4,22 @@
     model.safetensors                    all weights, when not split
     model-00001-of-00003.safetensors     or one file per shard,
     model.safetensors.index.json         plus an index: tensor name -> shard file
+    tokenizer.json                       the vocabulary the model was trained with
     LICENSE, NOTICE, README.md           license documents and model card (notice.py)
 
 safetensors stores only tensors, so loading never runs code (unlike torch.load).
+Every weight file's header names the tokenizer (`tokenizer`, such as
+"classics version 1") and the sha256 of tokenizer.json (`tokenizer_sha256`),
+so a model never runs with another vocabulary than its own: load_tokenizer
+refuses a tokenizer.json that does not match (TokenizerMismatch).
 """
 
+import hashlib
 import json
 from pathlib import Path
 
 import torch
+from safetensors import safe_open
 from safetensors.torch import load_file, save_file
 
 from .config import ModelConfig
@@ -21,14 +28,22 @@ from .gpt import TinyGPT
 CONFIG_NAME = "config.json"
 SINGLE_NAME = "model.safetensors"
 INDEX_NAME = "model.safetensors.index.json"
+TOKENIZER_NAME = "tokenizer.json"
 METADATA = {"format": "pt"}
 
 
-def save_model(model: TinyGPT, directory, max_shard_bytes=None, metadata=None):
+class TokenizerMismatch(ValueError):
+    """tokenizer.json is missing or is not the vocabulary named in the
+    weight files' headers (or the headers name none, or disagree)."""
+
+
+def save_model(model: TinyGPT, directory, tokenizer: bytes, tokenizer_name: str, max_shard_bytes=None, metadata=None):
     """Write the model folder. Replaces any model already saved there.
 
-    metadata: text entries added to the header of every weight file (for
-    example notice.WEIGHT_METADATA).
+    tokenizer: the vocabulary file's bytes, written as tokenizer.json and
+    named in every weight file's header with tokenizer_name.
+    metadata: other text entries added to the header of every weight file
+    (for example notice.WEIGHT_METADATA).
 
     config.json is written last, so a save that fails midway leaves a folder
     that load_model refuses instead of one that loads mismatched weights.
@@ -40,7 +55,9 @@ def save_model(model: TinyGPT, directory, max_shard_bytes=None, metadata=None):
     directory.mkdir(parents=True, exist_ok=True)
     _remove_model(directory)
     state = {k: v.detach().cpu().contiguous() for k, v in model.state_dict().items()}
-    metadata = {**(metadata or {}), **METADATA}
+    metadata = {**(metadata or {}), "tokenizer": tokenizer_name,
+                "tokenizer_sha256": hashlib.sha256(tokenizer).hexdigest(), **METADATA}
+    (directory / TOKENIZER_NAME).write_bytes(tokenizer)
 
     shards = _split(state, max_shard_bytes)
     if len(shards) == 1:
@@ -67,17 +84,48 @@ def load_model(directory, device="cpu") -> TinyGPT:
     """Rebuild the model from config.json and load its weights, split or not."""
     directory = Path(directory)
     config = ModelConfig.load(directory / CONFIG_NAME)
-    index_path = directory / INDEX_NAME
-    if index_path.exists():
-        files = sorted(set(json.loads(index_path.read_text(encoding="utf-8"))["weight_map"].values()))
-    else:
-        files = [SINGLE_NAME]
     state = {}
-    for name in files:
+    for name in _weight_files(directory):
         state.update(load_file(directory / name))
     model = TinyGPT(config)
     model.load_state_dict(state)
     return model.to(device)
+
+
+def tokenizer_identity(directory) -> tuple[str, str]:
+    """(tokenizer name, sha256 of tokenizer.json) as the weight files' headers name them."""
+    directory = Path(directory)
+    found = set()
+    for name in _weight_files(directory):
+        with safe_open(directory / name, framework="pt") as weights:
+            header = weights.metadata() or {}
+        found.add((header.get("tokenizer"), header.get("tokenizer_sha256")))
+    if len(found) != 1 or None in next(iter(found)):
+        raise TokenizerMismatch(f"{directory}: the weight files name no single tokenizer ({sorted(found, key=str)}); "
+                                "this folder was written before tokenizers were named, so train it again")
+    return next(iter(found))
+
+
+def load_tokenizer(directory) -> bytes:
+    """The bytes of tokenizer.json, only when they are the vocabulary the weights name."""
+    directory = Path(directory)
+    name, expected = tokenizer_identity(directory)
+    try:
+        data = (directory / TOKENIZER_NAME).read_bytes()
+    except FileNotFoundError:
+        raise TokenizerMismatch(f"{directory}: no {TOKENIZER_NAME}; the weights need tokenizer {name}") from None
+    actual = hashlib.sha256(data).hexdigest()
+    if actual != expected:
+        raise TokenizerMismatch(f"{directory}: {TOKENIZER_NAME} has sha256 {actual}, but the weights were trained "
+                                f"with tokenizer {name}, sha256 {expected}")
+    return data
+
+
+def _weight_files(directory: Path) -> list[str]:
+    index_path = directory / INDEX_NAME
+    if index_path.exists():
+        return sorted(set(json.loads(index_path.read_text(encoding="utf-8"))["weight_map"].values()))
+    return [SINGLE_NAME]
 
 
 def _split(state, max_shard_bytes):
@@ -104,3 +152,4 @@ def _remove_model(directory: Path):
         path.unlink()
     (directory / INDEX_NAME).unlink(missing_ok=True)
     (directory / CONFIG_NAME).unlink(missing_ok=True)
+    (directory / TOKENIZER_NAME).unlink(missing_ok=True)

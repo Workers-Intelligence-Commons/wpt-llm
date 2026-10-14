@@ -34,7 +34,7 @@ import numpy as np
 import torch
 
 from wpt_device import describe, select_device
-from wpt_model import TinyGPT, load_model
+from wpt_model import TinyGPT, TokenizerMismatch, load_model, load_tokenizer
 from wpt_model.notice import EVALS_NAME, write_documents
 from wpt_store import Store, StoreError, store_from_settings
 from wpt_store.shards import read_verified
@@ -132,9 +132,13 @@ def open_context(folder, store, device) -> Context:
         raise EvalError(f"{folder}: no provenance.json; give a folder that wpt-train wrote") from None
     if provenance.get("schema") != 3:
         raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 3; train it again")
+    try:
+        tokenizer = Tokenizer.from_bytes(load_tokenizer(folder))
+    except TokenizerMismatch as error:
+        raise EvalError(str(error)) from None
     model = load_model(folder, device)
     model.eval()
-    return Context(folder, model, Tokenizer.load(folder / "tokenizer.json"), device, provenance, store)
+    return Context(folder, model, tokenizer, device, provenance, store)
 
 
 def main(argv=None):

@@ -42,7 +42,19 @@ def test_every_format_becomes_markdown_that_reads_as_written(kit, repo, store, t
         "[^1]: See *Phaedo*.\n")
     assert "text/notes.xhtml" not in found  # its only note now lives in the page that refers to it
     assert found["plain.txt"] == b"\\# not a heading\\\nsecond \\*line\\*\n\nnew paragraph\n"
-    assert found["code/run.py"] == b"````python title=\"code/run.py\"\nprint('```')\n````\n"
+    assert found["code/run.py"] == b"````python path=\"./code/run.py\"\nprint('```')\n````\n"  # from the repository's root
+
+
+def test_code_outside_a_repository_names_its_path_without_a_root(kit, repo, store, http_folder):
+    # "./" stands for a repository's root; a downloaded file or archive has none
+    folder, base = http_folder
+    (folder / "run.py").write_bytes(b"print(1)\n")
+    sid = kit.add_source(repo, store, "example", "script", {
+        "type": "http-file", "address": f"{base}/run.py", "revision": "2026-10-14",
+        "formats": [{"format": "code", "language": "python", "paths": ["**"]}]})
+    source = repo.source(sid)
+    assert documents(source, source_tree(source, store)[0], store) == [
+        ("run.py", b"```python path=\"run.py\"\nprint(1)\n```\n")]
 
 
 def test_a_file_without_format_or_with_broken_markup_stops_the_build(kit, repo, store, tmp_path):

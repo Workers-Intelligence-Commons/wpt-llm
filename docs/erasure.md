@@ -51,6 +51,12 @@ who accepts that.
 Erasure applies to **future builds and models only**. Models already trained
 and published are not changed.
 
+A locked vocabulary is not retrained when a source changes (see
+[tokenizer.md](tokenizer.md)), so merges learned from erased text, such as
+pieces of a rare name, stay in it until someone raises the tokenizer
+recipe's `version`. When an erasure must reach the vocabulary too, raise
+the version in the same commit as the cut.
+
 ## History rewrites
 
 Projects almost never rewrite git history to remove licensed content: they

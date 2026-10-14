@@ -113,8 +113,11 @@ The model folder holds:
 - the weights (safetensors, optionally split with `--max-shard-size`); each
   file's header carries `license` (AGPL-3.0-or-later), `output_license`
   (CC0-1.0) and `notice`, which points to the folder's `NOTICE` and the
-  project;
-- `tokenizer.json`, the dataset's vocabulary;
+  project, and `tokenizer` (the tokenizer recipe and version, such as
+  `classics version 1`) and `tokenizer_sha256`;
+- `tokenizer.json`, the dataset's vocabulary, exactly the bytes those
+  headers name: `wpt-chat`, `wpt-eval` and `wpt-posttrain` refuse another
+  (see [tokenizer.md](tokenizer.md));
 - `provenance.json`, what produced the model, including every source it
   learned from (address, revision, licenses and attribution, copied from the
   dataset record);

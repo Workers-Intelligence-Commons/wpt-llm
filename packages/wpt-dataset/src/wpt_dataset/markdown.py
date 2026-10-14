@@ -11,7 +11,10 @@ Markdown, never on the file itself:
   characters with a meaning in Markdown are escaped, so the text reads
   exactly as written.
 - `code`: one fenced code block whose opening line names the language and
-  the file's path, as in ```python title="src/main.py".
+  the file's path, as in ```python path="./src/main.py". In a git or
+  Mercurial source the path starts with "./", the repository's root; in
+  any other source (an archive, a single file) it is written as it is,
+  ```python path="src/main.py", since no repository root exists.
 - `xhtml`: web pages written as strict XML (EPUB books), read by lxml's XML
   parser; a file that is not well-formed stops the build. Headings become
   `#` headings, paragraphs paragraphs, lists lists, quotations `>`
@@ -51,6 +54,7 @@ TAG_START = re.compile(r"<(?=[A-Za-z/!?])")
 ENTITY = re.compile(r"&(?=#?[A-Za-z0-9]+;)")
 LINE_START = re.compile(r"^([#>+=|~-])")
 NUMBERED = re.compile(r"^(\d+)([.)])")
+REPOSITORIES = {"git", "mercurial"}  # source types whose paths start at a repository's root
 
 
 def format_of(source, path: str) -> dict:
@@ -89,7 +93,7 @@ def documents(source, tree, store) -> list[tuple[str, bytes]]:
         elif kind == "text":
             markdown = text(data.decode("utf-8"))
         elif kind == "code":
-            markdown = code(data.decode("utf-8"), entry["language"], path)
+            markdown = code(data.decode("utf-8"), entry["language"], path, source.data["type"] in REPOSITORIES)
         else:
             markdown = Page(path, note).render(page(path))
         if markdown.strip():
@@ -121,9 +125,9 @@ def text(content: str) -> bytes:
     return ("\n\n".join(paragraphs) + "\n").encode() if paragraphs else b""
 
 
-def code(content: str, language: str, path: str) -> bytes:
-    title = path.replace("\\", "\\\\").replace('"', '\\"')
-    return (fenced(content.removeprefix("\ufeff"), f'{language} title="{title}"') + "\n").encode()
+def code(content: str, language: str, path: str, from_repository: bool) -> bytes:
+    shown = ("./" if from_repository else "") + path.replace("\\", "\\\\").replace('"', '\\"')
+    return (fenced(content.removeprefix("\ufeff"), f'{language} path="{shown}"') + "\n").encode()
 
 
 def fenced(content: str, info: str) -> str:

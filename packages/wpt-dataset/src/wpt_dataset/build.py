@@ -34,7 +34,7 @@ from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_tokenizer import __version__ as TOKENIZER_VERSION
 
 from . import markdown, pools
-from .errors import LockMismatch, PoolError
+from .errors import LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
 from .repo import Repo, dump_json, load_json
 from .sources import VERSION, fingerprint, source_tree, tags_of
 
@@ -95,37 +95,71 @@ def is_held_out(document_id: str, share: float) -> bool:
 # -- tokenizer ------------------------------------------------------------------
 
 def build_tokenizer(repo: Repo, name: str, store, log=print):
-    """(tokenizer, vocabulary object sha256, fingerprint). Writes the lock
-    file when it is missing or its fingerprint is outdated."""
-    recipe = repo.recipe("tokenizer", name)
-    mixture = repo.recipe("mixture", recipe["mixture"])
-    documents, _, _ = gather(repo, store, log)
-    selected = sorted((d for pool in assign(documents, mixture).values() for d in pool), key=lambda d: d.id)
-    if not selected:
-        raise PoolError(f"tokenizer {name}: mixture {recipe['mixture']} selects no documents")
-    key = fingerprint({
-        "kind": "vocabulary", "wpt_tokenizer": TOKENIZER_VERSION, "wpt_dataset": VERSION,
-        "recipe": recipe, "mixture": mixture, "documents": [[d.id, d.sha256] for d in selected],
-    })
-    vocabulary = store.get_ref("vocabularies", key)
-    if vocabulary is None:
-        log(f"training tokenizer {name} on {len(selected):,} documents (vocab_size {recipe['vocab_size']:,})")
-        tokenizer = Tokenizer.train((store.get_bytes(d.sha256) for d in selected), recipe["vocab_size"])
-        vocabulary = store.put_bytes(tokenizer.to_bytes())
-        store.set_ref("vocabularies", key, vocabulary)
-    else:
-        tokenizer = Tokenizer.from_bytes(store.get_bytes(vocabulary))
+    """(tokenizer, vocabulary object sha256, fingerprint) of a tokenizer recipe.
 
+    The lock file freezes one vocabulary per recipe version, so adding or
+    changing sources never retrains it:
+
+    - no lock, or the recipe's `version` was raised: train on the documents
+      the mixture selects now, and write the lock (replacing the old one);
+    - the same version, but the recipe (other than its note) or the
+      tokenizer code changed: TokenizerVersionNeeded;
+    - otherwise the locked vocabulary, from the store, or rebuilt from the
+      documents the lock lists (LockedDocumentsMissing when some are not in
+      the store, LockMismatch when the result differs).
+    """
+    recipe = repo.recipe("tokenizer", name)
     lock_path = repo.lock_path(name)
     lock = load_json(lock_path, "lock") if lock_path.exists() else None
-    if lock and lock["fingerprint"] == key:
-        if lock["vocabulary_sha256"] != vocabulary:
-            raise LockMismatch(f"tokenizer {name}: built vocabulary {vocabulary} differs from the locked "
-                               f"{lock['vocabulary_sha256']} for the same inputs (training is not repeatable here)")
+
+    locked = lock is not None and lock["recipe"]["version"] == recipe["version"]
+    if locked:
+        if _training_part(lock["recipe"]) != _training_part(recipe) or lock["wpt_tokenizer"] != TOKENIZER_VERSION:
+            changed = "the recipe" if _training_part(lock["recipe"]) != _training_part(recipe) else f"the tokenizer code ({lock['wpt_tokenizer']} -> {TOKENIZER_VERSION})"
+            raise TokenizerVersionNeeded(f"tokenizer {name}: {changed} changed since version {recipe['version']} was "
+                                         f"locked; raise `version` in {repo.recipe_path('tokenizer', name).name}")
+        trained = lock["documents"]
     else:
-        lock_path.write_text(dump_json({"schema": 1, "fingerprint": key, "vocabulary_sha256": vocabulary}), encoding="utf-8", newline="\n")
-        log(f"wrote {lock_path.relative_to(repo.root)}: commit it so every machine checks against it")
+        mixture = repo.recipe("mixture", recipe["mixture"])
+        documents, _, _ = gather(repo, store, log)
+        selected = sorted((d for pool in assign(documents, mixture).values() for d in pool), key=lambda d: d.id)
+        if not selected:
+            raise PoolError(f"tokenizer {name}: mixture {recipe['mixture']} selects no documents")
+        trained = [[d.id, d.sha256] for d in selected]
+
+    key = fingerprint({"kind": "vocabulary", "wpt_tokenizer": TOKENIZER_VERSION, "recipe": recipe, "documents": trained})
+    vocabulary = lock["vocabulary_sha256"] if locked else store.get_ref("vocabularies", key)
+    if vocabulary is not None and store.has(vocabulary):
+        tokenizer = Tokenizer.from_bytes(store.get_bytes(vocabulary))
+    else:
+        if locked:
+            gather(repo, store, log)  # puts the current documents in the store
+        missing = [doc_id for doc_id, sha256 in trained if not store.has(sha256)]
+        if missing:
+            raise LockedDocumentsMissing(f"tokenizer {name} version {recipe['version']}: its vocabulary is not in "
+                                         f"{store}, and {len(missing):,} of the documents it was trained on are not "
+                                         f"either, such as {missing[0]}")
+        log(f"training tokenizer {name} version {recipe['version']} on {len(trained):,} documents "
+            f"(vocab_size {recipe['vocab_size']:,})")
+        tokenizer = Tokenizer.train((store.get_bytes(sha256) for _, sha256 in trained), recipe["vocab_size"])
+        built = store.put_bytes(tokenizer.to_bytes())
+        if vocabulary is not None and built != vocabulary:
+            raise LockMismatch(f"tokenizer {name}: built vocabulary {built} differs from the locked {vocabulary} "
+                               "for the same documents (training is not repeatable here)")
+        vocabulary = built
+        store.set_ref("vocabularies", key, vocabulary)
+
+    if not locked:
+        lock_path.write_text(dump_json({"schema": 2, "recipe": recipe, "wpt_tokenizer": TOKENIZER_VERSION,
+                                        "documents": trained, "vocabulary_sha256": vocabulary}),
+                             encoding="utf-8", newline="\n")
+        log(f"wrote {lock_path.relative_to(repo.root)}: commit it so every machine uses this vocabulary")
     return tokenizer, vocabulary, key
+
+
+def _training_part(recipe) -> dict:
+    """What trains the vocabulary: the recipe without its shape number and note."""
+    return {k: v for k, v in recipe.items() if k not in ("schema", "note")}
 
 
 # -- dataset ----------------------------------------------------------------------
@@ -155,12 +189,13 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         held_shards = _write_shards([(d, "held-out", 0) for d in held_out], tokens, store, Path(tmp), shard_tokens)
 
     record = {
-        "schema": 2,
+        "schema": 3,
         "id": dataset_id,
         "recipe_name": name,
         "recipe": recipe,
         "mixture": mixture,
-        "tokenizer": {"recipe": recipe["tokenizer"], "fingerprint": tokenizer_key, "vocabulary": vocabulary,
+        "tokenizer": {"recipe": recipe["tokenizer"], "recipe_version": repo.recipe("tokenizer", recipe["tokenizer"])["version"],
+                      "fingerprint": tokenizer_key, "vocabulary": vocabulary,
                       "version": TOKENIZER_VERSION, "vocab_size": tokenizer.vocab_size},
         "sources": sources_info,
         "documents": {"total": len(documents), "duplicates_removed": duplicates,

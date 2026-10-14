@@ -95,14 +95,16 @@
     "decision": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["decision", "by", "date", "reason"],
+      "required": ["decision", "by", "date"],
       "properties": {
         "decision": {"enum": ["admitted", "refused", "retired"]},
         "by": {"type": "string", "minLength": 1},
         "date": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
-        "reason": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1, "description": "required to refuse or retire; to admit, only for an exception (such as an explicit permission for content without a license)"},
         "note": {"type": "string"}
-      }
+      },
+      "if": {"properties": {"decision": {"enum": ["refused", "retired"]}}},
+      "then": {"required": ["reason"]}
     },
     "note": {"type": "string"}
   },

@@ -13,12 +13,14 @@ Crawlers that fetch a page for a person using an AI assistant (such as
 Claude-User or ChatGPT-User) are not in the list: a site that refuses only
 them has not refused training.
 
-No robots.txt (an answer 400 to 499) means no rules. A robots.txt that
-cannot be read (a server error, an unreachable site) forbids crawling that
-address, as the standard says, but states no wish of the owner: the address
-counts as unreachable (RobotsUnreachable, an OSError), and the next mirror
-is tried. Addresses that are not http(s) (local folders, ssh) have no
-robots.txt.
+Only an answer saying the file does not exist (404 Not Found, 410 Gone)
+means no rules: some sites publish no policy. Any other answer that is not
+the file (another 4xx such as 401, 403 or 429, a 5xx, a timeout, an
+unreachable site) makes that address unusable (RobotsUnreachable, an
+OSError), since its policy cannot be known. A refusal or an unusable
+address speaks only for that site: the source's next mirror is tried, with
+its own robots.txt. Addresses that are not http(s) (local folders, ssh)
+have no robots.txt.
 """
 
 import urllib.error
@@ -31,6 +33,7 @@ from .errors import CrawlForbidden
 
 WPT_AGENT = "wpt-dataset"
 MAX_BYTES = 500 * 1024  # the standard asks crawlers to read at least 500 KiB
+NO_FILE = (404, 410)  # the only answers that mean "this site has no robots.txt"
 
 # token -> where its operator states that it gathers AI training data. Only
 # a first-party statement adds a crawler here; read 2026-10-14.
@@ -77,7 +80,7 @@ def _rules(robots_url: str, user_agent: str) -> Protego:
         with urllib.request.urlopen(request, timeout=60) as response:  # follows redirects
             text = response.read(MAX_BYTES).decode("utf-8", errors="replace")
     except urllib.error.HTTPError as error:
-        if 400 <= error.code < 500:
+        if error.code in NO_FILE:
             return Protego.parse("")  # no robots.txt: no rules
         raise RobotsUnreachable(f"{robots_url}: answered {error.code}, so the address cannot be used") from None
     except (urllib.error.URLError, OSError) as error:

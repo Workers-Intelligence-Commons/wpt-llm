@@ -1,11 +1,14 @@
 import hashlib
+import http.server
 import io
 import tarfile
+import threading
 
 import pytest
 
 from wpt_dataset import manifest
 from wpt_dataset.errors import BadPath, ChecksumMismatch, CrawlForbidden, CutFailed, LicenseMapError, NotText, PatchFailed
+from wpt_dataset.robots import RobotsUnreachable
 from wpt_dataset.sources import compute_upstream, source_tree
 
 
@@ -141,19 +144,56 @@ def test_paths_differing_only_by_case_are_refused(kit, store, http_folder):
         compute_upstream({"type": "http-archive", "revision": "2026-10-14"}, f"{base}/case.tar", store)
 
 
-def test_a_robots_txt_refusing_ai_training_refuses_the_source_even_with_a_mirror(kit, repo, store, http_folder,
-                                                                                tmp_path):
-    # a site's "no" to AI training crawlers must hold: no download, and no way around it through a mirror
+def test_a_robots_txt_refusal_skips_that_address_and_the_next_mirror_is_tried(kit, repo, store, http_folder):
+    # a site's "no" to AI training crawlers holds for that site: nothing is
+    # downloaded from it, but a mirror whose own rules allow it still serves the source
     folder, base = http_folder
-    (folder / "book.txt").write_bytes(b"a short story\n")
+    (folder / "copy").mkdir()
+    for name in ("book.txt", "copy/book.txt"):
+        (folder / name).write_bytes(b"a short story\n")
     (folder / "robots.txt").write_text("User-agent: GPTBot\nDisallow: /book.txt\n")
-    sid = kit.add_source(repo, store, "example", "refused", {
-        "type": "http-file", "address": f"{base}/book.txt", "revision": "2026-10-14",
-        "mirrors": [{"address": str(tmp_path / "anywhere")}]}, compute_checksum=False)
+    data = {"type": "http-file", "address": f"{base}/book.txt", "revision": "2026-10-14"}
+    checksum = manifest.checksum(compute_upstream(data, f"{base}/copy/book.txt", store))
     with pytest.raises(CrawlForbidden, match="forbids .*book.txt to GPTBot"):
-        source_tree(repo.source(sid), store)
+        compute_upstream(data, data["address"], store)
+
+    alone = kit.add_source(repo, store, "example", "alone", {**data, "checksum": checksum}, compute_checksum=False)
+    with pytest.raises(CrawlForbidden, match="every address failed; refused .*GPTBot"):
+        source_tree(repo.source(alone), store)
+
+    mirrored = kit.add_source(repo, store, "example", "mirrored", {
+        **data, "checksum": checksum, "mirrors": [{"address": f"{base}/copy/book.txt"}]}, compute_checksum=False)
+    assert set(source_tree(repo.source(mirrored), store)[0]) == {"book.txt"}
 
     # refusing only assistants that fetch for a person is not a refusal of training
     (folder / "robots.txt").write_text("User-agent: Claude-User\nDisallow: /\n")
-    data = {"type": "http-file", "address": f"{base}/book.txt", "revision": "2026-10-14"}
     assert set(compute_upstream(data, data["address"], store)) == {"book.txt"}
+
+
+@pytest.mark.parametrize("answer, usable", [(410, True), (403, False), (429, False)])
+def test_only_a_missing_robots_txt_means_no_rules(answer, usable, store):
+    # 404 and 410 say the site has no policy; any other answer leaves its policy unknown
+    class Handler(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            if self.path == "/robots.txt":
+                self.send_error(answer)
+            else:
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b"a short story\n")
+
+        def log_message(self, *args):
+            pass
+
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        address = f"http://127.0.0.1:{server.server_address[1]}/book.txt"
+        data = {"type": "http-file", "revision": "2026-10-14"}
+        if usable:
+            assert set(compute_upstream(data, address, store)) == {"book.txt"}
+        else:
+            with pytest.raises(RobotsUnreachable, match=f"answered {answer}"):
+                compute_upstream(data, address, store)
+    finally:
+        server.shutdown()

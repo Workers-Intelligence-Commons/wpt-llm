@@ -9,7 +9,7 @@ import torch
 from safetensors import safe_open
 from safetensors.torch import load_file
 
-from wpt_model import load_model
+from wpt_model import load_model, load_tokenizer, tokenizer_identity
 from wpt_tokenizer import Tokenizer
 from wpt_train import main
 
@@ -24,9 +24,10 @@ def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatc
 
     model = load_model(tmp_path / "model")
     assert model.config.n_layer == 1 and model.config.block_size == 16
-    tokenizer = Tokenizer.load(tmp_path / "model" / "tokenizer.json")
     record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
-    assert tokenizer.to_bytes() == store.get_bytes(record["tokenizer"]["vocabulary"])
+    # the weights name the dataset's vocabulary, and only that file loads with them
+    assert tokenizer_identity(tmp_path / "model") == ("t version 1", record["tokenizer"]["vocabulary"])
+    tokenizer = Tokenizer.from_bytes(load_tokenizer(tmp_path / "model"))
     assert model.config.vocab_size == tokenizer.vocab_size
     provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
     assert provenance["dataset"] == dataset_id

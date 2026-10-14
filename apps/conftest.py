@@ -12,7 +12,7 @@ import pytest
 
 from wpt_dataset import manifest
 from wpt_dataset.build import build_dataset
-from wpt_dataset.repo import Repo, address_hash, dump_json
+from wpt_dataset.repo import CURRENT_SCHEMA, Repo, address_hash, dump_json
 from wpt_dataset.sources import compute_upstream
 from wpt_store import open_store
 from wpt_train import main as train
@@ -49,10 +49,10 @@ def built(tmp_path, monkeypatch):
     (root / "data" / "sources" / source_id).mkdir(parents=True)
     (root / "data" / "sources" / source_id / "source.json").write_text(dump_json(data))
     for kind, name, document in [("mixture", "m", {"pools": [{"name": "en", "select": "en", "weight": 1}]}),
-                                 ("tokenizer", "t", {"mixture": "m", "vocab_size": 300}),
+                                 ("tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 300}),
                                  ("dataset", "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 3000, "held_out": 0.5})]:
         repo.recipe_path(kind, name).parent.mkdir(parents=True, exist_ok=True)
-        repo.recipe_path(kind, name).write_text(json.dumps({"schema": 1, **document}))
+        repo.recipe_path(kind, name).write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}))
     dataset_id = build_dataset(repo, "d", store, log=lambda _: None)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
     monkeypatch.chdir(tmp_path)

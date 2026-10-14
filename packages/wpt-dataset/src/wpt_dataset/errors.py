@@ -26,7 +26,8 @@ class FetchFailed(DatasetError):
 class CrawlForbidden(DatasetError):
     """The robots.txt of an address's site forbids it to every crawler, to
     wpt-dataset, or to an AI training crawler. Nothing was downloaded from
-    it; the source cannot be used, and no mirror is tried instead."""
+    it. Raised for one address, and for a source when no address worked and
+    at least one refused (each address and its reason are listed)."""
 
 
 class ChecksumMismatch(DatasetError):
@@ -77,6 +78,21 @@ class PoolError(DatasetError):
 
 class LockMismatch(DatasetError):
     """A rebuilt vocabulary differs from the sha256 its lock file records."""
+
+
+class TokenizerVersionNeeded(DatasetError):
+    """A tokenizer recipe, or the tokenizer code, changed since its version
+    was locked; raise the recipe's `version` to train a new vocabulary."""
+
+
+class LockedDocumentsMissing(DatasetError):
+    """The locked vocabulary is not in the store, and some documents it was
+    trained on are gone, so it cannot be rebuilt here; get it from a store
+    that holds it, or raise the recipe's `version`."""
+
+
+class RoundTripFailed(DatasetError):
+    """A document does not decode back to its exact bytes."""
 
 
 class MissingTool(DatasetError):

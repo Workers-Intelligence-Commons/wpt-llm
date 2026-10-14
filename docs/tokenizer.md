@@ -12,28 +12,72 @@ hot loops in Rust (PyO3, built by maturin when the workspace is installed).
 
 ## Vocabularies
 
-A vocabulary (the list of merges) is a build result, trained once per
-tokenizer recipe and shared by every dataset and model size that uses it.
+A vocabulary (the list of merges) is a build result: one per version of a
+tokenizer recipe, shared by every dataset and model that uses it.
 
 `data/recipes/tokenizers/<name>.json`:
 
 ```json
-{ "schema": 1, "mixture": "<mixture name>", "vocab_size": 32000, "note": "" }
+{ "schema": 2, "version": 1, "mixture": "<mixture name>", "vocab_size": 32000, "note": "" }
 ```
 
-The documents selected by the mixture's pools (each once) train the
-vocabulary. Its fingerprint covers the tokenizer's version
-(`packages/wpt-tokenizer/rust/Cargo.toml`), the recipe, the mixture and the
-sha256 of every selected document.
+### The lock freezes it
 
-Training is deterministic: it runs on one thread, and when two pairs are
-equally frequent the pair with the smaller ids wins. The first build records
-the vocabulary's sha256 in `data/recipes/tokenizers/<name>.lock.json`; commit
-that file. A later build with the same fingerprint that gives another
-vocabulary fails (`LockMismatch`).
+The first build of a recipe version trains the vocabulary on the documents
+its mixture selects (each once), and writes
+`data/recipes/tokenizers/<name>.lock.json`: the recipe, the tokenizer code's
+version, every document it was trained on (`[id, sha256 of its Markdown]`)
+and the vocabulary's sha256. Commit it. From then on, every build of that
+version uses that vocabulary:
 
-Bump the tokenizer's version whenever a change could alter training or
-encoding results.
+- **Adding or changing sources never retrains it.** Many datasets and
+  models, whatever their training settings, share one vocabulary, so a
+  model can keep training on new data. A source the vocabulary was not
+  trained on still encodes exactly, since every byte has a token, only less
+  compactly; `wpt-dataset tokenizer-check <name>` shows by how much.
+- **A new vocabulary takes a new version.** For a big change (much more
+  data, another size) or a change of the tokenizing algorithm, raise
+  `version` in the recipe: the next build trains a new vocabulary and
+  replaces the lock (git history keeps the old one). Editing the recipe
+  (other than its `note`), or a new tokenizer code version, without
+  raising `version` stops the build (`TokenizerVersionNeeded`), so one name
+  and version always mean one vocabulary.
+- **Every machine gets the same vocabulary.** A store that lacks it trains
+  it again from the documents the lock lists, and the result must have the
+  locked sha256 (`LockMismatch` otherwise). Training is deterministic: it
+  runs on one thread, and when two pairs are equally frequent the pair with
+  the smaller ids wins. When a listed document is no longer available (its
+  source changed or was cut), that store cannot rebuild it
+  (`LockedDocumentsMissing`): copy the vocabulary from a store that holds
+  it, or raise `version`.
+- **Erasure does not reach a locked vocabulary** until `version` is raised:
+  merges learned from text that was erased later stay in it (see
+  [erasure.md](erasure.md)).
+
+The tokenizer code's version is in `packages/wpt-tokenizer/rust/Cargo.toml`.
+Bump it whenever a code change could alter training or encoding results.
+
+### Where the vocabulary is checked
+
+- The dataset build uses only the locked vocabulary; the dataset record
+  names the recipe, its version and the vocabulary's sha256, and the
+  dataset id covers it.
+- Training reads the vocabulary from the store, checked against that
+  sha256, and writes it into the model folder as `tokenizer.json`. Every
+  weight file's header names it: `tokenizer` (such as
+  `classics version 1`) and `tokenizer_sha256`.
+- `wpt-chat`, `wpt-eval` and `wpt-posttrain` load `tokenizer.json` only when
+  its sha256 is the one in the weights' headers (`TokenizerMismatch`
+  otherwise), so a model never runs with another vocabulary.
+  `wpt-posttrain` keeps the base model's vocabulary and name.
+
+### Checking a vocabulary on the data
+
+`wpt-dataset tokenizer-check <name>` encodes then decodes every document of
+every admitted source with the locked vocabulary: each must give back its
+exact bytes (`RoundTripFailed` otherwise). It prints, per source, the
+documents, characters, tokens and characters per token, and marks the
+sources the vocabulary was not trained on.
 
 A vocabulary file is canonical JSON:
 

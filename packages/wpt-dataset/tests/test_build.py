@@ -3,7 +3,8 @@ import json
 import pytest
 
 from wpt_dataset.build import build_dataset
-from wpt_dataset.errors import LockMismatch, PoolError
+from wpt_dataset.cli import main
+from wpt_dataset.errors import LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
 from wpt_store import open_store
 from wpt_store.shards import read_shard, token_hash
 from wpt_tokenizer import Tokenizer
@@ -35,7 +36,7 @@ def setup_recipes(kit, repo, store, corpus, total_tokens, held_out=0.0):
         {"name": "literature", "select": "literature", "weight": 0.25},
         {"name": "fr", "select": "fr && !(en)", "weight": 0.25},  # also matches fr/lit/: first pool wins
         {"name": "en", "select": "en", "weight": 0.5}]})
-    kit.write_recipe(repo, "tokenizer", "main", {"mixture": "main", "vocab_size": 400})
+    kit.write_recipe(repo, "tokenizer", "main", {"version": 1, "mixture": "main", "vocab_size": 400})
     kit.write_recipe(repo, "dataset", "small", {"mixture": "main", "tokenizer": "main",
                                                 "total_tokens": total_tokens, "held_out": held_out})
 
@@ -88,7 +89,7 @@ def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
     kit.add_source(repo, store, "example", "many", {"type": "git", "address": folder, "revision": commit,
                                                     "tags": [{"tags": ["all"], "paths": ["**"]}]})
     kit.write_recipe(repo, "mixture", "all", {"pools": [{"name": "all", "select": "all", "weight": 1}]})
-    kit.write_recipe(repo, "tokenizer", "all", {"mixture": "all", "vocab_size": 300})
+    kit.write_recipe(repo, "tokenizer", "all", {"version": 1, "mixture": "all", "vocab_size": 300})
     kit.write_recipe(repo, "dataset", "split", {"mixture": "all", "tokenizer": "all",
                                                 "total_tokens": 100, "held_out": 0.5})
 
@@ -106,12 +107,72 @@ def test_too_many_passes_over_a_pool_is_refused(kit, repo, store, corpus):
         build_dataset(repo, "small", store, log=lambda _: None)
 
 
-def test_a_rebuilt_vocabulary_must_match_its_lock(kit, repo, store, corpus, tmp_path):
+def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, store, corpus, tmp_path):
+    # many datasets and models share one vocabulary, so new sources must not change it;
+    # only a person raising the recipe's version trains a new one
+    setup_recipes(kit, repo, store, corpus, total_tokens=1000)
+    first = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
+    lock_path = repo.lock_path("main")
+    lock = json.loads(lock_path.read_text())
+    assert lock["vocabulary_sha256"] == first["tokenizer"]["vocabulary"] and len(lock["documents"]) == 10
+    assert first["tokenizer"]["recipe_version"] == 1
+
+    folder, commit = kit.git_project(tmp_path / "more", files={"en/new.txt": b"zebras graze quietly. " * 30},
+                                     executable=set(), symlinks={})
+    kit.add_source(repo, store, "example", "more", {"type": "git", "address": folder, "revision": commit,
+                                                    "tags": [{"tags": ["en"], "paths": ["**"]}]})
+    second = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
+    assert second["documents"]["total"] == 11  # the new source is in the dataset...
+    assert second["tokenizer"]["vocabulary"] == first["tokenizer"]["vocabulary"]  # ...but not in the vocabulary
+    assert json.loads(lock_path.read_text()) == lock
+    # another machine rebuilds the same vocabulary from the documents the lock lists
+    fresh = open_store((tmp_path / "fresh").as_uri())
+    assert record_of(fresh, build_dataset(repo, "small", fresh, log=lambda _: None))["tokenizer"]["vocabulary"] \
+        == lock["vocabulary_sha256"]
+
+    recipe_path = repo.recipe_path("tokenizer", "main")
+    recipe = json.loads(recipe_path.read_text())
+    recipe_path.write_text(json.dumps({**recipe, "note": "a note changes nothing"}))
+    build_dataset(repo, "small", store, log=lambda _: None)
+    recipe_path.write_text(json.dumps({**recipe, "vocab_size": 450}))
+    with pytest.raises(TokenizerVersionNeeded, match="the recipe changed since version 1"):
+        build_dataset(repo, "small", store, log=lambda _: None)
+
+    recipe_path.write_text(json.dumps({**recipe, "vocab_size": 450, "version": 2}))
+    third = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
+    new_lock = json.loads(lock_path.read_text())
+    assert third["tokenizer"]["recipe_version"] == 2 and third["tokenizer"]["vocabulary"] == new_lock["vocabulary_sha256"]
+    assert new_lock["vocabulary_sha256"] != lock["vocabulary_sha256"] and len(new_lock["documents"]) == 11
+
+
+def test_a_locked_vocabulary_that_cannot_be_rebuilt_the_same_is_refused(kit, repo, store, corpus, tmp_path):
     setup_recipes(kit, repo, store, corpus, total_tokens=1000)
     build_dataset(repo, "small", store, log=lambda _: None)
     lock_path = repo.lock_path("main")
     lock = json.loads(lock_path.read_text())
-    lock["vocabulary_sha256"] = "f" * 64  # as if another machine had trained a different vocabulary
-    lock_path.write_text(json.dumps(lock))
+    lock_path.write_text(json.dumps({**lock, "vocabulary_sha256": "f" * 64}))  # as if another machine trained another
     with pytest.raises(LockMismatch):
         build_dataset(repo, "small", open_store((tmp_path / "fresh").as_uri()), log=lambda _: None)
+
+    # a document the vocabulary was trained on is gone, and the store holds neither
+    lock_path.write_text(json.dumps({**lock, "documents": lock["documents"] + [["example-gone/a.txt", "e" * 64]]}))
+    with pytest.raises(LockedDocumentsMissing, match="1 of the documents .* such as example-gone/a.txt"):
+        build_dataset(repo, "small", open_store((tmp_path / "fresh-2").as_uri()), log=lambda _: None)
+
+
+def test_tokenizer_check_round_trips_every_document_and_reports_each_source(kit, repo, store, corpus, tmp_path,
+                                                                           monkeypatch, capsys):
+    # shows whether text the vocabulary never saw still encodes compactly enough
+    setup_recipes(kit, repo, store, corpus, total_tokens=1000)
+    build_dataset(repo, "small", store, log=lambda _: None)
+    folder, commit = kit.git_project(tmp_path / "more", files={"new.txt": "zèbres ✓ broutent. ".encode() * 30},
+                                     executable=set(), symlinks={})
+    late = kit.add_source(repo, store, "example", "more", {"type": "git", "address": folder, "revision": commit})
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+
+    assert main(["--root", str(repo.root), "tokenizer-check", "main"]) == 0
+    lines = capsys.readouterr().out.splitlines()
+    corpus_line = next(line for line in lines if line.startswith("example-corpus-"))
+    assert ": 10 documents, " in corpus_line and "not in the vocabulary" not in corpus_line
+    assert next(line for line in lines if line.startswith(late)).endswith("(not in the vocabulary's training)")
+    assert lines[-1].startswith("every document decodes back exactly: 11 documents, ")

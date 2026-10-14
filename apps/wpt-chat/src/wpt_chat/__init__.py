@@ -15,7 +15,7 @@ from pathlib import Path
 
 from wpt_device import describe, select_device
 from wpt_inference import sample_tokens
-from wpt_model import load_model
+from wpt_model import TokenizerMismatch, load_model, load_tokenizer
 from wpt_model.notice import LICENSE, NOTICE_NAME, OUTPUT_LICENSE, REPOSITORY
 from wpt_tokenizer import Tokenizer
 
@@ -64,7 +64,10 @@ def main(argv=None):
         return
 
     device = select_device()
-    tokenizer = Tokenizer.load(Path(args.model) / "tokenizer.json")
+    try:
+        tokenizer = Tokenizer.from_bytes(load_tokenizer(args.model))
+    except TokenizerMismatch as error:
+        sys.exit(f"TokenizerMismatch: {error}")
     model = load_model(args.model, device)
     model.eval()
     print(f"model loaded ({tokenizer.vocab_size} tokens) on {describe(device)}. type text to continue, empty line quits.")

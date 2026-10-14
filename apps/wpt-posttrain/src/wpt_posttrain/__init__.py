@@ -40,7 +40,7 @@ from pathlib import Path
 import torch
 
 from wpt_device import describe, select_device
-from wpt_model import TinyGPT, load_model, save_model
+from wpt_model import TinyGPT, TokenizerMismatch, load_model, load_tokenizer, save_model, tokenizer_identity
 from wpt_model.notice import WEIGHT_METADATA, write_documents
 from wpt_store import Store, StoreError, store_from_settings
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
@@ -132,7 +132,11 @@ def open_context(base, store, device) -> Context:
         raise StepError(f"{base}: no provenance.json; give a folder that wpt-train wrote") from None
     if provenance.get("schema") != 3:
         raise StepError(f"{base}: provenance shape {provenance.get('schema')}, this wpt-posttrain reads 3")
-    return Context(base, load_model(base, device), Tokenizer.load(base / "tokenizer.json"), device, provenance, store)
+    try:
+        tokenizer = Tokenizer.from_bytes(load_tokenizer(base))
+    except TokenizerMismatch as error:
+        raise StepError(str(error)) from None
+    return Context(base, load_model(base, device), tokenizer, device, provenance, store)
 
 
 def post_train(context, steps, new_folder) -> Path:
@@ -156,8 +160,8 @@ def post_train(context, steps, new_folder) -> Path:
     new_folder.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=f".{new_folder.name}-", dir=new_folder.parent))
     try:
-        save_model(context.model, staging, metadata=WEIGHT_METADATA)
-        context.tokenizer.save(staging / "tokenizer.json")
+        save_model(context.model, staging, load_tokenizer(context.base), tokenizer_identity(context.base)[0],
+                   metadata=WEIGHT_METADATA)  # the base model's vocabulary, under the same name
         (staging / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n",
                                                  encoding="utf-8", newline="\n")
         write_documents(staging)

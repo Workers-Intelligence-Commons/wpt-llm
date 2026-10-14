@@ -48,7 +48,8 @@ A Rust toolchain is needed: the tokenizer is built from source.
 | manifest and checksum of a source | `uv run wpt-dataset manifest ID` | the upstream | the store; prints the checksum |
 | edit a source's files | `uv run wpt-dataset unpack ID FOLDER`, edit, `uv run wpt-dataset patch ID FOLDER NAME` | the source, the folder | the folder; then `data/sources/ID/NNNN-NAME.patch` |
 | check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` | `data/` | the store, with `--fetch` |
-| build a vocabulary | `uv run wpt-dataset build-tokenizer NAME` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` |
+| build a vocabulary | `uv run wpt-dataset build-tokenizer NAME` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
+| check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
 | build a dataset | `uv run wpt-dataset build NAME` | a dataset recipe | the store; prints the dataset id |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | train | `uv run wpt-train DATASET_ID [--out FOLDER] [options]` | the store | a model folder; `scratch/` token files in the store's local folder |
@@ -79,13 +80,19 @@ Follow CONTRIBUTING.md, "Adding a source". The parts an agent gets wrong:
   Markdown (`markdown`, `text`, `code` with its `language`, `xhtml`).
   Training reads only Markdown; a new kind of file needs its format in
   `wpt_dataset/markdown.py` first.
-- `wpt-dataset` refuses any download that the site's robots.txt forbids to
-  every crawler, to wpt-dataset or to an AI training crawler
-  (`wpt_dataset/robots.py`); never work around a refusal (another address,
-  a mirror, a manual download).
+- `wpt-dataset` downloads nothing from an address that its site's robots.txt
+  forbids to every crawler, to wpt-dataset or to an AI training crawler, or
+  whose robots.txt answers anything but the file, 404 or 410
+  (`wpt_dataset/robots.py`); it then tries the next mirror, read with its
+  own robots.txt, since a site's robots.txt speaks only for that site. A
+  mirror is a real place the content is published (such as the author's
+  own site); never download by hand around a refusal.
 - Tags, licenses and formats are written by people; never generate them.
 - A new source starts with `"decision": "refused"` and the reason "under
-  review". Only a maintainer admits it, in a signed commit.
+  review". Only a maintainer admits it, in a signed commit; an admission
+  has no reason unless it is an exception (such as an explicit permission
+  for content without a license), while a refusal or retirement always
+  says why.
 - The schema of each data file is in
   `packages/wpt-dataset/src/wpt_dataset/schemas/`.
 
@@ -121,6 +128,16 @@ company's model may enter the data, so:
 - From a session with an AI assistant, keep only the person's own
   messages.
 
+## Vocabularies
+
+A tokenizer recipe's lock freezes its vocabulary: adding sources never
+retrains it (docs/tokenizer.md). Raising the recipe's `version` trains a new
+one and replaces the lock; it is a person's decision (it makes later models
+incompatible with earlier ones), so never raise it unasked. A build that
+stops with `TokenizerVersionNeeded` means the recipe or the tokenizer code
+changed: ask whether to raise the version or undo the change. Commit the
+lock file a build writes.
+
 ## Changing a file's shape
 
 Every data file carries its shape version (`schema`). To change a shape:
@@ -133,7 +150,9 @@ each file to fill in.
 ## The model folder
 
 `wpt-train` writes `config.json`, the weights (each safetensors header
-carries `license`, `output_license` and `notice`), `tokenizer.json`,
+carries `license`, `output_license`, `notice`, `tokenizer` and
+`tokenizer_sha256`), `tokenizer.json` (loaded only through
+`wpt_model.load_tokenizer`, which checks it against those headers),
 `provenance.json` (what produced it, including every source it learned
 from), and `LICENSE`, `NOTICE` and `README.md` (the model card).
 `NOTICE` and `README.md` come from `wpt_model.notice.write_documents`, which

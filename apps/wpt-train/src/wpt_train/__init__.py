@@ -138,8 +138,8 @@ def load_dataset(store, dataset_id):
     record = json.loads(store.get_bytes(record_object))
     if record.get("id") != dataset_id:
         raise InputError(f"dataset record {record_object} describes {record.get('id')}, not {dataset_id}")
-    if record.get("schema") != 2:
-        raise InputError(f"dataset {dataset_id} has record shape {record.get('schema')}, this wpt-train reads 2; "
+    if record.get("schema") != 3:
+        raise InputError(f"dataset {dataset_id} has record shape {record.get('schema')}, this wpt-train reads 3; "
                          "build the recipe again with the current wpt-dataset")
     tokenizer = Tokenizer.from_bytes(store.get_bytes(record["tokenizer"]["vocabulary"]))  # sha256-checked by the store
     return record, record_object, tokenizer
@@ -252,9 +252,10 @@ def _train(args, strategy, plugins):
 
     batch = {"windows": settings.batch_size, "micro_batch": settings.micro_batch, "processes": strategy.world_size,
              "accumulation": settings.batch_size // (settings.micro_batch * strategy.world_size)}
-    save_model(model, out, max_shard_bytes=args.max_shard_size, metadata=WEIGHT_METADATA)
+    named = record["tokenizer"]
+    save_model(model, out, store.get_bytes(named["vocabulary"]), f"{named['recipe']} version {named['recipe_version']}",
+               max_shard_bytes=args.max_shard_size, metadata=WEIGHT_METADATA)
     shutil.rmtree(out / EVALS_NAME, ignore_errors=True)
-    tokenizer.save(out / "tokenizer.json")
     sources = sources_of(store, record["shards"])
     (out / "provenance.json").write_text(
         json.dumps(provenance(args, record, record_object, sources, model_config, n_params, strategy, plugins,

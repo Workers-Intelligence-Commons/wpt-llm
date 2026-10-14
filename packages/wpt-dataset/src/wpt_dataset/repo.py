@@ -22,7 +22,7 @@ from .errors import InvalidFile, OutdatedSchema, RuleViolation
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 3, "mixture": 1, "dataset": 1, "tokenizer": 1, "lock": 1}
+CURRENT_SCHEMA = {"source": 3, "mixture": 1, "dataset": 1, "tokenizer": 2, "lock": 2}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")

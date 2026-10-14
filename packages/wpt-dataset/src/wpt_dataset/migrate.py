@@ -13,6 +13,7 @@ the result against the new schema.
 import json
 from pathlib import Path
 
+from .errors import DatasetError, OutdatedSchema
 from .repo import CURRENT_SCHEMA, Repo, dump_json, load_json
 
 MIGRATIONS: dict[str, dict[int, callable]] = {kind: {} for kind in CURRENT_SCHEMA}
@@ -39,6 +40,24 @@ def _source_2_to_3(document):
 MIGRATIONS["source"][2] = _source_2_to_3
 
 
+def _tokenizer_1_to_2(document):
+    """Shape 2 gives the recipe a vocabulary `version`; existing ones start at 1."""
+    return {**document, "schema": 2, "version": 1}
+
+
+MIGRATIONS["tokenizer"][1] = _tokenizer_1_to_2
+
+
+def _lock_1_to_2(document):
+    """Shape 2 lists the documents the vocabulary was trained on, which a
+    shape 1 lock never recorded, so it cannot be converted."""
+    raise OutdatedSchema("a shape 1 lock does not list the documents its vocabulary was trained on, "
+                         "so it cannot become shape 2: delete it and build again")
+
+
+MIGRATIONS["lock"][1] = _lock_1_to_2
+
+
 def _files(repo: Repo):
     for sid in repo.source_ids():
         yield "source", repo.data / "sources" / sid / "source.json"
@@ -62,7 +81,10 @@ def migrate(repo: Repo, migrations=None, current=None, log=print) -> list[Path]:
             step = migrations[kind].get(document["schema"])
             if step is None:
                 raise KeyError(f"{path}: no migration for {kind} shape {document['schema']}")
-            document = step(document)
+            try:
+                document = step(document)
+            except DatasetError as error:
+                raise type(error)(f"{path}: {error}") from None
         if document.get("schema") != start:
             path.write_text(dump_json(document), encoding="utf-8", newline="\n")
             changed.append(path)

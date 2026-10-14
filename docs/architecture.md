@@ -57,7 +57,7 @@ recipe then needs the old commit of this repository.
   "tags": [ { "tags": ["en", "literature"], "paths": ["**"], "note": "" } ],
   "mirrors": [ { "address": "https://...", "note": "" } ],
   "cuts": [ { "path": "...", "start": 0, "end": 0, "sha256_after": "...", "note": "" } ],
-  "decision": { "decision": "admitted", "by": "...", "date": "2026-10-14", "reason": "...", "note": "" },
+  "decision": { "decision": "admitted", "by": "...", "date": "2026-10-14", "note": "" },
   "note": ""
 }
 ```
@@ -89,7 +89,9 @@ recipe then needs the old commit of this repository.
 - `mirrors`: other addresses expected to give the same checksum.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
 - `decision`: the human decision on the source (required): `admitted`,
-  `refused` or `retired`, by whom, when, and why.
+  `refused` or `retired`, by whom and when. `reason` (why) is required to
+  refuse or retire; an admission gives one only for an exception, such as
+  an explicit permission for content without a license.
 - Every object may hold a free-text `note`. It is data, so it survives
   migrations (comments would not).
 
@@ -153,7 +155,7 @@ tree, as its `formats` entry says
 | --- | --- |
 | `markdown` | the file as it is |
 | `text` | paragraphs as written; each line break inside a paragraph is a Markdown line break; Markdown's own characters are escaped, so the text reads exactly as written |
-| `code` | one fenced code block whose opening line names the language and the path: ```` ```python title="src/main.py" ```` (the entry's `language`) |
+| `code` | one fenced code block whose opening line names the language and the path: ```` ```python path="./src/main.py" ```` (the entry's `language`); in a git or Mercurial source the path starts with `./`, the repository's root, and in any other source it is written as it is (```` ```python path="src/main.py" ````), since no repository root exists |
 | `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source |
 
 A file whose Markdown is empty is no document: an EPUB file that holds only
@@ -170,7 +172,7 @@ of its inputs, including WPT's own code version.
 | --- | --- |
 | upstream tree | the source checksum |
 | final source tree | checksum, cuts, each patch's sha256, wpt-dataset version |
-| vocabulary | tokenizer version, tokenizer recipe, its mixture, the selected documents' sha256 (of their Markdown) |
+| vocabulary | tokenizer code version, tokenizer recipe (with its `version`), the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
 | dataset | wpt-dataset version, dataset recipe, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution) |
 
 So "already done" is a lookup: nothing is downloaded or applied twice, and

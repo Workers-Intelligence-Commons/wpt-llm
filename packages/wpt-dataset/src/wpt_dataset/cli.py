@@ -14,6 +14,8 @@
     wpt-dataset patch ID FOLDER NAME      record the folder's differences from the source's
                                           final files as its next patch, NNNN-NAME.patch
     wpt-dataset build-tokenizer NAME      train (or find) the vocabulary of a tokenizer recipe
+    wpt-dataset tokenizer-check NAME      encode and decode every admitted document with that
+                                          vocabulary: exact round trip, characters per token
     wpt-dataset build NAME                build (or find) a dataset recipe; prints the dataset id
     wpt-dataset migrate                   rewrite data files to the current shapes
 
@@ -35,6 +37,7 @@ from .migrate import migrate
 from .repo import Repo, source_id
 from .markdown import documents
 from .sources import compute_upstream, source_tree
+from .tokenizer_check import check_tokenizer
 
 
 def _store(repo):
@@ -105,6 +108,18 @@ def cmd_build_tokenizer(args, repo):
     return 0
 
 
+def cmd_tokenizer_check(args, repo):
+    reports = check_tokenizer(repo, args.name, _store(repo))
+    for r in reports:
+        print(f"{r.source}: {r.documents:,} documents, {r.characters:,} characters, {r.tokens:,} tokens, "
+              f"{r.characters_per_token:.2f} characters per token" + ("" if r.in_vocabulary else
+                                                                      " (not in the vocabulary's training)"))
+    characters, tokens = sum(r.characters for r in reports), sum(r.tokens for r in reports)
+    print(f"every document decodes back exactly: {sum(r.documents for r in reports):,} documents, "
+          f"{characters:,} characters, {tokens:,} tokens, {characters / max(tokens, 1):.2f} characters per token")
+    return 0
+
+
 def cmd_build(args, repo):
     print(build_dataset(repo, args.name, _store(repo)))
     return 0
@@ -147,6 +162,9 @@ def main(argv=None):
     vocab = commands.add_parser("build-tokenizer")
     vocab.add_argument("name")
     vocab.set_defaults(run=cmd_build_tokenizer)
+    vocab_check = commands.add_parser("tokenizer-check")
+    vocab_check.add_argument("name")
+    vocab_check.set_defaults(run=cmd_tokenizer_check)
     build = commands.add_parser("build")
     build.add_argument("name")
     build.set_defaults(run=cmd_build)

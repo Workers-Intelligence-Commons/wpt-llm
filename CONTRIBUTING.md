@@ -14,10 +14,10 @@ commits without it.
 For a commit that adds or changes a source, signing off also certifies that:
 
 - you read the source's license, and every path it covers;
-- you looked for a "no AI training" wish (README, robots.txt, a
+- you looked for a "no AI training" wish from the owner (README, a
   machine-readable text-and-data-mining reservation) and found none
-  (`wpt-dataset` also refuses any download that the site's robots.txt
-  forbids; see [docs/licenses.md](docs/licenses.md));
+  (`wpt-dataset` also skips any address whose site's robots.txt forbids it
+  and tries the next mirror; see [docs/licenses.md](docs/licenses.md));
 - the source holds no personal data.
 
 You take responsibility for those three checks.
@@ -74,7 +74,11 @@ you find license texts; they never decide.
 ## Decisions are signed
 
 A maintainer admits a source by setting `decision` to `admitted`, with their
-name, the date and the reason. A commit that changes any `decision` must be
+name and the date. An admission needs no reason: the license map and its
+texts already say why the source is allowed. It carries one only for an
+exception, such as an explicit permission for content without a license.
+Refusing or retiring a source always gives the reason, so nobody reviews it
+again from scratch. A commit that changes any `decision` must be
 signed (`git commit -S`) by an SSH key listed in `data/allowed-signers` or a
 GPG key in `data/allowed-gpg-keys.asc`; CI checks the signature against the
 lists as they stood before the commit, so a new key can only be added by a
