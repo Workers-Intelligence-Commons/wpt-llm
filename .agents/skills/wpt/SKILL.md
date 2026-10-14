@@ -1,0 +1,155 @@
+---
+name: wpt
+description: How to work in the WPT repository (Workers' Pre-trained Transformer) with its own tools. Use it before adding or changing a source, a recipe, the model, training, an evaluation or a post-training step, before running any wpt-* command, and before every push. It names the command for each job, what each one reads and writes, how to extend evaluation and post-training, and the rules that keep `scripts/check.py` green.
+---
+
+# WPT tooling
+
+WPT trains a language model only on content whose license is clear. The
+repository holds pointers to the data, not the data: every source is a
+`data/sources/<id>/source.json` with an exact address, revision and
+checksum, and everything fetched or built lives in a store named by the
+`WPT_STORE` setting (environment, or `.env` at the root). The documents in
+`docs/` hold every decision; read the one that covers your change before
+changing it.
+
+## Before every push
+
+```sh
+uv run scripts/check.py
+```
+
+It runs what CI runs, the same way (CI calls this script): `uv.lock`
+matches the project files, the Python tests, the Rust tests, the data
+rules, the changed sources (fetched and checked) and the commits (sign-off
+on every commit, an allowed signature on every commit that changes a
+`decision`), compared with what a push would send. A green run means a
+green CI. It needs a git clone with an upstream branch; elsewhere pass
+`--base` and `--range`.
+
+Commits are signed off (`git commit -s`): CI refuses any commit without a
+`Signed-off-by` line.
+
+## Setting up a machine
+
+```sh
+uv run scripts/setup.py          # installs the PyTorch build for this machine's GPU
+```
+
+A plain `uv sync` removes PyTorch, because no build is part of the default
+install; run `scripts/setup.py` again after it. `uv run` does not remove it.
+A Rust toolchain is needed: the tokenizer is built from source.
+
+## The commands
+
+| Job | Command | Reads | Writes |
+| --- | --- | --- | --- |
+| id of a new source | `uv run wpt-dataset source-id ORIGIN [ITEM] ADDRESS` | | prints the id |
+| manifest and checksum of a source | `uv run wpt-dataset manifest ID` | the upstream | the store; prints the checksum |
+| check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` | `data/` | the store, with `--fetch` |
+| build a vocabulary | `uv run wpt-dataset build-tokenizer NAME` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` |
+| build a dataset | `uv run wpt-dataset build NAME` | a dataset recipe | the store; prints the dataset id |
+| migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
+| train | `uv run wpt-train DATASET_ID [--out FOLDER] [options]` | the store | a model folder |
+| evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md` |
+| post-train | `uv run wpt-posttrain BASE NEW STEP [STEP ...]` | the base folder, the store | the new folder, only if every step succeeded |
+| continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE) | the folder | |
+
+Every `wpt-train` option also comes from `WPT_<OPTION>` in the environment
+(`--n-layer` -> `WPT_N_LAYER`); `--help` on any command lists the rest.
+
+## Adding a source
+
+Follow CONTRIBUTING.md, "Adding a source". The parts an agent gets wrong:
+
+- The license must be on the allowed list in
+  `packages/wpt-dataset/src/wpt_dataset/licenses.py` and
+  `docs/licenses.md`. When in doubt, refuse; grey-zone licenses (CC BY,
+  CC BY-SA, ODbL) are refused until a lawyer confirms them.
+- Every path matches exactly one `licenses` entry, and each entry needs an
+  `attribution`: the credit that license asks for, copied from the source
+  (authors, title, copyright line, link). Never invent it. Every model
+  trained on the source repeats it in its `NOTICE`.
+- Tags and licenses are written by people; never generate them.
+- A new source starts with `"decision": "refused"` and the reason "under
+  review". Only a maintainer admits it, in a signed commit.
+- The schema of each data file is in
+  `packages/wpt-dataset/src/wpt_dataset/schemas/`.
+
+## Changing a file's shape
+
+Every data file carries its shape version (`schema`). To change a shape:
+bump `CURRENT_SCHEMA` in `wpt_dataset/repo.py`, update the schema file,
+register the step in `wpt_dataset/migrate.py`, and run `wpt-dataset
+migrate`. Never edit data files by hand for a shape change. A field only a
+person can fill is left empty by the migration, and the check then names
+each file to fill in.
+
+## The model folder
+
+`wpt-train` writes `config.json`, the weights (each safetensors header
+carries `license`, `output_license` and `notice`), `tokenizer.json`,
+`provenance.json` (what produced it, including every source it learned
+from), and `LICENSE`, `NOTICE` and `README.md` (the model card).
+`NOTICE` and `README.md` come from `wpt_model.notice.write_documents`, which
+reads only the folder's own files: change what they say there, never by
+editing a generated folder. Training into an existing folder removes its
+`evals/`, which describe other weights.
+
+Weights are AGPL-3.0-or-later; generated text is CC0-1.0 under
+`OUTPUT-NOTICE`. `packages/wpt-model/src/wpt_model/LICENSE` and
+`OUTPUT-NOTICE` are copies of the root files, and a test fails when they
+differ: change both together.
+
+## Writing an evaluation
+
+One Python file, a built-in in `apps/wpt-eval/src/wpt_eval/evals/` or any
+path given to `wpt-eval`:
+
+```python
+from wpt_eval import Result
+
+def run(context):  # context: model, tokenizer, device, folder, provenance, store,
+                   # documents("training") and documents("held_out")
+    ...
+    return Result(data={...}, text="the same findings, for people")
+```
+
+Every evaluation returns `Result`: `data` that JSON can hold, and `text`
+that the model card shows. Details: `docs/evaluation.md`.
+
+## Writing a post-training step
+
+One Python file, a built-in in `apps/wpt-posttrain/src/wpt_posttrain/steps/`
+or any path given to `wpt-posttrain`:
+
+```python
+from wpt_posttrain import Outcome
+
+def run(context):  # context: model (change it in place), tokenizer, device,
+                   # base, provenance, store
+    ...
+    return Outcome.success()  # or Outcome.failure("why it could not do its part")
+```
+
+A step reports only whether it managed to do its part, and why not. The
+first failure stops the run and nothing is written. Details:
+`docs/post-training.md`.
+
+## Rules that keep the checks green
+
+- Write text files with `encoding="utf-8", newline="\n"`: Windows must
+  produce the same bytes as Linux.
+- Start external programs through `wpt_dataset.programs.program(name)`,
+  which reports a missing tool clearly.
+- Test isolation: a test never writes into the real store, cache or user
+  settings; set `WPT_STORE`, `XDG_CACHE_HOME` and `LOCALAPPDATA` to the
+  test's own folder when it touches them.
+- The application tests share their setup (a dataset built from a git
+  project, a tiny trained model) through the `built` and `trained`
+  fixtures in `apps/conftest.py`.
+- A new third-party package in `uv.lock` or `Cargo.lock` gets a row in
+  `docs/licenses.md` (version and license, read from its metadata), and a
+  changed version gets its row checked again.
+- The repository is public: never commit personal paths, machine names,
+  credentials, or data that is not a pointer to a licensed source.
