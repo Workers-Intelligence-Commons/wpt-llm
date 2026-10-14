@@ -34,7 +34,7 @@ jobs:
         run: uv run pytest -rs
       - name: Rust tests
         working-directory: packages/wpt-tokenizer/rust  # inside the folder, so rustup applies rust-toolchain.toml
-        run: cargo test
+        run: rustc --version && cargo test
       - name: Data rules
         run: uv run wpt-dataset check
       - name: Changed sources and commits
@@ -51,3 +51,6 @@ jobs:
           fi
           uv run wpt-dataset check --changed "$base"
           uv run wpt-dataset check-commits "$range"
+      - name: Stop the S3 test server
+        if: always()  # a running uvx holds uv's cache lock, which the uv action's cleanup waits for
+        run: pkill -f "[m]oto_server" || true  # [m]: the pattern does not match this shell's own command line
