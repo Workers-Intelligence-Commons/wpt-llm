@@ -37,7 +37,9 @@ def run(context):
 - `store`: the store holding the dataset;
 - `documents("training")` and `documents("held_out")`: each document of that
   part once, with its `id`, `source` and `tokens` (ending with the
-  end-of-document token).
+  end-of-document token). They are read one shard at a time as the test
+  goes through them, so a dataset larger than memory works; a test that
+  needs them twice calls `documents` twice, or keeps only what it needs.
 
 Every test returns the same type, `Result`: `data`, numbers and names for
 programs (anything JSON can hold), and `text`, the same findings written for

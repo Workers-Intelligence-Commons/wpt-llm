@@ -26,7 +26,8 @@ import importlib.metadata
 import importlib.util
 import json
 import sys
-from dataclasses import dataclass, field
+from collections.abc import Iterator
+from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
@@ -70,21 +71,21 @@ class Context:
     device: torch.device
     provenance: dict
     store: Store
-    _documents: dict = field(default_factory=dict, repr=False)
 
-    def documents(self, part) -> list[Document]:
+    def documents(self, part) -> Iterator[Document]:
         """"training" or "held_out": each document of that part once, in
-        shard order (a document repeated by the mixture appears once)."""
+        shard order (a document repeated by the mixture appears once). They
+        are read one shard at a time, each shard checked before its
+        documents are given, so a dataset larger than memory can be read;
+        call again to read them again."""
         if part not in ("training", "held_out"):
             raise ValueError(f"part {part!r}: choose 'training' or 'held_out'")
-        if part not in self._documents:
-            shards = self.provenance["shards" if part == "training" else "held_out_shards"]
-            seen = {}
-            for shard in shards:
-                for tokens, source, document, _, _ in read_verified(self.store, shard):
-                    seen.setdefault(document, Document(document, source, tokens))
-            self._documents[part] = list(seen.values())
-        return self._documents[part]
+        seen = set()
+        for shard in self.provenance["shards" if part == "training" else "held_out_shards"]:
+            for tokens, source, document, _, _ in read_verified(self.store, shard):
+                if document not in seen:
+                    seen.add(document)
+                    yield Document(document, source, tokens)
 
 
 def built_in_names() -> list[str]:
@@ -129,8 +130,8 @@ def open_context(folder, store, device) -> Context:
         provenance = json.loads((folder / "provenance.json").read_text(encoding="utf-8"))
     except FileNotFoundError:
         raise EvalError(f"{folder}: no provenance.json; give a folder that wpt-train wrote") from None
-    if provenance.get("schema") != 2:
-        raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 2; train it again")
+    if provenance.get("schema") != 3:
+        raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 3; train it again")
     model = load_model(folder, device)
     model.eval()
     return Context(folder, model, Tokenizer.load(folder / "tokenizer.json"), device, provenance, store)

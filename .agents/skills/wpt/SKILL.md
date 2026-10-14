@@ -51,13 +51,17 @@ A Rust toolchain is needed: the tokenizer is built from source.
 | build a vocabulary | `uv run wpt-dataset build-tokenizer NAME` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` |
 | build a dataset | `uv run wpt-dataset build NAME` | a dataset recipe | the store; prints the dataset id |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
-| train | `uv run wpt-train DATASET_ID [--out FOLDER] [options]` | the store | a model folder |
+| train | `uv run wpt-train DATASET_ID [--out FOLDER] [options]` | the store | a model folder; `scratch/` token files in the store's local folder |
+| train on several GPUs | `uv run wpt-train DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md` |
 | post-train | `uv run wpt-posttrain BASE NEW STEP [STEP ...]` | the base folder, the store | the new folder, only if every step succeeded |
 | continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE) | the folder | |
 
 Every `wpt-train` option also comes from `WPT_<OPTION>` in the environment
 (`--n-layer` -> `WPT_N_LAYER`); `--help` on any command lists the rest.
+`--batch-size` is global (over every process), `--set NAME=VALUE` changes a
+setting of the method, and after a crash the same command with `--resume`
+continues from `FOLDER/checkpoint/`.
 
 ## Adding a source
 
@@ -143,13 +147,50 @@ path given to `wpt-eval`:
 from wpt_eval import Result
 
 def run(context):  # context: model, tokenizer, device, folder, provenance, store,
-                   # documents("training") and documents("held_out")
+                   # documents("training") and documents("held_out"), read
+                   # one shard at a time: iterate, never assume a list
     ...
     return Result(data={...}, text="the same findings, for people")
 ```
 
 Every evaluation returns `Result`: `data` that JSON can hold, and `text`
 that the model card shows. Details: `docs/evaluation.md`.
+
+## Writing a training strategy or method
+
+A strategy (how the hardware is used) is one Python file, a built-in in
+`packages/wpt-training/src/wpt_training/strategies/` or any path given to
+`wpt-train --strategy`:
+
+```python
+from wpt_training import Strategy
+
+def start():  # a subclass overrides wrap, no_sync, mean, broadcast, barrier, close
+    return Strategy(device, rank=0, world_size=1, local_rank=0)
+```
+
+A method (how the model learns) is one Python file, a built-in in
+`packages/wpt-training/src/wpt_training/methods/` or any path given to
+`wpt-train --method`:
+
+```python
+from wpt_training import Method, Verdict
+
+SETTINGS = {"lr": 3e-4}  # changed with --set lr=0.001, typed from these defaults
+
+class Mine(Method):  # may override loss, before_update, evaluated, state_dict, load_state_dict
+    def __init__(self, model, settings, run):  # run: tokens, parameters, steps, log
+        self.optimizer = ...
+
+def start(model, settings, run):
+    return Mine(model, settings, run)
+```
+
+The runner in `wpt_training/runner.py` owns the data, the global batch,
+evaluation and checkpoints: a strategy or a method never draws windows or
+seeds randomness itself, so runs stay the same on any hardware. Anything a
+resumed run needs goes in the method's `state_dict`. Details:
+`docs/training.md`.
 
 ## Writing a post-training step
 

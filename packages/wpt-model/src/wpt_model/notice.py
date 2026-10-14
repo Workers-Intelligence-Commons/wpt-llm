@@ -91,8 +91,9 @@ def card(config, provenance, evals) -> str:
         f"- Context: {config['block_size']} tokens; vocabulary: {config['vocab_size']:,} tokens", "",
         "## Training", "",
         f"- Dataset: `{provenance['dataset']}`",
-        f"- Steps: at most {provenance['options']['steps']:,}, batch {provenance['options']['batch_size']}, "
-        f"learning rate {provenance['options']['lr']}",
+        f"- Steps: at most {provenance['options']['steps']:,}, batch {provenance['batch']['windows']} windows",
+        f"- Method: {provenance['method']['name']} "
+        f"({', '.join(f'{k} {v}' for k, v in sorted(provenance['method']['settings'].items()))})",
         f"- Best validation loss: {provenance['best_validation_loss']:.4f}",
         *(f"- {line}" for line in _built_from(provenance)),
         f"- Device: {provenance['device']}",

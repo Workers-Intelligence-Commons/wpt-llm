@@ -1,8 +1,13 @@
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
+import torch
 from safetensors import safe_open
+from safetensors.torch import load_file
 
 from wpt_model import load_model
 from wpt_tokenizer import Tokenizer
@@ -60,3 +65,67 @@ def test_a_damaged_shard_stops_training_before_it_starts(built, tmp_path):
     with pytest.raises(SystemExit, match="CorruptObject"):
         main([dataset_id, "--out", "model", "--steps", "1"])
     assert not (tmp_path / "model").exists()
+
+
+SMALL = ["--block-size", "16", "--n-layer", "1", "--n-head", "2", "--n-embd", "16", "--batch-size", "4",
+         "--eval-every", "2"]
+ON_CPU = {"CUDA_VISIBLE_DEVICES": "", "HIP_VISIBLE_DEVICES": ""}  # gloo on every system, no GPU needed
+STARTERS = {
+    "processes": ["-m", "wpt_train", "--processes", "2"],
+    "torchrun": pytest.param(["-m", "torch.distributed.run", "--nproc-per-node", "2", "-m", "wpt_train"],
+                             marks=pytest.mark.skipif(os.name == "nt", reason="torchrun does not start on Windows "
+                                                                              "with PyTorch 2.14 (docs/training.md)")),
+}
+
+
+def weights(folder):
+    return load_file(folder / "model.safetensors")
+
+
+@pytest.mark.parametrize("starter", STARTERS.values(), ids=STARTERS.keys())
+def test_two_processes_train_the_same_model_as_one(built, tmp_path, starter):
+    # the batch is global: 2 processes of 2 windows each, or 1 process adding up
+    # 2 passes of 2 windows, must take the same steps, dropout included
+    env = {**os.environ, **ON_CPU}
+    for out, command in [("one", ["-m", "wpt_train", "--micro-batch", "2"]), ("two", [*starter, "--strategy", "ddp"])]:
+        subprocess.run([sys.executable, *command, built.dataset_id, "--out", out, "--steps", "4", *SMALL],
+                       cwd=tmp_path, env=env, check=True)
+
+    one, two = weights(tmp_path / "one"), weights(tmp_path / "two")
+    assert one.keys() == two.keys()
+    # gloo adds gradients in varying order: up to 4e-6 apart; other dropout gives 2e-3
+    assert all(torch.allclose(one[k], two[k], atol=1e-4) for k in one)
+    provenance = json.loads((tmp_path / "two" / "provenance.json").read_text())
+    assert provenance["strategy"]["processes"] == 2 and provenance["batch"]["accumulation"] == 1
+
+
+def test_a_crashed_run_resumes_where_its_checkpoint_left_it(built, tmp_path, monkeypatch):
+    # after a crash, --resume must give the same model as a run never interrupted
+    strategy = tmp_path / "cpu.py"
+    strategy.write_text("import torch\nfrom wpt_training import Strategy\n\n"
+                        "def start():\n    return Strategy(torch.device('cpu'))\n")
+    method = tmp_path / "crashing.py"
+    method.write_text(
+        "import os\nimport torch\nfrom wpt_training import Method\n\nSETTINGS = {'lr': 0.01}\n\n"
+        "class Crashing(Method):\n"
+        "    def __init__(self, model, settings):\n"
+        "        self.optimizer = torch.optim.AdamW(model.parameters(), lr=settings['lr'])\n\n"
+        "    def before_update(self, model, step):\n"
+        "        if step == 3 and os.environ.get('CRASH'):\n"
+        "            raise RuntimeError('power cut')\n\n"
+        "def start(model, settings, run):\n    return Crashing(model, settings)\n")
+    options = ["--steps", "5", "--checkpoint-every", "2", "--strategy", str(strategy), "--method", str(method), *SMALL]
+    main([built.dataset_id, "--out", "whole", *options])
+
+    monkeypatch.setenv("CRASH", "1")
+    with pytest.raises(RuntimeError, match="power cut"):
+        main([built.dataset_id, "--out", "resumed", *options])
+    assert (tmp_path / "resumed" / "checkpoint" / "checkpoint.pt").is_file()
+    with pytest.raises(SystemExit, match="--resume"):
+        main([built.dataset_id, "--out", "resumed", *options])
+    monkeypatch.delenv("CRASH")
+    main([built.dataset_id, "--out", "resumed", "--resume", *options])
+
+    whole, resumed = weights(tmp_path / "whole"), weights(tmp_path / "resumed")
+    assert all(torch.equal(whole[k], resumed[k]) for k in whole)
+    assert not (tmp_path / "resumed" / "checkpoint").exists()

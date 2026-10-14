@@ -26,6 +26,8 @@ import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 
+import numpy as np
+
 from wpt_store.shards import write_shard
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_tokenizer import __version__ as TOKENIZER_VERSION
@@ -148,38 +150,9 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     held_out = [d for d in documents if is_held_out(d.id, recipe["held_out"])]
     held_ids = {d.id for d in held_out}
     training = [d for d in documents if d.id not in held_ids]
-    tokens = {}
-    for document in documents:
-        tokens[document.id] = tokenizer.encode(store.get_bytes(document.sha256)) + [Tokenizer.END]
-
-    rows, pool_report = [], []
-    assigned = assign(training, mixture)
-    for pool in mixture["pools"]:
-        members = assigned[pool["name"]]
-        available = sum(len(tokens[d.id]) for d in members)
-        share = round(pool["weight"] * recipe["total_tokens"])
-        if available == 0:
-            raise PoolError(f"pool {pool['name']} ({pool['select']}) selects no training documents")
-        epochs = share / available
-        limit = pool.get("max_epochs", DEFAULT_MAX_EPOCHS)
-        if epochs > limit:
-            raise PoolError(f"pool {pool['name']}: filling {share:,} tokens from {available:,} needs {epochs:.2f} "
-                            f"passes, more than the {limit} allowed (set max_epochs in the mixture to allow more)")
-        full = math.floor(epochs)
-        for pass_ in range(full):
-            rows += [(d, pool["name"], pass_) for d in members]
-        remainder, taken = share - full * available, 0
-        for d in sorted(members, key=lambda d: _rank(dataset_id, pool["name"], full, d.id)):
-            if taken >= remainder:
-                break
-            rows.append((d, pool["name"], full))
-            taken += len(tokens[d.id])
-        pool_report.append({"name": pool["name"], "documents": len(members), "tokens": available,
-                            "share": share, "epochs": round(epochs, 6)})
-        log(f"pool {pool['name']}: {len(members):,} documents, {available:,} tokens, {epochs:.2f} passes for {share:,}")
-    rows.sort(key=lambda r: _rank(dataset_id, "order", r[2], r[0].id))
-
     with tempfile.TemporaryDirectory(prefix="wpt-build-") as tmp:
+        tokens = EncodedDocuments(Path(tmp) / "tokens", tokenizer, documents, store)
+        rows, pool_report = _fill_pools(dataset_id, recipe, mixture, training, tokens, log)
         shards = _write_shards(rows, tokens, store, Path(tmp), shard_tokens)
         held_shards = _write_shards([(d, "held-out", 0) for d in held_out], tokens, store, Path(tmp), shard_tokens)
 
@@ -212,6 +185,56 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     return dataset_id
 
 
+def _fill_pools(dataset_id, recipe, mixture, training, tokens, log):
+    """(rows, pool report): each pool filled to its share of the recipe's tokens."""
+    rows, pool_report = [], []
+    assigned = assign(training, mixture)
+    for pool in mixture["pools"]:
+        members = assigned[pool["name"]]
+        available = sum(tokens.length(d.id) for d in members)
+        share = round(pool["weight"] * recipe["total_tokens"])
+        if available == 0:
+            raise PoolError(f"pool {pool['name']} ({pool['select']}) selects no training documents")
+        epochs = share / available
+        limit = pool.get("max_epochs", DEFAULT_MAX_EPOCHS)
+        if epochs > limit:
+            raise PoolError(f"pool {pool['name']}: filling {share:,} tokens from {available:,} needs {epochs:.2f} "
+                            f"passes, more than the {limit} allowed (set max_epochs in the mixture to allow more)")
+        full = math.floor(epochs)
+        for pass_ in range(full):
+            rows += [(d, pool["name"], pass_) for d in members]
+        remainder, taken = share - full * available, 0
+        for d in sorted(members, key=lambda d: _rank(dataset_id, pool["name"], full, d.id)):
+            if taken >= remainder:
+                break
+            rows.append((d, pool["name"], full))
+            taken += tokens.length(d.id)
+        pool_report.append({"name": pool["name"], "documents": len(members), "tokens": available,
+                            "share": share, "epochs": round(epochs, 6)})
+        log(f"pool {pool['name']}: {len(members):,} documents, {available:,} tokens, {epochs:.2f} passes for {share:,}")
+    rows.sort(key=lambda r: _rank(dataset_id, "order", r[2], r[0].id))
+    return rows, pool_report
+
+
+class EncodedDocuments:
+    """Every document's tokens (ending with END), encoded once into its own
+    file in folder; only their lengths stay in memory."""
+
+    def __init__(self, folder: Path, tokenizer, documents, store):
+        folder.mkdir()
+        self.folder, self._lengths = folder, {}
+        for i, document in enumerate(documents):
+            tokens = np.asarray(tokenizer.encode(store.get_bytes(document.sha256)) + [Tokenizer.END], dtype="<u4")
+            tokens.tofile(folder / f"{i}.u32")
+            self._lengths[document.id] = (i, len(tokens))
+
+    def length(self, document_id) -> int:
+        return self._lengths[document_id][1]
+
+    def __getitem__(self, document_id) -> np.ndarray:
+        return np.fromfile(self.folder / f"{self._lengths[document_id][0]}.u32", dtype="<u4")
+
+
 def _write_shards(rows, tokens, store, folder: Path, shard_tokens):
     shards, batch, size = [], [], 0
 
@@ -223,7 +246,7 @@ def _write_shards(rows, tokens, store, folder: Path, shard_tokens):
 
     for row in rows:
         batch.append(row)
-        size += len(tokens[row[0].id])
+        size += tokens.length(row[0].id)
         if size >= shard_tokens:
             flush()
             batch, size = [], 0

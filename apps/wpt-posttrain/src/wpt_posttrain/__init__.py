@@ -130,8 +130,8 @@ def open_context(base, store, device) -> Context:
         provenance = json.loads((base / "provenance.json").read_text(encoding="utf-8"))
     except FileNotFoundError:
         raise StepError(f"{base}: no provenance.json; give a folder that wpt-train wrote") from None
-    if provenance.get("schema") != 2:
-        raise StepError(f"{base}: provenance shape {provenance.get('schema')}, this wpt-posttrain reads 2")
+    if provenance.get("schema") != 3:
+        raise StepError(f"{base}: provenance shape {provenance.get('schema')}, this wpt-posttrain reads 3")
     return Context(base, load_model(base, device), Tokenizer.load(base / "tokenizer.json"), device, provenance, store)
 
 

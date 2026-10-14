@@ -66,7 +66,11 @@ def _check_ref(kind, name):
 
 
 class Store:
-    """Operations every store offers. Subclasses provide the _raw_* methods."""
+    """Operations every store offers. Subclasses provide the _raw_* methods
+    and `scratch`: a local folder for files derived from objects (such as
+    token files for training), which may be deleted at any time."""
+
+    scratch: Path
 
     def put_bytes(self, data: bytes) -> str:
         sha = hashlib.sha256(data).hexdigest()
@@ -123,6 +127,7 @@ class LocalStore(Store):
 
     def __init__(self, root):
         self.root = Path(root)
+        self.scratch = self.root / "scratch"
 
     def __repr__(self):
         return f"LocalStore({str(self.root)!r})"
@@ -162,6 +167,7 @@ class S3Store(Store):
         self.prefix = prefix.strip("/")
         self.client = client or boto3.client("s3")
         self.cache = Path(cache_dir) if cache_dir else _default_cache() / bucket / (self.prefix or "_")
+        self.scratch = self.cache / "scratch"
 
     def __repr__(self):
         return f"S3Store(s3://{self.bucket}/{self.prefix})"

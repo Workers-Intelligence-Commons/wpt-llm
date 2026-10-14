@@ -174,7 +174,7 @@ settings. Objects are named by their sha256 and checked on every read.
 | `wpt-store` | the content-addressed store (local or S3) and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
 | `wpt-model` | the TinyGPT network, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
-| `wpt-training` | the training loop and choosing the best checkpoint |
+| `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
 | `wpt-inference` | token-by-token sampling |
 | `wpt-device` | picks the best GPU, else the CPU |
 | `wpt-train`, `wpt-eval`, `wpt-posttrain`, `wpt-chat` | the applications |

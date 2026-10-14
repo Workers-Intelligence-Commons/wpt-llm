@@ -43,3 +43,23 @@ def test_s3_store_round_trip(tmp_path, monkeypatch):
 
         shutil.rmtree(tmp_path / "cache")  # a fresh machine: the object comes from the bucket again
         assert store.get_bytes(sha) == b"some text\n"
+
+
+def test_a_token_file_holds_the_shards_tokens_and_is_rebuilt_when_changed(tmp_path):
+    # training reads this file instead of the shards, so it must hold exactly
+    # their tokens, and a copy changed on disk must never be used
+    import numpy as np
+
+    from wpt_store.shards import token_file, write_shard
+
+    store = open_store((tmp_path / "store").as_uri())
+    rows = [[([1, 2, 3], "s", "s/a", "p", 0), ([4, 5], "s", "s/b", "p", 0)], [([6, 7, 8, 9], "s", "s/c", "p", 0)]]
+    shards = []
+    for i, part in enumerate(rows):
+        token_sha256 = write_shard(tmp_path / f"{i}.parquet", part)
+        shards.append({"object": store.put_file(tmp_path / f"{i}.parquet"), "token_sha256": token_sha256})
+
+    path = token_file(store, shards)
+    assert np.fromfile(path, dtype="<u4").tolist() == list(range(1, 10))
+    path.write_bytes(np.arange(9, dtype="<u4").tobytes())
+    assert np.fromfile(token_file(store, shards), dtype="<u4").tolist() == list(range(1, 10))

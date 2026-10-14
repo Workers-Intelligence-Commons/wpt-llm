@@ -1631,6 +1631,7 @@ version = "0.2.0"
 source = { editable = "packages/wpt-dataset" }
 dependencies = [
     { name = "jsonschema" },
+    { name = "numpy" },
     { name = "pyarrow" },
     { name = "wpt-store" },
     { name = "wpt-tokenizer" },
@@ -1639,6 +1640,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "jsonschema", specifier = ">=4.23" },
+    { name = "numpy", specifier = ">=2" },
     { name = "pyarrow", specifier = ">=21" },
     { name = "wpt-store", editable = "packages/wpt-store" },
     { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
@@ -1813,6 +1815,16 @@ requires-dist = [
 name = "wpt-training"
 version = "0.1.0"
 source = { editable = "packages/wpt-training" }
+dependencies = [
+    { name = "numpy" },
+    { name = "wpt-device" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=2" },
+    { name = "wpt-device", editable = "packages/wpt-device" },
+]
 
 [[package]]
 name = "xmltodict"

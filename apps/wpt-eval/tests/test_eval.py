@@ -30,7 +30,7 @@ def test_memorization_counts_the_training_documents_a_model_reproduces(trained):
     # the test must report all training documents and no held-out document
     folder, sid = trained.folder, trained.source_id
     context = open_context(folder, trained.store, torch.device("cpu"))
-    training, held_out = context.documents("training"), context.documents("held_out")
+    training, held_out = list(context.documents("training")), list(context.documents("held_out"))
     assert training and held_out
     context.model = Recall(training, context.tokenizer.vocab_size)
 

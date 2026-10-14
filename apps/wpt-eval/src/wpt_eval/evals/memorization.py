@@ -15,6 +15,7 @@ sha256, among documents long enough.
 """
 
 import hashlib
+import heapq
 from collections import Counter
 
 import torch
@@ -37,8 +38,16 @@ def greedy(model, prompts, steps):
 
 
 def measure(context, part):
-    long_enough = [d for d in context.documents(part) if len(d.tokens) >= PREFIX + CONTINUATION]
-    chosen = sorted(long_enough, key=lambda d: hashlib.sha256(d.id.encode()).digest())[:DOCUMENTS]
+    counts = Counter()
+
+    def counted():
+        for d in context.documents(part):
+            counts["in_part"] += 1
+            if len(d.tokens) >= PREFIX + CONTINUATION:
+                counts["long_enough"] += 1
+                yield d
+
+    chosen = heapq.nsmallest(DOCUMENTS, counted(), key=lambda d: hashlib.sha256(d.id.encode()).digest())
     matched, exact = [], Counter()
     for start in range(0, len(chosen), BATCH):
         batch = chosen[start:start + BATCH]
@@ -49,7 +58,7 @@ def measure(context, part):
         matched += lengths
         exact.update(d.source for d, n in zip(batch, lengths) if n == CONTINUATION)
     tested = len(chosen)
-    return {"documents": tested, "in_part": len(context.documents(part)), "long_enough": len(long_enough),
+    return {"documents": tested, "in_part": counts["in_part"], "long_enough": counts["long_enough"],
             "exact": sum(exact.values()),
             "exact_rate": sum(exact.values()) / tested if tested else None,
             "mean_matched_tokens": sum(matched) / tested if tested else None,
