@@ -52,7 +52,8 @@ A Rust toolchain is needed: the tokenizer is built from source.
 | check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
 | build a dataset | `uv run wpt-dataset build NAME` | a dataset recipe | the store; prints the dataset id |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
-| train | `uv run wpt-train DATASET_ID [--out FOLDER] [options]` | the store | a model folder; `scratch/` token files in the store's local folder |
+| check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
+| train | `uv run wpt-train DATASET_ID [--out FOLDER] [options]`, started detached (skill `wpt-training-run`) | the store | a model folder; `scratch/` token files in the store's local folder |
 | train on several GPUs | `uv run wpt-train DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md` |
 | post-train | `uv run wpt-posttrain BASE NEW STEP [STEP ...]` | the base folder, the store | the new folder, only if every step succeeded |
@@ -66,7 +67,9 @@ continues from `FOLDER/checkpoint/`.
 
 ## Adding a source
 
-Follow CONTRIBUTING.md, "Adding a source". The parts an agent gets wrong:
+Follow CONTRIBUTING.md, "Adding a source", in the order of the
+`wpt-sources` skill (finding and proving sources, when to ask the
+maintainer, admission). The parts an agent gets wrong:
 
 - The license must be on the allowed list in
   `packages/wpt-dataset/src/wpt_dataset/licenses.py` and
@@ -87,7 +90,9 @@ Follow CONTRIBUTING.md, "Adding a source". The parts an agent gets wrong:
   own robots.txt, since a site's robots.txt speaks only for that site. A
   mirror is a real place the content is published (such as the author's
   own site); never download by hand around a refusal.
-- Tags, licenses and formats are written by people; never generate them.
+- Tags, licenses and formats come from people and from the source's own
+  statements: an agent may draft them from those statements for a person
+  to approve, never invent or guess them.
 - A new source starts with `"decision": "refused"` and the reason "under
   review". Only a maintainer admits it, in a signed commit; an admission
   has no reason unless it is an exception (such as an explicit permission

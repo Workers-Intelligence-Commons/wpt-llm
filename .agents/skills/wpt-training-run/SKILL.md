@@ -1,0 +1,57 @@
+---
+name: wpt-training-run
+description: How to start a WPT training run so it survives a closed terminal or SSH session and keeps its log. Use it before running wpt-train (or any long wpt-* command such as a large build or evaluation) on Windows, Linux or macOS, locally or over SSH, and when a run must be followed, stopped or resumed.
+---
+
+# Starting a training run
+
+Read the `wpt` skill first for the commands and their options. This skill
+is how a run is started and looked after.
+
+## Before the run
+
+- The dataset is built: `uv run wpt-dataset build NAME` prints its id. A
+  first build of a tokenizer recipe writes its lock
+  (`data/recipes/tokenizers/NAME.lock.json`): commit it.
+- PyTorch is installed for this machine's GPU: a plain `uv sync` removes
+  it, `uv run scripts/setup.py` puts it back.
+- The model folder (`--out`, under `runs/`, which git ignores) is new, or
+  holds a checkpoint to resume.
+
+## Always start it detached
+
+A program started from a terminal or an SSH session ends when the session
+closes, and its output is lost. Start every run, and every command that
+takes more than a few minutes, through the detach script of the machine,
+from the repository folder:
+
+| System | Command |
+| --- | --- |
+| Windows (PowerShell) | `.\scripts\detach.ps1 uv run wpt-train DATASET_ID --out runs/NAME [options]` |
+| Linux, macOS | `scripts/detach.sh uv run wpt-train DATASET_ID --out runs/NAME [options]` |
+
+Both run the command outside the session, write everything it prints to
+`runs/logs/<date-time>.log` (UTF-8, line by line), and print the process
+id with how to follow and stop it:
+
+| | Windows | Linux, macOS |
+| --- | --- | --- |
+| follow | `Get-Content -Wait 'runs\logs\<file>.log'` | `tail -f 'runs/logs/<file>.log'` |
+| stop | `taskkill /T /F /PID <id>` | `kill <id>` |
+
+Over SSH, start the run with the script, end the SSH command, and read the
+log in later commands; never keep a run attached to the connection.
+
+## While it runs
+
+Read the log to report progress: each evaluation line gives the step, the
+training and validation loss, and the time. The run ends with
+`saved runs/NAME` followed by a sample of generated text. A process that is
+gone without that line has failed: the end of the log says why.
+
+## After a crash or a stop
+
+The same command with `--resume` continues from
+`runs/NAME/checkpoint/` (written every `--checkpoint-every` steps), started
+the same detached way. Without `--resume`, a leftover checkpoint stops the
+run, so an unfinished run is never overwritten by mistake.

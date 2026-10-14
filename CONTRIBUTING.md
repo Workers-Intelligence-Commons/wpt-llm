@@ -41,7 +41,8 @@ You take responsibility for those three checks.
    for, as the source gives it: authors, title, copyright line, link. Every
    model trained on the source repeats it in its notice.
 5. `uv run wpt-dataset check --fetch <id>` must pass (it also converts every
-   file to Markdown), then `uv run scripts/check.py`.
+   file to Markdown), and `uv run wpt-dataset markdown-check <id>` (every
+   note complete, no leftover markup), then `uv run scripts/check.py`.
 6. Open a pull request. Say what the source is, its license, and anything a
    reviewer should know; use `note` fields for reasons that must stay with
    the data.

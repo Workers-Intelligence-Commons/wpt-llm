@@ -6,6 +6,12 @@
 uv run wpt-train <dataset id> --n-layer 4 --n-head 4 --n-embd 128 --block-size 256 --steps 3000
 ```
 
+A run takes minutes to days, so start it detached from the terminal or SSH
+session, which would otherwise end it and lose its output:
+`.\scripts\detach.ps1 uv run wpt-train ...` on Windows,
+`scripts/detach.sh uv run wpt-train ...` on Linux and macOS. Both write its
+output to `runs/logs/<date-time>.log` and print how to follow and stop it.
+
 `wpt-train` takes a built dataset id and never builds: build and training
 fail separately. Every setting is a command-line option or an environment
 variable (`WPT_` + the option name in capitals, `--n-layer` ->

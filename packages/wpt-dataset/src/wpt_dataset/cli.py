@@ -13,6 +13,8 @@
                                           outside the repository, to edit them
     wpt-dataset patch ID FOLDER NAME      record the folder's differences from the source's
                                           final files as its next patch, NNNN-NAME.patch
+    wpt-dataset markdown-check [ID ...]   check the Markdown made from text and xhtml files (every
+                                          source, or the ids given): notes, unescaped tags
     wpt-dataset build-tokenizer NAME      train (or find) the vocabulary of a tokenizer recipe
     wpt-dataset tokenizer-check NAME      encode and decode every admitted document with that
                                           vocabulary: exact round trip, characters per token
@@ -36,6 +38,7 @@ from .errors import DatasetError
 from .migrate import migrate
 from .repo import Repo, source_id
 from .markdown import documents
+from .markdown_check import check_markdown
 from .sources import compute_upstream, source_tree
 from .tokenizer_check import check_tokenizer
 
@@ -102,6 +105,18 @@ def cmd_patch(args, repo):
     return 0
 
 
+def cmd_markdown_check(args, repo):
+    store, failed = _store(repo), False
+    for sid in args.ids or repo.source_ids():
+        report = check_markdown(repo.source(sid), store)
+        for problem in report.problems:
+            print(f"{sid}: {problem}", file=sys.stderr)
+        failed = failed or bool(report.problems)
+        print(f"{sid}: {report.documents:,} documents checked, {report.notes:,} notes, "
+              + (f"{len(report.problems):,} problems" if report.problems else "OK"))
+    return 1 if failed else 0
+
+
 def cmd_build_tokenizer(args, repo):
     _, vocabulary, key = build_tokenizer(repo, args.name, _store(repo))
     print(f"vocabulary {vocabulary} (fingerprint {key})")
@@ -159,6 +174,9 @@ def main(argv=None):
     patch.add_argument("folder")
     patch.add_argument("name")
     patch.set_defaults(run=cmd_patch)
+    markdown_check = commands.add_parser("markdown-check")
+    markdown_check.add_argument("ids", nargs="*", metavar="ID")
+    markdown_check.set_defaults(run=cmd_markdown_check)
     vocab = commands.add_parser("build-tokenizer")
     vocab.add_argument("name")
     vocab.set_defaults(run=cmd_build_tokenizer)

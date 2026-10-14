@@ -1,7 +1,9 @@
 import pytest
 
 from wpt_dataset.errors import FormatMapError, NotText
+from wpt_dataset.cli import main
 from wpt_dataset.markdown import documents
+from wpt_dataset.markdown_check import problems
 from wpt_dataset.sources import source_tree
 
 HEAD = ('<?xml version="1.0" encoding="utf-8"?>\n<html xmlns="http://www.w3.org/1999/xhtml" '
@@ -62,3 +64,20 @@ def test_a_file_without_format_or_with_broken_markup_stops_the_build(kit, repo, 
         markdown_of(kit, repo, store, tmp_path, {"plain.txt": b"words\n", "extra.dat": b"x\n"})
     with pytest.raises(NotText, match="text/one.xhtml is not well-formed XHTML"):
         markdown_of(kit, repo, store, tmp_path / "second", {"text/one.xhtml": PAGE.replace("</p>", "", 1).encode()})
+
+
+def test_markdown_check_finds_broken_notes_and_leftover_tags():
+    # a converter mistake on a new kind of input must show, not slip into training
+    assert problems("Text.[^1] An escaped \\<i> and `<b>` in code.\n\n[^1]: The note.\n") == []
+    assert problems("Text.[^2] and <span class=\"x\">more</span>\n\n[^3]: Lost.\n") == [
+        "note [^2] has no definition", "note [^3] is defined but never referred to",
+        "unescaped HTML tag '<span'", "unescaped HTML tag '</span>'"]
+
+
+def test_markdown_check_command_passes_on_converted_pages(kit, repo, store, tmp_path, monkeypatch, capsys):
+    files = {"text/one.xhtml": PAGE.encode(), "text/notes.xhtml": NOTES.encode(), "plain.txt": b"<b> stays text\n",
+             "code/run.py": b"print('<b>')\n"}
+    markdown_of(kit, repo, store, tmp_path, files)
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    assert main(["--root", str(repo.root), "markdown-check"]) == 0
+    assert capsys.readouterr().out.endswith(": 2 documents checked, 1 notes, OK\n")  # the page and plain.txt
