@@ -40,24 +40,37 @@ packages must stay compatible with AGPL-3.0-or-later.
 | attrs | 26.1.0 | MIT | |
 | boto3 | 1.43.113 | Apache-2.0 | |
 | botocore | 1.43.113 | Apache-2.0 | |
+| certifi | 2026.7.22 | MPL-2.0 | tests, through moto (requests) |
+| cffi | 2.1.1 | MIT-0 | tests, through moto (cryptography) |
+| charset-normalizer | 3.5.2 | MIT | tests, through moto (requests) |
 | colorama | 0.4.6 | BSD-3-Clause | Windows only, through pytest |
+| cryptography | 50.0.2 | Apache-2.0 OR BSD-3-Clause | tests, through moto; its compiled part includes OpenSSL (Apache-2.0), statically linked |
+| idna | 3.20 | BSD-3-Clause | tests, through moto (requests) |
 | iniconfig | 2.3.1 | MIT | through pytest |
 | jmespath | 1.1.0 | MIT | |
 | jsonschema | 4.26.0 | MIT | |
 | jsonschema-specifications | 2025.9.1 | MIT | |
+| moto | 5.2.4 | Apache-2.0 | tests: answers the S3 test's requests inside the test process |
 | numpy | 2.5.4 | BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0 | |
 | packaging | 26.3 | Apache-2.0 OR BSD-2-Clause | through pytest |
 | pluggy | 1.6.0 | MIT | through pytest |
+| py-partiql-parser | 0.6.3 | MIT | tests, through moto |
 | pyarrow | 26.0.0 | Apache-2.0 | |
+| pycparser | 3.11 | BSD-3-Clause | tests, through moto (cffi) |
 | pygments | 2.21.0 | BSD-2-Clause | through pytest |
 | pytest | 9.1.1 | MIT | tests |
 | python-dateutil | 2.9.0.post0 | Apache-2.0 AND BSD-3-Clause | newer code is also under Apache-2.0; all of it is under BSD-3-Clause |
+| pyyaml | 6.0.3 | MIT | tests, through moto |
 | referencing | 0.37.0 | MIT | |
+| requests | 2.34.2 | Apache-2.0 | tests, through moto |
+| responses | 0.26.3 | Apache-2.0 | tests, through moto |
 | rpds-py | 2026.9.1 | MIT | |
 | s3transfer | 0.19.2 | Apache-2.0 | |
 | safetensors | 0.8.0 | Apache-2.0 | |
 | six | 1.17.0 | MIT | |
 | urllib3 | 2.8.0 | MIT | |
+| werkzeug | 3.1.9 | BSD-3-Clause | tests, through moto |
+| xmltodict | 1.0.4 | MIT | tests, through moto |
 
 ### PyTorch (one build per machine, picked by `scripts/setup.py`)
 
@@ -193,7 +206,6 @@ They run unmodified next to WPT and are not linked into it.
 | git | any | GPL-2.0-only | fetches sources, applies patches, checks commits |
 | mercurial | any | GPL-2.0-or-later | fetches mercurial sources |
 | GnuPG | any | GNU GPL | checks GPG-signed decisions |
-| moto (server) | latest, in CI | Apache-2.0 | the S3 test server |
 | actions/checkout | v4 | MIT | CI |
 | astral-sh/setup-uv | v6 | MIT | CI |
 

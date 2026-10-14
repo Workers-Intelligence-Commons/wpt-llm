@@ -165,12 +165,19 @@ settings. Objects are named by their sha256 and checked on every read.
 | `wpt-training` | the training loop and choosing the best checkpoint |
 | `wpt-inference` | token-by-token sampling |
 | `wpt-device` | picks the best GPU, else the CPU |
-| `wpt-train`, `wpt-eval`, `wpt-chat` | the applications |
+| `wpt-train`, `wpt-eval`, `wpt-posttrain`, `wpt-chat` | the applications |
 
 ## Checks
 
-CI runs on every pull request and push (`.github/workflows/ci.yml`):
+`uv run scripts/check.py` runs every check, the same way on any machine
+and in CI (`.github/workflows/ci.yml`, on every pull request and push), so
+a green run before pushing means a green CI. It compares with the upstream
+branch, as a push would:
 
+- `uv.lock` matches every `pyproject.toml`.
+- The tests of every package, and the Rust tests. None needs a server: the
+  S3 test runs against moto, which answers S3 requests inside the test
+  process.
 - `wpt-dataset check`: every file matches its schema and current shape,
   source ids match their address, licenses are on the allowed list (with
   their text for a LicenseRef), patches are numbered without gaps, mixture
@@ -180,10 +187,9 @@ CI runs on every pull request and push (`.github/workflows/ci.yml`):
   checksum, cuts, patches, license map and text are checked.
 - `wpt-dataset check-commits <range>`: DCO sign-off on every commit, and a
   signature from an allowed key on every commit that changes a decision.
-- The tests of every package, and the Rust tests.
 
-There is no local hook: run the same commands before pushing if you want an
-early answer.
+It runs every check even after one failed, then lists which passed. There
+is no local hook: run it before pushing.
 
 ## Migrations
 

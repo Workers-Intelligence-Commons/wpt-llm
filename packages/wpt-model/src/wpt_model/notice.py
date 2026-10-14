@@ -97,6 +97,7 @@ def card(config, provenance, evals) -> str:
         *(f"- {line}" for line in _built_from(provenance)),
         f"- Device: {provenance['device']}",
         f"- Every input and tool version: [provenance.json](provenance.json)", "",
+        *_post_training(provenance.get("post_training")),
         "## Sources", "",
         "| Source | Revision | Licenses |", "|---|---|---|",
         *(f"| {sid} | `{source['revision']}` | {', '.join(sorted({e['license'] for e in source['licenses']}))} |"
@@ -111,6 +112,18 @@ def card(config, provenance, evals) -> str:
                   f"`{result['file']}` (sha256 `{result['file_sha256'][:12]}`), wpt-eval {result['wpt_eval']}, "
                   f"on {result['device']}. Data: [evals/{result['name']}.json](evals/{result['name']}.json)", ""]
     return "\n".join(lines)
+
+
+def _post_training(post_training):
+    if not post_training:
+        return []
+    return ["## Post-training", "",
+            "Trained from the base weights "
+            + ", ".join(f"`{name}` (sha256 `{sha[:12]}`)" for name, sha in post_training["base_weights"].items())
+            + ", then changed by these steps, in order; every one succeeded:", "",
+            *(f"{i}. `{step['file']}` (sha256 `{step['file_sha256'][:12]}`)"
+              for i, step in enumerate(post_training["steps"], start=1)),
+            "", *(f"- {line}" for line in _built_from(post_training)), ""]
 
 
 def _built_from(provenance):

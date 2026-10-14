@@ -1,4 +1,5 @@
-# Every check of docs/architecture.md#checks, on every push and pull request.
+# Every check of docs/architecture.md#checks, on every push and pull request:
+# scripts/check.py, the same script anyone runs before pushing.
 name: ci
 
 on:
@@ -10,12 +11,6 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       WPT_STORE: file:///tmp/wpt-store
-      # the S3 test talks to a local moto server (an S3-compatible test server)
-      AWS_ACCESS_KEY_ID: test
-      AWS_SECRET_ACCESS_KEY: test
-      AWS_ENDPOINT_URL: http://127.0.0.1:9123
-      AWS_DEFAULT_REGION: us-east-1
-      WPT_TEST_S3_BUCKET: wpt-test
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,19 +20,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y mercurial
       - name: Install the workspace (CPU PyTorch; builds the Rust tokenizer)
         run: uv sync --locked --group cpu
-      - name: Start the S3 test server
-        run: |
-          uvx --from "moto[server]" moto_server -H 127.0.0.1 -p 9123 > /tmp/moto.log 2>&1 &
-          for i in $(seq 30); do curl -s http://127.0.0.1:9123 > /dev/null && break; sleep 1; done
-          uv run python -c "import boto3; boto3.client('s3').create_bucket(Bucket='wpt-test')"
-      - name: Tests
-        run: uv run pytest -rs
-      - name: Rust tests
-        working-directory: packages/wpt-tokenizer/rust  # inside the folder, so rustup applies rust-toolchain.toml
-        run: rustc --version && cargo test
-      - name: Data rules
-        run: uv run wpt-dataset check
-      - name: Changed sources and commits
+      - name: Every check, as `uv run scripts/check.py` runs them on your machine
         run: |
           if [ "${{ github.event_name }}" = pull_request ]; then
             base="${{ github.event.pull_request.base.sha }}"
@@ -49,8 +32,4 @@ jobs:
             base="$(git hash-object -t tree /dev/null)"
             range="${{ github.sha }}"
           fi
-          uv run wpt-dataset check --changed "$base"
-          uv run wpt-dataset check-commits "$range"
-      - name: Stop the S3 test server
-        if: always()  # a running uvx holds uv's cache lock, which the uv action's cleanup waits for
-        run: pkill -f "[m]oto_server" || true  # [m]: the pattern does not match this shell's own command line
+          uv run scripts/check.py --base "$base" --range "$range"

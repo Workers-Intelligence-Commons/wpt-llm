@@ -36,8 +36,8 @@ data/sources/<id>/        one folder per upstream source: source.json + patches
 data/recipes/             mixtures, tokenizer recipes, dataset recipes
 docs/                     every decision, in English
 packages/                 libraries: dataset rules, store, tokenizer, model, training...
-apps/                     wpt-train, wpt-eval, wpt-chat
-scripts/                  machine setup and helpers
+apps/                     wpt-train, wpt-eval, wpt-posttrain, wpt-chat
+scripts/                  machine setup, every check (check.py), helpers
 ```
 
 ## Quick start
@@ -56,6 +56,8 @@ uv run wpt-train <dataset id> --n-layer 4 --n-embd 128
 uv run wpt-eval runs/default             # tests such as memorization, into the model card
 uv run wpt-chat runs/default
 ```
+
+Before pushing, `uv run scripts/check.py` runs every check CI runs.
 
 The repository starts with no sources: each one is added by a reviewed,
 signed contribution (see [CONTRIBUTING.md](CONTRIBUTING.md)).

@@ -37,7 +37,7 @@ You take responsibility for those three checks.
    each license entry, write in `attribution` the credit that license asks
    for, as the source gives it: authors, title, copyright line, link. Every
    model trained on the source repeats it in its notice.
-5. `uv run wpt-dataset check --fetch <id>` must pass.
+5. `uv run wpt-dataset check --fetch <id>` must pass, then `uv run scripts/check.py`.
 6. Open a pull request. Say what the source is, its license, and anything a
    reviewer should know; use `note` fields for reasons that must stay with
    the data.
@@ -97,10 +97,10 @@ provenance, recorded only with the authorizations they need.
 
 ```sh
 uv run scripts/setup.py      # once per machine: installs the right PyTorch build
-uv run pytest                # every package's tests
-uv run wpt-dataset check     # the data rules
+uv run scripts/check.py      # every check CI runs, before you push
 ```
 
-CI runs those, the Rust tests, and the checks on changed sources and on your
-commits. There is no local hook; running the commands before pushing gives
-the same answers earlier.
+`scripts/check.py` is what CI runs too: the tests of every package, the Rust
+tests, the data rules, and the checks on changed sources and on your
+commits, compared with the upstream branch. A green run means a green CI.
+There is no local hook.
