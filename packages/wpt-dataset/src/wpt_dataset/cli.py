@@ -33,6 +33,7 @@ from .edit import unpack, write_patch
 from .errors import DatasetError
 from .migrate import migrate
 from .repo import Repo, source_id
+from .markdown import documents
 from .sources import compute_upstream, source_tree
 
 
@@ -57,7 +58,9 @@ def cmd_check(args, repo):
         for sid in ids:
             source = repo.source(sid)
             tree, _ = source_tree(source, store)
-            print(f"{sid}: {len(tree)} entries, checksum, cuts, patches and license map OK")
+            converted = documents(source, tree, store)
+            print(f"{sid}: {len(tree)} entries, checksum, cuts, patches, license and format maps OK; "
+                  f"{len(converted)} Markdown documents")
     print(f"checked {len(repo.source_ids())} sources and their recipes")
     return 0
 

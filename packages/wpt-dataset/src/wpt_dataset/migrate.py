@@ -29,6 +29,16 @@ def _source_1_to_2(document):
 MIGRATIONS["source"][1] = _source_1_to_2
 
 
+def _source_2_to_3(document):
+    """Shape 3 says how each file becomes Markdown for training (`formats`).
+    Only a person knows each file's format, so the step leaves the list
+    empty and the check that follows names each file to fill in."""
+    return {**document, "schema": 3, "formats": document.get("formats", [])}
+
+
+MIGRATIONS["source"][2] = _source_2_to_3
+
+
 def _files(repo: Repo):
     for sid in repo.source_ids():
         yield "source", repo.data / "sources" / sid / "source.json"

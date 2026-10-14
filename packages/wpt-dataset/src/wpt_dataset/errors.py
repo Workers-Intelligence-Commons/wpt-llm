@@ -23,6 +23,12 @@ class FetchFailed(DatasetError):
     """No address (main or mirror) gave data with the expected checksum."""
 
 
+class CrawlForbidden(DatasetError):
+    """The robots.txt of an address's site forbids it to every crawler, to
+    wpt-dataset, or to an AI training crawler. Nothing was downloaded from
+    it; the source cannot be used, and no mirror is tried instead."""
+
+
 class ChecksumMismatch(DatasetError):
     """The downloaded data has another manifest checksum than source.json says."""
 
@@ -54,6 +60,10 @@ class EditError(DatasetError):
 
 class LicenseMapError(DatasetError):
     """A path matches no license entry, or more than one."""
+
+
+class FormatMapError(DatasetError):
+    """A path matches no format entry, or more than one."""
 
 
 class NotText(DatasetError):

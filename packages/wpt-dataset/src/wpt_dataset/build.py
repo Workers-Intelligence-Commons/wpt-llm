@@ -1,7 +1,8 @@
 """Build vocabularies and datasets from recipes.
 
-    documents      every file of every admitted source's final tree; exact
-                   duplicates removed (the first by source id, then path, keeps it)
+    documents      the Markdown of every file of every admitted source's final
+                   tree (see markdown.py); exact duplicates removed (the first by
+                   source id, then path, keeps it)
     held-out       documents whose id hashes below the recipe's held_out share
     pools          each training document goes to the first pool, in mixture
                    order, whose expression matches its tags
@@ -32,10 +33,9 @@ from wpt_store.shards import write_shard
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_tokenizer import __version__ as TOKENIZER_VERSION
 
-from . import pools
+from . import markdown, pools
 from .errors import LockMismatch, PoolError
 from .repo import Repo, dump_json, load_json
-from .manifest import SYMLINK
 from .sources import VERSION, fingerprint, source_tree, tags_of
 
 DEFAULT_MAX_EPOCHS = 4
@@ -61,15 +61,13 @@ def gather(repo: Repo, store, log=print):
         info[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
                            "checksum": source.data["checksum"], "tree": tree_object,
                            "licenses": source.data["licenses"]}
-        for path in sorted(tree, key=str.encode):
-            entry = tree[path]
-            if entry.mode == SYMLINK:
-                continue  # a link is not a document; its target is
-            if entry.sha256 in seen:
+        for path, text in markdown.documents(source, tree, store):  # links are not documents; their targets are
+            sha256 = store.put_bytes(text)
+            if sha256 in seen:
                 duplicates += 1
                 continue
-            seen.add(entry.sha256)
-            documents.append(Document(f"{source.id}/{path}", source.id, entry.sha256, tags_of(source, path)))
+            seen.add(sha256)
+            documents.append(Document(f"{source.id}/{path}", source.id, sha256, tags_of(source, path)))
     log(f"documents: {len(documents):,} from {len(info)} admitted sources ({duplicates:,} exact duplicates removed)")
     return documents, info, duplicates
 

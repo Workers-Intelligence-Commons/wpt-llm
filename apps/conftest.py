@@ -39,8 +39,9 @@ def built(tmp_path, monkeypatch):
     root = tmp_path / "wpt"
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
-    data = {"schema": 2, "type": "git", "address": str(upstream), "revision": commit,
+    data = {"schema": 3, "type": "git", "address": str(upstream), "revision": commit,
             "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION}],
+            "formats": [{"format": "text", "paths": ["**"]}],
             "tags": [{"tags": ["en"], "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-14", "reason": "test"}}
     data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], store))

@@ -1,7 +1,9 @@
 """From a source description to its final tree of documents.
 
     download (address, else each mirror) -> upstream tree, checked against `checksum`
-                                            (an "empty" source has no files and downloads nothing)
+                                            (an "empty" source has no files and downloads nothing;
+                                            a robots.txt that forbids an address refuses the source,
+                                            see robots.py)
     erasure cuts, in the order listed     -> each checked by sha256_after
     patches, in file-name order           -> applied with `git apply`
 
@@ -22,7 +24,7 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
-from . import manifest
+from . import manifest, robots
 from .errors import ChecksumMismatch, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match
 from .programs import program
@@ -72,6 +74,8 @@ def compute_upstream(data: dict, address: str, store) -> dict[str, Entry]:
 def _fetch(data: dict, address: str, store) -> dict[str, Entry]:
     extractor = Extractor(store, data.get("extract", {}))
     kind, revision = data["type"], data["revision"]
+    if kind != "empty":
+        robots.check(address, kind, USER_AGENT)  # before anything is downloaded
     with tempfile.TemporaryDirectory(prefix="wpt-fetch-") as tmp:
         tmp = Path(tmp)
         if kind == "http-file":
@@ -107,10 +111,10 @@ def _download(address: str, target: Path) -> Path:
 
 def _git_fetch(address: str, revision: str, repo: Path):
     subprocess.run(["git", "init", "-q", "--bare", str(repo)], capture_output=True, check=True)
-    shallow = subprocess.run(["git", "-C", str(repo), "fetch", "-q", "--depth", "1", address, revision],
-                             capture_output=True)
+    git = ["git", "-c", f"http.userAgent={USER_AGENT}", "-C", str(repo)]
+    shallow = subprocess.run([*git, "fetch", "-q", "--depth", "1", address, revision], capture_output=True)
     if shallow.returncode != 0:  # some servers only serve branch and tag tips
-        subprocess.run(["git", "-C", str(repo), "fetch", "-q", address,
+        subprocess.run([*git, "fetch", "-q", address,
                         "+refs/heads/*:refs/heads/*", "+refs/tags/*:refs/tags/*"], capture_output=True, check=True)
     subprocess.run(["git", "-C", str(repo), "cat-file", "-e", f"{revision}^{{commit}}"], capture_output=True, check=True)
 

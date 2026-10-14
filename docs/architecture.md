@@ -45,7 +45,7 @@ recipe then needs the old commit of this repository.
 
 ```json
 {
-  "schema": 2,
+  "schema": 3,
   "type": "http-archive",
   "address": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip",
   "revision": "2026-03-01",
@@ -53,6 +53,7 @@ recipe then needs the old commit of this repository.
   "extract": { "strip": 1, "exclude": ["**/*.jpg"], "note": "" },
   "licenses": [ { "license": "LicenseRef-public-domain", "paths": ["**"],
                   "attribution": "Jane Austen, Pride and Prejudice, Project Gutenberg, https://www.gutenberg.org/ebooks/1342", "note": "" } ],
+  "formats": [ { "format": "xhtml", "paths": ["**/*.xhtml"], "note": "" } ],
   "tags": [ { "tags": ["en", "literature"], "paths": ["**"], "note": "" } ],
   "mirrors": [ { "address": "https://...", "note": "" } ],
   "cuts": [ { "path": "...", "start": 0, "end": 0, "sha256_after": "...", "note": "" } ],
@@ -81,6 +82,9 @@ recipe then needs the old commit of this repository.
   `attribution` (required) is the credit that license asks for, written by
   a person: authors, title, copyright line, link. Every model trained on
   the source repeats it in its `NOTICE`.
+- `formats`: how each file becomes Markdown, mapped to paths like
+  `licenses`: every path matches exactly one entry. Training reads only
+  Markdown (see "Documents are Markdown" below).
 - `tags`: describe paths (language, domain); pools select documents by tags.
 - `mirrors`: other addresses expected to give the same checksum.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
@@ -139,6 +143,24 @@ and the project is what comes out of it. Removed material is not used, not
 endorsed, and explicitly removed; the removal is itself the record that a
 license was respected.
 
+## Documents are Markdown
+
+Every training document is the Markdown of one file of a source's final
+tree, as its `formats` entry says
+(`packages/wpt-dataset/src/wpt_dataset/markdown.py`):
+
+| Format | Becomes |
+| --- | --- |
+| `markdown` | the file as it is |
+| `text` | paragraphs as written; each line break inside a paragraph is a Markdown line break; Markdown's own characters are escaped, so the text reads exactly as written |
+| `code` | one fenced code block whose opening line names the language and the path: ```` ```python title="src/main.py" ```` (the entry's `language`) |
+| `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source |
+
+A file whose Markdown is empty is no document: an EPUB file that holds only
+notes gives none, since its notes moved into the texts that refer to them.
+A new kind of data (another markup, another kind of code) needs its format
+here first; a path without a format stops the check.
+
 ## Fingerprints and the store
 
 Every result is stored under the fingerprint of what produced it: the sha256
@@ -148,8 +170,8 @@ of its inputs, including WPT's own code version.
 | --- | --- |
 | upstream tree | the source checksum |
 | final source tree | checksum, cuts, each patch's sha256, wpt-dataset version |
-| vocabulary | tokenizer version, tokenizer recipe, its mixture, the selected documents' sha256 |
-| dataset | wpt-dataset version, dataset recipe, mixture, vocabulary, every document's id, sha256 and tags, each source's address, revision, checksum, tree and licenses (with attribution) |
+| vocabulary | tokenizer version, tokenizer recipe, its mixture, the selected documents' sha256 (of their Markdown) |
+| dataset | wpt-dataset version, dataset recipe, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution) |
 
 So "already done" is a lookup: nothing is downloaded or applied twice, and
 changing one patch rebuilds only that source.

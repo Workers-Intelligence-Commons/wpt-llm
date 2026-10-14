@@ -15,7 +15,9 @@ For a commit that adds or changes a source, signing off also certifies that:
 
 - you read the source's license, and every path it covers;
 - you looked for a "no AI training" wish (README, robots.txt, a
-  machine-readable text-and-data-mining reservation) and found none;
+  machine-readable text-and-data-mining reservation) and found none
+  (`wpt-dataset` also refuses any download that the site's robots.txt
+  forbids; see [docs/licenses.md](docs/licenses.md));
 - the source holds no personal data.
 
 You take responsibility for those three checks.
@@ -33,11 +35,13 @@ You take responsibility for those three checks.
    `"refused"` with the reason "under review".
 4. `uv run wpt-dataset manifest <id>` downloads it and prints its manifest and
    checksum. Put the checksum in `source.json`. Exclude binary files in
-   `extract`, and map every path to exactly one license in `licenses`. In
+   `extract`, map every path to exactly one license in `licenses`, and to
+   exactly one format in `formats` (how it becomes Markdown, below). In
    each license entry, write in `attribution` the credit that license asks
    for, as the source gives it: authors, title, copyright line, link. Every
    model trained on the source repeats it in its notice.
-5. `uv run wpt-dataset check --fetch <id>` must pass, then `uv run scripts/check.py`.
+5. `uv run wpt-dataset check --fetch <id>` must pass (it also converts every
+   file to Markdown), then `uv run scripts/check.py`.
 6. Open a pull request. Say what the source is, its license, and anything a
    reviewer should know; use `note` fields for reasons that must stay with
    the data.

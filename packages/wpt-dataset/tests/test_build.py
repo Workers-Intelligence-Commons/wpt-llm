@@ -67,7 +67,8 @@ def test_build_fills_pools_and_is_repeatable_on_another_machine(kit, repo, store
     tokens, _, document, *_ = rows[0]
     assert tokens[-1] == Tokenizer.END
     original = kit.run("git", "show", f"{corpus[1]}:{document.split('/', 1)[1]}", cwd=corpus[0])
-    assert vocabulary.decode(tokens) == original
+    # training reads the file's Markdown: this one-line text, without its last space, then a newline
+    assert vocabulary.decode(tokens[:-1]) == original.strip() + b"\n"
 
     # same inputs: a lookup, not a rebuild
     assert build_dataset(repo, "small", store, log=lambda _: None) == dataset_id

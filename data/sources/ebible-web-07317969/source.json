@@ -1,0 +1,51 @@
+{
+  "schema": 3,
+  "type": "http-archive",
+  "address": "https://eBible.org/Scriptures/engwebp_readaloud.zip",
+  "revision": "2026-10-14",
+  "checksum": "sha256:5cbe7cae9e55fbba256894b57fe4667cfe01cb8e08b175a6a6555e425ca87e0e",
+  "extract": {
+    "exclude": [
+      "copr.htm",
+      "keys.asc",
+      "engwebp_000_000_000_read.txt"
+    ],
+    "note": "left out: the copyright page (quoted in LicenseRef-public-domain.txt), the signing key, and eBible's note about the file set"
+  },
+  "licenses": [
+    {
+      "license": "LicenseRef-public-domain",
+      "paths": [
+        "**"
+      ],
+      "attribution": "World English Bible (WEB), 2020 stable text edition, eBible.org, https://ebible.org/engwebp/. \"World English Bible\" is a trademark of eBible.org.",
+      "note": "eBible.org asks that a changed text no longer be called the World English Bible: a patch that changes its words must also take that name out of this attribution."
+    }
+  ],
+  "formats": [
+    {
+      "format": "text",
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tags": [
+        "en",
+        "religion"
+      ],
+      "paths": [
+        "**"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "refused",
+    "by": "Inaya Yousfi",
+    "date": "2026-10-14",
+    "reason": "under review"
+  },
+  "note": "eBible.org rebuilds this zip often; the checksum covers the files inside, so a rebuild with the same text still matches."
+}

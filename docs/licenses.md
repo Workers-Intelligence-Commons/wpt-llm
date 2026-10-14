@@ -50,10 +50,12 @@ packages must stay compatible with AGPL-3.0-or-later.
 | jmespath | 1.1.0 | MIT | |
 | jsonschema | 4.26.0 | MIT | |
 | jsonschema-specifications | 2025.9.1 | MIT | |
+| lxml | 6.1.3 | BSD-3-Clause | reads XHTML for the Markdown conversion; its compiled part bundles zlib (Zlib), libiconv (LGPL-2.1), libxml2, libxslt and libexslt (MIT) |
 | moto | 5.2.4 | Apache-2.0 | tests: answers the S3 test's requests inside the test process |
 | numpy | 2.5.4 | BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0 | |
 | packaging | 26.3 | Apache-2.0 OR BSD-2-Clause | through pytest |
 | pluggy | 1.6.0 | MIT | through pytest |
+| protego | 0.7.0 | BSD-3-Clause | reads robots.txt files |
 | py-partiql-parser | 0.6.3 | MIT | tests, through moto |
 | pyarrow | 26.0.0 | Apache-2.0 | |
 | pycparser | 3.11 | BSD-3-Clause | tests, through moto (cffi) |
@@ -261,6 +263,18 @@ keeping attribution, so the copyright notices of a source stay in its tree.
   use: a statement in a README, robots.txt, or a machine-readable
   text-and-data-mining reservation (EU Directive 2019/790, article 4) leaves
   the content out. Review looks for them on every source.
+- **robots.txt is enforced in the code**, with no setting to turn it off:
+  before any download from an http(s) address, `wpt-dataset` reads the
+  site's robots.txt (RFC 9309) and refuses the source when it forbids the
+  address to every crawler (`*`), to `wpt-dataset` itself, or to an AI
+  training crawler. Those are the crawlers whose operator documents that
+  they gather training data, listed with the link to that statement in
+  `packages/wpt-dataset/src/wpt_dataset/robots.py`. A refusal stops the
+  source; no mirror is tried instead. Crawlers that only fetch a page for a
+  person using an AI assistant (Claude-User, ChatGPT-User...) are not on the
+  list: a site that refuses only them has not refused training. A
+  robots.txt that cannot be read makes that address unusable, and the next
+  mirror is tried.
 - **No personal data**: sources made of personal data are not accepted.
 - A machine can check that a license is written and allowed, not that it is
   true. If the source page lies, only human review catches it.

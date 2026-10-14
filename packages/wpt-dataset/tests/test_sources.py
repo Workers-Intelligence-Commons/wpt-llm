@@ -5,7 +5,7 @@ import tarfile
 import pytest
 
 from wpt_dataset import manifest
-from wpt_dataset.errors import BadPath, ChecksumMismatch, CutFailed, LicenseMapError, NotText, PatchFailed
+from wpt_dataset.errors import BadPath, ChecksumMismatch, CrawlForbidden, CutFailed, LicenseMapError, NotText, PatchFailed
 from wpt_dataset.sources import compute_upstream, source_tree
 
 
@@ -139,3 +139,21 @@ def test_paths_differing_only_by_case_are_refused(kit, store, http_folder):
     (folder / "case.tar").write_bytes(buffer.getvalue())
     with pytest.raises(BadPath):
         compute_upstream({"type": "http-archive", "revision": "2026-10-14"}, f"{base}/case.tar", store)
+
+
+def test_a_robots_txt_refusing_ai_training_refuses_the_source_even_with_a_mirror(kit, repo, store, http_folder,
+                                                                                tmp_path):
+    # a site's "no" to AI training crawlers must hold: no download, and no way around it through a mirror
+    folder, base = http_folder
+    (folder / "book.txt").write_bytes(b"a short story\n")
+    (folder / "robots.txt").write_text("User-agent: GPTBot\nDisallow: /book.txt\n")
+    sid = kit.add_source(repo, store, "example", "refused", {
+        "type": "http-file", "address": f"{base}/book.txt", "revision": "2026-10-14",
+        "mirrors": [{"address": str(tmp_path / "anywhere")}]}, compute_checksum=False)
+    with pytest.raises(CrawlForbidden, match="forbids .*book.txt to GPTBot"):
+        source_tree(repo.source(sid), store)
+
+    # refusing only assistants that fetch for a person is not a refusal of training
+    (folder / "robots.txt").write_text("User-agent: Claude-User\nDisallow: /\n")
+    data = {"type": "http-file", "address": f"{base}/book.txt", "revision": "2026-10-14"}
+    assert set(compute_upstream(data, data["address"], store)) == {"book.txt"}

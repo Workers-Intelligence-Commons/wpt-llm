@@ -75,7 +75,15 @@ Follow CONTRIBUTING.md, "Adding a source". The parts an agent gets wrong:
   `attribution`: the credit that license asks for, copied from the source
   (authors, title, copyright line, link). Never invent it. Every model
   trained on the source repeats it in its `NOTICE`.
-- Tags and licenses are written by people; never generate them.
+- Every path also matches exactly one `formats` entry: how it becomes
+  Markdown (`markdown`, `text`, `code` with its `language`, `xhtml`).
+  Training reads only Markdown; a new kind of file needs its format in
+  `wpt_dataset/markdown.py` first.
+- `wpt-dataset` refuses any download that the site's robots.txt forbids to
+  every crawler, to wpt-dataset or to an AI training crawler
+  (`wpt_dataset/robots.py`); never work around a refusal (another address,
+  a mirror, a manual download).
+- Tags, licenses and formats are written by people; never generate them.
 - A new source starts with `"decision": "refused"` and the reason "under
   review". Only a maintainer admits it, in a signed commit.
 - The schema of each data file is in

@@ -130,8 +130,9 @@ ATTRIBUTION = "Copyright (c) 2026 Test Author, https://example.org/project"
 def add_source(repo, store, origin, item, data, patches=(), compute_checksum=True):
     """Write data/sources/<id>/source.json, filling in the checksum from the
     real upstream. Returns the source id."""
-    data = {"schema": 2, "checksum": "sha256:" + "0" * 64,
-            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION}], "decision": DECISION, **data}
+    data = {"schema": 3, "checksum": "sha256:" + "0" * 64,
+            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION}],
+            "formats": [{"format": "text", "paths": ["**"]}], "decision": DECISION, **data}
     if compute_checksum:
         data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], store))
     sid = "-".join([origin] + ([item] if item else []) + [address_hash(data["address"])])
