@@ -45,6 +45,13 @@ class PatchFailed(DatasetError):
     """A patch does not apply to the cut tree."""
 
 
+class EditError(DatasetError):
+    """`unpack` or `patch` cannot run: the folder lies inside the repository,
+    `unpack`'s folder is not empty, `patch`'s folder holds something other
+    than files and symlinks, or matches the source already. Nothing was
+    written."""
+
+
 class LicenseMapError(DatasetError):
     """A path matches no license entry, or more than one."""
 

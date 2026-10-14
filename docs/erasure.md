@@ -38,6 +38,14 @@ A person who asks to be erased, including from a copyright notice that a
 license requires keeping, gets the notice **and everything they made**
 removed, so that no license is left broken.
 
+## Text inside the repository
+
+Sources of type `empty` (text written for WPT) live in this repository as
+patches. Erasing from them takes a new patch that removes the text, which
+stops future builds from using it, but the text stays in the repository's
+history, clones and forks. Such text is committed only by its own author,
+who accepts that.
+
 ## What it covers
 
 Erasure applies to **future builds and models only**. Models already trained

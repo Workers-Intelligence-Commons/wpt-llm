@@ -7,9 +7,9 @@
   "required": ["schema", "type", "address", "revision", "checksum", "licenses", "decision"],
   "properties": {
     "schema": {"const": 2, "description": "shape version of this file, for migrations"},
-    "type": {"enum": ["http-file", "http-archive", "git", "mercurial"]},
+    "type": {"enum": ["http-file", "http-archive", "git", "mercurial", "empty"], "description": "empty: no upstream; the patches hold every file (text written for WPT)"},
     "address": {"type": "string", "minLength": 1, "description": "where to fetch it; its sha256 gives the id's hash part"},
-    "revision": {"type": "string", "minLength": 1, "description": "git/mercurial: full commit hash; http: fetch date YYYY-MM-DD"},
+    "revision": {"type": "string", "minLength": 1, "description": "git/mercurial: full commit hash; http: fetch date YYYY-MM-DD; empty: the date the source was started"},
     "checksum": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "sha256 of the canonical manifest"},
     "extract": {
       "type": "object",
@@ -97,8 +97,18 @@
       "then": {"properties": {"revision": {"pattern": "^[0-9a-f]{40}$"}}}
     },
     {
-      "if": {"properties": {"type": {"enum": ["http-file", "http-archive"]}}},
+      "if": {"properties": {"type": {"enum": ["http-file", "http-archive", "empty"]}}},
       "then": {"properties": {"revision": {"pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "empty"}}},
+      "then": {
+        "properties": {
+          "address": {"pattern": "^empty:[a-z0-9][a-z0-9._-]*$", "description": "empty:<name>, a name for the source; nothing is fetched"},
+          "checksum": {"const": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "description": "the checksum of an empty manifest"}
+        },
+        "not": {"anyOf": [{"required": ["extract"]}, {"required": ["mirrors"]}]}
+      }
     },
     {
       "if": {"properties": {"type": {"not": {"const": "http-file"}}}},

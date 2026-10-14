@@ -1,6 +1,7 @@
 """From a source description to its final tree of documents.
 
     download (address, else each mirror) -> upstream tree, checked against `checksum`
+                                            (an "empty" source has no files and downloads nothing)
     erasure cuts, in the order listed     -> each checked by sha256_after
     patches, in file-name order           -> applied with `git apply`
 
@@ -87,6 +88,8 @@ def _fetch(data: dict, address: str, store) -> dict[str, Entry]:
             subprocess.run([program("hg"), "clone", "-q", "-U", "-r", revision, address, str(tmp / "repo")],
                            capture_output=True, check=True)
             manifest.read_mercurial(tmp / "repo", revision, extractor)
+        elif kind == "empty":
+            pass  # its patches hold every file
         else:
             raise ValueError(f"unknown source type {kind!r}")
     return extractor.finish()
@@ -140,19 +143,8 @@ def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Path], s
     if not patches:
         return tree
     with tempfile.TemporaryDirectory(prefix="wpt-patch-") as tmp:
-        env = {**os.environ, "GIT_DIR": str(Path(tmp) / "git"), "GIT_INDEX_FILE": str(Path(tmp) / "index"),
-               "GIT_CEILING_DIRECTORIES": tmp, "GIT_CONFIG_NOSYSTEM": "1"}
-
-        def git(*args, input=None):
-            return subprocess.run(["git", "-c", "core.autocrlf=false", *args], input=input, cwd=tmp,
-                                  env=env, capture_output=True, check=True).stdout
-
-        git("init", "-q", "--bare", env["GIT_DIR"])
-        paths = sorted(tree)
-        objects = git("hash-object", "-w", "--no-filters", "--stdin-paths",
-                      input="".join(f"{store.path(tree[p].sha256)}\n" for p in paths).encode()).decode().split()
-        git("update-index", "-z", "--index-info",
-            input=b"".join(f"{tree[p].mode} {o}\t{p}".encode() + b"\0" for p, o in zip(paths, objects)))
+        git, env = temporary_git(tmp)
+        load_index(git, tree, store)
         for patch in patches:
             try:
                 git("apply", "--cached", "--whitespace=nowarn", str(patch.resolve()))
@@ -168,6 +160,32 @@ def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Path], s
             patched = {path: Entry(mode, store.put_bytes(content)) for (path, mode, _), content in zip(records, contents)}
     manifest.check_paths(patched)
     return patched
+
+
+def temporary_git(tmp):
+    """(git, env): a function running git on an empty bare repository and
+    index inside tmp, isolated from the user's settings and repositories."""
+    env = {**os.environ, "GIT_DIR": str(Path(tmp) / "git"), "GIT_INDEX_FILE": str(Path(tmp) / "index"),
+           "GIT_CEILING_DIRECTORIES": str(tmp), "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull}
+
+    def git(*args, input=None):
+        return subprocess.run(["git", "-c", "core.autocrlf=false", "-c", "core.quotepath=off", *args], input=input,
+                              cwd=tmp, env=env, capture_output=True, check=True).stdout
+
+    git("init", "-q", "--bare", env["GIT_DIR"])
+    return git, env
+
+
+def load_index(git, tree: dict[str, Entry], store):
+    """Make the temporary index hold exactly this tree."""
+    git("read-tree", "--empty")
+    paths = sorted(tree)
+    if not paths:
+        return
+    objects = git("hash-object", "-w", "--no-filters", "--stdin-paths",
+                  input="".join(f"{store.path(tree[p].sha256)}\n" for p in paths).encode()).decode().split()
+    git("update-index", "-z", "--index-info",
+        input=b"".join(f"{tree[p].mode} {o}\t{p}".encode() + b"\0" for p, o in zip(paths, objects)))
 
 
 # -- the final tree -------------------------------------------------------------

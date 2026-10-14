@@ -18,6 +18,21 @@ is systematic.
 - Scores come from programs or from humans, never from another company's
   model.
 
+## Where records live
+
+Records are files of a source, like any other text, tagged `demonstration`:
+they get the same license entries, attribution, signed decision, NOTICE
+listing and checks as every source. Records written for WPT go in an
+`empty` source (see CONTRIBUTING.md, "Adding your own texts"). A
+pre-training mixture leaves them out (`!demonstration` in its pools); only
+post-training reads them.
+
+- A record holds only what a person made: commands typed, edits, messages
+  written. From a session with an AI assistant, only the person's own
+  messages may be kept, never the assistant's replies.
+- No other person's personal data, and no secrets: terminal output and
+  paths are checked before a record is committed.
+
 ## Record format
 
 JSON Lines: one record per line. Media such as screenshots are separate
@@ -26,7 +41,7 @@ carries its provenance: the contributor, the commit that added it (signed
 off under the DCO), the reference of the authorization it relies on, and its
 license. Records are converted to tokens before training.
 
-The exact fields are written when the first post-training data is added.
+The exact fields are written together with the first recording tool.
 
 ## Running post-training
 

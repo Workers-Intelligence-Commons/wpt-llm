@@ -9,6 +9,10 @@
                                           the id a new source must use
     wpt-dataset manifest ID               fetch a source without checking its checksum and
                                           print its manifest and checksum (to fill in source.json)
+    wpt-dataset unpack ID FOLDER          write a source's final files into a new folder
+                                          outside the repository, to edit them
+    wpt-dataset patch ID FOLDER NAME      record the folder's differences from the source's
+                                          final files as its next patch, NNNN-NAME.patch
     wpt-dataset build-tokenizer NAME      train (or find) the vocabulary of a tokenizer recipe
     wpt-dataset build NAME                build (or find) a dataset recipe; prints the dataset id
     wpt-dataset migrate                   rewrite data files to the current shapes
@@ -25,6 +29,7 @@ from wpt_store import StoreError, store_from_settings
 from . import manifest
 from .build import build_dataset, build_tokenizer
 from .commits import check_commits
+from .edit import unpack, write_patch
 from .errors import DatasetError
 from .migrate import migrate
 from .repo import Repo, source_id
@@ -79,6 +84,18 @@ def cmd_manifest(args, repo):
     return 0
 
 
+def cmd_unpack(args, repo):
+    count = unpack(repo, repo.source(args.id), _store(repo), args.folder)
+    print(f"{args.folder}: {count} files of {args.id}; edit them, then `wpt-dataset patch {args.id} {args.folder} <name>`")
+    return 0
+
+
+def cmd_patch(args, repo):
+    path = write_patch(repo, repo.source(args.id), _store(repo), args.folder, args.name)
+    print(f"wrote {path.relative_to(repo.root)}; it applies and gives exactly the folder's files")
+    return 0
+
+
 def cmd_build_tokenizer(args, repo):
     _, vocabulary, key = build_tokenizer(repo, args.name, _store(repo))
     print(f"vocabulary {vocabulary} (fingerprint {key})")
@@ -115,6 +132,15 @@ def main(argv=None):
     show = commands.add_parser("manifest")
     show.add_argument("id")
     show.set_defaults(run=cmd_manifest)
+    unpack_ = commands.add_parser("unpack")
+    unpack_.add_argument("id")
+    unpack_.add_argument("folder")
+    unpack_.set_defaults(run=cmd_unpack)
+    patch = commands.add_parser("patch")
+    patch.add_argument("id")
+    patch.add_argument("folder")
+    patch.add_argument("name")
+    patch.set_defaults(run=cmd_patch)
     vocab = commands.add_parser("build-tokenizer")
     vocab.add_argument("name")
     vocab.set_defaults(run=cmd_build_tokenizer)

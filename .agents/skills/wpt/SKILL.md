@@ -46,6 +46,7 @@ A Rust toolchain is needed: the tokenizer is built from source.
 | --- | --- | --- | --- |
 | id of a new source | `uv run wpt-dataset source-id ORIGIN [ITEM] ADDRESS` | | prints the id |
 | manifest and checksum of a source | `uv run wpt-dataset manifest ID` | the upstream | the store; prints the checksum |
+| edit a source's files | `uv run wpt-dataset unpack ID FOLDER`, edit, `uv run wpt-dataset patch ID FOLDER NAME` | the source, the folder | the folder; then `data/sources/ID/NNNN-NAME.patch` |
 | check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` | `data/` | the store, with `--fetch` |
 | build a vocabulary | `uv run wpt-dataset build-tokenizer NAME` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` |
 | build a dataset | `uv run wpt-dataset build NAME` | a dataset recipe | the store; prints the dataset id |
@@ -75,6 +76,38 @@ Follow CONTRIBUTING.md, "Adding a source". The parts an agent gets wrong:
   review". Only a maintainer admits it, in a signed commit.
 - The schema of each data file is in
   `packages/wpt-dataset/src/wpt_dataset/schemas/`.
+
+## Patches and text written for WPT
+
+Never write a patch by hand. `wpt-dataset unpack` writes a source's final
+files into a folder outside the repository; after the edit,
+`wpt-dataset patch` records the difference as the next patch and keeps it
+only if the source then gives exactly the folder's files and passes its
+license map.
+
+Text a person writes for WPT is an `empty` source: no download, its
+patches hold every file (CONTRIBUTING.md, "Adding your own texts").
+Post-training records are files of such a source, tagged `demonstration`
+(docs/post-training.md); their format is not written yet. Committed text
+stays in the repository's history for good.
+
+## Formatting a person's text
+
+A person may hand you raw text to turn into source files, asking you to
+change only its form. The text must stay theirs, and no output of another
+company's model may enter the data, so:
+
+- Never open, read or print the content of those files.
+- Learn their shape only through scripts that report structure, never
+  words: line counts and lengths, blank lines, character classes,
+  encodings, line endings.
+- Change them only through scripts that transform the whole file
+  mechanically (line endings, spacing, splitting into files), never by
+  writing their text yourself.
+- Pass the result to the tools with shell commands: `unpack`, copy the
+  formatted files into the folder, `patch`, then `scripts/check.py`.
+- From a session with an AI assistant, keep only the person's own
+  messages.
 
 ## Changing a file's shape
 

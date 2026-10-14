@@ -63,9 +63,14 @@ recipe then needs the old commit of this repository.
 
 - `schema`: the shape version of the file, for migrations.
 - `type`: `http-file`, `http-archive` (tar, tar.gz, tar.bz2, tar.xz or zip),
-  `git` or `mercurial`.
+  `git`, `mercurial`, or `empty` for text written for WPT: it downloads
+  nothing and starts with no files, and its patches hold every file. Its
+  `address` is a name, `empty:<name>`, its `revision` the date it was
+  started, and its `checksum` that of an empty manifest,
+  `sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
 - `revision`: the full commit hash for git and mercurial; the fetch date
-  (`YYYY-MM-DD`) for http, where the checksum is what pins the content.
+  (`YYYY-MM-DD`) for http, where the checksum is what pins the content; the
+  start date for `empty`.
 - `checksum`: the sha256 of the canonical manifest (below).
 - `extract`: `strip` removes leading path components (entries left with no
   path are dropped), `exclude` leaves paths out, and `name` gives an
@@ -120,6 +125,13 @@ Patches use git's format and are applied with `git apply` inside a temporary
 git index, so no file is written to a disk and modes and symlinks behave the
 same everywhere. Git is therefore a dependency of data processing. A patch
 can add, change, delete files and change modes.
+
+Patches are not written by hand: `wpt-dataset unpack <id> <folder>` writes a
+source's final files (after cuts and patches) into a folder outside the
+repository; after editing them, `wpt-dataset patch <id> <folder> <name>`
+records the difference as the next patch, `NNNN-<name>.patch`. It then
+applies every patch again and keeps the new one only if the source gives
+exactly the folder's files and passes its license map.
 
 Removal patches are allowed even though their `-` lines show the removed
 text: this repository is the software that downloads and treats the data,

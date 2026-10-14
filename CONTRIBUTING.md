@@ -42,6 +42,27 @@ You take responsibility for those three checks.
    reviewer should know; use `note` fields for reasons that must stay with
    the data.
 
+## Adding your own texts
+
+Text written for WPT, by you, lives in the repository itself, as the
+patches of an `empty` source (see [docs/architecture.md](docs/architecture.md)):
+
+1. Choose its id: `uv run wpt-dataset source-id <origin> [<item>] empty:<name>`.
+2. Create `data/sources/<id>/source.json` with `"type": "empty"`, the
+   address `empty:<name>`, today's date as `revision`, the empty checksum,
+   a license you choose for your text (for example `CC0-1.0`) with your
+   `attribution`, its tags, and the decision.
+3. `uv run wpt-dataset unpack <id> <folder>` (a folder outside the
+   repository), write or edit your files there, then
+   `uv run wpt-dataset patch <id> <folder> <name>`. Each later change is the
+   same two commands and one more patch.
+
+Committed text stays public in the repository's history, clones and forks:
+an erasure can remove it from future builds, never from that history (see
+[docs/erasure.md](docs/erasure.md)). Commit only text you want public for
+good. Your signed-off commit certifies you wrote it, and it holds no other
+person's personal data and no output of another company's model.
+
 There is no automatic filtering or tagging: tags and licenses are written by
 people, and a person reviews every source. Tools such as ScanCode may help
 you find license texts; they never decide.
