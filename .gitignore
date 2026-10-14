@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+# machine-specific settings (see .env.example)
+.env
+# trained models: weights stay out of the repository
+runs/
+*.pt
+*.safetensors
+# Rust build output, and the compiled tokenizer extension
+target/
+*.so
+*.pyd

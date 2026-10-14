@@ -1,0 +1,69 @@
+# Workspace root: holds no code. Libraries live in packages/, runnable apps in apps/.
+# Never built itself; it exists to carry the groups below.
+[project]
+name = "wpt-llm"
+version = "0.1.0"
+requires-python = ">=3.14"
+
+[tool.uv]
+package = false
+# One PyTorch build per kind of hardware. They are all recorded in uv.lock;
+# `uv run scripts/setup.py` installs the one this machine needs.
+conflicts = [[{ group = "cpu" }, { group = "cuda" }, { group = "rocm" }, { group = "xpu" }]]
+
+[tool.uv.workspace]
+members = ["packages/*", "apps/*"]
+
+[dependency-groups]
+# `uv sync` installs every app, and through them every library (but not torch).
+dev = ["wpt-train", "wpt-chat", "wpt-dataset", "pytest>=8"]
+cpu = ["torch>=2.14"]
+cuda = ["torch>=2.14"]  # NVIDIA, CUDA 13.0: needs driver 580 or newer
+# AMD ROCm builds exist for Linux only. triton-rocm / triton-xpu are torch's own
+# dependencies, named here only so the source rules below apply to them.
+rocm = ["torch>=2.14 ; sys_platform == 'linux'", "triton-rocm ; sys_platform == 'linux'"]
+xpu = ["torch>=2.14", "triton-xpu"]
+
+[tool.uv.sources]
+wpt-tokenizer = { workspace = true }
+wpt-store = { workspace = true }
+wpt-dataset = { workspace = true }
+wpt-model = { workspace = true }
+wpt-inference = { workspace = true }
+wpt-training = { workspace = true }
+wpt-device = { workspace = true }
+wpt-train = { workspace = true }
+wpt-chat = { workspace = true }
+torch = [
+    { index = "pytorch-cpu", group = "cpu" },
+    { index = "pytorch-cuda", group = "cuda" },
+    { index = "pytorch-rocm", group = "rocm" },
+    { index = "pytorch-xpu", group = "xpu" },
+]
+triton-rocm = { index = "pytorch-rocm", group = "rocm" }
+triton-xpu = { index = "pytorch-xpu", group = "xpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cuda"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/rocm7.2"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-xpu"
+url = "https://download.pytorch.org/whl/xpu"
+explicit = true
+
+[tool.pytest.ini_options]
+testpaths = ["packages", "apps"]
+# test files in different members may share a name
+addopts = "--import-mode=importlib"

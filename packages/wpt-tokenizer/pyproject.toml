@@ -1,0 +1,20 @@
+[project]
+name = "wpt-tokenizer"
+dynamic = ["version"]  # from rust/Cargo.toml: one version for the code and its vocabularies
+description = "Byte-level BPE tokenizer with its hot loop in Rust"
+requires-python = ">=3.14"
+dependencies = []
+
+[build-system]
+requires = ["maturin>=1.15,<2"]
+build-backend = "maturin"
+
+[tool.maturin]
+manifest-path = "rust/Cargo.toml"
+python-source = "src"
+module-name = "wpt_tokenizer._native"
+
+[tool.uv]
+# rebuild the Rust extension whenever its sources change
+cache-keys = [{ file = "pyproject.toml" }, { file = "rust-toolchain.toml" }, { file = "rust/Cargo.toml" },
+              { file = "rust/build.rs" }, { file = "rust/src/**/*.rs" }]

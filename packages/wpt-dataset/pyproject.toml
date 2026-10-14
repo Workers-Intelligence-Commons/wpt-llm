@@ -1,0 +1,13 @@
+[project]
+name = "wpt-dataset"
+version = "0.1.0"
+description = "WPT's data rules: sources, manifests, cuts, patches, mixtures, builds and the checks CI runs"
+requires-python = ">=3.14"
+dependencies = ["wpt-store", "wpt-tokenizer", "jsonschema>=4.23", "pyarrow>=21"]
+
+[project.scripts]
+wpt-dataset = "wpt_dataset.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"

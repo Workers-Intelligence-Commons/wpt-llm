@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/inayayousfi/wpt-llm/schemas/tokenizer.schema.json",
+  "title": "WPT tokenizer recipe (data/recipes/tokenizers/<name>.json)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "mixture", "vocab_size"],
+  "properties": {
+    "schema": {"const": 1},
+    "mixture": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "description": "the documents of this mixture's pools train the vocabulary, each once"},
+    "vocab_size": {"type": "integer", "minimum": 257, "description": "256 bytes + end-of-document + merges"},
+    "note": {"type": "string"}
+  }
+}

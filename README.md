@@ -1,0 +1,84 @@
+# WPT: Workers' Pre-trained Transformer
+
+WPT is the first model of Workers' Intelligence Commons: an open language
+model, trained from scratch only on content whose license is clear, and
+published under copyleft, so that intelligence stays a shared means of
+production: everyone's, or rather no one's.
+
+## Why
+
+Language models are becoming a central work tool. We want them to stay a
+common good that anyone can use, host, modify and improve, including future
+generations of workers. The full principles are in the
+[charter](docs/charter.md).
+
+## Principles
+
+- Trained from scratch: no distillation from another company's model, and no
+  existing base model to fine-tune.
+- The corpus holds only content under licenses compatible with copyleft
+  (MIT, public domain, and the others in [docs/licenses.md](docs/licenses.md)).
+  When in doubt, it is refused.
+- A public provenance record: every source is described in this repository,
+  with an exact pointer and a checksum of its content.
+- Copyleft keeps every improvement served to the public in the commons.
+
+## What this repository is
+
+The repository is a lockfile, not a corpus. It holds verifiable pointers to
+the data (address, revision, checksum), the patches and erasure cuts applied
+to it, the recipes that mix it, and the code that fetches, checks, builds and
+trains on it. The data itself is fetched on demand into a store each person
+controls; WPT hosts no data. See [docs/architecture.md](docs/architecture.md).
+
+```
+data/sources/<id>/        one folder per upstream source: source.json + patches
+data/recipes/             mixtures, tokenizer recipes, dataset recipes
+docs/                     every decision, in English
+packages/                 libraries: dataset rules, store, tokenizer, model, training...
+apps/                     wpt-train, wpt-chat
+scripts/                  machine setup and helpers
+```
+
+## Quick start
+
+Requirements: [uv](https://docs.astral.sh/uv/), git, a Rust toolchain (the
+tokenizer is built from source), mercurial only for mercurial sources, and
+GnuPG only to check GPG-signed decisions (on Windows, the gnupg.org build:
+the copy inside Git for Windows does not accept Windows paths).
+
+```sh
+uv run scripts/setup.py                  # installs the PyTorch build for this machine's GPU
+echo "WPT_STORE=file://$HOME/wpt-store" >> .env
+uv run wpt-dataset check --fetch         # fetch every admitted source and check it
+uv run wpt-dataset build <dataset recipe>   # prints a dataset id
+uv run wpt-train <dataset id> --n-layer 4 --n-embd 128
+uv run wpt-chat runs/default
+```
+
+The repository starts with no sources: each one is added by a reviewed,
+signed contribution (see [CONTRIBUTING.md](CONTRIBUTING.md)).
+
+## Documentation
+
+- [Charter](docs/charter.md)
+- [Architecture: sources, manifests, patches, store, builds](docs/architecture.md)
+- [Licenses and what the corpus accepts](docs/licenses.md)
+- [Erasure requests](docs/erasure.md)
+- [Data selection: tags, pools, mixtures, held-out text](docs/data-selection.md)
+- [Tokenizer](docs/tokenizer.md)
+- [Training and repeatability](docs/training.md)
+- [Post-training](docs/post-training.md)
+- [Output notice and attribution (draft clauses)](docs/output-notice.md)
+
+## License
+
+The code and documents in this repository are under the
+[GNU Affero General Public License, version 3 or later](LICENSE)
+(AGPL-3.0-or-later). The license of published weights and built data is not
+decided yet; see [docs/licenses.md](docs/licenses.md).
+
+## Status
+
+The project is starting. The first model will be small. No checkpoint has
+been published.

@@ -1,0 +1,10 @@
+[project]
+name = "wpt-store"
+version = "0.1.0"
+description = "Content-addressed storage for WPT data (a local folder or an S3-compatible bucket) and its token shard format"
+requires-python = ">=3.14"
+dependencies = ["boto3>=1.40", "pyarrow>=21", "numpy>=2"]  # pyarrow, numpy: the token shard format (shards.py)
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"

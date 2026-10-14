@@ -1,0 +1,10 @@
+[project]
+name = "wpt-model"
+version = "0.1.0"
+description = "TinyGPT network, its config, and safetensors model folders"
+requires-python = ">=3.14"
+dependencies = ["safetensors>=0.4", "numpy>=2"]  # numpy: safetensors saves torch tensors through it; torch comes from the root group that scripts/setup.py picks
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"

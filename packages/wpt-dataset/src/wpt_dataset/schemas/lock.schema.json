@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/inayayousfi/wpt-llm/schemas/lock.schema.json",
+  "title": "WPT tokenizer lock (data/recipes/tokenizers/<name>.lock.json), written by the build",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "fingerprint", "vocabulary_sha256"],
+  "properties": {
+    "schema": {"const": 1},
+    "fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "vocabulary_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "note": {"type": "string"}
+  }
+}
