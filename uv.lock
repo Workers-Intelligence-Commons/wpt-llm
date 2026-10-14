@@ -21,6 +21,7 @@ members = [
     "wpt-chat",
     "wpt-dataset",
     "wpt-device",
+    "wpt-eval",
     "wpt-inference",
     "wpt-llm",
     "wpt-model",
@@ -1282,7 +1283,7 @@ requires-dist = [
 
 [[package]]
 name = "wpt-dataset"
-version = "0.1.0"
+version = "0.2.0"
 source = { editable = "packages/wpt-dataset" }
 dependencies = [
     { name = "jsonschema" },
@@ -1303,6 +1304,27 @@ requires-dist = [
 name = "wpt-device"
 version = "0.1.0"
 source = { editable = "packages/wpt-device" }
+
+[[package]]
+name = "wpt-eval"
+version = "0.1.0"
+source = { editable = "apps/wpt-eval" }
+dependencies = [
+    { name = "numpy" },
+    { name = "wpt-device" },
+    { name = "wpt-model" },
+    { name = "wpt-store" },
+    { name = "wpt-tokenizer" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=2" },
+    { name = "wpt-device", editable = "packages/wpt-device" },
+    { name = "wpt-model", editable = "packages/wpt-model" },
+    { name = "wpt-store", editable = "packages/wpt-store" },
+    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
+]
 
 [[package]]
 name = "wpt-inference"
@@ -1326,6 +1348,7 @@ dev = [
     { name = "pytest" },
     { name = "wpt-chat" },
     { name = "wpt-dataset" },
+    { name = "wpt-eval" },
     { name = "wpt-train" },
 ]
 rocm = [
@@ -1346,6 +1369,7 @@ dev = [
     { name = "pytest", specifier = ">=8" },
     { name = "wpt-chat", editable = "apps/wpt-chat" },
     { name = "wpt-dataset", editable = "packages/wpt-dataset" },
+    { name = "wpt-eval", editable = "apps/wpt-eval" },
     { name = "wpt-train", editable = "apps/wpt-train" },
 ]
 rocm = [

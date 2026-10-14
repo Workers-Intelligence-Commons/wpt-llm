@@ -12,8 +12,11 @@ Every option can also come from an environment variable, WPT_ plus the
 option name in capitals with '_' for '-' (--n-layer -> WPT_N_LAYER); the
 command line wins. The dataset id may come from WPT_DATASET.
 
-The model folder gets config.json, the weights, tokenizer.json (the
-dataset's vocabulary, for wpt-chat) and provenance.json (what produced it).
+The model folder gets config.json, the weights (their headers name the
+licenses), tokenizer.json (the dataset's vocabulary, for wpt-chat),
+provenance.json (what produced it, with the sources it learned from), and
+LICENSE, NOTICE and README.md (the model card). Results that wpt-eval wrote
+for a model saved there before are removed: they describe other weights.
 """
 
 import argparse
@@ -22,6 +25,7 @@ import json
 import os
 import platform
 import re
+import shutil
 import subprocess
 import sys
 from dataclasses import asdict
@@ -33,8 +37,9 @@ import torch
 from wpt_device import describe, select_device
 from wpt_inference import sample_tokens
 from wpt_model import ModelConfig, TinyGPT, save_model
+from wpt_model.notice import EVALS_NAME, WEIGHT_METADATA, write_documents
 from wpt_store import StoreError, store_from_settings
-from wpt_store.shards import TokenHash, read_shard
+from wpt_store.shards import read_verified
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_training import TrainConfig, train
 
@@ -43,8 +48,10 @@ DEFAULT_MODEL, DEFAULT_TRAINING = ModelConfig(vocab_size=1), TrainConfig()
 
 
 class InputError(Exception):
-    """The dataset, or one of its shards or its vocabulary, is missing or
-    does not match its recorded hash. Nothing has been trained."""
+    """The dataset is missing, its record describes another id, or it has a
+    record shape this version does not read. Nothing has been trained. (A
+    shard or vocabulary that does not match its hash is the store's
+    CorruptObject.)"""
 
 
 def parse_size(text):
@@ -92,32 +99,29 @@ def parse_args(argv=None, environ=None):
 
 
 def load_dataset(store, dataset_id):
-    """(record, record object, tokenizer, training tokens, held-out tokens), every input checked."""
+    """(record, record object, tokenizer, training tokens, held-out tokens,
+    ids of the sources in the training tokens), every input checked."""
     record_object = store.get_ref("datasets", dataset_id)
     if record_object is None:
         raise InputError(f"no dataset {dataset_id} in {store}; build it with `wpt-dataset build <recipe>`")
     record = json.loads(store.get_bytes(record_object))
     if record.get("id") != dataset_id:
         raise InputError(f"dataset record {record_object} describes {record.get('id')}, not {dataset_id}")
+    if record.get("schema") != 2:
+        raise InputError(f"dataset {dataset_id} has record shape {record.get('schema')}, this wpt-train reads 2; "
+                         "build the recipe again with the current wpt-dataset")
     tokenizer = Tokenizer.from_bytes(store.get_bytes(record["tokenizer"]["vocabulary"]))  # sha256-checked by the store
-    return (record, record_object, tokenizer,
-            _read_tokens(store, record["shards"]), _read_tokens(store, record["held_out_shards"]))
+    training = [row for shard in record["shards"] for row in read_verified(store, shard)]
+    held_out = [row for shard in record["held_out_shards"] for row in read_verified(store, shard)]
+    return record, record_object, tokenizer, _tokens(training), _tokens(held_out), {row[1] for row in training}
 
 
-def _read_tokens(store, shards):
-    parts = []
-    for shard in shards:
-        digest = TokenHash()
-        for tokens, *rest in read_shard(store.path(shard["object"])):  # the file's sha256 is checked here
-            digest.add(tokens, *rest)
-            parts.append(tokens)
-        if digest.hexdigest() != shard["token_sha256"]:
-            raise InputError(f"shard {shard['object']}: token content does not match its recorded hash")
-    joined = np.concatenate(parts) if parts else np.zeros(0, dtype=np.uint32)
+def _tokens(rows):
+    joined = np.concatenate([row[0] for row in rows]) if rows else np.zeros(0, dtype=np.uint32)
     return torch.from_numpy(joined.astype(np.int64))
 
 
-def provenance(args, record, record_object, model_config, n_params, device, best_val):
+def provenance(args, record, record_object, sources, model_config, n_params, device, best_val):
     def run(*command):
         try:
             return subprocess.run(command, capture_output=True, text=True, check=True).stdout.strip()
@@ -132,9 +136,10 @@ def provenance(args, record, record_object, model_config, n_params, device, best
         except importlib.metadata.PackageNotFoundError:
             versions[package] = None
     return {
-        "schema": 1,
+        "schema": 2,
         "dataset": record["id"],
         "dataset_record": record_object,
+        "sources": {sid: record["sources"][sid] for sid in sorted(sources)},  # address, revision, licenses
         "vocabulary": record["tokenizer"]["vocabulary"],
         "shards": [{"object": s["object"], "token_sha256": s["token_sha256"]} for s in record["shards"]],
         "held_out_shards": [{"object": s["object"], "token_sha256": s["token_sha256"]} for s in record["held_out_shards"]],
@@ -155,7 +160,7 @@ def main(argv=None):
     torch.manual_seed(args.seed)
     try:
         store = store_from_settings(Path.cwd() / ".env")
-        record, record_object, tokenizer, train_data, val_data = load_dataset(store, args.dataset)
+        record, record_object, tokenizer, train_data, val_data, sources = load_dataset(store, args.dataset)
     except (StoreError, InputError) as error:
         sys.exit(f"{type(error).__name__}: {error}")
     if len(train_data) <= args.block_size + 1:
@@ -176,13 +181,16 @@ def main(argv=None):
     best_val = train(model, train_data, val_data, block_size=model_config.block_size, config=train_config, device=device)
 
     out = Path(args.out)
-    save_model(model, out, max_shard_bytes=args.max_shard_size)
+    save_model(model, out, max_shard_bytes=args.max_shard_size, metadata=WEIGHT_METADATA)
+    shutil.rmtree(out / EVALS_NAME, ignore_errors=True)
     tokenizer.save(out / "tokenizer.json")
     record_args = argparse.Namespace(**{**vars(args), "batch_size": batch_size})
     (out / "provenance.json").write_text(
-        json.dumps(provenance(record_args, record, record_object, model_config, n_params, device, best_val), indent=2) + "\n",
+        json.dumps(provenance(record_args, record, record_object, sources, model_config, n_params, device, best_val),
+                   indent=2) + "\n",
         encoding="utf-8", newline="\n")
-    print(f"saved {out}")
+    write_documents(out)
+    print(f"saved {out} (licenses and sources: {out / 'NOTICE'})")
     # show a sample so you immediately see what it learned
     model.eval()
     ids = sample_tokens(model, [Tokenizer.END], context_size=model_config.block_size, max_new_tokens=120)

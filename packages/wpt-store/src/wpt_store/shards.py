@@ -22,6 +22,8 @@ import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from wpt_store import CorruptObject
+
 SCHEMA = pa.schema([
     ("tokens", pa.list_(pa.uint32())),
     ("source", pa.string()),
@@ -71,6 +73,19 @@ def read_shard(path):
         others = [group.column(n).to_pylist() for n in ("source", "document", "pool", "pass")]
         for j in range(group.num_rows):
             yield (tokens[j].values.to_numpy(zero_copy_only=False), *(column[j] for column in others))
+
+
+def read_verified(store, shard) -> list:
+    """The rows of a shard recorded as {"object": sha256, "token_sha256": ...},
+    in order. The store checks the file; this checks the rows against the
+    token hash. Raises CorruptObject when they differ."""
+    rows, digest = [], TokenHash()
+    for row in read_shard(store.path(shard["object"])):
+        digest.add(*row)
+        rows.append(row)
+    if digest.hexdigest() != shard["token_sha256"]:
+        raise CorruptObject(f"shard {shard['object']}: its rows do not match their recorded token hash")
+    return rows
 
 
 def token_hash(path) -> str:

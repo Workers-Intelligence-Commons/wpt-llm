@@ -77,30 +77,38 @@ Almost nobody reads a license file: the information must appear where people
 look.
 
 - **The repository README**: links to OUTPUT-NOTICE.
-- **Model card** (the model's README), when weights are published: at the
-  top, not the bottom.
-- **Weight file metadata**: safetensors has a free metadata field in its
-  header, GGUF has key-value pairs (license, URL); to check in each format's
-  documentation. The link then travels with the weights.
-- **The tool serving the model**: an `--about` command or an `/about` page
-  showing the notice.
+- **The repository NOTICE**: says where to find the notice of a given model.
+- **The model folder's NOTICE**: the licenses, every source the model
+  learned from with its attribution, and the full output notice.
+- **Model card** (the model folder's README.md): the licenses at the top,
+  not the bottom.
+- **Weight file metadata**: each safetensors header carries `license`,
+  `output_license` and `notice` (the folder's NOTICE and the project's
+  address), so the licenses travel with a weight file even alone. Other
+  formats (GGUF key-value pairs) need the same when weights are converted.
+- **The tool serving the model**: `wpt-chat` names the licenses and the
+  notice on its start line, and `wpt-chat --about` prints the notice.
 
 ## One source of truth
 
-The source descriptions should generate the NOTICE file, the public web page
-(authors, licenses, links), the model card block and the metadata text, so
-the four cannot contradict each other, and CI checks they are up to date.
-A page readable by humans is needed, not only JSON files.
+Each source's `licenses` entries in `source.json` hold its attribution. The
+dataset build copies them into the dataset record; training copies the
+sources it used into `provenance.json`, and the model folder's NOTICE, model
+card and weight metadata are generated from it, so they cannot contradict
+each other. They are generated when a model is trained, not checked by CI,
+because the repository holds no model. A public web page listing every
+source does not exist yet.
 
 ## Before publishing weights
 
 - [ ] Have OUTPUT-NOTICE reviewed by a lawyer
 - [ ] Choose a stable domain name for the attribution address, or keep the
       repository address
-- [ ] Measure memorization (regurgitation tests)
+- [ ] Measure memorization on the model to publish: `wpt-eval <model folder>
+      memorization` (see [evaluation.md](evaluation.md))
 - [x] Check section 2, sections 15 and 16, and license compatibility in the
       official AGPL text (section 7 also matters, see clause 1)
 - [x] Decide where the clauses live: OUTPUT-NOTICE
-- [ ] Generate NOTICE, the model card block and the metadata from the source
+- [x] Generate NOTICE, the model card block and the metadata from the source
       descriptions
-- [ ] Show the notice in `wpt-chat` (`--about`)
+- [x] Show the notice in `wpt-chat` (`--about`)

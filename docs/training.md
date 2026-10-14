@@ -15,11 +15,29 @@ training recipe file. `uv run wpt-train --help` lists them.
 Training stops early when the smoothed validation loss stops improving, and
 keeps the best checkpoint. Validation uses the dataset's held-out shards.
 
-The model folder holds `config.json`, the weights (safetensors, optionally
-split with `--max-shard-size`), `tokenizer.json` and `provenance.json`.
+The model folder holds:
+
+- `config.json`, the model's sizes;
+- the weights (safetensors, optionally split with `--max-shard-size`); each
+  file's header carries `license` (AGPL-3.0-or-later), `output_license`
+  (CC0-1.0) and `notice`, which points to the folder's `NOTICE` and the
+  project;
+- `tokenizer.json`, the dataset's vocabulary;
+- `provenance.json`, what produced the model, including every source it
+  learned from (address, revision, licenses and attribution, copied from the
+  dataset record);
+- `LICENSE`, the AGPL text; `NOTICE`, the licenses of the weights and of
+  generated text, every source with the credit it asks for, and the output
+  notice; `README.md`, the model card, with the licenses at the top;
+- `evals/`, results written by `wpt-eval` (see [evaluation.md](evaluation.md)),
+  shown in the model card. Training into the folder again removes them.
+
+`NOTICE` and `README.md` are generated from the folder's own records, so they
+cannot disagree with it.
 
 `wpt-chat <model folder>` continues text typed by the user, until the model
-ends the document. A pre-trained model only continues text; a chat format
+ends the document. Its start line names the licenses and where the notice
+is; `wpt-chat <model folder> --about` prints the folder's `NOTICE`. A pre-trained model only continues text; a chat format
 comes with post-training.
 
 ## What is exactly repeatable
@@ -45,6 +63,6 @@ weights. Around it, everything possible is checked:
 - before training, every input is checked against its hash: the dataset
   record, each shard (file sha256 and token hash), and the vocabulary;
 - `provenance.json` records what produced the model: the dataset id and
-  record, the vocabulary, every shard, all options, the model shape and
+  record, the sources it learned from, the vocabulary, every shard, all options, the model shape and
   parameter count, the repository commit (and whether the working tree had
   uncommitted changes), the device and the tool versions.

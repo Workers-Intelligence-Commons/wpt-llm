@@ -56,7 +56,9 @@ def gather(repo: Repo, store, log=print):
         if not source.admitted:
             continue
         tree, tree_object = source_tree(source, store)
-        info[source.id] = {"checksum": source.data["checksum"], "tree": tree_object}
+        info[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
+                           "checksum": source.data["checksum"], "tree": tree_object,
+                           "licenses": source.data["licenses"]}
         for path in sorted(tree, key=str.encode):
             entry = tree[path]
             if entry.mode == SYMLINK:
@@ -137,6 +139,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     dataset_id = fingerprint({
         "kind": "dataset", "wpt_dataset": VERSION, "recipe": recipe, "mixture": mixture, "vocabulary": vocabulary,
         "documents": [[d.id, d.sha256, sorted(d.tags)] for d in documents],
+        "sources": sources_info,  # the record copies their licenses and attribution: a change rebuilds it
     })
     if store.get_ref("datasets", dataset_id):
         log(f"dataset {dataset_id} is already built")
@@ -181,7 +184,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         held_shards = _write_shards([(d, "held-out", 0) for d in held_out], tokens, store, Path(tmp), shard_tokens)
 
     record = {
-        "schema": 1,
+        "schema": 2,
         "id": dataset_id,
         "recipe_name": name,
         "recipe": recipe,

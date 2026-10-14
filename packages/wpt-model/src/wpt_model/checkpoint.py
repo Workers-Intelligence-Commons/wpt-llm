@@ -4,6 +4,7 @@
     model.safetensors                    all weights, when not split
     model-00001-of-00003.safetensors     or one file per shard,
     model.safetensors.index.json         plus an index: tensor name -> shard file
+    LICENSE, NOTICE, README.md           license documents and model card (notice.py)
 
 safetensors stores only tensors, so loading never runs code (unlike torch.load).
 """
@@ -23,8 +24,11 @@ INDEX_NAME = "model.safetensors.index.json"
 METADATA = {"format": "pt"}
 
 
-def save_model(model: TinyGPT, directory, max_shard_bytes=None):
+def save_model(model: TinyGPT, directory, max_shard_bytes=None, metadata=None):
     """Write the model folder. Replaces any model already saved there.
+
+    metadata: text entries added to the header of every weight file (for
+    example notice.WEIGHT_METADATA).
 
     config.json is written last, so a save that fails midway leaves a folder
     that load_model refuses instead of one that loads mismatched weights.
@@ -36,20 +40,21 @@ def save_model(model: TinyGPT, directory, max_shard_bytes=None):
     directory.mkdir(parents=True, exist_ok=True)
     _remove_model(directory)
     state = {k: v.detach().cpu().contiguous() for k, v in model.state_dict().items()}
+    metadata = {**(metadata or {}), **METADATA}
 
     shards = _split(state, max_shard_bytes)
     if len(shards) == 1:
-        save_file(shards[0], directory / SINGLE_NAME, metadata=METADATA)
+        save_file(shards[0], directory / SINGLE_NAME, metadata=metadata)
     else:
-        _save_shards(shards, state, directory)
+        _save_shards(shards, state, directory, metadata)
     model.config.save(directory / CONFIG_NAME)
 
 
-def _save_shards(shards, state, directory):
+def _save_shards(shards, state, directory, metadata):
     weight_map = {}
     for i, shard in enumerate(shards, start=1):
         name = f"model-{i:05d}-of-{len(shards):05d}.safetensors"
-        save_file(shard, directory / name, metadata=METADATA)
+        save_file(shard, directory / name, metadata=metadata)
         weight_map.update({key: name for key in shard})
     index = {
         "metadata": {"total_size": sum(_nbytes(t) for t in state.values())},

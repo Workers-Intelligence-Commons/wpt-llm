@@ -8,10 +8,14 @@ inputs (MIT, BSD, CC0, Apache-2.0, GPLv3...). "Or later" avoids being stuck
 with one version. Compatibility runs one way: permissive content can enter
 copyleft, never the reverse.
 
+The weights of WPT models are under AGPL-3.0-or-later too. Each model folder
+carries the license text (`LICENSE`), a `NOTICE` naming every source the
+model learned from with the credit it asks for, and a model card; the weight
+files' headers name the licenses (see [training.md](training.md)).
+
 Still open:
 
-- whether published weights and built data get a license of their own (for
-  example AGPL for the code, and another license for data and weights);
+- whether built data (token shards, vocabularies) gets a license of its own;
 - the legal effect of a license on weights is not settled; a lawyer reviews
   it before weights are published, and the commitment is written in a
   manifesto next to the license.

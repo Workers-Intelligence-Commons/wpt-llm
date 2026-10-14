@@ -1,8 +1,10 @@
 import json
 import os
 import subprocess
+from pathlib import Path
 
 import pytest
+from safetensors import safe_open
 
 from wpt_dataset import manifest
 from wpt_dataset.build import build_dataset
@@ -15,6 +17,8 @@ from wpt_train import main
 
 GIT_ENV = {**os.environ, "GIT_AUTHOR_NAME": "T", "GIT_AUTHOR_EMAIL": "t@example.org", "GIT_COMMITTER_NAME": "T",
            "GIT_COMMITTER_EMAIL": "t@example.org", "GIT_CONFIG_GLOBAL": os.devnull}
+ROOT = Path(__file__).resolve().parents[3]
+ATTRIBUTION = "Fox Stories, copyright (c) 2026 Ada Writer, https://example.org/fox"
 
 
 @pytest.fixture
@@ -31,8 +35,9 @@ def built(tmp_path, monkeypatch):
     root = tmp_path / "wpt"
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
-    data = {"schema": 1, "type": "git", "address": str(upstream), "revision": commit,
-            "licenses": [{"license": "MIT", "paths": ["**"]}], "tags": [{"tags": ["en"], "paths": ["**"]}],
+    data = {"schema": 2, "type": "git", "address": str(upstream), "revision": commit,
+            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION}],
+            "tags": [{"tags": ["en"], "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-14", "reason": "test"}}
     data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], store))
     folder = root / "data" / "sources" / f"example-fox-{address_hash(str(upstream))}"
@@ -66,6 +71,28 @@ def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatc
     assert provenance["vocabulary"] == record["tokenizer"]["vocabulary"]
     assert provenance["options"]["n_layer"] == 1 and provenance["options"]["steps"] == 3
     assert [s["token_sha256"] for s in provenance["shards"]] == [s["token_sha256"] for s in record["shards"]]
+
+
+def test_a_trained_model_folder_names_its_licenses_and_sources(built, tmp_path):
+    # whoever receives the folder, or only a weight file, must learn the licenses
+    # and the credit each source asks for
+    store, dataset_id = built
+    main([dataset_id, "--out", "model", "--steps", "1", "--block-size", "16", "--n-layer", "1",
+          "--n-head", "2", "--n-embd", "16", "--batch-size", "4"])
+    folder = tmp_path / "model"
+    sid = f"example-fox-{address_hash(str(tmp_path / 'upstream'))}"
+
+    notice = (folder / "NOTICE").read_text()
+    assert "Weights: AGPL-3.0-or-later" in notice and "Generated text: CC0-1.0" in notice
+    assert f"{sid}\n" in notice and f"  MIT for **:\n    {ATTRIBUTION}\n" in notice
+    assert notice.endswith((ROOT / "OUTPUT-NOTICE").read_text())
+    assert (folder / "LICENSE").read_text() == (ROOT / "LICENSE").read_text()
+    card = (folder / "README.md").read_text()
+    assert card.startswith("---\nlicense: agpl-3.0\n---\n") and "Weights: AGPL-3.0-or-later" in card
+    assert f"| {sid} |" in card and "None yet: run `wpt-eval" in card
+    with safe_open(folder / "model.safetensors", "pt") as weights:
+        assert weights.metadata()["license"] == "AGPL-3.0-or-later"
+        assert weights.metadata()["output_license"] == "CC0-1.0"
 
 
 def test_a_damaged_shard_stops_training_before_it_starts(built, tmp_path):

@@ -105,7 +105,8 @@ def test_a_patch_that_does_not_apply_is_refused(kit, repo, store, git_upstream):
 def test_every_path_needs_exactly_one_license(kit, repo, store, git_upstream):
     sid = kit.add_source(repo, store, "example", "project", {
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1],
-        "licenses": [{"license": "MIT", "paths": ["**"]}, {"license": "CC0-1.0", "paths": ["docs/**"]}]})
+        "licenses": [{"license": "MIT", "paths": ["**"], "attribution": kit.ATTRIBUTION},
+                     {"license": "CC0-1.0", "paths": ["docs/**"], "attribution": "Test Author"}]})
     with pytest.raises(LicenseMapError, match="docs/guide.txt matches 2"):
         source_tree(repo.source(sid), store)
 

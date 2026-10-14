@@ -18,6 +18,17 @@ from .repo import CURRENT_SCHEMA, Repo, dump_json, load_json
 MIGRATIONS: dict[str, dict[int, callable]] = {kind: {} for kind in CURRENT_SCHEMA}
 
 
+def _source_1_to_2(document):
+    """Shape 2 gives every license entry the credit it asks for. Only a
+    person can write it, so the step leaves it empty and the check that
+    follows names each file to fill in."""
+    licenses = [{**entry, "attribution": entry.get("attribution", "")} for entry in document["licenses"]]
+    return {**document, "schema": 2, "licenses": licenses}
+
+
+MIGRATIONS["source"][1] = _source_1_to_2
+
+
 def _files(repo: Repo):
     for sid in repo.source_ids():
         yield "source", repo.data / "sources" / sid / "source.json"

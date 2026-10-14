@@ -45,13 +45,14 @@ recipe then needs the old commit of this repository.
 
 ```json
 {
-  "schema": 1,
+  "schema": 2,
   "type": "http-archive",
   "address": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip",
   "revision": "2026-03-01",
   "checksum": "sha256:...",
   "extract": { "strip": 1, "exclude": ["**/*.jpg"], "note": "" },
-  "licenses": [ { "license": "LicenseRef-public-domain", "paths": ["**"], "note": "" } ],
+  "licenses": [ { "license": "LicenseRef-public-domain", "paths": ["**"],
+                  "attribution": "Jane Austen, Pride and Prejudice, Project Gutenberg, https://www.gutenberg.org/ebooks/1342", "note": "" } ],
   "tags": [ { "tags": ["en", "literature"], "paths": ["**"], "note": "" } ],
   "mirrors": [ { "address": "https://...", "note": "" } ],
   "cuts": [ { "path": "...", "start": 0, "end": 0, "sha256_after": "...", "note": "" } ],
@@ -71,7 +72,10 @@ recipe then needs the old commit of this repository.
   `http-file` its path.
 - `licenses`: SPDX identifiers mapped to paths by glob patterns. Every path
   must match exactly one entry, or the check fails; a new upstream file that
-  matches no entry blocks the update until someone assigns it.
+  matches no entry blocks the update until someone assigns it. Each entry's
+  `attribution` (required) is the credit that license asks for, written by
+  a person: authors, title, copyright line, link. Every model trained on
+  the source repeats it in its `NOTICE`.
 - `tags`: describe paths (language, domain); pools select documents by tags.
 - `mirrors`: other addresses expected to give the same checksum.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
@@ -133,7 +137,7 @@ of its inputs, including WPT's own code version.
 | upstream tree | the source checksum |
 | final source tree | checksum, cuts, each patch's sha256, wpt-dataset version |
 | vocabulary | tokenizer version, tokenizer recipe, its mixture, the selected documents' sha256 |
-| dataset | dataset recipe, mixture, vocabulary, every document's id, sha256 and tags |
+| dataset | wpt-dataset version, dataset recipe, mixture, vocabulary, every document's id, sha256 and tags, each source's address, revision, checksum, tree and licenses (with attribution) |
 
 So "already done" is a lookup: nothing is downloaded or applied twice, and
 changing one patch rebuilds only that source.
@@ -155,13 +159,13 @@ settings. Objects are named by their sha256 and checked on every read.
 | Package | Role |
 | --- | --- |
 | `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; command `wpt-dataset` |
-| `wpt-store` | the content-addressed store (local or S3) and the token shard format, so training reads data without depending on the data rules |
+| `wpt-store` | the content-addressed store (local or S3) and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
-| `wpt-model` | the TinyGPT network and its safetensors model folders |
+| `wpt-model` | the TinyGPT network, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop and choosing the best checkpoint |
 | `wpt-inference` | token-by-token sampling |
 | `wpt-device` | picks the best GPU, else the CPU |
-| `wpt-train`, `wpt-chat` | the applications |
+| `wpt-train`, `wpt-eval`, `wpt-chat` | the applications |
 
 ## Checks
 
@@ -186,4 +190,7 @@ early answer.
 Each data file carries its shape version (`schema`). When a shape changes,
 the change comes with a migration step in
 `packages/wpt-dataset/src/wpt_dataset/migrate.py`, and `wpt-dataset migrate`
-rewrites every file that is behind. Nobody edits the files by hand for it.
+rewrites every file that is behind. Nobody edits the files by hand for it,
+except where a new field holds something only a person can write: shape 2 of
+`source.json` adds `attribution`, which the migration leaves empty, and the
+check then names each file to fill in.

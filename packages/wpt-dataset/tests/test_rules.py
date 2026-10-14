@@ -1,8 +1,10 @@
 import json
+import re
 
 import pytest
 
 from wpt_dataset.cli import main
+from wpt_dataset.errors import InvalidFile
 from wpt_dataset.migrate import migrate
 from wpt_dataset.pools import matches, parse
 from wpt_dataset.repo import address_hash, dump_json
@@ -25,7 +27,7 @@ def test_check_reports_each_broken_rule(kit, repo, store, git_upstream):
 
     grey = kit.add_source(repo, store, "example", "grey", {
         "type": "git", "address": git_upstream[0] + "/.", "revision": git_upstream[1],
-        "licenses": [{"license": "CC-BY-4.0", "paths": ["**"]}]})
+        "licenses": [{"license": "CC-BY-4.0", "paths": ["**"], "attribution": kit.ATTRIBUTION}]})
     wrong_id = repo.data / "sources" / "example-wrong-00000000"
     wrong_id.mkdir()
     (wrong_id / "source.json").write_text((repo.data / "sources" / good / "source.json").read_text())
@@ -44,15 +46,34 @@ def test_migrate_rewrites_files_that_are_behind(kit, repo, store, git_upstream):
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
     path = repo.data / "sources" / sid / "source.json"
     # a made-up next shape: "type" renamed to "kind"
-    step = {1: lambda doc: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 2}}
-    current = {"source": 2, "mixture": 1, "dataset": 1, "tokenizer": 1, "lock": 1}
+    step = {2: lambda doc: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 3}}
+    current = {"source": 3, "mixture": 1, "dataset": 1, "tokenizer": 1, "lock": 1}
 
     changed = migrate(repo, migrations={"source": step, "mixture": {}, "dataset": {}, "tokenizer": {}, "lock": {}},
                       current=current, log=lambda _: None)
     assert changed == [path]
     document = json.loads(path.read_text())
-    assert document["schema"] == 2 and document["kind"] == "git" and "type" not in document
+    assert document["schema"] == 3 and document["kind"] == "git" and "type" not in document
     assert path.read_text() == dump_json(document)
+
+
+def test_migrating_a_shape_1_source_asks_a_person_for_its_attribution(kit, repo, store, git_upstream):
+    sid = kit.add_source(repo, store, "example", "ok", {
+        "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
+    path = repo.data / "sources" / sid / "source.json"
+    old = json.loads(path.read_text())
+    old["schema"] = 1
+    del old["licenses"][0]["attribution"]
+    path.write_text(dump_json(old))
+
+    with pytest.raises(InvalidFile, match=re.escape(f"{path}: at licenses/0/attribution")):
+        migrate(repo, log=lambda _: None)
+    document = json.loads(path.read_text())
+    assert document["schema"] == 2 and document["licenses"] == [{"license": "MIT", "paths": ["**"], "attribution": ""}]
+
+    document["licenses"][0]["attribution"] = kit.ATTRIBUTION  # what the person writes
+    path.write_text(dump_json(document))
+    assert migrate(repo, log=lambda _: None) == [] and repo.check() == []
 
 
 def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_upstream, monkeypatch, capsys):
