@@ -17,7 +17,14 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $logs = Join-Path $root 'runs\logs'
 New-Item -ItemType Directory -Force -Path $logs | Out-Null
-$log = Join-Path $logs ('{0:yyyyMMdd-HHmmss}.log' -f (Get-Date))
+# Create the log only if no run started in the same second has it
+# (CreateNew refuses an existing file); otherwise add -1, -2...
+$stamp = Join-Path $logs ('{0:yyyyMMdd-HHmmss}' -f (Get-Date))
+$log = "$stamp.log"
+for ($n = 1; ; $n++) {
+    try { [IO.File]::Open($log, 'CreateNew').Close(); break }
+    catch [IO.IOException] { $log = "$stamp-$n.log" }
+}
 
 # Start the program by its real file: Windows refuses to run a program through
 # a symbolic link (such as winget's ...\WinGet\Links\uv.exe) in a process
