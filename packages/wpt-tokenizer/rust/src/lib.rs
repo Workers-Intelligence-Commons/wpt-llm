@@ -1,8 +1,10 @@
 //! Byte-level BPE: training, encoding and decoding.
 //!
 //! Token ids: 0..=255 are the bytes themselves, 256 is the end-of-document
-//! token, and every learned merge adds the next id from 257 on. Every byte
-//! has a token, so encoding never drops anything.
+//! token, 257..=512 are reserved for special tokens (the chat template's
+//! tags, named in Python), and every learned merge adds the next id from 513
+//! on. Every byte has a token, so encoding never drops anything; encoding
+//! never produces END or a special token, and decoding gives them no bytes.
 //!
 //! Text is first cut into chunks so merges never cross a word boundary: a
 //! chunk is an optional single leading space followed by bytes that are not
@@ -21,7 +23,8 @@ use pyo3::prelude::*;
 use pyo3::types::PyBytes;
 
 const END: u32 = 256;
-const FIRST_MERGE: u32 = 257;
+const LAST_SPECIAL: u32 = 512;
+const FIRST_MERGE: u32 = LAST_SPECIAL + 1;
 
 type Pair = (u32, u32);
 
@@ -167,7 +170,7 @@ fn learn(counts: &HashMap<Vec<u8>, u64>, n_merges: usize) -> Vec<Pair> {
 #[pyclass(frozen)]
 struct Codec {
     ranks: HashMap<Pair, u32>,
-    pieces: Vec<Vec<u8>>, // id -> bytes (END decodes to nothing)
+    pieces: Vec<Vec<u8>>, // id -> bytes (END and the special tokens decode to nothing)
     cache: Mutex<HashMap<Vec<u8>, Vec<u32>>>,
 }
 
@@ -188,11 +191,11 @@ impl Codec {
     #[new]
     fn new(merges: Vec<Pair>) -> PyResult<Self> {
         let mut pieces: Vec<Vec<u8>> = (0..=255u8).map(|b| vec![b]).collect();
-        pieces.push(Vec::new()); // END
+        pieces.extend((END..=LAST_SPECIAL).map(|_| Vec::new())); // END and the special tokens
         let mut ranks = HashMap::new();
         for (rank, &(a, b)) in merges.iter().enumerate() {
             let id = FIRST_MERGE as usize + rank;
-            if a as usize >= id || b as usize >= id || a == END || b == END {
+            if a as usize >= id || b as usize >= id || (END..=LAST_SPECIAL).contains(&a) || (END..=LAST_SPECIAL).contains(&b) {
                 return Err(PyValueError::new_err(format!("merge {rank} refers to an id it cannot use: ({a}, {b})")));
             }
             if ranks.insert((a, b), rank as u32).is_some() {
@@ -242,6 +245,7 @@ fn _native(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Trainer>()?;
     m.add_class::<Codec>()?;
     m.add("END", END)?;
+    m.add("FIRST_MERGE", FIRST_MERGE)?;
     m.add("VERSION", env!("CARGO_PKG_VERSION"))?;
     m.add("RUSTC_VERSION", env!("WPT_RUSTC_VERSION"))?;
     Ok(())

@@ -28,15 +28,25 @@ Markdown, never on the file itself:
   sections themselves (epub:type endnotes or footnotes) are left where they
   were, so a file holding only notes gives no document.
 
+- `chat`: conversations for post-training, one per line (see
+  conversations.py). Each line is checked, and the file gives no document:
+  only the post-training step named by its tags reads it.
+- `records`: one document per record whose license enters (see
+  records.py), at the path `<file>#<record id>`; its text field is read as
+  `text` above, or kept as it is when the entry says `"as": "markdown"`.
+
 A file whose Markdown is empty gives no document.
 """
 
 import posixpath
 import re
+from collections.abc import Iterator
+from typing import NamedTuple
 from urllib.parse import unquote, urlparse
 
 from lxml import etree
 
+from . import conversations, records
 from .errors import FormatMapError, NotText
 from .manifest import SYMLINK, glob_match
 
@@ -65,11 +75,20 @@ def format_of(source, path: str) -> dict:
     return found[0]
 
 
-def documents(source, tree, store) -> list[tuple[str, bytes]]:
-    """(path, Markdown) for each file of a final tree, in path order; links
-    and files whose Markdown is empty are left out. Raises FormatMapError
-    when a path matches no format entry or several, NotText when an xhtml
-    file is not well-formed."""
+class Converted(NamedTuple):
+    path: str  # the document's path in its source: the file's, or <file>#<record id>
+    markdown: bytes
+    file: str  # the file it comes from
+    record: records.Record | None  # for a records file, the record it comes from
+
+
+def documents(source, tree, store, skipped: dict | None = None) -> Iterator[Converted]:
+    """Each document of a final tree, in file path order; links, chat files
+    and documents whose Markdown is empty are left out. skipped, when given,
+    receives file -> records.Skipped for each records file. Raises
+    FormatMapError when a path matches no format entry or several, NotText
+    when an xhtml file is not well-formed, InvalidFile when a chat or
+    records file holds a line that is not valid."""
     files = {path: entry for path, entry in tree.items() if entry.mode != SYMLINK}
     formats = {path: format_of(source, path) for path in files}
     pages = {}  # parsed xhtml files, also read for the notes they hold
@@ -84,10 +103,15 @@ def documents(source, tree, store) -> list[tuple[str, bytes]]:
             return None
         return next((e for e in page(path).iter() if isinstance(e.tag, str) and e.get("id") == element_id), None)
 
-    out = []
     for path in sorted(files, key=str.encode):
         entry, kind = formats[path], formats[path]["format"]
+        if kind == "records":
+            yield from _records(source, path, entry, store.path(files[path].sha256), skipped)
+            continue
         data = store.get_bytes(files[path].sha256)
+        if kind == "chat":
+            conversations.parse(source.id, path, data)
+            continue
         if kind == "markdown":
             markdown = data
         elif kind == "text":
@@ -97,8 +121,22 @@ def documents(source, tree, store) -> list[tuple[str, bytes]]:
         else:
             markdown = Page(path, note).render(page(path))
         if markdown.strip():
-            out.append((path, markdown))
-    return out
+            yield Converted(path, markdown, path, None)
+
+
+def _records(source, path, entry, file, skipped):
+    licenses = {value: license_entry["license"] for license_entry in source.data["licenses"]
+                if any(glob_match(path, g) for g in license_entry["paths"])
+                for value in license_entry.get("values", [])}
+    report = records.Skipped({})
+    if skipped is not None:
+        skipped[path] = report
+    for record in records.records(file, path, entry, licenses, report):
+        markdown = record.text.encode("utf-8") if entry.get("as") == "markdown" else text(record.text)
+        if markdown.strip():
+            yield Converted(f"{path}#{record.id}", markdown, path, record)
+        else:
+            report.empty += 1
 
 
 # -- text and code ----------------------------------------------------------------

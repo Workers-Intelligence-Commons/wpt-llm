@@ -31,6 +31,12 @@ annotator, editor of notes. Find for each one:
   limit moves one year every 1 January);
 - the edition's own statement for what it added (markup, corrections).
 
+docs/licenses.md, "Rules", says when the country of origin does not
+matter: a first publication in the United States before the limit, or
+everyone having lived until 1925 (every country) or until 1955 (every
+life + 70 country: watch France, Spain, Colombia, Mexico and Russia). A
+translation is checked as two layers, the original and the translation.
+
 Cite where each fact comes from. When a fact cannot be found, or the
 evidence disagrees (an unknown death year, a revision by a later person, an
 unconfirmed country), **do not settle it yourself in either direction**:
@@ -121,3 +127,29 @@ first.
   signing key and the empty front file. eBible rebuilds archives often, so
   a later fetch can give another checksum: fetch again and update the
   revision and checksum together.
+- **Hugging Face datasets** (`huggingface.co/datasets/<owner>/<name>`):
+  type `huggingface`, revision the dataset's commit; exclude `README.md`,
+  `.gitattributes` and anything that is not a data file; one `records`
+  format naming the text, id, license and credit fields; license entries
+  list the exact record license `values` they cover (allowed licenses
+  only; vague, ShareAlike or US-only public-domain labels stay unlisted).
+  `wpt-dataset manifest` reads the Hub's listing, so the checksum needs no
+  download. Common Pile's "Public Domain" on PEPs maps to
+  `LicenseRef-public-domain` (the authors' own dedication; the maintainer
+  decided it on 2026-10-15). Text written by another company's model
+  (Whisper transcripts, LLM-corrected OCR, synthetic chats) never enters.
+- **GitHub repositories** (`github.com/<owner>/<name>`): those with 10,000
+  stars or more, not forks, not archived, under a license key on the
+  allowed list (maintainer's decision, 2026-10-15; the build removes exact
+  duplicates with Common Pile's code). Revision: the current commit of the
+  default branch; code written with an AI assistant is not a reason to
+  leave a repository out. Follow `github-neovim`: one license entry from
+  the root license file (copyright line in `attribution`, the file and an
+  Apache `NOTICE` in `text`); leave out vendored folders, folders with
+  their own license file, hidden files, generated and large files, and
+  every file that is not code or Markdown; `code` formats per extension.
+  Add `"history": {"since": ...}` with the commit from which the root
+  license file holds today's license, and a `code` format with language
+  `patch` on `.git/history/**`. GPL-family keys need each file's notice
+  ("only" or "or later": GPL-2.0-only is refused), and a README asking
+  not to train AI leaves the repository out.

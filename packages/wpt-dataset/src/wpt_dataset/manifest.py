@@ -14,8 +14,10 @@ headers, git or mercurial objects), never from files written to a disk, so
 Linux and Windows compute the same manifest.
 """
 
+import concurrent.futures
 import contextlib
 import hashlib
+import os
 import stat
 import subprocess
 import tarfile
@@ -81,7 +83,9 @@ class Extractor:
         self.exclude = extract.get("exclude", [])
         self.tree: dict[str, Entry] = {}
 
-    def add(self, raw_path: bytes | str, mode: str, content: bytes):
+    def kept(self, raw_path: bytes | str) -> str | None:
+        """The path an entry keeps after `strip`, or None when it is stripped
+        away or excluded."""
         if isinstance(raw_path, bytes):
             try:
                 raw_path = raw_path.decode("utf-8")
@@ -89,13 +93,31 @@ class Extractor:
                 raise BadPath(f"{raw_path!r} is not valid UTF-8") from error
         parts = [p for p in raw_path.split("/") if p not in ("", ".")]
         if len(parts) <= self.strip:
-            return  # gone with the stripped folders, like tar --strip-components
+            return None  # gone with the stripped folders, like tar --strip-components
         path = "/".join(parts[self.strip:])
         if any(glob_match(path, pattern) for pattern in self.exclude):
-            return
+            return None
+        return path
+
+    def add(self, raw_path: bytes | str, mode: str, content: bytes):
+        path = self.kept(raw_path)
+        if path is not None:
+            self._record(path, mode, self.store.put_bytes(content))
+
+    def add_file(self, path: str, mode: str, file: Path):
+        """A kept path (see kept) whose content is a file on disk, stored
+        without reading it into memory."""
+        self._record(path, mode, self.store.put_file(file))
+
+    def add_known(self, path: str, mode: str, sha256: str):
+        """A kept path known only by its content's sha256, which is not
+        stored: for a manifest computed from an upstream's own listing."""
+        self._record(path, mode, sha256)
+
+    def _record(self, path: str, mode: str, sha256: str):
         if path in self.tree:
             raise BadPath(f"{path!r} appears twice")
-        self.tree[path] = Entry(mode, self.store.put_bytes(content))
+        self.tree[path] = Entry(mode, sha256)
 
     def finish(self) -> dict[str, Entry]:
         check_paths(self.tree)
@@ -159,8 +181,63 @@ def read_git(repo: Path, revision: str, extractor: Extractor):
             extractor.add(path, mode, content)
 
 
+HISTORY = ".git/history/"
+# git's output must not depend on the settings of the machine that fetches
+PLAIN_GIT = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull}
+
+
+def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor):
+    """One file per commit from `since` to `revision`, merges left out:
+    `.git/history/<commit>`, holding what `git format-patch` writes for the
+    commit (author, date, message, changed files, diff), limited to the
+    paths the extractor keeps. A commit that changes no kept path gives no
+    file. git never allows a `.git` folder in a tree, so these paths cannot
+    meet a file of the commit itself."""
+    ancestor = subprocess.run(["git", "-C", str(repo), "merge-base", "--is-ancestor", since, revision],
+                              capture_output=True, env=PLAIN_GIT)
+    if ancestor.returncode != 0:
+        raise UnsupportedEntry(f"history.since {since} is not an ancestor of the revision {revision}")
+    parents = _git(repo, "rev-parse", f"{since}^@").decode().split()
+    commits = _git(repo, "rev-list", "--no-merges", revision, "--not", *parents).decode().split()
+    changed = _changed_paths(repo, commits)
+
+    def patch(commit):
+        paths = [p for p in changed[commit] if extractor.kept(p) is not None]
+        if not paths:
+            return commit, None
+        limit = [] if len(paths) == len(changed[commit]) else ["--", *(f":(literal){p}" for p in paths)]
+        text = _git(repo, "format-patch", "-1", "--root", "--stdout", "--no-signature", "--no-renames", "--no-binary",
+                    commit, *limit)
+        # a diff may hold bytes in any encoding; the file must be UTF-8 text
+        return commit, text.decode("utf-8", errors="replace").encode("utf-8")
+
+    with concurrent.futures.ThreadPoolExecutor(8) as pool:
+        for commit, text in pool.map(patch, commits):
+            if text is not None:
+                extractor.add(HISTORY + commit, FILE, text)
+
+
+def _changed_paths(repo, commits) -> dict[str, list[str]]:
+    """The paths each commit changes, from one `git diff-tree --stdin`."""
+    if not commits:
+        return {}
+    out = _git(repo, "diff-tree", "--stdin", "--always", "--root", "-r", "--name-only", "-z", "--no-renames",
+               input="".join(c + "\n" for c in commits).encode())
+    changed, expected, current = {}, iter(commits), None
+    upcoming = next(expected)
+    for token in filter(None, out.split(b"\0")):
+        name = token.decode("utf-8", errors="surrogateescape").strip("\n")
+        if name == upcoming:
+            current, upcoming = name, next(expected, None)
+            changed[current] = []
+        else:
+            changed[current].append(name)
+    return changed
+
+
 def _git(repo, *args, input=None) -> bytes:
-    return subprocess.run(["git", "-C", str(repo), *args], input=input, capture_output=True, check=True).stdout
+    return subprocess.run(["git", "-C", str(repo), *args], input=input, capture_output=True, check=True,
+                          env=PLAIN_GIT).stdout
 
 
 def _git_blobs(repo, object_ids):

@@ -64,11 +64,26 @@ def cmd_check(args, repo):
         for sid in ids:
             source = repo.source(sid)
             tree, _ = source_tree(source, store)
-            converted = documents(source, tree, store)
+            skipped = {}
+            converted = sum(1 for _ in documents(source, tree, store, skipped))
             print(f"{sid}: {len(tree)} entries, checksum, cuts, patches, license and format maps OK; "
-                  f"{len(converted)} Markdown documents")
+                  f"{converted} Markdown documents")
+            _print_skipped(skipped)
     print(f"checked {len(repo.source_ids())} sources and their recipes")
     return 0
+
+
+def _print_skipped(skipped):
+    """The records each records file left out, by license value."""
+    unlisted, empty = {}, 0
+    for report in skipped.values():
+        empty += report.empty
+        for value, count in report.unlisted.items():
+            unlisted[value] = unlisted.get(value, 0) + count
+    for value, count in sorted(unlisted.items(), key=lambda item: -item[1]):
+        print(f"  left out: {count} records with license value {value!r} (listed by no license entry)")
+    if empty:
+        print(f"  left out: {empty} records with empty text")
 
 
 def cmd_check_commits(args, repo):

@@ -36,7 +36,7 @@ def setup_recipes(kit, repo, store, corpus, total_tokens, held_out=0.0):
         {"name": "literature", "select": "literature", "weight": 0.25},
         {"name": "fr", "select": "fr && !(en)", "weight": 0.25},  # also matches fr/lit/: first pool wins
         {"name": "en", "select": "en", "weight": 0.5}]})
-    kit.write_recipe(repo, "tokenizer", "main", {"version": 1, "mixture": "main", "vocab_size": 400})
+    kit.write_recipe(repo, "tokenizer", "main", {"version": 1, "mixture": "main", "vocab_size": 656})
     kit.write_recipe(repo, "dataset", "small", {"mixture": "main", "tokenizer": "main",
                                                 "total_tokens": total_tokens, "held_out": held_out})
 
@@ -89,7 +89,7 @@ def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
     kit.add_source(repo, store, "example", "many", {"type": "git", "address": folder, "revision": commit,
                                                     "tags": [{"tags": ["all"], "paths": ["**"]}]})
     kit.write_recipe(repo, "mixture", "all", {"pools": [{"name": "all", "select": "all", "weight": 1}]})
-    kit.write_recipe(repo, "tokenizer", "all", {"version": 1, "mixture": "all", "vocab_size": 300})
+    kit.write_recipe(repo, "tokenizer", "all", {"version": 1, "mixture": "all", "vocab_size": 556})
     kit.write_recipe(repo, "dataset", "split", {"mixture": "all", "tokenizer": "all",
                                                 "total_tokens": 100, "held_out": 0.5})
 
@@ -134,11 +134,11 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     recipe = json.loads(recipe_path.read_text())
     recipe_path.write_text(json.dumps({**recipe, "note": "a note changes nothing"}))
     build_dataset(repo, "small", store, log=lambda _: None)
-    recipe_path.write_text(json.dumps({**recipe, "vocab_size": 450}))
+    recipe_path.write_text(json.dumps({**recipe, "vocab_size": 706}))
     with pytest.raises(TokenizerVersionNeeded, match="the recipe changed since version 1"):
         build_dataset(repo, "small", store, log=lambda _: None)
 
-    recipe_path.write_text(json.dumps({**recipe, "vocab_size": 450, "version": 2}))
+    recipe_path.write_text(json.dumps({**recipe, "vocab_size": 706, "version": 2}))
     third = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
     new_lock = json.loads(lock_path.read_text())
     assert third["tokenizer"]["recipe_version"] == 2 and third["tokenizer"]["vocabulary"] == new_lock["vocabulary_sha256"]

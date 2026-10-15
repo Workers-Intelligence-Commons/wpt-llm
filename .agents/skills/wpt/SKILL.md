@@ -57,7 +57,7 @@ A Rust toolchain is needed: the tokenizer is built from source.
 | train on several GPUs | `uv run wpt-train DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md` |
 | post-train | `uv run wpt-posttrain BASE NEW STEP [STEP ...]` | the base folder, the store | the new folder, only if every step succeeded |
-| continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE) | the folder | |
+| continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a post-trained model) | the folder | |
 | review and edit sources in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ | `data/`, `packages/wpt-web/ui` | `source.json` through the source rules; `ui/node_modules`, `ui/dist` |
 
 Every `wpt-train` option also comes from `WPT_<OPTION>` in the environment
@@ -86,7 +86,15 @@ maintainer, admission). The parts an agent gets wrong:
   domain, the proof). Never invent either. Every model trained on the
   source repeats both in its `NOTICE`.
 - Every path also matches exactly one `formats` entry: how it becomes
-  Markdown (`markdown`, `text`, `code` with its `language`, `xhtml`).
+  Markdown (`markdown`, `text`, `code` with its `language`, `xhtml`), or
+  `chat` for conversations, which only post-training reads, or `records`
+  for a dataset file holding one document per record (JSON Lines or
+  Parquet), whose license entries list the record license `values` they
+  cover; a record with any other value is left out, and
+  `check --fetch` prints the values it left out. A git source with
+  `history` (`since`: the commit from which the root license file holds
+  the listed license) adds one `.git/history/<commit>` file per commit,
+  in `git format-patch` layout: format `code`, language `patch`.
   Training reads only Markdown; a new kind of file needs its format in
   `wpt_dataset/markdown.py` first.
 - `wpt-dataset` downloads nothing from an address that its site's robots.txt
@@ -117,8 +125,9 @@ license map.
 
 Text a person writes for WPT is an `empty` source: no download, its
 patches hold every file (CONTRIBUTING.md, "Adding your own texts").
-Post-training records are files of such a source, tagged `demonstration`
-(docs/post-training.md); their format is not written yet. Committed text
+Post-training conversations are `chat` files of such a source, tagged with
+the name of the step that reads them (`sft`), one conversation per line as
+docs/chat-format.md says. Committed text
 stays in the repository's history for good.
 
 ## Formatting a person's text
@@ -239,7 +248,8 @@ or any path given to `wpt-posttrain`:
 from wpt_posttrain import Outcome
 
 def run(context):  # context: model (change it in place), tokenizer, device,
-                   # base, provenance, store
+                   # base, provenance, store; context.conversations() reads
+                   # the chat files tagged with this step's name
     ...
     return Outcome.success()  # or Outcome.failure("why it could not do its part")
 ```

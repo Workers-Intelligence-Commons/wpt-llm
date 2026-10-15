@@ -381,9 +381,62 @@ BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
   text (`text`).
 - Checking is per file, not per repository: a license can be applied by
   mistake, and public domain depends on the country.
+- **Per record** in a `records` file (a dataset holding many documents,
+  each with its own license field): the license entries covering the file
+  list in `values` the exact license values they cover, and a record enters
+  only when its value is listed. Any other value (vague ones such as
+  "Various open data", ShareAlike, unknown) leaves the record out, so a
+  value nobody reviewed never enters. Each kept record's credit fields go
+  into `CREDITS/<source id>.jsonl` in every model folder trained on it,
+  which `NOTICE` names. The values are the dataset's own labels: its
+  publisher checked each document, not WPT, and a label can be wrong.
+- **A git history** (`history` in a git source) starts at the commit from
+  which the repository's root license file holds the license the source
+  lists: earlier commits were published without a license or under
+  another one. Its diffs show only the files the source keeps, so a
+  vendored folder left out of the code stays out of the history. Commit
+  authors' names and emails stay as git wrote them: the repository
+  publishes them under its license.
 - **Public domain** means public domain both in the United States and in the
   work's country of origin (the Wikimedia Commons rule). A work can still be
-  protected in the country someone publishes from.
+  protected in the country someone publishes from. A label that says only
+  "public domain in the United States" (Project Gutenberg, collections of
+  books published before 1929) is not enough: in its home country such a
+  work may still have all rights reserved. How to decide, for every person
+  whose words are in the text (author, translator, reviser, editor of
+  notes):
+  - **First published in the United States** before the moving limit (1931
+    in 2026): the United States rule settles the country of origin too,
+    whatever the death years.
+  - **Everyone lived until 1925 or earlier**: public domain in every country
+    (the longest term, Mexico's life + 100 years, ended by 2026), so the
+    exact country of first publication does not matter.
+  - **Everyone lived until 1955 or earlier**: public domain in every country
+    whose term is life + 70 years or shorter, which covers the
+    English-speaking countries and most of Europe, so an unknown country or
+    a publication in two such countries at once changes nothing. The
+    countries with longer terms still need their own check: France (wartime
+    extensions of about 6 to 8 years for works published before 1948, more
+    for an author "mort pour la France"), Spain (life + 80 for authors who
+    died before 1987), Colombia (life + 80), Mexico (life + 100), Russia
+    (4 more years for people who worked or fought in the Second World War).
+  - **Someone lived until 1956 or later**: public domain only where the
+    country of first publication is known and its term has ended, or
+    through the United States rule above. A publication in the United
+    States and another country within 30 days needs the shorter-term
+    country to be named.
+  - **A translation is two layers**: the original is settled by its own
+    author (an author who lived until 1925 or earlier, or an anonymous or
+    traditional work written before 1800, frees the original everywhere,
+    whatever its country), and the translation by its translator and
+    editors, with the countries where that translation could first have
+    appeared.
+  - **A dedication by the authors themselves** to the public domain (the
+    Python Enhancement Proposals, whose authors placed them in the public
+    domain) is `LicenseRef-public-domain`, with the dedication quoted in
+    `text` (maintainer's decision, 2026-10-15).
+  - An unknown death year, an unnamed reviser or committee, or facts that
+    disagree make the work a doubt for the maintainer, never a guess.
 - **"No AI training" wishes are honored** even when the license would allow
   use: a statement by the owner in a README or a machine-readable
   text-and-data-mining reservation (EU Directive 2019/790, article 4) leaves
@@ -433,3 +486,10 @@ Tools may help reviewers by flagging, never by deciding:
 
 No output of another company's language model enters the data or the
 training, including "synthetic" datasets whose human origin is not proven.
+This covers text a model produced: generated datasets (smoltalk, Tulu,
+OpenCodeInstruct), machine transcripts (Whisper transcripts of videos),
+OCR corrected by a model, and conversations marked as synthetic. It does
+not cover work that people published under an allowed license, such as a
+repository's code, even when its authors used an AI assistant: the license
+of the person who published it decides, and repositories are not filtered
+for signs of such tools (maintainer's decision, 2026-10-15).

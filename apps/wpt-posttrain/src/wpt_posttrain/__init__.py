@@ -12,10 +12,17 @@ and changes context.model in place. The steps run in order. Each one says
 whether it succeeded or why it failed (Outcome.success() or
 Outcome.failure(reason)); the first failure stops the run.
 
+A step reads its training data with context.conversations(): the
+conversations of every admitted source whose `chat` files carry a tag named
+after the step (the `sft` step reads the files tagged `sft`), found in the
+repository holding the current folder. The runner records those sources.
+
 NEW_FOLDER is written only when every step succeeded: the weights, the
 tokenizer, and the base model's provenance.json with a "post_training"
-section (the base weights' sha256, each step's file sha256 and outcome, the
-repository commit, the tools), then LICENSE, NOTICE and README.md. It must
+section (the base weights' sha256, each step's file sha256, outcome and the
+sources it read, those sources' revisions and licenses, the repository
+commit, the tools), then LICENSE, NOTICE and README.md, which list the
+sources read by the steps with the pre-training sources. It must
 not exist yet. BASE_FOLDER is never changed, and its evaluation results are
 not copied: they describe other weights.
 
@@ -34,14 +41,17 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import torch
 
+from wpt_dataset import conversations as chat_files
+from wpt_dataset.errors import DatasetError
+from wpt_dataset.repo import Repo
 from wpt_device import describe, select_device
 from wpt_model import TinyGPT, TokenizerMismatch, load_model, load_tokenizer, save_model, tokenizer_identity
-from wpt_model.notice import WEIGHT_METADATA, write_documents
+from wpt_model.notice import CREDITS_NAME, WEIGHT_METADATA, write_documents
 from wpt_store import Store, StoreError, store_from_settings
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 
@@ -88,6 +98,17 @@ class Context:
     device: torch.device
     provenance: dict  # the base folder's provenance.json
     store: Store
+    step: str = ""  # the running step's name, set by the runner
+    sources: dict = field(default_factory=dict)  # the sources the running step read, recorded by the runner
+
+    def conversations(self) -> list[tuple[str, dict]]:
+        """[(conversation id, conversation)] of the admitted sources whose
+        chat files are tagged with the running step's name, in source and
+        path order (docs/chat-format.md). Raises a wpt_dataset DatasetError
+        when a source or a conversation breaks the rules."""
+        found, sources = chat_files.read(Repo.find(), self.store, self.step)
+        self.sources.update(sources)
+        return found
 
 
 def built_in_names() -> list[str]:
@@ -115,13 +136,14 @@ def run_step(context, step) -> dict:
     spec.loader.exec_module(module)
     if not callable(getattr(module, "run", None)):
         raise StepError(f"{path.name}: defines no run(context)")
+    context.step, context.sources = name, {}
     outcome = module.run(context)
     if not isinstance(outcome, Outcome):
         raise StepError(f"{path.name}: run(context) returned {type(outcome).__name__}, not wpt_posttrain.Outcome")
     if not outcome.succeeded:
         raise StepFailed(name, outcome.reason)
     return {"name": name, "file": file_name, "file_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-            "outcome": "succeeded"}
+            "outcome": "succeeded", "sources": dict(sorted(context.sources.items()))}
 
 
 def open_context(base, store, device) -> Context:
@@ -134,7 +156,7 @@ def open_context(base, store, device) -> Context:
         raise StepError(f"{base}: provenance shape {provenance.get('schema')}, this wpt-posttrain reads 3")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(base))
-    except TokenizerMismatch as error:
+    except (TokenizerMismatch, ValueError) as error:  # ValueError: a vocabulary of another tokenizer version
         raise StepError(str(error)) from None
     return Context(base, load_model(base, device), tokenizer, device, provenance, store)
 
@@ -147,10 +169,12 @@ def post_train(context, steps, new_folder) -> Path:
     for step in steps:
         find(step)  # an unknown step stops the run before any step has run
     records = [run_step(context, step) for step in steps]
+    sources = {sid: source for record in records for sid, source in record["sources"].items()}
     provenance = {**context.provenance, "post_training": {
         "base_weights": {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
                          for path in sorted(context.base.glob("model*.safetensors"))},
-        "steps": records,
+        "steps": [{**record, "sources": sorted(record["sources"])} for record in records],
+        "sources": dict(sorted(sources.items())),  # address, revision, licenses
         **_repository(),
         "device": describe(context.device),
         "tools": {"python": platform.python_version(), "platform": platform.platform(), "rustc": RUSTC_VERSION,
@@ -164,6 +188,8 @@ def post_train(context, steps, new_folder) -> Path:
                    metadata=WEIGHT_METADATA)  # the base model's vocabulary, under the same name
         (staging / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n",
                                                  encoding="utf-8", newline="\n")
+        if (context.base / CREDITS_NAME).is_dir():  # the base model's per-document credits still apply
+            shutil.copytree(context.base / CREDITS_NAME, staging / CREDITS_NAME)
         write_documents(staging)
         os.replace(staging, new_folder)
     except BaseException:
@@ -195,6 +221,6 @@ def main(argv=None):
         print(f"device: {describe(device)}")
         context = open_context(args.base, store_from_settings(Path.cwd() / ".env"), device)
         new_folder = post_train(context, args.steps, args.new)
-    except (StoreError, StepError, StepFailed) as error:
+    except (StoreError, StepError, StepFailed, DatasetError) as error:
         sys.exit(f"{type(error).__name__}: {error}\nnothing was written")
     print(f"saved {new_folder} (licenses and sources: {new_folder / 'NOTICE'})")

@@ -40,7 +40,7 @@ def built(tmp_path, monkeypatch):
     root = tmp_path / "wpt"
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
-    data = {"schema": 4, "type": "git", "address": str(upstream), "revision": commit,
+    data = {"schema": 5, "type": "git", "address": str(upstream), "revision": commit,
             "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}],
             "formats": [{"format": "text", "paths": ["**"]}],
             "tags": [{"tags": ["en"], "paths": ["**"]}],
@@ -50,7 +50,7 @@ def built(tmp_path, monkeypatch):
     (root / "data" / "sources" / source_id).mkdir(parents=True)
     (root / "data" / "sources" / source_id / "source.json").write_text(dump_json(data))
     for kind, name, document in [("mixture", "m", {"pools": [{"name": "en", "select": "en", "weight": 1}]}),
-                                 ("tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 300}),
+                                 ("tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556}),
                                  ("dataset", "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 3000, "held_out": 0.5})]:
         repo.recipe_path(kind, name).parent.mkdir(parents=True, exist_ok=True)
         repo.recipe_path(kind, name).write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}))

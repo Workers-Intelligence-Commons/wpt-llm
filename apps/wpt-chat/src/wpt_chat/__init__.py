@@ -1,8 +1,14 @@
-"""Continue text with a trained model.
+"""Continue text with a trained model, or chat with a post-trained one.
 
 You type some text and press Enter; the model continues it until it ends the
 document or reaches the length limit. There are no roles and no history: a
 pre-trained model only continues text. Empty line quits.
+
+--chat talks to a model post-trained on conversations (docs/chat-format.md):
+each line you type is a user message, the conversation so far goes through
+the chat template, and the model writes the assistant's message until
+<|im_end|>. Its thinking and tool calls are shown with their tags; tool
+calls are not run.
 
 --about prints the model folder's NOTICE: the licenses of the weights and of
 generated text, and the sources the model learned from.
@@ -17,7 +23,7 @@ from wpt_device import describe, select_device
 from wpt_inference import sample_tokens
 from wpt_model import TokenizerMismatch, load_model, load_tokenizer
 from wpt_model.notice import LICENSE, NOTICE_NAME, OUTPUT_LICENSE, REPOSITORY
-from wpt_tokenizer import Tokenizer
+from wpt_tokenizer import Tokenizer, chat
 
 MAX_NEW_TOKENS = 200
 
@@ -31,6 +37,17 @@ def continue_text(model, tokenizer, text, max_new_tokens=MAX_NEW_TOKENS) -> str:
             break
         generated.append(next_id)
     return tokenizer.decode(generated).decode("utf-8", errors="replace")
+
+
+def answer(model, tokenizer, conversation, max_new_tokens=MAX_NEW_TOKENS) -> tuple[list[dict], str]:
+    """The assistant's next message: its blocks, and its text with tags shown."""
+    generated = []
+    for next_id in sample_tokens(model, chat.prompt(tokenizer, conversation), context_size=model.config.block_size,
+                                 max_new_tokens=max_new_tokens):
+        if next_id in (chat.IM_END, Tokenizer.END):
+            break
+        generated.append(next_id)
+    return chat.reply(tokenizer, generated), chat.show(tokenizer, generated)
 
 
 def licenses_line(folder) -> str:
@@ -57,6 +74,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("model", nargs="?", default="runs/default", help="model folder (default: runs/default)")
     parser.add_argument("--max-new-tokens", type=int, default=MAX_NEW_TOKENS, help="length limit of each continuation")
+    parser.add_argument("--chat", action="store_true", help="chat with a post-trained model (roles and history)")
     parser.add_argument("--about", action="store_true", help="print the model's licenses and sources, then quit")
     args = parser.parse_args(argv)
     if args.about:
@@ -66,12 +84,23 @@ def main(argv=None):
     device = select_device()
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(args.model))
-    except TokenizerMismatch as error:
-        sys.exit(f"TokenizerMismatch: {error}")
+    except (TokenizerMismatch, ValueError) as error:  # ValueError: a vocabulary of another tokenizer version
+        sys.exit(f"{type(error).__name__}: {error}")
     model = load_model(args.model, device)
     model.eval()
-    print(f"model loaded ({tokenizer.vocab_size} tokens) on {describe(device)}. type text to continue, empty line quits.")
+    what = "type a message" if args.chat else "type text to continue"
+    print(f"model loaded ({tokenizer.vocab_size} tokens) on {describe(device)}. {what}, empty line quits.")
     print(licenses_line(args.model))
+    conversation = {"schema": 1, "messages": []}
+    while args.chat:
+        text = input("you> ")
+        if not text:
+            return
+        conversation["messages"].append({"role": "user", "content": [{"type": "text", "text": text}]})
+        blocks, shown = answer(model, tokenizer, conversation, args.max_new_tokens)
+        print(f"wpt> {shown}")
+        if blocks:
+            conversation["messages"].append({"role": "assistant", "content": blocks})
     while True:
         text = input("> ")
         if not text:

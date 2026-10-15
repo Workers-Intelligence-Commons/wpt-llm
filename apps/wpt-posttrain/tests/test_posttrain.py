@@ -1,11 +1,17 @@
 import hashlib
 import json
+import os
+import subprocess
 
 import pytest
 import torch
 
+from wpt_dataset import manifest
+from wpt_dataset.repo import address_hash, dump_json
+from wpt_dataset.sources import compute_upstream
 from wpt_model import load_model
 from wpt_posttrain import main
+from wpt_train import main as train
 
 ZERO_WEIGHTS = ("import torch\nfrom wpt_posttrain import Outcome\n\n"
              "def run(context):\n"
@@ -61,3 +67,47 @@ def test_a_step_that_returns_no_outcome_writes_nothing(trained, tmp_path):
     with pytest.raises(SystemExit, match="returned bool, not wpt_posttrain.Outcome"):
         main([str(trained.folder), str(tmp_path / "tuned"), str(step)])
     assert list(tmp_path.glob("*tuned*")) == []
+
+
+def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path, monkeypatch):
+    # the built-in step fine-tunes on the conversations a person adds as a
+    # source tagged sft; until one exists it says so and writes nothing, and
+    # once it has trained, the model's NOTICE credits that source
+    train([built.dataset_id, "--out", "model", "--steps", "1", "--block-size", "64", "--n-layer", "1",
+           "--n-head", "2", "--n-embd", "16", "--batch-size", "4"])
+    base, root = tmp_path / "model", tmp_path / "wpt"
+    monkeypatch.chdir(root)  # the step reads the sources of the repository holding the current folder
+    with pytest.raises(SystemExit, match="step sft failed: no conversations: no admitted source has chat files tagged sft"):
+        main([str(base), str(tmp_path / "tuned"), "sft"])
+    assert not (tmp_path / "tuned").exists()
+
+    talk = {"schema": 1, "messages": [{"role": "user", "content": [{"type": "text", "text": "Hi"}]},
+                                      {"role": "assistant", "content": [{"type": "text", "text": "Hello"}]}]}
+    upstream = tmp_path / "talks"
+    upstream.mkdir()
+    (upstream / "talks.jsonl").write_text(json.dumps(talk) + "\n")
+    env = {**os.environ, "GIT_AUTHOR_NAME": "T", "GIT_AUTHOR_EMAIL": "t@example.org", "GIT_COMMITTER_NAME": "T",
+           "GIT_COMMITTER_EMAIL": "t@example.org", "GIT_CONFIG_GLOBAL": os.devnull}
+    for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
+        subprocess.run(["git", *args], cwd=upstream, env=env, check=True)
+    commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True, text=True).stdout.strip()
+    data = {"schema": 5, "type": "git", "address": str(upstream), "revision": commit,
+            "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Talks, by Bo Speaker, 2026",
+                          "text": "Bo Speaker dedicates these talks to the public domain.\n"}],
+            "formats": [{"format": "chat", "paths": ["**"]}], "tags": [{"tags": ["sft"], "paths": ["**"]}],
+            "decision": {"decision": "admitted", "by": "T", "date": "2026-10-15"}}
+    data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], built.store))
+    sid = f"example-talks-{address_hash(str(upstream))}"
+    (root / "data" / "sources" / sid).mkdir()
+    (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data))
+
+    main([str(base), str(tmp_path / "tuned"), "sft"])
+    tuned = tmp_path / "tuned"
+    assert digest(tuned)["model.safetensors"] != digest(base)["model.safetensors"]
+    post = json.loads((tuned / "provenance.json").read_text())["post_training"]
+    assert post["steps"][0]["file"] == "wpt_posttrain/steps/sft.py" and post["steps"][0]["sources"] == [sid]
+    assert post["sources"][sid]["revision"] == commit
+    notice = (tuned / "NOTICE").read_text()
+    assert sid in notice and "Talks, by Bo Speaker, 2026" in notice and "dedicates these talks" in notice
+    assert built.attribution in notice  # the pre-training sources stay credited
+    assert f"1. `wpt_posttrain/steps/sft.py`" in (tuned / "README.md").read_text()

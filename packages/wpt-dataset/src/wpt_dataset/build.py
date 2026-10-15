@@ -52,7 +52,10 @@ class Document:
 
 
 def gather(repo: Repo, store, log=print):
-    """(documents, sources info, number of duplicates removed)."""
+    """(documents, sources info, number of duplicates removed). A source with
+    records files gets `credits` in its info: the store object listing, one
+    JSON line per document it gives, the document id, its license and the
+    credit fields of its record."""
     documents, info, seen, duplicates = [], {}, set(), 0
     for source in repo.sources():
         if not source.admitted:
@@ -61,13 +64,20 @@ def gather(repo: Repo, store, log=print):
         info[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
                            "checksum": source.data["checksum"], "tree": tree_object,
                            "licenses": source.data["licenses"]}
-        for path, text in markdown.documents(source, tree, store):  # links are not documents; their targets are
-            sha256 = store.put_bytes(text)
+        credits = []
+        for converted in markdown.documents(source, tree, store):  # links are not documents; their targets are
+            sha256 = store.put_bytes(converted.markdown)
             if sha256 in seen:
                 duplicates += 1
                 continue
             seen.add(sha256)
-            documents.append(Document(f"{source.id}/{path}", source.id, sha256, tags_of(source, path)))
+            document_id = f"{source.id}/{converted.path}"
+            documents.append(Document(document_id, source.id, sha256, tags_of(source, converted.file)))
+            if converted.record:
+                credits.append(json.dumps({"document": document_id, "license": converted.record.license,
+                                           "credit": converted.record.credit}, ensure_ascii=False, sort_keys=True))
+        if credits:
+            info[source.id]["credits"] = store.put_bytes("".join(f"{line}\n" for line in credits).encode())
     log(f"documents: {len(documents):,} from {len(info)} admitted sources ({duplicates:,} exact duplicates removed)")
     return documents, info, duplicates
 

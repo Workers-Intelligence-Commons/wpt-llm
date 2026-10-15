@@ -20,12 +20,13 @@ is systematic.
 
 ## Where records live
 
-Records are files of a source, like any other text, tagged `demonstration`:
-they get the same license entries, attribution, signed decision, NOTICE
-listing and checks as every source. Records written for WPT go in an
-`empty` source (see CONTRIBUTING.md, "Adding your own texts"). A
-pre-training mixture leaves them out (`!demonstration` in its pools); only
-post-training reads them.
+Records are files of a source, like any other text: they get the same
+license entries, attribution, signed decision, NOTICE listing and checks as
+every source. Records written for WPT go in an `empty` source (see
+CONTRIBUTING.md, "Adding your own texts"). Conversations are files in the
+`chat` format, tagged with the name of the step that reads them (`sft` for
+the `sft` step); a `chat` file is never a pre-training document
+([chat-format.md](chat-format.md)).
 
 - A record holds only what a person made: commands typed, edits, messages
   written. From a session with an AI assistant, only the person's own
@@ -39,9 +40,9 @@ JSON Lines: one record per line. Media such as screenshots are separate
 files named by their sha256 and referenced from the record. Each record
 carries its provenance: the contributor, the commit that added it (signed
 off under the DCO), the reference of the authorization it relies on, and its
-license. Records are converted to tokens before training.
-
-The exact fields are written together with the first recording tool.
+license. A conversation in a record follows [chat-format.md](chat-format.md):
+one JSON object holding every element, turned into tokens by a template
+before training.
 
 ## Running post-training
 
@@ -50,22 +51,24 @@ uv run wpt-posttrain <base model folder> <new model folder> <step> [<step> ...]
 ```
 
 A step is one Python file (or the name of a built-in one, in
-`apps/wpt-posttrain/src/wpt_posttrain/steps/`; there is none yet) that
-defines `run`:
+`apps/wpt-posttrain/src/wpt_posttrain/steps/`) that defines `run`:
 
 ```python
 from wpt_posttrain import Outcome
 
 def run(context):
-    records = ...  # read the demonstrations, for example from context.store
-    if not records:
-        return Outcome.failure("no demonstration records in the store")
+    conversations = context.conversations()  # [(id, conversation)] tagged with this step's name
+    if not conversations:
+        return Outcome.failure("no conversations")
     ...  # train context.model on them
     return Outcome.success()
 ```
 
 `context` gives the `model` to change (in place, on `device`), its
-`tokenizer`, the `base` folder, its `provenance` and the `store`. Every step
+`tokenizer`, the `base` folder, its `provenance` and the `store`.
+`context.conversations()` reads the conversations of every admitted source
+whose `chat` files carry a tag named after the step, from the repository
+holding the current folder, and the runner records those sources. Every step
 returns the same type, `Outcome`: success, or failure with its reason. A
 step does not write a report; it says whether it managed to do its part,
 and if not, why.
@@ -80,5 +83,23 @@ steps. The new folder must not exist yet; the base folder is never changed,
 and its `evals/` results are not copied, since they describe other weights.
 Run `wpt-eval` on the new folder to measure it.
 
-The records a step trains on will need their own provenance in `NOTICE`;
-that part is written with the first post-training data.
+Each step's record in `provenance.json` names the sources it read, and the
+`post_training` section keeps their address, revision and licenses. The
+new folder's `NOTICE` lists them with the pre-training sources, with the
+credit and the license text of each, and the model card names them under
+each step.
+
+## The `sft` step
+
+`uv run wpt-posttrain BASE NEW sft` is supervised fine-tuning: it reads the
+conversations tagged `sft`, turns each into tokens with the chat template,
+and trains the model to predict the assistant's turns only. Until a source
+holds such conversations, it fails with "no conversations" and writes
+nothing. Each conversation must fit the model's context; a longer one
+stops the step, since cutting it would drop the answers it holds. Its
+settings (epochs, learning rate, batch, seed) are the constants at the top
+of `steps/sft.py`; to change them, copy the file and give its path instead.
+
+The base model must use a vocabulary of tokenizer 0.3.0 or later, which
+reserves the chat template's ids. Talk to the result with
+`uv run wpt-chat NEW --chat`.

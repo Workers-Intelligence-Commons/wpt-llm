@@ -1841,6 +1841,7 @@ name = "wpt-posttrain"
 version = "0.1.0"
 source = { editable = "apps/wpt-posttrain" }
 dependencies = [
+    { name = "wpt-dataset" },
     { name = "wpt-device" },
     { name = "wpt-model" },
     { name = "wpt-store" },
@@ -1849,6 +1850,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
     { name = "wpt-device", editable = "packages/wpt-device" },
     { name = "wpt-model", editable = "packages/wpt-model" },
     { name = "wpt-store", editable = "packages/wpt-store" },

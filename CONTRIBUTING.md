@@ -44,6 +44,20 @@ You take responsibility for those three checks.
    copyright line, then an Apache `NOTICE` file's content; for public
    domain, why). Every model trained on the source repeats both in its
    notice.
+   A dataset on huggingface.co is `"type": "huggingface"`, pinned to the
+   dataset's commit; `manifest` then reads the Hub's listing and downloads
+   only its small files. A file holding many documents, each with its own
+   license (JSON Lines, optionally `.gz` or `.zst`, or Parquet), is in the
+   `records` format: it names the record's `text`, `license`, `id` and
+   `credit` fields, and each license entry covering it lists in `values`
+   the license values it covers ([docs/licenses.md](docs/licenses.md),
+   "Rules").
+   A git source may add its history: `"history": {"since": "<commit>"}`
+   gives one file `.git/history/<commit>` per commit from `since` to the
+   revision (merges left out), in `git format-patch` layout and limited
+   to the files `extract` keeps. `since` is the commit from which the root
+   license file holds the license the source lists; give these files a
+   `code` format with the language `patch`.
 5. `uv run wpt-dataset check --fetch <id>` must pass (it also converts every
    file to Markdown), and `uv run wpt-dataset markdown-check <id>` (every
    note complete, no leftover markup), then `uv run scripts/check.py`.

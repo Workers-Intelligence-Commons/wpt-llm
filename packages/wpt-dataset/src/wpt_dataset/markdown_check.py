@@ -10,7 +10,8 @@ reports each problem:
   would treat as markup instead of showing it.
 
 `markdown` files are kept as written (HTML inside them is valid Markdown)
-and `code` files are one fenced block, so neither is checked.
+and `code` files are one fenced block, so neither is checked. Records are
+checked when their text is read as plain text.
 """
 
 import re
@@ -48,11 +49,12 @@ def problems(markdown: str) -> list[str]:
 def check_markdown(source: Source, store) -> SourceReport:
     tree, _ = source_tree(source, store)
     report = SourceReport(source.id)
-    for path, markdown in documents(source, tree, store):
-        if format_of(source, path)["format"] not in CHECKED:
+    for converted in documents(source, tree, store):
+        entry = format_of(source, converted.file)
+        if entry["format"] not in CHECKED and not (entry["format"] == "records" and entry.get("as") != "markdown"):
             continue
-        text = markdown.decode("utf-8")
+        text = converted.markdown.decode("utf-8")
         report.documents += 1
         report.notes += len(DEFINITION.findall(CODE_SPAN.sub("", text)))
-        report.problems += [f"{path}: {problem}" for problem in problems(text)]
+        report.problems += [f"{converted.path}: {problem}" for problem in problems(text)]
     return report

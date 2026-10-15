@@ -5,7 +5,10 @@ hot loops in Rust (PyO3, built by maturin when the workspace is installed).
 
 - **Every byte has a token** (ids 0-255), so encoding never drops anything.
 - Id 256 is the end-of-document token.
-- Each learned merge adds the next id from 257 on.
+- Ids 257 to 512 are reserved for special tokens, such as the chat
+  template's tags ([chat-format.md](chat-format.md)). Encoding text never
+  produces them, and decoding gives them no bytes.
+- Each learned merge adds the next id from 513 on.
 - Text is first cut into chunks by ASCII whitespace only (a chunk is a word
   with at most one leading space, or a run of whitespace), so results never
   depend on a Unicode version.
@@ -82,5 +85,10 @@ sources the vocabulary was not trained on.
 A vocabulary file is canonical JSON:
 
 ```json
-{"format":"wpt-bpe","merges":[[a,b],...],"tokenizer_version":"0.2.0"}
+{"format":"wpt-bpe","merges":[[a,b],...],"tokenizer_version":"0.3.0"}
 ```
+
+A vocabulary file written by another tokenizer version is refused, since
+its ids would mean other tokens: tokenizer 0.3.0 reserved ids 257 to 512,
+so vocabularies of 0.2.0, and the models trained on them, need a new
+vocabulary version and a new model.

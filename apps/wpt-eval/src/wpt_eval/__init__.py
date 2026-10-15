@@ -134,7 +134,7 @@ def open_context(folder, store, device) -> Context:
         raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 3; train it again")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(folder))
-    except TokenizerMismatch as error:
+    except (TokenizerMismatch, ValueError) as error:  # ValueError: a vocabulary of another tokenizer version
         raise EvalError(str(error)) from None
     model = load_model(folder, device)
     model.eval()

@@ -7,7 +7,7 @@ from wpt_tokenizer import Tokenizer
 
 
 def model_folder(folder, notice=None):
-    tokenizer = Tokenizer.train([b"the quick brown fox jumps over the lazy dog"] * 4, 260)
+    tokenizer = Tokenizer.train([b"the quick brown fox jumps over the lazy dog"] * 4, 516)
     save_model(TinyGPT(ModelConfig(vocab_size=tokenizer.vocab_size, block_size=8, n_layer=1, n_head=1, n_embd=8)),
                folder, tokenizer.to_bytes(), "fox version 1")
     if notice is not None:

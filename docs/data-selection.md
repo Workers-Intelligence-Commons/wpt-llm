@@ -5,6 +5,15 @@
 Every file of an admitted source's final tree (after cuts and patches) is a
 document, identified as `<source id>/<path>`. Symlinks are not documents.
 
+A file in the `records` format (a dataset holding many documents, such as a
+JSON Lines or Parquet file) is not one document: each of its records whose
+license enters is one, identified as `<source id>/<path>#<record id>`, and
+tagged with its file's tags.
+
+A git source with `history` adds one document per commit,
+`<source id>/.git/history/<commit>`: the commit as `git format-patch`
+writes it, limited to the files the source keeps.
+
 **Exact duplicates are removed**: when several documents have the same
 content, the first by source id, then by path, keeps it. Nothing judges
 content. Near-duplicates stay.

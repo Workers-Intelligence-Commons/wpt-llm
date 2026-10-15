@@ -49,7 +49,7 @@ def test_own_texts_grow_by_patches_made_from_plain_files(kit, repo, store, tmp_p
     assert repo.check() == []
 
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "fr", "select": "fr", "weight": 1}]})
-    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 300})
+    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
     kit.write_recipe(repo, "dataset", "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 200, "held_out": 0})
     dataset_id = build_dataset(repo, "d", store, log=lambda _: None)
     assert kit.json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))["documents"]["total"] == 2

@@ -1,6 +1,6 @@
 import pytest
 
-from wpt_dataset.errors import FormatMapError, NotText
+from wpt_dataset.errors import FormatMapError, InvalidFile, NotText
 from wpt_dataset.cli import main
 from wpt_dataset.markdown import documents
 from wpt_dataset.markdown_check import problems
@@ -25,7 +25,7 @@ def markdown_of(kit, repo, store, tmp_path, files, formats=FORMATS):
     sid = kit.add_source(repo, store, "example", "book", {"type": "git", "address": address, "revision": commit,
                                                            "formats": formats})
     source = repo.source(sid)
-    return dict(documents(source, source_tree(source, store)[0], store))
+    return {c.path: c.markdown for c in documents(source, source_tree(source, store)[0], store)}
 
 
 def test_every_format_becomes_markdown_that_reads_as_written(kit, repo, store, tmp_path):
@@ -55,7 +55,7 @@ def test_code_outside_a_repository_names_its_path_without_a_root(kit, repo, stor
         "type": "http-file", "address": f"{base}/run.py", "revision": "2026-10-14",
         "formats": [{"format": "code", "language": "python", "paths": ["**"]}]})
     source = repo.source(sid)
-    assert documents(source, source_tree(source, store)[0], store) == [
+    assert [(c.path, c.markdown) for c in documents(source, source_tree(source, store)[0], store)] == [
         ("run.py", b"```python path=\"run.py\"\nprint(1)\n```\n")]
 
 
@@ -81,3 +81,21 @@ def test_markdown_check_command_passes_on_converted_pages(kit, repo, store, tmp_
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
     assert main(["--root", str(repo.root), "markdown-check"]) == 0
     assert capsys.readouterr().out.endswith(": 2 documents checked, 1 notes, OK\n")  # the page and plain.txt
+
+
+def test_a_chat_file_is_checked_and_never_becomes_a_pretraining_document(kit, repo, store, tmp_path):
+    # conversations are for the post-training step named by their tags: they
+    # must reach no pre-training mixture, and a malformed one must stop the check
+    good = (b'{"schema": 1, "messages": [{"role": "user", "content": [{"type": "text", "text": "Hi"}]}, '
+            b'{"role": "assistant", "content": [{"type": "text", "text": "Hello"}]}]}\n')
+    formats = [{"format": "chat", "paths": ["*.jsonl"]}, {"format": "text", "paths": ["plain.txt"]}]
+    found = markdown_of(kit, repo, store, tmp_path / "good", {"talks.jsonl": good, "plain.txt": b"words\n"}, formats)
+    assert list(found) == ["plain.txt"]
+
+    thinking_user = good.replace(b'"assistant"', b'"user"').replace(b'"text", "text": "Hello"', b'"thinking", "text": "x"')
+    with pytest.raises(InvalidFile, match="talks.jsonl line 2: at messages/1/content/0"):  # only the assistant thinks
+        markdown_of(kit, repo, store, tmp_path / "bad", {"talks.jsonl": good + thinking_user}, formats)
+    lost = good.replace(b'"role": "assistant", "content": [{"type": "text", "text": "Hello"}]',
+                        b'"role": "tool", "content": [{"type": "tool_result", "call": "c9", "content": []}]')
+    with pytest.raises(InvalidFile, match="tool_result answers 'c9', which no earlier tool_call made"):
+        markdown_of(kit, repo, store, tmp_path / "lost", {"talks.jsonl": lost}, formats)

@@ -73,6 +73,7 @@ signed contribution (see [CONTRIBUTING.md](CONTRIBUTING.md)).
 - [Training and repeatability](docs/training.md)
 - [Evaluation](docs/evaluation.md)
 - [Post-training](docs/post-training.md)
+- [Chat format: conversations as JSON, turned into tokens by a template](docs/chat-format.md)
 - [Output notice and attribution](docs/output-notice.md)
 
 ## License

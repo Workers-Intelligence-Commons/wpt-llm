@@ -70,6 +70,16 @@ def _source_3_to_4(document, path):
 MIGRATIONS["source"][3] = _source_3_to_4
 
 
+def _source_4_to_5(document, _path):
+    """Shape 5 adds the huggingface type, the records format and the `values`
+    of a license entry; a shape 4 file uses none of them, so only its number
+    changes."""
+    return {**document, "schema": 5}
+
+
+MIGRATIONS["source"][4] = _source_4_to_5
+
+
 def _drop_moved_license_files(path, document):
     """Remove the LicenseRef files whose text the written source.json now
     holds exactly; anything else stays for the check to report."""

@@ -56,7 +56,7 @@ import torch
 from wpt_device import describe
 from wpt_inference import sample_tokens
 from wpt_model import ModelConfig, TinyGPT, save_model
-from wpt_model.notice import EVALS_NAME, WEIGHT_METADATA, write_documents
+from wpt_model.notice import EVALS_NAME, WEIGHT_METADATA, write_credits, write_documents
 from wpt_store import StoreError, store_from_settings
 from wpt_store.shards import sources_of, token_file
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
@@ -257,10 +257,9 @@ def _train(args, strategy, plugins):
                max_shard_bytes=args.max_shard_size, metadata=WEIGHT_METADATA)
     shutil.rmtree(out / EVALS_NAME, ignore_errors=True)
     sources = sources_of(store, record["shards"])
-    (out / "provenance.json").write_text(
-        json.dumps(provenance(args, record, record_object, sources, model_config, n_params, strategy, plugins,
-                              best_val, batch), indent=2) + "\n",
-        encoding="utf-8", newline="\n")
+    written = provenance(args, record, record_object, sources, model_config, n_params, strategy, plugins, best_val, batch)
+    (out / "provenance.json").write_text(json.dumps(written, indent=2) + "\n", encoding="utf-8", newline="\n")
+    write_credits(out, written, store.get_bytes)
     write_documents(out)
     shutil.rmtree(checkpoint_folder, ignore_errors=True)  # the run is complete
     log(f"saved {out} (licenses and sources: {out / 'NOTICE'})")

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/inayayousfi/wpt-llm/schemas/conversation.schema.json",
+  "title": "WPT conversation (one line of a file in the chat format; docs/chat-format.md)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "messages"],
+  "properties": {
+    "schema": {"const": 1, "description": "shape version of the conversation"},
+    "tools": {
+      "type": "array",
+      "description": "the tools offered in the conversation",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "description", "parameters"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "description": {"type": "string"},
+          "parameters": {"type": "object", "description": "the JSON Schema of the call's arguments"}
+        }
+      }
+    },
+    "messages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "content"],
+        "properties": {
+          "role": {"enum": ["system", "user", "assistant", "tool"]},
+          "content": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/block"}}
+        },
+        "allOf": [
+          {"if": {"properties": {"role": {"const": "tool"}}},
+           "then": {"properties": {"content": {"items": {"properties": {"type": {"const": "tool_result"}}}}}},
+           "else": {"properties": {"content": {"items": {"properties": {"type": {"not": {"const": "tool_result"}}}}}}}},
+          {"if": {"properties": {"role": {"const": "assistant"}}},
+           "else": {"properties": {"content": {"items": {"properties": {"type": {"not": {"enum": ["thinking", "tool_call"]}}}}}}}}
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "block": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {"type": {"enum": ["text", "thinking", "tool_call", "tool_result", "json", "file"]}},
+      "allOf": [
+        {"if": {"properties": {"type": {"enum": ["text", "thinking"]}}},
+         "then": {"additionalProperties": false, "required": ["type", "text"],
+                  "properties": {"type": true, "text": {"type": "string"}}}},
+        {"if": {"properties": {"type": {"const": "tool_call"}}},
+         "then": {"additionalProperties": false, "required": ["type", "id", "name", "arguments"],
+                  "properties": {"type": true, "id": {"type": "string", "minLength": 1},
+                                 "name": {"type": "string", "minLength": 1}, "arguments": {"type": "object"}}}},
+        {"if": {"properties": {"type": {"const": "tool_result"}}},
+         "then": {"additionalProperties": false, "required": ["type", "call", "content"],
+                  "properties": {"type": true, "call": {"type": "string", "minLength": 1}, "error": {"type": "boolean"},
+                                 "content": {"type": "array", "items": {"$ref": "#/$defs/block",
+                                             "properties": {"type": {"enum": ["text", "json", "file"]}}}}}}},
+        {"if": {"properties": {"type": {"const": "json"}}},
+         "then": {"additionalProperties": false, "required": ["type", "value"],
+                  "properties": {"type": true, "value": true}}},
+        {"if": {"properties": {"type": {"const": "file"}}},
+         "then": {"additionalProperties": false, "required": ["type", "sha256", "media_type"],
+                  "properties": {"type": true, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                                 "media_type": {"type": "string", "pattern": "^[a-z]+/[A-Za-z0-9.+-]+$"}}}}
+      ]
+    }
+  }
+}

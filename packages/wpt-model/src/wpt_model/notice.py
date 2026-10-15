@@ -3,6 +3,9 @@
 Next to its weights, a model folder carries:
 
     LICENSE       the GNU AGPL, version 3: the license of the weights
+    CREDITS/      for each source whose files hold many documents with
+                  their own licenses, <source id>.jsonl: one line per
+                  document, with its license and the credit its record gives
     NOTICE        the licenses of the weights and of generated text, the
                   sources the model learned from with the credit each one
                   asks for, and the output notice
@@ -19,13 +22,14 @@ root files; a test checks they stay identical.
 """
 
 import json
+import shutil
 from importlib.resources import files
 from pathlib import Path
 
 LICENSE = "AGPL-3.0-or-later"
 OUTPUT_LICENSE = "CC0-1.0"
 REPOSITORY = "https://github.com/inayayousfi/wpt-llm"
-NOTICE_NAME, CARD_NAME, LICENSE_NAME, EVALS_NAME = "NOTICE", "README.md", "LICENSE", "evals"
+NOTICE_NAME, CARD_NAME, LICENSE_NAME, EVALS_NAME, CREDITS_NAME = "NOTICE", "README.md", "LICENSE", "evals", "CREDITS"
 WEIGHT_METADATA = {"license": LICENSE, "output_license": OUTPUT_LICENSE,
                    "notice": f"NOTICE in the model folder; {REPOSITORY}"}
 SUMMARY = (f"Weights: {LICENSE}. Generated text: {OUTPUT_LICENSE}, waived by the authors of WPT; "
@@ -52,6 +56,18 @@ def write_documents(folder):
         (folder / name).write_text(text, encoding="utf-8", newline="\n")
 
 
+def write_credits(folder, provenance, read_object):
+    """Write CREDITS/<source id>.jsonl for every source the model learned
+    from whose dataset record lists `credits`; read_object(sha256) gives
+    that object's bytes. Replaces earlier copies."""
+    folder = Path(folder) / CREDITS_NAME
+    shutil.rmtree(folder, ignore_errors=True)
+    for sid, source in sorted(learned_from(provenance).items()):
+        if source.get("credits"):
+            folder.mkdir(exist_ok=True)
+            (folder / f"{sid}.jsonl").write_bytes(read_object(source["credits"]))
+
+
 def notice(provenance) -> str:
     lines = [
         "WPT model notice", "",
@@ -64,14 +80,19 @@ def notice(provenance) -> str:
         *_built_from(provenance), "", "",
         "Sources this model learned from", "",
         "Each source with its exact revision, and for each license the paths it",
-        "covers and the credit it asks for, as recorded when the dataset was built.",
-        "Their license texts follow the list, each text once.",
+        "covers and the credit it asks for, as recorded when the dataset was built",
+        "or when a post-training step read it. Their license texts follow the list,",
+        "each text once.",
     ]
     texts = {}  # text -> the sources and licenses that give it
-    for sid, source in sorted(provenance["sources"].items()):
+    for sid, source in sorted(learned_from(provenance).items()):
         lines += ["", sid, f"  address:  {source['address']}", f"  revision: {source['revision']}"]
+        if source.get("credits"):
+            lines.append(f"  credit of each document: {CREDITS_NAME}/{sid}.jsonl")
         for entry in source["licenses"]:
-            lines += [f"  {entry['license']} for {', '.join(entry['paths'])}:",
+            covers = ", ".join(entry["paths"]) + (f" (records whose license is {', '.join(map(repr, entry['values']))})"
+                                                  if entry.get("values") else "")
+            lines += [f"  {entry['license']} for {covers}:",
                       *(f"    {line}" for line in entry["attribution"].splitlines())]
             if entry.get("text"):  # datasets built before shape 4 recorded no texts
                 texts.setdefault(entry["text"], []).append(f"{sid} ({entry['license']})")
@@ -91,8 +112,7 @@ def card(config, provenance, evals) -> str:
         "> The full notice, with every source and the credit it asks for, is in",
         f"> [NOTICE](NOTICE). Project: {REPOSITORY}", "",
         "## Model", "",
-        "TinyGPT, a decoder-only transformer. It is pre-trained only: it continues",
-        "text and follows no instructions.", "",
+        *_model_kind(provenance),
         f"- Parameters: {provenance['parameters']:,}",
         f"- Transformer blocks: {config['n_layer']}, attention heads: {config['n_head']}, "
         f"embedding width: {config['n_embd']}",
@@ -110,7 +130,7 @@ def card(config, provenance, evals) -> str:
         "## Sources", "",
         "| Source | Revision | Licenses |", "|---|---|---|",
         *(f"| {sid} | `{source['revision']}` | {', '.join(sorted({e['license'] for e in source['licenses']}))} |"
-          for sid, source in sorted(provenance["sources"].items())), "",
+          for sid, source in sorted(learned_from(provenance).items())), "",
         "Authors and the credit each source asks for: [NOTICE](NOTICE).", "",
         "## Evaluations", "",
     ]
@@ -123,6 +143,12 @@ def card(config, provenance, evals) -> str:
     return "\n".join(lines)
 
 
+def learned_from(provenance) -> dict:
+    """Every source the model learned from: the pre-training dataset's, then
+    those post-training steps read."""
+    return {**provenance["sources"], **(provenance.get("post_training") or {}).get("sources", {})}
+
+
 def _post_training(post_training):
     if not post_training:
         return []
@@ -131,8 +157,17 @@ def _post_training(post_training):
             + ", ".join(f"`{name}` (sha256 `{sha[:12]}`)" for name, sha in post_training["base_weights"].items())
             + ", then changed by these steps, in order; every one succeeded:", "",
             *(f"{i}. `{step['file']}` (sha256 `{step['file_sha256'][:12]}`)"
+              + (f", trained on {', '.join(step['sources'])}" if step.get("sources") else "")
               for i, step in enumerate(post_training["steps"], start=1)),
             "", *(f"- {line}" for line in _built_from(post_training)), ""]
+
+
+def _model_kind(provenance):
+    if provenance.get("post_training"):
+        return ["TinyGPT, a decoder-only transformer, pre-trained and then changed by the",
+                "post-training steps below.", ""]
+    return ["TinyGPT, a decoder-only transformer. It is pre-trained only: it continues",
+            "text and follows no instructions.", ""]
 
 
 def _built_from(provenance):

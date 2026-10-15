@@ -138,8 +138,11 @@ cannot disagree with it.
 
 `wpt-chat <model folder>` continues text typed by the user, until the model
 ends the document. Its start line names the licenses and where the notice
-is; `wpt-chat <model folder> --about` prints the folder's `NOTICE`. A pre-trained model only continues text; a chat format
-comes with post-training.
+is; `wpt-chat <model folder> --about` prints the folder's `NOTICE`. A pre-trained model only continues text. `wpt-chat <model folder> --chat`
+talks to a model post-trained on conversations: it keeps the history,
+writes it with the chat template ([chat-format.md](chat-format.md)), and
+shows the model's thinking and tool calls with their tags, without running
+the calls.
 
 ## What is exactly repeatable
 

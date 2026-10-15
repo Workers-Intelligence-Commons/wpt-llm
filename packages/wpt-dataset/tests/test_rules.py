@@ -50,14 +50,14 @@ def test_migrate_rewrites_files_that_are_behind(kit, repo, store, git_upstream):
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
     path = repo.data / "sources" / sid / "source.json"
     # a made-up next shape: "type" renamed to "kind"
-    step = {4: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 5}}
-    current = {"source": 5, "mixture": 1, "dataset": 1, "tokenizer": 1, "lock": 1}
+    step = {5: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 6}}
+    current = {"source": 6, "mixture": 1, "dataset": 1, "tokenizer": 1, "lock": 1}
 
     changed = migrate(repo, migrations={"source": step, "mixture": {}, "dataset": {}, "tokenizer": {}, "lock": {}},
                       current=current, log=lambda _: None)
     assert changed == [path]
     document = json.loads(path.read_text())
-    assert document["schema"] == 5 and document["kind"] == "git" and "type" not in document
+    assert document["schema"] == 6 and document["kind"] == "git" and "type" not in document
     assert path.read_text() == dump_json(document)
 
 
@@ -75,7 +75,7 @@ def test_migrating_a_shape_1_source_asks_a_person_for_attribution_text_and_forma
     with pytest.raises(InvalidFile, match=re.escape(str(path))):
         migrate(repo, log=lambda _: None)
     document = json.loads(path.read_text())
-    assert document["schema"] == 4
+    assert document["schema"] == 5
     assert document["licenses"] == [{"license": "MIT", "paths": ["**"], "attribution": "", "text": ""}]
     assert document["formats"] == []
 
@@ -129,7 +129,7 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1],
         "tags": [{"tags": ["text"], "paths": ["**"]}]})
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "text", "select": "text", "weight": 1}]})
-    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 300})
+    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
     kit.write_recipe(repo, "dataset", "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
 
@@ -142,13 +142,13 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
 
 def test_migrating_shape_1_tokenizer_files(kit, repo):
     # recipes start at vocabulary version 1; an old lock lists no documents, so it cannot be kept
-    recipe = kit.write_recipe(repo, "tokenizer", "t", {"mixture": "m", "vocab_size": 300})
+    recipe = kit.write_recipe(repo, "tokenizer", "t", {"mixture": "m", "vocab_size": 556})
     recipe.write_text(json.dumps({**json.loads(recipe.read_text()), "schema": 1}))
     lock = repo.lock_path("t")
     lock.write_text(json.dumps({"schema": 1, "fingerprint": "0" * 64, "vocabulary_sha256": "1" * 64}))
     with pytest.raises(OutdatedSchema, match=re.escape(f"{lock}: a shape 1 lock does not list the documents")):
         migrate(repo, log=lambda _: None)
-    assert json.loads(recipe.read_text()) == {"schema": 2, "mixture": "m", "vocab_size": 300, "version": 1}
+    assert json.loads(recipe.read_text()) == {"schema": 2, "mixture": "m", "vocab_size": 556, "version": 1}
     lock.unlink()  # what the message asks; the next build writes a shape 2 lock
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
     assert migrate(repo, log=lambda _: None) == []

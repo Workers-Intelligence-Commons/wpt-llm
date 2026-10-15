@@ -2,6 +2,8 @@
 
     download (address, else each mirror) -> upstream tree, checked against `checksum`
                                             (an "empty" source has no files and downloads nothing;
+                                            a "huggingface" source is a dataset pinned to a commit,
+                                            see huggingface.py;
                                             an address whose robots.txt forbids it, or cannot be
                                             read, is skipped for the next mirror, see robots.py)
     erasure cuts, in the order listed     -> each checked by sha256_after
@@ -24,7 +26,7 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
-from . import manifest, robots
+from . import huggingface, manifest, robots
 from .errors import ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match
 from .programs import program
@@ -72,11 +74,13 @@ def upstream_tree(source: Source, store) -> dict[str, Entry]:
 
 def compute_upstream(data: dict, address: str, store) -> dict[str, Entry]:
     """The upstream tree of a description, without checking its checksum
-    (used to fill in `checksum` for a new source)."""
-    return _fetch(data, address, store)
+    (used to fill in `checksum` for a new source). For a huggingface source
+    it comes from the Hub's listing, and large files are not downloaded: the
+    tree is only good for its manifest."""
+    return _fetch(data, address, store, listing_only=True)
 
 
-def _fetch(data: dict, address: str, store) -> dict[str, Entry]:
+def _fetch(data: dict, address: str, store, listing_only=False) -> dict[str, Entry]:
     extractor = Extractor(store, data.get("extract", {}))
     kind, revision = data["type"], data["revision"]
     if kind != "empty":
@@ -91,8 +95,13 @@ def _fetch(data: dict, address: str, store) -> dict[str, Entry]:
         elif kind == "http-archive":
             manifest.read_archive(_download(address, tmp / "download"), extractor)
         elif kind == "git":
-            _git_fetch(address, revision, tmp / "repo")
+            history = data.get("history")
+            _git_fetch(address, revision, tmp / "repo", full=history is not None)
             manifest.read_git(tmp / "repo", revision, extractor)
+            if history:
+                manifest.read_git_history(tmp / "repo", history["since"], revision, extractor)
+        elif kind == "huggingface":
+            huggingface.read(address, revision, extractor, tmp, USER_AGENT, listing_only)
         elif kind == "mercurial":
             subprocess.run([program("hg"), "clone", "-q", "-U", "-r", revision, address, str(tmp / "repo")],
                            capture_output=True, check=True)
@@ -114,10 +123,12 @@ def _download(address: str, target: Path) -> Path:
     return target
 
 
-def _git_fetch(address: str, revision: str, repo: Path):
+def _git_fetch(address: str, revision: str, repo: Path, full=False):
+    """The commit `revision`; with `full`, its whole history too."""
     subprocess.run(["git", "init", "-q", "--bare", str(repo)], capture_output=True, check=True)
     git = ["git", "-c", f"http.userAgent={USER_AGENT}", "-C", str(repo)]
-    shallow = subprocess.run([*git, "fetch", "-q", "--depth", "1", address, revision], capture_output=True)
+    depth = [] if full else ["--depth", "1"]
+    shallow = subprocess.run([*git, "fetch", "-q", *depth, address, revision], capture_output=True)
     if shallow.returncode != 0:  # some servers only serve branch and tag tips
         subprocess.run([*git, "fetch", "-q", address,
                         "+refs/heads/*:refs/heads/*", "+refs/tags/*:refs/tags/*"], capture_output=True, check=True)
@@ -217,7 +228,7 @@ def source_tree(source: Source, store) -> tuple[dict[str, Entry], str]:
         tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
         tree = apply_patches(source.id, tree, source.patches, store)
         for path, entry in tree.items():
-            if entry.mode != SYMLINK:
+            if entry.mode != SYMLINK and not is_records(source, path):
                 try:
                     store.get_bytes(entry.sha256).decode("utf-8")
                 except UnicodeDecodeError as error:
@@ -228,12 +239,33 @@ def source_tree(source: Source, store) -> tuple[dict[str, Entry], str]:
     return tree, known
 
 
+def is_records(source: Source, path: str) -> bool:
+    """Whether a path is in the records format (see records.py)."""
+    return any(e["format"] == "records" and any(glob_match(path, g) for g in e["paths"])
+               for e in source.data["formats"])
+
+
 def check_license_map(source: Source, tree: dict[str, Entry]):
+    """Every path matches exactly one license entry, without `values`; a
+    records file instead matches one or more, each listing the license
+    values of the records it covers, with no value listed twice."""
     for path in tree:
-        found = [e["license"] for e in source.data["licenses"] if any(glob_match(path, g) for g in e["paths"])]
-        if len(found) != 1:
-            what = "no license entry" if not found else f"{len(found)} license entries ({', '.join(found)})"
-            raise LicenseMapError(f"{source.id}: {path} matches {what}; every path must match exactly 1")
+        found = [e for e in source.data["licenses"] if any(glob_match(path, g) for g in e["paths"])]
+        names = ", ".join(e["license"] for e in found)
+        if not is_records(source, path):
+            if len(found) != 1:
+                what = "no license entry" if not found else f"{len(found)} license entries ({names})"
+                raise LicenseMapError(f"{source.id}: {path} matches {what}; every path must match exactly 1")
+            if "values" in found[0]:
+                raise LicenseMapError(f"{source.id}: {path} is not a records file, but its license entry lists `values`")
+            continue
+        if not found or any("values" not in e for e in found):
+            raise LicenseMapError(f"{source.id}: {path} is a records file: every license entry covering it "
+                                  f"lists the `values` it covers (found: {names or 'none'})")
+        values = [v for e in found for v in e["values"]]
+        repeated = sorted({v for v in values if values.count(v) > 1})
+        if repeated:
+            raise LicenseMapError(f"{source.id}: {path}: license values listed by several entries: {repeated}")
 
 
 def tags_of(source: Source, path: str) -> frozenset[str]:
