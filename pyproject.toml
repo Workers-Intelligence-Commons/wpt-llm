@@ -18,7 +18,7 @@ exclude = ["apps/__pycache__"]  # left by apps/conftest.py, the apps' shared tes
 
 [dependency-groups]
 # `uv sync` installs every app, and through them every library (but not torch).
-dev = ["wpt-train", "wpt-chat", "wpt-eval", "wpt-posttrain", "wpt-dataset", "pytest>=8", "moto[s3]>=5"]
+dev = ["wpt-train", "wpt-chat", "wpt-eval", "wpt-posttrain", "wpt-dataset", "wpt-web", "pytest>=8", "moto[s3]>=5"]
 cpu = ["torch>=2.14"]
 cuda = ["torch>=2.14"]  # NVIDIA, CUDA 13.0: needs driver 580 or newer
 # AMD ROCm builds exist for Linux only. triton-rocm / triton-xpu are torch's own
@@ -38,6 +38,7 @@ wpt-train = { workspace = true }
 wpt-chat = { workspace = true }
 wpt-eval = { workspace = true }
 wpt-posttrain = { workspace = true }
+wpt-web = { workspace = true }
 torch = [
     { index = "pytorch-cpu", group = "cpu" },
     { index = "pytorch-cuda", group = "cuda" },

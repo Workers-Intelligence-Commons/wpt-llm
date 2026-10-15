@@ -58,6 +58,7 @@ A Rust toolchain is needed: the tokenizer is built from source.
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md` |
 | post-train | `uv run wpt-posttrain BASE NEW STEP [STEP ...]` | the base folder, the store | the new folder, only if every step succeeded |
 | continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE) | the folder | |
+| review and edit sources in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ | `data/`, `packages/wpt-web/ui` | `source.json` through the source rules; `ui/node_modules`, `ui/dist` |
 
 Every `wpt-train` option also comes from `WPT_<OPTION>` in the environment
 (`--n-layer` -> `WPT_N_LAYER`); `--help` on any command lists the rest.

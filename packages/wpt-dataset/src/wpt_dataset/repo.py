@@ -10,6 +10,7 @@
 
 import hashlib
 import json
+import os
 import re
 from dataclasses import dataclass
 from functools import cache
@@ -18,7 +19,7 @@ from pathlib import Path
 
 import jsonschema
 
-from .errors import InvalidFile, OutdatedSchema, RuleViolation
+from .errors import InvalidFile, OutdatedSchema, RuleViolation, StaleFile
 from .licenses import check_license
 from .pools import parse
 
@@ -52,6 +53,13 @@ def load_json(path: Path, kind: str) -> dict:
         document = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
         raise InvalidFile(f"{path}: {error}") from error
+    validate(document, kind, path)
+    return document
+
+
+def validate(document, kind: str, path: Path):
+    """Raise OutdatedSchema or InvalidFile unless the document is a valid
+    file of the given kind in its current shape; path names it in messages."""
     version = document.get("schema") if isinstance(document, dict) else None
     if isinstance(version, int) and version < CURRENT_SCHEMA[kind]:
         raise OutdatedSchema(f"{path}: shape {version}, current is {CURRENT_SCHEMA[kind]}; run `wpt-dataset migrate`")
@@ -60,7 +68,11 @@ def load_json(path: Path, kind: str) -> dict:
     except jsonschema.ValidationError as error:
         where = "/".join(map(str, error.absolute_path)) or "(top level)"
         raise InvalidFile(f"{path}: at {where}: {error.message}") from error
-    return document
+
+
+def file_version(path: Path) -> str:
+    """The sha256 of a file's bytes: what a caller read, to detect a change."""
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def dump_json(document) -> str:
@@ -143,7 +155,7 @@ class Repo:
                 problems.append(str(error))
 
         for sid in self.source_ids():
-            attempt(self._check_source, sid)
+            problems += self.check_source(sid)
         for kind in ("mixture", "tokenizer", "dataset"):
             for name in self.recipe_names(kind):
                 attempt(self._check_recipe, kind, name)
@@ -152,10 +164,34 @@ class Repo:
                 attempt(load_json, self.lock_path(name), "lock")
         return problems
 
-    def _check_source(self, sid):
+    def check_source(self, sid) -> list[str]:
+        """Every rule on one source that needs no download: [] or one problem."""
+        try:
+            self._check_source_document(sid, load_json(self.data / "sources" / sid / "source.json", "source"))
+        except (InvalidFile, OutdatedSchema, RuleViolation) as error:
+            return [str(error)]
+        return []
+
+    def save_source(self, sid, document, version) -> str:
+        """Write source.json from a document, after the same rules as the
+        check. version is the file_version the caller read: if the file
+        changed since, StaleFile. InvalidFile, OutdatedSchema or
+        RuleViolation say why the document is refused. Nothing is written
+        unless every rule passes. Returns the new version."""
+        path = self.data / "sources" / sid / "source.json"
+        if file_version(path) != version:
+            raise StaleFile(f"{path}: changed on disk since it was read")
+        validate(document, "source", path)
+        self._check_source_document(sid, document)
+        temporary = path.with_name(".source.json.writing")
+        temporary.write_text(dump_json(document), encoding="utf-8", newline="\n")
+        os.replace(temporary, path)
+        return file_version(path)
+
+    def _check_source_document(self, sid, document):
         if not ID.fullmatch(sid):
             raise RuleViolation(f"{sid}: a source id is <origin>-<item>-<hash> or <origin>-<hash>, lowercase a-z 0-9 '-'")
-        source = self.source(sid)
+        source = Source(sid, self.data / "sources" / sid, document)
         expected = address_hash(source.data["address"])
         if not sid.endswith("-" + expected):
             raise RuleViolation(f"{sid}: the id must end with {expected}, the hash of its address")

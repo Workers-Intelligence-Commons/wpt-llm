@@ -30,6 +30,7 @@ members = [
     "wpt-tokenizer",
     "wpt-train",
     "wpt-training",
+    "wpt-web",
 ]
 
 [[package]]
@@ -1785,6 +1786,7 @@ dev = [
     { name = "wpt-eval" },
     { name = "wpt-posttrain" },
     { name = "wpt-train" },
+    { name = "wpt-web" },
 ]
 rocm = [
     { name = "torch", version = "2.14.1+rocm7.2", source = { registry = "https://download.pytorch.org/whl/rocm7.2" }, marker = "sys_platform == 'linux'" },
@@ -1808,6 +1810,7 @@ dev = [
     { name = "wpt-eval", editable = "apps/wpt-eval" },
     { name = "wpt-posttrain", editable = "apps/wpt-posttrain" },
     { name = "wpt-train", editable = "apps/wpt-train" },
+    { name = "wpt-web", editable = "packages/wpt-web" },
 ]
 rocm = [
     { name = "torch", marker = "sys_platform == 'linux'", specifier = ">=2.14", index = "https://download.pytorch.org/whl/rocm7.2", conflict = { package = "wpt-llm", group = "rocm" } },
@@ -1912,6 +1915,17 @@ requires-dist = [
     { name = "numpy", specifier = ">=2" },
     { name = "wpt-device", editable = "packages/wpt-device" },
 ]
+
+[[package]]
+name = "wpt-web"
+version = "0.1.0"
+source = { editable = "packages/wpt-web" }
+dependencies = [
+    { name = "wpt-dataset" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "wpt-dataset", editable = "packages/wpt-dataset" }]
 
 [[package]]
 name = "xmltodict"

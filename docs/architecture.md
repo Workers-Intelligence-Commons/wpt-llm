@@ -201,6 +201,7 @@ settings. Objects are named by their sha256 and checked on every read.
 | `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; command `wpt-dataset` |
 | `wpt-store` | the content-addressed store (local or S3) and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
+| `wpt-web` | a local web interface: one small server on 127.0.0.1, one file per page (Python routes, React page); its interface is built with Bun when it starts; command `wpt-web` |
 | `wpt-model` | the TinyGPT network, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
 | `wpt-inference` | token-by-token sampling |

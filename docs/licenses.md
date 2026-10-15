@@ -28,7 +28,8 @@ install, with the license it declares, read from its metadata
 are vague or missing, from its license files. All of them were checked for
 the versions below.
 
-**When a version changes** in `uv.lock` or `Cargo.lock`, check that row
+**When a version changes** in `uv.lock`, `Cargo.lock` or
+`packages/wpt-web/ui/bun.lock`, check that row
 again (the license can change between versions) and update its version
 here; a new package gets a row, a removed one loses its row. The required
 packages must stay compatible with AGPL-3.0-or-later.
@@ -217,6 +218,40 @@ WPT does not distribute any of these packages: installing a build downloads
 them on the user's machine, under their own terms. Distributing WPT
 together with them (a container image, an installer) needs its own license
 check first, above all for the NVIDIA, Intel and AMD runtimes.
+
+### The web interface (`packages/wpt-web/ui/bun.lock`)
+
+Bun installs these when `wpt-web` builds its interface. Only React,
+React DOM and scheduler end up in the built files the browser loads; the
+others build them. lightningcss's MPL-2.0 names the AGPL as a Secondary
+License (its section 1.12).
+
+| Package | Version | License | Note |
+| --- | --- | --- | --- |
+| react | 19.3.1 | MIT | in the built files |
+| react-dom | 19.3.1 | MIT | in the built files |
+| scheduler | 0.28.0 | MIT | in the built files, through react-dom |
+| vite | 8.3.4 | MIT | builds the interface |
+| rolldown | 1.2.14 | MIT | through vite |
+| @rolldown/binding-* | 1.2.14 | MIT | one per platform (15), through rolldown |
+| @rolldown/pluginutils | 1.0.1 | MIT | through vite |
+| @oxc-project/types | 0.154.0 | MIT | through rolldown |
+| lightningcss | 1.33.0 | MPL-2.0 | through vite |
+| lightningcss-* | 1.33.0 | MPL-2.0 | one per platform (11), through lightningcss |
+| detect-libc | 2.1.2 | Apache-2.0 | through lightningcss |
+| postcss | 8.5.30 | MIT | through vite |
+| nanoid | 3.3.20 | MIT | through postcss |
+| picocolors | 1.1.1 | ISC | through postcss |
+| source-map-js | 1.2.2 | BSD-3-Clause | through postcss |
+| tinyglobby | 0.2.17 | MIT | through vite |
+| fdir | 6.5.0 | MIT | through tinyglobby |
+| picomatch | 4.0.7 | MIT | through tinyglobby |
+| fsevents | 2.3.3 | MIT | macOS only, through vite |
+| typescript | 7.0.2 | Apache-2.0 | checks the types |
+| @typescript/typescript-* | 7.0.2 | Apache-2.0 | one per platform (20), through typescript |
+| @types/react | 19.3.0 | MIT | types only |
+| @types/react-dom | 19.3.0 | MIT | types only |
+| csstype | 3.2.3 | MIT | types only, through @types/react |
 
 ## What the corpus accepts
 

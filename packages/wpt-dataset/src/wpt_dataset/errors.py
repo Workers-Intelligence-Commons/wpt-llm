@@ -15,6 +15,11 @@ class RuleViolation(DatasetError):
     """A repository rule is broken (id, license list, patch names, recipes...)."""
 
 
+class StaleFile(DatasetError):
+    """A file changed on disk since the caller read it; nothing was written.
+    Read it again and redo the change."""
+
+
 class OutdatedSchema(DatasetError):
     """A file uses an older shape; `wpt-dataset migrate` rewrites it."""
 
