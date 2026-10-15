@@ -1,6 +1,6 @@
 """The data descriptions in a WPT repository, read and validated.
 
-    data/sources/<id>/source.json         + NNNN-*.patch, LicenseRef-*.txt
+    data/sources/<id>/source.json         + NNNN-*.patch
     data/recipes/mixtures/<name>.json
     data/recipes/tokenizers/<name>.json   + <name>.lock.json (written by builds)
     data/recipes/datasets/<name>.json
@@ -22,7 +22,7 @@ from .errors import InvalidFile, OutdatedSchema, RuleViolation
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 3, "mixture": 1, "dataset": 1, "tokenizer": 2, "lock": 2}
+CURRENT_SCHEMA = {"source": 4, "mixture": 1, "dataset": 1, "tokenizer": 2, "lock": 2}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
@@ -163,7 +163,7 @@ class Repo:
             check_license(entry["license"], source.folder)
         numbers = []
         for path in source.folder.iterdir():
-            if path.name == "source.json" or (path.name.startswith("LicenseRef-") and path.suffix == ".txt"):
+            if path.name == "source.json":
                 continue
             match = PATCH.fullmatch(path.name)
             if not match:

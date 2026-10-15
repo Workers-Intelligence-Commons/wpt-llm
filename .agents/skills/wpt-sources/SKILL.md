@@ -59,7 +59,7 @@ For each candidate, following CONTRIBUTING.md, "Adding a source":
   with `attribution` built from the edition's own metadata (author,
   translator, title, edition, producer, link), read by a script, never
   written from memory.
-- **`LicenseRef-public-domain.txt`** next to `source.json`: the people and
+- **`text`** of the `LicenseRef-public-domain` entry: the people and
   their death years, the first publication, why it holds in the United
   States and in the country of origin, the edition's own dedication, and
   the sources of these facts.

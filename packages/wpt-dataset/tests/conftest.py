@@ -125,13 +125,14 @@ def repo(tmp_path):
 
 DECISION = {"decision": "admitted", "by": "Test Reviewer", "date": "2026-10-14"}  # an admission needs no reason
 ATTRIBUTION = "Copyright (c) 2026 Test Author, https://example.org/project"
+LICENSE_TEXT = "Copyright (c) 2026 Test Author\n\nPermission is hereby granted, free of charge, to any person.\n"
 
 
 def add_source(repo, store, origin, item, data, patches=(), compute_checksum=True):
     """Write data/sources/<id>/source.json, filling in the checksum from the
     real upstream. Returns the source id."""
-    data = {"schema": 3, "checksum": "sha256:" + "0" * 64,
-            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION}],
+    data = {"schema": 4, "checksum": "sha256:" + "0" * 64,
+            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}],
             "formats": [{"format": "text", "paths": ["**"]}], "decision": DECISION, **data}
     if compute_checksum:
         data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], store))

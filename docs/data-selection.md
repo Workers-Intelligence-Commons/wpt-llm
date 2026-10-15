@@ -83,12 +83,12 @@ license rules.
 ## Languages and translation
 
 As many languages as possible, plus translation as a capability. Clean
-parallel text is scarce: Europarl and EU texts (CC BY 4.0) and Tatoeba
-(CC BY 2.0 FR) stay refused until a lawyer confirms them. Parallel text comes
-from:
+parallel text is scarce. It comes from:
 
 - public-domain pairs: old works and their public-domain translations
   (Project Gutenberg, Wikisource), aligned by sentence;
+- Europarl and EU texts (CC BY 4.0) and Tatoeba (CC BY 2.0 FR), whose
+  licenses are on the allowed list (see [licenses.md](licenses.md));
 - translations contributed under the DCO.
 
 ## Models in training

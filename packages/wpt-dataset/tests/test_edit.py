@@ -16,7 +16,7 @@ def contents(store, tree):
 def own_texts(kit, repo, store):
     return kit.add_source(repo, store, "author", "texts", {
         "type": "empty", "address": "empty:author-texts", "revision": "2026-10-14", "checksum": EMPTY,
-        "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Test Author"}],
+        "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Test Author", "text": "CC0 1.0 Universal\n"}],
         "tags": [{"tags": ["fr"], "paths": ["**"]}]}, compute_checksum=False)
 
 

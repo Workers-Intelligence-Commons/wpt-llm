@@ -2,8 +2,8 @@
 
 This folder describes data; it never holds data itself.
 
-- `sources/<id>/`: one folder per upstream source (`source.json`, patches,
-  LicenseRef texts). See [docs/architecture.md](../docs/architecture.md).
+- `sources/<id>/`: one folder per upstream source (`source.json` and
+  patches). See [docs/architecture.md](../docs/architecture.md).
 - `recipes/mixtures/`: pools and their weights.
 - `recipes/tokenizers/`: tokenizer recipes and the lock files builds write.
 - `recipes/datasets/`: dataset recipes, built by `wpt-dataset build <name>`.

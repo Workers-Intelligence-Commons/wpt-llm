@@ -73,12 +73,17 @@ maintainer, admission). The parts an agent gets wrong:
 
 - The license must be on the allowed list in
   `packages/wpt-dataset/src/wpt_dataset/licenses.py` and
-  `docs/licenses.md`. When in doubt, refuse; grey-zone licenses (CC BY,
-  CC BY-SA, ODbL) are refused until a lawyer confirms them.
+  `docs/licenses.md`, whose "What to check" column names each license's
+  trap. When in doubt, refuse; grey-zone licenses (CC BY-SA, ODbL) are
+  refused until a lawyer confirms them. A dual-licensed file is an
+  expression (`A OR B`, `A WITH exception`) that passes when one
+  alternative is allowed.
 - Every path matches exactly one `licenses` entry, and each entry needs an
   `attribution`: the credit that license asks for, copied from the source
-  (authors, title, copyright line, link). Never invent it. Every model
-  trained on the source repeats it in its `NOTICE`.
+  (authors, title, copyright line, link), and a `text`: the license as the
+  source gives it, read by a script from the source's own files (for public
+  domain, the proof). Never invent either. Every model trained on the
+  source repeats both in its `NOTICE`.
 - Every path also matches exactly one `formats` entry: how it becomes
   Markdown (`markdown`, `text`, `code` with its `language`, `xhtml`).
   Training reads only Markdown; a new kind of file needs its format in

@@ -25,8 +25,9 @@ You take responsibility for those three checks.
 ## Adding a source
 
 1. Check the license against [docs/licenses.md](docs/licenses.md). It must be
-   on the allowed list, clearly. Grey-zone licenses (CC BY, CC BY-SA, ODbL)
-   are refused until a lawyer confirms them. Public domain must hold in the
+   on the allowed list, clearly; its "What to check" column says where each
+   kind of license hides a trap. Grey-zone licenses (CC BY-SA, ODbL) are
+   refused until a lawyer confirms them. Public domain must hold in the
    United States and in the work's country of origin.
 2. Choose the id: `uv run wpt-dataset source-id <origin> [<item>] <address>`.
 3. Create `data/sources/<id>/source.json` (see
@@ -38,8 +39,11 @@ You take responsibility for those three checks.
    `extract`, map every path to exactly one license in `licenses`, and to
    exactly one format in `formats` (how it becomes Markdown, below). In
    each license entry, write in `attribution` the credit that license asks
-   for, as the source gives it: authors, title, copyright line, link. Every
-   model trained on the source repeats it in its notice.
+   for, as the source gives it: authors, title, copyright line, link, and
+   in `text` the license as the source gives it (its license file with its
+   copyright line, then an Apache `NOTICE` file's content; for public
+   domain, why). Every model trained on the source repeats both in its
+   notice.
 5. `uv run wpt-dataset check --fetch <id>` must pass (it also converts every
    file to Markdown), and `uv run wpt-dataset markdown-check <id>` (every
    note complete, no leftover markup), then `uv run scripts/check.py`.

@@ -54,7 +54,8 @@ reproduces keeps its own license.
   compliance. Attribution obligations arise when a piece of a source is
   actually reproduced, and fall on whoever republishes it.
 - Some licenses accept attribution through a link to a page holding the
-  information (CC BY 4.0 seems to, to check); others may not. The notice
+  information (CC BY 4.0 does: its section 3(a)(2) accepts "a URI or
+  hyperlink to a resource"); others may not. The notice
   never says that the mention makes anyone compliant.
 
 ## Clause 3: transparency (statement of fact)

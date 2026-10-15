@@ -65,12 +65,20 @@ def notice(provenance) -> str:
         "Sources this model learned from", "",
         "Each source with its exact revision, and for each license the paths it",
         "covers and the credit it asks for, as recorded when the dataset was built.",
+        "Their license texts follow the list, each text once.",
     ]
+    texts = {}  # text -> the sources and licenses that give it
     for sid, source in sorted(provenance["sources"].items()):
         lines += ["", sid, f"  address:  {source['address']}", f"  revision: {source['revision']}"]
         for entry in source["licenses"]:
             lines += [f"  {entry['license']} for {', '.join(entry['paths'])}:",
                       *(f"    {line}" for line in entry["attribution"].splitlines())]
+            if entry.get("text"):  # datasets built before shape 4 recorded no texts
+                texts.setdefault(entry["text"], []).append(f"{sid} ({entry['license']})")
+    if texts:
+        lines += ["", "", "License texts"]
+        for text, users in texts.items():
+            lines += ["", f"--- {', '.join(users)}", "", text.rstrip("\n")]
     return "\n".join(lines) + "\n\n\n" + output_notice()
 
 

@@ -20,6 +20,7 @@ from wpt_train import main as train
 GIT_ENV = {**os.environ, "GIT_AUTHOR_NAME": "T", "GIT_AUTHOR_EMAIL": "t@example.org", "GIT_COMMITTER_NAME": "T",
            "GIT_COMMITTER_EMAIL": "t@example.org", "GIT_CONFIG_GLOBAL": os.devnull}
 ATTRIBUTION = "Fox Stories, copyright (c) 2026 Ada Writer, https://example.org/fox"
+LICENSE_TEXT = "Copyright (c) 2026 Ada Writer\n\nPermission is hereby granted, free of charge, to any person.\n"
 
 
 @pytest.fixture
@@ -39,8 +40,8 @@ def built(tmp_path, monkeypatch):
     root = tmp_path / "wpt"
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
-    data = {"schema": 3, "type": "git", "address": str(upstream), "revision": commit,
-            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION}],
+    data = {"schema": 4, "type": "git", "address": str(upstream), "revision": commit,
+            "licenses": [{"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}],
             "formats": [{"format": "text", "paths": ["**"]}],
             "tags": [{"tags": ["en"], "paths": ["**"]}],
             "decision": {"decision": "admitted", "by": "T", "date": "2026-10-14", "reason": "test"}}
@@ -56,7 +57,8 @@ def built(tmp_path, monkeypatch):
     dataset_id = build_dataset(repo, "d", store, log=lambda _: None)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
     monkeypatch.chdir(tmp_path)
-    return SimpleNamespace(store=store, dataset_id=dataset_id, source_id=source_id, attribution=ATTRIBUTION)
+    return SimpleNamespace(store=store, dataset_id=dataset_id, source_id=source_id, attribution=ATTRIBUTION,
+                           license_text=LICENSE_TEXT)
 
 
 @pytest.fixture

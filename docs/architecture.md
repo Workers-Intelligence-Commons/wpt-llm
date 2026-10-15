@@ -21,9 +21,8 @@ fetched on demand, then checked against its fingerprint, the same way
 
 ## Sources
 
-One folder per source: `data/sources/<id>/` holds `source.json`, its patches
-`0001-<name>.patch`, `0002-<name>.patch`... applied in that order, and the
-text of any `LicenseRef-<name>` license as `LicenseRef-<name>.txt`.
+One folder per source: `data/sources/<id>/` holds `source.json` and its
+patches `0001-<name>.patch`, `0002-<name>.patch`... applied in that order.
 
 ### The id
 
@@ -45,14 +44,15 @@ recipe then needs the old commit of this repository.
 
 ```json
 {
-  "schema": 3,
+  "schema": 4,
   "type": "http-archive",
   "address": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip",
   "revision": "2026-03-01",
   "checksum": "sha256:...",
   "extract": { "strip": 1, "exclude": ["**/*.jpg"], "note": "" },
   "licenses": [ { "license": "LicenseRef-public-domain", "paths": ["**"],
-                  "attribution": "Jane Austen, Pride and Prejudice, Project Gutenberg, https://www.gutenberg.org/ebooks/1342", "note": "" } ],
+                  "attribution": "Jane Austen, Pride and Prejudice, Project Gutenberg, https://www.gutenberg.org/ebooks/1342",
+                  "text": "Public domain. Jane Austen died in 1817; ...", "note": "" } ],
   "formats": [ { "format": "xhtml", "paths": ["**/*.xhtml"], "note": "" } ],
   "tags": [ { "tags": ["en", "literature"], "paths": ["**"], "note": "" } ],
   "mirrors": [ { "address": "https://...", "note": "" } ],
@@ -76,12 +76,16 @@ recipe then needs the old commit of this repository.
 - `extract`: `strip` removes leading path components (entries left with no
   path are dropped), `exclude` leaves paths out, and `name` gives an
   `http-file` its path.
-- `licenses`: SPDX identifiers mapped to paths by glob patterns. Every path
-  must match exactly one entry, or the check fails; a new upstream file that
-  matches no entry blocks the update until someone assigns it. Each entry's
-  `attribution` (required) is the credit that license asks for, written by
-  a person: authors, title, copyright line, link. Every model trained on
-  the source repeats it in its `NOTICE`.
+- `licenses`: SPDX identifiers (or `LicenseRef-<name>`, or alternatives
+  joined by `OR`, each optionally `WITH` an exception) mapped to paths by
+  glob patterns. Every path must match exactly one entry, or the check
+  fails; a new upstream file that matches no entry blocks the update until
+  someone assigns it. Each entry's `attribution` (required) is the credit
+  that license asks for, written by a person: authors, title, copyright
+  line, link. Its `text` (required) is the license as the source gives it,
+  with its copyright line and, for Apache-2.0, the source's `NOTICE`
+  content; for `LicenseRef-public-domain`, why the work is in the public
+  domain. Every model trained on the source repeats both in its `NOTICE`.
 - `formats`: how each file becomes Markdown, mapped to paths like
   `licenses`: every path matches exactly one entry. Training reads only
   Markdown (see "Documents are Markdown" below).
@@ -216,7 +220,7 @@ branch, as a push would:
   process.
 - `wpt-dataset check`: every file matches its schema and current shape,
   source ids match their address, licenses are on the allowed list (with
-  their text for a LicenseRef), patches are numbered without gaps, mixture
+  their text), patches are numbered without gaps, mixture
   weights add up to 1 and pool expressions parse, recipes name existing
   recipes.
 - `wpt-dataset check --changed <base>`: changed sources are fetched; their
@@ -235,4 +239,6 @@ the change comes with a migration step in
 rewrites every file that is behind. Nobody edits the files by hand for it,
 except where a new field holds something only a person can write: shape 2 of
 `source.json` adds `attribution`, which the migration leaves empty, and the
-check then names each file to fill in.
+check then names each file to fill in. Shape 4 adds each license's `text`:
+the migration moves a `LicenseRef-<name>.txt` file into it and leaves any
+other text empty for a person to fill.

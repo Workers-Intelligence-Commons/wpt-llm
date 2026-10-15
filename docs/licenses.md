@@ -222,38 +222,128 @@ check first, above all for the NVIDIA, Intel and AMD runtimes.
 
 **When in doubt, refuse.** A doubtful content is left out rather than used.
 
-The allowed list (SPDX identifiers), in
-`packages/wpt-dataset/src/wpt_dataset/licenses.py`:
+The allowed list below is closed: `packages/wpt-dataset/src/wpt_dataset/licenses.py`
+holds it, and these are the licenses we recommend to contributors. Each one
+lets its content end up inside AGPL-3.0-or-later weights: it is permissive,
+its own text lets the content move to the GPLv3 or the AGPL (AGPL section 13
+accepts GPLv3 works, each part keeping its license), or it asks only for
+credit. The "What to check" column says where licenses of that kind hide a
+trap; a person still reads the license of every path.
 
-- CC0-1.0, Unlicense, MIT, BSD-2-Clause, BSD-3-Clause, ISC, Apache-2.0
-- GPL-3.0-or-later, LGPL-3.0-or-later, AGPL-3.0-or-later
-- `LicenseRef-public-domain`: public domain, with a text next to source.json
-  stating why
+The evidence was gathered on 2026-10-15 from the FSF license list
+(<https://www.gnu.org/licenses/license-list.html>), the license texts, the
+Open Definition list (<https://opendefinition.org/licenses/>), the Blue Oak
+Council list (<https://blueoakcouncil.org/list>), Creative Commons' pages on
+compatibility and on AI training, and the publishers named below. Two
+choices rest on the maintainer's decision alone, without an outside ruling:
+CC BY before 4.0 and CDLA-Sharing-1.0.
 
-Refused by default, the grey zone: CC-BY-4.0, CC-BY-SA-4.0, ODbL-1.0. They
-stay refused until a lawyer confirms them; a compatibility statement from
-Creative Commons or the FSF is not enough on its own. Facts gathered for that
-review:
+### Public domain and permissive
+
+| License (SPDX) | Why it is allowed | What to check |
+| --- | --- | --- |
+| `LicenseRef-public-domain` | no rights left | public domain both in the United States and in the country of origin, for every person whose words are in the text (author, translator, editor of notes); the entry's `text` gives the proof and its sources |
+| `CC0-1.0`, `Unlicense` | public-domain dedications; FSF: compatible | a dedication by the right person: a site cannot dedicate what it does not own |
+| `MIT`, `MIT-0`, `0BSD`, `BSD-1-Clause`, `BSD-2-Clause`, `BSD-2-Clause-Patent`, `BSD-3-Clause`, `ISC`, `X11`, `NCSA`, `PostgreSQL`, `UPL-1.0`, `HPND`, `W3C`, `curl` | FSF: GPL-compatible (BSD-2-Clause-Patent: Blue Oak Gold) | the copyright line of the source's own license file goes into `text` with the license |
+| `Apache-2.0` | FSF: compatible with GPLv3 (not v2) | the source's `NOTICE` file, if any: its content follows the license in `text` |
+| `Zlib`, `BSL-1.0`, `WTFPL` | FSF: compatible | Zlib: changed versions must be marked as changed |
+| `Python-2.0`, `PSF-2.0` | FSF: compatible from Python 2.0.1 and 2.1.1 | Python 1.6b1 to 2.1 licenses are not compatible |
+| `Unicode-3.0`, `Unicode-DFS-2016` | FSF: compatible with every GPL version | |
+| `Artistic-2.0` | FSF: compatible through its section 4(c)(ii) | Artistic-1.0 (old Perl) is refused; Perl's "Artistic or GPL" is written as an expression (below) |
+| `BlueOak-1.0.0` | Blue Oak Council's model permissive license | no FSF ruling; its text sets no condition the AGPL forbids |
+
+### Data
+
+| License (SPDX) | Why it is allowed | What to check |
+| --- | --- | --- |
+| `PDDL-1.0` | public-domain dedication for databases; Open Definition: recommended | |
+| `CDLA-Permissive-2.0` | section 3.1: no restriction on Results, which section 5.4 says include machine learning models | sharing the data itself needs the license text, which WPT never does (it holds pointers) |
+| `CDLA-Sharing-1.0` | section 3.5: no obligation on Results (maintainer's decision) | Results may hold no more than a de minimis part of the data (section 1.11): measure memorization (`wpt-eval FOLDER memorization`) before publishing weights trained on it |
+
+### GPLv3 family
+
+| License (SPDX) | Why it is allowed | What to check |
+| --- | --- | --- |
+| `GPL-3.0-only`, `GPL-3.0-or-later`, `LGPL-3.0-only`, `LGPL-3.0-or-later` | AGPL section 13 lets an AGPL work combine with GPLv3 works | a "-only" part can never move to a later AGPL version |
+| `AGPL-3.0-only`, `AGPL-3.0-or-later` | the weights' own license | |
+
+### Copyleft that moves to the GPLv3 or the AGPL
+
+| License (SPDX) | Why it is allowed | What to check |
+| --- | --- | --- |
+| `GPL-2.0-or-later` | "or later" lets the recipient choose the GPLv3 | the notice in each file: GPL-2.0-only (the Linux kernel) is refused, and a repository's `COPYING` file alone does not say "or later" |
+| `LGPL-2.1-only`, `LGPL-2.1-or-later` | LGPL 2.1 section 3: the ordinary GPL may apply instead, "if a newer version than version 2 ... has appeared, then you can specify that version" | |
+| `MPL-2.0` | section 1.12 names "the GNU Affero General Public License, Version 3.0, or any later versions" a Secondary License, and section 3.3 allows distribution under it | files marked "Incompatible With Secondary Licenses" (Exhibit B, SPDX `MPL-2.0-no-copyleft-exception`) are refused |
+| `EUPL-1.2` | its appendix lists the AGPL; the European Commission: "you may distribute under the AGPL a larger derivative work integrating components covered by the EUPL" | EUPL-1.1 is refused (FSF: incompatible) |
+| `CECILL-2.1` | FSF: "explicitly compatible with the GNU GPL" | CeCILL-B and CeCILL-C are refused |
+| `EPL-2.0 OR GPL-2.0-or-later`, with or without `WITH Classpath-exception-2.0` | the GPL "secondary license" the file designates | EPL-2.0 alone is refused (FSF: incompatible without that designation) |
+
+### Credit only: Creative Commons and the public sector
+
+| License (SPDX) | Why it is allowed | What to check |
+| --- | --- | --- |
+| `CC-BY-4.0` | FSF: "compatible with all versions of the GNU GPL"; credit may be given "in any reasonable manner", including a link (section 3(a)(2)); Creative Commons: for training, credit "could be a simple link to the source of the dataset" | NC and ND variants are refused; the credit names the creator, the copyright notice, the license, a link and whether the work was changed |
+| `CC-BY-1.0`, `CC-BY-2.0`, `CC-BY-2.5`, `CC-BY-2.5-AU`, `CC-BY-3.0`, `CC-BY-3.0-AT`, `CC-BY-3.0-AU`, `CC-BY-3.0-DE`, `CC-BY-3.0-IGO`, `CC-BY-3.0-NL`, `CC-BY-3.0-US`, `LicenseRef-CC-BY-2.0-FR` | Open Definition: open; no FSF ruling (maintainer's decision) | these versions ask to keep the license's address with every copy, which `text` carries; another country version is added to the list by name when a source needs it |
+| `ODC-By-1.0` | Open Definition: recommended | it covers a database, not the documents in it: each document needs its own license |
+| `OGL-UK-3.0` | the licence states it is "compatible with the Creative Commons Attribution License 4.0 and the Open Data Commons Attribution License" | it excludes personal data, third-party rights and logos; default credit: "Contains public sector information licensed under the Open Government Licence v3.0." |
+| `OGL-Canada-2.0` | Open Definition: conformant | |
+| `etalab-2.0` | Licence Ouverte 2.0, built to be compatible with CC BY (2.0 and later), the OGL and ODC-BY | credit: the source (at least the licensor's name) and the date of its last update |
+| `DL-DE-BY-2.0`, `DL-DE-ZERO-2.0` | Open Definition: conformant; allows change, merging and any purpose | BY: the provider's name, "dl-de/by-2-0" with its link, the dataset's link; changes are marked as such |
+| `NLOD-2.0` | its section 9 states compatibility with the OGL | |
+| `LicenseRef-IODL-2.0` | Italian Open Data License 2.0, a variant of the UK OGL | not in SPDX: its text comes from the publisher |
+| `LicenseRef-PDL-1.0` | Japan's Public Data License 1.0; the Japanese government states it is compatible with CC BY 4.0 | each dataset may add limits in an "Important note" section, often only in Japanese: read it |
+
+### Several licenses on one file
+
+A license entry may be an SPDX expression of alternatives, such as
+`EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0`. It passes when
+one alternative is allowed, and WPT uses the content under that
+alternative. `WITH` names an exception from a second closed list,
+`EXCEPTIONS` in `licenses.py`, which holds only exceptions that add
+permissions: `Classpath-exception-2.0` (Java), `LLVM-exception` (LLVM,
+after Apache-2.0) and `GCC-exception-3.1` (GCC's runtime libraries, after
+GPL-3.0-or-later). `AND` (two licenses at once) is not accepted.
+
+### License texts
+
+Every license entry carries `text`: the license as the source gives it, with
+its copyright line, followed for Apache-2.0 by the source's own `NOTICE`
+content; for `LicenseRef-public-domain`, the proof. MIT and BSD ask that
+their notice go with copies, and Apache asks for its license and the
+`NOTICE` content, so every model's `NOTICE` ends its list of sources with
+each distinct text once.
+
+### Still refused
+
+The grey zone stays refused until a lawyer confirms it: CC-BY-SA-4.0 and
+other ShareAlike licenses, and ODbL-1.0. Facts gathered for that review:
 
 - Creative Commons declared GPLv3 a BY-SA-compatible license for BY-SA 4.0 on
   2015-10-08, one way only
-  (<https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/>).
-- The FSF reportedly lists CC BY 4.0 as compatible with all GPL versions, and
-  CC BY-SA 4.0 with GPLv3 only (secondary source, to confirm on gnu.org).
+  (<https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/>);
+  the AGPL is not on that list.
+- Creative Commons' guidance on training: "If AI models or outputs are based
+  on ShareAlike content and they will be shared publicly, following the
+  ShareAlike condition would require AI developers to use the same CC
+  license as the original works"
+  (<https://creativecommons.org/using-cc-licensed-works-for-ai-training-2/>),
+  which contradicts AGPL weights.
+- The FSF calls ODbL "incompatible with the GNU GPL".
 - Wikipedia text is CC BY-SA 4.0 under the current Wikimedia Terms of Use.
 - Common Pile v0.1 includes CC BY-SA content; WPT's rule is stricter.
 
 Refused: any NC (no commercial use) or ND (no derivatives) clause,
-GPL-2.0-only, CC-BY-SA-3.0, anything without a license or with all rights
-reserved.
-
-Permissive does not mean without obligations: MIT, BSD and Apache require
-keeping attribution, so the copyright notices of a source stay in its tree.
+GPL-2.0-only, CC-BY-SA-3.0, GFDL (FSF: not GPL-compatible), the Free Art
+License, CDDL-1.0, EPL-1.0, EPL-2.0 alone, EUPL-1.1,
+MPL-2.0-no-copyleft-exception, CeCILL-B, CeCILL-C, Artistic-1.0,
+BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
+(RAIL, Llama), and anything without a license or with all rights reserved.
 
 ## Rules
 
 - A source can hold several licenses, each mapped to its paths; every path
-  matches exactly one.
+  matches exactly one. Each entry carries its credit (`attribution`) and its
+  text (`text`).
 - Checking is per file, not per repository: a license can be applied by
   mistake, and public domain depends on the country.
 - **Public domain** means public domain both in the United States and in the

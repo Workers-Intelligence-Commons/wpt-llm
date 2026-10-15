@@ -47,6 +47,7 @@ def test_a_trained_model_folder_names_its_licenses_and_sources(built, tmp_path):
     notice = (folder / "NOTICE").read_text()
     assert "Weights: AGPL-3.0-or-later" in notice and "Generated text: CC0-1.0" in notice
     assert f"{sid}\n" in notice and f"  MIT for **:\n    {built.attribution}\n" in notice
+    assert f"License texts\n\n--- {sid} (MIT)\n\n{built.license_text}" in notice  # what MIT asks to travel
     assert notice.endswith((ROOT / "OUTPUT-NOTICE").read_text())
     assert (folder / "LICENSE").read_text() == (ROOT / "LICENSE").read_text()
     card = (folder / "README.md").read_text()
