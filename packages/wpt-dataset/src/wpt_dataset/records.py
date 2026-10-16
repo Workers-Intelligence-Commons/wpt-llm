@@ -8,8 +8,11 @@ their metadata.
 
 A record enters only when its license value is one of the `values` of a
 license entry covering its file (see sources.check_license_map); any other
-record is left out and counted. A record whose text is missing or empty
-gives no document.
+record is left out and counted. An optional `keep` list narrows this
+further: each rule names a field and the values it may hold (`in`), and a
+record enters only when every rule holds, for example to keep the records
+of the one publisher a license covers. A record whose text is missing or
+empty gives no document.
 
 The file kind comes from its name: `.jsonl`, `.json` or `.ndjson` (JSON
 Lines: one object per line), each optionally compressed as `.gz` or `.zst`,
@@ -22,7 +25,7 @@ import io
 import json
 from collections.abc import Iterator
 from compression import zstd
-from dataclasses import dataclass
+from dataclasses import dataclass, field as dataclass_field
 from pathlib import Path
 
 import pyarrow.parquet as pq
@@ -47,6 +50,7 @@ class Skipped:
     """Records left out of one file, by reason."""
     unlisted: dict  # license value -> count
     empty: int = 0
+    outside: dict = dataclass_field(default_factory=dict)  # (field, value) a `keep` rule refused -> count
 
 
 def rows(file: Path, name: str) -> Iterator[dict]:
@@ -88,13 +92,23 @@ def field(row: dict, name: str):
     return value
 
 
+def _text(value) -> str:
+    """A field's value as listed in a source.json: strings as they are, any
+    other value as JSON."""
+    return value if isinstance(value, str) else json.dumps(value, ensure_ascii=False)
+
+
 def records(file: Path, name: str, entry: dict, licenses: dict[str, str], skipped: Skipped) -> Iterator[Record]:
     """The records of one file that enter: licenses maps each listed license
     value to its entry's SPDX expression. Ids repeat at no point in a file."""
     seen = set()
     for position, row in enumerate(rows(file, name), start=1):
-        value = field(row, entry["license"])
-        value = value if isinstance(value, str) else json.dumps(value, ensure_ascii=False)
+        refused = next(((rule["field"], value) for rule in entry.get("keep", [])
+                        for value in [_text(field(row, rule["field"]))] if value not in rule["in"]), None)
+        if refused:
+            skipped.outside[refused] = skipped.outside.get(refused, 0) + 1
+            continue
+        value = _text(field(row, entry["license"]))
         if value not in licenses:
             skipped.unlisted[value] = skipped.unlisted.get(value, 0) + 1
             continue

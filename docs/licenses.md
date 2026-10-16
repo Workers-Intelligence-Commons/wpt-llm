@@ -396,6 +396,11 @@ BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
   into `CREDITS/<source id>.jsonl` in every model folder trained on it,
   which `NOTICE` names. The values are the dataset's own labels: its
   publisher checked each document, not WPT, and a label can be wrong.
+  When a label is known to be wrong for part of the file, the format
+  entry's `keep` rules leave that part out by another field: each names a
+  field and the values it may hold, and a record enters only when every
+  rule holds (for example the records of the one parliament a licence
+  covers).
 - **A git history** (`history` in a git source) starts at the commit from
   which the repository's root license file holds the license the source
   lists: earlier commits were published without a license or under

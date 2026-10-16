@@ -17,7 +17,7 @@ def parquet_bytes(rows):
     return buffer.getvalue()
 
 
-def records_source(kit, repo, store, http_folder, licenses):
+def records_source(kit, repo, store, http_folder, licenses, keep=None):
     folder, base = http_folder
     lines = [{"id": "a", "text": "first words", "metadata": {"license": "CC-BY", "url": "https://example.org/a"}},
              {"id": "b", "text": "second words", "metadata": {"license": "Various open data", "url": "https://example.org/b"}},
@@ -29,7 +29,7 @@ def records_source(kit, repo, store, http_folder, licenses):
                  {"id": "e", "text": "", "metadata": {"license": "CC0", "url": "https://example.org/e"}}])}
     (folder / "dataset.tar.gz").write_bytes(kit.tar_bytes(top="dataset", files=files, executable=set(), symlinks={}))
     record = {"format": "records", "paths": ["data/**"], "text": "text", "id": "id", "license": "metadata.license",
-              "credit": ["metadata.url"]}
+              "credit": ["metadata.url"]} | ({"keep": keep} if keep else {})
     return kit.add_source(repo, store, "example", "records", {
         "type": "http-archive", "address": f"{base}/dataset.tar.gz", "revision": "2026-10-15",
         "extract": {"strip": 1}, "formats": [record], "licenses": licenses})
@@ -53,6 +53,19 @@ def test_only_records_whose_license_value_is_listed_become_documents_with_their_
         {"document": f"{sid}/data/part-0.jsonl.gz#a", "license": "CC-BY-4.0", "credit": {"metadata.url": "https://example.org/a"}},
         {"document": f"{sid}/data/part-0.jsonl.gz#c", "license": "CC0-1.0", "credit": {"metadata.url": "https://example.org/c"}},
         {"document": f"{sid}/data/part-1.parquet#d", "license": "CC0-1.0", "credit": {"metadata.url": "https://example.org/d"}}]
+
+
+def test_keep_rules_leave_out_records_whose_field_holds_another_value(kit, repo, store, http_folder):
+    # a dataset can label a whole file with one license although part of it
+    # comes from a publisher that license does not cover; another field of
+    # the record then names the part to keep
+    sid = records_source(kit, repo, store, http_folder, [
+        {"license": "CC0-1.0", "paths": ["data/**"], "values": ["CC0"], "attribution": kit.ATTRIBUTION, "text": "CC0 1.0"}],
+        keep=[{"field": "metadata.url", "in": ["https://example.org/d", "https://example.org/e"]}])
+
+    documents, _, _ = gather(repo, store, log=lambda _: None)
+
+    assert [d.id for d in documents] == [f"{sid}/data/part-1.parquet#d"]
 
 
 def test_a_records_file_needs_license_entries_that_list_their_values(kit, repo, store, http_folder):

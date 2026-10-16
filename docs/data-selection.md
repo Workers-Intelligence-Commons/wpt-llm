@@ -7,8 +7,9 @@ document, identified as `<source id>/<path>`. Symlinks are not documents.
 
 A file in the `records` format (a dataset holding many documents, such as a
 JSON Lines or Parquet file) is not one document: each of its records whose
-license enters is one, identified as `<source id>/<path>#<record id>`, and
-tagged with its file's tags.
+license enters, and that the format entry's `keep` rules keep, is one,
+identified as `<source id>/<path>#<record id>`, and tagged with its file's
+tags.
 
 A git source with `history` adds one document per commit,
 `<source id>/.git/history/<commit>`: the commit as `git format-patch`

@@ -95,11 +95,15 @@ def cmd_check(args, repo):
 
 def _print_skipped(skipped):
     """The records each records file left out, by license value."""
-    unlisted, empty = {}, 0
+    unlisted, empty, outside = {}, 0, {}
     for report in skipped.values():
         empty += report.empty
         for value, count in report.unlisted.items():
             unlisted[value] = unlisted.get(value, 0) + count
+        for key, count in report.outside.items():
+            outside[key] = outside.get(key, 0) + count
+    for (name, value), count in sorted(outside.items(), key=lambda item: -item[1]):
+        print(f"  left out: {count} records whose {name} is {value!r} (not kept by `keep`)")
     for value, count in sorted(unlisted.items(), key=lambda item: -item[1]):
         print(f"  left out: {count} records with license value {value!r} (listed by no license entry)")
     if empty:
