@@ -327,6 +327,7 @@ CC BY before 4.0 and CDLA-Sharing-1.0.
 | `NLOD-2.0` | its section 9 states compatibility with the OGL | |
 | `LicenseRef-IODL-2.0` | Italian Open Data License 2.0, a variant of the UK OGL | not in SPDX: its text comes from the publisher |
 | `LicenseRef-PDL-1.0` | Japan's Public Data License 1.0; the Japanese government states it is compatible with CC BY 4.0 | each dataset may add limits in an "Important note" section, often only in Japanese: read it |
+| `LicenseRef-OPL-UK-3.0` | the UK Open Parliament Licence v3.0, modelled on `OGL-UK-3.0` with the same terms: free use with attribution (maintainer's decision, 2026-10-16) | it excludes third-party material, personal data and the Parliament's logos; not in SPDX: its text comes from the publisher; credit: "Contains Parliamentary information licensed under the Open Parliament Licence v3.0." |
 
 ### Several licenses on one file
 
@@ -337,7 +338,12 @@ alternative. `WITH` names an exception from a second closed list,
 `EXCEPTIONS` in `licenses.py`, which holds only exceptions that add
 permissions: `Classpath-exception-2.0` (Java), `LLVM-exception` (LLVM,
 after Apache-2.0) and `GCC-exception-3.1` (GCC's runtime libraries, after
-GPL-3.0-or-later). `AND` (two licenses at once) is not accepted.
+GPL-3.0-or-later). `AND` joins licenses that apply at once, such as
+`MIT AND Apache-2.0` for a repository with both license files and no
+statement that one may choose: the alternative passes when every license
+in it is allowed, and its `text` holds every one of their texts
+(maintainer's decision, 2026-10-16). `AND` binds before `OR`, as in SPDX;
+parentheses are not accepted.
 
 ### License texts
 

@@ -38,7 +38,7 @@
         "additionalProperties": false,
         "required": ["license", "paths", "attribution", "text"],
         "properties": {
-          "license": {"type": "string", "pattern": "^[A-Za-z0-9.+-]+( WITH [A-Za-z0-9.+-]+)?( OR [A-Za-z0-9.+-]+( WITH [A-Za-z0-9.+-]+)?)*$", "description": "SPDX identifier or LicenseRef-<name>, or alternatives joined by OR, each optionally WITH an exception"},
+          "license": {"type": "string", "pattern": "^[A-Za-z0-9.+-]+( WITH [A-Za-z0-9.+-]+)?( (OR|AND) [A-Za-z0-9.+-]+( WITH [A-Za-z0-9.+-]+)?)*$", "description": "SPDX identifier or LicenseRef-<name>, or an expression: alternatives joined by OR, licenses that apply together joined by AND, each optionally WITH an exception"},
           "paths": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/glob"}},
           "attribution": {"type": "string", "minLength": 1, "description": "the credit this license asks for, written by a person: authors, title, copyright line, link"},
           "values": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}, "description": "records files only: the values of a record's license field that this entry covers, exactly as the records hold them; a record whose value no entry lists is left out"},

@@ -90,21 +90,26 @@ def test_migrating_a_shape_1_source_asks_a_person_for_attribution_text_and_forma
 
 
 def test_a_license_expression_passes_when_one_alternative_is_allowed(kit, repo, store, git_upstream):
-    # WPT uses dual-licensed content under the alternative it allows; an
-    # exception after WITH must be on its own closed list
+    # WPT uses dual-licensed content under the alternative it allows; licenses
+    # joined by AND all apply, so each must be allowed; an exception after WITH
+    # must be on its own closed list
     def add(item, expression, suffix):
         return kit.add_source(repo, store, "example", item, {
             "type": "git", "address": git_upstream[0] + suffix, "revision": git_upstream[1],
             "licenses": [{"license": expression, "paths": ["**"], "attribution": kit.ATTRIBUTION, "text": kit.LICENSE_TEXT}]})
 
     add("eclipse", "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0", "")
+    add("both", "MIT AND Apache-2.0", "//")
+    add("either", "CC-BY-SA-4.0 AND MIT OR CC0-1.0", "///")  # AND binds first: CC0-1.0 alone is allowed
     assert repo.check() == []
     neither = add("neither", "EPL-2.0 OR CC-BY-SA-4.0", "/.")
     unknown = add("unknown", "GPL-2.0-or-later WITH Some-exception", "/./")
+    half = add("half", "MIT AND CC-BY-SA-4.0", "/.//")
     problems = repo.check()
     assert f"{neither}: license expression EPL-2.0 OR CC-BY-SA-4.0 is not on the allowed list" in problems
     assert f"{unknown}: license expression GPL-2.0-or-later WITH Some-exception is not on the allowed list" in problems
-    assert len(problems) == 2
+    assert f"{half}: license expression MIT AND CC-BY-SA-4.0 is not on the allowed list" in problems
+    assert len(problems) == 3
 
 
 def test_migrating_to_shape_4_moves_a_licenseref_text_into_source_json(kit, repo, store, git_upstream):
