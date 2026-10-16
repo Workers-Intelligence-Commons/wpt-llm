@@ -14,8 +14,15 @@
 
 The dataset id is the fingerprint of every input, so building the same
 recipe on the same data again is a lookup.
+
+With stream=True the build keeps no source's files: each source is fetched
+into a throwaway store, turned into tokens (one store object per source,
+see source_tokens) and the throwaway store removed before the next one.
+The documents, the dataset id and the shards are the same as without it;
+only what the store keeps differs.
 """
 
+import concurrent.futures
 import hashlib
 import importlib.metadata
 import json
@@ -29,18 +36,20 @@ from pathlib import Path
 
 import numpy as np
 
+from wpt_store import CorruptObject, open_store
 from wpt_store.shards import write_shard
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_tokenizer import __version__ as TOKENIZER_VERSION
 
-from . import markdown, pools
+from . import manifest, markdown, pools
 from .errors import LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
 from .repo import Repo, dump_json, load_json
-from .sources import VERSION, fingerprint, source_tree, tags_of
+from .sources import VERSION, check_license_map, fingerprint, source_tree, tags_of, tree_key
 
 DEFAULT_MAX_EPOCHS = 4
 SHARD_TOKENS = 1 << 26  # about 64M tokens (256 MB of uint32) per shard
 NGRAM = 13  # contamination check: runs of 13 words, as in the GPT-3 paper
+STREAM_READERS = 16  # documents read at once from a streamed build's token objects
 
 
 @dataclass(frozen=True)
@@ -84,14 +93,144 @@ def gather(repo: Repo, store, log=print):
 
 def assign(documents, mixture) -> dict[str, list[Document]]:
     """Pool name -> its documents; each document goes to the first matching pool."""
-    trees = [(pool["name"], pools.parse(pool["select"])) for pool in mixture["pools"]]
+    trees = _pool_trees(mixture)
     assigned = {name: [] for name, _ in trees}
     for document in documents:
-        for name, tree in trees:
-            if pools.matches(tree, document.tags):
-                assigned[name].append(document)
-                break
+        name = _pool_of(document, trees)
+        if name is not None:
+            assigned[name].append(document)
     return assigned
+
+
+def _pool_trees(mixture):
+    return [(pool["name"], pools.parse(pool["select"])) for pool in mixture["pools"]]
+
+
+def _pool_of(document, trees) -> str | None:
+    return next((name for name, tree in trees if pools.matches(tree, document.tags)), None)
+
+
+# -- streaming --------------------------------------------------------------------
+
+def _fetched(source, folder: Path):
+    """(throwaway store, final tree, manifest object) of a source fetched
+    into a new store in folder; removing folder removes every file of it."""
+    scratch = open_store(folder.as_uri())
+    tree, tree_object = source_tree(source, scratch)
+    return scratch, tree, tree_object
+
+
+def streamed_documents(repo: Repo):
+    """(document, Markdown) of every admitted source, exact duplicates left
+    out as in gather, each source fetched into a throwaway store that is
+    removed before the next one."""
+    seen = set()
+    for source in repo.sources():
+        if not source.admitted:
+            continue
+        with tempfile.TemporaryDirectory(prefix="wpt-stream-") as tmp:
+            scratch, tree, _ = _fetched(source, Path(tmp) / "store")
+            for converted in markdown.documents(source, tree, scratch):
+                sha256 = hashlib.sha256(converted.markdown).hexdigest()
+                if sha256 in seen:
+                    continue
+                seen.add(sha256)
+                document = Document(f"{source.id}/{converted.path}", source.id, sha256, tags_of(source, converted.file))
+                yield document, converted.markdown
+
+
+def source_tokens(source, store, tokenizer, vocabulary: str) -> dict:
+    """A source as tokens, its files not kept: {"tree": its final manifest
+    object, "tokens": one object holding every document's tokens (each
+    ending with END) one after the other, "documents": [{path, file, sha256
+    of its Markdown, start (byte offset), tokens, token_sha256, record}]}.
+
+    Kept under a ref named after what decides it (the final tree, formats,
+    licenses, wpt-dataset version, vocabulary), so a source that did not
+    change is never fetched again."""
+    key = fingerprint({"kind": "source-tokens", "tree": tree_key(source), "formats": source.data["formats"],
+                       "licenses": [[e["license"], e["paths"], e.get("values")] for e in source.data["licenses"]],
+                       "wpt_dataset": VERSION, "vocabulary": vocabulary})
+    known = store.get_ref("source-tokens", key)
+    if known:
+        return json.loads(store.get_bytes(known))
+    with tempfile.TemporaryDirectory(prefix="wpt-stream-") as tmp:
+        tmp = Path(tmp)
+        scratch, tree, tree_object = _fetched(source, tmp / "store")
+        documents, offset = [], 0
+        with open(tmp / "tokens.u32", "wb") as out:
+            for converted in markdown.documents(source, tree, scratch):
+                data = np.asarray(tokenizer.encode(converted.markdown) + [Tokenizer.END], dtype="<u4").tobytes()
+                out.write(data)
+                entry = {"path": converted.path, "file": converted.file,
+                         "sha256": hashlib.sha256(converted.markdown).hexdigest(),
+                         "start": offset, "tokens": len(data) // 4, "token_sha256": hashlib.sha256(data).hexdigest()}
+                if converted.record:
+                    entry["record"] = {"license": converted.record.license, "credit": converted.record.credit}
+                documents.append(entry)
+                offset += len(data)
+        summary = {"tree": store.put_bytes(scratch.get_bytes(tree_object)), "tokens": store.put_file(tmp / "tokens.u32"),
+                   "documents": documents}
+    known = store.put_bytes(json.dumps(summary, ensure_ascii=False, sort_keys=True).encode())
+    store.set_ref("source-tokens", key, known)
+    return summary
+
+
+def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print):
+    """gather's (documents, sources info, duplicates), plus every document's
+    tokens (PackedDocuments), from source_tokens: no source's files stay in
+    the store."""
+    documents, info, seen, duplicates = [], {}, set(), 0
+    tokens = PackedDocuments(store)
+    for source in repo.sources():
+        if not source.admitted:
+            continue
+        summary = source_tokens(source, store, tokenizer, vocabulary)
+        check_license_map(source, manifest.parse_manifest(store.get_bytes(summary["tree"])))
+        info[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
+                           "checksum": source.data["checksum"], "tree": summary["tree"],
+                           "licenses": source.data["licenses"]}
+        credits = []
+        for entry in summary["documents"]:
+            if entry["sha256"] in seen:
+                duplicates += 1
+                continue
+            seen.add(entry["sha256"])
+            document_id = f"{source.id}/{entry['path']}"
+            documents.append(Document(document_id, source.id, entry["sha256"], tags_of(source, entry["file"])))
+            tokens.add(document_id, summary["tokens"], entry)
+            if "record" in entry:
+                credits.append(json.dumps({"document": document_id, **entry["record"]}, ensure_ascii=False, sort_keys=True))
+        if credits:
+            info[source.id]["credits"] = store.put_bytes("".join(f"{line}\n" for line in credits).encode())
+    log(f"documents: {len(documents):,} from {len(info)} admitted sources ({duplicates:,} exact duplicates removed)")
+    return documents, info, duplicates, tokens
+
+
+class PackedDocuments:
+    """Documents' tokens read from the token objects of source_tokens, a
+    part of the object each, checked against the document's own token
+    sha256; nothing is copied to disk."""
+
+    def __init__(self, store):
+        self.store, self._where = store, {}
+
+    def add(self, document_id, tokens_object, entry):
+        self._where[document_id] = (tokens_object, entry["start"], entry["tokens"], entry["token_sha256"])
+
+    def length(self, document_id) -> int:
+        return self._where[document_id][2]
+
+    def __getitem__(self, document_id) -> np.ndarray:
+        tokens_object, start, count, sha256 = self._where[document_id]
+        data = self.store.read_range(tokens_object, start, count * 4)
+        if hashlib.sha256(data).hexdigest() != sha256:
+            raise CorruptObject(f"tokens of {document_id} in {tokens_object} do not match their sha256")
+        return np.frombuffer(data, dtype="<u4")
+
+    def many(self, document_ids) -> dict[str, np.ndarray]:
+        with concurrent.futures.ThreadPoolExecutor(STREAM_READERS) as pool:
+            return dict(zip(document_ids, pool.map(self.__getitem__, document_ids)))
 
 
 def _rank(*parts) -> bytes:
@@ -104,7 +243,7 @@ def is_held_out(document_id: str, share: float) -> bool:
 
 # -- tokenizer ------------------------------------------------------------------
 
-def build_tokenizer(repo: Repo, name: str, store, log=print):
+def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False):
     """(tokenizer, vocabulary object sha256, fingerprint) of a tokenizer recipe.
 
     The lock file freezes one vocabulary per recipe version, so adding or
@@ -117,6 +256,11 @@ def build_tokenizer(repo: Repo, name: str, store, log=print):
     - otherwise the locked vocabulary, from the store, or rebuilt from the
       documents the lock lists (LockedDocumentsMissing when some are not in
       the store, LockMismatch when the result differs).
+
+    With stream, training reads each source from a throwaway store
+    (streamed_documents) instead of keeping the documents in the store; the
+    vocabulary is the same, since training counts words and its result
+    does not depend on the order of the documents.
     """
     recipe = repo.recipe("tokenizer", name)
     lock_path = repo.lock_path(name)
@@ -129,6 +273,22 @@ def build_tokenizer(repo: Repo, name: str, store, log=print):
             raise TokenizerVersionNeeded(f"tokenizer {name}: {changed} changed since version {recipe['version']} was "
                                          f"locked; raise `version` in {repo.recipe_path('tokenizer', name).name}")
         trained = lock["documents"]
+    elif stream:
+        trees = _pool_trees(repo.recipe("mixture", recipe["mixture"]))
+        trained = []
+
+        def selected_texts():
+            for document, text in streamed_documents(repo):
+                if _pool_of(document, trees) is not None:
+                    trained.append([document.id, document.sha256])
+                    yield text
+
+        log(f"training tokenizer {name} version {recipe['version']} on the documents its mixture selects, "
+            f"one source at a time (vocab_size {recipe['vocab_size']:,})")
+        streamed = Tokenizer.train(selected_texts(), recipe["vocab_size"])
+        if not trained:
+            raise PoolError(f"tokenizer {name}: mixture {recipe['mixture']} selects no documents")
+        trained.sort()
     else:
         mixture = repo.recipe("mixture", recipe["mixture"])
         documents, _, _ = gather(repo, store, log)
@@ -141,6 +301,31 @@ def build_tokenizer(repo: Repo, name: str, store, log=print):
     vocabulary = lock["vocabulary_sha256"] if locked else store.get_ref("vocabularies", key)
     if vocabulary is not None and store.has(vocabulary):
         tokenizer = Tokenizer.from_bytes(store.get_bytes(vocabulary))
+    elif stream:
+        if locked:
+            wanted, found = {tuple(d) for d in trained}, set()
+
+            def locked_texts():
+                for document, text in streamed_documents(repo):
+                    if (document.id, document.sha256) in wanted:
+                        found.add((document.id, document.sha256))
+                        yield text
+
+            log(f"training tokenizer {name} version {recipe['version']} again on the {len(trained):,} documents "
+                f"its lock lists, one source at a time")
+            streamed = Tokenizer.train(locked_texts(), recipe["vocab_size"])
+            missing = sorted(wanted - found)
+            if missing:
+                raise LockedDocumentsMissing(f"tokenizer {name} version {recipe['version']}: {len(missing):,} of the "
+                                             f"documents it was trained on are not in the admitted sources any "
+                                             f"more, such as {missing[0][0]}")
+        tokenizer = streamed
+        built = store.put_bytes(tokenizer.to_bytes())
+        if vocabulary is not None and built != vocabulary:
+            raise LockMismatch(f"tokenizer {name}: built vocabulary {built} differs from the locked {vocabulary} "
+                               "for the same documents (training is not repeatable here)")
+        vocabulary = built
+        store.set_ref("vocabularies", key, vocabulary)
     else:
         if locked:
             gather(repo, store, log)  # puts the current documents in the store
@@ -174,12 +359,17 @@ def _training_part(recipe) -> dict:
 
 # -- dataset ----------------------------------------------------------------------
 
-def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TOKENS) -> str:
-    """Build (or find) the dataset of a recipe and return its id."""
+def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TOKENS, stream=False) -> str:
+    """Build (or find) the dataset of a recipe and return its id; with
+    stream, keeping no source's files (see the module's docstring)."""
     recipe = repo.recipe("dataset", name)
     mixture = repo.recipe("mixture", recipe["mixture"])
-    tokenizer, vocabulary, tokenizer_key = build_tokenizer(repo, recipe["tokenizer"], store, log)
-    documents, sources_info, duplicates = gather(repo, store, log=lambda _: None)
+    tokenizer, vocabulary, tokenizer_key = build_tokenizer(repo, recipe["tokenizer"], store, log, stream=stream)
+    if stream:
+        documents, sources_info, duplicates, packed = gather_streamed(repo, store, tokenizer, vocabulary,
+                                                                       log=lambda _: None)
+    else:
+        documents, sources_info, duplicates = gather(repo, store, log=lambda _: None)
     dataset_id = fingerprint({
         "kind": "dataset", "wpt_dataset": VERSION, "recipe": recipe, "mixture": mixture, "vocabulary": vocabulary,
         "documents": [[d.id, d.sha256, sorted(d.tags)] for d in documents],
@@ -193,10 +383,19 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
     held_ids = {d.id for d in held_out}
     training = [d for d in documents if d.id not in held_ids]
     with tempfile.TemporaryDirectory(prefix="wpt-build-") as tmp:
-        tokens = EncodedDocuments(Path(tmp) / "tokens", tokenizer, documents, store)
+        tokens = packed if stream else EncodedDocuments(Path(tmp) / "tokens", tokenizer, documents, store)
         rows, pool_report = _fill_pools(dataset_id, recipe, mixture, training, tokens, log)
         shards = _write_shards(rows, tokens, store, Path(tmp), shard_tokens)
         held_shards = _write_shards([(d, "held-out", 0) for d in held_out], tokens, store, Path(tmp), shard_tokens)
+
+    def texts(chosen):
+        """The Markdown of these documents, in order."""
+        if not stream:
+            yield from (store.get_bytes(d.sha256) for d in chosen)
+            return
+        for i in range(0, len(chosen), 1024):
+            part = packed.many([d.id for d in chosen[i:i + 1024]])
+            yield from (tokenizer.decode(part[d.id].tolist()) for d in chosen[i:i + 1024])
 
     record = {
         "schema": 3,
@@ -214,7 +413,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
         "total_tokens": sum(s["tokens"] for s in shards),
         "shards": shards,
         "held_out_shards": held_shards,
-        "contamination": contamination(training, held_out, store),
+        "contamination": contamination(training, held_out, texts),
         "tools": tool_versions(),
         "tool_differences": tool_differences(repo),
     }
@@ -277,14 +476,19 @@ class EncodedDocuments:
     def __getitem__(self, document_id) -> np.ndarray:
         return np.fromfile(self.folder / f"{self._lengths[document_id][0]}.u32", dtype="<u4")
 
+    def many(self, document_ids) -> dict[str, np.ndarray]:
+        return {document_id: self[document_id] for document_id in document_ids}
+
 
 def _write_shards(rows, tokens, store, folder: Path, shard_tokens):
     shards, batch, size = [], [], 0
 
     def flush():
         path = folder / f"shard-{len(shards):05d}.parquet"
-        digest = write_shard(path, [(tokens[d.id], d.source, d.id, pool, p) for d, pool, p in batch])
-        shards.append({"object": store.put_file(path), "token_sha256": digest, "rows": len(batch), "tokens": size})
+        read = tokens.many(list(dict.fromkeys(d.id for d, _, _ in batch)))
+        digest = write_shard(path, [(read[d.id], d.source, d.id, pool, p) for d, pool, p in batch])
+        shards.append({"object": store.put_file(path), "token_sha256": digest, "rows": len(batch), "tokens": size,
+                       "sources": sorted({d.source for d, _, _ in batch})})
         path.unlink()
 
     for row in rows:
@@ -298,21 +502,22 @@ def _write_shards(rows, tokens, store, folder: Path, shard_tokens):
     return shards
 
 
-def contamination(training, held_out, store) -> dict:
-    """Held-out documents sharing a run of NGRAM words with training text."""
+def contamination(training, held_out, texts) -> dict:
+    """Held-out documents sharing a run of NGRAM words with training text.
+    texts(documents) yields their Markdown, in order."""
     def grams(data: bytes):
         words = data.split()
         return {hashlib.blake2b(b" ".join(words[i:i + NGRAM]), digest_size=8).digest()
                 for i in range(len(words) - NGRAM + 1)}
 
     owner = {}
-    for document in held_out:
-        for gram in grams(store.get_bytes(document.sha256)):
+    for document, text in zip(held_out, texts(held_out)):
+        for gram in grams(text):
             owner.setdefault(gram, document.id)
     found = {}
     if owner:
-        for document in training:
-            for gram in grams(store.get_bytes(document.sha256)):
+        for document, text in zip(training, texts(training)):
+            for gram in grams(text):
                 if gram in owner:
                     found.setdefault(owner[gram], document.id)
     return {"ngram_words": NGRAM, "held_out_documents": len(held_out), "overlapping": len(found),

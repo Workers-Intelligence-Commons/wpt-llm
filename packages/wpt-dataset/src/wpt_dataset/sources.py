@@ -210,16 +210,21 @@ def load_index(git, tree: dict[str, Entry], store):
 
 # -- the final tree -------------------------------------------------------------
 
-def source_tree(source: Source, store) -> tuple[dict[str, Entry], str]:
-    """The source's final tree and the sha256 of its manifest object."""
-    inputs = {
+def tree_key(source: Source) -> str:
+    """The fingerprint of a source's final tree: its checksum, cuts and
+    patches, and this wpt-dataset's version."""
+    return fingerprint({
         "kind": "source-tree",
         "wpt_dataset": VERSION,
         "checksum": source.data["checksum"],
         "cuts": source.data.get("cuts", []),
         "patches": [[p.name, hashlib.sha256(p.read_bytes()).hexdigest()] for p in source.patches],
-    }
-    key = fingerprint(inputs)
+    })
+
+
+def source_tree(source: Source, store) -> tuple[dict[str, Entry], str]:
+    """The source's final tree and the sha256 of its manifest object."""
+    key = tree_key(source)
     known = store.get_ref("source-trees", key)
     if known:
         tree = manifest.parse_manifest(store.get_bytes(known))

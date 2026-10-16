@@ -106,6 +106,24 @@ class Store:
     def get_bytes(self, sha: str) -> bytes:
         return self.path(sha).read_bytes()
 
+    def read_range(self, sha: str, start: int, length: int) -> bytes:
+        """length bytes of an object from offset start, without fetching the
+        rest of it. A part cannot be checked against the object's sha256:
+        the caller checks it against a hash of its own."""
+        _check_sha(sha)
+        if not self._raw_has(sha):
+            raise MissingObject(f"object {sha} is not in the store")
+        data = self._raw_read_range(sha, start, length)
+        if len(data) != length:
+            raise CorruptObject(f"object {sha}: {length} bytes at {start} read back as {len(data)}")
+        return data
+
+    def release(self, sha: str):
+        """Remove the local copy of a remote object (it stays in the store);
+        nothing for a local store, whose copy is the object itself."""
+        _check_sha(sha)
+        self._raw_discard_local(sha)
+
     def set_ref(self, kind: str, name: str, sha: str):
         _check_ref(kind, name)
         _check_sha(sha)
@@ -120,7 +138,6 @@ class Store:
         if sha is not None and not SHA256.fullmatch(sha):
             raise CorruptObject(f"ref {kind}/{name} holds {sha!r}, not a sha256")
         return sha
-
 
 class LocalStore(Store):
     """objects/<first 2 hex>/<sha256> and refs/<kind>/<name> under one folder."""
@@ -147,6 +164,11 @@ class LocalStore(Store):
     def _raw_discard_local(self, sha):
         pass  # the stored copy is the only one; keep it for inspection
 
+    def _raw_read_range(self, sha, start, length):
+        with open(self._object(sha), "rb") as file:
+            file.seek(start)
+            return file.read(length)
+
     def _raw_set_ref(self, kind, name, sha):
         _atomic_write(self.root / "refs" / kind / name, sha.encode())
 
@@ -155,7 +177,6 @@ class LocalStore(Store):
             return (self.root / "refs" / kind / name).read_text().strip()
         except FileNotFoundError:
             return None
-
 
 class S3Store(Store):
     """The same layout as LocalStore, as keys under s3://bucket/prefix."""
@@ -209,6 +230,18 @@ class S3Store(Store):
     def _raw_discard_local(self, sha):
         (self.cache / sha[:2] / sha).unlink(missing_ok=True)
 
+    def _raw_read_range(self, sha, start, length):
+        local = self.cache / sha[:2] / sha
+        if local.is_file():
+            with open(local, "rb") as file:
+                file.seek(start)
+                return file.read(length)
+        if length == 0:
+            return b""
+        answer = self.client.get_object(Bucket=self.bucket, Key=self._object_key(sha),
+                                        Range=f"bytes={start}-{start + length - 1}")
+        return answer["Body"].read()
+
     def _raw_set_ref(self, kind, name, sha):
         self.client.put_object(Bucket=self.bucket, Key=self._key("refs", kind, name), Body=sha.encode())
 
@@ -222,7 +255,6 @@ class S3Store(Store):
             if error.response["Error"]["Code"] in ("404", "NoSuchKey", "NotFound"):
                 return None
             raise
-
 
 def open_store(url: str) -> Store:
     """A store from a WPT_STORE value."""

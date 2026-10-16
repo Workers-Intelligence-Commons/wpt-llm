@@ -183,6 +183,18 @@ of its inputs, including WPT's own code version.
 So "already done" is a lookup: nothing is downloaded or applied twice, and
 changing one patch rebuilds only that source.
 
+`wpt-dataset build --stream` (or `WPT_STREAM=1`) keeps less: each source is
+fetched into a throwaway store, turned into Markdown and tokens, and the
+throwaway store removed before the next source. The store keeps one
+token object per source (every document's tokens, one after the other),
+its final manifest and a summary, under a ref named after the final tree,
+the formats, the licenses, the wpt-dataset version and the vocabulary; a
+source that did not change is never fetched again. The documents, the
+dataset id and the shards are the same as without `--stream`. What it no
+longer has is the source's files: a new vocabulary version, a changed
+format or patch, or `wpt-dataset unpack` fetches the source again.
+Without `--stream`, the store keeps everything, as above.
+
 The store is set by one setting, `WPT_STORE`, in the environment or in
 `.env` at the repository root:
 

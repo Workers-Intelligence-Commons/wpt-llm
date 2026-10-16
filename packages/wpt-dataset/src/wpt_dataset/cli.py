@@ -15,16 +15,20 @@
                                           final files as its next patch, NNNN-NAME.patch
     wpt-dataset markdown-check [ID ...]   check the Markdown made from text and xhtml files (every
                                           source, or the ids given): notes, unescaped tags
-    wpt-dataset build-tokenizer NAME      train (or find) the vocabulary of a tokenizer recipe
+    wpt-dataset build-tokenizer NAME [--stream]
+                                          train (or find) the vocabulary of a tokenizer recipe
     wpt-dataset tokenizer-check NAME      encode and decode every admitted document with that
                                           vocabulary: exact round trip, characters per token
-    wpt-dataset build NAME                build (or find) a dataset recipe; prints the dataset id
+    wpt-dataset build NAME [--stream]     build (or find) a dataset recipe; prints the dataset id
     wpt-dataset migrate                   rewrite data files to the current shapes
 
 The store comes from WPT_STORE (environment or .env at the repository root).
+--stream (or WPT_STREAM=1) fetches one source at a time and keeps only its
+tokens in the store, not its files: for a corpus larger than the disk.
 """
 
 import argparse
+import os
 import subprocess
 import sys
 
@@ -133,7 +137,7 @@ def cmd_markdown_check(args, repo):
 
 
 def cmd_build_tokenizer(args, repo):
-    _, vocabulary, key = build_tokenizer(repo, args.name, _store(repo))
+    _, vocabulary, key = build_tokenizer(repo, args.name, _store(repo), stream=args.stream)
     print(f"vocabulary {vocabulary} (fingerprint {key})")
     return 0
 
@@ -151,7 +155,7 @@ def cmd_tokenizer_check(args, repo):
 
 
 def cmd_build(args, repo):
-    print(build_dataset(repo, args.name, _store(repo)))
+    print(build_dataset(repo, args.name, _store(repo), stream=args.stream))
     return 0
 
 
@@ -192,14 +196,18 @@ def main(argv=None):
     markdown_check = commands.add_parser("markdown-check")
     markdown_check.add_argument("ids", nargs="*", metavar="ID")
     markdown_check.set_defaults(run=cmd_markdown_check)
+    stream = os.environ.get("WPT_STREAM", "") in ("1", "true", "yes")
+    stream_help = "fetch one source at a time and keep only tokens in the store, not its files (WPT_STREAM)"
     vocab = commands.add_parser("build-tokenizer")
     vocab.add_argument("name")
+    vocab.add_argument("--stream", action="store_true", default=stream, help=stream_help)
     vocab.set_defaults(run=cmd_build_tokenizer)
     vocab_check = commands.add_parser("tokenizer-check")
     vocab_check.add_argument("name")
     vocab_check.set_defaults(run=cmd_tokenizer_check)
     build = commands.add_parser("build")
     build.add_argument("name")
+    build.add_argument("--stream", action="store_true", default=stream, help=stream_help)
     build.set_defaults(run=cmd_build)
     commands.add_parser("migrate").set_defaults(run=cmd_migrate)
     args = parser.parse_args(argv)

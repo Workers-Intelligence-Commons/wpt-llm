@@ -131,3 +131,19 @@ def test_a_crashed_run_resumes_where_its_checkpoint_left_it(built, tmp_path, mon
     whole, resumed = weights(tmp_path / "whole"), weights(tmp_path / "resumed")
     assert all(torch.equal(whole[k], resumed[k]) for k in whole)
     assert not (tmp_path / "resumed" / "checkpoint").exists()
+
+
+def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_path):
+    # --stream trains from a few shards at a time, so a machine needs disk
+    # only for those, and the model folder names its sources as usual
+    store, dataset_id = built.store, built.dataset_id
+    main([dataset_id, "--out", "model", "--steps", "2", "--block-size", "16", "--n-layer", "1", "--n-head", "2",
+          "--n-embd", "16", "--batch-size", "4", "--stream", "--stream-shards", "1"])
+
+    record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
+    held_out_only = [p.name for p in (store.scratch / "tokens").glob("*.u32")]
+    assert len(held_out_only) == 1  # the held-out tokens; no file of every training shard
+    provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
+    assert set(provenance["sources"]) == {built.source_id}
+    assert load_model(tmp_path / "model").config.block_size == 16
+    assert record["shards"][0]["sources"] == [built.source_id]

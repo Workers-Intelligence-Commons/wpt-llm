@@ -48,12 +48,12 @@ A Rust toolchain is needed: the tokenizer is built from source.
 | manifest and checksum of a source | `uv run wpt-dataset manifest ID` | the upstream | the store; prints the checksum |
 | edit a source's files | `uv run wpt-dataset unpack ID FOLDER`, edit, `uv run wpt-dataset patch ID FOLDER NAME` | the source, the folder | the folder; then `data/sources/ID/NNNN-NAME.patch` |
 | check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` | `data/` | the store, with `--fetch` |
-| build a vocabulary | `uv run wpt-dataset build-tokenizer NAME` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
+| build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
 | check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
-| build a dataset | `uv run wpt-dataset build NAME` | a dataset recipe | the store; prints the dataset id |
+| build a dataset | `uv run wpt-dataset build NAME [--stream]` (`--stream`: one source at a time, only tokens kept) | a dataset recipe | the store; prints the dataset id |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
-| train | `uv run wpt-train DATASET_ID [--out FOLDER] [options]`, started detached (skill `wpt-training-run`) | the store | a model folder; `scratch/` token files in the store's local folder |
+| train | `uv run wpt-train DATASET_ID [--out FOLDER] [--stream] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time) | the store | a model folder; `scratch/` token files in the store's local folder |
 | train on several GPUs | `uv run wpt-train DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md` |
 | post-train | `uv run wpt-posttrain BASE NEW STEP [STEP ...]` | the base folder, the store | the new folder, only if every step succeeded |

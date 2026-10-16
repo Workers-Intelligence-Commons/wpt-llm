@@ -52,6 +52,15 @@ def _windows(tokens, block_size, count, *seed_parts):
     return torch.from_numpy(np.stack([np.asarray(tokens[s:s + block_size + 1], dtype=np.int64) for s in starts]))
 
 
+def _tokens_at(tokens, step, settings):
+    """The tokens a step draws its windows from: the array itself, or for a
+    stream (an object with `at`, such as wpt_store.shards.ShardStream) the
+    part in use once the steps before it have used their tokens."""
+    if hasattr(tokens, "at"):
+        return tokens.at((step - 1) * settings.batch_size * (settings.block_size + 1))
+    return tokens
+
+
 def _micro_batches(tokens, settings, strategy, accumulate, *seed_parts):
     """This process's micro-batches of one global batch: micro-batch a of
     process r is slice (a * world_size + r) of the batch, so the batch holds
@@ -68,7 +77,7 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
     """Train model in place, then load the weights of the evaluation the
     method judged best back into it; returns that evaluation's validation
     loss. train_tokens and val_tokens are 1-D arrays of token ids (np.memmap
-    works). With checkpoint_folder and settings.checkpoint_every, the main
+    works); train_tokens may instead be a stream (see _tokens_at). With checkpoint_folder and settings.checkpoint_every, the main
     process writes checkpoint.pt there every N steps; resume=True continues
     from it. identity: what a resumed run must share with the checkpoint
     besides the settings (for example the dataset id and the model shape)."""
@@ -106,7 +115,8 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
         losses = []
         with torch.no_grad():
             for i in range(settings.eval_batches):
-                for _, x, y in _micro_batches(val_tokens, settings, strategy, accumulate, settings.seed, "eval", step, i):
+                for _, x, y in _micro_batches(_tokens_at(val_tokens, step, settings), settings, strategy, accumulate,
+                                              settings.seed, "eval", step, i):
                     losses.append(method.loss(wrapped, x, y).item())
         model.train()
         return strategy.mean(sum(losses) / len(losses))
@@ -114,7 +124,8 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
     model.train()
     t0 = time.time()
     for step in range(first_step, settings.steps + 1):
-        for a, x, y in _micro_batches(train_tokens, settings, strategy, accumulate, settings.seed, "train", step):
+        for a, x, y in _micro_batches(_tokens_at(train_tokens, step, settings), settings, strategy, accumulate,
+                                      settings.seed, "train", step):
             # by the slice's place in the batch, so dropout does not depend on the number of processes
             torch.manual_seed(_seed(settings.seed, "dropout", step, a * strategy.world_size + strategy.rank))
             with strategy.no_sync(wrapped) if a < accumulate - 1 else contextlib.nullcontext():

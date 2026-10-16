@@ -26,6 +26,25 @@ folder (`<store folder>/scratch/` for a local store, the cache for S3). A
 later run reuses that file when it still matches the sha256 recorded when
 it was written. `scratch/` can be deleted at any time.
 
+### Streaming: a dataset larger than the disk
+
+`--stream` (or `WPT_STREAM=1`) never copies every shard to disk. The
+shards are walked in order at the speed training uses tokens: before each
+step, the shard holding the next unused token and the shards after it,
+`--stream-shards` in all (8 by default, about 2 GB), are the ones in use,
+and the step draws its windows from them only. The shard after them is
+prepared while training goes on, and a shard that leaves the set loses
+its token file and, from an S3 store, its local copy. After the last shard
+comes the first again.
+
+Which shards are in use depends only on the step, so a resumed run and any
+number of processes take the same windows, but they are not the windows a
+run without `--stream` takes: a streamed run mixes documents within the
+shards in use (the build already put the rows of every shard in a
+pseudo-random order), not over the whole dataset. A run must resume the
+way it started: with the same `--stream-shards`, or without `--stream`.
+The held-out shards are copied whole, as without `--stream`.
+
 ### The batch is the same on any hardware
 
 `--batch-size` is the number of windows in one update, over every process

@@ -58,7 +58,7 @@ from wpt_inference import sample_tokens
 from wpt_model import ModelConfig, TinyGPT, save_model
 from wpt_model.notice import EVALS_NAME, WEIGHT_METADATA, write_credits, write_documents
 from wpt_store import StoreError, store_from_settings
-from wpt_store.shards import sources_of, token_file
+from wpt_store.shards import ShardStream, sources_of, token_file
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_training import PluginError, RunSettings, SettingsMismatch, load_method, load_strategy, train
 from wpt_training.launch import launch
@@ -101,6 +101,7 @@ OPTIONS = [
     ("processes", int, 1, "start this many processes on this machine, one per GPU (with --strategy ddp)"),
     ("method", str, "adamw", "how the model learns: a built-in name or a .py file"),
     ("max-shard-size", parse_size, None, "split the weights into files of at most this size, e.g. 500MB"),
+    ("stream-shards", int, 8, "with --stream: dataset shards in use at once (windows are drawn from them)"),
 ]
 
 
@@ -118,6 +119,9 @@ def parse_args(argv=None, environ=None):
         parser.add_argument(f"--{name}", type=kind, default=default, help=f"{text} ({variable})")
     parser.add_argument("--set", action="append", default=environ.get("WPT_SET", "").split(), metavar="NAME=VALUE",
                         help="a setting of the method, repeatable (WPT_SET)")
+    parser.add_argument("--stream", action="store_true", default=environ.get("WPT_STREAM", "") in ("1", "true", "yes"),
+                        help="read the training shards a few at a time instead of copying them all to disk first "
+                             "(WPT_STREAM)")
     parser.add_argument("--resume", action="store_true", default=environ.get("WPT_RESUME", "") in ("1", "true", "yes"),
                         help="continue from the model folder's checkpoint (WPT_RESUME)")
     args = parser.parse_args(argv)
@@ -145,15 +149,23 @@ def load_dataset(store, dataset_id):
     return record, record_object, tokenizer
 
 
-def token_arrays(store, record, strategy):
+def token_arrays(store, record, strategy, stream_shards=None):
     """(training tokens, held-out tokens) as arrays read from disk on demand.
-    One process per machine builds the files, checking every shard."""
+    One process per machine builds the files, checking every shard. With
+    stream_shards, the training tokens are a ShardStream that keeps only
+    that many shards on disk at once."""
+    parts = ("held_out_shards",) if stream_shards else ("shards", "held_out_shards")
     if strategy.is_local_main:
-        token_file(store, record["shards"])
-        token_file(store, record["held_out_shards"])
+        for part in parts:
+            token_file(store, record[part])
     strategy.barrier()
-    return tuple(np.memmap(token_file(store, record[part]), dtype="<u4", mode="r") if record[part] else
-                 np.zeros(0, dtype="<u4") for part in ("shards", "held_out_shards"))
+    held_out = (np.memmap(token_file(store, record["held_out_shards"]), dtype="<u4", mode="r")
+                if record["held_out_shards"] else np.zeros(0, dtype="<u4"))
+    if stream_shards:
+        return ShardStream(store, record["shards"], stream_shards), held_out
+    training = (np.memmap(token_file(store, record["shards"]), dtype="<u4", mode="r") if record["shards"] else
+                np.zeros(0, dtype="<u4"))
+    return training, held_out
 
 
 def provenance(args, record, record_object, sources, model_config, n_params, strategy, plugins, best_val, batch):
@@ -221,7 +233,7 @@ def _train(args, strategy, plugins):
     try:
         store = store_from_settings(Path.cwd() / ".env")
         record, record_object, tokenizer = load_dataset(store, args.dataset)
-        train_data, val_data = token_arrays(store, record, strategy)
+        train_data, val_data = token_arrays(store, record, strategy, args.stream_shards if args.stream else None)
         settings = RunSettings(block_size=args.block_size, batch_size=args.batch_size,
                                micro_batch=args.micro_batch or args.batch_size // strategy.world_size,
                                steps=args.steps, eval_every=args.eval_every, checkpoint_every=args.checkpoint_every,
@@ -244,9 +256,14 @@ def _train(args, strategy, plugins):
     try:
         best_val = train(model, strategy, method_plugin, method_settings, train_data, val_data, settings,
                          checkpoint_folder=checkpoint_folder, resume=args.resume,
-                         identity={"dataset": args.dataset, "model": asdict(model_config)}, log=log)
+                         identity={"dataset": args.dataset, "model": asdict(model_config),
+                                   # the shards in use decide the windows, so a resumed run must stream the same way
+                                   **({"stream_shards": args.stream_shards} if args.stream else {})}, log=log)
     except (ValueError, SettingsMismatch, PluginError) as error:
         sys.exit(f"{type(error).__name__}: {error}")
+    finally:
+        if isinstance(train_data, ShardStream):
+            train_data.close()
     if not strategy.is_main:
         return
 

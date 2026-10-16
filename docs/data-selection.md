@@ -68,7 +68,10 @@ refused; a higher `max_epochs` is the explicit permission.
 ```
 
 `wpt-dataset build <name>` prints the dataset id: the fingerprint of the
-recipe, the mixture, the vocabulary and every document. There is no
+recipe, the mixture, the vocabulary and every document. With `--stream`, it
+fetches one source at a time and keeps only tokens in the store, for a
+corpus larger than the disk; the dataset is the same
+([architecture.md](architecture.md), "Fingerprints and the store"). There is no
 tokens-per-parameter rule: a model may be data-starved or oversized for its
 data. Model size is chosen when training starts.
 

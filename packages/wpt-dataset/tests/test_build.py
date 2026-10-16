@@ -1,3 +1,4 @@
+import hashlib
 import json
 
 import pytest
@@ -176,3 +177,31 @@ def test_tokenizer_check_round_trips_every_document_and_reports_each_source(kit,
     assert ": 10 documents, " in corpus_line and "not in the vocabulary" not in corpus_line
     assert next(line for line in lines if line.startswith(late)).endswith("(not in the vocabulary's training)")
     assert lines[-1].startswith("every document decodes back exactly: 11 documents, ")
+
+
+def test_a_streamed_build_gives_the_same_dataset_and_keeps_no_source_files(kit, repo, store, corpus, tmp_path):
+    # a corpus larger than the disk is built one source at a time: the store
+    # keeps tokens, never the sources' files, and the dataset is the one a
+    # normal build gives
+    setup_recipes(kit, repo, store, corpus, total_tokens=2000, held_out=0.2)
+    # one pool of all 10 documents, so the held-out share always leaves it some
+    kit.write_recipe(repo, "mixture", "main", {"pools": [{"name": "all", "select": "fr || en", "weight": 1}]})
+    streamed_store = open_store((tmp_path / "streamed").as_uri())
+    streamed_id = build_dataset(repo, "small", streamed_store, log=lambda _: None, stream=True)  # trains the vocabulary
+    normal_store = open_store((tmp_path / "normal").as_uri())
+    normal_id = build_dataset(repo, "small", normal_store, log=lambda _: None)  # rebuilds it from the lock
+
+    assert streamed_id == normal_id
+    streamed, normal = record_of(streamed_store, streamed_id), record_of(normal_store, normal_id)
+    for part in ("tokenizer", "sources", "documents", "pools", "contamination"):
+        assert streamed[part] == normal[part]
+    assert [s["token_sha256"] for s in streamed["shards"] + streamed["held_out_shards"]] == \
+           [s["token_sha256"] for s in normal["shards"] + normal["held_out_shards"]]
+    files = kit.run("git", "ls-tree", "-r", "--name-only", corpus[1], cwd=corpus[0]).decode().split()
+    for path in files:
+        content = kit.run("git", "show", f"{corpus[1]}:{path}", cwd=corpus[0])
+        assert not streamed_store.has(hashlib.sha256(content).hexdigest())
+    vocabulary = Tokenizer.from_bytes(streamed_store.get_bytes(streamed["tokenizer"]["vocabulary"]))
+    for tokens, *_ in rows_of(streamed_store, streamed["shards"]):
+        assert not streamed_store.has(hashlib.sha256(vocabulary.decode(tokens.tolist())).hexdigest())  # its Markdown
+
