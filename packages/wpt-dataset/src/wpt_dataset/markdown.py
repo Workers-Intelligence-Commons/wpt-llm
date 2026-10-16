@@ -28,9 +28,10 @@ Markdown, never on the file itself:
   sections themselves (epub:type endnotes or footnotes) are left where they
   were, so a file holding only notes gives no document.
 
-- `chat`: conversations for post-training, one per line (see
-  conversations.py). Each line is checked, and the file gives no document:
-  only the post-training step named by its tags reads it.
+- `chat`: conversations for post-training, one per line, or with `tree`
+  one message per record naming its parent (see conversations.py). Each
+  conversation is checked, and the file gives no document: only the
+  post-training step named by its tags reads it.
 - `records`: one document per record whose license enters (see
   records.py), at the path `<file>#<record id>`; its text field is read as
   `text` above, or kept as it is when the entry says `"as": "markdown"`.
@@ -108,10 +109,10 @@ def documents(source, tree, store, skipped: dict | None = None) -> Iterator[Conv
         if kind == "records":
             yield from _records(source, path, entry, store.path(files[path].sha256), skipped)
             continue
-        data = store.get_bytes(files[path].sha256)
         if kind == "chat":
-            conversations.parse(source.id, path, data)
+            conversations.of_file(source.id, path, entry, store, files[path].sha256)
             continue
+        data = store.get_bytes(files[path].sha256)
         if kind == "markdown":
             markdown = data
         elif kind == "text":

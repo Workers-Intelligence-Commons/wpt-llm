@@ -47,6 +47,15 @@ def schema(kind: str) -> dict:
     return json.loads(resources.files(__package__).joinpath(f"schemas/{kind}.schema.json").read_text())
 
 
+@cache
+def _validator(kind: str):
+    """One validator per kind: jsonschema.validate checks the schema itself
+    on every call, which costs more than checking a small document."""
+    document = schema(kind)
+    jsonschema.validators.validator_for(document).check_schema(document)
+    return jsonschema.validators.validator_for(document)(document)
+
+
 def load_json(path: Path, kind: str) -> dict:
     """Read and validate a file of the given kind (source, mixture, ...)."""
     try:
@@ -64,7 +73,9 @@ def validate(document, kind: str, path: Path):
     if isinstance(version, int) and version < CURRENT_SCHEMA[kind]:
         raise OutdatedSchema(f"{path}: shape {version}, current is {CURRENT_SCHEMA[kind]}; run `wpt-dataset migrate`")
     try:
-        jsonschema.validate(document, schema(kind))
+        error = jsonschema.exceptions.best_match(_validator(kind).iter_errors(document))
+        if error is not None:
+            raise error
     except jsonschema.ValidationError as error:
         where = "/".join(map(str, error.absolute_path)) or "(top level)"
         raise InvalidFile(f"{path}: at {where}: {error.message}") from error

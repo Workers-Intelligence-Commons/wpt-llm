@@ -1,5 +1,8 @@
+import json
+
 import pytest
 
+from wpt_dataset import conversations
 from wpt_dataset.errors import FormatMapError, InvalidFile, NotText
 from wpt_dataset.cli import main
 from wpt_dataset.markdown import documents
@@ -99,3 +102,47 @@ def test_a_chat_file_is_checked_and_never_becomes_a_pretraining_document(kit, re
                         b'"role": "tool", "content": [{"type": "tool_result", "call": "c9", "content": []}]')
     with pytest.raises(InvalidFile, match="tool_result answers 'c9', which no earlier tool_call made"):
         markdown_of(kit, repo, store, tmp_path / "lost", {"talks.jsonl": lost}, formats)
+
+
+def test_a_message_tree_gives_every_human_path_as_a_conversation(kit, repo, store, tmp_path):
+    # datasets such as OpenAssistant store branching conversations as messages
+    # naming their parent; post-training needs each path from the first message
+    # to a last one, and nothing written by a model or flagged by its reviewers
+    rows = [
+        {"id": "q", "parent": None, "role": "prompter", "text": "Why is the sky blue?"},
+        {"id": "a1", "parent": "q", "role": "assistant", "text": "Air scatters blue light most."},
+        {"id": "a2", "parent": "q", "role": "assistant", "text": "Rayleigh scattering."},
+        {"id": "f1", "parent": "a1", "role": "prompter", "text": "And at sunset?"},
+        {"id": "f1a", "parent": "f1", "role": "assistant", "text": "The light crosses more air, so red is left."},
+        {"id": "f2", "parent": "a1", "role": "prompter", "text": "Thanks!"},  # unanswered: left off
+        {"id": "m", "parent": "a2", "role": "prompter", "text": "Say more."},
+        {"id": "ma", "parent": "m", "role": "assistant", "text": "written by a model", "synthetic": True},
+        {"id": "d", "parent": "q", "role": "assistant", "text": "removed", "deleted": True},
+        {"id": "dd", "parent": "d", "role": "prompter", "text": "after a removed one"},
+        {"id": "p", "parent": None, "role": "prompter", "text": "My phone number is ...", "labels": {"pii": 0.7}},
+        {"id": "pa", "parent": "p", "role": "assistant", "text": "Noted."},
+    ]
+    data = "".join(json.dumps(row) + "\n" for row in rows).encode()
+    tree = {"id": "id", "parent": "parent", "role": "role", "text": "text",
+            "roles": {"prompter": "user", "assistant": "assistant"},
+            "drop": [{"field": "synthetic", "is": True}, {"field": "deleted", "is": True},
+                     {"field": "labels.pii", "above": 0}]}
+    formats = [{"format": "chat", "paths": ["*.jsonl"], "tree": tree}]
+    address, commit = kit.git_project(tmp_path / "talks", files={"messages.jsonl": data}, executable=set(), symlinks={})
+    sid = kit.add_source(repo, store, "example", "talks", {"type": "git", "address": address, "revision": commit,
+                                                           "formats": formats, "tags": [{"tags": ["sft"], "paths": ["**"]}]})
+
+    found, _ = conversations.read(repo, store, "sft")
+    said = {cid: [m["content"][0]["text"] for m in c["messages"]] for cid, c in found}
+    assert said == {
+        f"{sid}/messages.jsonl:f1a": ["Why is the sky blue?", "Air scatters blue light most.", "And at sunset?",
+                                      "The light crosses more air, so red is left."],
+        f"{sid}/messages.jsonl:a1": ["Why is the sky blue?", "Air scatters blue light most."],
+        f"{sid}/messages.jsonl:a2": ["Why is the sky blue?", "Rayleigh scattering."],
+    }
+    assert [m["role"] for m in found[0][1]["messages"]] == ["user", "assistant", "user", "assistant"]
+
+    rows.append({"id": "x", "parent": "gone", "role": "prompter", "text": "orphan"})
+    data = "".join(json.dumps(row) + "\n" for row in rows).encode()
+    with pytest.raises(InvalidFile, match="1 messages name a parent the file does not hold, such as gone"):
+        markdown_of(kit, repo, store, tmp_path / "orphan", {"messages.jsonl": data}, formats)

@@ -77,6 +77,35 @@ A `chat` file is never a pre-training document. A post-training step reads
 the `chat` files whose tags include the step's name: the `sft` step reads
 the files tagged `sft` ([post-training.md](post-training.md)).
 
+### Message trees
+
+Some datasets, such as OpenAssistant's, store branching conversations: one
+message per record, each naming its parent, so a question can have several
+answers and each answer several follow-ups. A `chat` format entry with
+`tree` reads such a file (JSON Lines or Parquet, as a `records` file):
+
+```json
+{"format": "chat", "paths": ["messages.jsonl.gz"],
+ "tree": {"id": "message_id", "parent": "parent_id", "role": "role", "text": "text",
+          "roles": {"prompter": "user", "assistant": "assistant"},
+          "drop": [{"field": "synthetic", "is": true}, {"field": "labels.pii.value", "above": 0}]}}
+```
+
+- `id`, `parent`, `role`, `text`: the fields holding them; a first message
+  has no parent. Fields with dots go into nested objects, as in `records`.
+- `roles`: each of the file's role names, mapped to WPT's.
+- `drop`: a message whose field `is` a value, or holds a number `above`
+  one, is dropped, and so is everything after it in the tree. A message
+  with no text is dropped too. Model-written messages are always dropped
+  this way: an `assistant` message is written by a person.
+
+Every path from a first message to a last one becomes a conversation, so
+the opening turns shared by several branches appear in each of them
+(maintainer's decision, 2026-10-16). Trailing messages that are not the
+assistant's are left off; a path with no assistant message, or one that
+repeats another exactly, gives none. A conversation's id ends with the id
+of its last message. A parent the file does not hold stops the check.
+
 ## The template
 
 `wpt_tokenizer.chat` turns a conversation into tokens with the layout of

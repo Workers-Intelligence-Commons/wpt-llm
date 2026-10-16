@@ -63,10 +63,27 @@
           "license": {"$ref": "#/$defs/field", "description": "records only: the field holding the record's license, matched against the `values` of the license entries"},
           "id": {"$ref": "#/$defs/field", "description": "records only: the field holding the record's id within its file; without it, the record's position (1 for the first)"},
           "credit": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/field"}, "description": "records only: the fields that name the record's authors, title and address, copied into the per-record credit file of every model trained on it"},
+          "tree": {
+            "type": "object", "additionalProperties": false, "required": ["id", "parent", "role", "text", "roles"],
+            "description": "chat only: the file holds one message per record (JSON Lines or Parquet, as a records file), each naming its parent; every path from a first message to a last one becomes a conversation (docs/chat-format.md)",
+            "properties": {
+              "id": {"$ref": "#/$defs/field"},
+              "parent": {"$ref": "#/$defs/field", "description": "empty or absent for a first message"},
+              "role": {"$ref": "#/$defs/field"},
+              "text": {"$ref": "#/$defs/field"},
+              "roles": {"type": "object", "minProperties": 1, "additionalProperties": {"enum": ["system", "user", "assistant"]}, "description": "the file's role names, each mapped to WPT's"},
+              "drop": {"type": "array", "description": "a message matching one rule is dropped, with everything after it", "items": {
+                "type": "object", "additionalProperties": false, "required": ["field"],
+                "properties": {"field": {"$ref": "#/$defs/field"}, "is": {"description": "drop when the field holds exactly this value"}, "above": {"type": "number", "description": "drop when the field holds a number above this one"}},
+                "oneOf": [{"required": ["is"]}, {"required": ["above"]}]}}
+            }
+          },
           "paths": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/glob"}},
           "note": {"type": "string"}
         },
         "allOf": [
+          {"if": {"properties": {"format": {"const": "chat"}}},
+           "else": {"not": {"required": ["tree"]}}},
           {"if": {"properties": {"format": {"const": "code"}}},
            "then": {"required": ["language"]},
            "else": {"not": {"required": ["language"]}}},
