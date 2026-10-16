@@ -3,24 +3,12 @@
   "type": "git",
   "address": "https://github.com/standardebooks/epictetus_short-works_george-long",
   "revision": "8c154d40a6f85e32a5711001a28c1b55ab56d3c8",
-  "checksum": "sha256:a3f321501cc0f2ff943da05f257972c88d267d1dc1827aa6051d37b7f628081a",
+  "checksum": "sha256:77b9686d64990b3defbb36f08ddfcdb311565d300e3d213cf8028be7e4d73cc7",
   "extract": {
     "exclude": [
       "images/**",
-      "LICENSE.md",
-      "production-notes.md",
-      "se-lint-ignore.xml",
-      "src/META-INF/**",
-      "src/mimetype",
-      "src/epub/content.opf",
-      "src/epub/toc.xhtml",
-      "src/epub/css/**",
       "src/epub/images/**",
-      "src/epub/text/colophon.xhtml",
-      "src/epub/text/imprint.xhtml",
-      "src/epub/text/uncopyright.xhtml",
-      "src/epub/text/titlepage.xhtml",
-      "src/epub/text/halftitlepage.xhtml"
+      "src/epub/fonts/**"
     ]
   },
   "licenses": [
@@ -38,6 +26,33 @@
       "format": "xhtml",
       "paths": [
         "**/*.xhtml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.opf",
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "src/mimetype"
       ]
     }
   ],

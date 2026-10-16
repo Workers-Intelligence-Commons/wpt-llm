@@ -3,24 +3,12 @@
   "type": "git",
   "address": "https://github.com/standardebooks/epictetus_discourses_george-long",
   "revision": "a50e918ff19c48e94e274bf55ad3d8a5209e0471",
-  "checksum": "sha256:252a837b233c111a653079276ae3fd8b3ad7bdf8990ab3f16cdd58a5611e7ec0",
+  "checksum": "sha256:1194620a778520b1965cf67e16f3cc36c27d8c14db405ec617a615d845615367",
   "extract": {
     "exclude": [
       "images/**",
-      "LICENSE.md",
-      "production-notes.md",
-      "se-lint-ignore.xml",
-      "src/META-INF/**",
-      "src/mimetype",
-      "src/epub/content.opf",
-      "src/epub/toc.xhtml",
-      "src/epub/css/**",
       "src/epub/images/**",
-      "src/epub/text/colophon.xhtml",
-      "src/epub/text/imprint.xhtml",
-      "src/epub/text/uncopyright.xhtml",
-      "src/epub/text/titlepage.xhtml",
-      "src/epub/text/halftitlepage.xhtml"
+      "src/epub/fonts/**"
     ]
   },
   "licenses": [
@@ -38,6 +26,33 @@
       "format": "xhtml",
       "paths": [
         "**/*.xhtml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.opf",
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "src/mimetype"
       ]
     }
   ],

@@ -3,24 +3,12 @@
   "type": "git",
   "address": "https://github.com/standardebooks/cicero_tusculan-disputations_c-d-yonge",
   "revision": "caa2aa9ecd472aff082c34ad85e8bdd403d8c8c6",
-  "checksum": "sha256:b1f13eadf21ba4cc23be4560ed2db4d9b87a0aaba15698f560b60d0c35daa244",
+  "checksum": "sha256:2d6adf6978cb5000c343b001a11f8ce586883edfa831dbca274292ab18be69e0",
   "extract": {
     "exclude": [
       "images/**",
-      "LICENSE.md",
-      "production-notes.md",
-      "se-lint-ignore.xml",
-      "src/META-INF/**",
-      "src/mimetype",
-      "src/epub/content.opf",
-      "src/epub/toc.xhtml",
-      "src/epub/css/**",
       "src/epub/images/**",
-      "src/epub/text/colophon.xhtml",
-      "src/epub/text/imprint.xhtml",
-      "src/epub/text/uncopyright.xhtml",
-      "src/epub/text/titlepage.xhtml",
-      "src/epub/text/halftitlepage.xhtml"
+      "src/epub/fonts/**"
     ]
   },
   "licenses": [
@@ -38,6 +26,33 @@
       "format": "xhtml",
       "paths": [
         "**/*.xhtml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.opf",
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "src/mimetype"
       ]
     }
   ],

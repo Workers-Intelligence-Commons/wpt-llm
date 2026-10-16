@@ -3,24 +3,12 @@
   "type": "git",
   "address": "https://github.com/standardebooks/boethius_the-consolation-of-philosophy_h-r-james",
   "revision": "6c6e03c2a18036970013039ca5d92c26dab6074b",
-  "checksum": "sha256:5db596ac6b3c3e000a306084428907d9adadb5b6d1012e617cc288d1afd8b935",
+  "checksum": "sha256:4babca6e2ccb27718fa8a2606434e029b00a8ddd961aeab0e1b768615d832300",
   "extract": {
     "exclude": [
       "images/**",
-      "LICENSE.md",
-      "production-notes.md",
-      "se-lint-ignore.xml",
-      "src/META-INF/**",
-      "src/mimetype",
-      "src/epub/content.opf",
-      "src/epub/toc.xhtml",
-      "src/epub/css/**",
       "src/epub/images/**",
-      "src/epub/text/colophon.xhtml",
-      "src/epub/text/imprint.xhtml",
-      "src/epub/text/uncopyright.xhtml",
-      "src/epub/text/titlepage.xhtml",
-      "src/epub/text/halftitlepage.xhtml"
+      "src/epub/fonts/**"
     ]
   },
   "licenses": [
@@ -38,6 +26,33 @@
       "format": "xhtml",
       "paths": [
         "**/*.xhtml"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "css",
+      "paths": [
+        "**/*.css"
+      ]
+    },
+    {
+      "format": "code",
+      "language": "xml",
+      "paths": [
+        "**/*.opf",
+        "**/*.xml"
+      ]
+    },
+    {
+      "format": "markdown",
+      "paths": [
+        "**/*.md"
+      ]
+    },
+    {
+      "format": "text",
+      "paths": [
+        "src/mimetype"
       ]
     }
   ],
