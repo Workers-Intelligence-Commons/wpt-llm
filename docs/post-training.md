@@ -47,8 +47,11 @@ before training.
 ## Running post-training
 
 ```sh
-uv run wpt-posttrain <base model folder> <new model folder> <step> [<step> ...]
+uv run wpt-posttrain <model recipe> <base model folder> <new model folder>
 ```
+
+The steps are the model recipe's `posttrain` list, run in order; the new
+folder's provenance records the recipe's name.
 
 A step is one Python file (or the name of a built-in one, in
 `apps/wpt-posttrain/src/wpt_posttrain/steps/`) that defines `run`:
@@ -91,14 +94,15 @@ each step.
 
 ## The `sft` step
 
-`uv run wpt-posttrain BASE NEW sft` is supervised fine-tuning: it reads the
-conversations tagged `sft`, turns each into tokens with the chat template,
-and trains the model to predict the assistant's turns only. Until a source
+The `sft` step, in a recipe's `posttrain` list, is supervised fine-tuning:
+it reads the conversations tagged `sft`, turns each into tokens with the
+chat template, and trains the model to predict the assistant's turns only. Until a source
 holds such conversations, it fails with "no conversations" and writes
 nothing. Each conversation must fit the model's context; a longer one
 stops the step, since cutting it would drop the answers it holds. Its
 settings (epochs, learning rate, batch, seed) are the constants at the top
-of `steps/sft.py`; to change them, copy the file and give its path instead.
+of `steps/sft.py`; to change them, copy the file and put its path in the
+recipe's `posttrain` list instead.
 
 The base model must use a vocabulary of tokenizer 0.3.0 or later, which
 reserves the chat template's ids. Talk to the result with

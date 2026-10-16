@@ -62,22 +62,27 @@ partial pass. More passes than `max_epochs` (default 4, after Muennighoff et
 al. 2023, where up to about 4 passes are about as good as fresh data) is
 refused; a higher `max_epochs` is the explicit permission.
 
-## Dataset recipes
+## The data part of a model recipe
 
-`data/recipes/datasets/<name>.json` is the only recipe a build enforces:
+A model recipe (`data/recipes/models/<name>.json`, see
+[model.md](model.md)) says everything that changes a model; its `data`
+part is what a build enforces:
 
 ```json
-{ "schema": 1, "mixture": "<mixture name>", "tokenizer": "<tokenizer recipe name>",
-  "total_tokens": 2000000000, "held_out": 0.001, "note": "" }
+"data": { "mixture": "<mixture name>", "tokenizer": "<tokenizer recipe name>",
+          "total_tokens": 2000000000, "held_out": 0.001 }
 ```
 
-`wpt-dataset build <name>` prints the dataset id: the fingerprint of the
-recipe, the mixture, the vocabulary and every document. With `--stream`, it
+`wpt-dataset build <name>` builds the data part of the model recipe of
+that name and prints the dataset id: the fingerprint of the data part, the
+mixture, the vocabulary and every document. Recipes with the same data
+part share one dataset, and `wpt-train` refuses a dataset built from
+another data part than its recipe's. With `--stream`, it
 fetches one source at a time and keeps only tokens in the store, for a
 corpus larger than the disk; the dataset is the same
 ([architecture.md](architecture.md), "Fingerprints and the store"). There is no
 tokens-per-parameter rule: a model may be data-starved or oversized for its
-data. Model size is chosen when training starts.
+data. Model size is the recipe's `model` part.
 
 The build record (in the store) lists the sources and their trees, the pools
 with their documents, tokens, shares and passes, the shards, the

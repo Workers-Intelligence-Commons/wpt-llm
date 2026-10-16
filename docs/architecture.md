@@ -111,7 +111,7 @@ rules.
 Globs: `*` matches within one folder, `**` across any number of folders.
 
 The schema is `packages/wpt-dataset/src/wpt_dataset/schemas/source.schema.json`.
-Mixture, dataset recipe, tokenizer recipe and lock files have schemas there
+Mixture, model recipe, tokenizer recipe and lock files have schemas there
 too.
 
 ### The manifest and the checksum
@@ -212,7 +212,7 @@ of its inputs, including WPT's own code version.
 | upstream tree | the source checksum |
 | final source tree | checksum, cuts, each patch's sha256, wpt-dataset version |
 | vocabulary | tokenizer code version, tokenizer recipe (with its `version`), the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
-| dataset | wpt-dataset version, dataset recipe, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution), and the sources skipped with `--skip-failed` |
+| dataset | wpt-dataset version, the model recipe's data part, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution), and the sources skipped with `--skip-failed` |
 
 So "already done" is a lookup: nothing is downloaded or applied twice, and
 changing one patch rebuilds only that source.
@@ -249,7 +249,7 @@ settings. Objects are named by their sha256 and checked on every read.
 | `wpt-store` | the content-addressed store (local or S3) and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
 | `wpt-web` | a local web interface: one small server on 127.0.0.1, one file per page (Python routes, React page); its interface is built with Bun when it starts; command `wpt-web` |
-| `wpt-model` | the TinyGPT network, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
+| `wpt-model` | the WPT network ([model.md](model.md)), its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
 | `wpt-inference` | token-by-token sampling |
 | `wpt-device` | picks the best GPU, else the CPU |

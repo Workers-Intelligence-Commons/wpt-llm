@@ -1,10 +1,10 @@
 # Model architecture
 
 Maintainer's decisions, 2026-10-16. This page describes the architecture
-WPT models use and why; until the code lands, `wpt-train` still trains the
-small `TinyGPT` described in [training.md](training.md). Every component
-comes from published research (cited at the end) and is trained from
-scratch: no weights or outputs of those models are used.
+WPT models use and why; the code is `packages/wpt-model` and the `muon`
+method of `packages/wpt-training`. Every component comes from published
+research (cited at the end) and is trained from scratch: no weights or
+outputs of those models are used.
 
 The design is one family for every size: a mixture-of-experts model that
 reads long texts (32K tokens or more). The numbers of a given size (layers,
@@ -54,8 +54,11 @@ among 0:1, 1:1, 3:1, 7:1 and 15:1, and the hybrid beat full attention at
 
 Training uses the chunked form (chunks of 64 tokens) from the
 flash-linear-attention library on GPUs; a step-by-step version of the
-formula above is the reference, used on CPUs and in tests, and the two must
-agree.
+formula above is the reference, used in tests, and the two must agree.
+Where flash-linear-attention cannot run (it needs Triton, which Windows
+lacks), the same chunked computation runs in plain PyTorch, 16 tokens at a
+time, factored at each chunk's middle token so no exponential leaves FP32's
+range; it agrees with the reference too, and is much slower.
 
 **Gated MLA layers** (Multi-head Latent Attention; [DeepSeek-V2][v2], [Kimi K3][k3]).
 Every fourth layer, and the last, attends to the whole text. Each token's
@@ -104,6 +107,11 @@ forward pass, for `m` tokens, `n` experts and top `k`:
 - the new biases route the next step, never the batch they came from, and
   are frozen for inference.
 
+WPT reads the quantile from a histogram of each expert's `s_j - alpha`,
+which every process adds up: 4096 bins within 0.5 of the expert's previous
+quantile (`-b_j`), with values outside counted in the edge bins. A bin is
+about 0.00024 wide, and one step moves a bias by at most 0.5.
+
 **Hash routing in the first 3 expert layers** ([DeepSeek-V4][v4]). Early layers
 have seen little context, so their experts are chosen from the token id
 alone, by a fixed function, with equal weights `1/k`. DeepSeek-V4 does not
@@ -124,7 +132,9 @@ hidden state through a learned gate.
   themselves). This ties the tables to the vocabulary.
 - For each order `n = 2 .. N` (N = 3 in Engram-27B) and each of `K` hash
   heads (8 in Engram-27B), the suffix N-gram's canonical ids are hashed into
-  a table of prime size and one row is read. The rows are concatenated into
+  a table of prime size and one row is read. In WPT, each (order, head)
+  pair has its own table, of a distinct prime size: the smallest primes at
+  or above the recipe's table size. The rows are concatenated into
   `e_t`. DeepSeek describes its hash only as multiplicative-XOR; WPT's
   constants are in the code.
 - Gate: `k_t = W_K e_t`, `v_t = W_V e_t`,
@@ -132,7 +142,8 @@ hidden state through a learned gate.
   With mHC's 4 streams, `W_V` is shared and each stream has its own `W_K`.
 - Then `Y = SiLU(Conv1D(RMSNorm(V))) + V`, a depthwise causal convolution
   of kernel 4 and dilation N, starting at zero so the module starts as
-  nothing; `Y` is added before the layer's sublayers.
+  nothing; `Y` is added before the layer's sublayers. WPT shares this
+  convolution across the 4 streams.
 - The recipe names the layers (Engram-27B: layers 2 and 15; the 3B
   reference: 2 and 6).
 
@@ -159,14 +170,18 @@ row normalization 20 times, so rows and columns sum to 1 and the product of
 many layers stays stable. The gating factors `a` start at 0.01. The papers
 do not say how the embedding becomes 4 streams or how they end; WPT copies
 the embedding into each stream and sums the streams before the final
-RMSNorm.
+RMSNorm. Nor do they give the biases' starting values; WPT starts with
+`H_pre` averaging the streams (`b_pre = logit(1/4)`), `H_post` adding the
+output to each stream in full (`b_post = 0`) and `H_res` near the identity
+(`b_res` = 4 on the diagonal, 0 elsewhere).
 
 ## Multi-token prediction
 
 One extra block ([DeepSeek-V3][v3]'s MTP module) predicts the token after next:
 it joins the final hidden state and the next token's embedding (each
 RMS-normalized, concatenated, projected back to the model width), runs one
-layer, and uses the shared output head. Its loss is added with weight 0.3,
+layer, and uses the shared output head. WPT's layer is a gated MLA and a
+dense SiTU-GLU as wide as the two shared experts together, on one stream. Its loss is added with weight 0.3,
 then 0.1 (DeepSeek-V3 switched after 10T of 14.8T tokens; the recipe sets
 the switch). At generation time it can serve as a draft that guesses one
 token ahead; the model works without it.
@@ -198,8 +213,15 @@ training tokens and 10% after 90%. DeepSeek reports final results matching
 cosine decay, and a run can be extended by continuing from a checkpoint
 taken before the first drop.
 
-**Numbers.** BF16 for weights' computations, FP32 for the optimizer state,
-the attention output and mHC's mapping coefficients.
+**Numbers.** BF16 for weights' computations on GPUs, FP32 for the weights
+themselves, the optimizer state, the attention output, KDA's memory,
+routing scores and mHC's mapping coefficients. CPUs compute in FP32. No
+layer uses dropout, as in the papers.
+
+**Memory.** `wpt-train --recompute` keeps only each layer's input during a
+pass and runs the layer again during the backward pass: the same result
+with much less memory, about a third slower (training.md). The layers'
+second run records no balancing counts or query-key scores.
 
 **Repeatability.** Runs stay the same for one seed on any hardware
 (training.md): routing ties, balancing quantiles and expert gradient sums
@@ -222,9 +244,21 @@ and the repository:
 - the post-training steps to run after pre-training.
 
 Settings that change the result come only from the recipe. Command-line
-options remain only for what does not: device, strategy, number of
-processes, streaming, output folder and resuming. Mixtures and tokenizer
-recipes stay separate files, since several models share them.
+options remain only for what does not: device strategy, number of
+processes, streaming, output folder, run name, resuming, micro-batch,
+recomputing, checkpoints, weight file size and restarts. Mixtures and
+tokenizer recipes stay separate files, since several models share them.
+A model has at least 2 layers, since KDA layers carry the position
+information and the last layer is MLA.
+
+Two recipes exist, both on the admitted public-domain books (about 4.3M
+tokens) until a larger mixture exists:
+
+- `classics-small`: 4.6M parameters, 256-token windows, to see every step
+  work on one machine.
+- `classics-5080`: 101M parameters (8 layers, width 512, 32 experts with
+  top 4), 32K-token windows, sized for one 16 GB GPU with `--recompute
+  --micro-batch 1`. It is untested: see below.
 
 ## Limits of the evidence
 
@@ -232,9 +266,12 @@ Every result above was measured on models of 3B parameters or more, most at
 27B to 2.8T, by the labs that built them; none was measured at the sizes a
 single 16 GB GPU trains. A first recipe sized for such a GPU carries the
 papers' ratios untested, and its first runs are the first check of whether
-they hold small. The details the papers leave out (the hash routing
-function, Engram's hash constants, how mHC's streams start and end) are
-WPT's own choices, marked as such above.
+they hold small. Its memory is measured only up to 16K tokens, on another
+GPU (one window: 1.5 GiB at 4K, 2.7 GiB at 8K, 4.6 GiB at 16K with
+`--recompute`), so 32K needs about 8 GiB by extrapolation, not by a run. The details the papers leave out (the hash routing
+function, Engram's hash constants and tables, how mHC's streams start and
+end, the histogram behind Quantile Balancing, the MTP layer) are WPT's own
+choices, marked as such above.
 
 ## Sources
 

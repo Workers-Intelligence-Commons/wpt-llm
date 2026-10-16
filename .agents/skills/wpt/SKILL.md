@@ -50,20 +50,23 @@ A Rust toolchain is needed: the tokenizer is built from source.
 | check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` (every source is fetched, failures listed at the end) | `data/` | the store, with `--fetch` |
 | build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
 | check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
-| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (`--stream`: one source at a time, only tokens kept; `--skip-failed`: a failing source is left out and listed in the record instead of stopping) | a dataset recipe | the store; prints the dataset id |
+| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (`--stream`: one source at a time, only tokens kept; `--skip-failed`: a failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; prints the dataset id |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
-| train | `uv run wpt-train DATASET_ID [--out FOLDER] [--stream] [--run NAME] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time; `--run`: the checkpoint in the store, so another machine can continue) | the store | a model folder; `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
-| train on several GPUs | `uv run wpt-train DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
+| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--run NAME] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
+| train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md` |
-| post-train | `uv run wpt-posttrain BASE NEW STEP [STEP ...]` | the base folder, the store | the new folder, only if every step succeeded |
+| post-train | `uv run wpt-posttrain RECIPE BASE NEW` (the steps are the recipe's `posttrain` list) | the model recipe, the base folder, the store | the new folder, only if every step succeeded |
 | continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a post-trained model) | the folder | |
 | review and edit sources in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ | `data/`, `packages/wpt-web/ui` | `source.json` through the source rules; `ui/node_modules`, `ui/dist` |
 
-Every `wpt-train` option also comes from `WPT_<OPTION>` in the environment
-(`--n-layer` -> `WPT_N_LAYER`); `--help` on any command lists the rest.
-`--batch-size` is global (over every process), `--set NAME=VALUE` changes a
-setting of the method. A crash restarts the processes on their own, up to
+Everything that changes a model comes from its model recipe
+(`data/recipes/models/NAME.json`: data, architecture, method and settings,
+steps, batch, seed, post-training steps; docs/model.md); the recipe's
+`batch_size` is global (over every process). The `wpt-train` options only
+say how the hardware runs it, and each also comes from `WPT_<OPTION>` in the
+environment (`--micro-batch` -> `WPT_MICRO_BATCH`); `--help` on any command
+lists them. A crash restarts the processes on their own, up to
 `--max-restarts` times (default 3), from the last checkpoint; Ctrl+C or
 `kill` finishes the step and saves first; after a stop, the same command
 with `--resume` continues from `FOLDER/checkpoint/` (or, with `--run NAME`,
@@ -177,20 +180,21 @@ A strategy (how the hardware is used) is one Python file, a built-in in
 ```python
 from wpt_training import Strategy
 
-def start():  # a subclass overrides wrap, no_sync, mean, broadcast, barrier, close
+def start():  # a subclass overrides wrap, no_sync, mean, reduce, broadcast, barrier, close
     return Strategy(device, rank=0, world_size=1, local_rank=0)
 ```
 
 A method (how the model learns) is one Python file, a built-in in
-`packages/wpt-training/src/wpt_training/methods/` or any path given to
-`wpt-train --method`:
+`packages/wpt-training/src/wpt_training/methods/` (`muon`, `adamw`) or any
+path, named by a model recipe's `training.method`:
 
 ```python
 from wpt_training import Method, Verdict
 
-SETTINGS = {"lr": 3e-4}  # changed with --set lr=0.001, typed from these defaults
+SETTINGS = {"lr": 3e-4}  # changed by the recipe's training.settings, typed from these defaults
 
-class Mine(Method):  # may override loss, before_update, evaluated, state_dict, load_state_dict
+class Mine(Method):  # may override loss, validation_loss, before_update, after_update, evaluated,
+                     # state_dict, load_state_dict
     def __init__(self, model, settings, run):  # run: tokens, parameters, steps, log
         self.optimizer = ...
 

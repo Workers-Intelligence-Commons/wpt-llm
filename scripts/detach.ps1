@@ -2,7 +2,7 @@
 Run a command on this Windows machine so it keeps going after SSH disconnects.
 
 Usage, from the repository folder:
-    .\scripts\detach.ps1 uv run wpt-train <dataset id>
+    .\scripts\detach.ps1 uv run wpt-train <recipe> <dataset id>
 
 Programs started from an SSH session end when the session closes. This starts
 the command through Windows' process-creation service (WMI) instead, so it

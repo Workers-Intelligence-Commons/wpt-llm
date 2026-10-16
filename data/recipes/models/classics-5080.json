@@ -1,0 +1,44 @@
+{
+  "schema": 2,
+  "data": {
+    "mixture": "classics",
+    "tokenizer": "classics",
+    "total_tokens": 4290110,
+    "held_out": 0.05
+  },
+  "model": {
+    "block_size": 32768,
+    "n_layer": 8,
+    "d_model": 512,
+    "kda_heads": 4,
+    "kda_head_dim": 128,
+    "mla_heads": 4,
+    "mla_head_dim": 128,
+    "mla_kv_rank": 128,
+    "n_experts": 32,
+    "top_k": 4,
+    "expert_width": 256,
+    "latent_width": 256,
+    "shared_width": 512,
+    "engram_layers": [
+      2
+    ],
+    "engram_order": 3,
+    "engram_heads": 8,
+    "engram_dim": 16,
+    "engram_table_size": 50021
+  },
+  "training": {
+    "method": "muon",
+    "settings": {
+      "warmup": 30
+    },
+    "steps": 300,
+    "batch_size": 8,
+    "eval_every": 50,
+    "eval_batches": 4,
+    "seed": 1337
+  },
+  "posttrain": [],
+  "note": "Untested: the first recipe sized for one 16 GB GPU (RTX 5080 Laptop), 101M parameters with 32K-token windows, trained with --recompute --micro-batch 1. Measured on another GPU with --recompute, one window peaked at 1.5 GiB at 4K tokens, 2.7 GiB at 8K and 4.6 GiB at 16K: about 8 GiB at 32K by extrapolation. Its data is the classics for now (about 4.3M tokens, so the model mostly memorizes); it changes once a larger mixture exists."
+}

@@ -3,7 +3,7 @@
 # terminal or SSH session closes.
 #
 # Usage, from anywhere in the repository:
-#     scripts/detach.sh uv run wpt-train <dataset id>
+#     scripts/detach.sh uv run wpt-train <recipe> <dataset id>
 #
 # Closing a session sends its programs a "hang up" signal, which ends them.
 # nohup makes the command ignore it, and the command runs in the background

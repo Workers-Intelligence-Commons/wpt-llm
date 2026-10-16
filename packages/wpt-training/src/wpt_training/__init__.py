@@ -18,7 +18,7 @@ Each is a Python file, named by a built-in name or a path:
 The runner (train) owns everything else: the data, the global batch and
 how it is split over processes and accumulation steps, evaluation,
 checkpoints (in a folder, or anywhere a Checkpoint subclass saves them),
-resuming, and stopping cleanly on a signal. The batches and the dropout of a step are seeded
+resuming, and stopping cleanly on a signal. The batches and the random draws of a step are seeded
 by the run's seed and the step only, so the same settings train the same
 way on any number of processes, and a resumed run continues exactly where
 it stopped.

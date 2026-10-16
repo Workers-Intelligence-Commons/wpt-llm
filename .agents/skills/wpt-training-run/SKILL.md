@@ -10,8 +10,8 @@ is how a run is started and looked after.
 
 ## Before the run
 
-- The dataset is built: `uv run wpt-dataset build NAME` prints its id. A
-  first build of a tokenizer recipe writes its lock
+- The dataset is built from the model recipe: `uv run wpt-dataset build
+  NAME` prints its id. A first build of a tokenizer recipe writes its lock
   (`data/recipes/tokenizers/NAME.lock.json`): commit it.
 - PyTorch is installed for this machine's GPU: a plain `uv sync` removes
   it, `uv run scripts/setup.py` puts it back.
@@ -27,8 +27,8 @@ from the repository folder:
 
 | System | Command |
 | --- | --- |
-| Windows (PowerShell) | `.\scripts\detach.ps1 uv run wpt-train DATASET_ID --out runs/NAME [options]` |
-| Linux, macOS | `scripts/detach.sh uv run wpt-train DATASET_ID --out runs/NAME [options]` |
+| Windows (PowerShell) | `.\scripts\detach.ps1 uv run wpt-train RECIPE DATASET_ID --out runs/NAME [options]` |
+| Linux, macOS | `scripts/detach.sh uv run wpt-train RECIPE DATASET_ID --out runs/NAME [options]` |
 
 Both run the command outside the session, write everything it prints to
 `runs/logs/<date-time>.log` (UTF-8, line by line), and print the process

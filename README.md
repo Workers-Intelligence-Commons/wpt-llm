@@ -47,13 +47,17 @@ uv run scripts/setup.py                            # the PyTorch build for this 
 echo "WPT_STORE=file://$HOME/wpt-store" >> .env    # where fetched and built data lives
 
 uv run wpt-dataset build classics-small --stream   # fetch, convert, tokenize; prints a dataset id
-scripts/detach.sh uv run wpt-train <dataset id> --stream --out runs/first --n-layer 4 --n-embd 128
+scripts/detach.sh uv run wpt-train classics-small <dataset id> --stream --out runs/first
 uv run wpt-eval runs/first                         # memorization and other tests, into the model card
 uv run wpt-chat runs/first                         # continue text with the model
 ```
 
-`classics-small` is a small recipe over the admitted public-domain books,
-enough to see every step work on one machine.
+`classics-small` is a small model recipe over the admitted public-domain
+books, enough to see every step work on one machine. A model recipe
+(`data/recipes/models/`) holds everything that changes the model: its
+data, architecture, training and post-training steps
+([model.md](docs/model.md)); the command-line options only say how the
+hardware runs it.
 
 **Streaming** keeps disk use small at both ends, for data larger than the
 disk:
@@ -78,11 +82,12 @@ the same command with `--resume` continues.
 | move a run to another machine | `--run NAME`: the checkpoint lives in the store; `--run NAME --resume` there |
 | use several GPUs | `--strategy ddp --processes N` (several machines: `torchrun`) |
 | build despite a broken source | `wpt-dataset build --skip-failed`: it is left out and listed |
-| teach the model to chat | `wpt-posttrain runs/first runs/chat sft`, then `wpt-chat runs/chat --chat` |
+| teach the model to chat | a recipe whose `posttrain` list holds `sft`: `wpt-posttrain RECIPE runs/first runs/chat`, then `wpt-chat runs/chat --chat` |
+| train long windows on a small GPU | `--recompute`: layers run again in the backward pass instead of keeping their values |
 | review sources in a browser | `wpt-web` (needs Bun), then http://127.0.0.1:8410/ |
 
-Every option also comes from the environment (`--n-layer` is
-`WPT_N_LAYER`), and `--help` lists them all. Details:
+Every option also comes from the environment (`--micro-batch` is
+`WPT_MICRO_BATCH`), and `--help` lists them all. Details:
 [training](docs/training.md), [architecture](docs/architecture.md).
 
 ## Contributing

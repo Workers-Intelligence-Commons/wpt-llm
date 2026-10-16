@@ -3,7 +3,8 @@
 ## Training
 
 ```sh
-uv run wpt-train <dataset id> --n-layer 4 --n-head 4 --n-embd 128 --block-size 256 --steps 3000
+uv run wpt-dataset build classics-small    # prints the dataset id
+uv run wpt-train classics-small <dataset id>
 ```
 
 A run takes minutes to days, so start it detached from the terminal or SSH
@@ -12,11 +13,17 @@ session, which would otherwise end it and lose its output:
 `scripts/detach.sh uv run wpt-train ...` on Linux and macOS. Both write its
 output to `runs/logs/<date-time>.log` and print how to follow and stop it.
 
-`wpt-train` takes a built dataset id and never builds: build and training
-fail separately. Every setting is a command-line option or an environment
-variable (`WPT_` + the option name in capitals, `--n-layer` ->
-`WPT_N_LAYER`; the dataset id may come from `WPT_DATASET`); there is no
-training recipe file. `uv run wpt-train --help` lists them.
+`wpt-train` takes a model recipe (`data/recipes/models/<name>.json`, see
+[model.md](model.md)) and the id of the dataset built from it, and never
+builds: build and training fail separately. A dataset built from another
+data part than the recipe's is refused. Everything that changes the
+resulting model comes from the recipe: the architecture's numbers, the
+method and its settings, the steps, the batch, the evaluations and the
+seed. The command-line options say only how the hardware runs it; each
+also comes from an environment variable (`WPT_` + the option name in
+capitals, `--micro-batch` -> `WPT_MICRO_BATCH`; the recipe and the dataset
+id from `WPT_RECIPE` and `WPT_DATASET`). `uv run wpt-train --help` lists
+them.
 
 Validation uses the dataset's held-out shards. The tokens are read from
 disk as training needs them, so a dataset larger than memory trains: before
@@ -47,15 +54,26 @@ The held-out shards are copied whole, as without `--stream`.
 
 ### The batch is the same on any hardware
 
-`--batch-size` is the number of windows in one update, over every process
-together. Each process takes `--micro-batch` windows per pass (by default
-its whole share) and adds the passes up until the batch is complete. Which
-windows a step uses depends only on `--seed` and the step, never on the
-number of processes, and so does dropout, as long as `--micro-batch` stays
-the same: one GPU with two passes and two GPUs with one pass each take the
-same steps. When a GPU runs out of memory, lower `--micro-batch`; the
-training stays the same. The batch must split evenly: `--batch-size` a
-multiple of `--micro-batch` times the number of processes.
+The recipe's `batch_size` is the number of windows in one update, over
+every process together. Each process takes `--micro-batch` windows per
+pass (by default its whole share) and adds the passes up until the batch
+is complete. Which windows a step uses depends only on the recipe's `seed`
+and the step, never on the number of processes: one GPU with two passes
+and two GPUs with one pass each take the same steps. When a GPU runs out of
+memory, lower `--micro-batch`, then add `--recompute`; the training stays
+the same. The batch must split evenly: `batch_size` a multiple of
+`--micro-batch` times the number of processes.
+
+### Recomputing layers: long windows on a small GPU
+
+`--recompute` (or `WPT_RECOMPUTE=1`) keeps only each layer's input during
+a pass and runs the layer again during the backward pass, instead of
+keeping everything the layer computed. The result is the same; memory
+drops and each step takes about a third longer. Measured with a 101M model
+(8 layers, width 512), one window's peak memory was 5.5 GiB at 4K tokens
+without it, and with it 1.5 GiB at 4K, 2.7 GiB at 8K and 4.6 GiB at 16K.
+The `classics-5080` recipe, 32K-token windows on one 16 GB GPU, needs it
+with `--micro-batch 1`.
 
 ### Strategies: how the hardware is used
 
@@ -69,7 +87,7 @@ multiple of `--micro-batch` times the number of processes.
 On one machine, `--processes` starts them:
 
 ```sh
-uv run wpt-train <dataset id> --strategy ddp --processes 2
+uv run wpt-train <recipe> <dataset id> --strategy ddp --processes 2
 ```
 
 On several machines, `torchrun` (which comes with PyTorch) starts them:
@@ -77,7 +95,7 @@ each machine runs the same command with its `--nnodes`, `--node-rank` and
 `--master-addr` options. torchrun works on one machine too:
 
 ```sh
-uv run torchrun --nproc-per-node 2 -m wpt_train <dataset id> --strategy ddp
+uv run torchrun --nproc-per-node 2 -m wpt_train <recipe> <dataset id> --strategy ddp
 ```
 
 On Windows, torchrun does not start with PyTorch 2.14: the store its
@@ -101,11 +119,27 @@ yet.
 
 ### Methods: how the model learns
 
-`--method` names a built-in or a Python file. Its settings are changed with
-`--set NAME=VALUE`, repeatable (`WPT_SET` holds pairs separated by spaces);
-an unknown setting or a value of the wrong type stops before training.
+The recipe's `training.method` names a built-in or a Python file, and
+`training.settings` changes its settings; those left out keep the method's
+defaults, and an unknown setting or a value of the wrong type stops before
+training.
 
-- `adamw` (default): AdamW at a constant learning rate. Training stops
+- `muon`: how WPT models train (model.md, "Training"). Muon for matrix
+  weights, per head for the query, key and value projections and per
+  expert for routed experts; AdamW for the embedding, the output head,
+  norms and mHC's biases and gating factors; Adam at `table_lr_factor`
+  times the rate, without weight decay, for Engram's tables; QK-Clip at
+  `qk_clip` on MLA layers (0: off). The learning rate warms up over
+  `warmup` steps to `lr`, then falls to `first_factor` of it after
+  `first_drop` of the steps and to `second_factor` after `second_drop`;
+  the multi-token prediction loss weighs `mtp_weight`, then
+  `mtp_late_weight` after `mtp_switch` of the steps. The folder keeps the
+  weights of the lowest validation loss. Settings and defaults: `lr`
+  0.002, `weight_decay` 0.1, `momentum` 0.95, `beta1` 0.9, `beta2` 0.95,
+  `eps` 1e-8, `table_lr_factor` 5, `warmup` 2000, `first_drop` 0.8,
+  `first_factor` 0.316, `second_drop` 0.9, `second_factor` 0.1,
+  `mtp_weight` 0.3, `mtp_late_weight` 0.1, `mtp_switch` 0.676, `qk_clip` 100.
+- `adamw`: AdamW at a constant learning rate, for every weight. Training stops
   early when the validation loss, smoothed over the last `smoothing`
   evaluations, has not improved by `min_improve` for `patience`
   evaluations; the smaller the tokens-per-parameter ratio, the smaller the
@@ -115,19 +149,23 @@ an unknown setting or a value of the wrong type stops before training.
 
 A method file defines `SETTINGS` (names and defaults, whose types the
 values take) and `start(model, settings, run)`, which returns a
-`wpt_training.Method`: its optimizer, and optionally the loss of a batch,
-what happens just before each update (a learning-rate schedule, gradient
-clipping), which evaluation is the best and when to stop, and the state a
-resumed run needs. The model folder keeps the weights of the evaluation
-the method judged best.
+`wpt_training.Method`: its optimizer, and optionally the loss of a batch
+(by default the next-token loss plus the multi-token prediction loss at
+`mtp_weight`), what happens just before each update (a learning-rate
+schedule, gradient clipping) and just after it (QK-Clip), which evaluation
+is the best and when to stop, and the state a resumed run needs.
+Evaluations measure the next-token loss alone, at step 1, every
+`eval_every` steps and at the last step. The model folder keeps the weights
+of the evaluation the method judged best.
 
 ### Checkpoints and resuming
 
 Every `--checkpoint-every` steps (default 500, 0 for never), the main
 process writes a checkpoint: the step, the weights, the method's state and
 the best weights so far. The same command with `--resume` continues from
-it, on other hardware too: the number of processes and `--micro-batch` may
-change, the other options may not (the run stops with `SettingsMismatch`).
+it, on other hardware too: the number of processes, `--micro-batch` and
+`--recompute` may change; the recipe and the other options may not (the
+run stops with `SettingsMismatch`).
 Without `--resume`, a leftover checkpoint stops the run, so a crashed run
 is never overwritten by mistake. The checkpoint is removed once the model
 is saved.
@@ -177,7 +215,7 @@ included.
 
 The model folder holds:
 
-- `config.json`, the model's sizes;
+- `config.json`, the model's numbers;
 - the weights (safetensors, optionally split with `--max-shard-size`); each
   file's header carries `license` (AGPL-3.0-or-later), `output_license`
   (CC0-1.0) and `notice`, which points to the folder's `NOTICE` and the
@@ -224,14 +262,14 @@ tables, and the tokenizer uses none.
 
 **Training is not bit-exact**: GPU arithmetic differs between GPUs, drivers
 and PyTorch versions, so the same inputs give equivalent but not identical
-weights. The steps themselves are the same: each step's windows and dropout
-come from the seed and the step, and a resumed run continues the same
+weights. The steps themselves are the same: each step's windows, and any
+random draw a model makes, come from the seed and the step, and a resumed run continues the same
 steps. Around it, everything possible is checked:
 
 - before training, every input is checked against its hash: the dataset
   record, each shard (file sha256 and token hash), and the vocabulary;
 - `provenance.json` records what produced the model: the dataset id and
-  record, the sources it learned from, the vocabulary, every shard, all options, the strategy and
+  record, the sources it learned from, the vocabulary, every shard, the recipe's name and content, the command-line options, the strategy and
   method (file, its sha256, the method's settings), how the batch was split, the model shape and
   parameter count, the steps trained and the step whose weights the folder holds (which the
   model card shows), the repository commit (and whether the working tree had
