@@ -221,6 +221,19 @@ They run unmodified next to WPT and are not linked into it.
 | actions/checkout | v4 | MIT | CI |
 | astral-sh/setup-uv | v6 | MIT | CI |
 
+### Word lists of recipe names (`scripts/names/`)
+
+`scripts/recipe_name.py` draws model recipe names from two lists taken
+from Princeton WordNet 3.0, under its own license (the WordNet License,
+kept in `scripts/names/LICENSE` as it asks):
+
+- `adjectives.txt`: the adjectives that are one lowercase ASCII word and
+  appear at least once in WordNet's tagged text (its sense counts), minus
+  those WordNet marks as an ethnic slur, a disparagement or an obscenity:
+  4,619 words.
+- `animals.txt`: the nouns under `animal.n.01` that are one lowercase
+  ASCII word, minus the same marks: 2,497 words.
+
 ### Distribution
 
 WPT does not distribute any of these packages: installing a build downloads

@@ -72,9 +72,8 @@ keeping everything the layer computed. The result is the same; memory
 drops and each step takes about a third longer. Measured with a 101M model
 (8 layers, width 512), one window's peak memory was 5.5 GiB at 4K tokens
 without it, and with it 1.5 GiB at 4K, 2.7 GiB at 8K and 4.6 GiB at 16K.
-The `tardigrade` and `axolotl` recipes, 32K-token windows on one 16 GB or
-one 8 GB GPU, need it
-with `--micro-batch 1`.
+The `watery-tardigrade` and `unimpaired-axolotl` recipes, 32K-token
+windows on one 16 GB or one 8 GB GPU, need it with `--micro-batch 1`.
 
 ### Strategies: how the hardware is used
 

@@ -40,5 +40,5 @@
     "seed": 1337
   },
   "posttrain": [],
-  "note": "Untested in a full run: half of tardigrade, 50M parameters with 32K-token windows, sized for about 8 GB of GPU memory, trained with --recompute --micro-batch 1. On an integrated Radeon 860M, one 32K window of random tokens peaked at 6.55 GiB and took 105 s, but a real run on the classics hung that GPU in its first step: it is meant for a stronger GPU. Its data is the classics for now (about 4.3M tokens, so the model mostly memorizes); it changes once a larger mixture exists."
+  "note": "Untested in a full run: half of watery-tardigrade, 50M parameters with 32K-token windows, sized for about 8 GB of GPU memory, trained with --recompute --micro-batch 1. On an integrated Radeon 860M, one 32K window of random tokens peaked at 6.55 GiB and took 105 s, but a real run on the classics hung that GPU in its first step: it is meant for a stronger GPU. Its data is the classics for now (about 4.3M tokens, so the model mostly memorizes); it changes once a larger mixture exists."
 }
