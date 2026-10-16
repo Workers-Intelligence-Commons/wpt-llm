@@ -44,7 +44,7 @@ recipe then needs the old commit of this repository.
 
 ```json
 {
-  "schema": 4,
+  "schema": 5,
   "type": "http-archive",
   "address": "https://www.gutenberg.org/cache/epub/1342/pg1342-h.zip",
   "revision": "2026-03-01",
@@ -64,7 +64,8 @@ recipe then needs the old commit of this repository.
 
 - `schema`: the shape version of the file, for migrations.
 - `type`: `http-file`, `http-archive` (tar, tar.gz, tar.bz2, tar.xz or zip),
-  `git`, `mercurial`, or `empty` for text written for WPT: it downloads
+  `git`, `mercurial`, `huggingface` (a dataset on huggingface.co, pinned to
+  its commit), or `empty` for text written for WPT: it downloads
   nothing and starts with no files, and its patches hold every file. Its
   `address` is a name, `empty:<name>`, its `revision` the date it was
   started, and its `checksum` that of an empty manifest,
@@ -91,6 +92,10 @@ recipe then needs the old commit of this repository.
   Markdown (see "Documents are Markdown" below).
 - `tags`: describe paths (language, domain); pools select documents by tags.
 - `mirrors`: other addresses expected to give the same checksum.
+- `history` (git only): adds one file per commit from `since` to the
+  revision, `.git/history/<commit>`, in `git format-patch` layout.
+- `submodules` (git only): the address of each submodule the source reads,
+  by its path.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
 - `decision`: the human decision on the source (required): `admitted`,
   `refused` or `retired`, by whom and when. `reason` (why) is required to
@@ -98,6 +103,10 @@ recipe then needs the old commit of this repository.
   an explicit permission for content without a license.
 - Every object may hold a free-text `note`. It is data, so it survives
   migrations (comments would not).
+
+`CONTRIBUTING.md`, "Adding a source", says how to fill `history`,
+`submodules` and the `records` format's fields, including its `keep`
+rules.
 
 Globs: `*` matches within one folder, `**` across any number of folders.
 
@@ -185,6 +194,7 @@ tree, as its `formats` entry says
 | `text` | paragraphs as written; each line break inside a paragraph is a Markdown line break; Markdown's own characters are escaped, so the text reads exactly as written |
 | `code` | one fenced code block whose opening line names the language and the path: ```` ```python path="./src/main.py" ```` (the entry's `language`); in a git or Mercurial source the path starts with `./`, the repository's root, and in any other source it is written as it is (```` ```python path="src/main.py" ````), since no repository root exists |
 | `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source |
+| `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, or kept as it is with `"as": "markdown"` |
 | `chat` | conversations for post-training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: only the post-training step named by its tags reads it |
 
 A file whose Markdown is empty is no document: an EPUB file that holds only
@@ -279,4 +289,6 @@ except where a new field holds something only a person can write: shape 2 of
 `source.json` adds `attribution`, which the migration leaves empty, and the
 check then names each file to fill in. Shape 4 adds each license's `text`:
 the migration moves a `LicenseRef-<name>.txt` file into it and leaves any
-other text empty for a person to fill.
+other text empty for a person to fill. Shape 5 adds the `huggingface`
+type, the `records` format and a license entry's `values`; only the
+number changes.

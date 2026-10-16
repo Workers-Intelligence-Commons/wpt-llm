@@ -71,52 +71,14 @@ from the store, on any machine). Exit codes: 2 refused, 130 stopped.
 
 ## Adding a source
 
-Follow CONTRIBUTING.md, "Adding a source", in the order of the
-`wpt-sources` skill (finding and proving sources, when to ask the
-maintainer, admission). The parts an agent gets wrong:
-
-- The license must be on the allowed list in
-  `packages/wpt-dataset/src/wpt_dataset/licenses.py` and
-  `docs/licenses.md`, whose "What to check" column names each license's
-  trap. When in doubt, refuse; grey-zone licenses (CC BY-SA, ODbL) are
-  refused until a lawyer confirms them. A dual-licensed file is an
-  expression (`A OR B`, `A WITH exception`) that passes when one
-  alternative is allowed.
-- Every path matches exactly one `licenses` entry, and each entry needs an
-  `attribution`: the credit that license asks for, copied from the source
-  (authors, title, copyright line, link), and a `text`: the license as the
-  source gives it, read by a script from the source's own files (for public
-  domain, the proof). Never invent either. Every model trained on the
-  source repeats both in its `NOTICE`.
-- Every path also matches exactly one `formats` entry: how it becomes
-  Markdown (`markdown`, `text`, `code` with its `language`, `xhtml`), or
-  `chat` for conversations, which only post-training reads, or `records`
-  for a dataset file holding one document per record (JSON Lines or
-  Parquet), whose license entries list the record license `values` they
-  cover; a record with any other value is left out, and
-  `check --fetch` prints the values it left out. A git source with
-  `history` (`since`: the commit from which the root license file holds
-  the listed license) adds one `.git/history/<commit>` file per commit,
-  in `git format-patch` layout: format `code`, language `patch`.
-  Training reads only Markdown; a new kind of file needs its format in
-  `wpt_dataset/markdown.py` first.
-- `wpt-dataset` downloads nothing from an address that its site's robots.txt
-  forbids to every crawler, to wpt-dataset or to an AI training crawler, or
-  whose robots.txt answers anything but the file, 404 or 410
-  (`wpt_dataset/robots.py`); it then tries the next mirror, read with its
-  own robots.txt, since a site's robots.txt speaks only for that site. A
-  mirror is a real place the content is published (such as the author's
-  own site); never download by hand around a refusal.
-- Tags, licenses and formats come from people and from the source's own
-  statements: an agent may draft them from those statements for a person
-  to approve, never invent or guess them.
-- A new source starts with `"decision": "refused"` and the reason "under
-  review". Only a maintainer admits it, in a signed commit; an admission
-  has no reason unless it is an exception (such as an explicit permission
-  for content without a license), while a refusal or retirement always
-  says why.
-- The schema of each data file is in
-  `packages/wpt-dataset/src/wpt_dataset/schemas/`.
+Every rule for sources lives in the documentation: `docs/licenses.md`
+(the allowed licenses, what to check for each, every rule and maintainer's
+decision), `CONTRIBUTING.md` ("Adding a source"), `docs/data-selection.md`
+and `docs/chat-format.md`. Read them before writing or reviewing a source,
+and follow the `wpt-sources` skill for the order of work. Never apply a
+rule they do not hold: a case they do not settle is a question for the
+maintainer, and the answer goes into the documentation with its date. Only
+a maintainer admits a source, in a signed commit.
 
 ## Patches and text written for WPT
 

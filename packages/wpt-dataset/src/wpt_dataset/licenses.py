@@ -1,7 +1,8 @@
 """The closed list of licenses a source may carry. When in doubt, refuse.
 
 docs/licenses.md says why each one is here and what to check before using
-it. CC-BY-SA, ODbL and GFDL stay out until a lawyer confirms them. A
+it. CC-BY-SA-4.0 stays out until a lawyer confirms it; ODbL and GFDL are
+refused. A
 license outside the SPDX list is written LicenseRef-<name>.
 
 A source's license may be an SPDX expression of alternatives, such as

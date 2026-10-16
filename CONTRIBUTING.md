@@ -26,16 +26,21 @@ You take responsibility for those three checks.
 
 1. Check the license against [docs/licenses.md](docs/licenses.md). It must be
    on the allowed list, clearly; its "What to check" column says where each
-   kind of license hides a trap. Grey-zone licenses (CC BY-SA, ODbL) are
-   refused until a lawyer confirms them. Public domain must hold in the
+   kind of license hides a trap. CC BY-SA 4.0, the one grey-zone license,
+   is refused until a lawyer confirms it. Public domain must hold in the
    United States and in the work's country of origin.
 2. Choose the id: `uv run wpt-dataset source-id <origin> [<item>] <address>`.
+   For a git repository on GitHub, write the address without `.git`:
+   GitHub's robots.txt forbids `/*.git` addresses to AI training
+   crawlers, and the plain address serves the same repository.
 3. Create `data/sources/<id>/source.json` (see
    [docs/architecture.md](docs/architecture.md)), with `checksum` set to
    `sha256:` followed by 64 zeros for now, and a `decision` stating
    `"refused"` with the reason "under review".
 4. `uv run wpt-dataset manifest <id>` downloads it and prints its manifest and
-   checksum. Put the checksum in `source.json`. Exclude binary files in
+   checksum. Put the checksum in `source.json`. A publisher that rebuilds
+   its archives gives another checksum on a later fetch: fetch again and
+   update `revision` and `checksum` together. Exclude binary files in
    `extract`, map every path to exactly one license in `licenses`, and to
    exactly one format in `formats` (how it becomes Markdown, below). In
    each license entry, write in `attribution` the credit that license asks

@@ -59,14 +59,14 @@ uv run wpt-chat runs/default
 
 Before pushing, `uv run scripts/check.py` runs every check CI runs.
 
-The repository starts with no sources: each one is added by a reviewed,
-signed contribution (see [CONTRIBUTING.md](CONTRIBUTING.md)).
+Each source is added by a reviewed, signed contribution (see [CONTRIBUTING.md](CONTRIBUTING.md)).
 
 ## Documentation
 
 - [Charter](docs/charter.md)
 - [Architecture: sources, manifests, patches, store, builds](docs/architecture.md)
 - [Licenses and what the corpus accepts](docs/licenses.md)
+- [Questions for legal review, in English and French](LEGAL-QUESTIONS.html)
 - [Erasure requests](docs/erasure.md)
 - [Data selection: tags, pools, mixtures, held-out text](docs/data-selection.md)
 - [Tokenizer](docs/tokenizer.md)

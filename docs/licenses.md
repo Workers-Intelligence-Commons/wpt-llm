@@ -269,9 +269,9 @@ The evidence was gathered on 2026-10-15 from the FSF license list
 (<https://www.gnu.org/licenses/license-list.html>), the license texts, the
 Open Definition list (<https://opendefinition.org/licenses/>), the Blue Oak
 Council list (<https://blueoakcouncil.org/list>), Creative Commons' pages on
-compatibility and on AI training, and the publishers named below. Two
-choices rest on the maintainer's decision alone, without an outside ruling:
-CC BY before 4.0 and CDLA-Sharing-1.0.
+compatibility and on AI training, and the publishers named below. A choice
+that rests on the maintainer's decision alone, without an outside ruling,
+says so in its row.
 
 ### Public domain and permissive
 
@@ -299,15 +299,15 @@ CC BY before 4.0 and CDLA-Sharing-1.0.
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `GPL-3.0-only`, `GPL-3.0-or-later`, `LGPL-3.0-only`, `LGPL-3.0-or-later` | AGPL section 13 lets an AGPL work combine with GPLv3 works | a "-only" part can never move to a later AGPL version |
+| `GPL-3.0-only`, `GPL-3.0-or-later`, `LGPL-3.0-only`, `LGPL-3.0-or-later` | AGPL section 13 lets an AGPL work combine with GPLv3 works | a "-only" part can never move to a later AGPL version; the version comes from the notices in the files: a notice naming version 3 only gives "-only", and "any later version", or no notice at all, gives "-or-later" (section 14: a Program that specifies no version lets any version be chosen; maintainer's decision, 2026-10-16), the same for the AGPL |
 | `AGPL-3.0-only`, `AGPL-3.0-or-later` | the weights' own license | |
 
 ### Copyleft that moves to the GPLv3 or the AGPL
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `GPL-2.0-or-later` | "or later" lets the recipient choose the GPLv3 | the notice in each file: GPL-2.0-only (the Linux kernel) is refused, and a repository's `COPYING` file alone does not say "or later" |
-| `LGPL-2.1-only`, `LGPL-2.1-or-later` | LGPL 2.1 section 3: the ordinary GPL may apply instead, "if a newer version than version 2 ... has appeared, then you can specify that version" | |
+| `GPL-2.0-or-later` | "or later" lets the recipient choose the GPLv3 | the notice in each file: a notice naming version 2 only (GPL-2.0-only, the Linux kernel) is refused; "any later version", or no notice at all, gives "-or-later" (section 9: a Program that specifies no version lets any version be chosen; maintainer's decision, 2026-10-16) |
+| `LGPL-2.1-only`, `LGPL-2.1-or-later` | LGPL 2.1 section 3: the ordinary GPL may apply instead, "if a newer version than version 2 ... has appeared, then you can specify that version" | a notice naming version 2.1 only gives "-only"; "any later version", or no notice at all, gives "-or-later" (section 14, as for the GPL; maintainer's decision, 2026-10-16) |
 | `MPL-2.0` | section 1.12 names "the GNU Affero General Public License, Version 3.0, or any later versions" a Secondary License, and section 3.3 allows distribution under it | files marked "Incompatible With Secondary Licenses" (Exhibit B, SPDX `MPL-2.0-no-copyleft-exception`) are refused |
 | `EUPL-1.2` | its appendix lists the AGPL; the European Commission: "you may distribute under the AGPL a larger derivative work integrating components covered by the EUPL" | EUPL-1.1 is refused (FSF: incompatible) |
 | `CECILL-2.1` | FSF: "explicitly compatible with the GNU GPL" | CeCILL-B and CeCILL-C are refused |
@@ -317,7 +317,7 @@ CC BY before 4.0 and CDLA-Sharing-1.0.
 
 | License (SPDX) | Why it is allowed | What to check |
 | --- | --- | --- |
-| `CC-BY-4.0` | FSF: "compatible with all versions of the GNU GPL"; credit may be given "in any reasonable manner", including a link (section 3(a)(2)); Creative Commons: for training, credit "could be a simple link to the source of the dataset" | NC and ND variants are refused; the credit names the creator, the copyright notice, the license, a link and whether the work was changed |
+| `CC-BY-4.0` | FSF: "compatible with all versions of the GNU GPL"; credit may be given "in any reasonable manner", including a link (section 3(a)(2)); Creative Commons: for training, credit "could be a simple link to the source of the dataset" | NC and ND variants are refused; the credit names the creator, the copyright notice, the license, a link and whether the work was changed; a label that names no version (peS2o's "CCBY") is CC BY, written `CC-BY-4.0` with a note in `text` that no version is named: every version permits the use (maintainer's decision, 2026-10-16) |
 | `CC-BY-1.0`, `CC-BY-2.0`, `CC-BY-2.5`, `CC-BY-2.5-AU`, `CC-BY-3.0`, `CC-BY-3.0-AT`, `CC-BY-3.0-AU`, `CC-BY-3.0-DE`, `CC-BY-3.0-IGO`, `CC-BY-3.0-NL`, `CC-BY-3.0-US`, `LicenseRef-CC-BY-2.0-FR` | Open Definition: open; no FSF ruling (maintainer's decision) | these versions ask to keep the license's address with every copy, which `text` carries; another country version is added to the list by name when a source needs it |
 | `ODC-By-1.0` | Open Definition: recommended | it covers a database, not the documents in it: each document needs its own license |
 | `OGL-UK-3.0` | the licence states it is "compatible with the Creative Commons Attribution License 4.0 and the Open Data Commons Attribution License" | it excludes personal data, third-party rights and logos; default credit: "Contains public sector information licensed under the Open Government Licence v3.0." |
@@ -342,7 +342,9 @@ GPL-3.0-or-later). `AND` joins licenses that apply at once, such as
 `MIT AND Apache-2.0` for a repository with both license files and no
 statement that one may choose: the alternative passes when every license
 in it is allowed, and its `text` holds every one of their texts
-(maintainer's decision, 2026-10-16). `AND` binds before `OR`, as in SPDX;
+(maintainer's decision, 2026-10-16). When the repository states the choice
+(its README or `Cargo.toml` says "MIT OR Apache-2.0", "MIT/Apache-2.0" or
+"at your option"), the entry is `MIT OR Apache-2.0`. `AND` binds before `OR`, as in SPDX;
 parentheses are not accepted.
 
 ### License texts
@@ -356,8 +358,8 @@ each distinct text once.
 
 ### Still refused
 
-The grey zone stays refused until a lawyer confirms it: CC-BY-SA-4.0 and
-other ShareAlike licenses, and ODbL-1.0. Facts gathered for that review:
+The grey zone is CC-BY-SA-4.0 alone, refused until a lawyer confirms it
+(maintainer's decision, 2026-10-16). Facts gathered for that review:
 
 - Creative Commons declared GPLv3 a BY-SA-compatible license for BY-SA 4.0 on
   2015-10-08, one way only
@@ -369,12 +371,13 @@ other ShareAlike licenses, and ODbL-1.0. Facts gathered for that review:
   license as the original works"
   (<https://creativecommons.org/using-cc-licensed-works-for-ai-training-2/>),
   which contradicts AGPL weights.
-- The FSF calls ODbL "incompatible with the GNU GPL".
 - Wikipedia text is CC BY-SA 4.0 under the current Wikimedia Terms of Use.
 - Common Pile v0.1 includes CC BY-SA content; WPT's rule is stricter.
 
 Refused: any NC (no commercial use) or ND (no derivatives) clause,
-GPL-2.0-only, CC-BY-SA-3.0, GFDL (FSF: not GPL-compatible), the Free Art
+GPL-2.0-only, CC-BY-SA-3.0, ODbL-1.0 (FSF: "incompatible with the GNU
+GPL"), GFDL (FSF: not GPL-compatible; maintainer's decision, 2026-10-16:
+plainly refused, not a grey zone), the Free Art
 License, CDDL-1.0, EPL-1.0, EPL-2.0 alone, EUPL-1.1,
 MPL-2.0-no-copyleft-exception, CeCILL-B, CeCILL-C, Artistic-1.0,
 BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
@@ -399,15 +402,35 @@ BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
   When a label is known to be wrong for part of the file, the format
   entry's `keep` rules leave that part out by another field: each names a
   field and the values it may hold, and a record enters only when every
-  rule holds (for example the records of the one parliament a licence
-  covers).
+  rule holds: UK Hansard keeps the records of the UK Parliament, which its
+  licence covers, and leaves out those of the devolved parliaments and
+  London; regulations keeps the rules and proposed rules agencies issue,
+  and leaves out the notices and supporting material that also hold
+  companies' filings (maintainer's decision, 2026-10-16).
 - **A git history** (`history` in a git source) starts at the commit from
   which the repository's root license file holds the license the source
   lists: earlier commits were published without a license or under
-  another one. Its diffs show only the files the source keeps, so a
-  vendored folder left out of the code stays out of the history. Commit
+  another one. Its diffs show every file the source keeps, third-party
+  folders included, so its license entry is the AND of every license in
+  the source, with every credit (maintainer's decision, 2026-10-16). Commit
   authors' names and emails stay as git wrote them: the repository
   publishes them under its license.
+- **Every file whose license allows it comes in.** Only binary files (the
+  repository reads UTF-8 text), license refusals and doubts leave a file
+  out; configuration, build files, license files and edition pages are
+  data like any other (maintainer's decision, 2026-10-16).
+- **Third-party code** (a copied library, a dependency folder) inside a
+  source is used when its license is allowed, as its own license entry:
+  its license file, or else the license its package metadata declares
+  (`package.json`, `Cargo.toml`, `composer.json`, `pyproject.toml`), with
+  that license's official text in `text`. A folder that declares no
+  license stays out (maintainer's decision, 2026-10-16).
+- **A git submodule** is another repository with its own license. Its
+  files enter at the commit the parent pins, with a license entry of
+  their own when that license is on the allowed list (a parent under
+  MIT and a submodule under Apache-2.0 give two entries); a submodule
+  under another license, or one that cannot be fetched, is excluded
+  (maintainer's decision, 2026-10-16).
 - **Public domain** means public domain both in the United States and in the
   work's country of origin (the Wikimedia Commons rule). A work can still be
   protected in the country someone publishes from. A label that says only
@@ -446,8 +469,43 @@ BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
     Python Enhancement Proposals, whose authors placed them in the public
     domain) is `LicenseRef-public-domain`, with the dedication quoted in
     `text` (maintainer's decision, 2026-10-15).
-  - An unknown death year, an unnamed reviser or committee, or facts that
-    disagree make the work a doubt for the maintainer, never a guess.
+  - **A translation project's own dedication** counts as its authors':
+    the project states in its own words that the text is in the public
+    domain (or under CC0), and nothing from the same holder contradicts it,
+    such as a notice reserving rights, a conflicting page or a condition on
+    copying or changing the text. The Berean Standard Bible stays refused
+    for a conflicting page of its holder. A request about the name alone
+    does not contradict it (the World English Bible: "if you CHANGE the
+    actual text ... you not call the result the World English Bible"), nor
+    does a copyright line beside a release of every right (the
+    Robinson-Pierpont Greek New Testament: "This compilation is Copyright
+    ... All rights to this text are released to everyone"). A label written
+    by a distributor counts only when the distributor is the project, as
+    eBible.org's owner is the World English Bible's editor (maintainer's
+    decisions, 2026-10-16).
+  - **A text revised by an unnamed committee or reviser** and published
+    before 1926 is an anonymous work, in the public domain everywhere; the
+    named people (the original translator) are still checked
+    (maintainer's decision, 2026-10-16).
+  - An unknown death year, an unnamed reviser or committee of a text
+    published in 1926 or later, or facts that disagree make the work a
+    doubt for the maintainer, never a guess. A fact that one more research
+    pass cannot find leaves the source refused, with that fact as its
+    `reason` (maintainer's decision, 2026-10-16).
+- **Collections the maintainer chose**: GitHub repositories with 10,000
+  stars or more, forks and archived ones included, whose license is
+  allowed, whether GitHub recognizes the license file or the file itself
+  is identified (maintainer's decisions, 2026-10-15 and 2026-10-16); the
+  build removes exact duplicates with Common Pile's code.
+- **A distributor's own pages** (a copyright page, a note on the file set)
+  enter only when the distributor states their license: eBible.org states
+  none for its own pages, so they stay out, while its signing key, not a
+  written work, enters. A dataset card enters when its license is stated:
+  OpenAssistant's under Apache-2.0, not Common Pile's, which state none
+  (maintainer's decisions, 2026-10-16).
+- **A distributor's date is not proof of the edition**: compare a passage
+  with the edition it names; modern spelling, section headings or
+  introductions mean a later edition, whose editors must be found.
 - **"No AI training" wishes are honored** even when the license would allow
   use: a statement by the owner in a README or a machine-readable
   text-and-data-mining reservation (EU Directive 2019/790, article 4) leaves
@@ -484,6 +542,14 @@ A human decides every source; the decision is recorded in `source.json`
 admission) and its commit must be signed by an allowed key (see
 [CONTRIBUTING.md](../CONTRIBUTING.md)). There is no automatic filtering or
 tagging.
+
+A license question the maintainer cannot settle alone goes into
+[LEGAL-QUESTIONS.html](../LEGAL-QUESTIONS.html), the page for legal
+review, in English and French: the current choice, the reasons and
+evidence, and the question. Until a lawyer answers, the current choice
+applies. An answer is written under its question with its date and who
+gave it, and the rule it changes is written into this document
+(maintainer's decision, 2026-10-16).
 
 Tools may help reviewers by flagging, never by deciding:
 

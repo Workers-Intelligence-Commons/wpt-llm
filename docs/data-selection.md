@@ -21,8 +21,11 @@ content. Near-duplicates stay.
 
 ## Tags and pools
 
-Tags describe paths in `source.json` (language, domain...). A pool selects
-documents by a tag expression:
+Tags describe paths in `source.json` (language, domain...). They come from
+the source's own statements or from a person, never from a guess: GitHub
+repositories carry only `code`, since their human language is not stated
+(maintainer's decision, 2026-10-16). A pool selects documents by a tag
+expression:
 
 | Expression | Selects |
 | --- | --- |

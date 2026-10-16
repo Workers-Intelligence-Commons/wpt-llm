@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WPT legal questions</title>
+<style>
+:root {
+  --bg: #fbfaf7; --fg: #1d1d1b; --muted: #5d5b55; --line: #dcd8cf;
+  --card: #ffffff; --accent: #8a2c1d; --open: #8a5a00; --open-bg: #fbefd5;
+  --done: #2f6b2f; --done-bg: #e2f0de;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171715; --fg: #ecebe6; --muted: #a9a69d; --line: #3a3934;
+    --card: #20201d; --accent: #e08a73; --open: #f0c060; --open-bg: #3b3018;
+    --done: #8fcf8f; --done-bg: #1f3320;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #171715; --fg: #ecebe6; --muted: #a9a69d; --line: #3a3934;
+  --card: #20201d; --accent: #e08a73; --open: #f0c060; --open-bg: #3b3018;
+  --done: #8fcf8f; --done-bg: #1f3320;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 16px/1.55 Georgia, "Times New Roman", serif; }
+main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 1.7rem; margin: 0 0 4px; }
+h2 { font-size: 1.25rem; margin: 40px 0 12px; padding-bottom: 6px;
+  border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.05rem; margin: 0 0 8px; }
+p, li { margin: 0 0 8px; }
+a { color: var(--accent); }
+code { font: 0.9em ui-monospace, Menlo, Consolas, monospace; }
+.meta { color: var(--muted); font-size: 0.95rem; }
+.switch { position: sticky; top: 0; z-index: 1; background: var(--bg);
+  padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.switch button { font: inherit; padding: 4px 12px; margin-right: 6px;
+  border: 1px solid var(--line); background: var(--card); color: var(--fg);
+  border-radius: 4px; cursor: pointer; }
+.switch button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+body[data-lang="en"] .pair, body[data-lang="fr"] .pair { grid-template-columns: 1fr; }
+body[data-lang="en"] [lang="fr"], body[data-lang="fr"] [lang="en"] { display: none; }
+.q { background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+  padding: 16px; margin: 0 0 16px; }
+.q .id { font-weight: bold; color: var(--accent); margin-right: 6px; }
+.status { display: inline-block; font-size: 0.8rem; padding: 1px 8px;
+  border-radius: 10px; margin-left: 6px; vertical-align: 2px;
+  font-family: system-ui, sans-serif; }
+.status.open { color: var(--open); background: var(--open-bg); }
+.status.done { color: var(--done); background: var(--done-bg); }
+dl { margin: 0; }
+dt { font-weight: bold; margin-top: 8px; }
+dd { margin: 0 0 4px; }
+@media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+@media print {
+  .switch { display: none; }
+  .q { break-inside: avoid; }
+  body { background: #fff; color: #000; }
+}
+</style>
+</head>
+<body data-lang="both">
+<main>
+
+<div class="pair">
+<div lang="en">
+<h1>WPT: questions for legal review</h1>
+<p class="meta">Workers' Intelligence Commons, https://github.com/Workers-Intelligence-Commons/wpt-llm. Maintainer: Inaya Yousfi. Started 2026-10-16.</p>
+</div>
+<div lang="fr">
+<h1>WPT : questions pour un examen juridique</h1>
+<p class="meta">Workers' Intelligence Commons, https://github.com/Workers-Intelligence-Commons/wpt-llm. Mainteneuse : Inaya Yousfi. Commencé le 16/10/2026.</p>
+</div>
+</div>
+
+<div class="switch" role="group" aria-label="Language / Langue">
+<button type="button" data-set="both" aria-pressed="true">EN + FR</button>
+<button type="button" data-set="en" aria-pressed="false">English</button>
+<button type="button" data-set="fr" aria-pressed="false">Français</button>
+</div>
+
+<div class="pair">
+<div lang="en">
+<h2>About this document</h2>
+<p>WPT (Workers' Pre-trained Transformer) is a language model trained from scratch, only on content whose license is clear. Its code and its weights are published under the GNU Affero General Public License, version 3 or later (AGPL-3.0-or-later). The project needs two things from that license: anyone may serve the model for money, and every modified version must be shared, including a version that is only offered as an online service.</p>
+<p>The project treats every training source like a dependency of the weights: a source enters only when its license allows the weights to be distributed under the AGPL. The repository holds no data, only exact pointers to each source (address, revision, checksum) with its licenses and the credit each asks for. The full rules are in <code>docs/licenses.md</code>.</p>
+<p>This page lists every choice that does not rest on a written statement that the content may be used in AGPL work, and every legal question the project is still waiting on. Each entry gives the current choice, the reasons and evidence behind it, and the question for a lawyer. Until an answer arrives, the current choice applies.</p>
+<p>It is a living document: every license question the maintainer cannot settle alone is added here. An answer is written under its question with its date and who gave it, and the rule it changes is written into <code>docs/licenses.md</code>.</p>
+</div>
+<div lang="fr">
+<h2>À propos de ce document</h2>
+<p>WPT (Workers' Pre-trained Transformer) est un modèle de langue entraîné de zéro, uniquement sur des contenus dont la licence est claire. Son code et ses poids sont publiés sous la GNU Affero General Public License, version 3 ou ultérieure (AGPL-3.0-or-later). Le projet attend deux choses de cette licence : chacun peut proposer le modèle comme service payant, et toute version modifiée doit être partagée, y compris une version seulement proposée comme service en ligne.</p>
+<p>Le projet traite chaque source d'entraînement comme une dépendance des poids : une source n'entre que si sa licence permet de distribuer les poids sous l'AGPL. Le dépôt ne contient aucune donnée, seulement des pointeurs exacts vers chaque source (adresse, révision, somme de contrôle) avec ses licences et la mention que chacune exige. Les règles complètes sont dans <code>docs/licenses.md</code>.</p>
+<p>Cette page liste chaque choix qui ne repose pas sur une déclaration écrite autorisant l'usage du contenu dans une œuvre sous AGPL, et chaque question juridique encore en attente. Chaque entrée donne le choix actuel, ses raisons et ses preuves, et la question posée à un juriste. Tant qu'aucune réponse n'est donnée, le choix actuel s'applique.</p>
+<p>C'est un document vivant : chaque question de licence que la mainteneuse ne peut pas trancher seule y est ajoutée. Une réponse est écrite sous sa question avec sa date et son auteur, et la règle qu'elle change est écrite dans <code>docs/licenses.md</code>.</p>
+</div>
+</div>
+
+<!-- A. Foundations -->
+<div class="pair">
+<div lang="en"><h2>A. Foundations</h2></div>
+<div lang="fr"><h2>A. Fondements</h2></div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">A1</span>Do the licenses of training data bind the weights? <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>The project assumes they do: weights are treated as a work combining every source, so every source's license must allow distribution under the AGPL.</dd>
+<dt>Why</dt><dd>It is the cautious reading. Whether training makes the weights a derivative work of the data is not settled, in the European Union or in the United States.</dd>
+<dt>Question</dt><dd>Under French and EU law (and, if possible, US law), are model weights a derivative or composite work of their training texts? If not, which obligations of the sources' licenses still apply (credit, notices, share-alike)?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">A1</span>Les licences des données d'entraînement s'imposent-elles aux poids ? <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Le projet suppose que oui : les poids sont traités comme une œuvre combinant toutes les sources, donc la licence de chaque source doit permettre une distribution sous AGPL.</dd>
+<dt>Raisons</dt><dd>C'est la lecture prudente. La question de savoir si l'entraînement fait des poids une œuvre dérivée des données n'est tranchée ni dans l'Union européenne ni aux États-Unis.</dd>
+<dt>Question</dt><dd>En droit français et européen (et si possible américain), les poids d'un modèle sont-ils une œuvre dérivée ou composite de leurs textes d'entraînement ? Sinon, quelles obligations des licences des sources s'appliquent encore (mention, notices, partage à l'identique) ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">A2</span>Does the AGPL work for weights? <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>Weights are licensed AGPL-3.0-or-later. Each model folder carries the license text, a <code>NOTICE</code> naming every source with its credit, and a model card; each weight file's header names the licenses.</dd>
+<dt>Why</dt><dd>AGPL section 13 makes offering a modified program over a network count, which is the project's second need. It also accepts the widest set of copyleft inputs: GPLv3 works through section 13, and through them LGPL, MPL-2.0, EUPL-1.2, CeCILL-2.1 and GPLv2-or-later.</dd>
+<dt>Question</dt><dd>Are weights a "Program" under the AGPL, and does serving a modified model to users over a network trigger section 13, so that the modified weights must be offered to those users?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">A2</span>L'AGPL fonctionne-t-elle pour des poids ? <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Les poids sont sous AGPL-3.0-or-later. Chaque dossier de modèle contient le texte de la licence, un fichier <code>NOTICE</code> nommant chaque source avec sa mention, et une fiche du modèle ; l'en-tête de chaque fichier de poids nomme les licences.</dd>
+<dt>Raisons</dt><dd>La section 13 de l'AGPL couvre la mise à disposition d'un programme modifié à travers un réseau, ce qui est le second besoin du projet. Elle accepte aussi le plus large ensemble d'entrées sous copyleft : les œuvres sous GPLv3 par sa section 13, et à travers elles la LGPL, la MPL-2.0, l'EUPL-1.2, la CeCILL-2.1 et la GPLv2 ou ultérieure.</dd>
+<dt>Question</dt><dd>Des poids sont-ils un « Programme » au sens de l'AGPL, et proposer un modèle modifié à des utilisateurs à travers un réseau déclenche-t-il la section 13, obligeant à leur offrir les poids modifiés ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">A3</span>"Version 3 only" content inside "or later" weights <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>Sources under GPL-3.0-only, LGPL-3.0-only or AGPL-3.0-only are accepted, and the weights are still labelled AGPL-3.0-or-later. <code>docs/licenses.md</code> notes that a "-only" part can never move to a later AGPL version.</dd>
+<dt>Question</dt><dd>Can weights trained on "-only" content carry the "or later" label, or must the label become AGPL-3.0-only as soon as one such source enters?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">A3</span>Contenu « version 3 seulement » dans des poids « ou ultérieure » <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Les sources sous GPL-3.0-only, LGPL-3.0-only ou AGPL-3.0-only sont acceptées, et les poids restent étiquetés AGPL-3.0-or-later. <code>docs/licenses.md</code> note qu'une partie « -only » ne pourra jamais passer à une version ultérieure de l'AGPL.</dd>
+<dt>Question</dt><dd>Des poids entraînés sur du contenu « -only » peuvent-ils porter l'étiquette « ou ultérieure », ou l'étiquette doit-elle devenir AGPL-3.0-only dès qu'une telle source entre ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">A4</span>Is one NOTICE file enough credit? <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>Credit is given once per model: its <code>NOTICE</code> lists every source with the credit its license asks for (authors, title, copyright line, link) and each distinct license text once. For datasets holding many documents, each kept document's credit goes into a file <code>CREDITS/&lt;source&gt;.jsonl</code> in the model folder. Generated text carries no credit; OUTPUT-NOTICE recommends linking to the repository.</dd>
+<dt>Why</dt><dd>MIT and BSD ask that their notice go with copies, Apache-2.0 asks for its license and the source's <code>NOTICE</code> content, and CC BY 4.0 accepts credit "in any reasonable manner", including a link (section 3(a)(2)).</dd>
+<dt>Question</dt><dd>Does this satisfy the notice obligations of MIT, BSD, Apache-2.0 and CC BY when weights are distributed? What happens when a model reproduces a piece of a source in its output?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">A4</span>Un seul fichier NOTICE suffit-il comme mention ? <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>La mention est donnée une fois par modèle : son <code>NOTICE</code> liste chaque source avec la mention que sa licence exige (auteurs, titre, ligne de copyright, lien) et chaque texte de licence distinct une fois. Pour les jeux de données contenant de nombreux documents, la mention de chaque document retenu va dans un fichier <code>CREDITS/&lt;source&gt;.jsonl</code> du dossier du modèle. Le texte généré ne porte aucune mention ; OUTPUT-NOTICE recommande un lien vers le dépôt.</dd>
+<dt>Raisons</dt><dd>MIT et BSD demandent que leur notice accompagne les copies, Apache-2.0 demande sa licence et le contenu du fichier <code>NOTICE</code> de la source, et CC BY 4.0 accepte une mention « par tout moyen raisonnable », y compris un lien (section 3(a)(2)).</dd>
+<dt>Question</dt><dd>Cela remplit-il les obligations de notice de MIT, BSD, Apache-2.0 et CC BY lors de la distribution des poids ? Qu'en est-il lorsqu'un modèle reproduit un passage d'une source dans sa sortie ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<!-- B. Licenses -->
+<div class="pair">
+<div lang="en"><h2>B. Licenses accepted without a written yes for the AGPL</h2></div>
+<div lang="fr"><h2>B. Licences acceptées sans « oui » écrit pour l'AGPL</h2></div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">B1</span>Creative Commons Attribution before 4.0 <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>Accepted on the maintainer's decision: CC-BY-1.0, 2.0, 2.5, 2.5-AU, 3.0 and its ports (AT, AU, DE, IGO, NL, US), and CC BY 2.0 France (Tatoeba). The license's address goes with every copy, in the entry's <code>text</code>.</dd>
+<dt>Why</dt><dd>The Open Definition lists them as open. The FSF has ruled only on CC BY 4.0 ("compatible with all versions of the GNU GPL").</dd>
+<dt>Question</dt><dd>Are these versions compatible with the AGPL? In particular, do their clauses on keeping the license's address with every copy, and on technical protection measures, add conditions the AGPL forbids?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">B1</span>Creative Commons Attribution avant la 4.0 <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Acceptées sur décision de la mainteneuse : CC-BY-1.0, 2.0, 2.5, 2.5-AU, 3.0 et ses transpositions (AT, AU, DE, IGO, NL, US), et CC BY 2.0 France (Tatoeba). L'adresse de la licence accompagne chaque copie, dans le champ <code>text</code>.</dd>
+<dt>Raisons</dt><dd>L'Open Definition les classe comme ouvertes. La FSF ne s'est prononcée que sur CC BY 4.0 (« compatible avec toutes les versions de la GNU GPL »).</dd>
+<dt>Question</dt><dd>Ces versions sont-elles compatibles avec l'AGPL ? En particulier, leurs clauses sur la conservation de l'adresse de la licence avec chaque copie, et sur les mesures techniques de protection, ajoutent-elles des conditions que l'AGPL interdit ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">B2</span>A "CC BY" label without a version <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>A label such as peS2o's "CCBY" is written CC-BY-4.0, with a note that no version is named (maintainer's decision, 2026-10-16).</dd>
+<dt>Why</dt><dd>Every version of CC BY permits the use.</dd>
+<dt>Question</dt><dd>Is reading an unversioned label as CC BY 4.0 defensible, or should it be read as the oldest version, or refused?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">B2</span>Une étiquette « CC BY » sans version <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Une étiquette comme le « CCBY » de peS2o est écrite CC-BY-4.0, avec une note indiquant qu'aucune version n'est nommée (décision de la mainteneuse, 16/10/2026).</dd>
+<dt>Raisons</dt><dd>Toutes les versions de CC BY permettent cet usage.</dd>
+<dt>Question</dt><dd>Lire une étiquette sans version comme CC BY 4.0 est-il défendable, ou faut-il la lire comme la plus ancienne version, ou la refuser ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">B3</span>Public-sector licenses accepted through a chain <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>Accepted because each states compatibility with CC BY or with a license that does, or because the Open Definition lists it: OGL-UK-3.0 ("compatible with the Creative Commons Attribution License 4.0 and the Open Data Commons Attribution License"), OGL-Canada-2.0 (Open Definition), etalab-2.0 (built to be compatible with CC BY 2.0 and later, the OGL and ODC-BY), DL-DE-BY-2.0 and DL-DE-ZERO-2.0 (Open Definition), NLOD-2.0 (compatible with the OGL), the Italian IODL-2.0 (a variant of the OGL), Japan's PDL-1.0 (compatible with CC BY 4.0, per the Japanese government), and the UK Open Parliament Licence 3.0 (modelled on the OGL; maintainer's decision, 2026-10-16).</dd>
+<dt>Question</dt><dd>Does compatibility pass along a chain (license X compatible with CC BY 4.0, CC BY 4.0 compatible with the GPL, so X can enter AGPL work)? Do the exclusions in these licenses (personal data, third-party rights, logos) or Japan's per-dataset "Important note" change the answer?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">B3</span>Licences du secteur public acceptées par une chaîne <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Acceptées parce que chacune se déclare compatible avec CC BY ou avec une licence qui l'est, ou parce que l'Open Definition la reconnaît : OGL-UK-3.0 (« compatible avec la Creative Commons Attribution License 4.0 et l'Open Data Commons Attribution License »), OGL-Canada-2.0 (Open Definition), etalab-2.0 (Licence Ouverte 2.0, conçue compatible avec CC BY 2.0 et ultérieures, l'OGL et l'ODC-BY), DL-DE-BY-2.0 et DL-DE-ZERO-2.0 (Open Definition), NLOD-2.0 (compatible avec l'OGL), l'IODL-2.0 italienne (variante de l'OGL), la PDL-1.0 japonaise (compatible avec CC BY 4.0 selon le gouvernement japonais), et l'Open Parliament Licence 3.0 britannique (calquée sur l'OGL ; décision de la mainteneuse, 16/10/2026).</dd>
+<dt>Question</dt><dd>La compatibilité se transmet-elle le long d'une chaîne (licence X compatible avec CC BY 4.0, CC BY 4.0 compatible avec la GPL, donc X peut entrer dans une œuvre sous AGPL) ? Les exclusions de ces licences (données personnelles, droits de tiers, logos) ou la « note importante » propre à chaque jeu de données japonais changent-elles la réponse ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">B4</span>Data licenses: CDLA, PDDL, ODC-By <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>CDLA-Permissive-2.0 is accepted: section 3.1 sets no restriction on Results, which section 5.4 says include machine learning models. CDLA-Sharing-1.0 is accepted on the maintainer's decision: section 3.5 sets no obligation on Results, provided Results hold no more than a de minimis part of the data (section 1.11), checked by measuring memorization before weights are published. PDDL-1.0 and ODC-By-1.0 cover a database, not the documents in it, so each document still needs its own license.</dd>
+<dt>Question</dt><dd>Are trained weights "Results" under both CDLA licenses? Is a memorization measurement a sound way to show the de minimis condition of CDLA-Sharing-1.0?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">B4</span>Licences de données : CDLA, PDDL, ODC-By <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>CDLA-Permissive-2.0 est acceptée : sa section 3.1 ne restreint pas les « Results », qui selon sa section 5.4 incluent les modèles d'apprentissage automatique. CDLA-Sharing-1.0 est acceptée sur décision de la mainteneuse : sa section 3.5 n'impose aucune obligation sur les « Results », à condition qu'ils ne contiennent qu'une part minime (de minimis) des données (section 1.11), vérifiée en mesurant la mémorisation avant de publier des poids. PDDL-1.0 et ODC-By-1.0 couvrent une base de données, pas les documents qu'elle contient : chaque document a besoin de sa propre licence.</dd>
+<dt>Question</dt><dd>Des poids entraînés sont-ils des « Results » au sens des deux licences CDLA ? Une mesure de mémorisation est-elle un moyen valable de montrer la condition de minimis de CDLA-Sharing-1.0 ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">B5</span>Copyleft licenses that move to the GPL or the AGPL <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>Accepted through each license's own text: LGPL-2.1 through its section 3 (the ordinary GPL may apply instead, then a later GPL version, then AGPL section 13); MPL-2.0, whose section 1.12 names the AGPL a Secondary License (files marked "Incompatible With Secondary Licenses" are refused); EUPL-1.2, whose appendix lists the AGPL; CeCILL-2.1, which the FSF calls "explicitly compatible with the GNU GPL"; and EPL-2.0 only when the file designates GPL-2.0-or-later as its secondary license.</dd>
+<dt>Question</dt><dd>Does each chain hold for weights, where the original files cannot be separated from the result? In particular: does MPL-2.0 still require its files to stay available under the MPL, does the EUPL-1.2 compatibility clause apply to a work that mixes EUPL and GPL content, and does CeCILL-2.1 reach the AGPL and not only the GPL?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">B5</span>Licences copyleft qui passent à la GPL ou à l'AGPL <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Acceptées par le texte de chaque licence : la LGPL-2.1 par sa section 3 (la GPL ordinaire peut s'appliquer à la place, puis une version ultérieure de la GPL, puis la section 13 de l'AGPL) ; la MPL-2.0, dont la section 1.12 désigne l'AGPL comme « Secondary License » (les fichiers marqués « Incompatible With Secondary Licenses » sont refusés) ; l'EUPL-1.2, dont l'annexe liste l'AGPL ; la CeCILL-2.1, que la FSF dit « explicitement compatible avec la GNU GPL » ; et l'EPL-2.0 seulement lorsque le fichier désigne la GPL-2.0 ou ultérieure comme licence secondaire.</dd>
+<dt>Question</dt><dd>Chaque chaîne tient-elle pour des poids, où les fichiers d'origine ne peuvent pas être séparés du résultat ? En particulier : la MPL-2.0 exige-t-elle encore que ses fichiers restent disponibles sous MPL, la clause de compatibilité de l'EUPL-1.2 s'applique-t-elle à une œuvre mêlant contenus EUPL et GPL, et la CeCILL-2.1 permet-elle d'aller jusqu'à l'AGPL et pas seulement la GPL ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">B6</span>GPL and LGPL code with no version notice <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>When a repository's license file is a GPL, LGPL or AGPL text and no file states a version, the content is read as "version N or any later version" (GPLv2 section 9, LGPL-2.1 section 14, GPLv3 section 14: a Program that specifies no version lets any version be chosen; maintainer's decisions, 2026-10-16). A notice naming one version only is respected; GPL-2.0-only is refused.</dd>
+<dt>Question</dt><dd>Does a copy of one version's text, alone in a repository, "specify a version number" in the sense of those sections? If it does, these repositories would be "-only", and GPL-2.0 ones would leave the corpus.</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">B6</span>Code GPL et LGPL sans notice de version <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Lorsque le fichier de licence d'un dépôt est un texte GPL, LGPL ou AGPL et qu'aucun fichier n'indique de version, le contenu est lu comme « version N ou toute version ultérieure » (GPLv2 section 9, LGPL-2.1 section 14, GPLv3 section 14 : un Programme qui n'indique aucune version permet de choisir n'importe quelle version ; décisions de la mainteneuse, 16/10/2026). Une notice qui nomme une seule version est respectée ; la GPL-2.0-only est refusée.</dd>
+<dt>Question</dt><dd>Une copie du texte d'une version, seule dans un dépôt, « indique-t-elle un numéro de version » au sens de ces sections ? Si oui, ces dépôts seraient « -only », et ceux sous GPL-2.0 sortiraient du corpus.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">B7</span>Smaller cases without an outside ruling <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt>
+<dd>
+<p>BlueOak-1.0.0 is accepted without an FSF ruling: its text sets no condition the AGPL forbids.</p>
+<p>A repository with two license files and no statement of choice is entered as both at once (for example <code>MIT AND Apache-2.0</code>), with both texts (maintainer's decision, 2026-10-16).</p>
+<p>Third-party code copied inside a source is entered under the license its own license file gives, or else the license its package metadata declares (<code>package.json</code>, <code>Cargo.toml</code>...), with that license's official text, which then lacks the authors' copyright line (maintainer's decision, 2026-10-16).</p>
+<p>Datasets with a license field per document are trusted per document: the publisher's label decides, not a check by the project.</p>
+</dd>
+<dt>Question</dt><dd>Is each of these choices sound? Is the official text of a license without the authors' copyright line enough to meet MIT's or BSD's notice condition? How far may the project rely on a publisher's per-document labels?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">B7</span>Cas plus petits sans avis extérieur <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt>
+<dd>
+<p>BlueOak-1.0.0 est acceptée sans avis de la FSF : son texte n'impose aucune condition que l'AGPL interdit.</p>
+<p>Un dépôt avec deux fichiers de licence et sans indication de choix est enregistré sous les deux à la fois (par exemple <code>MIT AND Apache-2.0</code>), avec les deux textes (décision de la mainteneuse, 16/10/2026).</p>
+<p>Le code tiers copié dans une source est enregistré sous la licence de son propre fichier de licence, ou à défaut celle que déclarent ses métadonnées de paquet (<code>package.json</code>, <code>Cargo.toml</code>...), avec le texte officiel de cette licence, qui ne contient alors pas la ligne de copyright des auteurs (décision de la mainteneuse, 16/10/2026).</p>
+<p>Les jeux de données avec un champ de licence par document sont crus document par document : l'étiquette de l'éditeur décide, pas une vérification par le projet.</p>
+</dd>
+<dt>Question</dt><dd>Chacun de ces choix est-il valable ? Le texte officiel d'une licence sans la ligne de copyright des auteurs suffit-il à remplir la condition de notice de MIT ou BSD ? Jusqu'où le projet peut-il se fier aux étiquettes par document d'un éditeur ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<!-- C. Public domain -->
+<div class="pair">
+<div lang="en"><h2>C. Public domain</h2></div>
+<div lang="fr"><h2>C. Domaine public</h2></div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">C1</span>The two-country test and its shortcuts <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>A work is public domain only when it is so both in the United States and in its country of origin, for every person whose words are in the text (author, translator, reviser, editor of notes). Shortcuts: first publication in the United States before the moving limit (1931 in 2026) settles both countries; everyone dead by 1925 means public domain everywhere (Mexico's life + 100 ended); everyone dead by 1955 covers countries with life + 70 or shorter, with France's wartime extensions, Spain, Colombia, Mexico and Russia checked apart. A translation is two layers, the original and the translation. A text revised by an unnamed committee and published before 1926 is treated as an anonymous work (maintainer's decision, 2026-10-16).</dd>
+<dt>Question</dt><dd>Is this test enough for training in France and distributing weights worldwide? Are the shortcuts right, in particular for France's wartime extensions and "mort pour la France", and for unnamed revisers?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">C1</span>Le critère des deux pays et ses raccourcis <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Une œuvre n'est dans le domaine public que si elle l'est à la fois aux États-Unis et dans son pays d'origine, pour chaque personne dont les mots sont dans le texte (auteur, traducteur, réviseur, auteur des notes). Raccourcis : une première publication aux États-Unis avant la limite mobile (1931 en 2026) règle les deux pays ; tous morts en 1925 au plus tard signifie domaine public partout (la durée mexicaine de vie + 100 ans est écoulée) ; tous morts en 1955 au plus tard couvre les pays à vie + 70 ans ou moins, avec les prorogations de guerre françaises, l'Espagne, la Colombie, le Mexique et la Russie vérifiés à part. Une traduction a deux couches, l'original et la traduction. Un texte révisé par un comité non nommé et publié avant 1926 est traité comme une œuvre anonyme (décision de la mainteneuse, 16/10/2026).</dd>
+<dt>Question</dt><dd>Ce critère suffit-il pour entraîner en France et distribuer des poids dans le monde entier ? Les raccourcis sont-ils justes, en particulier pour les prorogations de guerre françaises et la mention « mort pour la France », et pour les réviseurs non nommés ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">C2</span>Dedications to the public domain <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>A dedication by the authors themselves (the Python Enhancement Proposals) or by a translation project in its own words counts, when nothing from the same holder contradicts it. A request about the name alone does not contradict it (World English Bible: "if you CHANGE the actual text ... you not call the result the World English Bible"), nor does a copyright line beside a release of every right (Robinson-Pierpont Greek New Testament). A distributor's label counts only when the distributor is the project (maintainer's decisions, 2026-10-15 and 2026-10-16).</dd>
+<dt>Question</dt><dd>Do such dedications have effect in France, where moral rights cannot be waived? Do the name request and the copyright line above weaken them?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">C2</span>Dédicaces au domaine public <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Une dédicace par les auteurs eux-mêmes (les Python Enhancement Proposals) ou par un projet de traduction dans ses propres mots compte, si rien du même titulaire ne la contredit. Une demande portant seulement sur le nom ne la contredit pas (World English Bible : « si vous CHANGEZ le texte ... n'appelez pas le résultat World English Bible »), ni une ligne de copyright à côté d'une renonciation à tout droit (Nouveau Testament grec Robinson-Pierpont). L'étiquette d'un distributeur ne compte que si le distributeur est le projet (décisions de la mainteneuse, 15 et 16/10/2026).</dd>
+<dt>Question</dt><dd>De telles dédicaces ont-elles un effet en France, où le droit moral est inaliénable ? La demande sur le nom et la ligne de copyright ci-dessus les affaiblissent-elles ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<!-- D. Grey zone -->
+<div class="pair">
+<div lang="en"><h2>D. Grey zone</h2></div>
+<div lang="fr"><h2>D. Zone grise</h2></div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">D1</span>CC BY-SA 4.0 <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>Refused until a lawyer confirms it (maintainer's decision, 2026-10-16). It is the only license in the grey zone; ODbL-1.0, GFDL and CC-BY-SA-3.0 are plainly refused.</dd>
+<dt>Why</dt><dd>A possible path exists: Creative Commons declared GPLv3 a BY-SA-compatible license for BY-SA 4.0 on 2015-10-08, one way only, and AGPL section 13 lets AGPL work combine with GPLv3 work. Against it: the AGPL is not on Creative Commons' list, and Creative Commons' guidance on AI training says "If AI models or outputs are based on ShareAlike content and they will be shared publicly, following the ShareAlike condition would require AI developers to use the same CC license as the original works". Wikipedia's text is under CC BY-SA 4.0.</dd>
+<dt>Question</dt><dd>Can CC BY-SA 4.0 content enter AGPL weights through GPLv3 and AGPL section 13? Does Creative Commons' training guidance bind licensees, or only explain its view?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">D1</span>CC BY-SA 4.0 <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Refusée jusqu'à confirmation par un juriste (décision de la mainteneuse, 16/10/2026). C'est la seule licence en zone grise ; ODbL-1.0, GFDL et CC-BY-SA-3.0 sont refusées tout court.</dd>
+<dt>Raisons</dt><dd>Un chemin possible existe : Creative Commons a déclaré la GPLv3 compatible avec BY-SA 4.0 le 08/10/2015, dans un seul sens, et la section 13 de l'AGPL permet de combiner une œuvre sous AGPL avec une œuvre sous GPLv3. En sens contraire : l'AGPL n'est pas sur la liste de Creative Commons, et son guide sur l'entraînement d'IA dit : « If AI models or outputs are based on ShareAlike content and they will be shared publicly, following the ShareAlike condition would require AI developers to use the same CC license as the original works ». Le texte de Wikipédia est sous CC BY-SA 4.0.</dd>
+<dt>Question</dt><dd>Un contenu sous CC BY-SA 4.0 peut-il entrer dans des poids sous AGPL en passant par la GPLv3 et la section 13 de l'AGPL ? Le guide de Creative Commons sur l'entraînement lie-t-il les licenciés, ou explique-t-il seulement sa position ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<!-- E. Pending -->
+<div class="pair">
+<div lang="en"><h2>E. Other reviews the project is waiting on</h2></div>
+<div lang="fr"><h2>E. Autres examens en attente</h2></div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">E1</span>Waiver of rights in generated text <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>The file <code>OUTPUT-NOTICE</code>, in force pending review, waives the WPT authors' rights in generated text under CC0 1.0, as the authors' own statement rather than an additional permission of the AGPL (which AGPL section 7 would let anyone remove). The waiver covers only what the model itself generates: material from anywhere else keeps its owner's rights and license when it appears in an output, whether the model reproduces it from its training data or takes it from its context (the prompt, documents, web pages or files it reads, tool results), so the model never turns such material into public domain (maintainer's decision, 2026-10-16). The notice also recommends, without requiring, a link to the repository when publishing output, and states what the model was trained on. It was written without a lawyer.</dd>
+<dt>Question</dt><dd>Is the wording sound, in particular the CC0 fallback where rights cannot be waived (French moral rights), the limit of the waiver to what the model itself generates, and the claim that it adds no restriction under the AGPL?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">E1</span>Renonciation aux droits sur le texte généré <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Le fichier <code>OUTPUT-NOTICE</code>, en vigueur en attendant un examen, renonce aux droits des auteurs de WPT sur le texte généré par CC0 1.0, comme déclaration propre des auteurs et non comme permission additionnelle de l'AGPL (que la section 7 de l'AGPL permettrait à chacun de retirer). La renonciation ne couvre que ce que le modèle génère lui-même : tout contenu venant d'ailleurs garde les droits et la licence de son titulaire lorsqu'il apparaît dans une sortie, que le modèle le reproduise depuis ses données d'entraînement ou le reprenne de son contexte (l'invite, les documents, pages web ou fichiers qu'il lit, les résultats d'outils) ; le modèle ne fait donc jamais entrer un tel contenu dans le domaine public (décision de la mainteneuse, 16/10/2026). La notice recommande aussi, sans l'exiger, un lien vers le dépôt lors de la publication d'une sortie, et décrit ce sur quoi le modèle a été entraîné. Elle a été écrite sans juriste.</dd>
+<dt>Question</dt><dd>La rédaction est-elle solide, en particulier le repli de CC0 là où l'on ne peut pas renoncer aux droits (droit moral français), la limite de la renonciation à ce que le modèle génère lui-même, et l'affirmation qu'elle n'ajoute aucune restriction au sens de l'AGPL ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">E2</span>License of built data <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>Not decided. Built data (token shards, vocabularies) is produced by each person in their own store; the project hosts none.</dd>
+<dt>Question</dt><dd>Which license, if any, should built data carry, given that it holds every source's content in another form?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">E2</span>Licence des données construites <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Non décidée. Les données construites (fragments de jetons, vocabulaires) sont produites par chacun dans son propre espace de stockage ; le projet n'en héberge aucune.</dd>
+<dt>Question</dt><dd>Quelle licence, le cas échéant, les données construites doivent-elles porter, sachant qu'elles contiennent le contenu de chaque source sous une autre forme ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">E3</span>Text-and-data-mining opt-outs and robots.txt <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>An owner's "no AI training" statement in a README, or a machine-readable reservation (EU Directive 2019/790, article 4), leaves the content out even when its license allows use. The download tool reads each site's robots.txt and downloads nothing that it forbids to every crawler, to the tool itself, or to a crawler whose operator says it gathers training data; it then tries another place where the same content is published, read with that site's own robots.txt. A robots.txt that refuses only assistants fetching a page for one person is not read as refusing training.</dd>
+<dt>Question</dt><dd>Does this meet article 4 and its French transposition (article L122-5-3 of the Code de la propriété intellectuelle)? May the project use a copy from another site when the first site's robots.txt refuses it but the owner states nothing?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">E3</span>Oppositions à la fouille de textes et robots.txt <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Une déclaration du titulaire refusant l'entraînement d'IA dans un README, ou une réserve lisible par machine (directive UE 2019/790, article 4), exclut le contenu même quand sa licence permet l'usage. L'outil de téléchargement lit le robots.txt de chaque site et ne télécharge rien de ce qu'il interdit à tous les robots, à l'outil lui-même, ou à un robot dont l'opérateur dit qu'il collecte des données d'entraînement ; il essaie alors un autre lieu où le même contenu est publié, lu avec le robots.txt de ce site. Un robots.txt qui refuse seulement les assistants récupérant une page pour une personne n'est pas lu comme un refus de l'entraînement.</dd>
+<dt>Question</dt><dd>Cela respecte-t-il l'article 4 et sa transposition française (article L122-5-3 du Code de la propriété intellectuelle) ? Le projet peut-il utiliser une copie venant d'un autre site quand le robots.txt du premier site la refuse mais que le titulaire ne dit rien ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">E4</span>Personal data in git histories, and erasure <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>A git source may include its commit history; commit authors' names and email addresses stay as git wrote them, since the repository publishes them under its license. Every erasure request is honored by cutting bytes from future builds; requests under the GDPR are answered within one month. Models already published are not changed, and text committed to this repository stays in its history.</dd>
+<dt>Question</dt><dd>May the project train on commit authors' names and emails? Does the erasure process meet the GDPR, given that published models are not changed?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">E4</span>Données personnelles dans les historiques git, et effacement <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>Une source git peut inclure son historique de commits ; les noms et adresses e-mail des auteurs de commits restent tels que git les a écrits, puisque le dépôt les publie sous sa licence. Chaque demande d'effacement est honorée en coupant des octets dans les constructions futures ; les demandes au titre du RGPD reçoivent une réponse sous un mois. Les modèles déjà publiés ne sont pas modifiés, et un texte versé dans ce dépôt reste dans son historique.</dd>
+<dt>Question</dt><dd>Le projet peut-il entraîner sur les noms et adresses e-mail des auteurs de commits ? Le processus d'effacement respecte-t-il le RGPD, sachant que les modèles publiés ne sont pas modifiés ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">E5</span>Distributing WPT with GPU runtimes <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd>WPT distributes no third-party package: installing it downloads them on the user's machine under their own terms. Some PyTorch builds bring NVIDIA, Intel or AMD libraries under proprietary terms.</dd>
+<dt>Question</dt><dd>What would a container image or installer that bundles WPT with these runtimes need?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">E5</span>Distribuer WPT avec des bibliothèques GPU <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd>WPT ne distribue aucun paquet tiers : son installation les télécharge sur la machine de l'utilisateur, sous leurs propres conditions. Certaines versions de PyTorch apportent des bibliothèques NVIDIA, Intel ou AMD sous conditions propriétaires.</dd>
+<dt>Question</dt><dd>De quoi aurait besoin une image de conteneur ou un installateur qui regroupe WPT avec ces bibliothèques ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div class="q">
+<div class="pair">
+<div lang="en">
+<h3><span class="id">E6</span>The charter <span class="status open">open</span></h3>
+<dl>
+<dt>Current choice</dt><dd><code>docs/charter.md</code> is a draft. It plans a lawyer's review before publication, and its governance (who decides a doubtful license case, how a contributor contests it) is still to write.</dd>
+<dt>Question</dt><dd>Does the charter contradict the AGPL anywhere, for example by reading as an added condition on recipients?</dd>
+</dl>
+</div>
+<div lang="fr">
+<h3><span class="id">E6</span>La charte <span class="status open">ouverte</span></h3>
+<dl>
+<dt>Choix actuel</dt><dd><code>docs/charter.md</code> est un brouillon. Il prévoit un examen par un juriste avant publication, et sa gouvernance (qui tranche un cas de licence douteux, comment un contributeur le conteste) reste à écrire.</dd>
+<dt>Question</dt><dd>La charte contredit-elle l'AGPL quelque part, par exemple en se lisant comme une condition ajoutée pour les destinataires ?</dd>
+</dl>
+</div>
+</div>
+</div>
+
+</main>
+<script>
+document.querySelectorAll(".switch button").forEach(function (button) {
+  button.addEventListener("click", function () {
+    var lang = button.getAttribute("data-set");
+    document.body.setAttribute("data-lang", lang);
+    document.documentElement.lang = lang === "fr" ? "fr" : "en";
+    document.querySelectorAll(".switch button").forEach(function (other) {
+      other.setAttribute("aria-pressed", String(other === button));
+    });
+  });
+});
+</script>
+</body>
+</html>
