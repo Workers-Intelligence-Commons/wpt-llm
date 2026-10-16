@@ -1,3 +1,4 @@
+import gzip
 import json
 
 import pytest
@@ -104,7 +105,7 @@ def test_a_chat_file_is_checked_and_never_becomes_a_pretraining_document(kit, re
         markdown_of(kit, repo, store, tmp_path / "lost", {"talks.jsonl": lost}, formats)
 
 
-def test_a_message_tree_gives_every_human_path_as_a_conversation(kit, repo, store, tmp_path):
+def test_a_message_tree_gives_every_human_path_as_a_conversation(kit, repo, store, http_folder):
     # datasets such as OpenAssistant store branching conversations as messages
     # naming their parent; post-training needs each path from the first message
     # to a last one, and nothing written by a model or flagged by its reviewers
@@ -122,27 +123,35 @@ def test_a_message_tree_gives_every_human_path_as_a_conversation(kit, repo, stor
         {"id": "p", "parent": None, "role": "prompter", "text": "My phone number is ...", "labels": {"pii": 0.7}},
         {"id": "pa", "parent": "p", "role": "assistant", "text": "Noted."},
     ]
-    data = "".join(json.dumps(row) + "\n" for row in rows).encode()
+    data = gzip.compress("".join(json.dumps(row) + "\n" for row in rows).encode())
     tree = {"id": "id", "parent": "parent", "role": "role", "text": "text",
             "roles": {"prompter": "user", "assistant": "assistant"},
             "drop": [{"field": "synthetic", "is": True}, {"field": "deleted", "is": True},
                      {"field": "labels.pii", "above": 0}]}
-    formats = [{"format": "chat", "paths": ["*.jsonl"], "tree": tree}]
-    address, commit = kit.git_project(tmp_path / "talks", files={"messages.jsonl": data}, executable=set(), symlinks={})
-    sid = kit.add_source(repo, store, "example", "talks", {"type": "git", "address": address, "revision": commit,
-                                                           "formats": formats, "tags": [{"tags": ["sft"], "paths": ["**"]}]})
+    formats = [{"format": "chat", "paths": ["*.jsonl.gz"], "tree": tree}]
+    folder, base = http_folder
+
+    def tree_source(item, data):  # compressed, as OpenAssistant publishes it
+        (folder / f"{item}.tar.gz").write_bytes(kit.tar_bytes(top=item, files={"messages.jsonl.gz": data},
+                                                              executable=set(), symlinks={}))
+        return kit.add_source(repo, store, "example", item, {
+            "type": "http-archive", "address": f"{base}/{item}.tar.gz", "revision": "2026-10-16",
+            "extract": {"strip": 1}, "formats": formats, "tags": [{"tags": ["sft"], "paths": ["**"]}]})
+
+    sid = tree_source("talks", data)
 
     found, _ = conversations.read(repo, store, "sft")
     said = {cid: [m["content"][0]["text"] for m in c["messages"]] for cid, c in found}
     assert said == {
-        f"{sid}/messages.jsonl:f1a": ["Why is the sky blue?", "Air scatters blue light most.", "And at sunset?",
+        f"{sid}/messages.jsonl.gz:f1a": ["Why is the sky blue?", "Air scatters blue light most.", "And at sunset?",
                                       "The light crosses more air, so red is left."],
-        f"{sid}/messages.jsonl:a1": ["Why is the sky blue?", "Air scatters blue light most."],
-        f"{sid}/messages.jsonl:a2": ["Why is the sky blue?", "Rayleigh scattering."],
+        f"{sid}/messages.jsonl.gz:a1": ["Why is the sky blue?", "Air scatters blue light most."],
+        f"{sid}/messages.jsonl.gz:a2": ["Why is the sky blue?", "Rayleigh scattering."],
     }
     assert [m["role"] for m in found[0][1]["messages"]] == ["user", "assistant", "user", "assistant"]
 
     rows.append({"id": "x", "parent": "gone", "role": "prompter", "text": "orphan"})
-    data = "".join(json.dumps(row) + "\n" for row in rows).encode()
+    data = gzip.compress("".join(json.dumps(row) + "\n" for row in rows).encode())
+    source = repo.source(tree_source("orphan", data))
     with pytest.raises(InvalidFile, match="1 messages name a parent the file does not hold, such as gone"):
-        markdown_of(kit, repo, store, tmp_path / "orphan", {"messages.jsonl": data}, formats)
+        list(documents(source, source_tree(source, store)[0], store))

@@ -248,7 +248,7 @@ def source_tree(source: Source, store) -> tuple[dict[str, Entry], str]:
         tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
         tree = apply_patches(source.id, tree, source.patches, store)
         for path, entry in tree.items():
-            if entry.mode != SYMLINK and not is_records(source, path):
+            if entry.mode != SYMLINK and not is_records(source, path) and not is_message_tree(source, path):
                 try:
                     store.get_bytes(entry.sha256).decode("utf-8")
                 except UnicodeDecodeError as error:
@@ -262,6 +262,13 @@ def source_tree(source: Source, store) -> tuple[dict[str, Entry], str]:
 def is_records(source: Source, path: str) -> bool:
     """Whether a path is in the records format (see records.py)."""
     return any(e["format"] == "records" and any(glob_match(path, g) for g in e["paths"])
+               for e in source.data["formats"])
+
+
+def is_message_tree(source: Source, path: str) -> bool:
+    """Whether a path is a chat file read as a message tree, which is read
+    like a records file (JSON Lines, compressed or not, or Parquet)."""
+    return any(e["format"] == "chat" and "tree" in e and any(glob_match(path, g) for g in e["paths"])
                for e in source.data["formats"])
 
 
