@@ -25,7 +25,7 @@ it stopped.
 """
 
 from .plugins import Method, PluginError, Run, Strategy, Verdict, load_method, load_strategy
-from .runner import Checkpoint, FolderCheckpoint, Interrupted, RunSettings, SettingsMismatch, train
+from .runner import Checkpoint, FolderCheckpoint, Interrupted, RunSettings, SettingsMismatch, Trained, train
 
 __all__ = ["Checkpoint", "FolderCheckpoint", "Interrupted", "Method", "PluginError", "Run", "RunSettings",
-           "SettingsMismatch", "Strategy", "Verdict", "load_method", "load_strategy", "train"]
+           "SettingsMismatch", "Strategy", "Trained", "Verdict", "load_method", "load_strategy", "train"]

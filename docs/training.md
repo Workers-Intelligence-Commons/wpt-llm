@@ -233,5 +233,6 @@ steps. Around it, everything possible is checked:
 - `provenance.json` records what produced the model: the dataset id and
   record, the sources it learned from, the vocabulary, every shard, all options, the strategy and
   method (file, its sha256, the method's settings), how the batch was split, the model shape and
-  parameter count, the repository commit (and whether the working tree had
+  parameter count, the steps trained and the step whose weights the folder holds (which the
+  model card shows), the repository commit (and whether the working tree had
   uncommitted changes), the device and the tool versions.

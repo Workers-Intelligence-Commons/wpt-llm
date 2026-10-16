@@ -142,6 +142,30 @@ def test_a_crashed_run_resumes_where_its_checkpoint_left_it(built, tmp_path, mon
     assert not (tmp_path / "resumed" / "checkpoint").exists()
 
 
+def test_the_model_card_names_the_steps_trained_and_the_step_of_its_weights(built, tmp_path):
+    # a published model says how far it trained and which step its weights
+    # come from, even when its method stopped early and kept an earlier step
+    strategy = tmp_path / "cpu.py"
+    strategy.write_text("import torch\nfrom wpt_training import Strategy\n\n"
+                        "def start():\n    return Strategy(torch.device('cpu'))\n")
+    method = tmp_path / "early.py"
+    method.write_text(
+        "import torch\nfrom wpt_training import Method, Verdict\n\nSETTINGS = {}\n\n"
+        "class Early(Method):\n"
+        "    def __init__(self, model):\n"
+        "        self.optimizer = torch.optim.AdamW(model.parameters(), lr=0.01)\n\n"
+        "    def evaluated(self, step, val_loss):\n"
+        "        return Verdict(best=step == 2, stop=step == 4)\n\n"
+        "def start(model, settings, run):\n    return Early(model)\n")
+    main([built.dataset_id, "--out", "model", "--steps", "10", "--eval-every", "2",
+          "--strategy", str(strategy), "--method", str(method), *SMALL])
+
+    provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
+    assert (provenance["steps_trained"], provenance["weights_step"]) == (4, 2)
+    card = (tmp_path / "model" / "README.md").read_text()
+    assert "Steps: 4 trained (limit 10); the weights are those of step 2" in card
+
+
 def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_path):
     # --stream trains from a few shards at a time, so a machine needs disk
     # only for those, and the model folder names its sources as usual

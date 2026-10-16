@@ -187,7 +187,7 @@ def token_arrays(store, record, strategy, stream_shards=None):
     return training, held_out
 
 
-def provenance(args, record, record_object, sources, model_config, n_params, strategy, plugins, best_val, batch):
+def provenance(args, record, record_object, sources, model_config, n_params, strategy, plugins, trained, batch):
     def run(*command):
         try:
             return subprocess.run(command, capture_output=True, text=True, check=True).stdout.strip()
@@ -219,7 +219,9 @@ def provenance(args, record, record_object, sources, model_config, n_params, str
         "batch": batch,
         "model": asdict(model_config),
         "parameters": n_params,
-        "best_validation_loss": best_val,
+        "best_validation_loss": trained.best_val,
+        "steps_trained": trained.steps,  # the last step reached: fewer than --steps when the method stopped early
+        "weights_step": trained.weights_step,  # the step whose weights the folder holds
         "repository_commit": run("git", "rev-parse", "HEAD"),
         "repository_dirty": bool(status) if status is not None else None,
         "device": describe(strategy.device) + (f", {strategy.world_size} processes" if strategy.world_size > 1 else ""),
@@ -332,7 +334,7 @@ def _train(args, strategy, plugins):
     log(f"parameters: {n_params:,}")
     _, method_plugin, method_settings = plugins
     try:
-        best_val = train(model, strategy, method_plugin, method_settings, train_data, val_data, settings,
+        trained = train(model, strategy, method_plugin, method_settings, train_data, val_data, settings,
                          checkpoint=checkpoint, resume=resume,
                          identity={"dataset": args.dataset, "model": asdict(model_config),
                                    # the shards in use decide the windows, so a resumed run must stream the same way
@@ -352,7 +354,7 @@ def _train(args, strategy, plugins):
                max_shard_bytes=args.max_shard_size, metadata=WEIGHT_METADATA)
     shutil.rmtree(out / EVALS_NAME, ignore_errors=True)
     sources = sources_of(store, record["shards"])
-    written = provenance(args, record, record_object, sources, model_config, n_params, strategy, plugins, best_val, batch)
+    written = provenance(args, record, record_object, sources, model_config, n_params, strategy, plugins, trained, batch)
     (out / "provenance.json").write_text(json.dumps(written, indent=2) + "\n", encoding="utf-8", newline="\n")
     write_credits(out, written, store.get_bytes)
     write_documents(out)

@@ -120,7 +120,7 @@ def card(config, provenance, evals) -> str:
         f"- Context: {config['block_size']} tokens; vocabulary: {config['vocab_size']:,} tokens", "",
         "## Training", "",
         f"- Dataset: `{provenance['dataset']}`",
-        f"- Steps: at most {provenance['options']['steps']:,}, batch {provenance['batch']['windows']} windows",
+        f"- {_steps(provenance)}, batch {provenance['batch']['windows']} windows",
         f"- Method: {provenance['method']['name']} "
         f"({', '.join(f'{k} {v}' for k, v in sorted(provenance['method']['settings'].items()))})",
         f"- Best validation loss: {provenance['best_validation_loss']:.4f}",
@@ -169,6 +169,14 @@ def _model_kind(provenance):
                 "post-training steps below.", ""]
     return ["TinyGPT, a decoder-only transformer. It is pre-trained only: it continues",
             "text and follows no instructions.", ""]
+
+
+def _steps(provenance):
+    limit = provenance["options"]["steps"]
+    if "steps_trained" not in provenance:  # trained before the steps were recorded
+        return f"Steps: at most {limit:,}"
+    return (f"Steps: {provenance['steps_trained']:,} trained (limit {limit:,}); "
+            f"the weights are those of step {provenance['weights_step']:,}")
 
 
 def _built_from(provenance):
