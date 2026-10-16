@@ -24,7 +24,7 @@ def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatc
     main(["--out", "model"])
 
     model = load_model(tmp_path / "model")
-    assert model.config.n_layer == 1 and model.config.block_size == 16
+    assert model.config.n_layer == 4 and model.config.block_size == 16  # the recipe's numbers
     record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
     # the weights name the dataset's vocabulary, and only that file loads with them
     assert tokenizer_identity(tmp_path / "model") == ("t version 1", record["tokenizer"]["vocabulary"])

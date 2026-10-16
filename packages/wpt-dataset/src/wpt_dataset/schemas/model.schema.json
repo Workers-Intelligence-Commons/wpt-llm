@@ -9,7 +9,7 @@
     "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
   },
   "properties": {
-    "schema": {"const": 1},
+    "schema": {"const": 2},
     "data": {
       "description": "what `wpt-dataset build` builds; recipes with the same data share one dataset",
       "type": "object",
@@ -23,16 +23,33 @@
       }
     },
     "model": {
-      "description": "the architecture's numbers (wpt_model.ModelConfig without vocab_size, which the tokenizer gives)",
+      "description": "the architecture's numbers (docs/model.md; wpt_model.ModelConfig without vocab_size, which the tokenizer gives)",
       "type": "object",
       "additionalProperties": false,
-      "required": ["block_size", "n_layer", "n_head", "n_embd", "dropout"],
+      "required": ["block_size", "n_layer", "d_model", "kda_heads", "kda_head_dim", "mla_heads", "mla_head_dim",
+                   "mla_kv_rank", "n_experts", "top_k", "expert_width", "latent_width", "shared_width",
+                   "engram_layers", "engram_order", "engram_heads", "engram_dim", "engram_table_size"],
       "properties": {
-        "block_size": {"type": "integer", "minimum": 1, "description": "tokens the model sees at once"},
-        "n_layer": {"type": "integer", "minimum": 1},
-        "n_head": {"type": "integer", "minimum": 1},
-        "n_embd": {"type": "integer", "minimum": 1},
-        "dropout": {"type": "number", "minimum": 0, "exclusiveMaximum": 1}
+        "block_size": {"type": "integer", "minimum": 2, "description": "tokens per training window"},
+        "n_layer": {"type": "integer", "minimum": 2, "description": "gated MLA on every 4th layer and the last, KDA elsewhere"},
+        "d_model": {"type": "integer", "minimum": 1, "description": "width of the residual streams"},
+        "kda_heads": {"type": "integer", "minimum": 1},
+        "kda_head_dim": {"type": "integer", "minimum": 1, "description": "keys and values of a KDA head"},
+        "mla_heads": {"type": "integer", "minimum": 1},
+        "mla_head_dim": {"type": "integer", "minimum": 1, "description": "queries, keys and values of an MLA head"},
+        "mla_kv_rank": {"type": "integer", "minimum": 1, "description": "width of the compressed key-value vector"},
+        "n_experts": {"type": "integer", "minimum": 2, "description": "routed experts per layer"},
+        "top_k": {"type": "integer", "minimum": 1, "description": "routed experts per token, fewer than n_experts"},
+        "expert_width": {"type": "integer", "minimum": 1, "description": "hidden width of a routed expert"},
+        "latent_width": {"type": "integer", "minimum": 1, "description": "width of the space routed experts work in"},
+        "shared_width": {"type": "integer", "minimum": 1, "description": "hidden width of each of the 2 shared experts"},
+        "engram_layers": {"type": "array", "items": {"type": "integer", "minimum": 1}, "uniqueItems": true,
+                          "description": "layers (numbered from 1) that get Engram memory"},
+        "engram_order": {"type": "integer", "minimum": 2, "description": "largest N-gram; orders 2 .. N are read"},
+        "engram_heads": {"type": "integer", "minimum": 1, "maximum": 16, "description": "hash heads per order"},
+        "engram_dim": {"type": "integer", "minimum": 1, "description": "width of one table row"},
+        "engram_table_size": {"type": "integer", "minimum": 2, "exclusiveMaximum": 2147483648,
+                              "description": "each table has a distinct prime size, the smallest at or above this"}
       }
     },
     "training": {

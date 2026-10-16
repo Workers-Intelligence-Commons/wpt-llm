@@ -115,8 +115,9 @@ def card(config, provenance, evals) -> str:
         "## Model", "",
         *_model_kind(provenance),
         f"- Parameters: {provenance['parameters']:,}",
-        f"- Transformer blocks: {config['n_layer']}, attention heads: {config['n_head']}, "
-        f"embedding width: {config['n_embd']}",
+        f"- Layers: {config['n_layer']}, width {config['d_model']}; experts: {config['n_experts']} routed "
+        f"(top {config['top_k']}) and 2 shared per layer; Engram memory in layers "
+        f"{', '.join(map(str, config['engram_layers'])) or 'none'}",
         f"- Context: {config['block_size']} tokens; vocabulary: {config['vocab_size']:,} tokens", "",
         "## Training", "",
         f"- Dataset: `{provenance['dataset']}`",
@@ -165,10 +166,12 @@ def _post_training(post_training):
 
 def _model_kind(provenance):
     if provenance.get("post_training"):
-        return ["TinyGPT, a decoder-only transformer, pre-trained and then changed by the",
-                "post-training steps below.", ""]
-    return ["TinyGPT, a decoder-only transformer. It is pre-trained only: it continues",
-            "text and follows no instructions.", ""]
+        return ["A WPT mixture-of-experts model (KDA and gated MLA attention, mHC residual",
+                "streams, Engram memory), pre-trained and then changed by the post-training",
+                "steps below.", ""]
+    return ["A WPT mixture-of-experts model (KDA and gated MLA attention, mHC residual",
+            "streams, Engram memory). It is pre-trained only: it continues text and follows",
+            "no instructions.", ""]
 
 
 def _steps(provenance):

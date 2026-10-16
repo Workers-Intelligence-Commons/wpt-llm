@@ -2,14 +2,17 @@ import subprocess
 import sys
 
 from wpt_chat import main
-from wpt_model import ModelConfig, TinyGPT, save_model
+from wpt_model import WPT, ModelConfig, save_model
 from wpt_tokenizer import Tokenizer
 
 
 def model_folder(folder, notice=None):
     tokenizer = Tokenizer.train([b"the quick brown fox jumps over the lazy dog"] * 4, 516)
-    save_model(TinyGPT(ModelConfig(vocab_size=tokenizer.vocab_size, block_size=8, n_layer=1, n_head=1, n_embd=8)),
-               folder, tokenizer.to_bytes(), "fox version 1")
+    config = ModelConfig(vocab_size=tokenizer.vocab_size, block_size=8, n_layer=2, d_model=8, kda_heads=1,
+                         kda_head_dim=8, mla_heads=1, mla_head_dim=8, mla_kv_rank=4, n_experts=2, top_k=1,
+                         expert_width=4, latent_width=4, shared_width=8, engram_layers=[1], engram_order=2,
+                         engram_heads=1, engram_dim=4, engram_table_size=31)
+    save_model(WPT(config), folder, tokenizer.to_bytes(), "fox version 1")
     if notice is not None:
         (folder / "NOTICE").write_text(notice)
     return folder

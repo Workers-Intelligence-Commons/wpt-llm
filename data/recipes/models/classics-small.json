@@ -1,5 +1,5 @@
 {
-  "schema": 1,
+  "schema": 2,
   "data": {
     "mixture": "classics",
     "tokenizer": "classics",
@@ -9,9 +9,24 @@
   "model": {
     "block_size": 256,
     "n_layer": 4,
-    "n_head": 4,
-    "n_embd": 128,
-    "dropout": 0.1
+    "d_model": 128,
+    "kda_heads": 4,
+    "kda_head_dim": 32,
+    "mla_heads": 4,
+    "mla_head_dim": 32,
+    "mla_kv_rank": 64,
+    "n_experts": 8,
+    "top_k": 2,
+    "expert_width": 128,
+    "latent_width": 64,
+    "shared_width": 128,
+    "engram_layers": [
+      2
+    ],
+    "engram_order": 3,
+    "engram_heads": 4,
+    "engram_dim": 16,
+    "engram_table_size": 4099
   },
   "training": {
     "method": "adamw",

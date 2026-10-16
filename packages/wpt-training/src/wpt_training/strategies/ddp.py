@@ -43,6 +43,10 @@ class DDP(Strategy):
         dist.all_reduce(total)
         return total.item() / self.world_size
 
+    def reduce(self, tensor, op="sum"):
+        dist.all_reduce(tensor, op={"sum": dist.ReduceOp.SUM, "max": dist.ReduceOp.MAX}[op])
+        return tensor
+
     def broadcast(self, value):
         box = [value]
         dist.broadcast_object_list(box, src=0)

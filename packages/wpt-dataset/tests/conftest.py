@@ -145,7 +145,10 @@ def add_source(repo, store, origin, item, data, patches=(), compute_checksum=Tru
     return sid
 
 
-MODEL = {"block_size": 16, "n_layer": 1, "n_head": 2, "n_embd": 16, "dropout": 0.0}
+MODEL = {"block_size": 16, "n_layer": 2, "d_model": 16, "kda_heads": 2, "kda_head_dim": 8, "mla_heads": 2,
+         "mla_head_dim": 8, "mla_kv_rank": 8, "n_experts": 4, "top_k": 2, "expert_width": 8, "latent_width": 8,
+         "shared_width": 16, "engram_layers": [1], "engram_order": 3, "engram_heads": 2, "engram_dim": 4,
+         "engram_table_size": 31}
 TRAINING = {"method": "adamw", "settings": {}, "steps": 1, "batch_size": 4, "eval_every": 1, "eval_batches": 1,
             "seed": 1337}
 

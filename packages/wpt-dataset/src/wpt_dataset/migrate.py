@@ -80,6 +80,24 @@ def _source_4_to_5(document, _path):
 MIGRATIONS["source"][4] = _source_4_to_5
 
 
+def _model_1_to_2(document, _path):
+    """Shape 2 holds the numbers of the architecture in docs/model.md. The
+    window, the layers and the width carry over, and the old heads become
+    both attention kinds' heads; the other numbers are a person's choice, so
+    the step leaves them at 0 and the check that follows names each file to
+    fill in."""
+    old = document["model"]
+    head_dim = old["n_embd"] // old["n_head"]
+    model = {"block_size": old["block_size"], "n_layer": old["n_layer"], "d_model": old["n_embd"],
+             "kda_heads": old["n_head"], "kda_head_dim": head_dim, "mla_heads": old["n_head"], "mla_head_dim": head_dim,
+             "mla_kv_rank": 0, "n_experts": 0, "top_k": 0, "expert_width": 0, "latent_width": 0, "shared_width": 0,
+             "engram_layers": [], "engram_order": 0, "engram_heads": 0, "engram_dim": 0, "engram_table_size": 0}
+    return {**document, "schema": 2, "model": model}
+
+
+MIGRATIONS["model"][1] = _model_1_to_2
+
+
 def _drop_moved_license_files(path, document):
     """Remove the LicenseRef files whose text the written source.json now
     holds exactly; anything else stays for the check to report."""

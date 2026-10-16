@@ -48,6 +48,11 @@ class Strategy:
         """The average of value over every process."""
         return value
 
+    def reduce(self, tensor: torch.Tensor, op: str = "sum") -> torch.Tensor:
+        """The elementwise sum (op "sum") or maximum ("max") of tensor over
+        every process, in every process."""
+        return tensor
+
     def broadcast(self, value):
         """The main process's value, in every process (value is ignored
         elsewhere). It must survive pickle."""
@@ -78,16 +83,27 @@ class Verdict:
 
 class Method:
     """How a model learns. A method sets self.optimizer and may override the
-    rest; the defaults are a plain next-token loss and no stopping."""
+    rest; the defaults are the next-token loss plus the multi-token
+    prediction loss at mtp_weight, and no stopping."""
 
     optimizer: torch.optim.Optimizer
+    mtp_weight = 0.3  # DeepSeek-V3's first weight; a method may change it as training goes
 
     def loss(self, model, x, y):
-        logits = model(x)
-        return F.cross_entropy(logits.reshape(-1, logits.size(-1)), y.reshape(-1))
+        """The training loss of a batch: windows x, and y, the tokens after them."""
+        logits, ahead = model(x, next_tokens=y)
+        return _cross_entropy(logits, y) + self.mtp_weight * _cross_entropy(ahead[:, :-1], y[:, 1:])
+
+    def validation_loss(self, model, x, y):
+        """The next-token loss alone, which evaluations compare."""
+        return _cross_entropy(model(x), y)
 
     def before_update(self, model, step: int):
         """Called after the gradients of a step are complete, before the optimizer steps."""
+
+    def after_update(self, model, step: int, reduce):
+        """Called after the optimizer steps. reduce(tensor, op) sums ("sum")
+        or takes the maximum ("max") of a tensor over every process."""
 
     def evaluated(self, step: int, val_loss: float) -> Verdict:
         return Verdict(best=True, stop=False)
@@ -98,6 +114,10 @@ class Method:
 
     def load_state_dict(self, state: dict):
         self.optimizer.load_state_dict(state["optimizer"])
+
+
+def _cross_entropy(logits, targets):
+    return F.cross_entropy(logits.reshape(-1, logits.size(-1)), targets.reshape(-1))
 
 
 @dataclass(frozen=True)

@@ -1,6 +1,6 @@
-"""Save and load a TinyGPT as a model folder, in the Hugging Face layout:
+"""Save and load a WPT model as a model folder, in the Hugging Face layout:
 
-    config.json                          model sizes (ModelConfig)
+    config.json                          the model's numbers (ModelConfig)
     model.safetensors                    all weights, when not split
     model-00001-of-00003.safetensors     or one file per shard,
     model.safetensors.index.json         plus an index: tensor name -> shard file
@@ -23,7 +23,7 @@ from safetensors import safe_open
 from safetensors.torch import load_file, save_file
 
 from .config import ModelConfig
-from .gpt import TinyGPT
+from .model import WPT
 
 CONFIG_NAME = "config.json"
 SINGLE_NAME = "model.safetensors"
@@ -37,7 +37,7 @@ class TokenizerMismatch(ValueError):
     weight files' headers (or the headers name none, or disagree)."""
 
 
-def save_model(model: TinyGPT, directory, tokenizer: bytes, tokenizer_name: str, max_shard_bytes=None, metadata=None):
+def save_model(model: WPT, directory, tokenizer: bytes, tokenizer_name: str, max_shard_bytes=None, metadata=None):
     """Write the model folder. Replaces any model already saved there.
 
     tokenizer: the vocabulary file's bytes, written as tokenizer.json and
@@ -80,14 +80,14 @@ def _save_shards(shards, state, directory, metadata):
     (directory / INDEX_NAME).write_text(json.dumps(index, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
-def load_model(directory, device="cpu") -> TinyGPT:
+def load_model(directory, device="cpu") -> WPT:
     """Rebuild the model from config.json and load its weights, split or not."""
     directory = Path(directory)
     config = ModelConfig.load(directory / CONFIG_NAME)
     state = {}
     for name in _weight_files(directory):
         state.update(load_file(directory / name))
-    model = TinyGPT(config)
+    model = WPT(config)
     model.load_state_dict(state)
     return model.to(device)
 

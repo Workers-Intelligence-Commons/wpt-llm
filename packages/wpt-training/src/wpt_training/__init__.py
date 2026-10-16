@@ -6,8 +6,8 @@ over the processes. Built-ins (strategies/): `single`, one device; `ddp`,
 several processes started by `torchrun`, on one machine or several.
 
 A method knows how the model learns: its optimizer, its learning-rate
-schedule, the loss of one batch, what happens just before each update, and
-when training stops. Built-ins (methods/): `adamw`.
+schedule, the loss of one batch, what happens just before and after each
+update, and when training stops. Built-ins (methods/): `adamw`.
 
 Each is a Python file, named by a built-in name or a path:
 

@@ -53,7 +53,7 @@ from wpt_dataset import conversations as chat_files
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 from wpt_device import describe, select_device
-from wpt_model import TinyGPT, TokenizerMismatch, load_model, load_tokenizer, save_model, tokenizer_identity
+from wpt_model import WPT, TokenizerMismatch, load_model, load_tokenizer, save_model, tokenizer_identity
 from wpt_model.notice import CREDITS_NAME, WEIGHT_METADATA, write_documents
 from wpt_store import Store, StoreError, store_from_settings
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
@@ -97,7 +97,7 @@ class Outcome:
 @dataclass
 class Context:
     base: Path      # the base model folder, read only
-    model: TinyGPT  # the model the steps change, on device
+    model: WPT  # the model the steps change, on device
     tokenizer: Tokenizer
     device: torch.device
     provenance: dict  # the base folder's provenance.json

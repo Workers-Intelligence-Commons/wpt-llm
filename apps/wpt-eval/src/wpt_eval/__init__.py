@@ -34,7 +34,7 @@ import numpy as np
 import torch
 
 from wpt_device import describe, select_device
-from wpt_model import TinyGPT, TokenizerMismatch, load_model, load_tokenizer
+from wpt_model import WPT, TokenizerMismatch, load_model, load_tokenizer
 from wpt_model.notice import EVALS_NAME, write_documents
 from wpt_store import Store, StoreError, store_from_settings
 from wpt_store.shards import read_verified
@@ -66,7 +66,7 @@ class Document:
 @dataclass
 class Context:
     folder: Path
-    model: TinyGPT  # in eval mode, on device
+    model: WPT  # in eval mode, on device
     tokenizer: Tokenizer
     device: torch.device
     provenance: dict

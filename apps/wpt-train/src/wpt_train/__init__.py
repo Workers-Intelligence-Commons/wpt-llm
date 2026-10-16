@@ -67,7 +67,7 @@ from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
 from wpt_device import describe
 from wpt_inference import sample_tokens
-from wpt_model import ModelConfig, TinyGPT, save_model
+from wpt_model import WPT, ModelConfig, canonical_ids, save_model
 from wpt_model.notice import EVALS_NAME, WEIGHT_METADATA, write_credits, write_documents
 from wpt_store import NAME as STORE_NAME
 from wpt_store import StoreError, store_from_settings
@@ -342,7 +342,9 @@ def _train(args, recipe, strategy, plugins):
 
     torch.manual_seed(settings.seed)  # the same initial weights in every process
     model_config = ModelConfig(vocab_size=tokenizer.vocab_size, **shape)
-    model = TinyGPT(model_config).to(strategy.device)
+    model = WPT(model_config)
+    model.set_canonical_ids(canonical_ids(tokenizer.decode, tokenizer.vocab_size))  # Engram's, from the vocabulary
+    model = model.to(strategy.device)
     n_params = sum(p.numel() for p in model.parameters())
     log(f"parameters: {n_params:,}")
     _, method_plugin, method_settings = plugins

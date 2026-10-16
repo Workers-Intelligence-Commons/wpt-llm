@@ -81,7 +81,7 @@ class RunSettings:
     batch_size: int        # windows per update, over every process together
     micro_batch: int       # windows per forward pass in one process
     steps: int             # maximum number of updates
-    eval_every: int        # evaluate every N steps (and at step 1)
+    eval_every: int        # evaluate every N steps (and at the first and last steps)
     eval_batches: int = 20  # global batches averaged per evaluation
     checkpoint_every: int = 0  # write a checkpoint every N steps (0: never)
     seed: int = 1337
@@ -185,7 +185,7 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
             for i in range(settings.eval_batches):
                 for _, x, y in _micro_batches(_tokens_at(val_tokens, step, settings), settings, strategy, accumulate,
                                               settings.seed, "eval", step, i):
-                    losses.append(method.loss(wrapped, x, y).item())
+                    losses.append(method.validation_loss(wrapped, x, y).item())
         model.train()
         return strategy.mean(sum(losses) / len(losses))
 
@@ -202,8 +202,11 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
         method.before_update(model, step)
         method.optimizer.step()
         method.optimizer.zero_grad(set_to_none=True)
+        if hasattr(model, "after_update"):  # the model's own updates, such as expert balancing
+            model.after_update(strategy.reduce)
+        method.after_update(model, step, strategy.reduce)
 
-        if step % settings.eval_every == 0 or step == 1:
+        if step % settings.eval_every == 0 or step == 1 or step == settings.steps:
             val_loss = evaluate(step)
             verdict = method.evaluated(step, val_loss)
             if verdict.best:

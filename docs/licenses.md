@@ -53,6 +53,8 @@ packages must stay compatible with AGPL-3.0-or-later.
 | charset-normalizer | 3.5.2 | MIT | tests, through moto (requests) |
 | colorama | 0.4.6 | BSD-3-Clause | Windows only, through pytest |
 | cryptography | 50.0.2 | Apache-2.0 OR BSD-3-Clause | tests, through moto; its compiled part includes OpenSSL (Apache-2.0), statically linked |
+| einops | 0.8.2 | MIT | through fla-core |
+| fla-core | 0.5.2 | MIT | KDA's GPU kernel (flash-linear-attention), used where Triton runs |
 | idna | 3.20 | BSD-3-Clause | tests, through moto (requests) |
 | iniconfig | 2.3.1 | MIT | through pytest |
 | jmespath | 1.1.0 | MIT | |
