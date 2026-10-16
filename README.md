@@ -103,6 +103,7 @@ settle alone are listed for legal review in
 - [Erasure requests](docs/erasure.md)
 - [Data selection: tags, pools, mixtures, held-out text](docs/data-selection.md)
 - [Tokenizer](docs/tokenizer.md)
+- [Model architecture: the research it comes from and the recipes that size it](docs/model.md)
 - [Training and repeatability](docs/training.md)
 - [Evaluation](docs/evaluation.md)
 - [Post-training](docs/post-training.md)
