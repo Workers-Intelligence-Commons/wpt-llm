@@ -17,14 +17,15 @@ Each is a Python file, named by a built-in name or a path:
 
 The runner (train) owns everything else: the data, the global batch and
 how it is split over processes and accumulation steps, evaluation,
-checkpoints and resuming. The batches and the dropout of a step are seeded
+checkpoints (in a folder, or anywhere a Checkpoint subclass saves them),
+resuming, and stopping cleanly on a signal. The batches and the dropout of a step are seeded
 by the run's seed and the step only, so the same settings train the same
 way on any number of processes, and a resumed run continues exactly where
 it stopped.
 """
 
 from .plugins import Method, PluginError, Run, Strategy, Verdict, load_method, load_strategy
-from .runner import RunSettings, SettingsMismatch, train
+from .runner import Checkpoint, FolderCheckpoint, Interrupted, RunSettings, SettingsMismatch, train
 
-__all__ = ["Method", "PluginError", "Run", "RunSettings", "SettingsMismatch", "Strategy", "Verdict",
-           "load_method", "load_strategy", "train"]
+__all__ = ["Checkpoint", "FolderCheckpoint", "Interrupted", "Method", "PluginError", "Run", "RunSettings",
+           "SettingsMismatch", "Strategy", "Verdict", "load_method", "load_strategy", "train"]

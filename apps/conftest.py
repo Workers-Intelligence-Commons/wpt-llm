@@ -56,6 +56,7 @@ def built(tmp_path, monkeypatch):
         repo.recipe_path(kind, name).write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}))
     dataset_id = build_dataset(repo, "d", store, log=lambda _: None)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_MAX_RESTARTS", "0")  # wpt-train runs in the test's own process, unless a test says
     monkeypatch.chdir(tmp_path)
     return SimpleNamespace(store=store, dataset_id=dataset_id, source_id=source_id, attribution=ATTRIBUTION,
                            license_text=LICENSE_TEXT)

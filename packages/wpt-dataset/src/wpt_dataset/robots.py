@@ -29,6 +29,7 @@ from urllib.parse import urlparse, urlunparse
 
 from protego import Protego
 
+from . import retry
 from .errors import CrawlForbidden
 
 WPT_AGENT = "wpt-dataset"
@@ -77,8 +78,7 @@ def check(address: str, kind: str, user_agent: str):
 def _rules(robots_url: str, user_agent: str) -> Protego:
     request = urllib.request.Request(robots_url, headers={"User-Agent": user_agent})
     try:
-        with urllib.request.urlopen(request, timeout=60) as response:  # follows redirects
-            text = response.read(MAX_BYTES).decode("utf-8", errors="replace")
+        text = retry.call(lambda: _read(request), robots_url)
     except urllib.error.HTTPError as error:
         if error.code in NO_FILE:
             return Protego.parse("")  # no robots.txt: no rules
@@ -86,3 +86,8 @@ def _rules(robots_url: str, user_agent: str) -> Protego:
     except (urllib.error.URLError, OSError) as error:
         raise RobotsUnreachable(f"{robots_url}: unreachable ({error}), so the address cannot be used") from None
     return Protego.parse(text)
+
+
+def _read(request) -> str:
+    with urllib.request.urlopen(request, timeout=60) as response:  # follows redirects
+        return response.read(MAX_BYTES).decode("utf-8", errors="replace")

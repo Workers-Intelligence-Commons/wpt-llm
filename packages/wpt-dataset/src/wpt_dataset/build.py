@@ -15,6 +15,12 @@
 The dataset id is the fingerprint of every input, so building the same
 recipe on the same data again is a lookup.
 
+A source that fails (its checksum differs, every address fails, a file is
+broken) stops the build, unless the build is asked to skip such sources:
+the record then lists each one with its error under `skipped`. A missing
+program stops it anyway, since it fails every source that needs it. A
+vocabulary is never trained without a source: it is frozen for good.
+
 With stream=True the build keeps no source's files: each source is fetched
 into a throwaway store, turned into tokens (one store object per source,
 see source_tokens) and the throwaway store removed before the next one.
@@ -36,13 +42,13 @@ from pathlib import Path
 
 import numpy as np
 
-from wpt_store import CorruptObject, open_store
+from wpt_store import CorruptObject, MissingObject, open_store
 from wpt_store.shards import write_shard
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_tokenizer import __version__ as TOKENIZER_VERSION
 
 from . import manifest, markdown, pools
-from .errors import LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
+from .errors import DatasetError, LockedDocumentsMissing, LockMismatch, MissingTool, PoolError, TokenizerVersionNeeded
 from .repo import Repo, dump_json, load_json
 from .sources import VERSION, check_license_map, fingerprint, source_tree, tags_of, tree_key
 
@@ -60,35 +66,52 @@ class Document:
     tags: frozenset[str]
 
 
-def gather(repo: Repo, store, log=print):
+def gather(repo: Repo, store, log=print, skipped=None):
     """(documents, sources info, number of duplicates removed). A source with
     records files gets `credits` in its info: the store object listing, one
     JSON line per document it gives, the document id, its license and the
-    credit fields of its record."""
+    credit fields of its record. With a list as skipped, a failing source is
+    left out and added to it (see _skip); otherwise its error stops."""
     documents, info, seen, duplicates = [], {}, set(), 0
     for source in repo.sources():
         if not source.admitted:
             continue
-        tree, tree_object = source_tree(source, store)
+        try:
+            tree, tree_object = source_tree(source, store)
+            found, mine, credits, repeated = [], set(), [], 0  # kept apart until the source succeeds
+            for converted in markdown.documents(source, tree, store):  # links are not documents; their targets are
+                sha256 = store.put_bytes(converted.markdown)
+                if sha256 in seen or sha256 in mine:
+                    repeated += 1
+                    continue
+                mine.add(sha256)
+                document_id = f"{source.id}/{converted.path}"
+                found.append(Document(document_id, source.id, sha256, tags_of(source, converted.file)))
+                if converted.record:
+                    credits.append(json.dumps({"document": document_id, "license": converted.record.license,
+                                               "credit": converted.record.credit}, ensure_ascii=False, sort_keys=True))
+        except (DatasetError, CorruptObject, MissingObject) as error:
+            _skip(source, error, skipped, log)
+            continue
         info[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
                            "checksum": source.data["checksum"], "tree": tree_object,
                            "licenses": source.data["licenses"]}
-        credits = []
-        for converted in markdown.documents(source, tree, store):  # links are not documents; their targets are
-            sha256 = store.put_bytes(converted.markdown)
-            if sha256 in seen:
-                duplicates += 1
-                continue
-            seen.add(sha256)
-            document_id = f"{source.id}/{converted.path}"
-            documents.append(Document(document_id, source.id, sha256, tags_of(source, converted.file)))
-            if converted.record:
-                credits.append(json.dumps({"document": document_id, "license": converted.record.license,
-                                           "credit": converted.record.credit}, ensure_ascii=False, sort_keys=True))
+        documents += found
+        seen |= mine
+        duplicates += repeated
         if credits:
             info[source.id]["credits"] = store.put_bytes("".join(f"{line}\n" for line in credits).encode())
     log(f"documents: {len(documents):,} from {len(info)} admitted sources ({duplicates:,} exact duplicates removed)")
     return documents, info, duplicates
+
+
+def _skip(source, error, skipped, log):
+    """Record a source that failed, or raise its error: when nothing asked to
+    skip, and for a missing program, which would fail every source using it."""
+    if skipped is None or isinstance(error, MissingTool):
+        raise error
+    skipped.append({"source": source.id, "error": f"{type(error).__name__}: {error}"})
+    log(f"skipped {source.id}: {type(error).__name__}: {error}")
 
 
 def assign(documents, mixture) -> dict[str, list[Document]]:
@@ -176,17 +199,21 @@ def source_tokens(source, store, tokenizer, vocabulary: str) -> dict:
     return summary
 
 
-def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print):
+def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print, skipped=None):
     """gather's (documents, sources info, duplicates), plus every document's
     tokens (PackedDocuments), from source_tokens: no source's files stay in
-    the store."""
+    the store. skipped: as in gather."""
     documents, info, seen, duplicates = [], {}, set(), 0
     tokens = PackedDocuments(store)
     for source in repo.sources():
         if not source.admitted:
             continue
-        summary = source_tokens(source, store, tokenizer, vocabulary)
-        check_license_map(source, manifest.parse_manifest(store.get_bytes(summary["tree"])))
+        try:
+            summary = source_tokens(source, store, tokenizer, vocabulary)
+            check_license_map(source, manifest.parse_manifest(store.get_bytes(summary["tree"])))
+        except (DatasetError, CorruptObject, MissingObject) as error:
+            _skip(source, error, skipped, log)
+            continue
         info[source.id] = {"address": source.data["address"], "revision": source.data["revision"],
                            "checksum": source.data["checksum"], "tree": summary["tree"],
                            "licenses": source.data["licenses"]}
@@ -359,21 +386,27 @@ def _training_part(recipe) -> dict:
 
 # -- dataset ----------------------------------------------------------------------
 
-def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TOKENS, stream=False) -> str:
+def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TOKENS, stream=False,
+                  skip_failed=False) -> str:
     """Build (or find) the dataset of a recipe and return its id; with
-    stream, keeping no source's files (see the module's docstring)."""
+    stream, keeping no source's files; with skip_failed, leaving out the
+    sources that fail (see the module's docstring)."""
     recipe = repo.recipe("dataset", name)
     mixture = repo.recipe("mixture", recipe["mixture"])
     tokenizer, vocabulary, tokenizer_key = build_tokenizer(repo, recipe["tokenizer"], store, log, stream=stream)
+    skipped = [] if skip_failed else None
     if stream:
         documents, sources_info, duplicates, packed = gather_streamed(repo, store, tokenizer, vocabulary,
-                                                                       log=lambda _: None)
+                                                                       log=lambda _: None, skipped=skipped)
     else:
-        documents, sources_info, duplicates = gather(repo, store, log=lambda _: None)
+        documents, sources_info, duplicates = gather(repo, store, log=lambda _: None, skipped=skipped)
+    for failed in skipped or []:
+        log(f"skipped {failed['source']}: {failed['error']}")
     dataset_id = fingerprint({
         "kind": "dataset", "wpt_dataset": VERSION, "recipe": recipe, "mixture": mixture, "vocabulary": vocabulary,
         "documents": [[d.id, d.sha256, sorted(d.tags)] for d in documents],
         "sources": sources_info,  # the record copies their licenses and attribution: a change rebuilds it
+        **({"skipped": skipped} if skipped else {}),  # absent when none, so earlier ids stay the same
     })
     if store.get_ref("datasets", dataset_id):
         log(f"dataset {dataset_id} is already built")
@@ -407,6 +440,7 @@ def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TO
                       "fingerprint": tokenizer_key, "vocabulary": vocabulary,
                       "version": TOKENIZER_VERSION, "vocab_size": tokenizer.vocab_size},
         "sources": sources_info,
+        "skipped": skipped or [],
         "documents": {"total": len(documents), "duplicates_removed": duplicates,
                       "held_out": len(held_out), "training": len(training)},
         "pools": pool_report,

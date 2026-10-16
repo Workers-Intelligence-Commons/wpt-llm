@@ -149,6 +149,30 @@ and the project is what comes out of it. Removed material is not used, not
 endorsed, and explicitly removed; the removal is itself the record that a
 license was respected.
 
+### When a source fails
+
+A download that fails for a reason that may pass (a timeout, a cut
+connection, an HTTP answer of 408, 425, 429 or 5xx, a git or Mercurial
+network error) is tried again, up to 5 attempts in all. The wait doubles
+from 4 seconds up to 60, each one drawn at random below that limit, and
+follows a server's `Retry-After` up to 60 seconds. Anything else (a 404, a
+robots.txt refusal, a checksum that differs) fails at once, since asking
+again gives the same answer (`wpt_dataset/retry.py`).
+
+A source that still fails (its checksum differs because the site rebuilt
+the file, every address fails, a patch no longer applies, a file is
+broken) stops `wpt-dataset build`. With `--skip-failed` (or
+`WPT_SKIP_FAILED=1`), the build leaves it out instead and lists it, with
+its error, under `skipped` in the dataset record; the model's
+`provenance.json` repeats the list as `skipped_sources`. A missing program
+(such as `hg`) stops the build anyway, since it fails every source that
+needs it. Training a new vocabulary never skips a source: its lock freezes
+the vocabulary for every later model of that version, so the first build
+of a new tokenizer version needs every source.
+
+`wpt-dataset check --fetch` checks every source it was given, even after
+one failed, and ends with the list of failures and their reasons.
+
 ## Documents are Markdown
 
 Every training document is the Markdown of one file of a source's final
@@ -178,7 +202,7 @@ of its inputs, including WPT's own code version.
 | upstream tree | the source checksum |
 | final source tree | checksum, cuts, each patch's sha256, wpt-dataset version |
 | vocabulary | tokenizer code version, tokenizer recipe (with its `version`), the documents it is trained on (id and sha256 of their Markdown); frozen by the recipe's lock until `version` is raised ([tokenizer.md](tokenizer.md)) |
-| dataset | wpt-dataset version, dataset recipe, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution) |
+| dataset | wpt-dataset version, dataset recipe, mixture, vocabulary, every document's id, sha256 (of its Markdown) and tags, each source's address, revision, checksum, tree and licenses (with attribution), and the sources skipped with `--skip-failed` |
 
 So "already done" is a lookup: nothing is downloaded or applied twice, and
 changing one patch rebuilds only that source.

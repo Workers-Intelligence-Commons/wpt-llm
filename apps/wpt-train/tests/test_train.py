@@ -58,14 +58,15 @@ def test_a_trained_model_folder_names_its_licenses_and_sources(built, tmp_path):
         assert weights.metadata()["output_license"] == "CC0-1.0"
 
 
-def test_a_damaged_shard_stops_training_before_it_starts(built, tmp_path):
+def test_a_damaged_shard_stops_training_before_it_starts(built, tmp_path, capsys):
     store, dataset_id = built.store, built.dataset_id
     record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
     shard = record["shards"][0]["object"]
     path = store.root / "objects" / shard[:2] / shard
     path.write_bytes(path.read_bytes()[:-10] + b"0123456789")
-    with pytest.raises(SystemExit, match="CorruptObject"):
+    with pytest.raises(SystemExit) as refused:
         main([dataset_id, "--out", "model", "--steps", "1"])
+    assert refused.value.code == 2 and "CorruptObject" in capsys.readouterr().err  # 2: never restarted
     assert not (tmp_path / "model").exists()
 
 
@@ -101,30 +102,38 @@ def test_two_processes_train_the_same_model_as_one(built, tmp_path, starter):
     assert provenance["strategy"]["processes"] == 2 and provenance["batch"]["accumulation"] == 1
 
 
-def test_a_crashed_run_resumes_where_its_checkpoint_left_it(built, tmp_path, monkeypatch):
-    # after a crash, --resume must give the same model as a run never interrupted
+def interrupting(tmp_path, at_step_3):
+    """Options for a run on the CPU whose method does at_step_3 (Python code)
+    at step 3, just before the update."""
     strategy = tmp_path / "cpu.py"
     strategy.write_text("import torch\nfrom wpt_training import Strategy\n\n"
                         "def start():\n    return Strategy(torch.device('cpu'))\n")
-    method = tmp_path / "crashing.py"
+    method = tmp_path / "interrupting.py"
     method.write_text(
-        "import os\nimport torch\nfrom wpt_training import Method\n\nSETTINGS = {'lr': 0.01}\n\n"
-        "class Crashing(Method):\n"
+        "import os\nimport signal\nimport torch\nfrom wpt_training import Method\n\nSETTINGS = {'lr': 0.01}\n\n"
+        "class Interrupting(Method):\n"
         "    def __init__(self, model, settings):\n"
         "        self.optimizer = torch.optim.AdamW(model.parameters(), lr=settings['lr'])\n\n"
         "    def before_update(self, model, step):\n"
-        "        if step == 3 and os.environ.get('CRASH'):\n"
-        "            raise RuntimeError('power cut')\n\n"
-        "def start(model, settings, run):\n    return Crashing(model, settings)\n")
-    options = ["--steps", "5", "--checkpoint-every", "2", "--strategy", str(strategy), "--method", str(method), *SMALL]
+        "        if step == 3:\n"
+        f"            {at_step_3}\n\n"
+        "def start(model, settings, run):\n    return Interrupting(model, settings)\n")
+    return ["--steps", "5", "--strategy", str(strategy), "--method", str(method), *SMALL]
+
+
+def test_a_crashed_run_resumes_where_its_checkpoint_left_it(built, tmp_path, monkeypatch, capsys):
+    # after a crash, --resume must give the same model as a run never interrupted
+    options = ["--checkpoint-every", "2",
+               *interrupting(tmp_path, "if os.environ.get('CRASH'): raise RuntimeError('power cut')")]
     main([built.dataset_id, "--out", "whole", *options])
 
     monkeypatch.setenv("CRASH", "1")
     with pytest.raises(RuntimeError, match="power cut"):
         main([built.dataset_id, "--out", "resumed", *options])
     assert (tmp_path / "resumed" / "checkpoint" / "checkpoint.pt").is_file()
-    with pytest.raises(SystemExit, match="--resume"):
+    with pytest.raises(SystemExit) as refused:
         main([built.dataset_id, "--out", "resumed", *options])
+    assert refused.value.code == 2 and "--resume" in capsys.readouterr().err
     monkeypatch.delenv("CRASH")
     main([built.dataset_id, "--out", "resumed", "--resume", *options])
 
@@ -147,3 +156,45 @@ def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_pat
     assert set(provenance["sources"]) == {built.source_id}
     assert load_model(tmp_path / "model").config.block_size == 16
     assert record["shards"][0]["sources"] == [built.source_id]
+
+
+def test_a_stopped_run_saves_its_step_and_continues_on_another_machine(built, tmp_path, monkeypatch):
+    # a machine taken back (SIGTERM) or Ctrl+C loses no step; with --run the
+    # checkpoint is in the store, so another model folder, as on another machine
+    # using the same store, continues it and gives the model of an unbroken run
+    options = ["--checkpoint-every", "100",
+               *interrupting(tmp_path, "if os.environ.get('STOP'): signal.raise_signal(signal.SIGINT)")]
+    main([built.dataset_id, "--out", "whole", *options])
+
+    monkeypatch.setenv("STOP", "1")
+    with pytest.raises(SystemExit) as stopped:
+        main([built.dataset_id, "--out", "here", "--run", "fox-1", *options])
+    monkeypatch.delenv("STOP")
+    assert stopped.value.code == 130 and not (tmp_path / "here" / "checkpoint").exists()
+    saved = built.store.get_ref("checkpoints", "fox-1")
+    assert torch.load(built.store.path(saved), weights_only=True)["step"] == 3  # not a multiple of 100: the signal
+    main([built.dataset_id, "--out", "there", "--run", "fox-1", "--resume", *options])
+
+    whole, there = weights(tmp_path / "whole"), weights(tmp_path / "there")
+    assert all(torch.equal(whole[k], there[k]) for k in whole)
+    assert built.store.get_ref("checkpoints", "fox-1") is None and not built.store.has(saved)
+
+
+def test_a_crashed_run_starts_again_on_its_own(built, tmp_path):
+    # a long run must survive a crash nobody watches: the processes start again
+    # and continue from the checkpoint, without anyone typing --resume
+    options = ["--checkpoint-every", "2", *interrupting(
+        tmp_path, "if os.environ.get('CRASH') and os.environ['TORCHELASTIC_RESTART_COUNT'] == '0': "
+                  "raise RuntimeError('power cut')")]
+    env = {**os.environ, **ON_CPU}
+    subprocess.run([sys.executable, "-m", "wpt_train", built.dataset_id, "--out", "whole", *options],
+                   cwd=tmp_path, env=env, check=True)
+    run = subprocess.run([sys.executable, "-m", "wpt_train", built.dataset_id, "--out", "restarted", *options],
+                         cwd=tmp_path, env={**env, "CRASH": "1", "WPT_MAX_RESTARTS": "1"}, capture_output=True,
+                         text=True)
+
+    assert run.returncode == 0, run.stderr
+    assert "power cut" in run.stderr and "starting every process again (1 of 1 restarts)" in run.stderr
+    assert "resumed from step 2" in run.stdout
+    whole, restarted = weights(tmp_path / "whole"), weights(tmp_path / "restarted")
+    assert all(torch.equal(whole[k], restarted[k]) for k in whole)

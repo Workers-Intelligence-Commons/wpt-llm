@@ -19,6 +19,7 @@ import hashlib
 import importlib.metadata
 import json
 import os
+import shutil
 import subprocess
 import tempfile
 import urllib.error
@@ -26,7 +27,7 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
-from . import huggingface, manifest, robots
+from . import huggingface, manifest, retry, robots
 from .errors import ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match
 from .programs import program
@@ -103,8 +104,14 @@ def _fetch(data: dict, address: str, store, listing_only=False) -> dict[str, Ent
         elif kind == "huggingface":
             huggingface.read(address, revision, extractor, tmp, USER_AGENT, listing_only)
         elif kind == "mercurial":
-            subprocess.run([program("hg"), "clone", "-q", "-U", "-r", revision, address, str(tmp / "repo")],
-                           capture_output=True, check=True)
+            hg = program("hg")
+
+            def clone():
+                shutil.rmtree(tmp / "repo", ignore_errors=True)  # a cut clone leaves a folder hg refuses
+                subprocess.run([hg, "clone", "-q", "-U", "-r", revision, address, str(tmp / "repo")],
+                               capture_output=True, check=True)
+
+            retry.call(clone, address)
             manifest.read_mercurial(tmp / "repo", revision, extractor)
         elif kind == "empty":
             pass  # its patches hold every file
@@ -117,9 +124,13 @@ def _download(address: str, target: Path) -> Path:
     if urlparse(address).scheme not in ("http", "https"):
         raise OSError(f"{address}: http sources need an http:// or https:// address")
     request = urllib.request.Request(address, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=120) as response, open(target, "wb") as out:
-        while block := response.read(1 << 20):
-            out.write(block)
+
+    def download():
+        with urllib.request.urlopen(request, timeout=120) as response, open(target, "wb") as out:
+            while block := response.read(1 << 20):
+                out.write(block)
+
+    retry.call(download, address)
     return target
 
 
@@ -128,10 +139,14 @@ def _git_fetch(address: str, revision: str, repo: Path, full=False):
     subprocess.run(["git", "init", "-q", "--bare", str(repo)], capture_output=True, check=True)
     git = ["git", "-c", f"http.userAgent={USER_AGENT}", "-C", str(repo)]
     depth = [] if full else ["--depth", "1"]
-    shallow = subprocess.run([*git, "fetch", "-q", *depth, address, revision], capture_output=True)
-    if shallow.returncode != 0:  # some servers only serve branch and tag tips
-        subprocess.run([*git, "fetch", "-q", address,
-                        "+refs/heads/*:refs/heads/*", "+refs/tags/*:refs/tags/*"], capture_output=True, check=True)
+
+    def fetch(*what):
+        retry.call(lambda: subprocess.run([*git, "fetch", "-q", *what], capture_output=True, check=True), address)
+
+    try:
+        fetch(*depth, address, revision)
+    except subprocess.CalledProcessError:  # some servers only serve branch and tag tips
+        fetch(address, "+refs/heads/*:refs/heads/*", "+refs/tags/*:refs/tags/*")
     subprocess.run(["git", "-C", str(repo), "cat-file", "-e", f"{revision}^{{commit}}"], capture_output=True, check=True)
 
 

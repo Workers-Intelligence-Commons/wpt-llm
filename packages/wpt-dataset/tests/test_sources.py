@@ -3,6 +3,7 @@ import http.server
 import io
 import tarfile
 import threading
+import urllib.error
 
 import pytest
 
@@ -195,5 +196,40 @@ def test_only_a_missing_robots_txt_means_no_rules(answer, usable, store):
         else:
             with pytest.raises(RobotsUnreachable, match=f"answered {answer}"):
                 compute_upstream(data, address, store)
+    finally:
+        server.shutdown()
+
+
+def test_a_download_failing_for_a_passing_reason_is_tried_again(store):
+    # a busy server must not fail a fetch of thousands of sources, while a file
+    # that is not there is reported at once: asking again gives the same answer
+    asked = {}
+
+    class Handler(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            asked[self.path] = asked.get(self.path, 0) + 1
+            if self.path == "/book.txt" and asked[self.path] <= 2:
+                self.send_response(503)
+                self.send_header("Retry-After", "0")
+                self.end_headers()
+            elif self.path == "/book.txt":
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b"a short story\n")
+            else:
+                self.send_error(404)
+
+        def log_message(self, *args):
+            pass
+
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        base, data = f"http://127.0.0.1:{server.server_address[1]}", {"type": "http-file", "revision": "2026-10-16"}
+        tree = compute_upstream(data, f"{base}/book.txt", store)
+        assert store.get_bytes(tree["book.txt"].sha256) == b"a short story\n" and asked["/book.txt"] == 3
+        with pytest.raises(urllib.error.HTTPError, match="404"):
+            compute_upstream(data, f"{base}/gone.txt", store)
+        assert asked["/gone.txt"] == 1
     finally:
         server.shutdown()

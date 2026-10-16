@@ -16,6 +16,16 @@ def exercise(store):
     assert store.get_ref("builds", "abc") == sha
     with pytest.raises(MissingObject):
         store.get_bytes("0" * 64)
+    # a checkpoint replaced by a newer one is removed, or a long run fills the store
+    old = store.put_bytes(b"checkpoint at step 500\n")
+    store.set_ref("checkpoints", "run", old)
+    store.get_bytes(old)  # leaves a local copy for S3
+    store.delete(old)
+    store.delete_ref("checkpoints", "run")
+    assert not store.has(old) and store.get_ref("checkpoints", "run") is None
+    store.delete(old)  # absent: nothing to do
+    store.delete_ref("checkpoints", "run")
+    assert store.get_bytes(sha) == b"some text\n"
     return sha
 
 

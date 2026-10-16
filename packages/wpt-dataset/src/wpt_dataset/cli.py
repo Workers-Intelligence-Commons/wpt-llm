@@ -2,7 +2,8 @@
 
     wpt-dataset check                     every rule that needs no download
     wpt-dataset check --fetch [ID ...]    also fetch sources (all admitted, or the ids given):
-                                          checksum, cuts, patches, license map, text
+                                          checksum, cuts, patches, license map, text; every
+                                          source is checked, and the failures listed at the end
     wpt-dataset check --changed REV       fetch only sources changed since git revision REV
     wpt-dataset check-commits RANGE       DCO sign-off and signed decisions (e.g. origin/main..HEAD)
     wpt-dataset source-id ORIGIN [ITEM] ADDRESS
@@ -19,12 +20,17 @@
                                           train (or find) the vocabulary of a tokenizer recipe
     wpt-dataset tokenizer-check NAME      encode and decode every admitted document with that
                                           vocabulary: exact round trip, characters per token
-    wpt-dataset build NAME [--stream]     build (or find) a dataset recipe; prints the dataset id
+    wpt-dataset build NAME [--stream] [--skip-failed]
+                                          build (or find) a dataset recipe; prints the dataset id
     wpt-dataset migrate                   rewrite data files to the current shapes
 
 The store comes from WPT_STORE (environment or .env at the repository root).
 --stream (or WPT_STREAM=1) fetches one source at a time and keeps only its
 tokens in the store, not its files: for a corpus larger than the disk.
+A failing source stops a build; --skip-failed (or WPT_SKIP_FAILED=1) leaves
+it out and lists it, with its error, in the dataset record. A download that
+fails for a reason that may pass (timeout, cut connection, server error) is
+tried again, up to 5 times (see retry.py).
 """
 
 import argparse
@@ -63,17 +69,27 @@ def cmd_check(args, repo):
         ids = sorted({p.split("/")[2] for p in out.splitlines() if p.count("/") >= 3} & set(repo.source_ids()))
     elif args.fetch is not None:
         ids = args.fetch or [s.id for s in repo.sources() if s.admitted]
+    failed = []
     if ids:
         store = _store(repo)
-        for sid in ids:
+        for sid in ids:  # every source is checked, so one run names every failure
             source = repo.source(sid)
-            tree, _ = source_tree(source, store)
-            skipped = {}
-            converted = sum(1 for _ in documents(source, tree, store, skipped))
+            try:
+                tree, _ = source_tree(source, store)
+                skipped = {}
+                converted = sum(1 for _ in documents(source, tree, store, skipped))
+            except (DatasetError, StoreError) as error:
+                failed.append(f"{sid}: {type(error).__name__}: {error}")
+                print(f"{sid}: FAILED ({type(error).__name__})", file=sys.stderr)
+                continue
             print(f"{sid}: {len(tree)} entries, checksum, cuts, patches, license and format maps OK; "
                   f"{converted} Markdown documents")
             _print_skipped(skipped)
     print(f"checked {len(repo.source_ids())} sources and their recipes")
+    if failed:
+        print(f"{len(failed)} of {len(ids)} fetched sources failed:", file=sys.stderr)
+        print("\n".join(failed), file=sys.stderr)
+        return 1
     return 0
 
 
@@ -155,7 +171,7 @@ def cmd_tokenizer_check(args, repo):
 
 
 def cmd_build(args, repo):
-    print(build_dataset(repo, args.name, _store(repo), stream=args.stream))
+    print(build_dataset(repo, args.name, _store(repo), stream=args.stream, skip_failed=args.skip_failed))
     return 0
 
 
@@ -208,6 +224,10 @@ def main(argv=None):
     build = commands.add_parser("build")
     build.add_argument("name")
     build.add_argument("--stream", action="store_true", default=stream, help=stream_help)
+    build.add_argument("--skip-failed", action="store_true",
+                       default=os.environ.get("WPT_SKIP_FAILED", "") in ("1", "true", "yes"),
+                       help="leave out admitted sources that fail and list them in the dataset record, instead of "
+                            "stopping; a new vocabulary still needs every source (WPT_SKIP_FAILED)")
     build.set_defaults(run=cmd_build)
     commands.add_parser("migrate").set_defaults(run=cmd_migrate)
     args = parser.parse_args(argv)

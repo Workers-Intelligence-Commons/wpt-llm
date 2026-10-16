@@ -124,13 +124,56 @@ the method judged best.
 ### Checkpoints and resuming
 
 Every `--checkpoint-every` steps (default 500, 0 for never), the main
-process writes `<model folder>/checkpoint/checkpoint.pt`: the step, the
-weights, the method's state and the best weights so far. After a crash,
-the same command with `--resume` continues from it, on other hardware too:
-the number of processes and `--micro-batch` may change, the other options
-may not (the run stops with `SettingsMismatch`). Without `--resume`, a
-leftover checkpoint stops the run, so a crashed run is never overwritten by
-mistake. The checkpoint is removed once the model is saved.
+process writes a checkpoint: the step, the weights, the method's state and
+the best weights so far. The same command with `--resume` continues from
+it, on other hardware too: the number of processes and `--micro-batch` may
+change, the other options may not (the run stops with `SettingsMismatch`).
+Without `--resume`, a leftover checkpoint stops the run, so a crashed run
+is never overwritten by mistake. The checkpoint is removed once the model
+is saved.
+
+Where it lives:
+
+- without `--run`, in `<model folder>/checkpoint/checkpoint.pt`, on the
+  machine of the main process;
+- with `--run NAME` (or `WPT_RUN`), in the store, under the ref
+  `checkpoints/NAME`. Any machine using the same `WPT_STORE` continues the
+  run with the same command, `--run NAME --resume` and any `--out`: a run
+  can move from one machine to another between sessions. Each save
+  replaces the previous checkpoint of that name, which is then deleted;
+  a crash while saving leaves the previous one. With an S3 store, every
+  save is an upload of about four times the model's size.
+
+#### Stopping a run
+
+Ctrl+C, `SIGTERM` (a shutdown, a rented machine being taken back) or, on
+Windows, Ctrl+Break, sent to any process of the run, lets every process
+finish its step; they then write a checkpoint (unless `--checkpoint-every
+0`) and exit with code 130. `--resume` continues from that step. A second
+signal stops the run at once, losing the steps since the last checkpoint,
+as `kill -9` or a power cut does.
+
+#### Restarting after a crash
+
+When a process crashes, the processes `wpt-train` started are stopped and
+all start again, up to `--max-restarts` times (default 3, `WPT_MAX_RESTARTS`);
+a restarted process continues from the checkpoint without `--resume`. A
+one-process run is started this way too, by a small parent process, unless
+`--max-restarts 0`, which runs the training in the command's own process
+and never restarts. Two exits are never restarted: a refusal (exit code 2:
+a missing or damaged dataset, a checkpoint written with other settings,
+options that do not fit), which would refuse again, and a stop asked for
+(exit code 130). A bug that crashes every time stops after the last
+restart.
+
+With torchrun, its own `--max-restarts` restarts the processes, and they
+continue from the checkpoint the same way. On several machines, use
+torchrun's meeting point (`--rdzv-backend c10d --rdzv-endpoint HOST:PORT
+--rdzv-id NAME`) instead of `--master-addr`, so a machine that comes back
+can join again; and `--run`, so the checkpoint is where every machine can
+read it. A checkpoint folder without `--run` is only on the main
+process's machine. torchrun restarts after any failed process, refusals
+included.
 
 The model folder holds:
 

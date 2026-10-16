@@ -39,6 +39,10 @@ id with how to follow and stop it:
 | follow | `Get-Content -Wait 'runs\logs\<file>.log'` | `tail -f 'runs/logs/<file>.log'` |
 | stop | `taskkill /T /F /PID <id>` | `kill <id>` |
 
+`kill <id>` lets the run finish its step and write a checkpoint before it
+exits (code 130). `taskkill /F` ends it at once: the steps since the last
+checkpoint (every `--checkpoint-every` steps) are lost.
+
 Over SSH, start the run with the script, end the SSH command, and read the
 log in later commands; never keep a run attached to the connection.
 
@@ -51,7 +55,20 @@ gone without that line has failed: the end of the log says why.
 
 ## After a crash or a stop
 
-The same command with `--resume` continues from
-`runs/NAME/checkpoint/` (written every `--checkpoint-every` steps), started
-the same detached way. Without `--resume`, a leftover checkpoint stops the
-run, so an unfinished run is never overwritten by mistake.
+A crash restarts every process on its own, up to `--max-restarts` times
+(default 3), from the last checkpoint; the log says `starting every process
+again`. A refusal (exit code 2: missing dataset, other settings than the
+checkpoint's) is never restarted.
+
+After a stop, or once the restarts are used up, the same command with
+`--resume` continues from `runs/NAME/checkpoint/`, started the same
+detached way. Without `--resume`, a leftover checkpoint stops the run, so
+an unfinished run is never overwritten by mistake.
+
+## A run over several machines or sessions
+
+With `--run NAME`, the checkpoint is kept in the store (`WPT_STORE`)
+instead of the model folder: any machine using the same store continues
+the run with the same command plus `--run NAME --resume`. Use it when a run
+may move to another machine, or with torchrun on several machines
+(docs/training.md, "Restarting after a crash").

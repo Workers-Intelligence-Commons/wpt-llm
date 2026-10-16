@@ -23,6 +23,7 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import quote, urlparse
 
+from . import retry
 from .errors import UnsupportedEntry
 from .manifest import FILE
 
@@ -45,15 +46,19 @@ def files(address: str, revision: str, user_agent: str) -> list[dict]:
     url = f"{API}/{dataset_of(address)}/tree/{revision}?recursive=true&expand=false"
     found = []
     while url:
-        request = urllib.request.Request(url, headers={"User-Agent": user_agent})
-        with urllib.request.urlopen(request, timeout=120) as response:
-            found += json.load(response)
-            link = NEXT.search(response.headers.get("Link") or "")
+        page, link = retry.call(lambda url=url: _page(url, user_agent), url)
+        found += page
         url = link[1] if link else None
     for entry in found:
         if entry["type"] not in ("file", "directory"):
             raise UnsupportedEntry(f"{entry['path']}: Hub entry of type {entry['type']!r} is neither a file nor a folder")
     return [entry for entry in found if entry["type"] == "file"]
+
+
+def _page(url, user_agent):
+    request = urllib.request.Request(url, headers={"User-Agent": user_agent})
+    with urllib.request.urlopen(request, timeout=120) as response:
+        return json.load(response), NEXT.search(response.headers.get("Link") or "")
 
 
 def resolve_url(address: str, revision: str, path: str) -> str:
@@ -62,13 +67,18 @@ def resolve_url(address: str, revision: str, path: str) -> str:
 
 def fetch(address: str, revision: str, path: str, target: Path, user_agent: str) -> str:
     """Stream one file to target; returns its sha256."""
-    digest = hashlib.sha256()
-    request = urllib.request.Request(resolve_url(address, revision, path), headers={"User-Agent": user_agent})
-    with urllib.request.urlopen(request, timeout=120) as response, open(target, "wb") as out:
-        while block := response.read(BLOCK):
-            digest.update(block)
-            out.write(block)
-    return digest.hexdigest()
+    url = resolve_url(address, revision, path)
+    request = urllib.request.Request(url, headers={"User-Agent": user_agent})
+
+    def download():
+        digest = hashlib.sha256()
+        with urllib.request.urlopen(request, timeout=120) as response, open(target, "wb") as out:
+            while block := response.read(BLOCK):
+                digest.update(block)
+                out.write(block)
+        return digest.hexdigest()
+
+    return retry.call(download, url)
 
 
 def read(address: str, revision: str, extractor, tmp: Path, user_agent: str, listing_only: bool):

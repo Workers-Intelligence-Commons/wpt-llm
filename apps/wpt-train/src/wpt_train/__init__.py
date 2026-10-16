@@ -27,9 +27,16 @@ option name in capitals with '_' for '-' (--n-layer -> WPT_N_LAYER;
 WPT_SET holds NAME=VALUE pairs separated by spaces; WPT_RESUME=1); the
 command line wins. The dataset id may come from WPT_DATASET.
 
-Every --checkpoint-every steps the main process writes MODEL/checkpoint/;
-after a crash, run the same command with --resume to continue (on other
-hardware too). The checkpoint is removed once the model is saved.
+Every --checkpoint-every steps the main process writes MODEL/checkpoint/,
+or with --run NAME the store's checkpoint of that name, which any machine
+using the same store can continue. Run the same command with --resume to
+continue (on other hardware too). The checkpoint is removed once the model
+is saved. Ctrl+C or SIGTERM finishes the step and saves before stopping.
+After a crash, every process starts again, up to --max-restarts times
+(default 3), and continues from the checkpoint; 0 runs in this process.
+
+Exit codes: 0 done, 2 refused (bad input, other settings than the
+checkpoint's; never restarted), 130 stopped by a signal, others a crash.
 
 The model folder gets config.json, the weights (their headers name the
 licenses), tokenizer.json (the dataset's vocabulary, for wpt-chat),
@@ -57,15 +64,21 @@ from wpt_device import describe
 from wpt_inference import sample_tokens
 from wpt_model import ModelConfig, TinyGPT, save_model
 from wpt_model.notice import EVALS_NAME, WEIGHT_METADATA, write_credits, write_documents
+from wpt_store import NAME as STORE_NAME
 from wpt_store import StoreError, store_from_settings
 from wpt_store.shards import ShardStream, sources_of, token_file
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
-from wpt_training import PluginError, RunSettings, SettingsMismatch, load_method, load_strategy, train
-from wpt_training.launch import launch
+from wpt_training import (Checkpoint, FolderCheckpoint, Interrupted, PluginError, RunSettings, SettingsMismatch,
+                          load_method, load_strategy, train)
+from wpt_training.launch import REFUSED, STOPPED, launch
 
 SIZE_UNITS = {"": 1, "KB": 10**3, "MB": 10**6, "GB": 10**9}
 DEFAULT_MODEL = ModelConfig(vocab_size=1)
 CHECKPOINT_FOLDER = "checkpoint"
+
+
+class Refused(Exception):
+    """The run cannot start as asked; trying again would refuse again."""
 
 
 class InputError(Exception):
@@ -102,6 +115,10 @@ OPTIONS = [
     ("method", str, "adamw", "how the model learns: a built-in name or a .py file"),
     ("max-shard-size", parse_size, None, "split the weights into files of at most this size, e.g. 500MB"),
     ("stream-shards", int, 8, "with --stream: dataset shards in use at once (windows are drawn from them)"),
+    ("run", str, None, "keep the checkpoint in the store under this name, so any machine using the store can "
+                       "continue the run"),
+    ("max-restarts", int, 3, "after a crash, start every process again this many times at most, continuing from "
+                             "the checkpoint (0: run in this process, never restart)"),
 ]
 
 
@@ -123,10 +140,12 @@ def parse_args(argv=None, environ=None):
                         help="read the training shards a few at a time instead of copying them all to disk first "
                              "(WPT_STREAM)")
     parser.add_argument("--resume", action="store_true", default=environ.get("WPT_RESUME", "") in ("1", "true", "yes"),
-                        help="continue from the model folder's checkpoint (WPT_RESUME)")
+                        help="continue from the checkpoint: the model folder's, or with --run the store's (WPT_RESUME)")
     args = parser.parse_args(argv)
     if not args.dataset:
         parser.error("give the dataset id (or set WPT_DATASET)")
+    if args.run is not None and not STORE_NAME.fullmatch(args.run):
+        parser.error(f"--run {args.run!r}: use letters, digits, '.', '_' and '-' only")
     try:
         args.set = dict(pair.split("=", 1) for pair in args.set)
     except ValueError:
@@ -188,6 +207,7 @@ def provenance(args, record, record_object, sources, model_config, n_params, str
         "dataset": record["id"],
         "dataset_record": record_object,
         "sources": {sid: record["sources"][sid] for sid in sorted(sources)},  # address, revision, licenses
+        "skipped_sources": record.get("skipped", []),  # admitted, but left out of the build: it failed
         "vocabulary": record["tokenizer"]["vocabulary"],
         "shards": [{"object": s["object"], "token_sha256": s["token_sha256"]} for s in record["shards"]],
         "held_out_shards": [{"object": s["object"], "token_sha256": s["token_sha256"]} for s in record["held_out_shards"]],
@@ -211,27 +231,85 @@ def provenance(args, record, record_object, sources, model_config, n_params, str
 def main(argv=None):
     sys.stdout.reconfigure(encoding="utf-8")  # the sample is any text; Windows pipes default to a narrower code page
     args = parse_args(argv)
-    if args.processes > 1 and "LOCAL_RANK" not in os.environ:  # not yet one of the started processes
-        sys.exit(launch(args.processes, ["-m", "wpt_train", *(sys.argv[1:] if argv is None else argv)]))
+    if (args.processes > 1 or args.max_restarts > 0) and "LOCAL_RANK" not in os.environ:  # not yet started by one
+        sys.exit(launch(args.processes, ["-m", "wpt_train", *(sys.argv[1:] if argv is None else argv)],
+                        max_restarts=args.max_restarts))
     try:
         method_plugin, method_settings = load_method(args.method, args.set)
         strategy_plugin, strategy = load_strategy(args.strategy)
     except PluginError as error:
-        sys.exit(f"PluginError: {error}")
+        _refuse(f"PluginError: {error}")
     try:
         _train(args, strategy, (strategy_plugin, method_plugin, method_settings))
+    except Refused as error:
+        _refuse(str(error))
+    except Interrupted as error:
+        if strategy.is_main:
+            print(error, file=sys.stderr)
+        sys.exit(STOPPED)
     finally:
         strategy.close()
+
+
+def _refuse(text):
+    print(text, file=sys.stderr)
+    sys.exit(REFUSED)
+
+
+class StoreCheckpoint(Checkpoint):
+    """The checkpoint of a named run in the store (ref checkpoints/NAME):
+    any machine using the same store continues it. Each save replaces the
+    previous one, which is then deleted."""
+
+    KIND = "checkpoints"
+
+    def __init__(self, store, name):
+        self.store, self.name = store, name
+
+    def __str__(self):
+        return f"{self.store} as {self.KIND}/{self.name}"
+
+    def exists(self):
+        return self.store.get_ref(self.KIND, self.name) is not None
+
+    def load(self):
+        sha = self.store.get_ref(self.KIND, self.name)
+        if sha is None:
+            return None
+        state = torch.load(self.store.path(sha), map_location="cpu", weights_only=True)  # path() checks the sha256
+        self.store.release(sha)
+        return state
+
+    def save(self, state):
+        self.store.scratch.mkdir(parents=True, exist_ok=True)
+        partial = self.store.scratch / f"checkpoint-{self.name}.partial"
+        try:
+            torch.save(state, partial)
+            sha = self.store.put_file(partial)
+        finally:
+            partial.unlink(missing_ok=True)
+        previous = self.store.get_ref(self.KIND, self.name)
+        self.store.set_ref(self.KIND, self.name, sha)  # the previous one stays until this points elsewhere
+        if previous and previous != sha:
+            self.store.delete(previous)
+
+    def remove(self):
+        sha = self.store.get_ref(self.KIND, self.name)
+        self.store.delete_ref(self.KIND, self.name)
+        if sha:
+            self.store.delete(sha)
 
 
 def _train(args, strategy, plugins):
     log = print if strategy.is_main else (lambda *_: None)
     out = Path(args.out)
-    checkpoint_folder = out / CHECKPOINT_FOLDER
-    if checkpoint_folder.exists() and not args.resume:
-        sys.exit(f"{checkpoint_folder} holds an unfinished run: add --resume to continue it, or delete it")
+    restarted = int(os.environ.get("TORCHELASTIC_RESTART_COUNT", "0")) > 0  # set by the launcher and by torchrun
+    resume = args.resume or restarted
     try:
         store = store_from_settings(Path.cwd() / ".env")
+        checkpoint = StoreCheckpoint(store, args.run) if args.run else FolderCheckpoint(out / CHECKPOINT_FOLDER)
+        if checkpoint.exists() and not resume:
+            raise Refused(f"{checkpoint} holds an unfinished run: add --resume to continue it, or delete it")
         record, record_object, tokenizer = load_dataset(store, args.dataset)
         train_data, val_data = token_arrays(store, record, strategy, args.stream_shards if args.stream else None)
         settings = RunSettings(block_size=args.block_size, batch_size=args.batch_size,
@@ -239,9 +317,9 @@ def _train(args, strategy, plugins):
                                steps=args.steps, eval_every=args.eval_every, checkpoint_every=args.checkpoint_every,
                                seed=args.seed)
     except (StoreError, InputError) as error:
-        sys.exit(f"{type(error).__name__}: {error}")
+        raise Refused(f"{type(error).__name__}: {error}") from None
     if len(train_data) <= args.block_size + 1:
-        sys.exit(f"the dataset has {len(train_data):,} training tokens, fewer than one window of {args.block_size}")
+        raise Refused(f"the dataset has {len(train_data):,} training tokens, fewer than one window of {args.block_size}")
     log(f"device: {describe(strategy.device)}" + (f", {strategy.world_size} processes" if strategy.world_size > 1 else ""))
     log(f"dataset {args.dataset}: {len(train_data):,} training tokens, {len(val_data):,} held-out tokens, "
         f"vocabulary {tokenizer.vocab_size:,} tokens")
@@ -255,12 +333,12 @@ def _train(args, strategy, plugins):
     _, method_plugin, method_settings = plugins
     try:
         best_val = train(model, strategy, method_plugin, method_settings, train_data, val_data, settings,
-                         checkpoint_folder=checkpoint_folder, resume=args.resume,
+                         checkpoint=checkpoint, resume=resume,
                          identity={"dataset": args.dataset, "model": asdict(model_config),
                                    # the shards in use decide the windows, so a resumed run must stream the same way
                                    **({"stream_shards": args.stream_shards} if args.stream else {})}, log=log)
     except (ValueError, SettingsMismatch, PluginError) as error:
-        sys.exit(f"{type(error).__name__}: {error}")
+        raise Refused(f"{type(error).__name__}: {error}") from None
     finally:
         if isinstance(train_data, ShardStream):
             train_data.close()
@@ -278,7 +356,7 @@ def _train(args, strategy, plugins):
     (out / "provenance.json").write_text(json.dumps(written, indent=2) + "\n", encoding="utf-8", newline="\n")
     write_credits(out, written, store.get_bytes)
     write_documents(out)
-    shutil.rmtree(checkpoint_folder, ignore_errors=True)  # the run is complete
+    checkpoint.remove()  # the run is complete
     log(f"saved {out} (licenses and sources: {out / 'NOTICE'})")
     # show a sample so you immediately see what it learned
     model.eval()

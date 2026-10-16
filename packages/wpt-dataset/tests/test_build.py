@@ -5,7 +5,7 @@ import pytest
 
 from wpt_dataset.build import build_dataset
 from wpt_dataset.cli import main
-from wpt_dataset.errors import LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
+from wpt_dataset.errors import ChecksumMismatch, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
 from wpt_store import open_store
 from wpt_store.shards import read_shard, token_hash
 from wpt_tokenizer import Tokenizer
@@ -205,3 +205,30 @@ def test_a_streamed_build_gives_the_same_dataset_and_keeps_no_source_files(kit, 
     for tokens, *_ in rows_of(streamed_store, streamed["shards"]):
         assert not streamed_store.has(hashlib.sha256(vocabulary.decode(tokens.tolist())).hexdigest())  # its Markdown
 
+
+def test_a_failing_source_stops_the_build_unless_skipping_is_asked(kit, repo, store, corpus, tmp_path, monkeypatch,
+                                                                    capsys):
+    # with thousands of sources, one site rebuilding its file must not block every
+    # build; but leaving a source out is a choice someone makes, and the record says so
+    setup_recipes(kit, repo, store, corpus, total_tokens=2000)
+    first = build_dataset(repo, "small", store, log=lambda _: None)  # also locks the vocabulary
+    changed = kit.add_source(repo, store, "example", "changed", {
+        "type": "git", "address": corpus[0], "revision": corpus[1], "checksum": "sha256:" + "1" * 64,
+        "tags": [{"tags": ["en"], "paths": ["**"]}]}, compute_checksum=False)
+
+    with pytest.raises(ChecksumMismatch, match=changed):
+        build_dataset(repo, "small", store, log=lambda _: None)
+    for stream in (False, True):
+        skipped = build_dataset(repo, "small", store, log=lambda _: None, stream=stream, skip_failed=True)
+        record = record_of(store, skipped)
+        assert [s["source"] for s in record["skipped"]] == [changed]
+        assert record["skipped"][0]["error"].startswith("ChecksumMismatch: ")
+        assert changed not in record["sources"] and record["documents"] == record_of(store, first)["documents"]
+        assert skipped != first  # the id says something is missing
+
+    # the check goes on past a failure, so one run names every source to fix
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    capsys.readouterr()
+    assert main(["--root", str(repo.root), "check", "--fetch", *repo.source_ids()]) == 1
+    out, err = capsys.readouterr()
+    assert "Markdown documents" in out and f"1 of 2 fetched sources failed:\n{changed}: ChecksumMismatch: " in err

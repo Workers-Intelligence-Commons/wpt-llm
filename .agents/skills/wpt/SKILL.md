@@ -47,13 +47,13 @@ A Rust toolchain is needed: the tokenizer is built from source.
 | id of a new source | `uv run wpt-dataset source-id ORIGIN [ITEM] ADDRESS` | | prints the id |
 | manifest and checksum of a source | `uv run wpt-dataset manifest ID` | the upstream | the store; prints the checksum |
 | edit a source's files | `uv run wpt-dataset unpack ID FOLDER`, edit, `uv run wpt-dataset patch ID FOLDER NAME` | the source, the folder | the folder; then `data/sources/ID/NNNN-NAME.patch` |
-| check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` | `data/` | the store, with `--fetch` |
+| check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` (every source is fetched, failures listed at the end) | `data/` | the store, with `--fetch` |
 | build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
 | check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
-| build a dataset | `uv run wpt-dataset build NAME [--stream]` (`--stream`: one source at a time, only tokens kept) | a dataset recipe | the store; prints the dataset id |
+| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (`--stream`: one source at a time, only tokens kept; `--skip-failed`: a failing source is left out and listed in the record instead of stopping) | a dataset recipe | the store; prints the dataset id |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
-| train | `uv run wpt-train DATASET_ID [--out FOLDER] [--stream] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time) | the store | a model folder; `scratch/` token files in the store's local folder |
+| train | `uv run wpt-train DATASET_ID [--out FOLDER] [--stream] [--run NAME] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time; `--run`: the checkpoint in the store, so another machine can continue) | the store | a model folder; `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
 | train on several GPUs | `uv run wpt-train DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md` |
 | post-train | `uv run wpt-posttrain BASE NEW STEP [STEP ...]` | the base folder, the store | the new folder, only if every step succeeded |
@@ -63,8 +63,11 @@ A Rust toolchain is needed: the tokenizer is built from source.
 Every `wpt-train` option also comes from `WPT_<OPTION>` in the environment
 (`--n-layer` -> `WPT_N_LAYER`); `--help` on any command lists the rest.
 `--batch-size` is global (over every process), `--set NAME=VALUE` changes a
-setting of the method, and after a crash the same command with `--resume`
-continues from `FOLDER/checkpoint/`.
+setting of the method. A crash restarts the processes on their own, up to
+`--max-restarts` times (default 3), from the last checkpoint; Ctrl+C or
+`kill` finishes the step and saves first; after a stop, the same command
+with `--resume` continues from `FOLDER/checkpoint/` (or, with `--run NAME`,
+from the store, on any machine). Exit codes: 2 refused, 130 stopped.
 
 ## Adding a source
 

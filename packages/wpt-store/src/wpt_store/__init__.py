@@ -139,6 +139,20 @@ class Store:
             raise CorruptObject(f"ref {kind}/{name} holds {sha!r}, not a sha256")
         return sha
 
+    def delete(self, sha: str):
+        """Remove an object, and its local copy; nothing when it is absent.
+        Objects are shared by content: only for one that nothing else can
+        point at, such as a training checkpoint that a newer one replaced."""
+        _check_sha(sha)
+        self._raw_discard_local(sha)
+        self._raw_delete(sha)
+
+    def delete_ref(self, kind: str, name: str):
+        """Remove a ref (not its object); nothing when it is absent."""
+        _check_ref(kind, name)
+        self._raw_delete_ref(kind, name)
+
+
 class LocalStore(Store):
     """objects/<first 2 hex>/<sha256> and refs/<kind>/<name> under one folder."""
 
@@ -177,6 +191,13 @@ class LocalStore(Store):
             return (self.root / "refs" / kind / name).read_text().strip()
         except FileNotFoundError:
             return None
+
+    def _raw_delete(self, sha):
+        self._object(sha).unlink(missing_ok=True)
+
+    def _raw_delete_ref(self, kind, name):
+        (self.root / "refs" / kind / name).unlink(missing_ok=True)
+
 
 class S3Store(Store):
     """The same layout as LocalStore, as keys under s3://bucket/prefix."""
@@ -255,6 +276,13 @@ class S3Store(Store):
             if error.response["Error"]["Code"] in ("404", "NoSuchKey", "NotFound"):
                 return None
             raise
+
+    def _raw_delete(self, sha):
+        self.client.delete_object(Bucket=self.bucket, Key=self._object_key(sha))  # S3 answers the same when absent
+
+    def _raw_delete_ref(self, kind, name):
+        self.client.delete_object(Bucket=self.bucket, Key=self._key("refs", kind, name))
+
 
 def open_store(url: str) -> Store:
     """A store from a WPT_STORE value."""
