@@ -45,8 +45,15 @@ rather than a plain "we claim no copyright" sentence:
   passes the work on remove additional permissions, and a waiver of the
   authors' own rights cannot be removed that way.
 
-It covers only rights the authors hold. Third-party material that a model
-reproduces keeps its own license.
+It covers only rights the authors hold, so only what the model itself
+generates. Material from anywhere else keeps its owner's rights and license
+when it appears in an output: pieces of the training data the model
+reproduces, and anything placed in its context (the prompt, documents, web
+pages or files it reads, tool results). A model that reads a proprietary
+document and repeats it does not make that document public domain
+(maintainer's decision, 2026-10-16). The notice says so in its own
+paragraph, so readers do not have to infer it from "rights the authors
+hold".
 
 ## Clause 2: attribution recommendation (non-binding)
 

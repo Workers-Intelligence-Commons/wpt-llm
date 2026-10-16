@@ -33,7 +33,8 @@ NOTICE_NAME, CARD_NAME, LICENSE_NAME, EVALS_NAME, CREDITS_NAME = "NOTICE", "READ
 WEIGHT_METADATA = {"license": LICENSE, "output_license": OUTPUT_LICENSE,
                    "notice": f"NOTICE in the model folder; {REPOSITORY}"}
 SUMMARY = (f"Weights: {LICENSE}. Generated text: {OUTPUT_LICENSE}, waived by the authors of WPT; "
-           "third-party material that a model reproduces keeps its own license.")
+           "material it reproduces from its training data or its context (prompt, documents, tool "
+           "results) keeps its own license.")
 
 
 def output_notice() -> str:
