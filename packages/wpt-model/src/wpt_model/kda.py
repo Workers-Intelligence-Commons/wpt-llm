@@ -123,7 +123,7 @@ class KDA(nn.Module):
         self.norm = nn.RMSNorm(d, eps=EPS)
         self.out = nn.Linear(H * d, D, bias=False)
 
-    def forward(self, x):
+    def forward(self, x, collect=True):  # collect: KDA records nothing
         B, T, _ = x.shape
         H, d = self.heads, self.head_dim
 

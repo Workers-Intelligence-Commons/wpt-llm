@@ -72,3 +72,25 @@ def test_quantile_balancing_gives_each_expert_its_share():
         experts(x, ids)
         experts.balance(lambda tensor, op: tensor)
     assert torch.allclose(shares(), torch.full((8,), 1 / 8), atol=0.02)
+
+
+def test_recomputing_layers_trains_the_same_and_counts_each_token_once():
+    # --recompute only trades time for memory: the same gradients, and the
+    # layers' second run adds nothing to balancing or query-key records
+    torch.manual_seed(0)
+    model = WPT(ModelConfig(**TINY)).train()
+    model.track_query_keys(True)
+    ids, after = torch.randint(50, (2, 16)), torch.randint(50, (2, 16))
+    results = []
+    for recompute in (False, True):
+        model.recompute = recompute
+        model.zero_grad()
+        logits, ahead = model(ids, next_tokens=after)
+        (logits.logsumexp(-1).mean() + ahead.logsumexp(-1).mean()).backward()
+        experts, attention = model.layers[3].experts, model.layers[3].attention
+        results.append(([p.grad.clone() for p in model.parameters()], experts.histogram.clone(),
+                        attention.score_max.clone()))
+        experts.histogram, attention.score_max = None, None
+    (grads, counts, scores), (grads_again, counts_again, scores_again) = results
+    assert all(torch.allclose(a, b, atol=1e-6) for a, b in zip(grads, grads_again))
+    assert torch.equal(counts, counts_again) and torch.equal(scores, scores_again)

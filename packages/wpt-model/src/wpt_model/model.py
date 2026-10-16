@@ -5,10 +5,17 @@ The model only maps token ids to scores. Loss belongs to training, sampling
 belongs to inference. On a GPU it computes in BF16, keeping FP32 where
 docs/model.md says (the attention output, mHC's mappings, routing scores,
 KDA's memory).
+
+With recompute set, training keeps only each layer's input and runs the
+layer again during the backward pass, instead of keeping everything it
+computed: the same result with much less memory, for about a third more
+time. The second run records no statistics (expert balancing, query-key
+scores), so a step counts every token once.
 """
 
 import torch
 import torch.nn as nn
+from torch.utils.checkpoint import checkpoint
 
 from .config import ModelConfig
 from .engram import Engram
@@ -33,11 +40,23 @@ class Layer(nn.Module):
         self.attention_norm, self.experts_norm = nn.RMSNorm(D, eps=EPS), nn.RMSNorm(D, eps=EPS)
         self.attention_streams, self.experts_streams = Connection(D), Connection(D)
 
-    def forward(self, streams, ids, canonical):
+    def forward(self, streams, ids, canonical, collect=True):
+        """collect: record training statistics (False when the layer runs again for the backward pass)."""
         if self.engram is not None:
             streams = self.engram(streams, canonical)
-        streams = self.attention_streams(streams, lambda h: self.attention(self.attention_norm(h)))
-        return self.experts_streams(streams, lambda h: self.experts(self.experts_norm(h), ids))
+        streams = self.attention_streams(streams, lambda h: self.attention(self.attention_norm(h), collect))
+        return self.experts_streams(streams, lambda h: self.experts(self.experts_norm(h), ids, collect))
+
+
+def _first_run_collects(layer):
+    """The layer as a function whose first call records statistics and
+    whose later call, the run again for the backward pass, does not."""
+    runs = []
+
+    def run(streams, ids, canonical):
+        runs.append(None)
+        return layer(streams, ids, canonical, collect=len(runs) == 1)
+    return run
 
 
 class MultiTokenPrediction(nn.Module):
@@ -73,6 +92,7 @@ class WPT(nn.Module):
         self.mtp = MultiTokenPrediction(config)
         # Engram's canonical id of each token id, from the vocabulary (engram.canonical_ids); saved with the weights
         self.register_buffer("canonical", torch.arange(config.vocab_size))
+        self.recompute = False  # how training uses memory, not part of the model: see the module's docstring
 
     def set_canonical_ids(self, ids: torch.Tensor):
         self.canonical.copy_(ids)
@@ -85,8 +105,10 @@ class WPT(nn.Module):
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=idx.is_cuda):
             canonical = self.canonical[idx]
             streams = self.embedding(idx).float().unsqueeze(2).expand(-1, -1, STREAMS, -1)  # copied into each stream
+            recompute = self.recompute and self.training and torch.is_grad_enabled()
             for layer in self.layers:
-                streams = layer(streams, idx, canonical)
+                streams = (checkpoint(_first_run_collects(layer), streams, idx, canonical, use_reentrant=False)
+                           if recompute else layer(streams, idx, canonical))
             hidden = streams.sum(2)
             logits = self.head(self.final_norm(hidden)).float()
             if next_tokens is None:

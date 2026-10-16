@@ -47,8 +47,9 @@ class Experts(nn.Module):
             self.register_buffer("bias", torch.zeros(n))  # Quantile Balancing's b; saved, frozen for inference
             self.histogram = None  # this step's counts so far; not a buffer, which DDP would overwrite
 
-    def route(self, x, ids):
-        """(chosen experts (m, k), their weights (m, k)) for m tokens."""
+    def route(self, x, ids, collect=True):
+        """(chosen experts (m, k), their weights (m, k)) for m tokens; in
+        training with collect, the scores also go into the histogram."""
         if self.hashed:
             h = (ids * HASH_MULTIPLIER) % 2**32 % self.n
             spread = torch.arange(self.k, device=ids.device) * self.n // self.k
@@ -58,7 +59,7 @@ class Experts(nn.Module):
             top = torch.topk(s + self.bias, self.k + 1)
             chosen = top.indices[:, :self.k]
             weights = s.gather(1, chosen)
-            if self.training:
+            if self.training and collect:
                 self._count(s.detach(), top.values[:, self.k].detach())
             return chosen, weights / weights.sum(-1, keepdim=True)
 
@@ -90,11 +91,11 @@ class Experts(nn.Module):
         bias = -quantile
         self.bias.copy_(bias - bias.mean())
 
-    def forward(self, x, ids):
+    def forward(self, x, ids, collect=True):
         B, T, D = x.shape
         flat = x.reshape(-1, D)
         y = sum(expert(flat) for expert in self.shared)
-        chosen, weights = self.route(flat, ids.reshape(-1))
+        chosen, weights = self.route(flat, ids.reshape(-1), collect)
         m, k = chosen.shape
         z = self.down(flat)
         order = chosen.reshape(-1).argsort(stable=True)  # the m * k copies, grouped by expert

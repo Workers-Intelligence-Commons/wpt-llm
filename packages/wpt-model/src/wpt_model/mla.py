@@ -32,7 +32,7 @@ class MLA(nn.Module):
         self.track = False
         self.score_max = None  # (H,) largest query-key score since the last clip; not a buffer, which DDP would overwrite
 
-    def forward(self, x):
+    def forward(self, x, collect=True):
         B, T, _ = x.shape
 
         def heads(t):  # (B, T, H * d) -> (B, H, T, d)
@@ -42,7 +42,7 @@ class MLA(nn.Module):
         q, k, v = heads(self.q(x)), heads(self.k_up(c)), heads(self.v_up(c))
         gate = torch.sigmoid(self.gate(x))
         with torch.autocast(x.device.type, enabled=False):
-            if self.track and self.training:
+            if self.track and self.training and collect:
                 self._record(q.float(), k.float())
             o = F.scaled_dot_product_attention(q.float(), k.float(), v.float(), is_causal=True)
             o = o.transpose(1, 2).reshape(B, T, -1) * gate.float()

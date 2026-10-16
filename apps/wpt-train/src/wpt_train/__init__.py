@@ -134,6 +134,10 @@ def parse_args(argv=None, environ=None):
     parser.add_argument("--stream", action="store_true", default=environ.get("WPT_STREAM", "") in ("1", "true", "yes"),
                         help="read the training shards a few at a time instead of copying them all to disk first "
                              "(WPT_STREAM)")
+    parser.add_argument("--recompute", action="store_true",
+                        default=environ.get("WPT_RECOMPUTE", "") in ("1", "true", "yes"),
+                        help="keep only each layer's input and run the layer again for the backward pass: the same "
+                             "training with much less memory, about a third slower (WPT_RECOMPUTE)")
     parser.add_argument("--resume", action="store_true", default=environ.get("WPT_RESUME", "") in ("1", "true", "yes"),
                         help="continue from the checkpoint: the model folder's, or with --run the store's (WPT_RESUME)")
     args = parser.parse_args(argv)
@@ -344,6 +348,7 @@ def _train(args, recipe, strategy, plugins):
     model_config = ModelConfig(vocab_size=tokenizer.vocab_size, **shape)
     model = WPT(model_config)
     model.set_canonical_ids(canonical_ids(tokenizer.decode, tokenizer.vocab_size))  # Engram's, from the vocabulary
+    model.recompute = args.recompute
     model = model.to(strategy.device)
     n_params = sum(p.numel() for p in model.parameters())
     log(f"parameters: {n_params:,}")
