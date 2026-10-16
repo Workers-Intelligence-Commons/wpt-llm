@@ -134,20 +134,27 @@ def load_strategy(name_or_path) -> tuple[Plugin, Strategy]:
     return plugin, strategy
 
 
-def load_method(name_or_path, overrides: dict[str, str]) -> tuple[Plugin, dict]:
+def load_method(name_or_path, overrides: dict) -> tuple[Plugin, dict]:
     """The method's file and its settings: its SETTINGS defaults with the
-    overrides (text, converted to each default's type)."""
+    overrides, each of its default's type (an int where a float is expected
+    is taken; text is converted)."""
     plugin = _load("methods", name_or_path)
     defaults = getattr(plugin.module, "SETTINGS", {})
     settings = dict(defaults)
-    for key, text in overrides.items():
+    for key, value in overrides.items():
         if key not in defaults:
             raise PluginError(f"{plugin.file}: no setting {key!r} (settings: {', '.join(defaults) or 'none'})")
         kind = type(defaults[key])
-        try:
-            settings[key] = (text.lower() in ("1", "true", "yes")) if kind is bool else kind(text)
-        except ValueError:
-            raise PluginError(f"{plugin.file}: setting {key}={text!r} is not a {kind.__name__}") from None
+        if isinstance(value, str) and kind is not str:
+            try:
+                value = (value.lower() in ("1", "true", "yes")) if kind is bool else kind(value)
+            except ValueError:
+                raise PluginError(f"{plugin.file}: setting {key}={value!r} is not a {kind.__name__}") from None
+        elif kind is float and type(value) is int:
+            value = float(value)
+        if type(value) is not kind:
+            raise PluginError(f"{plugin.file}: setting {key}={value!r} is not a {kind.__name__}")
+        settings[key] = value
     return plugin, settings
 
 

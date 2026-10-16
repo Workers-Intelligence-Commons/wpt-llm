@@ -1884,6 +1884,7 @@ version = "0.1.0"
 source = { editable = "apps/wpt-train" }
 dependencies = [
     { name = "numpy" },
+    { name = "wpt-dataset" },
     { name = "wpt-device" },
     { name = "wpt-inference" },
     { name = "wpt-model" },
@@ -1895,6 +1896,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy", specifier = ">=2" },
+    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
     { name = "wpt-device", editable = "packages/wpt-device" },
     { name = "wpt-inference", editable = "packages/wpt-inference" },
     { name = "wpt-model", editable = "packages/wpt-model" },

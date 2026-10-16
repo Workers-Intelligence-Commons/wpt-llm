@@ -118,7 +118,7 @@ def store(tmp_path):
 @pytest.fixture
 def repo(tmp_path):
     root = tmp_path / "wpt"
-    for folder in ("sources", "recipes/mixtures", "recipes/tokenizers", "recipes/datasets"):
+    for folder in ("sources", "recipes/mixtures", "recipes/tokenizers", "recipes/models"):
         (root / "data" / folder).mkdir(parents=True)
     return Repo(root)
 
@@ -143,6 +143,17 @@ def add_source(repo, store, origin, item, data, patches=(), compute_checksum=Tru
     for i, patch in enumerate(patches, start=1):
         (folder / f"{i:04d}-change.patch").write_text(patch, encoding="utf-8", newline="\n")
     return sid
+
+
+MODEL = {"block_size": 16, "n_layer": 1, "n_head": 2, "n_embd": 16, "dropout": 0.0}
+TRAINING = {"method": "adamw", "settings": {}, "steps": 1, "batch_size": 4, "eval_every": 1, "eval_batches": 1,
+            "seed": 1337}
+
+
+def write_model_recipe(repo, name, data):
+    """A model recipe whose data part is data; its model and training parts
+    are the smallest that train."""
+    return write_recipe(repo, "model", name, {"data": data, "model": MODEL, "training": TRAINING, "posttrain": []})
 
 
 def write_recipe(repo, kind, name, document):

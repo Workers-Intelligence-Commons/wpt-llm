@@ -51,9 +51,9 @@ def test_migrate_rewrites_files_that_are_behind(kit, repo, store, git_upstream):
     path = repo.data / "sources" / sid / "source.json"
     # a made-up next shape: "type" renamed to "kind"
     step = {5: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 6}}
-    current = {"source": 6, "mixture": 1, "dataset": 1, "tokenizer": 1, "lock": 1}
+    current = {"source": 6, "mixture": 1, "model": 1, "tokenizer": 1, "lock": 1}
 
-    changed = migrate(repo, migrations={"source": step, "mixture": {}, "dataset": {}, "tokenizer": {}, "lock": {}},
+    changed = migrate(repo, migrations={"source": step, "mixture": {}, "model": {}, "tokenizer": {}, "lock": {}},
                       current=current, log=lambda _: None)
     assert changed == [path]
     document = json.loads(path.read_text())
@@ -135,7 +135,7 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
         "tags": [{"tags": ["text"], "paths": ["**"]}]})
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "text", "select": "text", "weight": 1}]})
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
-    kit.write_recipe(repo, "dataset", "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
+    kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
 
     assert main(["--root", str(repo.root), "check", "--fetch"]) == 0

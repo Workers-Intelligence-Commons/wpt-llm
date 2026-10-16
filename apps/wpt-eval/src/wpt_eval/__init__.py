@@ -130,8 +130,8 @@ def open_context(folder, store, device) -> Context:
         provenance = json.loads((folder / "provenance.json").read_text(encoding="utf-8"))
     except FileNotFoundError:
         raise EvalError(f"{folder}: no provenance.json; give a folder that wpt-train wrote") from None
-    if provenance.get("schema") != 3:
-        raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 3; train it again")
+    if provenance.get("schema") != 4:
+        raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 4; train it again")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(folder))
     except (TokenizerMismatch, ValueError) as error:  # ValueError: a vocabulary of another tokenizer version

@@ -388,10 +388,11 @@ def _training_part(recipe) -> dict:
 
 def build_dataset(repo: Repo, name: str, store, log=print, shard_tokens=SHARD_TOKENS, stream=False,
                   skip_failed=False) -> str:
-    """Build (or find) the dataset of a recipe and return its id; with
-    stream, keeping no source's files; with skip_failed, leaving out the
-    sources that fail (see the module's docstring)."""
-    recipe = repo.recipe("dataset", name)
+    """Build (or find) the dataset of a model recipe's data part and return
+    its id; with stream, keeping no source's files; with skip_failed,
+    leaving out the sources that fail (see the module's docstring). Only
+    the data part counts: recipes with the same data share one dataset."""
+    recipe = repo.recipe("model", name)["data"]
     mixture = repo.recipe("mixture", recipe["mixture"])
     tokenizer, vocabulary, tokenizer_key = build_tokenizer(repo, recipe["tokenizer"], store, log, stream=stream)
     skipped = [] if skip_failed else None

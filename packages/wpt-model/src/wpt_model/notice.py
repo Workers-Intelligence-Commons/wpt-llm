@@ -172,7 +172,7 @@ def _model_kind(provenance):
 
 
 def _steps(provenance):
-    limit = provenance["options"]["steps"]
+    limit = provenance["recipe"]["training"]["steps"]
     if "steps_trained" not in provenance:  # trained before the steps were recorded
         return f"Steps: at most {limit:,}"
     return (f"Steps: {provenance['steps_trained']:,} trained (limit {limit:,}); "

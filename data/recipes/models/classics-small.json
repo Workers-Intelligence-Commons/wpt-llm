@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "data": {
+    "mixture": "classics",
+    "tokenizer": "classics",
+    "total_tokens": 4290110,
+    "held_out": 0.05
+  },
+  "model": {
+    "block_size": 256,
+    "n_layer": 4,
+    "n_head": 4,
+    "n_embd": 128,
+    "dropout": 0.1
+  },
+  "training": {
+    "method": "adamw",
+    "settings": {},
+    "steps": 3000,
+    "batch_size": 64,
+    "eval_every": 200,
+    "eval_batches": 20,
+    "seed": 1337
+  },
+  "posttrain": []
+}

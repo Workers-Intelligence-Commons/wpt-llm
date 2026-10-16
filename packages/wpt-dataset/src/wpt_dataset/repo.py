@@ -3,7 +3,7 @@
     data/sources/<id>/source.json         + NNNN-*.patch
     data/recipes/mixtures/<name>.json
     data/recipes/tokenizers/<name>.json   + <name>.lock.json (written by builds)
-    data/recipes/datasets/<name>.json
+    data/recipes/models/<name>.json       data, architecture, training and post-training of one model
     data/allowed-signers                  SSH keys allowed to sign decisions
     data/allowed-gpg-keys.asc             GPG keys allowed to sign decisions (optional)
 """
@@ -23,7 +23,7 @@ from .errors import InvalidFile, OutdatedSchema, RuleViolation, StaleFile
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 5, "mixture": 1, "dataset": 1, "tokenizer": 2, "lock": 2, "conversation": 1}
+CURRENT_SCHEMA = {"source": 5, "mixture": 1, "model": 1, "tokenizer": 2, "lock": 2, "conversation": 1}
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
@@ -133,7 +133,7 @@ class Repo:
         return [self.source(sid) for sid in self.source_ids()]
 
     def recipe_path(self, kind: str, name: str) -> Path:
-        folder = {"mixture": "mixtures", "tokenizer": "tokenizers", "dataset": "datasets"}[kind]
+        folder = {"mixture": "mixtures", "tokenizer": "tokenizers", "model": "models"}[kind]
         return self.data / "recipes" / folder / f"{name}.json"
 
     def recipe(self, kind: str, name: str) -> dict:
@@ -167,7 +167,7 @@ class Repo:
 
         for sid in self.source_ids():
             problems += self.check_source(sid)
-        for kind in ("mixture", "tokenizer", "dataset"):
+        for kind in ("mixture", "tokenizer", "model"):
             for name in self.recipe_names(kind):
                 attempt(self._check_recipe, kind, name)
         for name in self.recipe_names("tokenizer"):
@@ -226,10 +226,11 @@ class Repo:
         if not NAME.fullmatch(name):
             raise RuleViolation(f"recipe name {name!r}: lowercase a-z, 0-9, '.', '_' and '-' only")
         document = self.recipe(kind, name)
-        if kind in ("tokenizer", "dataset"):
+        if kind == "tokenizer":
             self.recipe("mixture", document["mixture"])
-        if kind == "dataset":
-            self.recipe("tokenizer", document["tokenizer"])
+        if kind == "model":
+            self.recipe("mixture", document["data"]["mixture"])
+            self.recipe("tokenizer", document["data"]["tokenizer"])
 
 
 def check_mixture(mixture: dict, path):

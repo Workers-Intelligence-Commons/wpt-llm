@@ -38,7 +38,7 @@ def setup_recipes(kit, repo, store, corpus, total_tokens, held_out=0.0):
         {"name": "fr", "select": "fr && !(en)", "weight": 0.25},  # also matches fr/lit/: first pool wins
         {"name": "en", "select": "en", "weight": 0.5}]})
     kit.write_recipe(repo, "tokenizer", "main", {"version": 1, "mixture": "main", "vocab_size": 656})
-    kit.write_recipe(repo, "dataset", "small", {"mixture": "main", "tokenizer": "main",
+    kit.write_model_recipe(repo, "small", {"mixture": "main", "tokenizer": "main",
                                                 "total_tokens": total_tokens, "held_out": held_out})
 
 
@@ -91,7 +91,7 @@ def test_held_out_documents_never_reach_training(kit, repo, store, tmp_path):
                                                     "tags": [{"tags": ["all"], "paths": ["**"]}]})
     kit.write_recipe(repo, "mixture", "all", {"pools": [{"name": "all", "select": "all", "weight": 1}]})
     kit.write_recipe(repo, "tokenizer", "all", {"version": 1, "mixture": "all", "vocab_size": 556})
-    kit.write_recipe(repo, "dataset", "split", {"mixture": "all", "tokenizer": "all",
+    kit.write_model_recipe(repo, "split", {"mixture": "all", "tokenizer": "all",
                                                 "total_tokens": 100, "held_out": 0.5})
 
     record = record_of(store, build_dataset(repo, "split", store, log=lambda _: None))

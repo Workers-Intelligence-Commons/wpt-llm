@@ -110,7 +110,7 @@ MIGRATIONS["lock"][1] = _lock_1_to_2
 def _files(repo: Repo):
     for sid in repo.source_ids():
         yield "source", repo.data / "sources" / sid / "source.json"
-    for kind in ("mixture", "tokenizer", "dataset"):
+    for kind in ("mixture", "tokenizer", "model"):
         for name in repo.recipe_names(kind):
             yield kind, repo.recipe_path(kind, name)
     for name in repo.recipe_names("tokenizer"):

@@ -26,18 +26,20 @@ def digest(folder):
 
 
 def test_steps_that_succeed_give_a_new_folder_and_leave_the_base_untouched(trained, tmp_path):
+    # the recipe names the steps, and the new folder records which recipe ran
     base_before = digest(trained.folder)
     step = tmp_path / "zero_weights.py"
     step.write_text(ZERO_WEIGHTS)
     check = tmp_path / "check_records.py"
     check.write_text("from wpt_posttrain import Outcome\n\ndef run(context):\n    return Outcome.success()\n")
-    main([str(trained.folder), str(tmp_path / "tuned"), str(step), str(check)])
+    main([trained.recipe("tune", posttrain=[str(step), str(check)]), str(trained.folder), str(tmp_path / "tuned")])
 
     tuned = tmp_path / "tuned"
     assert all(torch.count_nonzero(p) == 0 for p in load_model(tuned).parameters())  # the steps' change was saved
     assert digest(trained.folder) == base_before
     provenance = json.loads((tuned / "provenance.json").read_text())
     post = provenance["post_training"]
+    assert post["recipe_name"] == "tune"
     assert [s["file"] for s in post["steps"]] == ["zero_weights.py", "check_records.py"]
     assert post["steps"][0]["file_sha256"] == hashlib.sha256(step.read_bytes()).hexdigest()
     assert post["base_weights"] == {"model.safetensors": base_before["model.safetensors"]}
@@ -57,7 +59,8 @@ def test_a_failed_step_stops_the_run_with_its_reason_and_writes_nothing(trained,
     never = tmp_path / "never.py"
     never.write_text("raise SystemExit('this step must not run')\n")
     with pytest.raises(SystemExit, match="step needs_records failed: no demonstration records in the store"):
-        main([str(trained.folder), str(tmp_path / "tuned"), str(step), str(failing), str(never)])
+        main([trained.recipe("tune", posttrain=[str(step), str(failing), str(never)]), str(trained.folder),
+              str(tmp_path / "tuned")])
     assert list(tmp_path.glob("*tuned*")) == []
 
 
@@ -65,7 +68,7 @@ def test_a_step_that_returns_no_outcome_writes_nothing(trained, tmp_path):
     step = tmp_path / "broken.py"
     step.write_text("def run(context):\n    return True\n")
     with pytest.raises(SystemExit, match="returned bool, not wpt_posttrain.Outcome"):
-        main([str(trained.folder), str(tmp_path / "tuned"), str(step)])
+        main([trained.recipe("tune", posttrain=[str(step)]), str(trained.folder), str(tmp_path / "tuned")])
     assert list(tmp_path.glob("*tuned*")) == []
 
 
@@ -73,12 +76,11 @@ def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path
     # the built-in step fine-tunes on the conversations a person adds as a
     # source tagged sft; until one exists it says so and writes nothing, and
     # once it has trained, the model's NOTICE credits that source
-    train([built.dataset_id, "--out", "model", "--steps", "1", "--block-size", "64", "--n-layer", "1",
-           "--n-head", "2", "--n-embd", "16", "--batch-size", "4"])
-    base, root = tmp_path / "model", tmp_path / "wpt"
-    monkeypatch.chdir(root)  # the step reads the sources of the repository holding the current folder
+    recipe = built.recipe("chat", model={"block_size": 64}, posttrain=["sft"])
+    train([recipe, built.dataset_id, "--out", "model"])
+    base, root = tmp_path / "model", tmp_path  # the step reads the sources of the repository holding the current folder
     with pytest.raises(SystemExit, match="step sft failed: no conversations: no admitted source has chat files tagged sft"):
-        main([str(base), str(tmp_path / "tuned"), "sft"])
+        main([recipe, str(base), str(tmp_path / "tuned")])
     assert not (tmp_path / "tuned").exists()
 
     talk = {"schema": 1, "messages": [{"role": "user", "content": [{"type": "text", "text": "Hi"}]},
@@ -101,7 +103,7 @@ def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path
     (root / "data" / "sources" / sid).mkdir()
     (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data))
 
-    main([str(base), str(tmp_path / "tuned"), "sft"])
+    main([recipe, str(base), str(tmp_path / "tuned")])
     tuned = tmp_path / "tuned"
     assert digest(tuned)["model.safetensors"] != digest(base)["model.safetensors"]
     post = json.loads((tuned / "provenance.json").read_text())["post_training"]

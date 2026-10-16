@@ -21,7 +21,8 @@
     wpt-dataset tokenizer-check NAME      encode and decode every admitted document with that
                                           vocabulary: exact round trip, characters per token
     wpt-dataset build NAME [--stream] [--skip-failed]
-                                          build (or find) a dataset recipe; prints the dataset id
+                                          build (or find) the data of a model recipe; prints the
+                                          dataset id
     wpt-dataset migrate                   rewrite data files to the current shapes
 
 The store comes from WPT_STORE (environment or .env at the repository root).

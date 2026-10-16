@@ -23,12 +23,21 @@ ATTRIBUTION = "Fox Stories, copyright (c) 2026 Ada Writer, https://example.org/f
 LICENSE_TEXT = "Copyright (c) 2026 Ada Writer\n\nPermission is hereby granted, free of charge, to any person.\n"
 
 
+TINY_MODEL = {"block_size": 16, "n_layer": 1, "n_head": 2, "n_embd": 16, "dropout": 0.1}
+ONE_STEP = {"method": "adamw", "settings": {}, "steps": 1, "batch_size": 4, "eval_every": 2, "eval_batches": 20,
+            "seed": 1337}
+
+
 @pytest.fixture
 def built(tmp_path, monkeypatch):
     """A dataset of one git project of 16 documents, about half of them held
     out; its 3000 training tokens draw only some of the training documents.
-    The store is WPT_STORE and the working folder is tmp_path. Gives store,
-    dataset_id, source_id and attribution."""
+    The working folder tmp_path is the repository, and the store is
+    WPT_STORE. Gives store, dataset_id (built from the model recipe "d", a
+    tiny model trained one step), source_id, attribution, and
+    recipe(name, model=..., training=..., posttrain=...), which writes a
+    model recipe of the same data part, with those changes to "d", and
+    returns its name."""
     upstream = tmp_path / "upstream"
     upstream.mkdir()
     for i in range(16):
@@ -37,7 +46,7 @@ def built(tmp_path, monkeypatch):
         subprocess.run(["git", *args], cwd=upstream, env=GIT_ENV, check=True)
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True, text=True).stdout.strip()
 
-    root = tmp_path / "wpt"
+    root = tmp_path
     repo = Repo(root)
     store = open_store((tmp_path / "store").as_uri())
     data = {"schema": 5, "type": "git", "address": str(upstream), "revision": commit,
@@ -49,22 +58,28 @@ def built(tmp_path, monkeypatch):
     source_id = f"example-fox-{address_hash(str(upstream))}"
     (root / "data" / "sources" / source_id).mkdir(parents=True)
     (root / "data" / "sources" / source_id / "source.json").write_text(dump_json(data))
-    for kind, name, document in [("mixture", "m", {"pools": [{"name": "en", "select": "en", "weight": 1}]}),
-                                 ("tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556}),
-                                 ("dataset", "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 3000, "held_out": 0.5})]:
+    def write(kind, name, document):
         repo.recipe_path(kind, name).parent.mkdir(parents=True, exist_ok=True)
         repo.recipe_path(kind, name).write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}))
-    dataset_id = build_dataset(repo, "d", store, log=lambda _: None)
+        return name
+
+    def recipe(name="d", model=None, training=None, posttrain=()):
+        return write("model", name, {"data": {"mixture": "m", "tokenizer": "t", "total_tokens": 3000, "held_out": 0.5},
+                                     "model": {**TINY_MODEL, **(model or {})},
+                                     "training": {**ONE_STEP, **(training or {})}, "posttrain": list(posttrain)})
+
+    write("mixture", "m", {"pools": [{"name": "en", "select": "en", "weight": 1}]})
+    write("tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
+    dataset_id = build_dataset(repo, recipe(), store, log=lambda _: None)
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
     monkeypatch.setenv("WPT_MAX_RESTARTS", "0")  # wpt-train runs in the test's own process, unless a test says
     monkeypatch.chdir(tmp_path)
     return SimpleNamespace(store=store, dataset_id=dataset_id, source_id=source_id, attribution=ATTRIBUTION,
-                           license_text=LICENSE_TEXT)
+                           license_text=LICENSE_TEXT, recipe=recipe)
 
 
 @pytest.fixture
 def trained(built, tmp_path):
-    """The built dataset plus tmp_path/model, a tiny model trained 1 step on it."""
-    train([built.dataset_id, "--out", "model", "--steps", "1", "--block-size", "16", "--n-layer", "1",
-           "--n-head", "2", "--n-embd", "16", "--batch-size", "4"])
+    """The built dataset plus tmp_path/model, trained by the recipe "d"."""
+    train(["d", built.dataset_id, "--out", "model"])
     return SimpleNamespace(**vars(built), folder=tmp_path / "model")

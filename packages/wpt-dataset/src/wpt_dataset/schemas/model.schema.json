@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/model.schema.json",
+  "title": "WPT model recipe (data/recipes/models/<name>.json): everything that changes the resulting model",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "data", "model", "training", "posttrain"],
+  "$defs": {
+    "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
+  },
+  "properties": {
+    "schema": {"const": 1},
+    "data": {
+      "description": "what `wpt-dataset build` builds; recipes with the same data share one dataset",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mixture", "tokenizer", "total_tokens", "held_out"],
+      "properties": {
+        "mixture": {"$ref": "#/$defs/name", "description": "a file name in data/recipes/mixtures/, without .json"},
+        "tokenizer": {"$ref": "#/$defs/name", "description": "a file name in data/recipes/tokenizers/, without .json"},
+        "total_tokens": {"type": "integer", "minimum": 1},
+        "held_out": {"type": "number", "minimum": 0, "exclusiveMaximum": 1, "description": "share of every source's documents kept out of training"}
+      }
+    },
+    "model": {
+      "description": "the architecture's numbers (wpt_model.ModelConfig without vocab_size, which the tokenizer gives)",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["block_size", "n_layer", "n_head", "n_embd", "dropout"],
+      "properties": {
+        "block_size": {"type": "integer", "minimum": 1, "description": "tokens the model sees at once"},
+        "n_layer": {"type": "integer", "minimum": 1},
+        "n_head": {"type": "integer", "minimum": 1},
+        "n_embd": {"type": "integer", "minimum": 1},
+        "dropout": {"type": "number", "minimum": 0, "exclusiveMaximum": 1}
+      }
+    },
+    "training": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "settings", "steps", "batch_size", "eval_every", "eval_batches", "seed"],
+      "properties": {
+        "method": {"type": "string", "minLength": 1, "description": "a built-in method of wpt_training, or a .py file"},
+        "settings": {"type": "object", "additionalProperties": {"type": ["number", "string", "boolean"]},
+                     "description": "the method's settings; those left out keep the method's defaults"},
+        "steps": {"type": "integer", "minimum": 1, "description": "maximum number of updates"},
+        "batch_size": {"type": "integer", "minimum": 1, "description": "windows per update, over every process together"},
+        "eval_every": {"type": "integer", "minimum": 1},
+        "eval_batches": {"type": "integer", "minimum": 1, "description": "global batches averaged per evaluation"},
+        "seed": {"type": "integer", "minimum": 0}
+      }
+    },
+    "posttrain": {
+      "description": "the steps `wpt-posttrain` runs, in order: built-in step names or .py files",
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "note": {"type": "string"}
+  }
+}

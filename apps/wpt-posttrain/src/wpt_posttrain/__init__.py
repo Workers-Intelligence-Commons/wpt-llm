@@ -1,10 +1,13 @@
-"""Run post-training steps on a trained model into a new model folder.
+"""Run a model recipe's post-training steps on a trained model into a new
+model folder.
 
 Usage:
-    wpt-posttrain BASE_FOLDER NEW_FOLDER STEP [STEP ...]
+    wpt-posttrain RECIPE BASE_FOLDER NEW_FOLDER
 
-STEP is the name of a built-in step (the files in wpt_posttrain/steps/) or
-the path of any Python file. A step file defines
+RECIPE is a file name in data/recipes/models/, without .json, in the
+repository holding the current folder; its `posttrain` list names the
+steps. Each step is the name of a built-in step (the files in
+wpt_posttrain/steps/) or the path of any Python file. A step file defines
 
     def run(context: wpt_posttrain.Context) -> wpt_posttrain.Outcome
 
@@ -19,8 +22,8 @@ repository holding the current folder. The runner records those sources.
 
 NEW_FOLDER is written only when every step succeeded: the weights, the
 tokenizer, and the base model's provenance.json with a "post_training"
-section (the base weights' sha256, each step's file sha256, outcome and the
-sources it read, those sources' revisions and licenses, the repository
+section (the recipe's name, the base weights' sha256, each step's file
+sha256, outcome and the sources it read, those sources' revisions and licenses, the repository
 commit, the tools), then LICENSE, NOTICE and README.md, which list the
 sources read by the steps with the pre-training sources. It must
 not exist yet. BASE_FOLDER is never changed, and its evaluation results are
@@ -60,9 +63,10 @@ VERSION = importlib.metadata.version("wpt-posttrain")
 
 
 class StepError(Exception):
-    """A step cannot run: the base folder is not a trained model, NEW_FOLDER
-    exists, the step is unknown, has no run(context), or returned something
-    other than an Outcome. Nothing has been written."""
+    """A step cannot run: the recipe is missing or names no step, the base
+    folder is not a trained model, NEW_FOLDER exists, the step is unknown,
+    has no run(context), or returned something other than an Outcome.
+    Nothing has been written."""
 
 
 class StepFailed(Exception):
@@ -152,8 +156,8 @@ def open_context(base, store, device) -> Context:
         provenance = json.loads((base / "provenance.json").read_text(encoding="utf-8"))
     except FileNotFoundError:
         raise StepError(f"{base}: no provenance.json; give a folder that wpt-train wrote") from None
-    if provenance.get("schema") != 3:
-        raise StepError(f"{base}: provenance shape {provenance.get('schema')}, this wpt-posttrain reads 3")
+    if provenance.get("schema") != 4:
+        raise StepError(f"{base}: provenance shape {provenance.get('schema')}, this wpt-posttrain reads 4")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(base))
     except (TokenizerMismatch, ValueError) as error:  # ValueError: a vocabulary of another tokenizer version
@@ -161,7 +165,18 @@ def open_context(base, store, device) -> Context:
     return Context(base, load_model(base, device), tokenizer, device, provenance, store)
 
 
-def post_train(context, steps, new_folder) -> Path:
+def recipe_steps(name) -> list[str]:
+    """The post-training steps of the model recipe of that name."""
+    try:
+        steps = Repo.find().recipe("model", name)["posttrain"]
+    except DatasetError as error:
+        raise StepError(str(error)) from None
+    if not steps:
+        raise StepError(f"model recipe {name!r} names no post-training step")
+    return steps
+
+
+def post_train(context, recipe_name, steps, new_folder) -> Path:
     """Run every step, then write new_folder. A failure leaves nothing."""
     new_folder = Path(new_folder)
     if new_folder.exists():
@@ -171,6 +186,7 @@ def post_train(context, steps, new_folder) -> Path:
     records = [run_step(context, step) for step in steps]
     sources = {sid: source for record in records for sid, source in record["sources"].items()}
     provenance = {**context.provenance, "post_training": {
+        "recipe_name": recipe_name,
         "base_weights": {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
                          for path in sorted(context.base.glob("model*.safetensors"))},
         "steps": [{**record, "sources": sorted(record["sources"])} for record in records],
@@ -212,15 +228,17 @@ def _repository():
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("recipe", help="model recipe whose `posttrain` steps run: a file name in data/recipes/models/, "
+                                       "without .json")
     parser.add_argument("base", help="model folder written by wpt-train")
     parser.add_argument("new", help="model folder to write; must not exist")
-    parser.add_argument("steps", nargs="+", help="built-in step names or .py files, run in order")
     args = parser.parse_args(argv)
     try:
+        steps = recipe_steps(args.recipe)
         device = select_device()
         print(f"device: {describe(device)}")
         context = open_context(args.base, store_from_settings(Path.cwd() / ".env"), device)
-        new_folder = post_train(context, args.steps, args.new)
+        new_folder = post_train(context, args.recipe, steps, args.new)
     except (StoreError, StepError, StepFailed, DatasetError) as error:
         sys.exit(f"{type(error).__name__}: {error}\nnothing was written")
     print(f"saved {new_folder} (licenses and sources: {new_folder / 'NOTICE'})")

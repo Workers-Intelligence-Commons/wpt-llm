@@ -18,9 +18,10 @@ ROOT = Path(__file__).resolve().parents[3]
 
 def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatch):
     store, dataset_id = built.store, built.dataset_id
-    monkeypatch.setenv("WPT_N_LAYER", "1")  # settings come from the environment too
-    main([dataset_id, "--out", "model", "--steps", "3", "--eval-every", "2", "--block-size", "16",
-          "--n-head", "2", "--n-embd", "16", "--batch-size", "4"])
+    recipe = built.recipe("three", training={"steps": 3})
+    monkeypatch.setenv("WPT_RECIPE", recipe)  # the recipe and the dataset come from the environment too
+    monkeypatch.setenv("WPT_DATASET", dataset_id)
+    main(["--out", "model"])
 
     model = load_model(tmp_path / "model")
     assert model.config.n_layer == 1 and model.config.block_size == 16
@@ -32,7 +33,8 @@ def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatc
     provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
     assert provenance["dataset"] == dataset_id
     assert provenance["vocabulary"] == record["tokenizer"]["vocabulary"]
-    assert provenance["options"]["n_layer"] == 1 and provenance["options"]["steps"] == 3
+    assert provenance["recipe_name"] == "three" and provenance["recipe"]["training"]["steps"] == 3
+    assert provenance["steps_trained"] == 3
     assert [s["token_sha256"] for s in provenance["shards"]] == [s["token_sha256"] for s in record["shards"]]
 
 
@@ -40,8 +42,7 @@ def test_a_trained_model_folder_names_its_licenses_and_sources(built, tmp_path):
     # whoever receives the folder, or only a weight file, must learn the licenses
     # and the credit each source asks for
     dataset_id, sid = built.dataset_id, built.source_id
-    main([dataset_id, "--out", "model", "--steps", "1", "--block-size", "16", "--n-layer", "1",
-          "--n-head", "2", "--n-embd", "16", "--batch-size", "4"])
+    main(["d", dataset_id, "--out", "model"])
     folder = tmp_path / "model"
 
     notice = (folder / "NOTICE").read_text()
@@ -65,13 +66,24 @@ def test_a_damaged_shard_stops_training_before_it_starts(built, tmp_path, capsys
     path = store.root / "objects" / shard[:2] / shard
     path.write_bytes(path.read_bytes()[:-10] + b"0123456789")
     with pytest.raises(SystemExit) as refused:
-        main([dataset_id, "--out", "model", "--steps", "1"])
+        main(["d", dataset_id, "--out", "model"])
     assert refused.value.code == 2 and "CorruptObject" in capsys.readouterr().err  # 2: never restarted
     assert not (tmp_path / "model").exists()
 
 
-SMALL = ["--block-size", "16", "--n-layer", "1", "--n-head", "2", "--n-embd", "16", "--batch-size", "4",
-         "--eval-every", "2"]
+def test_a_dataset_built_from_another_recipe_data_is_refused(built, tmp_path, capsys):
+    # the model must train on what its recipe names, so a dataset id built
+    # from another data part stops the run before it starts
+    other = built.recipe("other")
+    recipe = json.loads((tmp_path / "data" / "recipes" / "models" / "other.json").read_text())
+    recipe["data"]["total_tokens"] = 2000
+    (tmp_path / "data" / "recipes" / "models" / "other.json").write_text(json.dumps(recipe))
+    with pytest.raises(SystemExit) as refused:
+        main([other, built.dataset_id, "--out", "model"])
+    assert refused.value.code == 2 and "another data part" in capsys.readouterr().err
+    assert not (tmp_path / "model").exists()
+
+
 ON_CPU = {"CUDA_VISIBLE_DEVICES": "", "HIP_VISIBLE_DEVICES": ""}  # gloo on every system, no GPU needed
 STARTERS = {
     "processes": ["-m", "wpt_train", "--processes", "2"],
@@ -90,8 +102,9 @@ def test_two_processes_train_the_same_model_as_one(built, tmp_path, starter):
     # the batch is global: 2 processes of 2 windows each, or 1 process adding up
     # 2 passes of 2 windows, must take the same steps, dropout included
     env = {**os.environ, **ON_CPU}
+    recipe = built.recipe("four", training={"steps": 4})
     for out, command in [("one", ["-m", "wpt_train", "--micro-batch", "2"]), ("two", [*starter, "--strategy", "ddp"])]:
-        subprocess.run([sys.executable, *command, built.dataset_id, "--out", out, "--steps", "4", *SMALL],
+        subprocess.run([sys.executable, *command, recipe, built.dataset_id, "--out", out],
                        cwd=tmp_path, env=env, check=True)
 
     one, two = weights(tmp_path / "one"), weights(tmp_path / "two")
@@ -102,9 +115,9 @@ def test_two_processes_train_the_same_model_as_one(built, tmp_path, starter):
     assert provenance["strategy"]["processes"] == 2 and provenance["batch"]["accumulation"] == 1
 
 
-def interrupting(tmp_path, at_step_3):
-    """Options for a run on the CPU whose method does at_step_3 (Python code)
-    at step 3, just before the update."""
+def interrupting(built, tmp_path, at_step_3):
+    """The recipe and options of a 5-step run on the CPU whose method does
+    at_step_3 (Python code) at step 3, just before the update."""
     strategy = tmp_path / "cpu.py"
     strategy.write_text("import torch\nfrom wpt_training import Strategy\n\n"
                         "def start():\n    return Strategy(torch.device('cpu'))\n")
@@ -118,24 +131,25 @@ def interrupting(tmp_path, at_step_3):
         "        if step == 3:\n"
         f"            {at_step_3}\n\n"
         "def start(model, settings, run):\n    return Interrupting(model, settings)\n")
-    return ["--steps", "5", "--strategy", str(strategy), "--method", str(method), *SMALL]
+    return [built.recipe("interrupting", training={"steps": 5, "method": str(method)}), built.dataset_id,
+            "--strategy", str(strategy)]
 
 
 def test_a_crashed_run_resumes_where_its_checkpoint_left_it(built, tmp_path, monkeypatch, capsys):
     # after a crash, --resume must give the same model as a run never interrupted
-    options = ["--checkpoint-every", "2",
-               *interrupting(tmp_path, "if os.environ.get('CRASH'): raise RuntimeError('power cut')")]
-    main([built.dataset_id, "--out", "whole", *options])
+    options = [*interrupting(built, tmp_path, "if os.environ.get('CRASH'): raise RuntimeError('power cut')"),
+               "--checkpoint-every", "2"]
+    main([*options, "--out", "whole"])
 
     monkeypatch.setenv("CRASH", "1")
     with pytest.raises(RuntimeError, match="power cut"):
-        main([built.dataset_id, "--out", "resumed", *options])
+        main([*options, "--out", "resumed"])
     assert (tmp_path / "resumed" / "checkpoint" / "checkpoint.pt").is_file()
     with pytest.raises(SystemExit) as refused:
-        main([built.dataset_id, "--out", "resumed", *options])
+        main([*options, "--out", "resumed"])
     assert refused.value.code == 2 and "--resume" in capsys.readouterr().err
     monkeypatch.delenv("CRASH")
-    main([built.dataset_id, "--out", "resumed", "--resume", *options])
+    main([*options, "--out", "resumed", "--resume"])
 
     whole, resumed = weights(tmp_path / "whole"), weights(tmp_path / "resumed")
     assert all(torch.equal(whole[k], resumed[k]) for k in whole)
@@ -157,8 +171,8 @@ def test_the_model_card_names_the_steps_trained_and_the_step_of_its_weights(buil
         "    def evaluated(self, step, val_loss):\n"
         "        return Verdict(best=step == 2, stop=step == 4)\n\n"
         "def start(model, settings, run):\n    return Early(model)\n")
-    main([built.dataset_id, "--out", "model", "--steps", "10", "--eval-every", "2",
-          "--strategy", str(strategy), "--method", str(method), *SMALL])
+    recipe = built.recipe("early", training={"steps": 10, "method": str(method)})
+    main([recipe, built.dataset_id, "--out", "model", "--strategy", str(strategy)])
 
     provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
     assert (provenance["steps_trained"], provenance["weights_step"]) == (4, 2)
@@ -170,8 +184,7 @@ def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_pat
     # --stream trains from a few shards at a time, so a machine needs disk
     # only for those, and the model folder names its sources as usual
     store, dataset_id = built.store, built.dataset_id
-    main([dataset_id, "--out", "model", "--steps", "2", "--block-size", "16", "--n-layer", "1", "--n-head", "2",
-          "--n-embd", "16", "--batch-size", "4", "--stream", "--stream-shards", "1"])
+    main([built.recipe("two", training={"steps": 2}), dataset_id, "--out", "model", "--stream", "--stream-shards", "1"])
 
     record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
     held_out_only = [p.name for p in (store.scratch / "tokens").glob("*.u32")]
@@ -188,18 +201,18 @@ def test_a_stopped_run_saves_its_step_and_continues_on_another_machine(built, tm
     # using the same store, continues it and gives the model of an unbroken run.
     # SIGTERM, not SIGINT: a shell starts background commands with SIGINT
     # ignored, and an ignored signal stays ignored
-    options = ["--checkpoint-every", "100",
-               *interrupting(tmp_path, "if os.environ.get('STOP'): signal.raise_signal(signal.SIGTERM)")]
-    main([built.dataset_id, "--out", "whole", *options])
+    options = [*interrupting(built, tmp_path, "if os.environ.get('STOP'): signal.raise_signal(signal.SIGTERM)"),
+               "--checkpoint-every", "100"]
+    main([*options, "--out", "whole"])
 
     monkeypatch.setenv("STOP", "1")
     with pytest.raises(SystemExit) as stopped:
-        main([built.dataset_id, "--out", "here", "--run", "fox-1", *options])
+        main([*options, "--out", "here", "--run", "fox-1"])
     monkeypatch.delenv("STOP")
     assert stopped.value.code == 130 and not (tmp_path / "here" / "checkpoint").exists()
     saved = built.store.get_ref("checkpoints", "fox-1")
     assert torch.load(built.store.path(saved), weights_only=True)["step"] == 3  # not a multiple of 100: the signal
-    main([built.dataset_id, "--out", "there", "--run", "fox-1", "--resume", *options])
+    main([*options, "--out", "there", "--run", "fox-1", "--resume"])
 
     whole, there = weights(tmp_path / "whole"), weights(tmp_path / "there")
     assert all(torch.equal(whole[k], there[k]) for k in whole)
@@ -209,13 +222,13 @@ def test_a_stopped_run_saves_its_step_and_continues_on_another_machine(built, tm
 def test_a_crashed_run_starts_again_on_its_own(built, tmp_path):
     # a long run must survive a crash nobody watches: the processes start again
     # and continue from the checkpoint, without anyone typing --resume
-    options = ["--checkpoint-every", "2", *interrupting(
-        tmp_path, "if os.environ.get('CRASH') and os.environ['TORCHELASTIC_RESTART_COUNT'] == '0': "
-                  "raise RuntimeError('power cut')")]
+    options = [*interrupting(
+        built, tmp_path, "if os.environ.get('CRASH') and os.environ['TORCHELASTIC_RESTART_COUNT'] == '0': "
+                         "raise RuntimeError('power cut')"), "--checkpoint-every", "2"]
     env = {**os.environ, **ON_CPU}
-    subprocess.run([sys.executable, "-m", "wpt_train", built.dataset_id, "--out", "whole", *options],
+    subprocess.run([sys.executable, "-m", "wpt_train", *options, "--out", "whole"],
                    cwd=tmp_path, env=env, check=True)
-    run = subprocess.run([sys.executable, "-m", "wpt_train", built.dataset_id, "--out", "restarted", *options],
+    run = subprocess.run([sys.executable, "-m", "wpt_train", *options, "--out", "restarted"],
                          cwd=tmp_path, env={**env, "CRASH": "1", "WPT_MAX_RESTARTS": "1"}, capture_output=True,
                          text=True)
 
