@@ -66,10 +66,11 @@ of republishing but want to know what is in the model.
 
 ## The address
 
-Clauses 2 and 3 link to https://github.com/inayayousfi/wpt-llm. This link
-gets copied into outputs and can never be corrected there: if the
-repository moves (for example to an organization) or a project domain is
-chosen, the notice changes for new outputs only. GitHub redirects a moved
+Clauses 2 and 3 link to
+https://github.com/Workers-Intelligence-Commons/wpt-llm, the repository
+under the project's organization. This link gets copied into outputs and
+can never be corrected there: if the repository moves again or a project
+domain is chosen, the notice changes for new outputs only. GitHub redirects a moved
 repository, but the old address can later be taken by someone else.
 
 ## Where to show it

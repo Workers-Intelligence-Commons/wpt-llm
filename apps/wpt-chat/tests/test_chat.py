@@ -33,10 +33,10 @@ def test_a_folder_without_notice_still_names_the_licenses(tmp_path, monkeypatch,
     folder = model_folder(tmp_path / "model")
     main([str(folder), "--about"])
     about = capsys.readouterr().out
-    assert "AGPL-3.0-or-later" in about and "CC0-1.0" in about and "https://github.com/inayayousfi/wpt-llm" in about
+    assert "AGPL-3.0-or-later" in about and "CC0-1.0" in about and "https://github.com/Workers-Intelligence-Commons/wpt-llm" in about
     monkeypatch.setattr("builtins.input", lambda prompt: "")
     main([str(folder)])
-    assert "this folder has no NOTICE; notices and sources: https://github.com/inayayousfi/wpt-llm" in capsys.readouterr().out
+    assert "this folder has no NOTICE; notices and sources: https://github.com/Workers-Intelligence-Commons/wpt-llm" in capsys.readouterr().out
 
 
 def test_notices_reach_a_pipe_as_utf8(tmp_path):

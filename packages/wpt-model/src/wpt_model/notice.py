@@ -28,7 +28,7 @@ from pathlib import Path
 
 LICENSE = "AGPL-3.0-or-later"
 OUTPUT_LICENSE = "CC0-1.0"
-REPOSITORY = "https://github.com/inayayousfi/wpt-llm"
+REPOSITORY = "https://github.com/Workers-Intelligence-Commons/wpt-llm"
 NOTICE_NAME, CARD_NAME, LICENSE_NAME, EVALS_NAME, CREDITS_NAME = "NOTICE", "README.md", "LICENSE", "evals", "CREDITS"
 WEIGHT_METADATA = {"license": LICENSE, "output_license": OUTPUT_LICENSE,
                    "notice": f"NOTICE in the model folder; {REPOSITORY}"}

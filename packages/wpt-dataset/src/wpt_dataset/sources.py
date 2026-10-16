@@ -36,7 +36,7 @@ from .programs import program
 from .repo import Source
 
 VERSION = importlib.metadata.version("wpt-dataset")
-USER_AGENT = f"wpt-dataset/{VERSION} (+https://github.com/inayayousfi/wpt-llm)"
+USER_AGENT = f"wpt-dataset/{VERSION} (+https://github.com/Workers-Intelligence-Commons/wpt-llm)"
 
 
 def fingerprint(inputs) -> str:
