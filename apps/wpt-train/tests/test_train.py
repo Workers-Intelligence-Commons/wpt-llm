@@ -161,9 +161,11 @@ def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_pat
 def test_a_stopped_run_saves_its_step_and_continues_on_another_machine(built, tmp_path, monkeypatch):
     # a machine taken back (SIGTERM) or Ctrl+C loses no step; with --run the
     # checkpoint is in the store, so another model folder, as on another machine
-    # using the same store, continues it and gives the model of an unbroken run
+    # using the same store, continues it and gives the model of an unbroken run.
+    # SIGTERM, not SIGINT: a shell starts background commands with SIGINT
+    # ignored, and an ignored signal stays ignored
     options = ["--checkpoint-every", "100",
-               *interrupting(tmp_path, "if os.environ.get('STOP'): signal.raise_signal(signal.SIGINT)")]
+               *interrupting(tmp_path, "if os.environ.get('STOP'): signal.raise_signal(signal.SIGTERM)")]
     main([built.dataset_id, "--out", "whole", *options])
 
     monkeypatch.setenv("STOP", "1")
