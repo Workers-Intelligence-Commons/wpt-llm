@@ -29,8 +29,10 @@
     "engram_table_size": 4099
   },
   "training": {
-    "method": "adamw",
-    "settings": {},
+    "method": "muon",
+    "settings": {
+      "warmup": 200
+    },
     "steps": 3000,
     "batch_size": 64,
     "eval_every": 200,

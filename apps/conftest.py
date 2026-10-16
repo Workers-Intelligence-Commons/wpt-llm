@@ -27,7 +27,7 @@ TINY_MODEL = {"block_size": 16, "n_layer": 4, "d_model": 16, "kda_heads": 2, "kd
               "mla_head_dim": 8, "mla_kv_rank": 8, "n_experts": 4, "top_k": 2, "expert_width": 8, "latent_width": 8,
               "shared_width": 16, "engram_layers": [2], "engram_order": 3, "engram_heads": 2, "engram_dim": 4,
               "engram_table_size": 31}
-ONE_STEP = {"method": "adamw", "settings": {}, "steps": 1, "batch_size": 4, "eval_every": 2, "eval_batches": 20,
+ONE_STEP = {"method": "muon", "settings": {}, "steps": 1, "batch_size": 4, "eval_every": 2, "eval_batches": 20,
             "seed": 1337}
 
 

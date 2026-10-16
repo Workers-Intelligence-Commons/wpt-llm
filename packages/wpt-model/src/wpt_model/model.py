@@ -98,3 +98,52 @@ class WPT(nn.Module):
         biases from the step's scores, summed over processes by reduce."""
         for layer in self.layers:
             layer.experts.balance(reduce)
+
+    def attention_layers(self):
+        return [m for m in self.modules() if isinstance(m, MLA)]
+
+    def track_query_keys(self, on: bool):
+        """Whether MLA layers record their largest query-key scores in training, for clip_query_keys."""
+        for layer in self.attention_layers():
+            layer.track = on
+
+    def clip_query_keys(self, tau, reduce):
+        """QK-Clip on every MLA layer (KDA has no softmax scores)."""
+        for layer in self.attention_layers():
+            layer.clip(tau, reduce)
+
+    def optimizer_roles(self):
+        """(name, parameter, role, view) for every parameter. Role "matrix"
+        (Muon): view is the (matrices, rows, columns) shape it is
+        orthogonalized as, one matrix per head for the query, key and value
+        projections and one per expert for routed experts. Role "vector"
+        (AdamW): the embedding, the output head, norms, mHC's biases and
+        gating factors, KDA's decay scalars and the convolutions. Role
+        "table" (Engram's tables). view is None for the last two."""
+        heads = {}
+        for module in self.modules():
+            if isinstance(module, KDA):
+                heads.update({id(module.q.weight): module.heads, id(module.k.weight): module.heads,
+                              id(module.v.weight): module.heads})
+            elif isinstance(module, MLA):
+                heads.update({id(module.q.weight): module.heads, id(module.k_up.weight): module.heads,
+                              id(module.v_up.weight): module.heads})
+        vectors = {id(self.embedding.weight), id(self.head.weight)}
+        tables = set()
+        for module in self.modules():
+            if isinstance(module, nn.Conv1d):
+                vectors.add(id(module.weight))
+            elif isinstance(module, Connection):
+                vectors.update(id(p) for name, p in module.named_parameters() if name != "phi.weight")
+            elif isinstance(module, Engram):
+                tables.update(id(table.weight) for table in module.tables)
+        for name, p in self.named_parameters():
+            if id(p) in tables:
+                yield name, p, "table", None
+            elif id(p) in vectors or p.ndim < 2:
+                yield name, p, "vector", None
+            elif p.ndim == 3:
+                yield name, p, "matrix", tuple(p.shape)
+            else:
+                n = heads.get(id(p), 1)
+                yield name, p, "matrix", (n, p.shape[0] // n, p.shape[1])
