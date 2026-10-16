@@ -13,9 +13,16 @@ carries the license text (`LICENSE`), a `NOTICE` naming every source the
 model learned from with the credit it asks for, and a model card; the weight
 files' headers name the licenses (see [training.md](training.md)).
 
+Data built by WPT's tools (token shards, vocabularies, dataset records) is
+under AGPL-3.0-or-later too, by the same logic as code: every source is
+treated as a dependency, and every allowed source permits AGPL use. The
+content of each source inside keeps its own license wherever it is shared,
+with its credit and license text; the AGPL covers what WPT adds to it, the
+format, the structure and everything the pipeline puts around the content
+(maintainer's decision, 2026-10-16).
+
 Still open:
 
-- whether built data (token shards, vocabularies) gets a license of its own;
 - the legal effect of a license on weights is not settled; a lawyer reviews
   it before weights are published, and the commitment is written in a
   manifesto next to the license.
