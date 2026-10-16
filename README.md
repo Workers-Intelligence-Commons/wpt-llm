@@ -46,13 +46,13 @@ gnupg.org build).
 uv run scripts/setup.py                            # the PyTorch build for this machine's GPU
 echo "WPT_STORE=file://$HOME/wpt-store" >> .env    # where fetched and built data lives
 
-uv run wpt-dataset build classics-small --stream   # fetch, convert, tokenize; prints a dataset id
-scripts/detach.sh uv run wpt-train classics-small <dataset id> --stream --out runs/first
+uv run wpt-dataset build classics-test --stream    # fetch, convert, tokenize; prints a dataset id
+scripts/detach.sh uv run wpt-train classics-test <dataset id> --stream --out runs/first
 uv run wpt-eval runs/first                         # memorization and other tests, into the model card
 uv run wpt-chat runs/first                         # continue text with the model
 ```
 
-`classics-small` is a small model recipe over the admitted public-domain
+`classics-test` is a small model recipe over the admitted public-domain
 books, enough to see every step work on one machine. A model recipe
 (`data/recipes/models/`) holds everything that changes the model: its
 data, architecture, training and post-training steps

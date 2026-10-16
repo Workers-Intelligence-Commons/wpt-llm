@@ -1,0 +1,44 @@
+{
+  "schema": 2,
+  "data": {
+    "mixture": "classics",
+    "tokenizer": "classics",
+    "total_tokens": 4290110,
+    "held_out": 0.05
+  },
+  "model": {
+    "block_size": 32768,
+    "n_layer": 8,
+    "d_model": 320,
+    "kda_heads": 4,
+    "kda_head_dim": 80,
+    "mla_heads": 4,
+    "mla_head_dim": 80,
+    "mla_kv_rank": 80,
+    "n_experts": 32,
+    "top_k": 4,
+    "expert_width": 160,
+    "latent_width": 160,
+    "shared_width": 320,
+    "engram_layers": [
+      2
+    ],
+    "engram_order": 3,
+    "engram_heads": 8,
+    "engram_dim": 16,
+    "engram_table_size": 50021
+  },
+  "training": {
+    "method": "muon",
+    "settings": {
+      "warmup": 30
+    },
+    "steps": 300,
+    "batch_size": 8,
+    "eval_every": 50,
+    "eval_batches": 4,
+    "seed": 1337
+  },
+  "posttrain": [],
+  "note": "Untested in a full run: half of tardigrade, 50M parameters with 32K-token windows, sized for about 8 GB of GPU memory, trained with --recompute --micro-batch 1. On an integrated Radeon 860M, one 32K window of random tokens peaked at 6.55 GiB and took 105 s, but a real run on the classics hung that GPU in its first step: it is meant for a stronger GPU. Its data is the classics for now (about 4.3M tokens, so the model mostly memorizes); it changes once a larger mixture exists."
+}

@@ -251,14 +251,20 @@ tokenizer recipes stay separate files, since several models share them.
 A model has at least 2 layers, since KDA layers carry the position
 information and the last layer is MLA.
 
-Two recipes exist, both on the admitted public-domain books (about 4.3M
+Three recipes exist, all on the admitted public-domain books (about 4.3M
 tokens) until a larger mixture exists:
 
-- `classics-small`: 4.6M parameters, 256-token windows, to see every step
-  work on one machine.
-- `classics-5080`: 101M parameters (8 layers, width 512, 32 experts with
+- `classics-test`: 4.6M parameters, 256-token windows, a test to see every
+  step work on one machine.
+- `tardigrade`: 101M parameters (8 layers, width 512, 32 experts with
   top 4), 32K-token windows, sized for one 16 GB GPU with `--recompute
   --micro-batch 1`. It is untested: see below.
+- `axolotl`: half of `tardigrade`, 50M parameters (the same 8 layers and
+  32 experts, width 320 with heads of 80), 32K-token windows, sized for
+  about 8 GB with `--recompute --micro-batch 1`. On an integrated Radeon
+  860M, one 32K window of random tokens peaked at 6.55 GiB and took 105 s,
+  but a real run on the books hung that GPU in its first step, so it is
+  meant for a stronger GPU; no full run yet.
 
 ## Limits of the evidence
 
@@ -266,9 +272,10 @@ Every result above was measured on models of 3B parameters or more, most at
 27B to 2.8T, by the labs that built them; none was measured at the sizes a
 single 16 GB GPU trains. A first recipe sized for such a GPU carries the
 papers' ratios untested, and its first runs are the first check of whether
-they hold small. Its memory is measured only up to 16K tokens, on another
-GPU (one window: 1.5 GiB at 4K, 2.7 GiB at 8K, 4.6 GiB at 16K with
-`--recompute`), so 32K needs about 8 GiB by extrapolation, not by a run. The details the papers leave out (the hash routing
+they hold small. The memory of `tardigrade` is measured only up to 16K tokens, on
+another GPU (one window: 1.5 GiB at 4K, 2.7 GiB at 8K, 4.6 GiB at 16K
+with `--recompute`), so 32K needs about 8 GiB by extrapolation, not by a
+run; `axolotl` was measured at 32K itself. The details the papers leave out (the hash routing
 function, Engram's hash constants and tables, how mHC's streams start and
 end, the histogram behind Quantile Balancing, the MTP layer) are WPT's own
 choices, marked as such above.

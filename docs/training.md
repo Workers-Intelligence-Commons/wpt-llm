@@ -3,8 +3,8 @@
 ## Training
 
 ```sh
-uv run wpt-dataset build classics-small    # prints the dataset id
-uv run wpt-train classics-small <dataset id>
+uv run wpt-dataset build classics-test     # prints the dataset id
+uv run wpt-train classics-test <dataset id>
 ```
 
 A run takes minutes to days, so start it detached from the terminal or SSH
@@ -72,7 +72,8 @@ keeping everything the layer computed. The result is the same; memory
 drops and each step takes about a third longer. Measured with a 101M model
 (8 layers, width 512), one window's peak memory was 5.5 GiB at 4K tokens
 without it, and with it 1.5 GiB at 4K, 2.7 GiB at 8K and 4.6 GiB at 16K.
-The `classics-5080` recipe, 32K-token windows on one 16 GB GPU, needs it
+The `tardigrade` and `axolotl` recipes, 32K-token windows on one 16 GB or
+one 8 GB GPU, need it
 with `--micro-batch 1`.
 
 ### Strategies: how the hardware is used
