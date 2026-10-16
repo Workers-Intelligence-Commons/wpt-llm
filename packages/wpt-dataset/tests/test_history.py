@@ -17,6 +17,8 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
     folder = tmp_path / "upstream"
     folder.mkdir()
     kit.run("git", "init", "-q", cwd=folder)
+    for setting in ("uploadpack.allowFilter", "uploadpack.allowAnySHA1InWant"):  # partial fetches, as on GitHub
+        kit.run("git", "config", setting, "true", cwd=folder)
     before = commit(kit, folder, "start without a license", {"main.py": b"print(1)\n"})
     since = commit(kit, folder, "add the license", {"LICENSE": kit.LICENSE_TEXT.encode()})
     change = commit(kit, folder, "print two", {"main.py": b"print(2)\n", "vendor/lib.py": b"x = 1\n"})

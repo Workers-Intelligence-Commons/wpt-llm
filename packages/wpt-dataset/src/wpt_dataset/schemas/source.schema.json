@@ -30,6 +30,12 @@
         "since": {"type": "string", "pattern": "^([0-9a-f]{40}|[0-9a-f]{64})$", "description": "the first commit kept: the one from which the repository's root license file holds the license the source lists"}
       }
     },
+    "submodules": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "git only: the address of each kept submodule, by its path from the source's root (a submodule's own submodules too); its files are read at the commit the tree pins. An excluded submodule needs none",
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
     "licenses": {
       "type": "array",
       "minItems": 1,
@@ -182,7 +188,7 @@
     },
     {
       "if": {"properties": {"type": {"not": {"const": "git"}}}},
-      "then": {"not": {"required": ["history"]}}
+      "then": {"not": {"anyOf": [{"required": ["history"]}, {"required": ["submodules"]}]}}
     }
   ],
   "$defs": {

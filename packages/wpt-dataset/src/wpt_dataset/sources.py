@@ -17,6 +17,7 @@ changing one patch rebuilds only that source.
 import contextlib
 import hashlib
 import importlib.metadata
+import itertools
 import json
 import os
 import shutil
@@ -28,7 +29,8 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from . import huggingface, manifest, retry, robots
-from .errors import ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed
+from .errors import (ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed,
+                     UnsupportedEntry)
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match
 from .programs import program
 from .repo import Source
@@ -96,11 +98,7 @@ def _fetch(data: dict, address: str, store, listing_only=False) -> dict[str, Ent
         elif kind == "http-archive":
             manifest.read_archive(_download(address, tmp / "download"), extractor)
         elif kind == "git":
-            history = data.get("history")
-            _git_fetch(address, revision, tmp / "repo", full=history is not None)
-            manifest.read_git(tmp / "repo", revision, extractor)
-            if history:
-                manifest.read_git_history(tmp / "repo", history["since"], revision, extractor)
+            _read_git_source(data, address, tmp, extractor)
         elif kind == "huggingface":
             huggingface.read(address, revision, extractor, tmp, USER_AGENT, listing_only)
         elif kind == "mercurial":
@@ -134,20 +132,64 @@ def _download(address: str, target: Path) -> Path:
     return target
 
 
+def _read_git_source(data: dict, address: str, tmp: Path, extractor: Extractor):
+    """The commit, its history when asked, and each kept submodule at the
+    commit it pins, from the address `submodules` lists for it, recursively.
+    Only the contents of kept files are downloaded."""
+    since = data["history"]["since"] if data.get("history") else None
+    listed, found = data.get("submodules", {}), set()
+    pending = [("", address, data["revision"], since)]
+    for number in itertools.count():
+        if not pending:
+            break
+        prefix, address, revision, since = pending.pop(0)
+        repo = tmp / f"repo-{number}"
+        _git_fetch(address, revision, repo, full=since is not None)
+        _git_fetch_blobs(address, repo, manifest.git_blobs_needed(repo, revision, extractor, since, prefix))
+        submodules = manifest.read_git(repo, revision, extractor, prefix)
+        if since:
+            manifest.read_git_history(repo, since, revision, extractor)
+        for path, commit in submodules.items():
+            if path not in listed:
+                raise UnsupportedEntry(f"{path}: a submodule with no address in `submodules`; list it or exclude it")
+            robots.check(listed[path], "git", USER_AGENT)
+            found.add(path)
+            pending.append((path + "/", listed[path], commit, None))
+    if unused := sorted(set(listed) - found):
+        raise UnsupportedEntry(f"`submodules` lists {', '.join(unused)}, not a kept submodule of the revision")
+
+
 def _git_fetch(address: str, revision: str, repo: Path, full=False):
-    """The commit `revision`; with `full`, its whole history too."""
+    """The commit `revision` without file contents (git's partial fetch); with
+    `full`, its whole history too. A server that does not offer partial
+    fetches sends the contents as well."""
     subprocess.run(["git", "init", "-q", "--bare", str(repo)], capture_output=True, check=True)
     git = ["git", "-c", f"http.userAgent={USER_AGENT}", "-C", str(repo)]
+    for setting in (["remote", "add", "origin", address], ["config", "remote.origin.promisor", "true"],
+                    ["config", "remote.origin.partialclonefilter", "blob:none"]):
+        subprocess.run([*git, *setting], capture_output=True, check=True)
     depth = [] if full else ["--depth", "1"]
 
     def fetch(*what):
-        retry.call(lambda: subprocess.run([*git, "fetch", "-q", *what], capture_output=True, check=True), address)
+        retry.call(lambda: subprocess.run([*git, "fetch", "-q", "--no-tags", "--filter=blob:none", *what],
+                                          capture_output=True, check=True), address)
 
     try:
-        fetch(*depth, address, revision)
+        fetch(*depth, "origin", revision)
     except subprocess.CalledProcessError:  # some servers only serve branch and tag tips
-        fetch(address, "+refs/heads/*:refs/heads/*", "+refs/tags/*:refs/tags/*")
+        fetch("origin", "+refs/heads/*:refs/heads/*", "+refs/tags/*:refs/tags/*")
     subprocess.run(["git", "-C", str(repo), "cat-file", "-e", f"{revision}^{{commit}}"], capture_output=True, check=True)
+
+
+def _git_fetch_blobs(address: str, repo: Path, object_ids: list[str]):
+    """The file contents a partial fetch left out, asked for by id in one request."""
+    missing = manifest.missing_objects(repo, object_ids)
+    if not missing:
+        return
+    command = ["git", "-c", f"http.userAgent={USER_AGENT}", "-C", str(repo), "fetch", "-q", "--no-tags",
+               "--no-write-fetch-head", "--filter=blob:none", "--stdin", "origin"]
+    wanted = "".join(object_id + "\n" for object_id in missing).encode()
+    retry.call(lambda: subprocess.run(command, input=wanted, capture_output=True, check=True), address)
 
 
 # -- cuts and patches -----------------------------------------------------------

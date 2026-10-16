@@ -25,11 +25,12 @@ import zipfile
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
-from .errors import BadPath, UnsupportedEntry
+from .errors import BadPath, FetchFailed, UnsupportedEntry
 from .programs import program
 
 FILE, EXECUTABLE, SYMLINK = "100644", "100755", "120000"
 MODES = (FILE, EXECUTABLE, SYMLINK)
+SUBMODULE = "160000"  # a git tree's pointer to a commit of another repository
 
 
 @dataclass(frozen=True)
@@ -166,24 +167,61 @@ def read_archive(path: Path, extractor: Extractor):
             raise UnsupportedEntry(f"{path.name}: neither a zip nor a tar archive") from error
 
 
-def read_git(repo: Path, revision: str, extractor: Extractor):
-    """Entries of a commit, from git's own objects."""
-    listing = _git(repo, "ls-tree", "-r", "-z", "--full-tree", revision).split(b"\0")
-    entries = []
-    for record in filter(None, listing):
-        meta, path = record.split(b"\t", 1)
-        mode, kind, object_id = meta.decode().split()
-        if kind != "blob" or mode not in MODES:
-            raise UnsupportedEntry(f"{path.decode(errors='replace')}: git {kind} with mode {mode} (submodules are not supported)")
-        entries.append((path, mode, object_id))
+def read_git(repo: Path, revision: str, extractor: Extractor, prefix: str = "") -> dict[str, str]:
+    """Entries of a commit, from git's own objects, each path after `prefix`
+    (a submodule's folder, ending in "/"). An excluded file is never read, so
+    a partial fetch need not hold it. Returns the kept submodules, each path
+    with the commit it pins; an excluded submodule is skipped."""
+    entries, submodules = [], {}
+    for path, mode, kind, object_id in _git_tree(repo, revision, prefix):
+        if extractor.kept(path) is None:
+            continue
+        if mode == SUBMODULE:
+            submodules[path.decode()] = object_id
+        elif kind != "blob" or mode not in MODES:
+            raise UnsupportedEntry(f"{path.decode(errors='replace')}: git {kind} with mode {mode}")
+        else:
+            entries.append((path, mode, object_id))
     with contextlib.closing(_git_blobs(repo, [e[2] for e in entries])) as contents:
         for (path, mode, _), content in zip(entries, contents):
             extractor.add(path, mode, content)
+    return submodules
+
+
+def git_blobs_needed(repo: Path, revision: str, extractor: Extractor, since: str | None = None,
+                     prefix: str = "") -> list[str]:
+    """The blobs read_git and read_git_history read: the kept files of the
+    commit and, with `since`, both sides of every kept file a commit since
+    then changes. A partial fetch downloads only these."""
+    needed = [object_id for path, _, kind, object_id in _git_tree(repo, revision, prefix)
+              if kind == "blob" and extractor.kept(path) is not None]
+    if since:
+        for changes in _changed_paths(repo, _history_commits(repo, since, revision)).values():
+            needed += [object_id for path, blobs in changes if extractor.kept(path) is not None for object_id in blobs]
+    return list(dict.fromkeys(needed))
+
+
+def missing_objects(repo: Path, object_ids: list[str]) -> list[str]:
+    """The objects among object_ids that the repository does not hold."""
+    if not object_ids:
+        return []
+    out = _git(repo, "cat-file", "--batch-check", input="".join(o + "\n" for o in object_ids).encode())
+    return [line.split()[0] for line in out.decode().splitlines() if line.endswith(" missing")]
+
+
+def _git_tree(repo, revision, prefix):
+    """(path with prefix, mode, kind, object id) of each entry of a commit."""
+    for record in filter(None, _git(repo, "ls-tree", "-r", "-z", "--full-tree", revision).split(b"\0")):
+        meta, path = record.split(b"\t", 1)
+        mode, kind, object_id = meta.decode().split()
+        yield prefix.encode() + path, mode, kind, object_id
 
 
 HISTORY = ".git/history/"
 # git's output must not depend on the settings of the machine that fetches
-PLAIN_GIT = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull}
+PLAIN_GIT = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull,
+             # an object a partial fetch left out is an error, never a download of its own
+             "GIT_NO_LAZY_FETCH": "1"}
 
 
 def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor):
@@ -193,13 +231,8 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
     paths the extractor keeps. A commit that changes no kept path gives no
     file. git never allows a `.git` folder in a tree, so these paths cannot
     meet a file of the commit itself."""
-    ancestor = subprocess.run(["git", "-C", str(repo), "merge-base", "--is-ancestor", since, revision],
-                              capture_output=True, env=PLAIN_GIT)
-    if ancestor.returncode != 0:
-        raise UnsupportedEntry(f"history.since {since} is not an ancestor of the revision {revision}")
-    parents = _git(repo, "rev-parse", f"{since}^@").decode().split()
-    commits = _git(repo, "rev-list", "--no-merges", revision, "--not", *parents).decode().split()
-    changed = _changed_paths(repo, commits)
+    commits = _history_commits(repo, since, revision)
+    changed = {commit: [path for path, _ in changes] for commit, changes in _changed_paths(repo, commits).items()}
 
     def patch(commit):
         paths = [p for p in changed[commit] if extractor.kept(p) is not None]
@@ -217,21 +250,34 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
                 extractor.add(HISTORY + commit, FILE, text)
 
 
-def _changed_paths(repo, commits) -> dict[str, list[str]]:
-    """The paths each commit changes, from one `git diff-tree --stdin`."""
+def _history_commits(repo, since, revision) -> list[str]:
+    """The commits from `since` to `revision`, merges left out, newest first."""
+    ancestor = subprocess.run(["git", "-C", str(repo), "merge-base", "--is-ancestor", since, revision],
+                              capture_output=True, env=PLAIN_GIT)
+    if ancestor.returncode != 0:
+        raise UnsupportedEntry(f"history.since {since} is not an ancestor of the revision {revision}")
+    parents = _git(repo, "rev-parse", f"{since}^@").decode().split()
+    return _git(repo, "rev-list", "--no-merges", revision, "--not", *parents).decode().split()
+
+
+def _changed_paths(repo, commits) -> dict[str, list[tuple[str, list[str]]]]:
+    """Each commit's changed paths, with the blobs on both sides of the
+    change (none for a submodule, or for the side where the file is
+    absent), from one `git diff-tree --stdin`."""
     if not commits:
         return {}
-    out = _git(repo, "diff-tree", "--stdin", "--always", "--root", "-r", "--name-only", "-z", "--no-renames",
+    out = _git(repo, "diff-tree", "--stdin", "--always", "--root", "-r", "-z", "--no-renames",
                input="".join(c + "\n" for c in commits).encode())
-    changed, expected, current = {}, iter(commits), None
-    upcoming = next(expected)
-    for token in filter(None, out.split(b"\0")):
-        name = token.decode("utf-8", errors="surrogateescape").strip("\n")
-        if name == upcoming:
-            current, upcoming = name, next(expected, None)
+    changed, current, tokens = {}, None, iter(out.split(b"\0"))
+    for token in tokens:
+        if token.startswith(b":"):  # ":<old mode> <new mode> <old blob> <new blob> <status>", then the path
+            old_mode, new_mode, old, new, _ = token[1:].decode().split()
+            path = next(tokens).decode("utf-8", errors="surrogateescape")
+            blobs = [b for m, b in ((old_mode, old), (new_mode, new)) if m != SUBMODULE and b.strip("0")]
+            changed[current].append((path, blobs))
+        elif token.strip():
+            current = token.decode().strip()
             changed[current] = []
-        else:
-            changed[current].append(name)
     return changed
 
 
@@ -247,12 +293,14 @@ def _git_blobs(repo, object_ids):
     if not object_ids:
         return
     process = subprocess.Popen(["git", "-C", str(repo), "cat-file", "--batch"],
-                               stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+                               stdin=subprocess.PIPE, stdout=subprocess.PIPE, env=PLAIN_GIT)
     try:
         for object_id in object_ids:
             process.stdin.write(object_id.encode() + b"\n")
             process.stdin.flush()
             header = process.stdout.readline().split()
+            if header[1:] == [b"missing"]:
+                raise FetchFailed(f"git object {object_id} was not fetched")
             size = int(header[2])
             content = process.stdout.read(size)
             process.stdout.read(1)  # the newline after each object

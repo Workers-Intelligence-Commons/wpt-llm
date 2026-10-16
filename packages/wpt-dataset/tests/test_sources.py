@@ -2,13 +2,16 @@ import hashlib
 import http.server
 import io
 import tarfile
+import subprocess
 import threading
 import urllib.error
+from pathlib import Path
 
 import pytest
 
 from wpt_dataset import manifest
-from wpt_dataset.errors import BadPath, ChecksumMismatch, CrawlForbidden, CutFailed, LicenseMapError, NotText, PatchFailed
+from wpt_dataset.errors import (BadPath, ChecksumMismatch, CrawlForbidden, CutFailed, LicenseMapError, NotText, PatchFailed,
+                                UnsupportedEntry)
 from wpt_dataset.robots import RobotsUnreachable
 from wpt_dataset.sources import compute_upstream, source_tree
 
@@ -55,6 +58,48 @@ def test_checksum_mismatch_is_refused(kit, repo, store, http_folder):
     (folder / "book.txt").write_bytes(b"upstream changed it\n")
     with pytest.raises(ChecksumMismatch):
         source_tree(repo.source(sid), store)
+
+
+def offer_partial_fetches(folder):
+    """Serve partial fetches from a local repository, as GitHub does."""
+    for setting in ("uploadpack.allowFilter", "uploadpack.allowAnySHA1InWant"):
+        subprocess.run(["git", "config", setting, "true"], cwd=folder, check=True)
+
+
+def test_a_git_source_never_downloads_the_content_of_an_excluded_file(kit, store, tmp_path):
+    # a repository's videos or datasets can weigh gigabytes the source leaves
+    # out; here the excluded file's content is gone from the server, so any
+    # download of it would fail
+    address, commit = kit.git_project(tmp_path / "upstream", files={**kit.FILES, "video.bin": b"large\n"})
+    offer_partial_fetches(address)
+    blob = kit.run("git", "rev-parse", f"{commit}:video.bin", cwd=address).decode().strip()
+    (Path(address) / ".git" / "objects" / blob[:2] / blob[2:]).unlink()
+
+    tree = compute_upstream({"type": "git", "revision": commit, "extract": {"exclude": ["video.bin"]}}, address, store)
+
+    without, without_commit = kit.git_project(tmp_path / "without")  # the same project without that file
+    assert manifest.checksum(tree) == manifest.checksum(
+        compute_upstream({"type": "git", "revision": without_commit}, without, store))
+
+
+def test_a_kept_submodule_gives_its_files_under_its_folder_and_an_excluded_one_is_skipped(kit, store, tmp_path):
+    # a vendored library under its own allowed license enters with its own
+    # license entry; one the source leaves out is never fetched
+    library, library_commit = kit.git_project(tmp_path / "library", files={"lib.py": b"x = 1\n"}, symlinks={})
+    offer_partial_fetches(library)
+    parent, _ = kit.git_project(tmp_path / "parent", files={"main.py": b"import lib\n"}, symlinks={})
+    for path in ("vendor/lib", "vendor/unknown"):
+        kit.run("git", "update-index", "--add", "--cacheinfo", f"160000,{library_commit},{path}", cwd=parent)
+    kit.run("git", "commit", "-q", "-m", "add the submodules", cwd=parent)
+    commit = kit.run("git", "rev-parse", "HEAD", cwd=parent).decode().strip()
+    data = {"type": "git", "revision": commit, "extract": {"exclude": ["vendor/unknown"]}}
+
+    tree = compute_upstream({**data, "submodules": {"vendor/lib": library}}, parent, store)
+
+    assert sorted(tree) == ["main.py", "vendor/lib/lib.py"]
+    assert tree["vendor/lib/lib.py"].sha256 == hashlib.sha256(b"x = 1\n").hexdigest()
+    with pytest.raises(UnsupportedEntry, match="vendor/lib: a submodule with no address"):
+        compute_upstream(data, parent, store)
 
 
 def test_cuts_then_patches_produce_the_final_tree(kit, repo, store, git_upstream):

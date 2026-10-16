@@ -58,6 +58,12 @@ You take responsibility for those three checks.
    to the files `extract` keeps. `since` is the commit from which the root
    license file holds the license the source lists; give these files a
    `code` format with the language `patch`.
+   A git source downloads only the contents of the files it keeps. A
+   submodule (a folder pointing to a commit of another repository) is
+   either excluded in `extract` or read at that commit from the address
+   `submodules` gives for its path, `{"vendor/lib": "https://..."}`; its
+   own submodules follow the same rule, by their full path. Its files
+   need a license entry like any other path.
 5. `uv run wpt-dataset check --fetch <id>` must pass (it also converts every
    file to Markdown), and `uv run wpt-dataset markdown-check <id>` (every
    note complete, no leftover markup), then `uv run scripts/check.py`.
