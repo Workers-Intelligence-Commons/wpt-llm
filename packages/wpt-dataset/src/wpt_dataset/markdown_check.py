@@ -18,7 +18,7 @@ import re
 from dataclasses import dataclass, field
 
 from .markdown import documents, format_of
-from .repo import Source
+from .repo import Repo, Source
 from .sources import source_tree
 
 CHECKED = {"text", "xhtml"}
@@ -46,10 +46,10 @@ def problems(markdown: str) -> list[str]:
     return found
 
 
-def check_markdown(source: Source, store) -> SourceReport:
+def check_markdown(repo: Repo, source: Source, store) -> SourceReport:
     tree, _ = source_tree(source, store)
     report = SourceReport(source.id)
-    for converted in documents(source, tree, store):
+    for converted in documents(source, tree, store, repo):
         entry = format_of(source, converted.file)
         if entry["format"] not in CHECKED and not (entry["format"] == "records" and entry.get("as") != "markdown"):
             continue

@@ -17,6 +17,12 @@ Every step's dispatch is in a fixed order: each token's k copies are sorted
 by expert with a stable sort and put back by the inverse permutation, so
 gradients are sums in a fixed order, and every expert runs, even on no
 token, so every process has a gradient for every weight.
+
+A forward pass can record the experts its routers chose for each position
+of one sequence (Routes), and a later pass can replay them instead of
+choosing again: a learner then scores the tokens through the experts that
+wrote them (R3, docs/post-training.md). Replayed weights still come from
+the current router scores. Hash-routed layers need no record.
 """
 
 import torch
@@ -27,6 +33,32 @@ from .layers import EPS, FeedForward, expert_forward
 SHARED_EXPERTS = 2
 HASH_MULTIPLIER = 2654435761  # h(t) = (t * 2654435761 mod 2^32) mod n
 BINS, WINDOW = 4096, 0.5      # balancing histograms: 4096 bins within 0.5 of each expert's previous quantile
+
+
+class Routes:
+    """The experts each routed layer chose for each position of one
+    sequence (batch of 1), in position order: a forward pass given
+    record=routes adds the positions it has not recorded yet, one given
+    replay=routes routes its positions as recorded. A recording pass must
+    start at the sequence's first token."""
+
+    def __init__(self):
+        self.chosen = {}  # Experts module -> (positions, k) expert indices
+
+    def record(self, experts, chosen):
+        known = self.chosen.get(experts)
+        if known is None:
+            self.chosen[experts] = chosen.detach().clone()
+        elif len(chosen) > len(known):
+            self.chosen[experts] = torch.cat([known, chosen[len(known):].detach()])
+
+    def replay(self, experts, positions):
+        """The recorded choices of the first `positions` positions;
+        ValueError when fewer were recorded."""
+        known = self.chosen.get(experts)
+        if known is None or len(known) < positions:
+            raise ValueError(f"{positions} positions to replay, {0 if known is None else len(known)} recorded")
+        return known[:positions]
 
 
 class Experts(nn.Module):
@@ -47,20 +79,28 @@ class Experts(nn.Module):
             self.register_buffer("bias", torch.zeros(n))  # Quantile Balancing's b; saved, frozen for inference
             self.histogram = None  # this step's counts so far; not a buffer, which DDP would overwrite
 
-    def route(self, x, ids, collect=True):
+    def route(self, x, ids, collect=True, record=None, replay=None):
         """(chosen experts (m, k), their weights (m, k)) for m tokens; in
-        training with collect, the scores also go into the histogram."""
+        training with collect, the scores also go into the histogram. With
+        replay (Routes), the chosen experts are the recorded ones and nothing
+        is collected; with record, the choices are added to it."""
         if self.hashed:
             h = (ids * HASH_MULTIPLIER) % 2**32 % self.n
             spread = torch.arange(self.k, device=ids.device) * self.n // self.k
             return (h[:, None] + spread) % self.n, torch.full((len(ids), self.k), 1 / self.k, device=ids.device)
         with torch.autocast(x.device.type, enabled=False):
             s = torch.sigmoid(self.router(x.float()))  # routing scores in FP32
+            if replay is not None:
+                chosen = replay.replay(self, len(x)).to(x.device)
+                weights = s.gather(1, chosen)
+                return chosen, weights / weights.sum(-1, keepdim=True)
             top = torch.topk(s + self.bias, self.k + 1)
             chosen = top.indices[:, :self.k]
             weights = s.gather(1, chosen)
             if self.training and collect:
                 self._count(s.detach(), top.values[:, self.k].detach())
+            if record is not None and collect:
+                record.record(self, chosen)
             return chosen, weights / weights.sum(-1, keepdim=True)
 
     def _count(self, s, cutoff):
@@ -91,11 +131,13 @@ class Experts(nn.Module):
         bias = -quantile
         self.bias.copy_(bias - bias.mean())
 
-    def forward(self, x, ids, collect=True):
+    def forward(self, x, ids, collect=True, record=None, replay=None):
         B, T, D = x.shape
+        if B != 1 and (record is not None or replay is not None):
+            raise ValueError("routes are recorded and replayed for one sequence at a time")
         flat = x.reshape(-1, D)
         y = sum(expert(flat) for expert in self.shared)
-        chosen, weights = self.route(flat, ids.reshape(-1), collect)
+        chosen, weights = self.route(flat, ids.reshape(-1), collect, record, replay)
         m, k = chosen.shape
         z = self.down(flat)
         order = chosen.reshape(-1).argsort(stable=True)  # the m * k copies, grouped by expert

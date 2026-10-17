@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 
 from .errors import DatasetError, OutdatedSchema
-from .repo import CURRENT_SCHEMA, Repo, dump_json, load_json
+from .repo import CURRENT_SCHEMA, IMAGE_FILES, Repo, dump_json, load_json
 
 MIGRATIONS: dict[str, dict[int, callable]] = {kind: {} for kind in CURRENT_SCHEMA}
 
@@ -134,6 +134,10 @@ def _files(repo: Repo):
     for name in repo.recipe_names("tokenizer"):
         if repo.lock_path(name).exists():
             yield "lock", repo.lock_path(name)
+    for name in repo.image_names():
+        for kind in IMAGE_FILES:
+            if repo.image_file(name, kind).exists():
+                yield kind, repo.image_file(name, kind)
 
 
 def migrate(repo: Repo, migrations=None, current=None, log=print) -> list[Path]:

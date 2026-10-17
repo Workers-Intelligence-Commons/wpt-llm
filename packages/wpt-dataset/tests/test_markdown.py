@@ -29,7 +29,7 @@ def markdown_of(kit, repo, store, tmp_path, files, formats=FORMATS):
     sid = kit.add_source(repo, store, "example", "book", {"type": "git", "address": address, "revision": commit,
                                                            "formats": formats})
     source = repo.source(sid)
-    return {c.path: c.markdown for c in documents(source, source_tree(source, store)[0], store)}
+    return {c.path: c.markdown for c in documents(source, source_tree(source, store)[0], store, repo)}
 
 
 def test_every_format_becomes_markdown_that_reads_as_written(kit, repo, store, tmp_path):
@@ -59,7 +59,7 @@ def test_code_outside_a_repository_names_its_path_without_a_root(kit, repo, stor
         "type": "http-file", "address": f"{base}/run.py", "revision": "2026-10-14",
         "formats": [{"format": "code", "language": "python", "paths": ["**"]}]})
     source = repo.source(sid)
-    assert [(c.path, c.markdown) for c in documents(source, source_tree(source, store)[0], store)] == [
+    assert [(c.path, c.markdown) for c in documents(source, source_tree(source, store)[0], store, repo)] == [
         ("run.py", b"```python path=\"run.py\"\nprint(1)\n```\n")]
 
 
@@ -154,4 +154,4 @@ def test_a_message_tree_gives_every_human_path_as_a_conversation(kit, repo, stor
     data = gzip.compress("".join(json.dumps(row) + "\n" for row in rows).encode())
     source = repo.source(tree_source("orphan", data))
     with pytest.raises(InvalidFile, match="1 messages name a parent the file does not hold, such as gone"):
-        list(documents(source, source_tree(source, store)[0], store))
+        list(documents(source, source_tree(source, store)[0], store, repo))

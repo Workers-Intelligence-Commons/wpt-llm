@@ -4,6 +4,8 @@
     data/recipes/mixtures/<name>.json
     data/recipes/tokenizers/<name>.json   + <name>.lock.json (written by builds)
     data/recipes/models/<name>.json       data, architecture, training and post-training of one model
+    data/images/<name>/Dockerfile         a container image of agentic tasks
+                      + lock.json, licenses.json (written by `wpt-agent lock-image`)
     data/allowed-signers                  SSH keys allowed to sign decisions
     data/allowed-gpg-keys.asc             GPG keys allowed to sign decisions (optional)
 """
@@ -23,7 +25,10 @@ from .errors import InvalidFile, OutdatedSchema, RuleViolation, StaleFile
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 5, "mixture": 1, "model": 2, "tokenizer": 2, "lock": 2, "conversation": 1}
+CURRENT_SCHEMA = {"source": 5, "mixture": 1, "model": 2, "tokenizer": 2, "lock": 2, "conversation": 1, "task": 1,
+                  "image-lock": 1, "image-licenses": 1}
+IMAGE_FILES = {"image-lock": "lock.json", "image-licenses": "licenses.json"}  # kind -> file in data/images/<name>/
+IMAGES, DOCKERFILE = "images", "Dockerfile"  # data/images/<name>/Dockerfile, written by a person
 ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
@@ -154,6 +159,29 @@ class Repo:
     def lock_path(self, tokenizer_name: str) -> Path:
         return self.data / "recipes" / "tokenizers" / f"{tokenizer_name}.lock.json"
 
+    def image_names(self) -> list[str]:
+        folder = self.data / IMAGES
+        return sorted(p.name for p in folder.iterdir() if p.is_dir()) if folder.is_dir() else []
+
+    def image_folder(self, name: str) -> Path:
+        """data/images/<name>/; RuleViolation unless the name is valid and
+        the folder holds a Dockerfile."""
+        if not NAME.fullmatch(name):
+            raise RuleViolation(f"no image {name!r}: an image name is lowercase a-z, 0-9, '.', '_' and '-'")
+        folder = self.data / IMAGES / name
+        if not (folder / DOCKERFILE).is_file():
+            raise RuleViolation(f"no image {name!r}: data/{IMAGES}/{name}/{DOCKERFILE} does not exist")
+        return folder
+
+    def dockerfile(self, name: str) -> Path:
+        """data/images/<name>/Dockerfile; RuleViolation as image_folder."""
+        return self.image_folder(name) / DOCKERFILE
+
+    def image_file(self, name: str, kind: str) -> Path:
+        """data/images/<name>/ followed by the file of that kind (IMAGE_FILES),
+        whether or not it exists."""
+        return self.data / IMAGES / name / IMAGE_FILES[kind]
+
     # -- rules ---------------------------------------------------------------
     def check(self) -> list[str]:
         """Every rule that needs no download. Returns one line per problem."""
@@ -173,6 +201,8 @@ class Repo:
         for name in self.recipe_names("tokenizer"):
             if self.lock_path(name).exists():
                 attempt(load_json, self.lock_path(name), "lock")
+        for name in self.image_names():
+            attempt(self._check_image, name)
         return problems
 
     def check_source(self, sid) -> list[str]:
@@ -221,6 +251,12 @@ class Repo:
         for cut in source.data.get("cuts", []):
             if cut["end"] <= cut["start"]:
                 raise RuleViolation(f"{sid}: cut on {cut['path']} ends at or before its start")
+
+    def _check_image(self, name):
+        self.image_folder(name)
+        for kind in IMAGE_FILES:
+            if self.image_file(name, kind).exists():
+                load_json(self.image_file(name, kind), kind)
 
     def _check_recipe(self, kind, name):
         if not NAME.fullmatch(name):

@@ -1,16 +1,23 @@
 import hashlib
+import importlib.util
 import json
 import os
+import re
 import subprocess
+from pathlib import Path
 
 import pytest
 import torch
+from safetensors.torch import load_file
 
+import wpt_agent
+import wpt_posttrain
+from wpt_agent import images
 from wpt_dataset import manifest
 from wpt_dataset.repo import address_hash, dump_json
 from wpt_dataset.sources import compute_upstream
 from wpt_model import load_model
-from wpt_posttrain import main
+from wpt_posttrain import agentic, main
 from wpt_train import main as train
 
 ZERO_WEIGHTS = ("import torch\nfrom wpt_posttrain import Outcome\n\n"
@@ -113,3 +120,173 @@ def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path
     assert sid in notice and "Talks, by Bo Speaker, 2026" in notice and "dedicates these talks" in notice
     assert built.attribution in notice  # the pre-training sources stay credited
     assert f"1. `wpt_posttrain/steps/sft.py`" in (tuned / "README.md").read_text()
+
+
+def test_grpo_says_so_and_writes_nothing_until_a_source_holds_tasks(trained, tmp_path):
+    with pytest.raises(SystemExit, match="step grpo failed: no tasks: no admitted source has task files tagged grpo"):
+        main([trained.recipe("agent", posttrain=["grpo"]), str(trained.folder), str(tmp_path / "tuned")])
+    assert not (tmp_path / "tuned").exists()
+
+
+TASK = {"schema": 1, "instructions": "Write hello into out.txt.", "image": "tiny",
+        "limits": {"max_turns": 2, "max_tokens": 6, "command_seconds": 5}}
+
+
+def task_source(built, root, upstream, check='#!/bin/bash\necho "0.$RANDOM"\n') -> str:
+    """Writes data/images/tiny/Dockerfile and an admitted source of one task
+    tagged grpo, whose check by default prints scores that differ; returns
+    its id."""
+    (root / "data" / "images" / "tiny").mkdir(parents=True)
+    (root / "data" / "images" / "tiny" / "Dockerfile").write_text("ARG BASE=ubuntu:24.04\nFROM ${BASE}\nARG PACKAGES\n")
+    (upstream / "hello" / "files").mkdir(parents=True)
+    (upstream / "hello" / "task.json").write_text(json.dumps(TASK))
+    (upstream / "hello" / "files" / "notes.txt").write_text("start\n")
+    (upstream / "hello" / "check").write_text(check)
+    (upstream / "hello" / "check").chmod(0o755)
+    env = {**os.environ, "GIT_AUTHOR_NAME": "T", "GIT_AUTHOR_EMAIL": "t@example.org", "GIT_COMMITTER_NAME": "T",
+           "GIT_COMMITTER_EMAIL": "t@example.org", "GIT_CONFIG_GLOBAL": os.devnull}
+    for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "x"]):
+        subprocess.run(["git", *args], cwd=upstream, env=env, check=True)
+    commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=upstream, capture_output=True, text=True).stdout.strip()
+    data = {"schema": 5, "type": "git", "address": str(upstream), "revision": commit,
+            "licenses": [{"license": "CC0-1.0", "paths": ["**"], "attribution": "Tasks, by Cy Author, 2026",
+                          "text": "Cy Author dedicates these tasks to the public domain.\n"}],
+            "formats": [{"format": "task", "paths": ["**"]}], "tags": [{"tags": ["grpo"], "paths": ["**"]}],
+            "decision": {"decision": "admitted", "by": "T", "date": "2026-10-17"}}
+    data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], built.store))
+    sid = f"example-tasks-{address_hash(str(upstream))}"
+    (root / "data" / "sources" / sid).mkdir()
+    (root / "data" / "sources" / sid / "source.json").write_text(dump_json(data))
+    return sid
+
+
+GRPO = Path(wpt_posttrain.__file__).parent / "steps" / "grpo.py"
+
+
+def step_copy(folder, **settings) -> Path:
+    """The documented way to change a step's settings: a copy of its file,
+    under the same name, with the given constants changed."""
+    text = GRPO.read_text()
+    for name, value in settings.items():
+        text = re.sub(rf"^{name} = .*$", f"{name} = {value}", text, count=1, flags=re.MULTILINE)
+    step = folder / GRPO.name
+    step.write_text(text)
+    return step
+
+
+def step_module(path):
+    spec = importlib.util.spec_from_file_location(f"{path.stem.replace('-', '_')}_under_test", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_grpo_fails_and_writes_nothing_when_no_group_ever_teaches_anything(docker_runs, built, tmp_path,
+                                                                           monkeypatch):
+    # a check that always prints 0 gives every group equal scores: the run
+    # makes no update at all, and the step fails, saying why
+    recipe = built.recipe("agent", model={"block_size": 1024})
+    train([recipe, built.dataset_id, "--out", "model"])
+    task_source(built, tmp_path, tmp_path / "tasks", check="#!/bin/sh\necho 0\n")
+    if subprocess.run(["docker", "image", "inspect", "ubuntu:24.04"], capture_output=True).returncode:
+        subprocess.run(["docker", "pull", "-q", "ubuntu:24.04"], capture_output=True, check=True)
+    monkeypatch.setattr(images, "built", lambda root, name: "ubuntu:24.04")  # a plain image is enough here
+    step = step_copy(tmp_path, ROUNDS="2", GROUP="2", TASKS_PER_UPDATE="1")
+    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=[str(step)])
+    with pytest.raises(SystemExit, match=r"step grpo failed: no update in 2 rounds: every group was skipped, 2 "
+                                         r"because its scores were all equal, 0 because it kept fewer than 2 "
+                                         r"attempts\nnothing was written"):
+        main([recipe, str(tmp_path / "model"), str(tmp_path / "tuned")])
+    assert not (tmp_path / "tuned").exists()
+
+
+class _Logits(torch.nn.Module):
+    """A model of 8 tokens whose logits at each position come from the token there."""
+
+    def __init__(self):
+        super().__init__()
+        torch.manual_seed(0)
+        self.table = torch.nn.Embedding(8, 8)
+
+    def forward(self, idx, replay=None):
+        return self.table(idx)
+
+
+def test_a_group_whose_scores_are_all_equal_never_dilutes_the_update(monkeypatch):
+    # the loss is averaged over the tokens written in the groups that teach
+    # something: a skipped group, whose scores are all equal, adds none
+    scores = {"differ": [1.0, 0.0], "equal": [0.5, 0.5]}
+    played = {}
+
+    def play(task):
+        ids = [0, 1, 2, 3] if task.id == "differ" else [0, 4, 5, 6, 7, 1, 2]
+        attempt = wpt_agent.Attempt({}, ids, [False] + [True] * (len(ids) - 1), "answered")
+        return attempt, None, next(played[task.id])
+
+    losses, update = [], agentic.update
+    monkeypatch.setattr(agentic, "update", lambda *args: losses.append(update(*args)) or losses[-1])
+    grpo = step_module(GRPO)
+    settings = agentic.Settings(rounds=1, tasks_per_update=grpo.TASKS_PER_UPDATE, group=2,
+                                learning_rate=grpo.LEARNING_RATE, weight_decay=grpo.WEIGHT_DECAY,
+                                temperature=grpo.TEMPERATURE, top_k=grpo.TOP_K, check_seconds=grpo.CHECK_SECONDS,
+                                result_bytes=grpo.RESULT_BYTES, seed=grpo.SEED)
+    task = lambda name: type("Task", (), {"id": name, "image": "tiny"})
+    for names in (["differ", "equal"], ["differ"]):
+        played = {name: iter(values) for name, values in scores.items()}
+        tasks = [task(name) for name in names]
+        learner = agentic.Learner("grpo", _Logits(), None, "cpu", {"tiny": None}, 100, settings)
+        learner.play = play
+        assert learner.train(tasks).succeeded
+    assert len(losses) == 2 and losses[0] == pytest.approx(losses[1])
+
+
+def test_grpo_fails_and_writes_nothing_when_every_attempt_of_a_round_is_dropped(built, tmp_path, monkeypatch):
+    # a sandbox that never starts is not the model's doing, but a round that
+    # could make no update at all stops the step, naming the round and why
+    recipe = built.recipe("agent", model={"block_size": 1024})
+    train([recipe, built.dataset_id, "--out", "model"])
+    task_source(built, tmp_path, tmp_path / "tasks")
+
+    def refused(*args, **kwargs):
+        raise wpt_agent.SandboxError("docker create: no space left on device")
+
+    monkeypatch.setattr(images, "built", lambda root, name: f"wpt-agent/{name}:test")  # no image to build
+    monkeypatch.setattr(wpt_agent, "Sandbox", refused)
+    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=["grpo"])
+    with pytest.raises(SystemExit, match=r"step grpo failed: round 1: every attempt was dropped, Docker failed "
+                                         r"\d+ times; the last time: docker create: no space left on device"):
+        main([recipe, str(tmp_path / "model"), str(tmp_path / "tuned")])
+    assert not (tmp_path / "tuned").exists()
+
+
+def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, built, tmp_path):
+    # each attempt runs in a container of the task's image and its check
+    # scores it; attempts that score apart change the weights, but not the
+    # routers', and the new model's NOTICE credits the source of the tasks;
+    # the image must be built first, and the step says how
+    recipe = built.recipe("agent", model={"block_size": 1024})  # the four tools' descriptions take most of it
+    train([recipe, built.dataset_id, "--out", "model"])
+    base, root = tmp_path / "model", tmp_path
+    sid = task_source(built, root, tmp_path / "tasks")
+    images.lock(root, "tiny", log=lambda _: None)  # no image built yet
+
+    step = step_copy(tmp_path, ROUNDS="1", GROUP="2", TASKS_PER_UPDATE="1", LEARNING_RATE="1e-2")
+    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=[str(step)])
+    with pytest.raises(SystemExit, match="image 'tiny' is not built on this machine.*wpt-agent build-image tiny"):
+        main([recipe, str(base), str(tmp_path / "tuned")])
+    try:
+        images.build(root, "tiny", log=lambda _: None)
+        main([recipe, str(base), str(tmp_path / "tuned")])
+    finally:
+        subprocess.run(["docker", "rmi", "-f", images.tag(root, "tiny")], capture_output=True)
+
+    tuned = tmp_path / "tuned"
+    before, after = load_file(base / "model.safetensors"), load_file(tuned / "model.safetensors")
+    routers = [name for name in before if name.endswith("experts.router.weight")]
+    assert routers and all(torch.equal(before[name], after[name]) for name in routers)
+    assert any(not torch.equal(before[name], after[name]) for name in before)
+    post = json.loads((tuned / "provenance.json").read_text())["post_training"]
+    assert post["steps"][0]["file"] == "grpo.py" and post["steps"][0]["sources"] == [sid]
+    notice = (tuned / "NOTICE").read_text()
+    assert "Tasks, by Cy Author, 2026" in notice and "dedicates these tasks" in notice
+

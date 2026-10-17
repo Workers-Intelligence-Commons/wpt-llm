@@ -79,7 +79,7 @@ def gather(repo: Repo, store, log=print, skipped=None):
         try:
             tree, tree_object = source_tree(source, store)
             found, mine, credits, repeated = [], set(), [], 0  # kept apart until the source succeeds
-            for converted in markdown.documents(source, tree, store):  # links are not documents; their targets are
+            for converted in markdown.documents(source, tree, store, repo):  # links are not documents; their targets are
                 sha256 = store.put_bytes(converted.markdown)
                 if sha256 in seen or sha256 in mine:
                     repeated += 1
@@ -153,7 +153,7 @@ def streamed_documents(repo: Repo):
             continue
         with tempfile.TemporaryDirectory(prefix="wpt-stream-") as tmp:
             scratch, tree, _ = _fetched(source, Path(tmp) / "store")
-            for converted in markdown.documents(source, tree, scratch):
+            for converted in markdown.documents(source, tree, scratch, repo):
                 sha256 = hashlib.sha256(converted.markdown).hexdigest()
                 if sha256 in seen:
                     continue
@@ -162,7 +162,7 @@ def streamed_documents(repo: Repo):
                 yield document, converted.markdown
 
 
-def source_tokens(source, store, tokenizer, vocabulary: str) -> dict:
+def source_tokens(repo, source, store, tokenizer, vocabulary: str) -> dict:
     """A source as tokens, its files not kept: {"tree": its final manifest
     object, "tokens": one object holding every document's tokens (each
     ending with END) one after the other, "documents": [{path, file, sha256
@@ -182,7 +182,7 @@ def source_tokens(source, store, tokenizer, vocabulary: str) -> dict:
         scratch, tree, tree_object = _fetched(source, tmp / "store")
         documents, offset = [], 0
         with open(tmp / "tokens.u32", "wb") as out:
-            for converted in markdown.documents(source, tree, scratch):
+            for converted in markdown.documents(source, tree, scratch, repo):
                 data = np.asarray(tokenizer.encode(converted.markdown) + [Tokenizer.END], dtype="<u4").tobytes()
                 out.write(data)
                 entry = {"path": converted.path, "file": converted.file,
@@ -209,7 +209,7 @@ def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print, sk
         if not source.admitted:
             continue
         try:
-            summary = source_tokens(source, store, tokenizer, vocabulary)
+            summary = source_tokens(repo, source, store, tokenizer, vocabulary)
             check_license_map(source, manifest.parse_manifest(store.get_bytes(summary["tree"])))
         except (DatasetError, CorruptObject, MissingObject) as error:
             _skip(source, error, skipped, log)

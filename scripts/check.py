@@ -14,6 +14,7 @@ In order, each one run even when an earlier one failed:
     rust      the tokenizer's Rust tests
     data      wpt-dataset check: the data rules
     sources   wpt-dataset check --changed BASE: changed sources fetched and checked
+              (every source with tasks too when data/images/ changed)
     commits   wpt-dataset check-commits RANGE: sign-offs and decision signatures
 
 BASE defaults to where this branch left its upstream branch (for example

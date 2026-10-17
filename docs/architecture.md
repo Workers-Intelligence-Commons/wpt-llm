@@ -196,6 +196,7 @@ tree, as its `formats` entry says
 | `xhtml` | web pages written as strict XML, such as EPUB books, read by lxml (a malformed file stops the build): headings, paragraphs, lists, quotations, emphasis, tables; a dialogue row becomes `**Speaker:** words`; a note reference becomes a Markdown note (`[^12]`) with the note's text at the end of the document that refers to it, or is dropped when the note is not in the source |
 | `records` | a dataset file holding many documents (JSON Lines, optionally `.gz` or `.zst`, or Parquet): each record whose license value an entry lists, and that the `keep` rules keep, is one document, `<file>#<record id>`; its text field is read as `text` above, or kept as it is with `"as": "markdown"` |
 | `chat` | conversations for post-training, one JSON object per line ([chat-format.md](chat-format.md)); each line is checked, and the file gives no pre-training document: only the post-training step named by its tags reads it |
+| `task` | the files of task folders for agentic post-training (`task.json`, `files/`, `check`; [post-training.md](post-training.md)); each folder is checked, and its files give no pre-training document: only a post-training step that asks for a tag of its `task.json` reads it: each step asks for its own name |
 
 A file whose Markdown is empty is no document: an EPUB file that holds only
 notes gives none, since its notes moved into the texts that refer to them.
@@ -253,6 +254,7 @@ settings. Objects are named by their sha256 and checked on every read.
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
 | `wpt-inference` | token-by-token sampling |
 | `wpt-device` | picks the best GPU, else the CPU |
+| `wpt-agent` | the agent harness of agentic post-training: the four tools, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check; commands `wpt-agent lock-image` and `wpt-agent build-image` |
 | `wpt-train`, `wpt-eval`, `wpt-posttrain`, `wpt-chat` | the applications |
 
 ## Checks
@@ -272,7 +274,9 @@ branch, as a push would:
   weights add up to 1 and pool expressions parse, recipes name existing
   recipes.
 - `wpt-dataset check --changed <base>`: changed sources are fetched; their
-  checksum, cuts, patches, license map and text are checked.
+  checksum, cuts, patches, license map and text are checked. When anything
+  under `data/images/` changed, every source with files in the `task`
+  format is checked too, so a task naming a missing image is caught.
 - `wpt-dataset check-commits <range>`: DCO sign-off on every commit, and a
   signature from an allowed key on every commit that changes a decision.
 

@@ -1,0 +1,14 @@
+[project]
+name = "wpt-agent"
+version = "0.1.0"
+description = "A small agent harness: four tools, one Docker container per attempt, and tasks scored by their check"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.14"
+dependencies = ["wpt-tokenizer", "wpt-dataset"]
+
+[project.scripts]
+wpt-agent = "wpt_agent.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"
