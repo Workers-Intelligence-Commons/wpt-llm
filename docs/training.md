@@ -25,6 +25,21 @@ capitals, `--micro-batch` -> `WPT_MICRO_BATCH`; the recipe and the dataset
 id from `WPT_RECIPE` and `WPT_DATASET`). `uv run wpt-train --help` lists
 them.
 
+The main process records the run in the store: what it read, every step's
+loss, duration and learning rates, every evaluation and checkpoint, and
+every file it wrote ([observability.md](observability.md)). A record the
+store refuses stops the run with exit code 3, which is never restarted.
+When the training process's record breaks (a record call refused, or on
+S3 a group of its lines refused in the background), it finishes its step
+unrecorded and every process stops after it, as for Ctrl+C: the
+checkpoint is saved, and `--resume` continues from it without losing a
+step. The broken record does not name that checkpoint (nor, with `--run`,
+its store ref). When the launcher's record breaks while the processes
+train (on S3, a group of its lines refused in the background), it stops
+them as Ctrl+C does: they finish their step and save the checkpoint, and
+the launcher exits with code 3. The loss printed at each evaluation is the step's loss over the
+whole batch, every micro-batch of every process.
+
 Validation uses the dataset's held-out shards. The tokens are read from
 disk as training needs them, so a dataset larger than memory trains: before
 the first step, the shards are checked against their token hashes and
@@ -179,8 +194,15 @@ Where it lives:
   run with the same command, `--run NAME --resume` and any `--out`: a run
   can move from one machine to another between sessions. Each save
   replaces the previous checkpoint of that name, which is then deleted;
-  a crash while saving leaves the previous one. With an S3 store, every
-  save is an upload of about four times the model's size.
+  a crash while saving leaves the previous one. The ref's change, every
+  deletion, and the last checkpoint's once the model is saved, are
+  recorded with the object's sha256, and that line is in the store before
+  the step: a deletion whose record breaks leaves the object in the
+  store. A save once the record broke still sets the ref, unrecorded, and
+  leaves the previous object beside the new one. The last checkpoint's
+  deletion is recorded first too, so a record that breaks there ends a
+  run whose model is saved with exit code 3. With an S3 store, every save
+  is an upload of about four times the model's size.
 
 #### Stopping a run
 
@@ -198,11 +220,11 @@ all start again, up to `--max-restarts` times (default 3, `WPT_MAX_RESTARTS`);
 a restarted process continues from the checkpoint without `--resume`. A
 one-process run is started this way too, by a small parent process, unless
 `--max-restarts 0`, which runs the training in the command's own process
-and never restarts. Two exits are never restarted: a refusal (exit code 2:
-a missing or damaged dataset, a checkpoint written with other settings,
-options that do not fit), which would refuse again, and a stop asked for
-(exit code 130). A bug that crashes every time stops after the last
-restart.
+and never restarts. Three exits are never restarted: a refusal (exit code
+2: a missing or damaged dataset, a checkpoint written with other settings,
+options that do not fit), which would refuse again, a record that could
+not be written (exit code 3), and a stop asked for (exit code 130). A bug
+that crashes every time stops after the last restart.
 
 With torchrun, its own `--max-restarts` restarts the processes, and they
 continue from the checkpoint the same way. On several machines, use
@@ -231,7 +253,30 @@ The model folder holds:
   generated text, every source with the credit it asks for, and the output
   notice; `README.md`, the model card, with the licenses at the top;
 - `evals/`, results written by `wpt-eval` (see [evaluation.md](evaluation.md)),
-  shown in the model card. Training into the folder again removes them.
+  shown in the model card.
+
+The main process writes the folder beside its target, as a hidden folder
+named `.<folder name>-<random>`, records the sha256 of every file in it,
+then renames it into place. A run that stops before (a crash, a refused
+record) leaves the target as it was. Training into a folder that already
+exists still works, but replaces it as a whole: everything in it goes, not
+only the earlier weights and the `evals/` results, which describe other
+weights, but also its `checkpoint/` and any file put there by hand. Keep
+such files elsewhere. The checkpoint's removal is recorded before it is
+removed, and the record is in the store before the folder is renamed. The
+earlier folder is first moved aside, then removed once the new one is in
+place. When the new one cannot take its place, or the run is interrupted
+meanwhile, the earlier folder is moved back; when that fails too, the run
+stops with `RestoreFailed`, which names the earlier folder
+(`.<folder name>-replaced-<random>`) and the new one, both kept: move one
+of them into place by hand. Whenever the rename was tried and the target
+is missing afterward, whatever error stopped the run (a first rename
+refused, or a record that broke meanwhile), the new model is kept and
+named on the error output, with the earlier folder when there is one.
+When the earlier folder cannot be removed, or
+its removal is interrupted, it stays beside the new one, as
+`.<folder name>-replaced-<random>`, named in a warning and in the record:
+remove it by hand. The run still succeeds, unless it was interrupted.
 
 `NOTICE` and `README.md` are generated from the folder's own records, so they
 cannot disagree with it.

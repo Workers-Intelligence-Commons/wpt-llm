@@ -241,18 +241,24 @@ For S3, credentials and a non-AWS endpoint come from the usual
 `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_ENDPOINT_URL`
 settings. Objects are named by their sha256 and checked on every read.
 
+The store also holds the record of every run of `wpt-dataset build`,
+`wpt-train`, `wpt-posttrain` and `wpt-eval`: one folder per run under
+`records/`, written by name rather than by content
+([observability.md](observability.md)).
+
 ## Packages
 
 | Package | Role |
 | --- | --- |
 | `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; command `wpt-dataset` |
-| `wpt-store` | the content-addressed store (local or S3) and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
+| `wpt-store` | the content-addressed store (local or S3), its record folders, and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
+| `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
 | `wpt-web` | a local web interface: one small server on 127.0.0.1, one file per page (Python routes, React page); its interface is built with Bun when it starts; command `wpt-web` |
 | `wpt-model` | the WPT network ([model.md](model.md)), its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
 | `wpt-inference` | token-by-token sampling |
-| `wpt-device` | picks the best GPU, else the CPU |
+| `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing) and reads the repository commit (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike |
 | `wpt-train`, `wpt-eval`, `wpt-posttrain`, `wpt-chat` | the applications |
 
 ## Checks

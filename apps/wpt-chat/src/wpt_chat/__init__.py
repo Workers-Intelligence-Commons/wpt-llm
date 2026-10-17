@@ -19,11 +19,11 @@ import io
 import sys
 from pathlib import Path
 
-from wpt_device import describe, select_device
 from wpt_inference import sample_tokens
 from wpt_model import TokenizerMismatch, load_model, load_tokenizer
 from wpt_model.notice import LICENSE, NOTICE_NAME, OUTPUT_LICENSE, REPOSITORY
 from wpt_tokenizer import Tokenizer, chat
+from wpt_utils.device import describe, select_device
 
 MAX_NEW_TOKENS = 200
 

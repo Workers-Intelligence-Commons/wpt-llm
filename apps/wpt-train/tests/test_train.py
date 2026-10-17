@@ -1,7 +1,12 @@
+import contextlib
+import hashlib
 import json
+import math
 import os
+import shutil
 import subprocess
 import sys
+import threading
 from pathlib import Path
 
 import pytest
@@ -10,6 +15,9 @@ from safetensors import safe_open
 from safetensors.torch import load_file
 
 from wpt_model import load_model, load_tokenizer, tokenizer_identity
+import wpt_telemetry
+from wpt_store import LocalStore
+from wpt_telemetry import FLUSH_THREAD
 from wpt_tokenizer import Tokenizer
 from wpt_train import main
 
@@ -36,6 +44,245 @@ def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatc
     assert provenance["recipe_name"] == "three" and provenance["recipe"]["training"]["steps"] == 3
     assert provenance["steps_trained"] == 3
     assert [s["token_sha256"] for s in provenance["shards"]] == [s["token_sha256"] for s in record["shards"]]
+
+
+def test_a_training_run_records_what_it_read_every_step_and_what_it_wrote(built, tmp_path, capsys):
+    # afterwards one must know exactly what happened, from the store alone:
+    # the dataset read, each step's loss, the evaluations, the files written
+    main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+    printed = capsys.readouterr().out
+
+    [run] = built.records("wpt-train")
+    assert run.end["status"] == "succeeded" and run.end["exit_code"] == 0
+    assert run.ids["inputs"]["recipe"] == "three" and run.ids["inputs"]["dataset"] == built.dataset_id
+    assert f"-wpt-train-{built.dataset_id[:8]}-" in run.folder  # its folder is found by the dataset it trained on
+    steps = [e for e in run.events if e.get("name") == "training.step"]
+    assert [e["attributes"]["step"] for e in steps] == [1, 2, 3]
+    assert all(math.isfinite(e["values"]["train_loss"]) for e in steps)
+    evaluations = [e["attributes"]["step"] for e in run.events if e.get("name") == "training.evaluation"]
+    assert evaluations == [1, 2, 3]  # eval_every 2, and the first and last steps
+    folder = tmp_path / "model"
+    weights = hashlib.sha256((folder / "model.safetensors").read_bytes()).hexdigest()
+    assert run.ids["outputs"]["weights"] == {"model.safetensors": weights}
+    [files] = [e["attributes"]["files"] for e in run.events if e.get("name") == "model.files"]
+    assert files["NOTICE"] == hashlib.sha256((folder / "NOTICE").read_bytes()).hexdigest()
+    assert {"LICENSE", "README.md", "provenance.json", "tokenizer.json", "config.json"} <= set(files)
+    logged = "".join(e["text"] + "\n" for e in run.events if e["kind"] == "log")
+    assert logged == printed  # every line it printed, nothing else
+
+
+def test_a_record_the_store_refuses_stops_the_run_once_its_checkpoint_is_saved(built, tmp_path, monkeypatch, capsys):
+    # without its record a run must do nothing more than keep its work: it
+    # finishes the step and saves its checkpoint, takes no further step,
+    # writes no model, and says why
+    real = LocalStore._raw_append_record
+
+    def disk_full_at_step_3(self, folder, name, data):
+        if b'"name": "training.step"' in data and b'"step": 3,' in data:
+            raise OSError(28, "No space left on device")
+        real(self, folder, name, data)
+
+    monkeypatch.setattr(LocalStore, "_raw_append_record", disk_full_at_step_3)
+    with pytest.raises(SystemExit) as stopped:
+        main([built.recipe("five", training={"steps": 5}), built.dataset_id, "--out", "model"])
+
+    assert stopped.value.code == 3 and "No space left on device" in capsys.readouterr().err
+    [run] = built.records("wpt-train")
+    assert [e["attributes"]["step"] for e in run.events if e.get("name") == "training.step"] == [1, 2]
+    assert run.end is None and [path.name for path in (tmp_path / "model").iterdir()] == ["checkpoint"]
+    assert torch.load(tmp_path / "model" / "checkpoint" / "checkpoint.pt", weights_only=True)["step"] == 3
+
+
+def test_a_send_refused_in_the_background_keeps_the_step_in_the_store_checkpoint(built, tmp_path, monkeypatch, capsys):
+    # a record that breaks while the process trains (here a send refused in
+    # the background, which arrives as a stop signal) must not cost the steps
+    # done: the step ends, the store's checkpoint holds it, unrecorded, and
+    # --resume gives the model of an unbroken run. The checkpoint it replaced
+    # is not deleted, since its deletion could not be recorded first
+    real = LocalStore._raw_flush_records
+
+    def refused_in_the_background(self):
+        if threading.current_thread().name == FLUSH_THREAD and os.environ.get("REFUSE") == "now":
+            raise OSError(28, "No space left on device")
+        real(self)
+
+    monkeypatch.setattr(wpt_telemetry, "FLUSH_SECONDS", 0.02)
+    monkeypatch.setattr(LocalStore, "_raw_flush_records", refused_in_the_background)
+    options = [*interrupting(built, tmp_path, "if os.environ.get('REFUSE'): os.environ['REFUSE'] = 'now'; "
+                                              "__import__('time').sleep(2)"), "--checkpoint-every", "1"]
+    main([*options, "--out", "whole"])
+
+    monkeypatch.setenv("REFUSE", "1")
+    with pytest.raises(SystemExit) as stopped:
+        main([*options, "--out", "here", "--run", "fox-1"])
+    monkeypatch.delenv("REFUSE")
+    assert stopped.value.code == 3 and "No space left on device" in capsys.readouterr().err
+    saved = built.store.get_ref("checkpoints", "fox-1")
+    assert torch.load(built.store.path(saved), weights_only=True)["step"] == 3
+    run = built.records("wpt-train")[-1]
+    named = [e["attributes"]["object"] for e in run.events
+             if e.get("name") == "store.ref_set" and e["attributes"]["ref"] == "checkpoints/fox-1"]
+    assert len(named) == 2 and saved not in named and built.store.has(named[-1])  # steps 1 and 2; 2's object stays
+
+    main([*options, "--out", "there", "--run", "fox-1", "--resume"])
+    whole, there = weights(tmp_path / "whole"), weights(tmp_path / "there")
+    assert all(torch.equal(whole[k], there[k]) for k in whole)
+    assert built.store.get_ref("checkpoints", "fox-1") is None and built.store.has(named[-1])
+
+
+def test_training_into_a_model_folder_replaces_it_whole_and_only_once_recorded(built, tmp_path, monkeypatch):
+    # the folder appears only after the record names its files, so a record
+    # that fails leaves the earlier folder as it was; a run that succeeds
+    # replaces it as a whole, results of other weights and stray files included
+    recipe = built.recipe("two", training={"steps": 2})
+    main([recipe, built.dataset_id, "--out", "model"])
+    folder = tmp_path / "model"
+    (folder / "evals").mkdir()
+    (folder / "evals" / "memorization.json").write_text("{}\n")
+    (folder / "notes.txt").write_text("mine\n")
+    before = {path.name: path.read_bytes() for path in folder.iterdir() if path.is_file()}
+
+    real = LocalStore._raw_append_record
+
+    def disk_full_at_the_files(self, record, name, data):
+        if b'"name": "model.files"' in data:
+            raise OSError(28, "No space left on device")
+        real(self, record, name, data)
+
+    with monkeypatch.context() as patch:
+        patch.setattr(LocalStore, "_raw_append_record", disk_full_at_the_files)
+        with pytest.raises(SystemExit) as stopped:
+            main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+    assert stopped.value.code == 3
+    assert {path.name: path.read_bytes() for path in folder.iterdir() if path.is_file()} == before
+    assert (folder / "evals" / "memorization.json").exists()
+
+    main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+    assert not (folder / "evals").exists() and not (folder / "notes.txt").exists()
+    assert json.loads((folder / "provenance.json").read_text())["recipe_name"] == "three"
+    run = built.records("wpt-train")[-1]
+    assert run.ids["outputs"]["weights"] == {
+        "model.safetensors": hashlib.sha256((folder / "model.safetensors").read_bytes()).hexdigest()}
+    assert [path.name for path in tmp_path.iterdir() if path.name.startswith(".model")] == []  # nothing left beside it
+
+
+def test_on_s3_the_model_folder_is_replaced_only_once_its_record_is_in_the_bucket(built, s3, tmp_path):
+    # S3 holds record lines back: the lines naming the new files must be in
+    # the bucket before the earlier folder goes, so a refused send leaves it
+    # as it was
+    s3.copy(built.store)
+    folder = tmp_path / "model"
+    folder.mkdir()
+    (folder / "notes.txt").write_text("mine\n")
+    s3.refuse(b'"training.checkpoint_removed"')
+    with pytest.raises(SystemExit) as stopped:
+        main(["d", built.dataset_id, "--out", "model"])
+    assert stopped.value.code == 3
+    assert [path.name for path in folder.iterdir()] == ["notes.txt"]
+    assert [path.name for path in tmp_path.iterdir() if path.name.startswith(".model")] == []
+
+
+def test_every_checkpoint_deleted_from_the_store_is_named_in_the_record_first(built, tmp_path, monkeypatch):
+    # an object leaves the store only once the record says which one went:
+    # each replaced checkpoint, and the last one once the model is saved
+    real, deleted = LocalStore.delete, []
+
+    def delete(self, sha):
+        [run] = built.records("wpt-train")
+        named = [e["attributes"]["object"] for e in run.events if e.get("name") == "training.checkpoint_deleted"]
+        deleted.append((sha, sha in named))
+        real(self, sha)
+
+    monkeypatch.setattr(LocalStore, "delete", delete)
+    main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model", "--checkpoint-every", "1",
+          "--run", "fox-1"])
+    assert len({sha for sha, _ in deleted}) == 3 and all(named for _, named in deleted)
+    assert built.store.get_ref("checkpoints", "fox-1") is None
+
+
+def test_on_s3_a_checkpoint_is_deleted_only_once_its_deletion_is_in_the_bucket(built, s3, tmp_path, monkeypatch):
+    # S3 holds record lines back: a deletion the bucket did not record must
+    # not happen, so the previous checkpoint stays
+    from wpt_store import S3Store
+
+    s3.copy(built.store)
+    deleted = []
+    monkeypatch.setattr(S3Store, "delete", lambda self, sha: deleted.append(sha))
+    s3.refuse(b'"training.checkpoint_deleted"')
+    with pytest.raises(SystemExit) as stopped:
+        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model",
+              "--checkpoint-every", "1", "--run", "fox-1"])
+    assert stopped.value.code == 3 and deleted == []
+    assert s3.store.get_ref("checkpoints", "fox-1") is not None
+
+
+@pytest.mark.parametrize("error", [PermissionError(13, "Permission denied"), KeyboardInterrupt()],
+                         ids=["refused", "interrupted"])
+def test_an_earlier_folder_that_cannot_be_removed_is_left_beside_with_a_warning(built, tmp_path, monkeypatch, capsys,
+                                                                                error):
+    # the new model is in place and complete: an earlier folder that the
+    # system will not remove must not fail the run, but must be named; a
+    # Ctrl+C during its removal names it the same way, and still stops
+    main(["d", built.dataset_id, "--out", "model"])
+    real = shutil.rmtree
+
+    def refuse_the_replaced_one(path, *args, **options):
+        if "-replaced-" in Path(path).name:
+            raise error
+        return real(path, *args, **options)
+
+    monkeypatch.setattr(shutil, "rmtree", refuse_the_replaced_one)
+    with pytest.raises(KeyboardInterrupt) if isinstance(error, KeyboardInterrupt) else contextlib.nullcontext():
+        main(["d", built.dataset_id, "--out", "model"])
+
+    [left] = [path for path in tmp_path.iterdir() if path.name.startswith(".model-replaced-")]
+    assert (left / "model.safetensors").exists() and (tmp_path / "model" / "model.safetensors").exists()
+    run = built.records("wpt-train")[-1]
+    assert run.end["exit_code"] == (130 if isinstance(error, KeyboardInterrupt) else 0)
+    assert [e["attributes"]["folder"] for e in run.events if e.get("name") == "model.replaced_folder_left"] == [
+        left.name]  # as --out named the folder: relative to the working folder
+    assert left.name in capsys.readouterr().err
+
+
+def test_an_earlier_folder_is_put_back_when_the_new_one_cannot_take_its_place(built, tmp_path, monkeypatch):
+    # moving the earlier folder aside and the new one in are one step: when
+    # the second fails, the target must be the earlier folder again
+    main(["d", built.dataset_id, "--out", "model"])
+    before = {path.name: path.read_bytes() for path in (tmp_path / "model").iterdir() if path.is_file()}
+    real = os.replace
+
+    def refuse_the_new_one(source, target):
+        if Path(target).name == "model" and not Path(source).name.startswith(".model-replaced-"):
+            raise PermissionError(13, "Permission denied", str(source))
+        real(source, target)
+
+    monkeypatch.setattr(os, "replace", refuse_the_new_one)
+    with pytest.raises(PermissionError):
+        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+    assert {path.name: path.read_bytes() for path in (tmp_path / "model").iterdir() if path.is_file()} == before
+    assert [path.name for path in tmp_path.iterdir() if path.name.startswith(".model")] == []
+
+
+def test_an_earlier_folder_that_cannot_be_put_back_is_named_with_the_new_one(built, tmp_path, monkeypatch):
+    # when the earlier folder cannot be moved back either, the target is
+    # missing: neither model may be deleted, and the error names both
+    from wpt_train import RestoreFailed
+
+    main(["d", built.dataset_id, "--out", "model"])
+    earlier = (tmp_path / "model" / "model.safetensors").read_bytes()
+    real = os.replace
+
+    def refuse_every_move_into_the_target(source, target):
+        if Path(target).name == "model":
+            raise PermissionError(13, "Permission denied", str(source))
+        real(source, target)
+
+    monkeypatch.setattr(os, "replace", refuse_every_move_into_the_target)
+    with pytest.raises(RestoreFailed) as failed:
+        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+    assert not (tmp_path / "model").exists() and str(failed.value.aside) in str(failed.value)
+    assert (failed.value.aside / "model.safetensors").read_bytes() == earlier
+    assert json.loads((failed.value.new / "provenance.json").read_text())["recipe_name"] == "three"
 
 
 def test_a_trained_model_folder_names_its_licenses_and_sources(built, tmp_path):
@@ -237,3 +484,62 @@ def test_a_crashed_run_starts_again_on_its_own(built, tmp_path):
     assert "resumed from step 2" in run.stdout
     whole, restarted = weights(tmp_path / "whole"), weights(tmp_path / "restarted")
     assert all(torch.equal(whole[k], restarted[k]) for k in whole)
+    # one command, one record: both attempts and the restart between them
+    record = built.records("wpt-train")[-1]
+    assert record.start["arguments"][-2:] == ["--out", "restarted"] and record.end["status"] == "succeeded"
+    assert [e["attributes"]["step"] for e in record.events if e.get("name") == "training.step"] == [1, 2, 3, 4, 5]
+    assert any("starting every process again" in e.get("text", "") for e in record.events)
+    assert record.ids["outputs"]["weights"] == {
+        "model.safetensors": hashlib.sha256((tmp_path / "restarted" / "model.safetensors").read_bytes()).hexdigest()}
+
+
+def test_a_new_model_that_cannot_take_an_empty_place_is_kept_and_named(built, tmp_path, monkeypatch, capsys):
+    # with no earlier folder, a refused rename must not delete the only copy of the new model
+    real = os.replace
+
+    def refuse_the_target(source, target):
+        if Path(target).name == "model":
+            raise PermissionError(13, "Permission denied", str(source))
+        real(source, target)
+
+    monkeypatch.setattr(os, "replace", refuse_the_target)
+    with pytest.raises(PermissionError):
+        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+    [kept] = [path for path in tmp_path.iterdir() if path.name.startswith(".model-")]
+    assert not (tmp_path / "model").exists()
+    assert json.loads((kept / "provenance.json").read_text())["recipe_name"] == "three"
+    assert str(kept) in capsys.readouterr().err
+
+
+def test_a_restore_failure_inside_a_broken_record_still_keeps_both_models(built, tmp_path, monkeypatch, capsys):
+    # a broken record turns RestoreFailed into RecordError on its way out of
+    # the span: the folders, not the error's type, decide what is kept
+    import wpt_train
+    from wpt_telemetry import RecordError
+
+    main(["d", built.dataset_id, "--out", "model"])
+    earlier = (tmp_path / "model" / "model.safetensors").read_bytes()
+    real_replace, real_folder = os.replace, wpt_train._replace_folder
+
+    def refuse_every_move_into_the_target(source, target):
+        if Path(target).name == "model":
+            raise PermissionError(13, "Permission denied", str(source))
+        real_replace(source, target)
+
+    def replace_while_the_record_breaks(new, target, telemetry):
+        try:
+            real_folder(new, target, telemetry)
+        except wpt_train.RestoreFailed as failed:
+            raise RecordError("the record broke too") from failed
+
+    monkeypatch.setattr(os, "replace", refuse_every_move_into_the_target)
+    monkeypatch.setattr(wpt_train, "_replace_folder", replace_while_the_record_breaks)
+    with pytest.raises(SystemExit) as stopped:
+        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+    assert stopped.value.code == 3 and not (tmp_path / "model").exists()
+    [aside] = [path for path in tmp_path.iterdir() if path.name.startswith(".model-replaced-")]
+    [new] = [path for path in tmp_path.iterdir() if path.name.startswith(".model-") and path != aside]
+    assert (aside / "model.safetensors").read_bytes() == earlier
+    assert json.loads((new / "provenance.json").read_text())["recipe_name"] == "three"
+    err = capsys.readouterr().err
+    assert str(new) in err and str(aside) in err

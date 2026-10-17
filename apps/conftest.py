@@ -36,7 +36,8 @@ def built(tmp_path, monkeypatch):
     """A dataset of one git project of 16 documents, about half of them held
     out; its 3000 training tokens draw only some of the training documents.
     The working folder tmp_path is the repository, and the store is
-    WPT_STORE. Gives store, dataset_id (built from the model recipe "d", a
+    WPT_STORE. Gives store, records(command) (the record folders of that
+    command's runs, oldest first), dataset_id (built from the model recipe "d", a
     tiny model trained one step), source_id, attribution, and
     recipe(name, model=..., training=..., posttrain=...), which writes a
     model recipe of the same data part, with those changes to "d", and
@@ -74,11 +75,24 @@ def built(tmp_path, monkeypatch):
     write("mixture", "m", {"pools": [{"name": "en", "select": "en", "weight": 1}]})
     write("tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
     dataset_id = build_dataset(repo, recipe(), store, log=lambda _: None)
-    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())  # where each command run also writes its record
+    monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)  # no live backend, whatever this machine sets
     monkeypatch.setenv("WPT_MAX_RESTARTS", "0")  # wpt-train runs in the test's own process, unless a test says
     monkeypatch.chdir(tmp_path)
+    def records(command):
+        found = []
+        for folder in store.record_folders():
+            start = json.loads(store.read_record(folder, "start.json"))
+            if start["command"] == command:
+                found.append(SimpleNamespace(
+                    folder=folder, start=start, ids=json.loads(store.read_record(folder, "ids.json")),
+                    events=[json.loads(line) for line in store.read_record(folder, "events.jsonl").splitlines()],
+                    end=json.loads(store.read_record(folder, "end.json")) if "end.json" in store.record_files(folder)
+                    else None))
+        return sorted(found, key=lambda run: run.start["started"])
+
     return SimpleNamespace(store=store, dataset_id=dataset_id, source_id=source_id, attribution=ATTRIBUTION,
-                           license_text=LICENSE_TEXT, recipe=recipe)
+                           license_text=LICENSE_TEXT, recipe=recipe, records=records)
 
 
 @pytest.fixture
@@ -86,3 +100,44 @@ def trained(built, tmp_path):
     """The built dataset plus tmp_path/model, trained by the recipe "d"."""
     train(["d", built.dataset_id, "--out", "model"])
     return SimpleNamespace(**vars(built), folder=tmp_path / "model")
+
+
+@pytest.fixture
+def s3(tmp_path, monkeypatch):
+    """An S3 store that WPT_STORE now names (moto answers its requests inside
+    the test process). Gives store, copy(local), which puts a local store's
+    objects and refs into it (the built dataset, for a command that reads
+    it), and refuse(marker), after which the bucket refuses every group of
+    record lines that holds marker."""
+    import boto3
+    from moto import mock_aws
+
+    from wpt_store import S3Store
+
+    for name, value in {"AWS_ACCESS_KEY_ID": "test", "AWS_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
+                        "XDG_CACHE_HOME": str(tmp_path / "cache"), "LOCALAPPDATA": str(tmp_path / "cache")}.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)
+    monkeypatch.delenv("AWS_PROFILE", raising=False)
+    with mock_aws():
+        boto3.client("s3").create_bucket(Bucket="wpt-test")
+        store = open_store("s3://wpt-test/store")
+        monkeypatch.setenv("WPT_STORE", "s3://wpt-test/store")
+
+        def copy(local):
+            for path in sorted((local.root / "objects").glob("*/*")):
+                store.put_file(path)
+            for path in sorted((local.root / "refs").glob("*/*")):
+                store.set_ref(path.parent.name, path.name, path.read_text().strip())
+
+        def refuse(marker):
+            real = S3Store._raw_flush_records
+
+            def refusing(self):
+                if any(marker in data for additions in self._pending.values() for *_, data in additions):
+                    raise OSError("the bucket refused the request")
+                real(self)
+
+            monkeypatch.setattr(S3Store, "_raw_flush_records", refusing)
+
+        yield SimpleNamespace(store=store, copy=copy, refuse=refuse)

@@ -4,7 +4,7 @@ import boto3
 import pytest
 from moto import mock_aws
 
-from wpt_store import CorruptObject, MissingObject, open_store
+from wpt_store import CorruptObject, MissingObject, MixedRecord, open_store
 
 
 def exercise(store):
@@ -29,9 +29,59 @@ def exercise(store):
     return sha
 
 
+def exercise_records(store, reopen):
+    # a command's record: files written whole, and a file added to line by
+    # line, by one process and then by another (a restarted training process)
+    assert store.record_folders() == [] and store.record_files("run-1") == []
+    store.write_record("run-1", "start.json", b"{}\n")
+    store.write_record("run-1", "start.json", b'{"command": "x"}\n')  # replaced whole
+    for line in (b"one\n", b"two\n"):
+        store.append_record("run-1", "events.jsonl", line)
+    store.flush_records()
+    later = reopen()
+    later.append_record("run-1", "events.jsonl", b"three\n")
+    later.flush_records()
+    assert store.read_record("run-1", "start.json") == b'{"command": "x"}\n'
+    assert store.read_record("run-1", "events.jsonl") == b"one\ntwo\nthree\n"
+    assert store.record_files("run-1") == ["events.jsonl", "start.json"]
+    store.append_record("run-2", "events.jsonl", b"other\n")
+    store.flush_records()
+    assert store.record_folders() == ["run-1", "run-2"]
+    with pytest.raises(MissingObject):
+        store.read_record("run-1", "end.json")
+
+    # a file is written whole or added to, never both, whichever process made it
+    for writer in (store, reopen()):
+        with pytest.raises(MixedRecord):
+            writer.write_record("run-1", "events.jsonl", b"replaced\n")
+        with pytest.raises(MixedRecord):
+            writer.append_record("run-1", "start.json", b"added\n")
+    assert store.read_record("run-1", "events.jsonl") == b"one\ntwo\nthree\n"
+    assert store.read_record("run-1", "start.json") == b'{"command": "x"}\n'
+
+    # wpt-train's launcher and its training process add to one file in turn;
+    # reading gives their lines in the order they were added, even when each
+    # process sends its lines later (an S3 store sends them in groups)
+    launcher, child = reopen(), reopen()
+    for writer, line in ((launcher, b"launcher 1\n"), (child, b"child 1\n"), (launcher, b"launcher 2\n"),
+                         (child, b"child 2\n"), (launcher, b"launcher 3\n")):
+        writer.append_record("run-3", "events.jsonl", line)
+    child.flush_records()
+    launcher.flush_records()
+    assert store.read_record("run-3", "events.jsonl") == b"launcher 1\nchild 1\nlauncher 2\nchild 2\nlauncher 3\n"
+
+
 def test_local_store_round_trip_and_refuses_damaged_objects(tmp_path):
     store = open_store((tmp_path / "store").as_uri())
     sha = exercise(store)
+    exercise_records(store, lambda: open_store((tmp_path / "store").as_uri()))
+
+    # a power cut while a line was written leaves it cut; the next process to
+    # add to the file ends it first, so its own lines stay whole and readable
+    with open(tmp_path / "store" / "records" / "run-1" / "events.jsonl", "ab") as cut:
+        cut.write(b'{"kind": "ev')
+    open_store((tmp_path / "store").as_uri()).append_record("run-1", "events.jsonl", b"four\n")
+    assert store.read_record("run-1", "events.jsonl").splitlines()[-2:] == [b'{"kind": "ev', b"four"]
 
     (tmp_path / "store" / "objects" / sha[:2] / sha).write_bytes(b"tampered\n")
     with pytest.raises(CorruptObject):
@@ -50,9 +100,27 @@ def test_s3_store_round_trip(tmp_path, monkeypatch):
         boto3.client("s3").create_bucket(Bucket="wpt-test")
         store = open_store("s3://wpt-test/some/prefix")
         sha = exercise(store)
+        exercise_records(store, lambda: open_store("s3://wpt-test/some/prefix"))
 
         shutil.rmtree(tmp_path / "cache")  # a fresh machine: the object comes from the bucket again
         assert store.get_bytes(sha) == b"some text\n"
+
+        # a flush interrupted once S3 had stored its group (Ctrl+C, or the
+        # record's own interruption) sends it again later: each line once
+        real = store.client.put_object
+
+        def stored_then_interrupted(**request):
+            real(**request)
+            monkeypatch.setattr(store.client, "put_object", real)
+            raise KeyboardInterrupt
+
+        store.append_record("run-4", "events.jsonl", b"one\n")
+        monkeypatch.setattr(store.client, "put_object", stored_then_interrupted)
+        with pytest.raises(KeyboardInterrupt):
+            store.flush_records()
+        store.append_record("run-4", "events.jsonl", b"two\n")
+        store.flush_records()
+        assert open_store("s3://wpt-test/some/prefix").read_record("run-4", "events.jsonl") == b"one\ntwo\n"
 
 
 def test_a_token_file_holds_the_shards_tokens_and_is_rebuilt_when_changed(tmp_path):

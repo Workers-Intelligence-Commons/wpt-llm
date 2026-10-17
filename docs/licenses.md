@@ -48,14 +48,15 @@ packages must stay compatible with AGPL-3.0-or-later.
 | attrs | 26.1.0 | MIT | |
 | boto3 | 1.43.113 | Apache-2.0 | |
 | botocore | 1.43.113 | Apache-2.0 | |
-| certifi | 2026.7.22 | MPL-2.0 | tests, through moto (requests) |
+| certifi | 2026.7.22 | MPL-2.0 | through requests |
 | cffi | 2.1.1 | MIT-0 | tests, through moto (cryptography) |
-| charset-normalizer | 3.5.2 | MIT | tests, through moto (requests) |
+| charset-normalizer | 3.5.2 | MIT | through requests |
 | colorama | 0.4.6 | BSD-3-Clause | Windows only, through pytest |
 | cryptography | 50.0.2 | Apache-2.0 OR BSD-3-Clause | tests, through moto; its compiled part includes OpenSSL (Apache-2.0), statically linked |
 | einops | 0.8.2 | MIT | through fla-core |
 | fla-core | 0.5.2 | MIT | KDA's GPU kernel (flash-linear-attention), used where Triton runs |
-| idna | 3.20 | BSD-3-Clause | tests, through moto (requests) |
+| googleapis-common-protos | 1.75.5 | Apache-2.0 | through opentelemetry-exporter-otlp-proto-http |
+| idna | 3.20 | BSD-3-Clause | through requests |
 | iniconfig | 2.3.1 | MIT | through pytest |
 | jmespath | 1.1.0 | MIT | |
 | jsonschema | 4.26.0 | MIT | |
@@ -63,9 +64,18 @@ packages must stay compatible with AGPL-3.0-or-later.
 | lxml | 6.1.3 | BSD-3-Clause | reads XHTML for the Markdown conversion; its compiled part bundles zlib (Zlib), libiconv (LGPL-2.1), libxml2, libxslt and libexslt (MIT) |
 | moto | 5.2.4 | Apache-2.0 | tests: answers the S3 test's requests inside the test process |
 | numpy | 2.5.4 | BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0 | |
+| opentelemetry-api | 1.45.1 | Apache-2.0 | each command run's record and live view (wpt-telemetry) |
+| opentelemetry-exporter-http-transport | 0.66b1 | Apache-2.0 | through opentelemetry-exporter-otlp-proto-http |
+| opentelemetry-exporter-otlp-common | 0.66b1 | Apache-2.0 | through opentelemetry-exporter-otlp-proto-http |
+| opentelemetry-exporter-otlp-proto-common | 1.45.1 | Apache-2.0 | through opentelemetry-exporter-otlp-proto-http |
+| opentelemetry-exporter-otlp-proto-http | 1.45.1 | Apache-2.0 | sends the live view to an OpenTelemetry backend over OTLP/HTTP |
+| opentelemetry-proto | 1.45.1 | Apache-2.0 | through opentelemetry-exporter-otlp-proto-http |
+| opentelemetry-sdk | 1.45.1 | Apache-2.0 | |
+| opentelemetry-semantic-conventions | 0.66b1 | Apache-2.0 | through opentelemetry-sdk |
 | packaging | 26.3 | Apache-2.0 OR BSD-2-Clause | through pytest |
 | pluggy | 1.6.0 | MIT | through pytest |
 | protego | 0.7.0 | BSD-3-Clause | reads robots.txt files |
+| protobuf | 7.36.2 | BSD-3-Clause | through opentelemetry-proto; its metadata says "3-Clause BSD License" |
 | py-partiql-parser | 0.6.3 | MIT | tests, through moto |
 | pyarrow | 26.0.0 | Apache-2.0 | |
 | pycparser | 3.11 | BSD-3-Clause | tests, through moto (cffi) |
@@ -74,12 +84,13 @@ packages must stay compatible with AGPL-3.0-or-later.
 | python-dateutil | 2.9.0.post0 | Apache-2.0 AND BSD-3-Clause | newer code is also under Apache-2.0; all of it is under BSD-3-Clause |
 | pyyaml | 6.0.3 | MIT | tests, through moto |
 | referencing | 0.37.0 | MIT | |
-| requests | 2.34.2 | Apache-2.0 | tests, through moto |
+| requests | 2.34.2 | Apache-2.0 | through opentelemetry-exporter-otlp-proto-http, and moto in tests |
 | responses | 0.26.3 | Apache-2.0 | tests, through moto |
 | rpds-py | 2026.9.1 | MIT | |
 | s3transfer | 0.19.2 | Apache-2.0 | |
 | safetensors | 0.8.0 | Apache-2.0 | |
 | six | 1.17.0 | MIT | |
+| typing-extensions | 4.16.0 | PSF-2.0 | through opentelemetry; PyTorch needs it too |
 | urllib3 | 2.8.0 | MIT | |
 | werkzeug | 3.1.9 | BSD-3-Clause | tests, through moto |
 | xmltodict | 1.0.4 | MIT | tests, through moto |
@@ -119,7 +130,6 @@ the vendor's terms rather than PyTorch's:
 | networkx | 3.7 | BSD-3-Clause | |
 | setuptools | 84.0.0 | MIT | |
 | sympy | 1.14.0 | BSD-3-Clause | |
-| typing-extensions | 4.16.0 | PSF-2.0 | |
 
 ### CUDA build, Linux only
 
@@ -221,6 +231,30 @@ They run unmodified next to WPT and are not linked into it.
 | GnuPG | any | GNU GPL | checks GPG-signed decisions |
 | actions/checkout | v4 | MIT | CI |
 | astral-sh/setup-uv | v6 | MIT | CI |
+
+### The live view's backend (`deploy/otel-lgtm/`, not part of WPT)
+
+`deploy/otel-lgtm/compose.yaml` runs Grafana's `grafana/otel-lgtm` image
+next to WPT, unmodified, as a separate program that only receives data
+([observability.md](observability.md)); WPT neither links nor
+distributes it. Its license, from the image's own labels
+(`org.opencontainers.image.licenses`), and those of what it bundles, at
+the versions its Dockerfile pins for that release (GitHub's reading of
+each project's `LICENSE` file at that tag):
+
+| Part | Version | License |
+| --- | --- | --- |
+| grafana/otel-lgtm (the image's scripts and configuration) | 0.37.0 | Apache-2.0 |
+| Grafana | v13.2.3 | AGPL-3.0 |
+| Loki | v3.7.8 | AGPL-3.0 |
+| Tempo | v3.1.0 | AGPL-3.0 |
+| Pyroscope | v2.4.0 | AGPL-3.0 |
+| Prometheus | v3.15.0 | Apache-2.0 |
+| OpenTelemetry Collector | v0.162.0 | Apache-2.0 |
+| OpenTelemetry eBPF Instrumentation | v0.14.0 | Apache-2.0 |
+| Red Hat UBI 9 micro (the base image) | 9.8 | Red Hat's UBI terms (`com.redhat.license_terms`: https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI) |
+
+A new image version needs this table checked again.
 
 ### Word lists of recipe names (`scripts/names/`)
 

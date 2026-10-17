@@ -54,13 +54,13 @@ where a step needs them, run through Docker Desktop.
 | check the data rules | `uv run wpt-dataset check [--fetch [ID ...]] [--changed REV]` (every source is fetched, failures listed at the end) | `data/` | the store, with `--fetch` |
 | build a vocabulary | `uv run wpt-dataset build-tokenizer NAME [--stream]` | a tokenizer recipe | the store; `data/recipes/tokenizers/NAME.lock.json` (commit it) |
 | check a vocabulary on the data | `uv run wpt-dataset tokenizer-check NAME` | the lock, admitted sources | prints characters per token per source |
-| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (`--stream`: one source at a time, only tokens kept; `--skip-failed`: a failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; prints the dataset id |
+| build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (`--stream`: one source at a time, only tokens kept; `--skip-failed`: a failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; prints the dataset id |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
-| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--run NAME] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
+| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--run NAME] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
 | train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
-| evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md` |
-| post-train | `uv run wpt-posttrain RECIPE BASE NEW` (the steps are the recipe's `posttrain` list) | the model recipe, the base folder, the store | the new folder, only if every step succeeded |
+| evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store |
+| post-train | `uv run wpt-posttrain RECIPE BASE NEW` (the steps are the recipe's `posttrain` list) | the model recipe, the base folder, the store | the new folder, only if every step succeeded; its run record `records/<folder>/` in the store, always |
 | continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a post-trained model) | the folder | |
 | review and edit sources in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ | `data/`, `packages/wpt-web/ui` | `source.json` through the source rules; `ui/node_modules`, `ui/dist` |
 
@@ -74,7 +74,21 @@ lists them. A crash restarts the processes on their own, up to
 `--max-restarts` times (default 3), from the last checkpoint; Ctrl+C or
 `kill` finishes the step and saves first; after a stop, the same command
 with `--resume` continues from `FOLDER/checkpoint/` (or, with `--run NAME`,
-from the store, on any machine). Exit codes: 2 refused, 130 stopped.
+from the store, on any machine). Exit codes: 2 refused, 3 the run's record
+could not be written, 130 stopped.
+
+Every run of `wpt-dataset build`, `wpt-train`, `wpt-posttrain` and
+`wpt-eval` writes its record into its own store folder, `records/<UTC
+time>-<command>-<main id>-<random>/` (main id: the recipe name, a short
+dataset id or a short weights hash): `start.json`, `events.jsonl` (spans, events,
+every printed line), `ids.json` (the ids read and written, which chain the
+runs together), `end.json`. With `OTEL_EXPORTER_OTLP_ENDPOINT` set
+(environment or `.env`), the same goes live to an OpenTelemetry backend
+(`deploy/otel-lgtm/compose.yaml`). A backend failure is one warning; a
+record the store refuses stops the command with exit code 3 (`wpt-train`
+first finishes its step and saves its checkpoint). A post-training step or
+an evaluation records its own events and files through `context.telemetry`.
+Details: `docs/observability.md`.
 
 ## Adding a source
 
@@ -149,8 +163,9 @@ carries `license`, `output_license`, `notice`, `tokenizer` and
 from), and `LICENSE`, `NOTICE` and `README.md` (the model card).
 `NOTICE` and `README.md` come from `wpt_model.notice.write_documents`, which
 reads only the folder's own files: change what they say there, never by
-editing a generated folder. Training into an existing folder removes its
-`evals/`, which describe other weights.
+editing a generated folder. `wpt-train` writes the folder beside its
+target and renames it into place; training into an existing folder replaces
+it as a whole (its `evals/`, checkpoint and any other file go with it).
 
 Weights are AGPL-3.0-or-later; generated text is CC0-1.0 under
 `OUTPUT-NOTICE`. `packages/wpt-model/src/wpt_model/LICENSE` and
@@ -166,8 +181,9 @@ path given to `wpt-eval`:
 from wpt_eval import Result
 
 def run(context):  # context: model, tokenizer, device, folder, provenance, store,
-                   # documents("training") and documents("held_out"), read
-                   # one shard at a time: iterate, never assume a list
+                   # telemetry (the run's record), documents("training") and
+                   # documents("held_out"), read one shard at a time:
+                   # iterate, never assume a list
     ...
     return Result(data={...}, text="the same findings, for people")
 ```
@@ -221,8 +237,10 @@ or any path given to `wpt-posttrain`:
 from wpt_posttrain import Outcome
 
 def run(context):  # context: model (change it in place), tokenizer, device,
-                   # base, provenance, store; context.conversations() reads
-                   # the chat files tagged with this step's name
+                   # base, provenance, store, telemetry (the run's record:
+                   # events, spans, files in its store folder);
+                   # context.conversations() reads the chat files tagged
+                   # with this step's name
     ...
     return Outcome.success()  # or Outcome.failure("why it could not do its part")
 ```
@@ -235,7 +253,7 @@ first failure stops the run and nothing is written. Details:
 
 - Write text files with `encoding="utf-8", newline="\n"`: Windows must
   produce the same bytes as Linux.
-- Start external programs through `wpt_dataset.programs.program(name)`,
+- Start external programs through `wpt_utils.programs.program(name)`,
   which reports a missing tool clearly.
 - Test isolation: a test never writes into the real store, cache or user
   settings; set `WPT_STORE`, `XDG_CACHE_HOME` and `LOCALAPPDATA` to the

@@ -13,6 +13,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from wpt_telemetry import RecordError, Telemetry
+
 from .plugins import Run, start_method
 
 CHECKPOINT = "checkpoint.pt"
@@ -46,7 +48,9 @@ class Checkpoint:
         raise NotImplementedError
 
     def save(self, state: dict):
-        """Replace the saved state; a crash meanwhile leaves the previous one."""
+        """Replace the saved state; a crash meanwhile leaves the previous one.
+        A checkpoint that records what it does raises the run's RecordError
+        when its record breaks, once the state is saved all the same."""
         raise NotImplementedError
 
     def remove(self):
@@ -138,7 +142,7 @@ class Trained:
 
 
 def train(model, strategy, method_plugin, method_settings, train_tokens, val_tokens, settings: RunSettings,
-          checkpoint: Checkpoint | None = None, resume=False, identity=None, log=print) -> Trained:
+          checkpoint: Checkpoint | None = None, resume=False, identity=None, log=print, telemetry=None) -> Trained:
     """Train model in place, then load the weights of the evaluation the
     method judged best back into it; returns a Trained. train_tokens and val_tokens are 1-D arrays of token ids (np.memmap
     works); train_tokens may instead be a stream (see _tokens_at). With a
@@ -150,8 +154,20 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
     A stop signal (SIGINT, SIGTERM, and SIGBREAK on Windows) to any process
     lets every process finish the step; they then save the checkpoint, when
     the run keeps them, and raise Interrupted. A second signal acts as
-    usual."""
-    log = log if strategy.is_main else (lambda *_: None)
+    usual.
+
+    telemetry (a wpt_telemetry.Telemetry) records, from the main process,
+    every step (its loss over the whole batch, its duration, the learning
+    rates), every evaluation, checkpoint, resume and stop. When the record
+    breaks (RecordError from a call, log included, or a send refused in
+    the background, which arrives as a stop signal), the step goes on
+    unrecorded; then every process saves the checkpoint, when the run keeps
+    them, and raises RecordError: the main process the record's own, the
+    others one that says the main process's record broke. A record that
+    breaks at the last event, once the steps are done, raises RecordError
+    with no further save: the last checkpoint written stays."""
+    record = _Unbroken(telemetry if telemetry is not None and strategy.is_main else Telemetry.off())
+    log = record.guard(log) if strategy.is_main else (lambda *_: None)
     if len(val_tokens) <= settings.block_size + 1:
         log("text is small: validation loss is measured on training data")
         val_tokens = train_tokens
@@ -176,6 +192,7 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
             method.load_state_dict(state["method"])
             first_step, best_val, best_state = state["step"] + 1, state["best_val"], state["best_model"]
             best_step = state.get("best_step")  # absent from checkpoints written before it was kept
+            record.event("training.resumed", step=state["step"], checkpoint=str(checkpoint))
             log(f"resumed from step {state['step']}")
 
     def evaluate(step):
@@ -192,6 +209,7 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
     def _step(step):
         """One update, and its evaluation when one is due; True when the method says stop."""
         nonlocal best_val, best_state, best_step
+        started, losses = time.monotonic(), []
         for a, x, y in _micro_batches(_tokens_at(train_tokens, step, settings), settings, strategy, accumulate,
                                       settings.seed, "train", step):
             # by the slice's place in the batch, so dropout does not depend on the number of processes
@@ -199,12 +217,17 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
             with strategy.no_sync(wrapped) if a < accumulate - 1 else contextlib.nullcontext():
                 loss = method.loss(wrapped, x, y)
                 (loss / accumulate).backward()
+            losses.append(loss.detach())
         method.before_update(model, step)
         method.optimizer.step()
         method.optimizer.zero_grad(set_to_none=True)
         if hasattr(model, "after_update"):  # the model's own updates, such as expert balancing
             model.after_update(strategy.reduce)
         method.after_update(model, step, strategy.reduce)
+        # the loss over the whole batch: every micro-batch of every process
+        train_loss = strategy.mean(torch.stack(losses).float().mean().item())
+        record.event("training.step", values={"train_loss": train_loss, "seconds": time.monotonic() - started},
+                     step=step, learning_rates=[group["lr"] for group in method.optimizer.param_groups])
 
         if step % settings.eval_every == 0 or step == 1 or step == settings.steps:
             val_loss = evaluate(step)
@@ -212,16 +235,22 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
             if verdict.best:
                 best_val, best_step = val_loss, step
                 best_state = {k: v.detach().clone() for k, v in model.state_dict().items()}
-            log(f"step {step:5d} | train loss {loss.item():.4f} | val loss {val_loss:.4f} | "
+            record.event("training.evaluation", values={"val_loss": val_loss}, step=step, best=verdict.best,
+                         stop=verdict.stop, note=verdict.note)
+            log(f"step {step:5d} | train loss {train_loss:.4f} | val loss {val_loss:.4f} | "
                 f"{time.time() - t0:.0f}s{verdict.note}")
             return verdict.stop
         return False
 
     def save(step):
         if strategy.is_main:
-            checkpoint.save({"signature": signature, "step": step, "model": model.state_dict(),
-                             "method": method.state_dict(), "best_val": best_val, "best_model": best_state,
-                             "best_step": best_step})
+            with record.span("training.checkpoint", step=step, where=str(checkpoint)):
+                try:
+                    checkpoint.save({"signature": signature, "step": step, "model": model.state_dict(),
+                                     "method": method.state_dict(), "best_val": best_val, "best_model": best_state,
+                                     "best_step": best_step})
+                except RecordError as error:  # saved all the same; see Checkpoint.save
+                    record.broken = record.broken or error
         strategy.barrier()
 
     keeps = checkpoint is not None and settings.checkpoint_every > 0
@@ -234,17 +263,76 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
             last = step
             if keeps and step % settings.checkpoint_every == 0:
                 save(step)
-            # every process must stop at the same step, wherever the signal came
-            if (strategy.mean(1.0 if signals.asked else 0.0) if strategy.world_size > 1 else signals.asked) > 0:
+            # every process must stop at the same step, wherever the signal came or the record broke
+            asked, broken = (float(signals.asked), float(record.broken is not None))
+            if strategy.world_size > 1:
+                flags = torch.tensor([asked, broken], device=strategy.device)
+                asked, broken = strategy.reduce(flags, "max").tolist()
+            if asked or broken:
                 if keeps and step % settings.checkpoint_every:
                     save(step)
+                record.event("training.stopped", step=step, saved=keeps)
+                if record.broken is not None:
+                    raise record.broken
+                if broken:
+                    raise RecordError(f"the main process's record broke; stopped after step {step}")
                 raise Interrupted(step, keeps)
             if stop:
                 break
 
     if best_state is not None:
         model.load_state_dict(best_state)
-    return Trained(best_val, last, best_step if best_state is not None and best_step is not None else last)
+    trained = Trained(best_val, last, best_step if best_state is not None and best_step is not None else last)
+    record.event("training.finished", values={"best_validation_loss": best_val}, steps=trained.steps,
+                 weights_step=trained.weights_step)
+    if record.broken is not None:  # at the last event, once training ended: the last checkpoint written stays
+        raise record.broken
+    return trained
+
+
+class _Unbroken:
+    """The run's record, through which a RecordError does not stop the
+    step: it is kept in `broken`, and every later call does nothing."""
+
+    def __init__(self, telemetry):
+        self.telemetry, self.broken = telemetry, None
+
+    def guard(self, call):
+        def guarded(*args, **options):
+            if self.broken is None:
+                try:
+                    call(*args, **options)
+                except RecordError as error:
+                    self.broken = error
+        return guarded
+
+    def event(self, name, /, values=None, **attributes):
+        self.guard(self.telemetry.event)(name, values, **attributes)
+
+    @contextlib.contextmanager
+    def span(self, name, /, **attributes):
+        """The telemetry's span; a RecordError at its start or its end is
+        kept, and one from inside the block goes on as itself."""
+        if self.broken is not None:
+            yield None
+            return
+        opened = self.telemetry.span(name, **attributes)
+        try:
+            opened.__enter__()
+        except RecordError as error:
+            self.broken = error
+            yield None
+            return
+        try:
+            yield None
+        except BaseException as error:
+            if not opened.__exit__(type(error), error, error.__traceback__):
+                raise
+        else:
+            try:
+                opened.__exit__(None, None, None)
+            except RecordError as error:
+                self.broken = error
 
 
 def _save(path: Path, state):

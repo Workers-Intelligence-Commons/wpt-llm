@@ -68,7 +68,10 @@ def run(context):
 ```
 
 `context` gives the `model` to change (in place, on `device`), its
-`tokenizer`, the `base` folder, its `provenance` and the `store`.
+`tokenizer`, the `base` folder, its `provenance`, the `store`, and
+`telemetry`, the run's record: a step records its own events and spans
+there, and writes its own files (such as one JSON line per attempt) into
+the run's store folder ([observability.md](observability.md)).
 `context.conversations()` reads the conversations of every admitted source
 whose `chat` files carry a tag named after the step, from the repository
 holding the current folder, and the runner records those sources. Every step
@@ -77,14 +80,18 @@ step does not write a report; it says whether it managed to do its part,
 and if not, why.
 
 The steps run in order, and the first failure stops the run: the command
-prints that step's reason and writes nothing. When every step succeeded, it
+prints that step's reason and writes no model folder (its record in the
+store keeps what happened, with that reason). When every step succeeded, it
 writes the new folder: the weights, the tokenizer, and the base model's
 `provenance.json` with a `post_training` section (the sha256 of the base
 weights, each step's file and its sha256, the repository commit, the device
 and the tools), then `LICENSE`, `NOTICE` and the model card, which lists the
 steps. The new folder must not exist yet; the base folder is never changed,
 and its `evals/` results are not copied, since they describe other weights.
-Run `wpt-eval` on the new folder to measure it.
+The folder is written beside its place, then renamed into it; when that
+rename fails, the finished folder is kept, hidden as
+`.<folder name>-<random>`, and named on the error output: move it into
+place by hand. Run `wpt-eval` on the new folder to measure it.
 
 Each step's record in `provenance.json` names the sources it read, and the
 `post_training` section keeps their address, revision and licenses. The

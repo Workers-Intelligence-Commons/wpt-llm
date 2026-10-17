@@ -38,14 +38,25 @@ is saved. Ctrl+C or SIGTERM finishes the step and saves before stopping.
 After a crash, every process starts again, up to --max-restarts times
 (default 3), and continues from the checkpoint; 0 runs in this process.
 
+The main process records the run in the store, in its own folder under
+records/ (wpt_telemetry; docs/observability.md): what it read, every step,
+evaluation and checkpoint, and every file it wrote; a run started by the
+launcher keeps one folder over its restarts. When that record cannot be
+written, the run finishes its step unrecorded, saves its checkpoint
+(which the broken record does not name), and stops with code 3.
+
 Exit codes: 0 done, 2 refused (bad input, other settings than the
-checkpoint's; never restarted), 130 stopped by a signal, others a crash.
+checkpoint's; never restarted), 3 the record could not be written (never
+restarted), 130 stopped by a signal, others a crash.
 
 The model folder gets config.json, the weights (their headers name the
 licenses), tokenizer.json (the dataset's vocabulary, for wpt-chat),
 provenance.json (what produced it, with the sources it learned from), and
-LICENSE, NOTICE and README.md (the model card). Results that wpt-eval wrote
-for a model saved there before are removed: they describe other weights.
+LICENSE, NOTICE and README.md (the model card). It is written beside the
+target as a hidden folder, recorded, then renamed into place: a run that
+fails before leaves the target as it was. A folder already there, with
+everything in it (an earlier model, its checkpoint, the results wpt-eval
+wrote for other weights), is replaced as a whole.
 """
 
 import argparse
@@ -54,9 +65,10 @@ import json
 import os
 import platform
 import re
+import secrets
 import shutil
-import subprocess
 import sys
+import tempfile
 from dataclasses import asdict
 from pathlib import Path
 
@@ -65,17 +77,19 @@ import torch
 
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
-from wpt_device import describe
 from wpt_inference import sample_tokens
-from wpt_model import WPT, ModelConfig, canonical_ids, save_model
-from wpt_model.notice import EVALS_NAME, WEIGHT_METADATA, write_credits, write_documents
+from wpt_model import WPT, ModelConfig, canonical_ids, save_model, weight_files
+from wpt_model.notice import WEIGHT_METADATA, write_credits, write_documents
 from wpt_store import NAME as STORE_NAME
 from wpt_store import StoreError, store_from_settings
 from wpt_store.shards import ShardStream, sources_of, token_file
+from wpt_telemetry import JOIN_FOLDER, RECORD_FAILED, RecordError, Telemetry, file_hashes, set_ref, short
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_training import (Checkpoint, FolderCheckpoint, Interrupted, PluginError, RunSettings, SettingsMismatch,
                           load_method, load_strategy, train)
 from wpt_training.launch import REFUSED, STOPPED, launch
+from wpt_utils.device import describe
+from wpt_utils.programs import repository
 
 SIZE_UNITS = {"": 1, "KB": 10**3, "MB": 10**6, "GB": 10**9}
 CHECKPOINT_FOLDER = "checkpoint"
@@ -197,13 +211,6 @@ def token_arrays(store, record, strategy, stream_shards=None):
 
 def provenance(args, recipe, record, record_object, sources, model_config, n_params, strategy, plugins, trained,
                batch):
-    def run(*command):
-        try:
-            return subprocess.run(command, capture_output=True, text=True, check=True).stdout.strip()
-        except (OSError, subprocess.CalledProcessError):
-            return None
-
-    status = run("git", "status", "--porcelain")
     versions = {}
     for package in ("torch", "numpy", "pyarrow", "wpt-model", "wpt-training", "wpt-tokenizer", "wpt-store", "wpt-train"):
         try:
@@ -233,8 +240,7 @@ def provenance(args, recipe, record, record_object, sources, model_config, n_par
         "best_validation_loss": trained.best_val,
         "steps_trained": trained.steps,  # the last step reached: fewer than the recipe's when the method stopped early
         "weights_step": trained.weights_step,  # the step whose weights the folder holds
-        "repository_commit": run("git", "rev-parse", "HEAD"),
-        "repository_dirty": bool(status) if status is not None else None,
+        **repository(),  # repository_commit, repository_dirty
         "device": describe(strategy.device) + (f", {strategy.world_size} processes" if strategy.world_size > 1 else ""),
         "tools": {"python": platform.python_version(), "platform": platform.platform(), "rustc": RUSTC_VERSION,
                   **versions},
@@ -244,44 +250,80 @@ def provenance(args, recipe, record, record_object, sources, model_config, n_par
 def main(argv=None):
     sys.stdout.reconfigure(encoding="utf-8")  # the sample is any text; Windows pipes default to a narrower code page
     args = parse_args(argv)
-    if (args.processes > 1 or args.max_restarts > 0) and "LOCAL_RANK" not in os.environ:  # not yet started by one
-        sys.exit(launch(args.processes, ["-m", "wpt_train", *(sys.argv[1:] if argv is None else argv)],
-                        max_restarts=args.max_restarts))
+    arguments = sys.argv[1:] if argv is None else list(argv)
     try:
-        recipe = load_recipe(args.recipe)
-        training = recipe["training"]
-        method_plugin, method_settings = load_method(training["method"], training["settings"])
-        strategy_plugin, strategy = load_strategy(args.strategy)
+        store = store_from_settings(Path.cwd() / ".env")
+    except StoreError as error:  # no store, no record: nothing has started
+        print(f"{type(error).__name__}: {error}", file=sys.stderr)
+        sys.exit(REFUSED)
+    try:
+        if (args.processes > 1 or args.max_restarts > 0) and "LOCAL_RANK" not in os.environ:  # not yet started by one
+            with _record(store, args, arguments, main=True) as telemetry:
+                code = launch(args.processes, ["-m", "wpt_train", *arguments], max_restarts=args.max_restarts,
+                              log=lambda text: telemetry.log(text, error=True), environ=telemetry.child_environment())
+                if code:
+                    sys.exit(code)
+            return
+        # the main process records the run; the others' events are the same, and only it writes the folder
+        with _record(store, args, arguments, main=os.environ.get("RANK", "0") == "0") as telemetry:
+            _run(args, store, telemetry)
+    except RecordError as error:
+        print(f"RecordError: {error}; stopped, nothing more was recorded", file=sys.stderr)
+        sys.exit(RECORD_FAILED)
+
+
+def _record(store, args, arguments, main):
+    """The run's record: a new one, the one the launcher opened (JOIN_FOLDER),
+    or none in a process other than the main one."""
+    if not main:
+        return Telemetry.off()
+    if JOIN_FOLDER in os.environ:
+        return Telemetry.join(store, "wpt-train", os.environ, env_file=Path.cwd() / ".env")
+    return Telemetry.start(store, "wpt-train", arguments, short(args.dataset),
+                           inputs={"recipe": args.recipe, "dataset": args.dataset}, env_file=Path.cwd() / ".env")
+
+
+def _run(args, store, telemetry):
+    try:
+        with telemetry.span("inputs.recipe", recipe=args.recipe):
+            recipe = load_recipe(args.recipe)
+            training = recipe["training"]
+            method_plugin, method_settings = load_method(training["method"], training["settings"])
+            strategy_plugin, strategy = load_strategy(args.strategy)
     except InputError as error:
-        _refuse(f"InputError: {error}")
+        _refuse(f"InputError: {error}", telemetry)
     except PluginError as error:
-        _refuse(f"PluginError: {error}")
+        _refuse(f"PluginError: {error}", telemetry)
     try:
-        _train(args, recipe, strategy, (strategy_plugin, method_plugin, method_settings))
+        _train(args, recipe, strategy, (strategy_plugin, method_plugin, method_settings), store, telemetry)
     except Refused as error:
-        _refuse(str(error))
+        _refuse(str(error), telemetry)
     except Interrupted as error:
         if strategy.is_main:
-            print(error, file=sys.stderr)
+            telemetry.log(str(error), error=True)
         sys.exit(STOPPED)
     finally:
         strategy.close()
 
 
-def _refuse(text):
-    print(text, file=sys.stderr)
+def _refuse(text, telemetry):
+    telemetry.log(text, error=True)
     sys.exit(REFUSED)
 
 
 class StoreCheckpoint(Checkpoint):
     """The checkpoint of a named run in the store (ref checkpoints/NAME):
     any machine using the same store continues it. Each save replaces the
-    previous one, which is then deleted."""
+    previous one, which is then deleted. The ref's change and every
+    deletion are recorded in the run's record, naming the object, and that
+    line is in the store before the step (RecordError otherwise). When the
+    record breaks, a save still sets the ref, unrecorded, then raises the
+    RecordError; nothing is deleted then: the previous object stays."""
 
     KIND = "checkpoints"
 
-    def __init__(self, store, name):
-        self.store, self.name = store, name
+    def __init__(self, store, name, telemetry):
+        self.store, self.name, self.telemetry = store, name, telemetry
 
     def __str__(self):
         return f"{self.store} as {self.KIND}/{self.name}"
@@ -306,29 +348,94 @@ class StoreCheckpoint(Checkpoint):
         finally:
             partial.unlink(missing_ok=True)
         previous = self.store.get_ref(self.KIND, self.name)
-        self.store.set_ref(self.KIND, self.name, sha)  # the previous one stays until this points elsewhere
+        try:
+            set_ref(self.store, self.KIND, self.name, sha, self.telemetry)  # the previous one stays until this
+        except RecordError:
+            self.store.set_ref(self.KIND, self.name, sha)  # the checkpoint is saved all the same, unrecorded
+            raise
         if previous and previous != sha:
+            self._record_deletion(previous)
             self.store.delete(previous)
 
     def remove(self):
         sha = self.store.get_ref(self.KIND, self.name)
+        if sha:
+            self._record_deletion(sha)
         self.store.delete_ref(self.KIND, self.name)
         if sha:
             self.store.delete(sha)
 
+    def _record_deletion(self, sha):
+        self.telemetry.irreversible("training.checkpoint_deleted", object=sha, checkpoint=str(self))
 
-def _train(args, recipe, strategy, plugins):
-    log = print if strategy.is_main else (lambda *_: None)
+
+class RestoreFailed(Exception):
+    """A folder moved aside to make room for a new model could not be moved
+    back after the new one failed to take its place: the target is missing,
+    the earlier folder is at `aside`, the new one at `new`."""
+
+    def __init__(self, target, aside, new, cause):
+        super().__init__(f"{target} could not be replaced ({cause}), and the earlier folder, moved to {aside}, could "
+                         f"not be moved back; the new model is in {new}: move one of them to {target} by hand")
+        self.target, self.aside, self.new = target, aside, new
+
+
+def _replace_folder(new, target: Path, telemetry):
+    """Rename the folder new to target. A folder already at target is moved
+    aside first and removed once new is in place. Moving aside and putting
+    new in place are one step: on any failure or interruption between them,
+    the earlier folder is moved back (and new with it, to where it was)
+    before the error goes on, or RestoreFailed names both folders. Once new
+    is in place, an earlier folder that cannot be removed, or whose removal
+    is interrupted, stays beside the target, with a warning that names it
+    (an interruption then goes on)."""
+    if not target.exists():
+        os.replace(new, target)
+        return
+    aside = target.parent / f".{target.name}-replaced-{secrets.token_hex(4)}"
+    try:
+        os.replace(target, aside)
+        os.replace(new, target)
+    except BaseException as error:
+        if aside.exists():  # moved aside: put it back, whatever happened since
+            try:
+                if target.exists():
+                    os.replace(target, new)
+                os.replace(aside, target)
+            except BaseException as failed:
+                raise RestoreFailed(target, aside, new, f"{type(error).__name__}: {error}") from failed
+        raise
+    try:
+        shutil.rmtree(aside)
+    except (OSError, KeyboardInterrupt) as error:
+        telemetry.event("model.replaced_folder_left", folder=str(aside), error=_describe(error))
+        telemetry.log(f"warning: the earlier {target}, moved to {aside}, could not be removed "
+                      f"({_describe(error)}): remove it by hand", error=True)
+        if isinstance(error, KeyboardInterrupt):
+            raise
+
+
+def _describe(error):
+    return f"{type(error).__name__}: {error}" if str(error) else type(error).__name__
+
+
+def _train(args, recipe, strategy, plugins, store, telemetry):
+    log = telemetry.log if strategy.is_main else (lambda *_: None)
     out = Path(args.out)
     restarted = int(os.environ.get("TORCHELASTIC_RESTART_COUNT", "0")) > 0  # set by the launcher and by torchrun
     resume = args.resume or restarted
     try:
-        store = store_from_settings(Path.cwd() / ".env")
-        checkpoint = StoreCheckpoint(store, args.run) if args.run else FolderCheckpoint(out / CHECKPOINT_FOLDER)
-        if checkpoint.exists() and not resume:
-            raise Refused(f"{checkpoint} holds an unfinished run: add --resume to continue it, or delete it")
-        record, record_object, tokenizer = load_dataset(store, args.dataset, recipe)
-        train_data, val_data = token_arrays(store, record, strategy, args.stream_shards if args.stream else None)
+        with telemetry.span("inputs.dataset", dataset=args.dataset, stream=args.stream) as span:
+            checkpoint = (StoreCheckpoint(store, args.run, telemetry) if args.run
+                          else FolderCheckpoint(out / CHECKPOINT_FOLDER))
+            if checkpoint.exists() and not resume:
+                raise Refused(f"{checkpoint} holds an unfinished run: add --resume to continue it, or delete it")
+            record, record_object, tokenizer = load_dataset(store, args.dataset, recipe)
+            train_data, val_data = token_arrays(store, record, strategy, args.stream_shards if args.stream else None)
+            span.set(training_tokens=len(train_data), held_out_tokens=len(val_data),
+                     shards=len(record["shards"]), held_out_shards=len(record["held_out_shards"]))
+        telemetry.input(recipe=args.recipe, dataset=args.dataset, dataset_record=record_object,
+                        vocabulary=record["tokenizer"]["vocabulary"])
         shape, training = recipe["model"], recipe["training"]
         settings = RunSettings(block_size=shape["block_size"], batch_size=training["batch_size"],
                                micro_batch=args.micro_batch or training["batch_size"] // strategy.world_size,
@@ -352,13 +459,21 @@ def _train(args, recipe, strategy, plugins):
     model = model.to(strategy.device)
     n_params = sum(p.numel() for p in model.parameters())
     log(f"parameters: {n_params:,}")
-    _, method_plugin, method_settings = plugins
+    strategy_plugin, method_plugin, method_settings = plugins
+    telemetry.event("training.settings", recipe=recipe, settings=asdict(settings), model=asdict(model_config),
+                    parameters=n_params, device=describe(strategy.device), processes=strategy.world_size,
+                    strategy={"name": strategy_plugin.name, "file_sha256": strategy_plugin.sha256},
+                    method={"name": method_plugin.name, "file_sha256": method_plugin.sha256, "settings": method_settings},
+                    resume=resume, checkpoint=str(checkpoint))
     try:
-        trained = train(model, strategy, method_plugin, method_settings, train_data, val_data, settings,
-                         checkpoint=checkpoint, resume=resume,
-                         identity={"dataset": args.dataset, "model": asdict(model_config), "training": training,
-                                   # the shards in use decide the windows, so a resumed run must stream the same way
-                                   **({"stream_shards": args.stream_shards} if args.stream else {})}, log=log)
+        with telemetry.span("training", steps=settings.steps) as span:
+            trained = train(model, strategy, method_plugin, method_settings, train_data, val_data, settings,
+                            checkpoint=checkpoint, resume=resume,
+                            identity={"dataset": args.dataset, "model": asdict(model_config), "training": training,
+                                      # the shards in use decide the windows, so a resumed run must stream the same way
+                                      **({"stream_shards": args.stream_shards} if args.stream else {})},
+                            log=log, telemetry=telemetry)
+            span.set(**asdict(trained))
     except (ValueError, SettingsMismatch, PluginError) as error:
         raise Refused(f"{type(error).__name__}: {error}") from None
     finally:
@@ -370,16 +485,48 @@ def _train(args, recipe, strategy, plugins):
     batch = {"windows": settings.batch_size, "micro_batch": settings.micro_batch, "processes": strategy.world_size,
              "accumulation": settings.batch_size // (settings.micro_batch * strategy.world_size)}
     named = record["tokenizer"]
-    save_model(model, out, store.get_bytes(named["vocabulary"]), f"{named['recipe']} version {named['recipe_version']}",
-               max_shard_bytes=args.max_shard_size, metadata=WEIGHT_METADATA)
-    shutil.rmtree(out / EVALS_NAME, ignore_errors=True)
-    sources = sources_of(store, record["shards"])
-    written = provenance(args, recipe, record, record_object, sources, model_config, n_params, strategy, plugins,
-                         trained, batch)
-    (out / "provenance.json").write_text(json.dumps(written, indent=2) + "\n", encoding="utf-8", newline="\n")
-    write_credits(out, written, store.get_bytes)
-    write_documents(out)
-    checkpoint.remove()  # the run is complete
+    # written beside the target, then renamed: a failure midway leaves the target as it was
+    out.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=f".{out.name}-", dir=out.parent))
+    renaming = False
+    try:
+        with telemetry.span("model.write", folder=str(out)):
+            with telemetry.span("model.weights"):
+                save_model(model, staging, store.get_bytes(named["vocabulary"]),
+                           f"{named['recipe']} version {named['recipe_version']}", max_shard_bytes=args.max_shard_size,
+                           metadata=WEIGHT_METADATA)
+            with telemetry.span("model.provenance") as span:
+                sources = sources_of(store, record["shards"])
+                written = provenance(args, recipe, record, record_object, sources, model_config, n_params, strategy,
+                                     plugins, trained, batch)
+                (staging / "provenance.json").write_text(json.dumps(written, indent=2) + "\n", encoding="utf-8",
+                                                         newline="\n")
+                span.set(sources=sorted(sources), skipped_sources=written["skipped_sources"])
+            with telemetry.span("model.notice"):  # the credits each source asks for, NOTICE, LICENSE, the model card
+                write_credits(staging, written, store.get_bytes)
+                write_documents(staging)
+            files = file_hashes(staging)
+            telemetry.event("model.files", files=files)
+            # recorded before the folder appears: a record that cannot be written leaves the target as it was
+            telemetry.output(model_folder=str(out), weights={name: files[name] for name in weight_files(staging)},
+                             provenance=files["provenance.json"])
+            # the run is complete; recorded before the checkpoint goes (a FolderCheckpoint goes with the old folder)
+            telemetry.event("training.checkpoint_removed", checkpoint=str(checkpoint))
+            telemetry.irreversible("model.folder_replaced", folder=str(out))
+            renaming = True
+            _replace_folder(staging, out, telemetry)
+    except BaseException as error:
+        # decided by the folders, not by the error: a RestoreFailed may arrive inside a RecordError
+        if renaming and not out.exists() and staging.exists():
+            if not isinstance(error, RestoreFailed):  # its own message already names both folders
+                earlier = sorted(out.parent.glob(f".{out.name}-replaced-*"))
+                print(f"{out} is missing: the new model is kept in {staging}"
+                      + "".join(f", the earlier one in {folder.absolute()}" for folder in earlier)
+                      + f"; move one of them to {out} by hand", file=sys.stderr)
+        else:
+            shutil.rmtree(staging, ignore_errors=True)
+        raise
+    checkpoint.remove()
     log(f"saved {out} (licenses and sources: {out / 'NOTICE'})")
     # show a sample so you immediately see what it learned
     model.eval()

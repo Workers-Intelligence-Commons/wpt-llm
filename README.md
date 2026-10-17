@@ -115,6 +115,7 @@ settle alone are listed for legal review in
 - [Training and repeatability](docs/training.md)
 - [Evaluation](docs/evaluation.md)
 - [Post-training](docs/post-training.md)
+- [Observability: the record of every run, and its live view](docs/observability.md)
 - [Chat format: conversations as JSON, turned into tokens by a template](docs/chat-format.md)
 - [Output notice and attribution](docs/output-notice.md)
 - [Publishing models: releases, names, where](docs/publishing.md)

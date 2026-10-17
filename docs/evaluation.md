@@ -35,6 +35,8 @@ def run(context):
 - `tokenizer`, `device`, `folder`, and `provenance` (the folder's
   `provenance.json`);
 - `store`: the store holding the dataset;
+- `telemetry`: the run's record, for the test's own events
+  ([observability.md](observability.md));
 - `documents("training")` and `documents("held_out")`: each document of that
   part once, with its `id`, `source` and `tokens` (ending with the
   end-of-document token). They are read one shard at a time as the test

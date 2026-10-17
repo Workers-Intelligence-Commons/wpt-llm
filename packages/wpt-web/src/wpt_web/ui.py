@@ -8,7 +8,7 @@ and ui/dist, both ignored by git.
 import subprocess
 from pathlib import Path
 
-from wpt_dataset.programs import program
+from wpt_utils.programs import program
 
 UI = Path(__file__).resolve().parents[2] / "ui"
 STAMP = ".built"  # in dist/: written last, so a failed build stays stale

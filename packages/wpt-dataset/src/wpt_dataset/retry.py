@@ -7,8 +7,13 @@ that limit (so many fetches failing together do not come back together),
 and follows a server's Retry-After up to CAP. Anything else, such as a 404
 or a checksum that differs, fails at once: trying again gives the same
 answer.
+
+Each new try is announced in one line, printed on stderr; inside a
+reporting(log) block (a command that records its run passes its
+telemetry.log), the line goes to log instead, which records and prints it.
 """
 
+import contextlib
 import http.client
 import random
 import subprocess
@@ -28,6 +33,25 @@ TRANSIENT_MESSAGES = ("could not resolve host", "connection timed out", "connect
                       "gnutls", "ssl_read", "timed out")
 
 
+def _print(text, error=True):
+    print(text, file=sys.stderr)
+
+
+_report = _print  # where call() announces a new try; set by reporting()
+
+
+@contextlib.contextmanager
+def reporting(log):
+    """Announce every new try inside the block, from any thread, through
+    log(text, error=True) instead of printing it."""
+    global _report
+    previous, _report = _report, log
+    try:
+        yield
+    finally:
+        _report = previous
+
+
 def call(action, what: str, sleep=time.sleep):
     """action() once, and again while it fails for a reason that may pass."""
     for attempt in range(1, ATTEMPTS + 1):
@@ -39,8 +63,7 @@ def call(action, what: str, sleep=time.sleep):
             wait = _retry_after(error)
             if wait is None:
                 wait = random.uniform(0, min(CAP, BASE * 2 ** (attempt - 1)))
-            print(f"{what}: {_describe(error)}; trying again in {wait:.0f}s ({attempt + 1}/{ATTEMPTS})",
-                  file=sys.stderr)
+            _report(f"{what}: {_describe(error)}; trying again in {wait:.0f}s ({attempt + 1}/{ATTEMPTS})", error=True)
             sleep(wait)
 
 

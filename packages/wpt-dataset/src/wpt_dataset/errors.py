@@ -1,5 +1,7 @@
 """Every failure wpt-dataset reports. Callers tell them apart by class, never
-by message; the message carries the details (which file, which path)."""
+by message; the message carries the details (which file, which path). A
+program the work needs and does not find (mercurial, GnuPG) raises
+wpt_utils.programs.MissingTool."""
 
 
 class DatasetError(Exception):
@@ -98,11 +100,6 @@ class LockedDocumentsMissing(DatasetError):
 
 class RoundTripFailed(DatasetError):
     """A document does not decode back to its exact bytes."""
-
-
-class MissingTool(DatasetError):
-    """A program the work needs (mercurial for mercurial sources, GnuPG for
-    GPG-signed commits) is not installed."""
 
 
 class SignatureError(DatasetError):

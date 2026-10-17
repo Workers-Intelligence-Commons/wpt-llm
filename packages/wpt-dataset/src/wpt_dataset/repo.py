@@ -18,6 +18,7 @@ from importlib import resources
 from pathlib import Path
 
 import jsonschema
+from wpt_utils.files import sha256_file
 
 from .errors import InvalidFile, OutdatedSchema, RuleViolation, StaleFile
 from .licenses import check_license
@@ -83,7 +84,7 @@ def validate(document, kind: str, path: Path):
 
 def file_version(path: Path) -> str:
     """The sha256 of a file's bytes: what a caller read, to detect a change."""
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return sha256_file(path)
 
 
 def dump_json(document) -> str:

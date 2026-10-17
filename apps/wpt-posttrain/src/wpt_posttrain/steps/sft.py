@@ -45,6 +45,9 @@ def run(context):
         examples.append((ids, learn))
 
     model, device = context.model, context.device
+    context.telemetry.event("sft.settings", epochs=EPOCHS, learning_rate=LEARNING_RATE, weight_decay=WEIGHT_DECAY,
+                            batch=BATCH, seed=SEED, conversations=len(examples),
+                            tokens=sum(len(ids) for ids, _ in examples))
     optimizer = torch.optim.AdamW(model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
     order = torch.Generator().manual_seed(SEED)
     model.train()
@@ -62,8 +65,10 @@ def run(context):
             loss.backward()
             optimizer.step()
             losses.append(loss.item())
-        print(f"sft epoch {epoch}/{EPOCHS}: mean loss {sum(losses) / len(losses):.4f} "
-              f"over {len(examples)} conversations")
+            context.telemetry.event("sft.update", values={"loss": loss.item()}, epoch=epoch, update=len(losses),
+                                    conversations=len(inputs))
+        context.telemetry.log(f"sft epoch {epoch}/{EPOCHS}: mean loss {sum(losses) / len(losses):.4f} "
+                              f"over {len(examples)} conversations")
     model.eval()
     return Outcome.success()
 

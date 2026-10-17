@@ -10,6 +10,7 @@ from wpt_dataset import manifest
 from wpt_dataset.repo import address_hash, dump_json
 from wpt_dataset.sources import compute_upstream
 from wpt_model import load_model
+from wpt_eval import main as evaluate
 from wpt_posttrain import main
 from wpt_train import main as train
 
@@ -113,3 +114,60 @@ def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path
     assert sid in notice and "Talks, by Bo Speaker, 2026" in notice and "dedicates these talks" in notice
     assert built.attribution in notice  # the pre-training sources stay credited
     assert f"1. `wpt_posttrain/steps/sft.py`" in (tuned / "README.md").read_text()
+
+
+def test_the_records_of_training_post_training_and_evaluation_follow_one_model(trained, tmp_path):
+    # each run's record names the ids it read and wrote, so the chain from the
+    # dataset to the evaluated model can be followed across their folders;
+    # a step records its own events and files in its run's folder
+    step = tmp_path / "keeps_attempts.py"
+    step.write_text("from wpt_posttrain import Outcome\n\n"
+                    "def run(context):\n"
+                    "    context.telemetry.event('attempts', values={'reward': 1.0}, count=1)\n"
+                    "    context.telemetry.append_file('attempts.jsonl', b'{\"messages\": []}\\n')\n"
+                    "    return Outcome.success()\n")
+    main([trained.recipe("tune", posttrain=[str(step)]), str(trained.folder), str(tmp_path / "tuned")])
+    evaluate([str(tmp_path / "tuned")])
+
+    [training], [post], [evaluation] = (trained.records(c) for c in ("wpt-train", "wpt-posttrain", "wpt-eval"))
+    assert training.ids["inputs"]["dataset"] == post.ids["inputs"]["dataset"] == trained.dataset_id
+    assert post.ids["inputs"]["base_weights"] == training.ids["outputs"]["weights"]
+    assert evaluation.ids["inputs"]["weights"] == post.ids["outputs"]["weights"] == {
+        "model.safetensors": digest(tmp_path / "tuned")["model.safetensors"]}
+    assert all(run.end["status"] == "succeeded" for run in (training, post, evaluation))
+    # each folder's name carries what its run is about: the weights it started from, or measured
+    assert f"-wpt-posttrain-{training.ids['outputs']['weights']['model.safetensors'][:8]}-" in post.folder
+    assert f"-wpt-eval-{post.ids['outputs']['weights']['model.safetensors'][:8]}-" in evaluation.folder
+    assert any(e.get("name") == "attempts" for e in post.events)
+    assert trained.store.read_record(post.folder, "attempts.jsonl") == b'{"messages": []}\n'
+
+
+def test_on_s3_the_new_folder_appears_only_once_its_record_is_in_the_bucket(trained, s3, tmp_path):
+    # S3 holds record lines back: the lines naming the new folder's files must
+    # be in the bucket before the folder appears, so a refused send leaves none
+    step = tmp_path / "nothing.py"
+    step.write_text("from wpt_posttrain import Outcome\n\ndef run(context):\n    return Outcome.success()\n")
+    s3.refuse(b'"model.files"')
+    with pytest.raises(SystemExit) as stopped:
+        main([trained.recipe("tune", posttrain=[str(step)]), str(trained.folder), str(tmp_path / "tuned")])
+    assert stopped.value.code == 3
+    assert [path.name for path in tmp_path.iterdir() if "tuned" in path.name] == []
+
+
+def test_a_new_folder_that_cannot_be_renamed_into_place_is_kept_and_named(trained, tmp_path, monkeypatch, capsys):
+    # the rename is recorded before it happens: when it fails, the finished model stays, named
+    step = tmp_path / "nothing.py"
+    step.write_text("from wpt_posttrain import Outcome\n\ndef run(context):\n    return Outcome.success()\n")
+    real = os.replace
+
+    def refuse_the_target(source, target):
+        if os.path.basename(target) == "tuned":
+            raise PermissionError(13, "Permission denied", str(source))
+        real(source, target)
+
+    monkeypatch.setattr(os, "replace", refuse_the_target)
+    with pytest.raises(PermissionError):
+        main([trained.recipe("tune", posttrain=[str(step)]), str(trained.folder), str(tmp_path / "tuned")])
+    [kept] = [path for path in tmp_path.iterdir() if path.name.startswith(".tuned-")]
+    assert not (tmp_path / "tuned").exists() and (kept / "provenance.json").is_file()
+    assert str(kept) in capsys.readouterr().err

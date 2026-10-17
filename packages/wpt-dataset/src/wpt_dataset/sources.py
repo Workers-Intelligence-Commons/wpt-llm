@@ -28,11 +28,13 @@ import urllib.request
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
+from wpt_telemetry import Telemetry, set_ref
+from wpt_utils.programs import program
+
 from . import huggingface, manifest, retry, robots
 from .errors import (ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed,
                      UnsupportedEntry)
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match
-from .programs import program
 from .repo import Source
 
 VERSION = importlib.metadata.version("wpt-dataset")
@@ -45,7 +47,10 @@ def fingerprint(inputs) -> str:
 
 # -- upstream -----------------------------------------------------------------
 
-def upstream_tree(source: Source, store) -> dict[str, Entry]:
+def upstream_tree(source: Source, store, telemetry=None) -> dict[str, Entry]:
+    """The source's upstream tree, fetched once and kept under the ref
+    upstream/<checksum>; with a telemetry, the ref is recorded before it is
+    set (wpt_telemetry.set_ref)."""
     expected = source.data["checksum"]
     known = store.get_ref("upstream", expected.removeprefix("sha256:"))
     if known:
@@ -64,7 +69,8 @@ def upstream_tree(source: Source, store) -> dict[str, Entry]:
             continue
         actual = manifest.checksum(tree)
         if actual == expected:
-            store.set_ref("upstream", expected.removeprefix("sha256:"), store.put_bytes(manifest.manifest_bytes(tree)))
+            set_ref(store, "upstream", expected.removeprefix("sha256:"), store.put_bytes(manifest.manifest_bytes(tree)),
+                    telemetry or Telemetry.off())
             return tree
         mismatched.append(f"{address}: {actual}")
     others = "".join(f"; refused {f}" for f in forbidden) + "".join(f"; unreachable {u}" for u in unreachable)
@@ -279,14 +285,15 @@ def tree_key(source: Source) -> str:
     })
 
 
-def source_tree(source: Source, store) -> tuple[dict[str, Entry], str]:
-    """The source's final tree and the sha256 of its manifest object."""
+def source_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry], str]:
+    """The source's final tree and the sha256 of its manifest object. With
+    a telemetry, every ref it sets is recorded first (wpt_telemetry.set_ref)."""
     key = tree_key(source)
     known = store.get_ref("source-trees", key)
     if known:
         tree = manifest.parse_manifest(store.get_bytes(known))
     else:
-        tree = upstream_tree(source, store)
+        tree = upstream_tree(source, store, telemetry)
         tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
         tree = apply_patches(source.id, tree, source.patches, store)
         for path, entry in tree.items():
@@ -296,7 +303,7 @@ def source_tree(source: Source, store) -> tuple[dict[str, Entry], str]:
                 except UnicodeDecodeError as error:
                     raise NotText(f"{source.id}: {path} is not UTF-8 text; exclude it in extract") from error
         known = store.put_bytes(manifest.manifest_bytes(tree))
-        store.set_ref("source-trees", key, known)
+        set_ref(store, "source-trees", key, known, telemetry or Telemetry.off())
     check_license_map(source, tree)
     return tree, known
 

@@ -1,10 +1,10 @@
 import pytest
 import torch
 
-from wpt_device import select_device
 from wpt_model import WPT, ModelConfig
 from wpt_model.experts import Experts
 from wpt_model.kda import _fla_chunk_kda, chunked_kda, recurrent_kda
+from wpt_utils.device import select_device
 
 TINY = dict(vocab_size=50, block_size=16, n_layer=4, d_model=16, kda_heads=2, kda_head_dim=8, mla_heads=2,
             mla_head_dim=8, mla_kv_rank=8, n_experts=4, top_k=2, expert_width=8, latent_width=8, shared_width=16,

@@ -1,0 +1,54 @@
+# The live view of WPT's command runs: Grafana's otel-lgtm image (an
+# OpenTelemetry collector with Grafana, Tempo, Loki and Prometheus), one per
+# machine. docs/observability.md says how to start it and point the commands
+# at it; the record of every run is in the store either way.
+#
+# Two settings, from the environment or the .env file at the repository's
+# root (never committed):
+#
+#     WPT_GRAFANA_PASSWORD   Grafana's admin password; required, and never
+#                            "admin", so Grafana never starts with its
+#                            default admin / admin
+#     WPT_OTEL_ADDRESS       the address the ports listen on; 127.0.0.1 (this
+#                            machine only) unless set, such as to this
+#                            machine's address on a private network
+#
+#     docker compose --env-file .env -f deploy/otel-lgtm/compose.yaml up -d
+#
+# The image is pinned by digest: a new version is a change to its image
+# line, and its licenses, its run-grafana.sh and its start command (the
+# entrypoint below) are checked again (docs/licenses.md,
+# docs/observability.md).
+services:
+  otel-lgtm:
+    image: grafana/otel-lgtm:0.37.0@sha256:57b5ab1ca6619beb180174e2fccce04762470750669d043f544b4726d0582d07
+    # Refuses an empty password or "admin" before anything starts, then runs
+    # the image's own start command (its Dockerfile's CMD at 0.37.0; an
+    # entrypoint here replaces it, so it is named again). The password is
+    # read from the environment, never from the command line. A refused
+    # password stops the container with that message (docker compose logs
+    # otel-lgtm), and Docker starts it again and again, waiting longer each
+    # time, until the password is changed.
+    entrypoint:
+      - /bin/bash
+      - -c
+      - |
+        if [ -z "$${GF_SECURITY_ADMIN_PASSWORD}" ] || [ "$${GF_SECURITY_ADMIN_PASSWORD}" = admin ]; then
+          echo "WPT_GRAFANA_PASSWORD is empty or admin, Grafana's default password: choose another one" >&2
+          exit 1
+        fi
+        exec /otel-lgtm/run-all.sh
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${WPT_GRAFANA_PASSWORD:?set WPT_GRAFANA_PASSWORD, Grafana's admin password (docs/observability.md)}
+      # the image's run-grafana.sh turns anonymous access on, as Admin, unless
+      # this says false; with false, it sets no anonymous role either
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+    ports:
+      - "${WPT_OTEL_ADDRESS:-127.0.0.1}:3000:3000"  # Grafana
+      - "${WPT_OTEL_ADDRESS:-127.0.0.1}:4318:4318"  # OTLP over HTTP, where the commands send
+    volumes:
+      - otel-lgtm-data:/data  # every component keeps its data here: it survives restarts and new containers
+    restart: unless-stopped
+
+volumes:
+  otel-lgtm-data:

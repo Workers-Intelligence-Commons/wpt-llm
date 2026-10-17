@@ -1,13 +1,14 @@
 """What a strategy and a method are, and how their files are found."""
 
 import contextlib
-import hashlib
 import importlib.util
 from dataclasses import dataclass
 from pathlib import Path
 
 import torch
 import torch.nn.functional as F
+
+from wpt_utils.files import sha256_file
 
 HERE = Path(__file__).parent
 
@@ -143,7 +144,7 @@ def _load(kind, name_or_path) -> Plugin:
     spec.loader.exec_module(module)
     if not callable(getattr(module, "start", None)):
         raise PluginError(f"{path.name}: defines no start()")
-    return Plugin(path.stem, file, hashlib.sha256(path.read_bytes()).hexdigest(), module)
+    return Plugin(path.stem, file, sha256_file(path), module)
 
 
 def load_strategy(name_or_path) -> tuple[Plugin, Strategy]:

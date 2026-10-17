@@ -2,7 +2,7 @@
 
 import os
 
-from wpt_device import select_device
+from wpt_utils.device import select_device
 from wpt_training import PluginError, Strategy
 
 

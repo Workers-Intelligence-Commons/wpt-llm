@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "A local web interface to WPT's repository: one small server, one file per page"
 license = "AGPL-3.0-or-later"
 requires-python = ">=3.14"
-dependencies = ["wpt-dataset"]
+dependencies = ["wpt-dataset", "wpt-utils"]
 
 [project.scripts]
 wpt-web = "wpt_web.cli:main"
