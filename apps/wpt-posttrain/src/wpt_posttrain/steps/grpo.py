@@ -40,7 +40,8 @@ seeded with SEED, so a run gives the same attempts again on the same
 machine and setup. Attempts live in memory only and are dropped after
 their update. The settings below are the step's whole configuration; to
 change them, copy this file and give its path to wpt-posttrain. The
-machinery is wpt_posttrain/agentic.py.
+machinery is wpt_posttrain/agentic.py, which steps/token-efficiency.py
+shares.
 """
 
 from wpt_posttrain import Outcome, agentic

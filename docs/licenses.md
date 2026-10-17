@@ -225,7 +225,7 @@ They run unmodified next to WPT and are not linked into it.
 
 ### Container images of agentic tasks (`data/images/`)
 
-The `grpo` post-training step runs the model's
+The `grpo` and `token-efficiency` post-training steps run the model's
 commands in containers built on each machine from the Dockerfiles in
 `data/images/`
 ([post-training.md](post-training.md), "Images"). Locking an image

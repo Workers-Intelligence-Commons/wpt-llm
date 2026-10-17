@@ -28,7 +28,7 @@ CONTRIBUTING.md, "Adding your own texts"). Conversations are files in the
 the `sft` step); a `chat` file is never a pre-training document
 ([chat-format.md](chat-format.md)). Tasks for agentic post-training are
 files in the `task` format, tagged the same way (`grpo` for the `grpo`
-step, below); they are
+step, below, whose tasks the `token-efficiency` step reads too); they are
 never pre-training documents either.
 
 - A record holds only what a person made: commands typed, edits, messages
@@ -76,7 +76,9 @@ def run(context):
 whose `chat` files carry a tag named after the step, from the repository
 holding the current folder, and the runner records those sources.
 `context.tasks()` reads the tasks the same way: the task folders whose
-`task.json` carries the step's name; the runner records
+`task.json` carries the step's name. `context.tasks(tag)` reads those
+tagged `tag` instead, for a step that trains on another step's tasks (the
+`token-efficiency` step reads `context.tasks("grpo")`); the runner records
 those sources under the step that read them. Every step
 returns the same type, `Outcome`: success, or failure with its reason. A
 step does not write a report; it says whether it managed to do its part,
@@ -359,3 +361,47 @@ Its settings are the constants at the top of `steps/grpo.py`; to change
 them, copy the file and put its path in the recipe's `posttrain` list. The
 containers' sizes are not among them: they belong to each task.
 
+## The `token-efficiency` step
+
+The `token-efficiency` step comes after `grpo` in a recipe's `posttrain`
+list. Its goal is the same result as the model it starts from, with fewer
+tokens. It trains on `grpo`'s own tasks, those tagged `grpo` (it has no tag
+of its own), with the same images, containers, limits and checks, and
+`grpo`'s learning unchanged (Attempts, Scores, Learning and Runs above):
+groups of `GROUP` attempts, the advantage as the reward minus the group's
+mean, the loss over the tokens the model wrote, R3 routes and routers that
+do not change, dropped attempts and the same failures. Only the reward
+differs. Its code is `steps/token-efficiency.py`; the machinery both steps
+share is `apps/wpt-posttrain/src/wpt_posttrain/agentic.py`. Until a source
+holds tasks tagged `grpo`, it fails with "no tasks" and writes nothing.
+
+First, the reference. Before any update, the incoming model makes
+`REFERENCE` attempts at each task (by default `GROUP`), run and scored as
+`grpo`'s are. A task's best start score is the best score among them. An
+attempt passes when its score is at least that best score, and the task's
+reference length is the mean length of its passing attempts. A length
+counts only the tokens the model wrote, the same tokens the loss learns,
+never the instructions, the tool results or the template's own tokens. The
+reference stays fixed for the whole step, and the step does not train on
+its attempts. A task whose every reference attempt scored 0 has no result
+to keep and is left out, and so is a task whose every reference attempt
+Docker failed; the step prints a line for each. When no task is left, the
+step fails, saying how many tasks were left out for each reason, and
+writes nothing.
+
+Then the rounds, as `grpo`'s, with this reward for each attempt:
+
+- 0 when its score is below the task's best start score;
+- otherwise the task's reference length divided by the attempt's length:
+  1 for an attempt as long as the reference, 2 for one half as long, 0.5
+  for one twice as long.
+
+Every passing attempt is worth more than every failing one, and among
+passing attempts the shorter one is worth more. The step prints one line
+per task for the reference (its best start score and reference length) and
+one line per round (the mean reward, the number of attempts and of
+updates). Sampling draws from one generator seeded with `SEED`, for the
+reference and then the rounds. Its settings are the constants at the top
+of `steps/token-efficiency.py`, `TAG` (the tag of the tasks it reads) and
+`REFERENCE` among them; to change them, copy the file and put its path in
+the recipe's `posttrain` list.

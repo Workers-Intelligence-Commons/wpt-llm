@@ -1,7 +1,8 @@
-"""Learning from scored attempts at agentic tasks, the machinery of the
-`grpo` step (docs/post-training.md, "The grpo step").
+"""Learning from scored attempts at agentic tasks, the machinery the `grpo`
+and `token-efficiency` steps share (docs/post-training.md, "The grpo
+step").
 
-    prepare(context)           the step's tasks, their built images and the context size,
+    prepare(context, tag)      the tasks tagged `tag`, their built images and the context size,
                                or Unready when the step cannot start
     frozen_routers(model)      the routed expert layers' routers, unchanged while it lasts
     written(attempt)           how many tokens the model wrote in an attempt
@@ -10,8 +11,9 @@
                                mean, the loss over the tokens the model wrote, one update per
                                TASKS_PER_UPDATE tasks; drops, skips and failures as grpo says
 
-A step says what an attempt's reward is: grpo uses the check's score as
-it is.
+Each step says what an attempt's reward is: grpo uses the check's score
+as it is, token-efficiency its own rule on the score and the attempt's
+length. Everything else is the same for both.
 """
 
 import math
@@ -51,12 +53,12 @@ class Unready(Exception):
     the model's context, or an image is not built. Nothing has changed."""
 
 
-def prepare(context):
-    """(the tasks tagged with the running step's name, {image name: built
-    image}, the most tokens an attempt may hold), or Unready."""
-    tasks = context.tasks()
+def prepare(context, tag=None):
+    """(tasks tagged `tag`, by default the running step's name, {image name:
+    built image}, the most tokens an attempt may hold), or Unready."""
+    tasks = context.tasks(tag)
     if not tasks:
-        raise Unready(f"no tasks: no admitted source has task files tagged {context.step}")
+        raise Unready(f"no tasks: no admitted source has task files tagged {tag or context.step}")
     limit = context.model.config.block_size + 1
     for task in tasks:
         opening = len(chat.prompt(context.tokenizer, wpt_agent.opening(task)))

@@ -21,7 +21,8 @@ after the step (the `sft` step reads the files tagged `sft`), found in the
 repository holding the current folder. The runner records those sources.
 A step that trains on tasks reads them the same way with context.tasks():
 the task folders whose task.json carries the step's name (the `grpo` step
-reads those tagged `grpo`).
+reads those tagged `grpo`), or context.tasks(tag) those of another tag
+(the `token-efficiency` step reads the tasks tagged `grpo`).
 
 NEW_FOLDER is written only when every step succeeded: the weights, the
 tokenizer, and the base model's provenance.json with a "post_training"
@@ -118,12 +119,13 @@ class Context:
         self.sources.update(sources)
         return found
 
-    def tasks(self) -> list[task_files.Task]:
+    def tasks(self, tag: str | None = None) -> list[task_files.Task]:
         """The tasks of the admitted sources whose task.json files are
-        tagged with the running step's name, in source and folder order
-        (docs/post-training.md). Raises a wpt_dataset DatasetError when a
-        source or a task folder breaks the rules."""
-        found, sources = task_files.read(Repo.find(), self.store, self.step)
+        tagged `tag`, by default the running step's name, in source and
+        folder order (docs/post-training.md); a step that trains on another
+        step's tasks names that step's tag. Raises a wpt_dataset DatasetError
+        when a source or a task folder breaks the rules."""
+        found, sources = task_files.read(Repo.find(), self.store, tag or self.step)
         self.sources.update(sources)
         return found
 

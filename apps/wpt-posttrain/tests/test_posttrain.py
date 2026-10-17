@@ -161,15 +161,16 @@ def task_source(built, root, upstream, check='#!/bin/bash\necho "0.$RANDOM"\n') 
 
 
 GRPO = Path(wpt_posttrain.__file__).parent / "steps" / "grpo.py"
+TOKEN_EFFICIENCY = Path(wpt_posttrain.__file__).parent / "steps" / "token-efficiency.py"
 
 
-def step_copy(folder, **settings) -> Path:
+def step_copy(folder, original=GRPO, **settings) -> Path:
     """The documented way to change a step's settings: a copy of its file,
     under the same name, with the given constants changed."""
-    text = GRPO.read_text()
+    text = original.read_text()
     for name, value in settings.items():
         text = re.sub(rf"^{name} = .*$", f"{name} = {value}", text, count=1, flags=re.MULTILINE)
-    step = folder / GRPO.name
+    step = folder / original.name
     step.write_text(text)
     return step
 
@@ -290,3 +291,89 @@ def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, 
     notice = (tuned / "NOTICE").read_text()
     assert "Tasks, by Cy Author, 2026" in notice and "dedicates these tasks" in notice
 
+
+def attempt_of(written, read=3):
+    """An attempt whose model wrote `written` tokens between the `read`
+    tokens of its instructions and a tool result of `read` tokens."""
+    learn = [False] * read + [True] * written + [False] * read + [True]
+    return wpt_agent.Attempt({}, [0] * len(learn), learn, "answered")
+
+
+def test_token_efficiency_rewards_a_passing_attempt_by_how_few_tokens_it_wrote():
+    # below the best start score an attempt earns nothing; at or above it,
+    # the reference length over the tokens the model wrote, never counting
+    # the instructions, the tool results or the template's tokens
+    step = step_module(TOKEN_EFFICIENCY)
+    reference = (0.5, 12.0)  # best start score, reference length
+    assert step.reward(reference, attempt_of(2), 0.4) == 0.0  # short, but below the best start score
+    assert step.reward(reference, attempt_of(11, read=50), 0.5) == pytest.approx(1.0)  # 12 tokens written, as long
+    assert step.reward(reference, attempt_of(5), 1.0) == pytest.approx(2.0)  # half as long, scoring higher
+    assert step.reward(reference, attempt_of(23), 0.5) == pytest.approx(0.5)  # twice as long
+
+
+def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_best_start_score():
+    # per task: the best score the incoming model reached, and the mean
+    # length of its attempts that reach it; a task the model always scored
+    # 0 on, or whose every attempt Docker dropped, is left out
+    step = step_module(TOKEN_EFFICIENCY)
+    plays = {"mixed": [(0.5, 4), (0.75, 10), (0.25, 2), (0.75, 20)], "zero": [(0.0, 3), (0.0, 7)], "lost": []}
+
+    class Learner:
+        def play(self, task):
+            if not plays[task.id]:
+                raise wpt_agent.SandboxError("docker create: no space left on device")
+            score, length = plays[task.id].pop(0)
+            return attempt_of(length - 1), None, score
+
+    step.REFERENCE = 4
+    tasks = [type("Task", (), {"id": name}) for name in plays]
+    references, zero, lost = step._references(Learner(), tasks)
+    assert references == {"mixed": (0.75, pytest.approx(15.0))}
+    assert (zero, lost) == (1, 1)
+
+
+def test_token_efficiency_fails_and_writes_nothing_when_no_task_is_left(docker_runs, built, tmp_path, monkeypatch):
+    # the incoming model scores 0 on every reference attempt: the task has
+    # no result to keep, and with no task left the step fails, saying why
+    recipe = built.recipe("agent", model={"block_size": 1024})
+    train([recipe, built.dataset_id, "--out", "model"])
+    task_source(built, tmp_path, tmp_path / "tasks", check="#!/bin/sh\necho 0\n")
+    if subprocess.run(["docker", "image", "inspect", "ubuntu:24.04"], capture_output=True).returncode:
+        subprocess.run(["docker", "pull", "-q", "ubuntu:24.04"], capture_output=True, check=True)
+    monkeypatch.setattr(images, "built", lambda root, name: "ubuntu:24.04")  # a plain image is enough here
+    step = step_copy(tmp_path, TOKEN_EFFICIENCY, REFERENCE="2")
+    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=[str(step)])
+    with pytest.raises(SystemExit, match=r"step token-efficiency failed: no task left of the 1 tasks tagged grpo: 1 "
+                                         r"scored 0 on every reference attempt, Docker failed every reference "
+                                         r"attempt of 0\nnothing was written"):
+        main([recipe, str(tmp_path / "model"), str(tmp_path / "tuned")])
+    assert not (tmp_path / "tuned").exists()
+
+
+def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, tmp_path):
+    # the incoming model's attempts at grpo's own tasks set the reference,
+    # then attempts that pass and fail it change the weights, but not the
+    # routers', and the new model credits the source of the tasks
+    recipe = built.recipe("agent", model={"block_size": 1024})
+    train([recipe, built.dataset_id, "--out", "model"])
+    base, root = tmp_path / "model", tmp_path
+    sid = task_source(built, root, tmp_path / "tasks", check="#!/bin/bash\necho $((RANDOM % 2))\n")
+    images.lock(root, "tiny", log=lambda _: None)
+    # 16 reference attempts all fail 1 time in 65536; 8 attempts all equal, in each of 2 rounds, 1 time in 16384
+    step = step_copy(tmp_path, TOKEN_EFFICIENCY, ROUNDS="2", GROUP="8", REFERENCE="16", TASKS_PER_UPDATE="1",
+                     LEARNING_RATE="1e-2")
+    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=[str(step)])
+    try:
+        images.build(root, "tiny", log=lambda _: None)
+        main([recipe, str(base), str(tmp_path / "tuned")])
+    finally:
+        subprocess.run(["docker", "rmi", "-f", images.tag(root, "tiny")], capture_output=True)
+
+    tuned = tmp_path / "tuned"
+    before, after = load_file(base / "model.safetensors"), load_file(tuned / "model.safetensors")
+    routers = [name for name in before if name.endswith("experts.router.weight")]
+    assert routers and all(torch.equal(before[name], after[name]) for name in routers)
+    assert any(not torch.equal(before[name], after[name]) for name in before)
+    post = json.loads((tuned / "provenance.json").read_text())["post_training"]
+    assert post["steps"][0]["file"] == "token-efficiency.py" and post["steps"][0]["sources"] == [sid]
+    assert "Tasks, by Cy Author, 2026" in (tuned / "NOTICE").read_text()
