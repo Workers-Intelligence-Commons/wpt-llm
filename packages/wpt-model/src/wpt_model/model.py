@@ -11,6 +11,9 @@ layer again during the backward pass, instead of keeping everything it
 computed: the same result with much less memory, for about a third more
 time. The second run records no statistics (expert balancing, query-key
 scores), so a step counts every token once.
+
+record and replay (experts.Routes) keep the experts the routers chose for
+one sequence and route a later pass the same way (R3).
 """
 
 import torch
@@ -19,7 +22,7 @@ from torch.utils.checkpoint import checkpoint
 
 from .config import ModelConfig
 from .engram import Engram
-from .experts import SHARED_EXPERTS, Experts
+from .experts import SHARED_EXPERTS, Experts, Routes
 from .kda import KDA
 from .layers import EPS, FeedForward
 from .mhc import STREAMS, Connection
@@ -40,22 +43,23 @@ class Layer(nn.Module):
         self.attention_norm, self.experts_norm = nn.RMSNorm(D, eps=EPS), nn.RMSNorm(D, eps=EPS)
         self.attention_streams, self.experts_streams = Connection(D), Connection(D)
 
-    def forward(self, streams, ids, canonical, collect=True):
+    def forward(self, streams, ids, canonical, collect=True, record=None, replay=None):
         """collect: record training statistics (False when the layer runs again for the backward pass)."""
         if self.engram is not None:
             streams = self.engram(streams, canonical)
         streams = self.attention_streams(streams, lambda h: self.attention(self.attention_norm(h), collect))
-        return self.experts_streams(streams, lambda h: self.experts(self.experts_norm(h), ids, collect))
+        return self.experts_streams(streams, lambda h: self.experts(self.experts_norm(h), ids, collect, record,
+                                                                     replay))
 
 
-def _first_run_collects(layer):
+def _first_run_collects(layer, record, replay):
     """The layer as a function whose first call records statistics and
     whose later call, the run again for the backward pass, does not."""
     runs = []
 
     def run(streams, ids, canonical):
         runs.append(None)
-        return layer(streams, ids, canonical, collect=len(runs) == 1)
+        return layer(streams, ids, canonical, collect=len(runs) == 1, record=record, replay=replay)
     return run
 
 
@@ -97,18 +101,20 @@ class WPT(nn.Module):
     def set_canonical_ids(self, ids: torch.Tensor):
         self.canonical.copy_(ids)
 
-    def forward(self, idx, next_tokens=None):
+    def forward(self, idx, next_tokens=None, *, record: Routes | None = None, replay: Routes | None = None):
         """(B, T) token ids -> (B, T, vocab_size) next-token scores. With
         next_tokens, the (B, T) tokens that follow idx, also returns the
         multi-token prediction block's scores for the token after each next
-        token: (scores, mtp scores)."""
+        token: (scores, mtp scores). With record or replay (B = 1), the
+        routed layers record their choices into it, or route as it holds."""
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=idx.is_cuda):
             canonical = self.canonical[idx]
             streams = self.embedding(idx).float().unsqueeze(2).expand(-1, -1, STREAMS, -1)  # copied into each stream
             recompute = self.recompute and self.training and torch.is_grad_enabled()
             for layer in self.layers:
-                streams = (checkpoint(_first_run_collects(layer), streams, idx, canonical, use_reentrant=False)
-                           if recompute else layer(streams, idx, canonical))
+                streams = (checkpoint(_first_run_collects(layer, record, replay), streams, idx, canonical,
+                                      use_reentrant=False)
+                           if recompute else layer(streams, idx, canonical, record=record, replay=replay))
             hidden = streams.sum(2)
             logits = self.head(self.final_norm(hidden)).float()
             if next_tokens is None:

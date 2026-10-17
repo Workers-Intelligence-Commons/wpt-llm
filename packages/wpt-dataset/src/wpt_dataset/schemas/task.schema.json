@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/task.schema.json",
+  "title": "WPT task (the task.json of a task folder, in a file of the task format; docs/post-training.md)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "instructions", "image", "limits"],
+  "properties": {
+    "schema": {"const": 1, "description": "shape version of the task"},
+    "instructions": {"type": "string", "minLength": 1, "description": "what the model is asked to do: the user message that starts every attempt"},
+    "image": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "description": "the image the attempt's container runs: a folder name in data/images/"},
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_turns", "max_tokens", "command_seconds"],
+      "properties": {
+        "max_turns": {"type": "integer", "minimum": 1, "description": "assistant turns in one attempt"},
+        "max_tokens": {"type": "integer", "minimum": 1, "description": "tokens the model writes in one attempt, over every turn"},
+        "command_seconds": {"type": "number", "exclusiveMinimum": 0, "description": "how long one tool call may run in the container"}
+      }
+    },
+    "container": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "sizes of the attempt's and the check's containers above the defaults (tasks.py SIZES; a smaller value leaves the default); 2 x disk + 1024 MiB must stay below memory",
+      "properties": {
+        "memory": {"type": "integer", "minimum": 1, "description": "MiB of memory, files in /work and /tmp included"},
+        "disk": {"type": "integer", "minimum": 1, "description": "MiB that /work and /tmp may each hold"},
+        "processes": {"type": "integer", "minimum": 1, "description": "processes and threads running at once"},
+        "cpus": {"type": "number", "exclusiveMinimum": 0, "description": "CPUs' worth of time"}
+      }
+    },
+    "note": {"type": "string"}
+  }
+}

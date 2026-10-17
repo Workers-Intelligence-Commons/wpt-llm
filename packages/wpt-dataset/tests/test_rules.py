@@ -112,6 +112,27 @@ def test_a_license_expression_passes_when_one_alternative_is_allowed(kit, repo, 
     assert len(problems) == 3
 
 
+def test_the_check_reads_the_lock_and_licenses_of_each_image(repo):
+    # data/images/<name>/ follows the data-file rules: its two written files
+    # match their schemas, and every image folder has its Dockerfile
+    folder = repo.data / "images" / "tiny"
+    folder.mkdir(parents=True)
+    (folder / "Dockerfile").write_text("ARG BASE=debian:trixie-slim\nFROM ${BASE}\n")
+    lock = {"schema": 1, "base": "debian@sha256:" + "a" * 64, "snapshot": "20261017T120000Z",
+            "packages": {"bash": "5.2.37-2", "hello": "2.10-5"}}
+    licenses = {"schema": 1, "packages": {"bash": {"version": "5.2.37-2", "licenses": ["GPL-3+"]},
+                                          "hello": {"version": "2.10-5", "text": "Copyright: the authors\n"}}}
+    (folder / "lock.json").write_text(dump_json(lock))
+    (folder / "licenses.json").write_text(dump_json(licenses))
+    assert repo.check() == []
+
+    (folder / "lock.json").write_text(dump_json({**lock, "snapshot": "2026-10-17"}))
+    (repo.data / "images" / "other").mkdir()
+    problems = repo.check()
+    assert problems == ["no image 'other': data/images/other/Dockerfile does not exist",
+                        f"{folder / 'lock.json'}: at snapshot: '2026-10-17' does not match '^[0-9]{{8}}T[0-9]{{6}}Z$'"]
+
+
 def test_migrating_to_shape_4_moves_a_licenseref_text_into_source_json(kit, repo, store, git_upstream):
     sid = kit.add_source(repo, store, "example", "book", {
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1],

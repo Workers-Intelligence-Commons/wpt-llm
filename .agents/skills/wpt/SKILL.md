@@ -61,6 +61,8 @@ where a step needs them, run through Docker Desktop.
 | train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store |
 | post-train | `uv run wpt-posttrain RECIPE BASE NEW` (the steps are the recipe's `posttrain` list) | the model recipe, the base folder, the store | the new folder, only if every step succeeded; its run record `records/<folder>/` in the store, always |
+| lock an image of agentic tasks | `uv run wpt-agent lock-image NAME [--force]` (needs Docker; `--force` replaces an existing lock) | `data/images/NAME/Dockerfile`, the base image's registry, the dated package archive | `data/images/NAME/lock.json` and `licenses.json` (commit them) |
+| build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-posttrain` with `grpo` or `token-efficiency`) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
 | continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a post-trained model) | the folder | |
 | review and edit sources in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ | `data/`, `packages/wpt-web/ui` | `source.json` through the source rules; `ui/node_modules`, `ui/dist` |
 
@@ -113,7 +115,10 @@ Text a person writes for WPT is an `empty` source: no download, its
 patches hold every file (CONTRIBUTING.md, "Adding your own texts").
 Post-training conversations are `chat` files of such a source, tagged with
 the name of the step that reads them (`sft`), one conversation per line as
-docs/chat-format.md says. Committed text
+docs/chat-format.md says. Tasks for agentic post-training are `task`
+files of such a source, one folder per task, tagged `grpo`; the
+`token-efficiency` step, after `grpo`, reads the same tasks
+(docs/post-training.md). Committed text
 stays in the repository's history for good.
 
 ## Formatting a person's text
@@ -240,10 +245,16 @@ def run(context):  # context: model (change it in place), tokenizer, device,
                    # base, provenance, store, telemetry (the run's record:
                    # events, spans, files in its store folder);
                    # context.conversations() reads the chat files tagged
-                   # with this step's name
+                   # with this step's name, and context.tasks() its task
+                   # folders (run them with wpt_agent; context.tasks("grpo")
+                   # reads another step's tag)
     ...
     return Outcome.success()  # or Outcome.failure("why it could not do its part")
 ```
+
+The built-in steps are `sft`, `grpo` and `token-efficiency` (after `grpo`,
+on the same tasks: the same result with fewer written tokens); `grpo` and
+`token-efficiency` share `wpt_posttrain/agentic.py`.
 
 A step reports only whether it managed to do its part, and why not. The
 first failure stops the run and nothing is written. Details:

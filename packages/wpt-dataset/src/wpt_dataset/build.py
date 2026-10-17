@@ -86,7 +86,7 @@ def gather(repo: Repo, store, log=print, skipped=None, telemetry=None):
             try:
                 tree, tree_object = source_tree(source, store, telemetry)
                 found, mine, credits, repeated = [], set(), [], 0  # kept apart until the source succeeds
-                for converted in markdown.documents(source, tree, store):  # links are not documents; their targets are
+                for converted in markdown.documents(source, tree, store, repo):  # links are not documents; their targets are
                     sha256 = store.put_bytes(converted.markdown)
                     if sha256 in seen or sha256 in mine:
                         repeated += 1
@@ -166,7 +166,7 @@ def streamed_documents(repo: Repo, telemetry=None):
         with tempfile.TemporaryDirectory(prefix="wpt-stream-") as tmp:
             scratch, tree, tree_object = _fetched(source, Path(tmp) / "store")
             count = 0
-            for converted in markdown.documents(source, tree, scratch):
+            for converted in markdown.documents(source, tree, scratch, repo):
                 sha256 = hashlib.sha256(converted.markdown).hexdigest()
                 if sha256 in seen:
                     continue
@@ -179,7 +179,7 @@ def streamed_documents(repo: Repo, telemetry=None):
                             documents=count)
 
 
-def source_tokens(source, store, tokenizer, vocabulary: str, telemetry=None) -> dict:
+def source_tokens(repo, source, store, tokenizer, vocabulary: str, telemetry=None) -> dict:
     """A source as tokens, its files not kept: {"tree": its final manifest
     object, "tokens": one object holding every document's tokens (each
     ending with END) one after the other, "documents": [{path, file, sha256
@@ -200,7 +200,7 @@ def source_tokens(source, store, tokenizer, vocabulary: str, telemetry=None) -> 
         scratch, tree, tree_object = _fetched(source, tmp / "store")
         documents, offset = [], 0
         with open(tmp / "tokens.u32", "wb") as out:
-            for converted in markdown.documents(source, tree, scratch):
+            for converted in markdown.documents(source, tree, scratch, repo):
                 data = np.asarray(tokenizer.encode(converted.markdown) + [Tokenizer.END], dtype="<u4").tobytes()
                 out.write(data)
                 entry = {"path": converted.path, "file": converted.file,
@@ -229,7 +229,7 @@ def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print, sk
             continue
         with telemetry.span("source", source=source.id, checksum=source.data["checksum"]) as span:
             try:
-                summary = source_tokens(source, store, tokenizer, vocabulary, telemetry)
+                summary = source_tokens(repo, source, store, tokenizer, vocabulary, telemetry)
                 check_license_map(source, manifest.parse_manifest(store.get_bytes(summary["tree"])))
             except (DatasetError, CorruptObject, MissingObject) as error:
                 _skip(source, error, skipped, log)

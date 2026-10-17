@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Workers-Intelligence-Commons/wpt-llm/schemas/image-licenses.schema.json",
+  "title": "WPT image licenses (data/images/<name>/licenses.json), written by `wpt-agent lock-image`: every package installed in an image and its licenses (docs/licenses.md)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "packages"],
+  "properties": {
+    "schema": {"const": 1, "description": "shape version of this file, for migrations"},
+    "packages": {
+      "type": "object",
+      "description": "every package installed in the image, as in lock.json",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["version"],
+        "not": {"required": ["licenses", "text"]},
+        "properties": {
+          "version": {"type": "string", "minLength": 1},
+          "licenses": {"type": "array", "items": {"type": "string", "minLength": 1}, "description": "the License fields of a machine-readable /usr/share/doc/<package>/copyright"},
+          "text": {"type": "string", "description": "the whole copyright file, when it is not machine-readable"}
+        }
+      }
+    },
+    "note": {"type": "string"}
+  }
+}

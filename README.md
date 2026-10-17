@@ -86,6 +86,8 @@ the same command with `--resume` continues.
 | use several GPUs | `--strategy ddp --processes N` (several machines: `torchrun`) |
 | build despite a broken source | `wpt-dataset build --skip-failed`: it is left out and listed |
 | teach the model to chat | a recipe whose `posttrain` list holds `sft`: `wpt-posttrain RECIPE runs/first runs/chat`, then `wpt-chat runs/chat --chat` |
+| teach the model to finish tasks as an agent | tasks tagged `grpo` in a source, their images in `data/images/` locked with `wpt-agent lock-image NAME` and built with `wpt-agent build-image NAME`, and a recipe whose `posttrain` list holds `grpo` (needs Docker; [post-training](docs/post-training.md)) |
+| teach the agent to reach the same result with fewer tokens | `token-efficiency` after `grpo` in the recipe's `posttrain` list: it trains on the same tasks ([post-training](docs/post-training.md)) |
 | train long windows on a small GPU | `--recompute`: layers run again in the backward pass instead of keeping their values |
 | review sources in a browser | `wpt-web` (needs Bun), then http://127.0.0.1:8410/ |
 

@@ -229,6 +229,8 @@ They run unmodified next to WPT and are not linked into it.
 | git | any | GPL-2.0-only | fetches sources, applies patches, checks commits |
 | mercurial | any | GPL-2.0-or-later | fetches mercurial sources |
 | GnuPG | any | GNU GPL | checks GPG-signed decisions |
+| Docker Engine and its CLI | any | Apache-2.0 | builds the images and runs the containers of agentic post-training |
+| Docker Desktop | any | proprietary (Docker Subscription Service Agreement) | runs Docker Engine on Windows and macOS (the way WPT uses Docker on Windows) |
 | actions/checkout | v4 | MIT | CI |
 | astral-sh/setup-uv | v6 | MIT | CI |
 
@@ -255,6 +257,28 @@ each project's `LICENSE` file at that tag):
 | Red Hat UBI 9 micro (the base image) | 9.8 | Red Hat's UBI terms (`com.redhat.license_terms`: https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI) |
 
 A new image version needs this table checked again.
+
+### Container images of agentic tasks (`data/images/`)
+
+The `grpo` and `token-efficiency` post-training steps run the model's
+commands in containers built on each machine from the Dockerfiles in
+`data/images/`
+([post-training.md](post-training.md), "Images"). Locking an image
+(`wpt-agent lock-image`) records every package installed in it, with its
+version and its licenses, in `licenses.json` next to the image's
+`lock.json`. No limit applies to which licenses an image may hold: the
+record says what is there, and it is not a list of allowed licenses
+(maintainer's decision, 2026-10-17). The images run the tasks on the
+machine that builds them, and WPT does not distribute them. What a tool
+result shows of an image's files is context the model reads during an
+attempt; the loss covers only the tokens the model wrote.
+
+A package's licenses come from its `/usr/share/doc/<package>/copyright`
+file. When that file is machine-readable (Debian's copyright format, which
+starts with a `Format:` field), the record lists the licenses its
+`License:` fields name. When it is not, the record holds the file's full
+text instead (maintainer's decision, 2026-10-17). A package with no such
+file in the image has a record with its version only.
 
 ### Word lists of recipe names (`scripts/names/`)
 

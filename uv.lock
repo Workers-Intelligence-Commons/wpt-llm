@@ -18,6 +18,7 @@ conflicts = [[
 
 [manifest]
 members = [
+    "wpt-agent",
     "wpt-chat",
     "wpt-dataset",
     "wpt-eval",
@@ -1861,6 +1862,23 @@ wheels = [
 ]
 
 [[package]]
+name = "wpt-agent"
+version = "0.1.0"
+source = { editable = "packages/wpt-agent" }
+dependencies = [
+    { name = "wpt-dataset" },
+    { name = "wpt-tokenizer" },
+    { name = "wpt-utils" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "wpt-dataset", editable = "packages/wpt-dataset" },
+    { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
+    { name = "wpt-utils", editable = "packages/wpt-utils" },
+]
+
+[[package]]
 name = "wpt-chat"
 version = "0.1.0"
 source = { editable = "apps/wpt-chat" }
@@ -2020,7 +2038,9 @@ name = "wpt-posttrain"
 version = "0.1.0"
 source = { editable = "apps/wpt-posttrain" }
 dependencies = [
+    { name = "wpt-agent" },
     { name = "wpt-dataset" },
+    { name = "wpt-inference" },
     { name = "wpt-model" },
     { name = "wpt-store" },
     { name = "wpt-telemetry" },
@@ -2030,7 +2050,9 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "wpt-agent", editable = "packages/wpt-agent" },
     { name = "wpt-dataset", editable = "packages/wpt-dataset" },
+    { name = "wpt-inference", editable = "packages/wpt-inference" },
     { name = "wpt-model", editable = "packages/wpt-model" },
     { name = "wpt-store", editable = "packages/wpt-store" },
     { name = "wpt-telemetry", editable = "packages/wpt-telemetry" },

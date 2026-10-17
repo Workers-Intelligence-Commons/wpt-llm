@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from wpt_model import WPT, ModelConfig
+from wpt_model import WPT, ModelConfig, Routes
 from wpt_model.experts import Experts
 from wpt_model.kda import _fla_chunk_kda, chunked_kda, recurrent_kda
 from wpt_utils.device import select_device
@@ -72,6 +72,26 @@ def test_quantile_balancing_gives_each_expert_its_share():
         experts(x, ids)
         experts.balance(lambda tensor, op: tensor)
     assert torch.allclose(shares(), torch.full((8,), 1 / 8), atol=0.02)
+
+
+def test_a_replayed_pass_routes_each_token_through_the_experts_recorded_while_writing_it():
+    # R3 (docs/post-training.md): routes recorded by growing prefixes, as
+    # sampling reads them, route a later pass over the whole sequence the
+    # same way, even when the routers would now choose other experts
+    torch.manual_seed(0)
+    model = WPT(ModelConfig(**TINY)).eval()
+    ids = torch.randint(50, (1, 12))
+    routes = Routes()
+    with torch.no_grad():
+        for end in range(5, 13):  # a prompt of 5 tokens, then one more token at a time
+            model(ids[:, :end], record=routes)
+        written = model(ids)
+        routed = [layer.experts for layer in model.layers if not layer.experts.hashed]
+        for experts in routed:
+            experts.bias.copy_(torch.tensor([0.0, 0.0, 10.0, 10.0]))  # experts 2 and 3 for every token now
+        assert not torch.allclose(model(ids), written, atol=1e-4)
+        assert torch.allclose(model(ids, replay=routes), written, atol=1e-5)
+    assert [len(routes.chosen[experts]) for experts in routed] == [12]
 
 
 def test_recomputing_layers_trains_the_same_and_counts_each_token_once():

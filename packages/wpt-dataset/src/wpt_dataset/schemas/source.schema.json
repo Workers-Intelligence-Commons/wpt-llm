@@ -62,7 +62,7 @@
         "additionalProperties": false,
         "required": ["format", "paths"],
         "properties": {
-          "format": {"enum": ["markdown", "text", "xhtml", "code", "chat", "records"], "description": "markdown: kept as is; text: plain text; xhtml: web pages as strict XML (EPUB books); code: a fenced code block naming the language and the path; chat: conversations for the post-training step named by the file's tags, never a pre-training document; records: a JSON Lines (.jsonl, .json, optionally .gz or .zst) or Parquet file holding one document per record, each with its own license"},
+          "format": {"enum": ["markdown", "text", "xhtml", "code", "chat", "task", "records"], "description": "markdown: kept as is; text: plain text; xhtml: web pages as strict XML (EPUB books); code: a fenced code block naming the language and the path; chat: conversations for the post-training step named by the file's tags, never a pre-training document; task: the files of task folders (task.json, files/, check) for the post-training step named by the tags of their task.json, never a pre-training document; records: a JSON Lines (.jsonl, .json, optionally .gz or .zst) or Parquet file holding one document per record, each with its own license"},
           "language": {"type": "string", "pattern": "^[A-Za-z0-9_+#.-]+$", "description": "code only: the language named after the opening fence, for example python"},
           "text": {"$ref": "#/$defs/field", "description": "records only: the field holding the document's text"},
           "as": {"enum": ["text", "markdown"], "description": "records only: whether the text field is plain text (default) or Markdown"},

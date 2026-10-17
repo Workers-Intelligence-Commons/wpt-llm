@@ -10,13 +10,16 @@ import torch.nn.functional as F
 
 
 @torch.no_grad()
-def sample_tokens(model, ids, *, context_size, max_new_tokens, temperature=0.8, top_k=40):
+def sample_tokens(model, ids, *, context_size, max_new_tokens, temperature=0.8, top_k=40, generator=None):
     """Yield up to max_new_tokens sampled token ids, one at a time.
 
     ids: the starting token ids (a list of ints, at least one).
     context_size: how many trailing tokens the model sees at each step.
     temperature: >1 = more inventive, <1 = more predictable.
     top_k: sample only among the k highest-scoring tokens (None = all).
+    generator: the torch.Generator, on the model's device, that draws the
+    tokens, so a seeded one gives the same tokens again (None = torch's
+    global one).
     """
     device = next(model.parameters()).device
     idx = torch.tensor([ids], dtype=torch.long, device=device)
@@ -26,6 +29,6 @@ def sample_tokens(model, ids, *, context_size, max_new_tokens, temperature=0.8, 
             k = min(top_k, logits.size(-1))
             v, _ = torch.topk(logits, k)
             logits[logits < v[:, [-1]]] = float("-inf")
-        next_id = torch.multinomial(F.softmax(logits, dim=-1), 1)
+        next_id = torch.multinomial(F.softmax(logits, dim=-1), 1, generator=generator)
         idx = torch.cat([idx, next_id], dim=1)
         yield int(next_id)

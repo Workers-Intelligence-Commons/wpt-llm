@@ -4,7 +4,8 @@
     wpt-dataset check --fetch [ID ...]    also fetch sources (all admitted, or the ids given):
                                           checksum, cuts, patches, license map, text; every
                                           source is checked, and the failures listed at the end
-    wpt-dataset check --changed REV       fetch only sources changed since git revision REV
+    wpt-dataset check --changed REV       fetch only sources changed since git revision REV, and
+                                          every source with task files when data/images/ changed
     wpt-dataset check-commits RANGE       DCO sign-off and signed decisions (e.g. origin/main..HEAD)
     wpt-dataset source-id ORIGIN [ITEM] ADDRESS
                                           the id a new source must use
@@ -56,6 +57,7 @@ from .repo import Repo, source_id
 from .markdown import documents
 from .markdown_check import check_markdown
 from .sources import compute_upstream, source_tree
+from .tasks import has_tasks
 from .tokenizer_check import check_tokenizer
 
 
@@ -70,9 +72,13 @@ def cmd_check(args, repo):
         return 1
     ids = []
     if args.changed:
-        out = subprocess.run(["git", "-C", str(repo.root), "diff", "--name-only", args.changed, "--", "data/sources"],
-                             capture_output=True, text=True, check=True).stdout
-        ids = sorted({p.split("/")[2] for p in out.splitlines() if p.count("/") >= 3} & set(repo.source_ids()))
+        out = subprocess.run(["git", "-C", str(repo.root), "diff", "--name-only", args.changed, "--", "data/sources",
+                              "data/images"], capture_output=True, text=True, check=True).stdout
+        changed = out.splitlines()
+        ids = {p.split("/")[2] for p in changed if p.startswith("data/sources/") and p.count("/") >= 3}
+        if any(p.startswith("data/images/") for p in changed):  # a task may name an image that changed or went
+            ids |= {s.id for s in repo.sources() if has_tasks(s)}
+        ids = sorted(ids & set(repo.source_ids()))
     elif args.fetch is not None:
         ids = args.fetch or [s.id for s in repo.sources() if s.admitted]
     failed = []
@@ -83,7 +89,7 @@ def cmd_check(args, repo):
             try:
                 tree, _ = source_tree(source, store)
                 skipped = {}
-                converted = sum(1 for _ in documents(source, tree, store, skipped))
+                converted = sum(1 for _ in documents(source, tree, store, repo, skipped))
             except (DatasetError, StoreError, MissingTool) as error:
                 failed.append(f"{sid}: {type(error).__name__}: {error}")
                 print(f"{sid}: FAILED ({type(error).__name__})", file=sys.stderr)
@@ -153,7 +159,7 @@ def cmd_patch(args, repo):
 def cmd_markdown_check(args, repo):
     store, failed = _store(repo), False
     for sid in args.ids or repo.source_ids():
-        report = check_markdown(repo.source(sid), store)
+        report = check_markdown(repo, repo.source(sid), store)
         for problem in report.problems:
             print(f"{sid}: {problem}", file=sys.stderr)
         failed = failed or bool(report.problems)
