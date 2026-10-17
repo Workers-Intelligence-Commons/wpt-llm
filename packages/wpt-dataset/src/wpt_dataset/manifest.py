@@ -25,8 +25,9 @@ import zipfile
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 
+from wpt_utils.programs import program
+
 from .errors import BadPath, FetchFailed, UnsupportedEntry
-from .programs import program
 
 FILE, EXECUTABLE, SYMLINK = "100644", "100755", "120000"
 MODES = (FILE, EXECUTABLE, SYMLINK)

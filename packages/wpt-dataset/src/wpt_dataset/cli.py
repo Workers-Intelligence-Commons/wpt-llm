@@ -29,9 +29,12 @@ The store comes from WPT_STORE (environment or .env at the repository root).
 --stream (or WPT_STREAM=1) fetches one source at a time and keeps only its
 tokens in the store, not its files: for a corpus larger than the disk.
 A failing source stops a build; --skip-failed (or WPT_SKIP_FAILED=1) leaves
-it out and lists it, with its error, in the dataset record. A download that
-fails for a reason that may pass (timeout, cut connection, server error) is
-tried again, up to 5 times (see retry.py).
+it out and lists it, with its error, in the dataset record. A build is
+recorded in the store, in its own folder under records/ (wpt_telemetry;
+docs/observability.md); when that record cannot be written, it stops with
+exit code 3. A download that fails for a reason that may pass (timeout, cut
+connection, server error) is tried again, up to 5 times (see retry.py); a
+build records each new try.
 """
 
 import argparse
@@ -40,8 +43,10 @@ import subprocess
 import sys
 
 from wpt_store import StoreError, store_from_settings
+from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry
+from wpt_utils.programs import MissingTool
 
-from . import manifest
+from . import manifest, retry
 from .build import build_dataset, build_tokenizer
 from .commits import check_commits
 from .edit import unpack, write_patch
@@ -79,7 +84,7 @@ def cmd_check(args, repo):
                 tree, _ = source_tree(source, store)
                 skipped = {}
                 converted = sum(1 for _ in documents(source, tree, store, skipped))
-            except (DatasetError, StoreError) as error:
+            except (DatasetError, StoreError, MissingTool) as error:
                 failed.append(f"{sid}: {type(error).__name__}: {error}")
                 print(f"{sid}: FAILED ({type(error).__name__})", file=sys.stderr)
                 continue
@@ -176,7 +181,12 @@ def cmd_tokenizer_check(args, repo):
 
 
 def cmd_build(args, repo):
-    print(build_dataset(repo, args.name, _store(repo), stream=args.stream, skip_failed=args.skip_failed))
+    store = _store(repo)
+    with (Telemetry.start(store, "wpt-dataset-build", args.arguments, args.name, inputs={"recipe": args.name},
+                          env_file=repo.root / ".env") as telemetry,
+          retry.reporting(telemetry.log)):  # a download tried again is part of the run's record
+        telemetry.log(build_dataset(repo, args.name, store, log=telemetry.log, stream=args.stream,
+                                    skip_failed=args.skip_failed, telemetry=telemetry))
     return 0
 
 
@@ -236,6 +246,7 @@ def main(argv=None):
     build.set_defaults(run=cmd_build)
     commands.add_parser("migrate").set_defaults(run=cmd_migrate)
     args = parser.parse_args(argv)
+    args.arguments = sys.argv[1:] if argv is None else list(argv)  # as the run's record names them
     if args.command == "source-id":
         if len(args.parts) > 2:
             parser.error("source-id takes ORIGIN [ITEM] ADDRESS")
@@ -243,9 +254,12 @@ def main(argv=None):
     try:
         repo = Repo(args.root) if args.root else Repo.find()
         return args.run(args, repo)
-    except (DatasetError, StoreError) as error:
+    except (DatasetError, StoreError, MissingTool) as error:
         print(f"{type(error).__name__}: {error}", file=sys.stderr)
         return 1
+    except RecordError as error:
+        print(f"RecordError: {error}; stopped, nothing more was done", file=sys.stderr)
+        return RECORD_FAILED
 
 
 if __name__ == "__main__":

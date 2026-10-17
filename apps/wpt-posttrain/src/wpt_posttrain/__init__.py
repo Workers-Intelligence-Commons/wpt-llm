@@ -30,18 +30,21 @@ not exist yet. BASE_FOLDER is never changed, and its evaluation results are
 not copied: they describe other weights.
 
 The store named by WPT_STORE (environment or .env) is open for steps that
-read data from it.
+read data from it. The run is recorded there, in its own folder under
+records/ (wpt_telemetry; docs/observability.md): the base weights, each
+step with what it read and its outcome, and every file written. A step
+records its own events, and writes its own files into that folder, through
+context.telemetry. When the record cannot be written, the run stops at
+once, writes nothing more and exits with code 3.
 """
 
 import argparse
-import hashlib
 import importlib.metadata
 import importlib.util
 import json
 import os
 import platform
 import shutil
-import subprocess
 import sys
 import tempfile
 from dataclasses import dataclass, field
@@ -52,11 +55,15 @@ import torch
 from wpt_dataset import conversations as chat_files
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
-from wpt_device import describe, select_device
-from wpt_model import WPT, TokenizerMismatch, load_model, load_tokenizer, save_model, tokenizer_identity
+from wpt_model import (WPT, TokenizerMismatch, load_model, load_tokenizer, save_model, tokenizer_identity, weight_files,
+                       weight_hashes)
 from wpt_model.notice import CREDITS_NAME, WEIGHT_METADATA, write_documents
 from wpt_store import Store, StoreError, store_from_settings
+from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, file_hashes, short
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
+from wpt_utils.device import describe, select_device
+from wpt_utils.files import sha256_file
+from wpt_utils.programs import repository
 
 BUILT_IN = Path(__file__).parent / "steps"
 VERSION = importlib.metadata.version("wpt-posttrain")
@@ -104,13 +111,15 @@ class Context:
     store: Store
     step: str = ""  # the running step's name, set by the runner
     sources: dict = field(default_factory=dict)  # the sources the running step read, recorded by the runner
+    # the run's record: a step's own events (telemetry.event, .span, .log) and files (telemetry.write_file)
+    telemetry: Telemetry = field(default_factory=Telemetry.off)
 
     def conversations(self) -> list[tuple[str, dict]]:
         """[(conversation id, conversation)] of the admitted sources whose
         chat files are tagged with the running step's name, in source and
         path order (docs/chat-format.md). Raises a wpt_dataset DatasetError
         when a source or a conversation breaks the rules."""
-        found, sources = chat_files.read(Repo.find(), self.store, self.step)
+        found, sources = chat_files.read(Repo.find(), self.store, self.step, self.telemetry)
         self.sources.update(sources)
         return found
 
@@ -141,16 +150,20 @@ def run_step(context, step) -> dict:
     if not callable(getattr(module, "run", None)):
         raise StepError(f"{path.name}: defines no run(context)")
     context.step, context.sources = name, {}
-    outcome = module.run(context)
-    if not isinstance(outcome, Outcome):
-        raise StepError(f"{path.name}: run(context) returned {type(outcome).__name__}, not wpt_posttrain.Outcome")
-    if not outcome.succeeded:
-        raise StepFailed(name, outcome.reason)
-    return {"name": name, "file": file_name, "file_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+    file_sha256 = sha256_file(path)
+    with context.telemetry.span("posttrain.step", step=name, file=file_name, file_sha256=file_sha256) as span:
+        outcome = module.run(context)
+        if not isinstance(outcome, Outcome):
+            raise StepError(f"{path.name}: run(context) returned {type(outcome).__name__}, not wpt_posttrain.Outcome")
+        span.set(outcome="succeeded" if outcome.succeeded else "failed", reason=outcome.reason,
+                 sources={sid: source["revision"] for sid, source in sorted(context.sources.items())})
+        if not outcome.succeeded:
+            raise StepFailed(name, outcome.reason)
+    return {"name": name, "file": file_name, "file_sha256": file_sha256,
             "outcome": "succeeded", "sources": dict(sorted(context.sources.items()))}
 
 
-def open_context(base, store, device) -> Context:
+def open_context(base, store, device, telemetry=None) -> Context:
     base = Path(base)
     try:
         provenance = json.loads((base / "provenance.json").read_text(encoding="utf-8"))
@@ -162,7 +175,8 @@ def open_context(base, store, device) -> Context:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(base))
     except (TokenizerMismatch, ValueError) as error:  # ValueError: a vocabulary of another tokenizer version
         raise StepError(str(error)) from None
-    return Context(base, load_model(base, device), tokenizer, device, provenance, store)
+    return Context(base, load_model(base, device), tokenizer, device, provenance, store,
+                   telemetry=telemetry or Telemetry.off())
 
 
 def recipe_steps(name) -> list[str]:
@@ -176,22 +190,24 @@ def recipe_steps(name) -> list[str]:
     return steps
 
 
-def post_train(context, recipe_name, steps, new_folder) -> Path:
-    """Run every step, then write new_folder. A failure leaves nothing."""
+def post_train(context, recipe_name, steps, new_folder, base_weights) -> Path:
+    """Run every step, then write new_folder. A failure leaves nothing.
+    base_weights: wpt_model.weight_hashes(context.base)."""
     new_folder = Path(new_folder)
     if new_folder.exists():
         raise StepError(f"{new_folder} exists; give a new folder")
     for step in steps:
         find(step)  # an unknown step stops the run before any step has run
+    context.telemetry.input(recipe=recipe_name, base_weights=base_weights, dataset=context.provenance.get("dataset"))
     records = [run_step(context, step) for step in steps]
     sources = {sid: source for record in records for sid, source in record["sources"].items()}
+    context.telemetry.input(sources={sid: source["revision"] for sid, source in sorted(sources.items())})
     provenance = {**context.provenance, "post_training": {
         "recipe_name": recipe_name,
-        "base_weights": {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-                         for path in sorted(context.base.glob("model*.safetensors"))},
+        "base_weights": base_weights,
         "steps": [{**record, "sources": sorted(record["sources"])} for record in records],
         "sources": dict(sorted(sources.items())),  # address, revision, licenses
-        **_repository(),
+        **repository(),  # repository_commit, repository_dirty
         "device": describe(context.device),
         "tools": {"python": platform.python_version(), "platform": platform.platform(), "rustc": RUSTC_VERSION,
                   "torch": torch.__version__, "wpt-posttrain": VERSION},
@@ -199,31 +215,37 @@ def post_train(context, recipe_name, steps, new_folder) -> Path:
     # written beside the target, then renamed: a failure midway leaves no new folder
     new_folder.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=f".{new_folder.name}-", dir=new_folder.parent))
+    telemetry = context.telemetry
+    renaming = False
     try:
-        save_model(context.model, staging, load_tokenizer(context.base), tokenizer_identity(context.base)[0],
-                   metadata=WEIGHT_METADATA)  # the base model's vocabulary, under the same name
-        (staging / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n",
-                                                 encoding="utf-8", newline="\n")
-        if (context.base / CREDITS_NAME).is_dir():  # the base model's per-document credits still apply
-            shutil.copytree(context.base / CREDITS_NAME, staging / CREDITS_NAME)
-        write_documents(staging)
-        os.replace(staging, new_folder)
+        with telemetry.span("model.write", folder=str(new_folder)):
+            with telemetry.span("model.weights"):
+                save_model(context.model, staging, load_tokenizer(context.base), tokenizer_identity(context.base)[0],
+                           metadata=WEIGHT_METADATA)  # the base model's vocabulary, under the same name
+            with telemetry.span("model.provenance"):
+                (staging / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n",
+                                                         encoding="utf-8", newline="\n")
+            with telemetry.span("model.notice"):  # the credits each source asks for, NOTICE, LICENSE, the model card
+                if (context.base / CREDITS_NAME).is_dir():  # the base model's per-document credits still apply
+                    shutil.copytree(context.base / CREDITS_NAME, staging / CREDITS_NAME)
+                write_documents(staging)
+            files = file_hashes(staging)
+            telemetry.event("model.files", files=files)
+            # recorded before the folder appears: a record that cannot be written leaves no new folder
+            weights = {name: files[name] for name in weight_files(staging)}
+            telemetry.output(model_folder=str(new_folder), weights=weights, provenance=files["provenance.json"])
+            telemetry.irreversible("model.folder_written", folder=str(new_folder))
+            renaming = True
+            os.replace(staging, new_folder)
     except BaseException:
-        shutil.rmtree(staging, ignore_errors=True)
+        # the rename was recorded but did not happen: the finished model stays, named
+        if renaming and not new_folder.exists() and staging.exists():
+            print(f"{new_folder} could not be written: the new model is kept in {staging}; move it there by hand",
+                  file=sys.stderr)
+        else:
+            shutil.rmtree(staging, ignore_errors=True)
         raise
     return new_folder
-
-
-def _repository():
-    def run(*command):
-        try:
-            return subprocess.run(command, capture_output=True, text=True, check=True).stdout.strip()
-        except (OSError, subprocess.CalledProcessError):
-            return None
-
-    status = run("git", "status", "--porcelain")
-    return {"repository_commit": run("git", "rev-parse", "HEAD"),
-            "repository_dirty": bool(status) if status is not None else None}
 
 
 def main(argv=None):
@@ -234,11 +256,28 @@ def main(argv=None):
     parser.add_argument("new", help="model folder to write; must not exist")
     args = parser.parse_args(argv)
     try:
-        steps = recipe_steps(args.recipe)
-        device = select_device()
-        print(f"device: {describe(device)}")
-        context = open_context(args.base, store_from_settings(Path.cwd() / ".env"), device)
-        new_folder = post_train(context, args.recipe, steps, args.new)
-    except (StoreError, StepError, StepFailed, DatasetError) as error:
+        store = store_from_settings(Path.cwd() / ".env")
+    except StoreError as error:  # no store, no record: nothing has started
         sys.exit(f"{type(error).__name__}: {error}\nnothing was written")
-    print(f"saved {new_folder} (licenses and sources: {new_folder / 'NOTICE'})")
+    try:
+        base_weights = weight_hashes(args.base)
+    except OSError:  # no model there: open_context names the problem, in the record
+        base_weights = {}
+    try:
+        with Telemetry.start(store, "wpt-posttrain", sys.argv[1:] if argv is None else list(argv),
+                             short(next(iter(base_weights.values()), "none")),
+                             inputs={"recipe": args.recipe, "base_folder": args.base},
+                             env_file=Path.cwd() / ".env") as telemetry:
+            try:
+                with telemetry.span("inputs"):
+                    steps = recipe_steps(args.recipe)
+                    device = select_device()
+                    telemetry.log(f"device: {describe(device)}")
+                    context = open_context(args.base, store, device, telemetry)
+                new_folder = post_train(context, args.recipe, steps, args.new, base_weights)
+            except (StoreError, StepError, StepFailed, DatasetError) as error:
+                sys.exit(f"{type(error).__name__}: {error}\nnothing was written")  # end.json records it
+            telemetry.log(f"saved {new_folder} (licenses and sources: {new_folder / 'NOTICE'})")
+    except RecordError as error:
+        print(f"RecordError: {error}\nstopped; nothing more was written", file=sys.stderr)
+        sys.exit(RECORD_FAILED)

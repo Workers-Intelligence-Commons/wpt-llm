@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "The WPT model network, its config, and safetensors model folders"
 license = "AGPL-3.0-or-later"
 requires-python = ">=3.14"
-dependencies = ["safetensors>=0.4", "numpy>=2", "fla-core>=0.5.2"]  # numpy: safetensors saves torch tensors through it; fla-core: KDA's GPU kernel, used when Triton is there; torch comes from the root group that scripts/setup.py picks
+dependencies = ["wpt-utils", "safetensors>=0.4", "numpy>=2", "fla-core>=0.5.2"]  # wpt-utils: the one sha256 of a file; numpy: safetensors saves torch tensors through it; fla-core: KDA's GPU kernel, used when Triton is there; torch comes from the root group that scripts/setup.py picks
 
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14.0"]

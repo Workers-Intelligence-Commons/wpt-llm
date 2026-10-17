@@ -120,16 +120,17 @@ def of_file(source_id: str, path: str, entry: dict, store, sha256: str) -> list[
     return list(enumerate(parse(source_id, path, store.get_bytes(sha256)), start=1))
 
 
-def read(repo: Repo, store, tag: str) -> tuple[list[tuple[str, dict]], dict]:
+def read(repo: Repo, store, tag: str, telemetry=None) -> tuple[list[tuple[str, dict]], dict]:
     """([(conversation id, conversation)], {source id: address, revision,
     licenses}) for every chat file tagged `tag` in an admitted source, in
     source and path order. A conversation id is "<source>/<path>:<line>", or
-    with `tree` "<source>/<path>:<id of its last message>"."""
+    with `tree` "<source>/<path>:<id of its last message>". telemetry: as
+    for source_tree."""
     conversations, sources = [], {}
     for source in repo.sources():
         if not source.admitted:
             continue
-        tree, _ = source_tree(source, store)
+        tree, _ = source_tree(source, store, telemetry)
         for path in sorted(tree, key=str.encode):
             entry = markdown.format_of(source, path)
             if entry["format"] != "chat" or tag not in tags_of(source, path):

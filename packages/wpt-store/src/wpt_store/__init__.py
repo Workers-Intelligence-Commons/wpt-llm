@@ -9,24 +9,42 @@ An object is stored under the sha256 of its bytes and checked against it on
 every read. A ref is a small named pointer to an object (for example a build
 fingerprint to its result), so "already done" is a lookup.
 
+A record folder holds files written by name, not by content: a command's
+own account of one run (see wpt_telemetry), records/<folder>/<name>. A file
+is written whole, or added to line by line, never both. A file written whole
+is in the store when the call returns. A line added to a local store is on
+the disk when the call returns; an S3 store holds added lines back until
+flush_records() sends them together, since each S3 request costs time and
+money. Lines added by several processes read back in the order they were
+added.
+
 For S3, credentials and a non-AWS endpoint come from boto3's own settings
 (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_ENDPOINT_URL...). Objects read
 from S3 are cached locally after their check.
 
 Failures: StoreSettingError (no or bad WPT_STORE), MissingObject (no such
-object or ref target), CorruptObject (stored bytes do not match their sha256;
-the copy is not used).
+object, ref target or record file), CorruptObject (stored bytes do not match
+their sha256, or a record part is not in the store's format; the copy is not
+used), MixedRecord (a whole write to a file added to line by line, or the
+reverse; nothing is written). Writing raises what the folder or the bucket
+raised (OSError, botocore's errors): nothing is known to be stored.
 """
 
 import hashlib
 import os
 import re
+import secrets
 import tempfile
+import threading
+import time
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
+from wpt_utils.files import sha256_file
+
 SHA256 = re.compile(r"[0-9a-f]{64}")
-NAME = re.compile(r"[A-Za-z0-9._-]+")
+NAME_CHARACTERS = "A-Za-z0-9._-"  # what a ref or record name may hold, as a regular expression class
+NAME = re.compile(f"[{NAME_CHARACTERS}]+")
 CHUNK = 1 << 20
 
 
@@ -46,12 +64,11 @@ class CorruptObject(StoreError):
     pass
 
 
-def sha256_file(path) -> str:
-    h = hashlib.sha256()
-    with open(path, "rb") as f:
-        while block := f.read(CHUNK):
-            h.update(block)
-    return h.hexdigest()
+class MixedRecord(StoreError):
+    """A record file is written whole or added to line by line, never both."""
+
+
+WHOLE, APPENDED = "written whole", "added to line by line"  # the two kinds of record file
 
 
 def _check_sha(sha):
@@ -65,12 +82,35 @@ def _check_ref(kind, name):
             raise ValueError(f"ref parts use letters, digits, '.', '_' and '-' only: {part!r}")
 
 
+def check_record_name(part):
+    """ValueError unless part can name a record folder or file: letters,
+    digits, '.', '_' and '-' only, not starting with '.'."""
+    if not NAME.fullmatch(part) or part.startswith("."):
+        raise ValueError(f"record folders and files use letters, digits, '.', '_' and '-' only, "
+                         f"and do not start with '.': {part!r}")
+
+
+def as_record_name(text) -> str:
+    """text made into a part of a record folder or file name that
+    check_record_name accepts: '-' for each character it does not allow,
+    without the leading '.'s, and '-' for nothing left."""
+    return re.sub(f"[^{NAME_CHARACTERS}]", "-", str(text)).lstrip(".") or "-"
+
+
+def _check_record(folder, name=None):
+    for part in (folder, name) if name is not None else (folder,):
+        check_record_name(part)
+
+
 class Store:
     """Operations every store offers. Subclasses provide the _raw_* methods
     and `scratch`: a local folder for files derived from objects (such as
     token files for training), which may be deleted at any time."""
 
     scratch: Path
+
+    def __init__(self):
+        self._record_kinds = {}  # (folder, name) -> WHOLE or APPENDED, as this store learned it
 
     def put_bytes(self, data: bytes) -> str:
         sha = hashlib.sha256(data).hexdigest()
@@ -152,13 +192,68 @@ class Store:
         _check_ref(kind, name)
         self._raw_delete_ref(kind, name)
 
+    def write_record(self, folder: str, name: str, data: bytes):
+        """Write a record file whole, replacing any earlier one; a crash
+        meanwhile leaves the earlier one or nothing, never a part. In the
+        store when it returns. MixedRecord for a file added to line by line."""
+        _check_record(folder, name)
+        self._claim(folder, name, WHOLE)
+        self._raw_write_record(folder, name, data)
+
+    def append_record(self, folder: str, name: str, data: bytes):
+        """Add lines at the end of a record file, creating it. Several
+        processes may add to one file; reading returns every addition in the
+        order they were made. The first addition of this store to a file
+        whose last line is cut (a crash while it was written) ends that line
+        first, so the new lines start on their own. A local store has the
+        lines on the disk when it returns; an S3 store holds them until
+        flush_records(). MixedRecord for a file written whole."""
+        _check_record(folder, name)
+        self._claim(folder, name, APPENDED)
+        self._raw_append_record(folder, name, data)
+
+    def flush_records(self):
+        """Send the lines append_record holds back (S3); a local store holds
+        none. Raises what the bucket raised: the lines not sent are kept, to
+        send again."""
+        self._raw_flush_records()
+
+    def _claim(self, folder, name, kind):
+        """Refuse to mix the two kinds of record file. The kind is read from
+        the store the first time this store touches a file, so it holds for
+        files that another process made."""
+        known = self._record_kinds.get((folder, name))
+        if known is None:
+            known = self._raw_record_kind(folder, name) or kind
+        if known != kind:
+            raise MixedRecord(f"record file {folder}/{name} is {known}; it cannot also be {kind}")
+        self._record_kinds[(folder, name)] = known
+
+    def read_record(self, folder: str, name: str) -> bytes:
+        _check_record(folder, name)
+        data = self._raw_read_record(folder, name)
+        if data is None:
+            raise MissingObject(f"no record file {folder}/{name} in the store")
+        return data
+
+    def record_files(self, folder: str) -> list[str]:
+        """The names of a record folder's files, sorted; [] for no folder."""
+        _check_record(folder)
+        return sorted(self._raw_record_files(folder))
+
+    def record_folders(self) -> list[str]:
+        """Every record folder, sorted by name."""
+        return sorted(self._raw_record_folders())
+
 
 class LocalStore(Store):
     """objects/<first 2 hex>/<sha256> and refs/<kind>/<name> under one folder."""
 
     def __init__(self, root):
+        super().__init__()
         self.root = Path(root)
         self.scratch = self.root / "scratch"
+        self._appending = set()  # (folder, name) this store added to: their marker exists and their last line ends
 
     def __repr__(self):
         return f"LocalStore({str(self.root)!r})"
@@ -198,6 +293,59 @@ class LocalStore(Store):
     def _raw_delete_ref(self, kind, name):
         (self.root / "refs" / kind / name).unlink(missing_ok=True)
 
+    def _record(self, folder, name=None):
+        return self.root / "records" / folder / name if name else self.root / "records" / folder
+
+    def _raw_write_record(self, folder, name, data):
+        _atomic_write(self._record(folder, name), data, durable=True)
+
+    # A file added to line by line has a marker beside it, .appended-<name>,
+    # so a later process knows its kind (see Store._claim).
+
+    def _marker(self, folder, name):
+        return self._record(folder) / f".appended-{name}"
+
+    def _raw_record_kind(self, folder, name):
+        if self._marker(folder, name).exists():
+            return APPENDED
+        return WHOLE if self._record(folder, name).exists() else None
+
+    def _raw_append_record(self, folder, name, data):
+        path = self._record(folder, name)
+        first = (folder, name) not in self._appending
+        created = first and not self._marker(folder, name).exists()
+        if created:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            self._marker(folder, name).touch()
+        with open(path, "a+b") as out:
+            if first and out.seek(0, os.SEEK_END) > 0:
+                out.seek(-1, os.SEEK_END)
+                if out.read(1) != b"\n":  # the last line was cut by a crash: end it
+                    data = b"\n" + data
+            out.write(data)
+            out.flush()
+            os.fsync(out.fileno())  # on the disk before the caller goes on
+        if created:
+            _sync_folder(path.parent)
+        self._appending.add((folder, name))
+
+    def _raw_flush_records(self):
+        pass  # every line is on the disk already
+
+    def _raw_read_record(self, folder, name):
+        try:
+            return self._record(folder, name).read_bytes()
+        except FileNotFoundError:
+            return None
+
+    def _raw_record_files(self, folder):
+        found = self._record(folder)
+        return [p.name for p in found.iterdir() if p.is_file() and not p.name.startswith(".")] if found.is_dir() else []
+
+    def _raw_record_folders(self):
+        found = self.root / "records"
+        return [p.name for p in found.iterdir() if p.is_dir()] if found.is_dir() else []
+
 
 class S3Store(Store):
     """The same layout as LocalStore, as keys under s3://bucket/prefix."""
@@ -205,11 +353,15 @@ class S3Store(Store):
     def __init__(self, bucket, prefix, cache_dir=None, client=None):
         import boto3
 
+        super().__init__()
         self.bucket = bucket
         self.prefix = prefix.strip("/")
         self.client = client or boto3.client("s3")
         self.cache = Path(cache_dir) if cache_dir else _default_cache() / bucket / (self.prefix or "_")
         self.scratch = self.cache / "scratch"
+        # lines added and not yet sent: (folder, name) -> [(time, number, data)]; see _raw_append_record
+        self._writer, self._pending, self._added, self._last = secrets.token_hex(4), {}, 0, 0
+        self._pending_lock = threading.Lock()
 
     def __repr__(self):
         return f"S3Store(s3://{self.bucket}/{self.prefix})"
@@ -283,6 +435,98 @@ class S3Store(Store):
     def _raw_delete_ref(self, kind, name):
         self.client.delete_object(Bucket=self.bucket, Key=self._key("refs", kind, name))
 
+    # An S3 object cannot grow. A file added to line by line is a folder of
+    # parts, records/<folder>/<name>/<time>-<writer>-<number>: each part holds
+    # the additions one flush_records() sent, each one framed as
+    # "<time> <number> <length>\n" and its bytes. <time> is when it was added
+    # (nanoseconds since 1970, never twice the same for one writer), <writer>
+    # is this store's random id, and <number> counts its additions; a part is
+    # named after its first addition. Reading sorts every addition of every
+    # part by (time, writer, number): the order they were made, across
+    # processes, whenever each was sent.
+
+    def _raw_record_kind(self, folder, name):
+        parts, _ = self._list(self._key("records", folder, name) + "/", max_keys=1)
+        if parts:
+            return APPENDED
+        return WHOLE if self._record_object(folder, name) is not None else None
+
+    def _raw_write_record(self, folder, name, data):
+        self.client.put_object(Bucket=self.bucket, Key=self._key("records", folder, name), Body=data)
+
+    def _raw_append_record(self, folder, name, data):
+        with self._pending_lock:
+            self._last = max(time.time_ns(), self._last + 1)
+            self._added += 1
+            self._pending.setdefault((folder, name), []).append((self._last, self._added, data))
+
+    def _raw_flush_records(self):
+        # A group leaves _pending only once S3 answered its upload, so a send
+        # that failed or was interrupted (Ctrl+C) loses no line. When the
+        # interruption came after S3 stored it, the next flush sends the
+        # group again under the same key, since its first addition is the
+        # same: S3 replaces that object with the group and the lines added
+        # since, and no line is ever stored twice.
+        with self._pending_lock:
+            for (folder, name), additions in list(self._pending.items()):
+                first_time, first_number, _ = additions[0]
+                body = b"".join(b"%d %d %d\n" % (moment, number, len(data)) + data for moment, number, data in additions)
+                key = self._key("records", folder, name, f"{first_time:020d}-{self._writer}-{first_number:010d}")
+                self.client.put_object(Bucket=self.bucket, Key=key, Body=body)
+                del self._pending[(folder, name)]
+
+    def _list(self, prefix, delimiter=None, max_keys=None):
+        """(keys, sub-prefixes) under prefix, every page (only the first
+        max_keys keys, when given)."""
+        keys, prefixes = [], []
+        options = {"Bucket": self.bucket, "Prefix": prefix, **({"Delimiter": delimiter} if delimiter else {})}
+        if max_keys:
+            page = self.client.list_objects_v2(**options, MaxKeys=max_keys)
+            return [item["Key"] for item in page.get("Contents", [])], []
+        for page in self.client.get_paginator("list_objects_v2").paginate(**options):
+            keys += [item["Key"] for item in page.get("Contents", [])]
+            prefixes += [item["Prefix"] for item in page.get("CommonPrefixes", [])]
+        return keys, prefixes
+
+    def _record_object(self, folder, name):
+        from botocore.exceptions import ClientError
+
+        try:
+            return self.client.get_object(Bucket=self.bucket, Key=self._key("records", folder, name))["Body"].read()
+        except ClientError as error:
+            if error.response["Error"]["Code"] in ("404", "NoSuchKey", "NotFound"):
+                return None
+            raise
+
+    def _raw_read_record(self, folder, name):
+        parts, _ = self._list(self._key("records", folder, name) + "/")
+        if not parts:
+            return self._record_object(folder, name)
+        additions = []
+        for key in parts:
+            writer = key.rsplit("/", 1)[1].split("-")[1]
+            body = self.client.get_object(Bucket=self.bucket, Key=key)["Body"].read()
+            at = 0
+            try:
+                while at < len(body):
+                    end = body.index(b"\n", at)
+                    moment, number, length = (int(field) for field in body[at:end].split(b" "))
+                    additions.append((moment, writer, number, body[end + 1:end + 1 + length]))
+                    at = end + 1 + length
+            except ValueError:
+                raise CorruptObject(f"record part {key} is not in the store's format") from None
+        return b"".join(data for *_, data in sorted(additions))
+
+    def _raw_record_files(self, folder):
+        prefix = self._key("records", folder) + "/"
+        keys, appended = self._list(prefix, "/")
+        return {key[len(prefix):] for key in keys} | {p[len(prefix):-1] for p in appended}
+
+    def _raw_record_folders(self):
+        prefix = self._key("records") + "/"
+        _, folders = self._list(prefix, "/")
+        return [p[len(prefix):-1] for p in folders]
+
 
 def open_store(url: str) -> Store:
     """A store from a WPT_STORE value."""
@@ -343,13 +587,33 @@ def _atomic_copy(source, target: Path):
         raise
 
 
-def _atomic_write(target: Path, data: bytes):
+def _atomic_write(target: Path, data: bytes, durable=False):
+    """durable: on the disk, name included, when it returns, not only in the
+    system's memory."""
     target.parent.mkdir(parents=True, exist_ok=True)
-    fd, tmp = tempfile.mkstemp(dir=target.parent)
+    fd, tmp = tempfile.mkstemp(dir=target.parent, prefix=".partial-")
     try:
         with os.fdopen(fd, "wb") as out:
             out.write(data)
+            if durable:
+                out.flush()
+                os.fsync(out.fileno())
         os.replace(tmp, target)
     except BaseException:
         Path(tmp).unlink(missing_ok=True)
         raise
+    if durable:
+        _sync_folder(target.parent)
+
+
+def _sync_folder(folder: Path):
+    """Put a folder's list of names on the disk, so a new file's name survives
+    a power cut. Windows cannot open a folder this way: there, only the
+    file itself is synced."""
+    if os.name == "nt":
+        return
+    fd = os.open(folder, os.O_RDONLY)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)

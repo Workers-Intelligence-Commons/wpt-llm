@@ -18,7 +18,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from .programs import program
+from wpt_utils.programs import program
 
 SSH_SIGNERS = "data/allowed-signers"
 GPG_KEYS = "data/allowed-gpg-keys.asc"

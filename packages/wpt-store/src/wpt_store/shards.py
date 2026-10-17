@@ -28,7 +28,8 @@ import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-from wpt_store import CorruptObject, sha256_file
+from wpt_store import CorruptObject
+from wpt_utils.files import sha256_file
 
 SCHEMA = pa.schema([
     ("tokens", pa.list_(pa.uint32())),

@@ -4,8 +4,9 @@ serve it on http://127.0.0.1:N/ until Ctrl+C."""
 import argparse
 import sys
 
-from wpt_dataset.errors import MissingTool, RuleViolation
+from wpt_dataset.errors import RuleViolation
 from wpt_dataset.repo import Repo
+from wpt_utils.programs import MissingTool
 
 from . import pages, ui
 from .server import make_server

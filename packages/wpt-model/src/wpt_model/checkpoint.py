@@ -21,6 +21,7 @@ from pathlib import Path
 import torch
 from safetensors import safe_open
 from safetensors.torch import load_file, save_file
+from wpt_utils.files import sha256_file
 
 from .config import ModelConfig
 from .model import WPT
@@ -85,7 +86,7 @@ def load_model(directory, device="cpu") -> WPT:
     directory = Path(directory)
     config = ModelConfig.load(directory / CONFIG_NAME)
     state = {}
-    for name in _weight_files(directory):
+    for name in weight_files(directory):
         state.update(load_file(directory / name))
     model = WPT(config)
     model.load_state_dict(state)
@@ -96,7 +97,7 @@ def tokenizer_identity(directory) -> tuple[str, str]:
     """(tokenizer name, sha256 of tokenizer.json) as the weight files' headers name them."""
     directory = Path(directory)
     found = set()
-    for name in _weight_files(directory):
+    for name in weight_files(directory):
         with safe_open(directory / name, framework="pt") as weights:
             header = weights.metadata() or {}
         found.add((header.get("tokenizer"), header.get("tokenizer_sha256")))
@@ -121,11 +122,23 @@ def load_tokenizer(directory) -> bytes:
     return data
 
 
-def _weight_files(directory: Path) -> list[str]:
+def weight_files(directory) -> list[str]:
+    """The names of a model folder's weight files, sorted: model.safetensors,
+    or the shards its index names. What "the weights" of a folder are,
+    wherever they are hashed or read."""
+    directory = Path(directory)
     index_path = directory / INDEX_NAME
     if index_path.exists():
         return sorted(set(json.loads(index_path.read_text(encoding="utf-8"))["weight_map"].values()))
     return [SINGLE_NAME]
+
+
+def weight_hashes(directory) -> dict[str, str]:
+    """{name: sha256} of each of weight_files(directory), hashed as the store
+    hashes files (wpt_utils.files), so that every command names the same weights alike.
+    OSError when one cannot be read."""
+    directory = Path(directory)
+    return {name: sha256_file(directory / name) for name in weight_files(directory)}
 
 
 def _split(state, max_shard_bytes):

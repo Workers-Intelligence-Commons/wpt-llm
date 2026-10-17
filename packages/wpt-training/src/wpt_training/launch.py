@@ -7,10 +7,12 @@ lacks); this covers one machine on every system.
 When a process fails, the others are stopped and, up to max_restarts
 times, all start again; each is told how many times through
 TORCHELASTIC_RESTART_COUNT, as torchrun's --max-restarts does, so a
-restarted run knows to continue from its checkpoint. Two exits are never
-restarted: REFUSED (the run refused its input, and would again) and
-STOPPED (it was asked to stop). A stop signal to this launcher (Ctrl+C,
-SIGTERM, a closed terminal) is passed on to every process once: they
+restarted run knows to continue from its checkpoint. Three exits are
+never restarted: REFUSED (the run refused its input, and would again),
+RECORD_FAILED (the run's record could not be written: nothing more may
+happen without it, wpt_telemetry) and STOPPED (it was asked to stop). A
+stop signal to this launcher (Ctrl+C, SIGTERM, a closed terminal) is
+passed on to every process once: they
 finish their step, save, and exit with STOPPED. A second one is passed on
 too, and stops them at once. A signal ignored when the launcher starts
 (nohup ignores "hang up") stays ignored.
@@ -24,17 +26,20 @@ import sys
 import threading
 import time
 
+from wpt_telemetry import RECORD_FAILED
+
 REFUSED = 2
 STOPPED = 130
 GRACE = 30  # seconds a process gets to exit once its peers failed, before it is killed
 
 
-def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None) -> int:
+def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None, environ=None) -> int:
     """Run `python ARGUMENTS` processes times at once, each told its place
     the way torchrun tells it (RANK, LOCAL_RANK, WORLD_SIZE,
     LOCAL_WORLD_SIZE, MASTER_ADDR, MASTER_PORT). Returns 0 when all
     succeed; otherwise the exit code of the first that failed, once no
-    restart is left or allowed."""
+    restart is left or allowed. environ: more variables every process gets,
+    such as where the run's record is (wpt_telemetry)."""
     log = log or (lambda text: print(text, file=sys.stderr, flush=True))
     running, stopping = [], []
 
@@ -52,8 +57,8 @@ def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None
                 previous[getattr(signal, name)] = signal.signal(getattr(signal, name), forward)
     try:
         for attempt in range(max_restarts + 1):
-            code = _run_once(processes, arguments, attempt, running, stopping)
-            if code == 0 or stopping or code in (REFUSED, STOPPED) or attempt == max_restarts:
+            code = _run_once(processes, arguments, attempt, running, stopping, environ or {})
+            if code == 0 or stopping or code in (REFUSED, RECORD_FAILED, STOPPED) or attempt == max_restarts:
                 return STOPPED if stopping and code != 0 else code
             log(f"a training process failed (exit code {code}): starting every process again "
                 f"({attempt + 1} of {max_restarts} restarts)")
@@ -63,7 +68,7 @@ def launch(processes: int, arguments: list[str], max_restarts: int = 0, log=None
             signal.signal(number, handler)
 
 
-def _run_once(processes, arguments, attempt, running, stopping) -> int:
+def _run_once(processes, arguments, attempt, running, stopping, environ) -> int:
     with socket.socket() as probe:  # a free port for the processes to meet on
         probe.bind(("127.0.0.1", 0))
         port = probe.getsockname()[1]
@@ -72,7 +77,7 @@ def _run_once(processes, arguments, attempt, running, stopping) -> int:
     # in their own process group, so a Ctrl+C reaches them only once, through forward()
     group = ({"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == "nt" else {"process_group": 0})
     running[:] = [subprocess.Popen([sys.executable, *arguments],
-                                   env={**os.environ, **shared, "RANK": str(rank), "LOCAL_RANK": str(rank)}, **group)
+                                   env={**os.environ, **environ, **shared, "RANK": str(rank), "LOCAL_RANK": str(rank)}, **group)
                   for rank in range(processes)]
     try:
         while True:

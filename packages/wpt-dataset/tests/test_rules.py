@@ -137,12 +137,53 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
     kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
     kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
 
     assert main(["--root", str(repo.root), "check", "--fetch"]) == 0
     assert main(["--root", str(repo.root), "build", "d"]) == 0
     dataset_id = capsys.readouterr().out.strip().splitlines()[-1]
     assert store.get_ref("datasets", dataset_id)
     assert repo.lock_path("t").exists()
+    # the build's record names the dataset it wrote, which training records as its input,
+    # and each source it read
+    [folder] = store.record_folders()
+    assert "-wpt-dataset-build-d-" in folder  # named after the recipe it built
+    ids = json.loads(store.read_record(folder, "ids.json"))
+    assert ids["outputs"] == {"dataset": dataset_id, "dataset_record": store.get_ref("datasets", dataset_id)}
+    assert list(ids["inputs"]["sources"]) == repo.source_ids()
+    events = [json.loads(line) for line in store.read_record(folder, "events.jsonl").splitlines()]
+    fetched = {e["attributes"]["source"] for e in events if e.get("name") == "source" and e["kind"] == "span_start"}
+    assert fetched == set(repo.source_ids())
+    [locked] = [e["attributes"] for e in events if e.get("name") == "tokenizer.lock"]  # the lock file it wrote
+    assert locked == {"path": "data/recipes/tokenizers/t.lock.json",
+                      "vocabulary": json.loads(repo.lock_path("t").read_text())["vocabulary_sha256"]}
+    assert json.loads(store.read_record(folder, "end.json"))["status"] == "succeeded"
+
+
+def test_a_build_whose_record_breaks_writes_no_lock_file(kit, repo, store, git_upstream, monkeypatch, capsys):
+    # the lock changes the repository: it may change only once the record
+    # says so, like every other step of a build
+    from wpt_store import LocalStore
+
+    kit.add_source(repo, store, "example", "ok", {
+        "type": "git", "address": git_upstream[0], "revision": git_upstream[1],
+        "tags": [{"tags": ["text"], "paths": ["**"]}]})
+    kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "text", "select": "text", "weight": 1}]})
+    kit.write_recipe(repo, "tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})
+    kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
+    monkeypatch.setenv("WPT_STORE", store.root.as_uri())
+    monkeypatch.delenv("OTEL_EXPORTER_OTLP_ENDPOINT", raising=False)
+    real = LocalStore._raw_append_record
+
+    def disk_full_at_the_lock(self, folder, name, data):
+        if b'"name": "tokenizer.lock"' in data:
+            raise OSError(28, "No space left on device")
+        real(self, folder, name, data)
+
+    monkeypatch.setattr(LocalStore, "_raw_append_record", disk_full_at_the_lock)
+    assert main(["--root", str(repo.root), "build", "d"]) == 3
+    assert "No space left on device" in capsys.readouterr().err
+    assert not repo.lock_path("t").exists()
 
 
 def test_migrating_shape_1_tokenizer_files(kit, repo):

@@ -12,9 +12,9 @@ Next to its weights, a model folder carries:
     README.md     the model card: the same licenses first, then what the
                   model is, how it was built, and its evaluation results
 
-write_documents(folder) generates them from the folder's own records
-(config.json, provenance.json, evals/*.json), so they cannot disagree with
-what the folder holds. WEIGHT_METADATA goes into the header of every weight
+write_documents(folder) generates them (documents(folder) gives their text)
+from the folder's own records (config.json, provenance.json, evals/*.json),
+so they cannot disagree with what the folder holds. WEIGHT_METADATA goes into the header of every weight
 file, so the licenses travel with the weights even alone.
 
 OUTPUT-NOTICE and LICENSE in this package are copies of the repository's
@@ -45,16 +45,20 @@ def license_text() -> str:
     return (files(__package__) / "LICENSE").read_text(encoding="utf-8")
 
 
-def write_documents(folder):
-    """Write LICENSE, NOTICE and README.md into a model folder from its
-    config.json, provenance.json and evals/*.json. Replaces earlier copies."""
+def documents(folder) -> dict[str, str]:
+    """{LICENSE, NOTICE and README.md: their text} for a model folder, from
+    its config.json, provenance.json and evals/*.json."""
     folder = Path(folder)
     config = _read(folder / "config.json")
     provenance = _read(folder / "provenance.json")
     evals = [_read(path) for path in sorted((folder / EVALS_NAME).glob("*.json"))]
-    for name, text in ((LICENSE_NAME, license_text()), (NOTICE_NAME, notice(provenance)),
-                       (CARD_NAME, card(config, provenance, evals))):
-        (folder / name).write_text(text, encoding="utf-8", newline="\n")
+    return {LICENSE_NAME: license_text(), NOTICE_NAME: notice(provenance), CARD_NAME: card(config, provenance, evals)}
+
+
+def write_documents(folder):
+    """Write documents(folder) into the folder. Replaces earlier copies."""
+    for name, text in documents(folder).items():
+        (Path(folder) / name).write_text(text, encoding="utf-8", newline="\n")
 
 
 def write_credits(folder, provenance, read_object):
