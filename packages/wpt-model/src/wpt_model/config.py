@@ -1,12 +1,24 @@
 """The numbers that define a WPT model (docs/model.md). Saved as config.json
 next to the weights, so any saved model can be rebuilt without knowing how
 it was trained. What docs/model.md fixes for every size (4 mHC streams,
-gated MLA every 4th layer and the last, hash routing in the first 3 layers,
-2 shared experts) is in the code, not here."""
+a global layer every 4th layer and the last, the window, merging ratios,
+rotary dimensions and YaRN, the entries' FP8 and FP4 formats, hash routing
+in the first 3 layers, 2 shared experts) is in the code, not here."""
 
 import json
 from dataclasses import asdict, dataclass, fields
 from pathlib import Path
+
+from .attention import ROPE_DIMS
+from .formats import FP8_BLOCK
+
+GLOBAL_EVERY = 4  # a global layer (CSA or HCA) every 4th layer and the last; KDA elsewhere
+KINDS = ("CSA", "HCA")
+
+
+def global_layers(n_layer):
+    """The numbers (from 1) of the global layers of an n_layer model."""
+    return [n for n in range(1, n_layer + 1) if n % GLOBAL_EVERY == 0 or n == n_layer]
 
 
 @dataclass(frozen=True)
@@ -14,12 +26,19 @@ class ModelConfig:
     vocab_size: int
     block_size: int         # tokens per training window (the model itself has no length limit)
     n_layer: int
+    global_attention: tuple  # "CSA" or "HCA" for each global layer, in order
     d_model: int            # width of the residual streams
     kda_heads: int
     kda_head_dim: int       # keys and values of a KDA head
-    mla_heads: int
-    mla_head_dim: int       # queries, keys and values of an MLA head
-    mla_kv_rank: int        # width of the compressed key-value vector c_t
+    attention_heads: int    # query heads of CSA and HCA layers and the MTP block
+    attention_head_dim: int  # each query head and the one key-value head; the last 64 dimensions rotate,
+                             # the others are stored in FP8 blocks of 64
+    query_rank: int         # width of the query latent c^Q, shared with the indexer
+    output_groups: int      # groups of query heads in the grouped output projection
+    output_rank: int        # width of each group's intermediate output
+    index_heads: int        # query heads of the CSA indexer
+    index_head_dim: int     # each indexer head and key, a power of 2 (the Hadamard rotation); the last 64 rotate
+    index_top_k: int        # merged entries each query attends to in a CSA layer
     n_experts: int          # routed experts per layer
     top_k: int              # routed experts per token
     expert_width: int       # hidden width of a routed expert, in the latent space
@@ -33,15 +52,27 @@ class ModelConfig:
 
     def __post_init__(self):
         object.__setattr__(self, "engram_layers", tuple(self.engram_layers))
+        object.__setattr__(self, "global_attention", tuple(self.global_attention))
         problems = [f"{f.name} must be at least 1" for f in fields(self)
-                    if f.name != "engram_layers" and getattr(self, f.name) < 1]
+                    if f.name not in ("engram_layers", "global_attention") and getattr(self, f.name) < 1]
         if self.n_layer < 2:
-            problems.append("n_layer must be at least 2: KDA layers carry the position information, and the last "
-                            "layer is MLA")
+            problems.append("n_layer must be at least 2: the last layer is CSA or HCA, the first KDA")
         if self.block_size < 2:
             problems.append("block_size must be at least 2: multi-token prediction reads the token after next")
         if not self.top_k < self.n_experts:
             problems.append("top_k must be smaller than n_experts: Quantile Balancing reads the (k+1)-th score")
+        expected = len(global_layers(self.n_layer))
+        if len(self.global_attention) != expected or not set(self.global_attention) <= set(KINDS):
+            problems.append(f"global_attention must name CSA or HCA for each of the {expected} global layers "
+                            f"(layers {', '.join(map(str, global_layers(self.n_layer)))})")
+        if not (self.attention_head_dim > ROPE_DIMS and (self.attention_head_dim - ROPE_DIMS) % FP8_BLOCK == 0):
+            problems.append(f"attention_head_dim must be {ROPE_DIMS} rotary dimensions plus a multiple of {FP8_BLOCK}, "
+                            "the FP8 blocks of the others")
+        c = self.index_head_dim
+        if not (c > ROPE_DIMS and c & (c - 1) == 0):
+            problems.append(f"index_head_dim must be a power of 2 above {ROPE_DIMS}, for the Hadamard rotation")
+        if self.attention_heads % self.output_groups:
+            problems.append("attention_heads must be a multiple of output_groups")
         if self.engram_order < 2:
             problems.append("engram_order must be at least 2")
         if not self.engram_table_size < 2**31:

@@ -1,5 +1,5 @@
 {
-  "schema": 2,
+  "schema": 3,
   "data": {
     "mixture": "classics",
     "tokenizer": "classics",
@@ -9,12 +9,20 @@
   "model": {
     "block_size": 256,
     "n_layer": 4,
+    "global_attention": [
+      "CSA"
+    ],
     "d_model": 128,
     "kda_heads": 4,
     "kda_head_dim": 32,
-    "mla_heads": 4,
-    "mla_head_dim": 32,
-    "mla_kv_rank": 64,
+    "attention_heads": 4,
+    "attention_head_dim": 128,
+    "query_rank": 32,
+    "output_groups": 1,
+    "output_rank": 128,
+    "index_heads": 2,
+    "index_head_dim": 128,
+    "index_top_k": 16,
     "n_experts": 8,
     "top_k": 2,
     "expert_width": 128,
@@ -39,5 +47,6 @@
     "eval_batches": 20,
     "seed": 1337
   },
-  "posttrain": []
+  "posttrain": [],
+  "note": "A test to see every step work on one machine: 4.8M parameters, 256-token windows. Its one global layer (layer 4) is CSA with a top 16 of its 64 merged entries, so the selection is exercised even in short windows; with 4 layers it has no room for an HCA layer. Changed on 2026-10-17: gated MLA became DeepSeek-V4's CSA (4 heads of 128 sharing one key-value head, an indexer of 2 heads of 128, V4-Flash's scaled to the width) and the MTP block's attention a 128-token window; it grew from 4.6M to 4.8M parameters, and weights trained before no longer load."
 }

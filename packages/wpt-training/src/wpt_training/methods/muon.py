@@ -1,15 +1,19 @@
 """Muon for matrix weights, AdamW for the rest, on a multi-step schedule
 (docs/model.md, "Training").
 
-Muon (Moonlight): the momentum of each matrix is orthogonalized by
-Newton-Schulz steps, then scaled by 0.2 sqrt(max(A, B)) for an A x B matrix,
-with decoupled weight decay: W -= lr (0.2 sqrt(max(A, B)) O + wd W). The
+Muon as DeepSeek-V4 runs it: the momentum of each matrix is orthogonalized
+by hybrid Newton-Schulz steps (8 that bring the singular values near 1, then
+2 that settle them at 1), then scaled by 0.18 sqrt(max(A, B)) for an A x B
+matrix, so the update's RMS is 0.18, with decoupled weight decay:
+W -= lr (0.18 sqrt(max(A, B)) O + wd W). The
 model names each weight's role (WPT.optimizer_roles): query, key and value
-projections are orthogonalized head by head and routed experts one by one;
-the embedding, output head, norms and mHC's biases and gating factors take
-AdamW; Engram's tables take Adam at table_lr_factor times the rate, with no
-weight decay. After each step, QK-Clip scales the MLA heads whose largest
-query-key score passed qk_clip (0 turns it off).
+projections are orthogonalized head by head, routed experts one by one and
+the other logically separate matrices (an output group, a merging's
+projection pair) apart; the embedding, output head, norms, mHC's biases and
+gating factors, attention sinks and merging biases take AdamW; Engram's
+tables take Adam at table_lr_factor times the rate, with no weight decay.
+No QK-Clip: CSA and HCA normalize their queries and key-value entries, which
+keeps their scores bounded (DeepSeek-V4).
 
 Schedule (DeepSeek LLM): linear warm-up to lr over `warmup` steps, then
 first_factor of it after first_drop of the steps and second_factor after
@@ -33,10 +37,9 @@ SETTINGS = {
     "table_lr_factor": 5.0,
     "warmup": 2000, "first_drop": 0.8, "first_factor": 0.316, "second_drop": 0.9, "second_factor": 0.1,
     "mtp_weight": 0.3, "mtp_late_weight": 0.1, "mtp_switch": 0.676,
-    "qk_clip": 100.0,
 }
-NEWTON_SCHULZ = (3.4445, -4.7750, 2.0315)  # Moonlight's coefficients, 5 steps
-NEWTON_SCHULZ_STEPS = 5
+NEWTON_SCHULZ = [(3.4445, -4.7750, 2.0315)] * 8 + [(2.0, -1.5, 0.5)] * 2  # DeepSeek-V4's hybrid steps
+UPDATE_RMS = 0.18  # DeepSeek-V4's gamma
 
 
 def orthogonalize(G):
@@ -46,8 +49,7 @@ def orthogonalize(G):
     if tall:
         X = X.transpose(-1, -2)
     X = X / (X.norm(dim=(-2, -1), keepdim=True) + 1e-7)
-    a, b, c = NEWTON_SCHULZ
-    for _ in range(NEWTON_SCHULZ_STEPS):
+    for a, b, c in NEWTON_SCHULZ:
         A = X @ X.transpose(-1, -2)
         X = a * X + (b * A + c * A @ A) @ X
     return X.transpose(-1, -2) if tall else X
@@ -80,7 +82,7 @@ class MuonAdamW(torch.optim.Optimizer):
             state["momentum"].mul_(mu).add_(g)
             update = orthogonalize(g.add(state["momentum"], alpha=mu).view(view)).view(p.shape)  # Nesterov
             p.mul_(1 - lr * wd)
-            p.add_(update.to(p.dtype), alpha=-lr * 0.2 * math.sqrt(max(view[-2:])))
+            p.add_(update.to(p.dtype), alpha=-lr * UPDATE_RMS * math.sqrt(max(view[-2:])))
 
     def _adamw(self, group):
         lr, wd, eps = group["lr"], group["weight_decay"], group["eps"]
@@ -120,7 +122,6 @@ class Muon(Method):
         ]
         self.optimizer = MuonAdamW([g for g in groups if g["params"]], settings["momentum"],
                                    (settings["beta1"], settings["beta2"]), settings["eps"])
-        model.track_query_keys(settings["qk_clip"] > 0)
         self.best, self.next_step = float("inf"), 1
         self._weigh_mtp()
         run.log(f"muon: {len(roles['matrix'][0])} matrices, {len(roles['vector'][0])} AdamW tensors, "
@@ -142,8 +143,6 @@ class Muon(Method):
             group["lr"] = self.settings["lr"] * group["lr_factor"] * self.factor(step)
 
     def after_update(self, model, step, reduce):
-        if self.settings["qk_clip"] > 0:
-            model.clip_query_keys(self.settings["qk_clip"], reduce)
         self.next_step = step + 1
         self._weigh_mtp()
 

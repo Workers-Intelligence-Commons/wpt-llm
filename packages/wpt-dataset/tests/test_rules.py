@@ -5,7 +5,7 @@ import pytest
 
 from wpt_dataset.cli import main
 from wpt_dataset.errors import InvalidFile, OutdatedSchema
-from wpt_dataset.migrate import migrate
+from wpt_dataset.migrate import NEW_ATTENTION, migrate
 from wpt_dataset.pools import matches, parse
 from wpt_dataset.repo import address_hash, dump_json
 
@@ -218,4 +218,25 @@ def test_migrating_shape_1_tokenizer_files(kit, repo):
     assert json.loads(recipe.read_text()) == {"schema": 2, "mixture": "m", "vocab_size": 556, "version": 1}
     lock.unlink()  # what the message asks; the next build writes a shape 2 lock
     kit.write_recipe(repo, "mixture", "m", {"pools": [{"name": "a", "select": "a", "weight": 1}]})
+    assert migrate(repo, log=lambda _: None) == []
+
+
+def test_migrating_a_shape_2_model_recipe_asks_a_person_for_the_new_attention_numbers(kit, repo):
+    # gated MLA's numbers go; CSA and HCA's, and which global layer is which,
+    # are a person's choice, so the check names the file until they are filled in
+    old = {key: value for key, value in kit.MODEL.items() if key not in (*NEW_ATTENTION, "global_attention")}
+    old.update({"mla_heads": 2, "mla_head_dim": 8, "mla_kv_rank": 8})
+    path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
+    path.write_text(dump_json({**json.loads(path.read_text()), "schema": 2, "model": old}))
+
+    with pytest.raises(InvalidFile, match=re.escape(f"{path}: at model/")):
+        migrate(repo, log=lambda _: None)
+    document = json.loads(path.read_text())
+    assert document["schema"] == 3
+    assert not any(key.startswith("mla_") for key in document["model"])
+    assert {key: document["model"][key] for key in NEW_ATTENTION} == dict.fromkeys(NEW_ATTENTION, 0)
+    assert document["model"]["global_attention"] == []
+
+    document["model"].update({key: kit.MODEL[key] for key in (*NEW_ATTENTION, "global_attention")})  # the person's choice
+    path.write_text(dump_json(document))
     assert migrate(repo, log=lambda _: None) == []

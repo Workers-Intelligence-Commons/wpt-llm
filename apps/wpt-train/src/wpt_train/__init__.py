@@ -80,6 +80,7 @@ from wpt_dataset.repo import Repo
 from wpt_inference import sample_tokens
 from wpt_model import WPT, ModelConfig, canonical_ids, save_model, weight_files
 from wpt_model.notice import WEIGHT_METADATA, write_credits, write_documents
+from wpt_model.sparse import KernelUnavailable, kernels
 from wpt_store import NAME as STORE_NAME
 from wpt_store import StoreError, store_from_settings
 from wpt_store.shards import ShardStream, sources_of, token_file
@@ -240,6 +241,7 @@ def provenance(args, recipe, record, record_object, sources, model_config, n_par
         "best_validation_loss": trained.best_val,
         "steps_trained": trained.steps,  # the last step reached: fewer than the recipe's when the method stopped early
         "weights_step": trained.weights_step,  # the step whose weights the folder holds
+        "indexer_loss": trained.indexer_loss,  # the CSA indexers' loss at that step (docs/model.md, "Attention")
         **repository(),  # repository_commit, repository_dirty
         "device": describe(strategy.device) + (f", {strategy.world_size} processes" if strategy.world_size > 1 else ""),
         "tools": {"python": platform.python_version(), "platform": platform.platform(), "rustc": RUSTC_VERSION,
@@ -456,6 +458,13 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
     model = WPT(model_config)
     model.set_canonical_ids(canonical_ids(tokenizer.decode, tokenizer.vocab_size))  # Engram's, from the vocabulary
     model.recompute = args.recompute
+    if strategy.device.type == "cuda":  # decided once, before training (docs/model.md, "Attention")
+        try:
+            chosen = kernels(strategy.device)
+        except KernelUnavailable as error:
+            raise Refused(f"KernelUnavailable: {error}") from None
+        log("attention: " + (f"{chosen.NAME} kernels" if chosen
+                             else "PyTorch (neither TileLang nor Triton is installed)"))
     model = model.to(strategy.device)
     n_params = sum(p.numel() for p in model.parameters())
     log(f"parameters: {n_params:,}")

@@ -111,7 +111,13 @@ each step.
 
 The `sft` step, in a recipe's `posttrain` list, is supervised fine-tuning:
 it reads the conversations tagged `sft`, turns each into tokens with the
-chat template, and trains the model to predict the assistant's turns only. Until a source
+chat template, and trains the model to predict the assistant's turns only.
+The CSA indexers go on learning by their own loss, as in pre-training
+(model.md, "Attention"): the step asks the model for it, adds its gradient
+and shows its value beside the loss of each epoch. A post-training step
+that changes the weights by gradients does the same:
+`model(inputs, indexer_loss=True)` returns the scores and that loss, and
+the step adds `indexers - indexers.detach()` to its own loss. Until a source
 holds such conversations, it fails with "no conversations" and writes
 nothing. Each conversation must fit the model's context; a longer one
 stops the step, since cutting it would drop the answers it holds. Its
@@ -353,7 +359,8 @@ choices, and the loss pass routes each token through the same experts
 instead of choosing again (routing replay, "R3"), so the loss scores the
 tokens through the experts that wrote them. The routers' weights do not
 change during the step, and their balancing biases do not either. The
-hash-routed layers choose from the token alone and need neither.
+hash-routed layers choose from the token alone and need neither. The CSA
+indexers go on learning by their own loss in each loss pass, as in `sft`.
 
 ### Runs
 
@@ -363,7 +370,8 @@ the same machine and setup (the same model, tasks, images and devices);
 the checks themselves may differ, as any program may. WPT's own attempts
 live in memory only: each one is dropped after its update, and nothing is
 kept on disk yet. The step prints one line per round (`ROUNDS`, passes
-over every task): the mean score, the number of attempts and of updates.
+over every task): the mean score, the number of attempts and of updates,
+and the indexers' mean loss over the round's loss passes.
 Its settings are the constants at the top of `steps/grpo.py`; to change
 them, copy the file and put its path in the recipe's `posttrain` list. The
 containers' sizes are not among them: they belong to each task.

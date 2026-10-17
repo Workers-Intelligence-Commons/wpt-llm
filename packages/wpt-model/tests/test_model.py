@@ -2,12 +2,14 @@ import pytest
 import torch
 
 from wpt_model import WPT, ModelConfig, Routes
+from wpt_model.attention import CSA_RATIO, HCA_RATIO, Attention
 from wpt_model.experts import Experts
 from wpt_model.kda import _fla_chunk_kda, chunked_kda, recurrent_kda
 from wpt_utils.device import select_device
 
-TINY = dict(vocab_size=50, block_size=16, n_layer=4, d_model=16, kda_heads=2, kda_head_dim=8, mla_heads=2,
-            mla_head_dim=8, mla_kv_rank=8, n_experts=4, top_k=2, expert_width=8, latent_width=8, shared_width=16,
+TINY = dict(vocab_size=50, block_size=16, n_layer=4, global_attention=["CSA"], d_model=16, kda_heads=2, kda_head_dim=8,
+            attention_heads=2, attention_head_dim=128, query_rank=8, output_groups=1, output_rank=8, index_heads=2,
+            index_head_dim=128, index_top_k=2, n_experts=4, top_k=2, expert_width=8, latent_width=8, shared_width=16,
             engram_layers=[2], engram_order=3, engram_heads=2, engram_dim=4, engram_table_size=31)
 
 
@@ -39,18 +41,20 @@ def test_the_gpu_kernel_gives_the_formula_s_result():
 
 
 def test_a_token_never_changes_the_scores_before_it():
-    # a language model must not see ahead: changing token 9 leaves every
-    # score at positions 0 .. 8 as it was, through KDA, MLA, Engram, the
-    # experts and the streams
+    # a language model must not see ahead: changing token 150 leaves every
+    # score at positions 0 .. 149 as it was, through KDA, CSA (its merged
+    # entries, among them the one of tokens 148 .. 151, and its indexer's
+    # choice), HCA, Engram, the experts and the streams; 300 tokens let the
+    # window slide and every kind of entry merge
     torch.manual_seed(0)
-    model = WPT(ModelConfig(**TINY)).eval()
-    ids = torch.randint(50, (2, 16))
+    model = WPT(ModelConfig(**{**TINY, "n_layer": 8, "global_attention": ["CSA", "HCA"], "block_size": 300})).eval()
+    ids = torch.randint(50, (2, 300))
     changed = ids.clone()
-    changed[:, 9] = (ids[:, 9] + 1) % 50
+    changed[:, 150] = (ids[:, 150] + 1) % 50
     with torch.no_grad():
         before, after = model(ids), model(changed)
-    assert torch.allclose(before[:, :9], after[:, :9], atol=1e-5)
-    assert not torch.allclose(before[:, 9], after[:, 9])
+    assert torch.allclose(before[:, :150], after[:, :150], atol=1e-5)
+    assert not torch.allclose(before[:, 150], after[:, 150])
 
 
 def test_quantile_balancing_gives_each_expert_its_share():
@@ -95,22 +99,51 @@ def test_a_replayed_pass_routes_each_token_through_the_experts_recorded_while_wr
 
 
 def test_recomputing_layers_trains_the_same_and_counts_each_token_once():
-    # --recompute only trades time for memory: the same gradients, and the
-    # layers' second run adds nothing to balancing or query-key records
+    # --recompute only trades time for memory: the same gradients (the
+    # indexers' too), the indexers' loss counted once, and the layers'
+    # second run adds nothing to balancing
     torch.manual_seed(0)
-    model = WPT(ModelConfig(**TINY)).train()
-    model.track_query_keys(True)
-    ids, after = torch.randint(50, (2, 16)), torch.randint(50, (2, 16))
+    model = WPT(ModelConfig(**{**TINY, "block_size": 64})).train()
+    ids, after = torch.randint(50, (2, 64)), torch.randint(50, (2, 64))
     results = []
     for recompute in (False, True):
         model.recompute = recompute
         model.zero_grad()
-        logits, ahead = model(ids, next_tokens=after)
-        (logits.logsumexp(-1).mean() + ahead.logsumexp(-1).mean()).backward()
-        experts, attention = model.layers[3].experts, model.layers[3].attention
-        results.append(([p.grad.clone() for p in model.parameters()], experts.histogram.clone(),
-                        attention.score_max.clone()))
-        experts.histogram, attention.score_max = None, None
-    (grads, counts, scores), (grads_again, counts_again, scores_again) = results
+        logits, ahead, indexers = model(ids, next_tokens=after, indexer_loss=True)
+        (logits.logsumexp(-1).mean() + ahead.logsumexp(-1).mean() + indexers).backward()
+        experts = model.layers[3].experts
+        results.append(([p.grad.clone() for p in model.parameters()], experts.histogram.clone(), indexers.detach()))
+        experts.histogram = None
+    (grads, counts, loss), (grads_again, counts_again, loss_again) = results
+    assert loss > 0 and torch.allclose(loss, loss_again)
     assert all(torch.allclose(a, b, atol=1e-6) for a, b in zip(grads, grads_again))
-    assert torch.equal(counts, counts_again) and torch.equal(scores, scores_again)
+    assert torch.equal(counts, counts_again)
+
+
+def test_the_recipe_names_the_kind_of_each_global_layer():
+    # docs/model.md: every 4th layer and the last is global, CSA or HCA as
+    # the recipe's list says, in order; a list that does not match is refused
+    model = WPT(ModelConfig(**{**TINY, "n_layer": 9, "global_attention": ["HCA", "CSA", "CSA"]}))
+    ratios = {n: layer.attention.ratio for n, layer in enumerate(model.layers, 1)
+              if isinstance(layer.attention, Attention)}
+    assert ratios == {4: HCA_RATIO, 8: CSA_RATIO, 9: CSA_RATIO}
+    with pytest.raises(ValueError, match="global_attention"):
+        ModelConfig(**{**TINY, "n_layer": 8, "global_attention": ["CSA"]})
+
+
+def test_the_indexers_learn_only_when_the_caller_asks_for_their_loss():
+    # the indexer's loss is returned by the pass that asks for it, and is
+    # the only thing that trains the indexers; a pass that does not ask
+    # returns the scores alone and leaves the indexers without a gradient
+    torch.manual_seed(0)
+    model = WPT(ModelConfig(**{**TINY, "block_size": 64})).train()
+    ids, after = torch.randint(50, (2, 64)), torch.randint(50, (2, 64))
+    indexer = model.layers[3].attention.indexer
+    logits, ahead = model(ids, next_tokens=after)
+    (logits.logsumexp(-1).mean() + ahead.logsumexp(-1).mean()).backward()
+    assert all(p.grad is None for p in indexer.parameters())
+
+    logits, indexers = model(ids, indexer_loss=True)
+    assert logits.shape == (2, 64, 50) and indexers > 0
+    indexers.backward()
+    assert all(p.grad is not None and p.grad.abs().sum() > 0 for p in indexer.parameters())

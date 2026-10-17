@@ -85,15 +85,23 @@ class Verdict:
 class Method:
     """How a model learns. A method sets self.optimizer and may override the
     rest; the defaults are the next-token loss plus the multi-token
-    prediction loss at mtp_weight, and no stopping."""
+    prediction loss at mtp_weight, plus the gradient of the model's indexer
+    loss, and no stopping."""
 
     optimizer: torch.optim.Optimizer
     mtp_weight = 0.3  # DeepSeek-V3's first weight; a method may change it as training goes
 
     def loss(self, model, x, y):
-        """The training loss of a batch: windows x, and y, the tokens after them."""
-        logits, ahead = model(x, next_tokens=y)
-        return _cross_entropy(logits, y) + self.mtp_weight * _cross_entropy(ahead[:, :-1], y[:, 1:])
+        """The losses of a batch, windows x and y, the tokens after them:
+        (training loss, indexer loss). The training loss is what the
+        backward pass starts from: its value is the language-model loss,
+        which the log shows next to the validation loss, and it carries the
+        gradient of the CSA indexers' loss too, which reaches only the
+        indexers (DeepSeek-V3.2). The indexer loss is that loss's value,
+        which the log shows beside it."""
+        logits, ahead, indexers = model(x, next_tokens=y, indexer_loss=True)
+        loss = _cross_entropy(logits, y) + self.mtp_weight * _cross_entropy(ahead[:, :-1], y[:, 1:])
+        return loss + (indexers - indexers.detach()), indexers.detach()
 
     def validation_loss(self, model, x, y):
         """The next-token loss alone, which evaluations compare."""

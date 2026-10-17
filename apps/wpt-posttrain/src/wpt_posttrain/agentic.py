@@ -132,7 +132,7 @@ class Learner:
         order = torch.Generator().manual_seed(settings.seed)
         total = equal = small = 0  # updates, and groups skipped because their rewards were equal or they were too small
         for round_ in range(1, settings.rounds + 1):
-            rewards, updates, dropped = [], 0, []
+            rewards, updates, dropped, indexers = [], 0, [], []
             permutation = torch.randperm(len(tasks), generator=order).tolist()
             for start in range(0, len(tasks), settings.tasks_per_update):
                 model.eval()
@@ -156,17 +156,20 @@ class Learner:
                     else:
                         groups.append(group)
                 model.train()
-                loss = update(model, optimizer, groups, self.device)
+                loss, indexer = update(model, optimizer, groups, self.device)
                 if loss is not None and not math.isfinite(loss):
                     model.eval()
                     return Outcome.failure(f"round {round_}: the loss is {loss}; lower LEARNING_RATE")
                 updates += loss is not None
+                if indexer is not None:
+                    indexers.append(indexer)
             if not rewards:  # every attempt was dropped, so no update could be made
                 model.eval()
                 return Outcome.failure(f"round {round_}: every attempt was dropped, Docker failed {len(dropped)} "
                                        f"times; the last time: {dropped[-1]}")
             print(f"{self.name} round {round_}/{settings.rounds}: mean {measure} {sum(rewards) / len(rewards):.4f} "
-                  f"over {len(rewards)} attempts at {len(tasks)} tasks, {updates} updates")
+                  f"over {len(rewards)} attempts at {len(tasks)} tasks, {updates} updates"
+                  + (f", indexer loss {sum(indexers) / len(indexers):.4f}" if indexers else ""))
             total += updates
         model.eval()
         if not total:
@@ -188,17 +191,19 @@ class _Recording(torch.nn.Module):
 
 def update(model, optimizer, groups, device):
     """One optimizer step on the groups' attempts, given as (attempt, routes,
-    reward), whose rewards differ within each group; the loss, or None when
-    there is nothing to learn (no group, or no token written)."""
+    reward), whose rewards differ within each group: (the loss, the mean of
+    the CSA indexers' loss over its passes), or (None, None) when there is
+    nothing to learn (no group, or no token written). The indexers learn by
+    their own loss, as in pre-training (docs/model.md, "Attention")."""
     weighted = []
     for group in groups:
         mean = sum(value for *_, value in group) / len(group)
         weighted += [(attempt, routes, value - mean) for attempt, routes, value in group]
     count = sum(sum(attempt.learn[1:]) for attempt, _, _ in weighted)
     if count == 0 or all(advantage == 0 for *_, advantage in weighted):
-        return None
+        return None, None
     optimizer.zero_grad(set_to_none=True)
-    total = 0.0
+    total, indexers = 0.0, []
     for attempt, routes, advantage in weighted:  # one attempt at a time: the gradients add up
         if advantage == 0 or not any(attempt.learn[1:]):
             continue
@@ -208,12 +213,14 @@ def update(model, optimizer, groups, device):
         inputs = torch.tensor([attempt.ids[:end - 1]], device=device)
         targets = torch.tensor([attempt.ids[1:end]], device=device)
         mask = torch.tensor([attempt.learn[1:end]], dtype=torch.float32, device=device)
-        logits = model(inputs, replay=routes).float()
+        logits, indexer = model(inputs, replay=routes, indexer_loss=True)
+        logits = logits.float()
         chosen = F.log_softmax(logits, dim=-1).gather(-1, targets.unsqueeze(-1)).squeeze(-1)
         loss = -advantage * (chosen * mask).sum() / count
         if not math.isfinite(loss.item()):
-            return loss.item()
-        loss.backward()
+            return loss.item(), None
+        (loss + (indexer - indexer.detach())).backward()  # the indexers' gradient, not their value
         total += loss.item()
+        indexers.append(indexer.item())
     optimizer.step()
-    return total
+    return total, sum(indexers) / len(indexers)

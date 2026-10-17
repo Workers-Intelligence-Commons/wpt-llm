@@ -98,6 +98,32 @@ def _model_1_to_2(document, _path):
 MIGRATIONS["model"][1] = _model_1_to_2
 
 
+NEW_ATTENTION = ("attention_heads", "attention_head_dim", "query_rank", "output_groups", "output_rank", "index_heads",
+                 "index_head_dim", "index_top_k")
+
+
+def _model_2_to_3(document, _path):
+    """Shape 3 replaces gated MLA with DeepSeek-V4's CSA and HCA, whose
+    numbers are new (docs/model.md, "Attention"): the MLA numbers go, and
+    the new ones are a person's choice, as is which global layer is CSA and
+    which HCA (global_attention), which gated MLA's numbers do not say. So
+    the step leaves the numbers at 0 and the list empty, and the check that
+    follows names each file to fill in. Weights trained with shape 2 do not
+    load into the new model."""
+    model = {}
+    for key, value in document["model"].items():
+        if key == "mla_heads":
+            model.update(dict.fromkeys(NEW_ATTENTION, 0))
+        elif key not in ("mla_head_dim", "mla_kv_rank"):
+            model[key] = value
+        if key == "n_layer":
+            model["global_attention"] = []
+    return {**document, "schema": 3, "model": model}
+
+
+MIGRATIONS["model"][2] = _model_2_to_3
+
+
 def _drop_moved_license_files(path, document):
     """Remove the LicenseRef files whose text the written source.json now
     holds exactly; anything else stays for the check to report."""

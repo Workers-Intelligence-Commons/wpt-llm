@@ -170,10 +170,10 @@ def _post_training(post_training):
 
 def _model_kind(provenance):
     if provenance.get("post_training"):
-        return ["A WPT mixture-of-experts model (KDA and gated MLA attention, mHC residual",
+        return ["A WPT mixture-of-experts model (KDA, CSA and HCA attention, mHC residual",
                 "streams, Engram memory), pre-trained and then changed by the post-training",
                 "steps below.", ""]
-    return ["A WPT mixture-of-experts model (KDA and gated MLA attention, mHC residual",
+    return ["A WPT mixture-of-experts model (KDA, CSA and HCA attention, mHC residual",
             "streams, Engram memory). It is pre-trained only: it continues text and follows",
             "no instructions.", ""]
 
