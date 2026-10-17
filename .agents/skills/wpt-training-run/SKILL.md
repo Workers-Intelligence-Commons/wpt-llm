@@ -30,6 +30,9 @@ from the repository folder:
 | Windows (PowerShell) | `.\scripts\detach.ps1 uv run wpt-train RECIPE DATASET_ID --out runs/NAME [options]` |
 | Linux, macOS | `scripts/detach.sh uv run wpt-train RECIPE DATASET_ID --out runs/NAME [options]` |
 
+On a Windows machine, use the Windows row from PowerShell, never a WSL
+shell (the `wpt` skill, "Setting up a machine").
+
 Both run the command outside the session, write everything it prints to
 `runs/logs/<date-time>.log` (UTF-8, line by line), and print the process
 id with how to follow and stop it:

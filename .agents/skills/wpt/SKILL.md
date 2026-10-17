@@ -40,6 +40,10 @@ A plain `uv sync` removes PyTorch, because no build is part of the default
 install; run `scripts/setup.py` again after it. `uv run` does not remove it.
 A Rust toolchain is needed: the tokenizer is built from source.
 
+On Windows, work in Windows itself (PowerShell), never inside WSL: clone,
+set up, build, train and run every wpt-* command there. Linux containers,
+where a step needs them, run through Docker Desktop.
+
 ## The commands
 
 | Job | Command | Reads | Writes |

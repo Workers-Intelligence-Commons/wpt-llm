@@ -40,7 +40,10 @@ rebuild exactly the same dataset. WPT hosts no data.
 Requirements: [uv](https://docs.astral.sh/uv/), git and a Rust toolchain
 (the tokenizer is built from source). Mercurial only for Mercurial
 sources; GnuPG only to check GPG-signed decisions (on Windows, the
-gnupg.org build).
+gnupg.org build). On Windows, run WPT in Windows itself (PowerShell), not
+inside WSL: a second system adds failures of its own and keeps files on a
+disk Windows does not see. Linux containers, where a step needs them, run
+through Docker Desktop.
 
 ```sh
 uv run scripts/setup.py                            # the PyTorch build for this machine's GPU
