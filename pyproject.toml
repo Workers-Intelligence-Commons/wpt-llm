@@ -20,7 +20,8 @@ exclude = ["apps/__pycache__"]  # left by apps/conftest.py, the apps' shared tes
 # `uv sync` installs every app, and through them every library (but not torch).
 dev = ["wpt-train", "wpt-chat", "wpt-eval", "wpt-posttrain", "wpt-dataset", "wpt-web", "pytest>=8", "moto[s3]>=5"]
 cpu = ["torch>=2.14"]
-cuda = ["torch>=2.14"]  # NVIDIA, CUDA 13.0: needs driver 580 or newer
+cuda = ["torch>=2.14", "triton-windows>=3.8,<3.9 ; sys_platform == 'win32'"]  # NVIDIA, CUDA 13.0: needs driver 580 or newer;
+# triton-windows: Triton for Windows (torch brings Triton on Linux only), so flash-linear-attention runs there too
 # AMD ROCm builds exist for Linux only. triton-rocm / triton-xpu are torch's own
 # dependencies, named here only so the source rules below apply to them.
 rocm = ["torch>=2.14 ; sys_platform == 'linux'", "triton-rocm ; sys_platform == 'linux'"]

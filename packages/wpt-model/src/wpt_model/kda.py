@@ -8,8 +8,8 @@ with alpha_t = exp(g_t) per channel and g_t in [-5, 0) (K3's bound).
 
 Three forms compute it. recurrent_kda follows the formula token by token:
 it is the reference. chunked_kda is the same result 16 tokens at a time in
-PyTorch, for CPUs and for GPUs without flash-linear-attention (on Windows,
-Triton is missing). On a GPU where flash-linear-attention imports, its
+PyTorch, for CPUs and for GPUs where flash-linear-attention does not import
+(no Triton). On a GPU where flash-linear-attention imports, its
 chunked kernel runs. Tests check that each agrees with the reference.
 """
 
@@ -27,7 +27,7 @@ _fla = None
 
 def _fla_chunk_kda():
     """flash-linear-attention's chunk_kda, or False when it does not import
-    here (no Triton, as on Windows, or no GPU support)."""
+    here (no Triton, or no GPU support)."""
     global _fla
     if _fla is None:
         try:

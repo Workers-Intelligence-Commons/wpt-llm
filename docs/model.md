@@ -55,9 +55,9 @@ among 0:1, 1:1, 3:1, 7:1 and 15:1, and the hybrid beat full attention at
 Training uses the chunked form (chunks of 64 tokens) from the
 flash-linear-attention library on GPUs; a step-by-step version of the
 formula above is the reference, used in tests, and the two must agree.
-Where flash-linear-attention cannot run (it needs Triton, which Windows
-lacks), the same chunked computation runs in plain PyTorch, 16 tokens at a
-time, factored at each chunk's middle token so no exponential leaves FP32's
+Where flash-linear-attention cannot run (it needs Triton: torch brings it on
+Linux, triton-windows on Windows, and CPUs have no kernel), the same chunked
+computation runs in plain PyTorch, 16 tokens at a time, factored at each chunk's middle token so no exponential leaves FP32's
 range; it agrees with the reference too, and is much slower.
 
 **Gated MLA layers** (Multi-head Latent Attention; [DeepSeek-V2][v2], [Kimi K3][k3]).

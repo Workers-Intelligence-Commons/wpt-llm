@@ -1652,6 +1652,15 @@ wheels = [
 ]
 
 [[package]]
+name = "triton-windows"
+version = "3.8.0.post29"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0c/3c/6be3de0febab8f0708b32377c59d6f963a492622ce79762ec08ddc7496a8/triton_windows-3.8.0.post29-cp314-cp314-win_amd64.whl", hash = "sha256:1d0fd6a6cf36ba5cced997177068e328d015e42cd4300f6995fff5a6f8707aff", size = 54097540, upload-time = "2026-09-28T21:59:03.5Z" },
+    { url = "https://files.pythonhosted.org/packages/01/ee/4e293741678fa6da4e7af016e60d60dc5bc0b11e9c80d4a38b5445b01f89/triton_windows-3.8.0.post29-cp314-cp314-win_arm64.whl", hash = "sha256:4e39f736c46fe23330d80b0f81fd983e3d23756a477ade40b2c65e2510195434", size = 49565282, upload-time = "2026-09-28T21:59:10.387Z" },
+]
+
+[[package]]
 name = "triton-xpu"
 version = "3.8.0"
 source = { registry = "https://download.pytorch.org/whl/xpu" }
@@ -1798,6 +1807,7 @@ cpu = [
 ]
 cuda = [
     { name = "torch", version = "2.14.1+cu130", source = { registry = "https://download.pytorch.org/whl/cu130" } },
+    { name = "triton-windows", marker = "sys_platform == 'win32'" },
 ]
 dev = [
     { name = "moto", extra = ["s3"] },
@@ -1822,7 +1832,10 @@ xpu = [
 
 [package.metadata.requires-dev]
 cpu = [{ name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/cpu", conflict = { package = "wpt-llm", group = "cpu" } }]
-cuda = [{ name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/cu130", conflict = { package = "wpt-llm", group = "cuda" } }]
+cuda = [
+    { name = "torch", specifier = ">=2.14", index = "https://download.pytorch.org/whl/cu130", conflict = { package = "wpt-llm", group = "cuda" } },
+    { name = "triton-windows", marker = "sys_platform == 'win32'", specifier = ">=3.8,<3.9" },
+]
 dev = [
     { name = "moto", extras = ["s3"], specifier = ">=5" },
     { name = "pytest", specifier = ">=8" },

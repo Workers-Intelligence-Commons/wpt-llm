@@ -148,6 +148,7 @@ agreement for NVIDIA software development kits).
 | nvidia-nvshmem-cu13 | 3.4.5 | NVIDIA proprietary | CUDA Toolkit license agreement, from its license file |
 | nvidia-nvtx | 13.0.85 | Apache-2.0 | from its license file (its metadata also says proprietary) |
 | triton | 3.8.0 | MIT | Python below 3.15 |
+| triton-windows | 3.8.0.post29 | MIT | Windows only. It bundles, with no license file of theirs, NVIDIA's GPU compiler `ptxas.exe` (NVIDIA proprietary, CUDA Toolkit license agreement) and the TinyCC C compiler (`tcc.exe`, `libtcc.dll`; LGPL-2.1-or-later) |
 
 ### ROCm build, Linux only
 
