@@ -130,11 +130,13 @@ def _micro_batches(tokens, settings, strategy, accumulate, *seed_parts):
 @dataclass(frozen=True)
 class Trained:
     """What a run reached: the validation loss of the evaluation the method
-    judged best, the last step trained, and the step whose weights the model
-    holds (that best evaluation's, or the last step's when none was best)."""
+    judged best, the last step trained, the step whose weights the model
+    holds (that best evaluation's, or the last step's when none was best),
+    and the indexer loss of that step's last micro-batch."""
     best_val: float
     steps: int
     weights_step: int
+    indexer_loss: float
 
 
 def train(model, strategy, method_plugin, method_settings, train_tokens, val_tokens, settings: RunSettings,
@@ -163,7 +165,7 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
     signature = {"settings": {k: v for k, v in asdict(settings).items() if k not in ("micro_batch", "checkpoint_every")},
                  "method": [method_plugin.sha256, method_settings], "identity": identity}
 
-    first_step, best_val, best_state, best_step = 1, float("inf"), None, None
+    first_step, best_val, best_state, best_step, best_indexer = 1, float("inf"), None, None, None
     if resume and checkpoint:
         # only the main process wrote it, maybe on another machine: it reads and sends it
         state = strategy.broadcast(checkpoint.load() if strategy.is_main else None)
@@ -176,6 +178,7 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
             method.load_state_dict(state["method"])
             first_step, best_val, best_state = state["step"] + 1, state["best_val"], state["best_model"]
             best_step = state.get("best_step")  # absent from checkpoints written before it was kept
+            best_indexer = state.get("best_indexer")
             log(f"resumed from step {state['step']}")
 
     def evaluate(step):
@@ -191,13 +194,13 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
 
     def _step(step):
         """One update, and its evaluation when one is due; True when the method says stop."""
-        nonlocal best_val, best_state, best_step
+        nonlocal best_val, best_state, best_step, best_indexer, indexer
         for a, x, y in _micro_batches(_tokens_at(train_tokens, step, settings), settings, strategy, accumulate,
                                       settings.seed, "train", step):
             # by the slice's place in the batch, so dropout does not depend on the number of processes
             torch.manual_seed(_seed(settings.seed, "dropout", step, a * strategy.world_size + strategy.rank))
             with strategy.no_sync(wrapped) if a < accumulate - 1 else contextlib.nullcontext():
-                loss = method.loss(wrapped, x, y)
+                loss, indexer = method.loss(wrapped, x, y)
                 (loss / accumulate).backward()
         method.before_update(model, step)
         method.optimizer.step()
@@ -210,9 +213,10 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
             val_loss = evaluate(step)
             verdict = method.evaluated(step, val_loss)
             if verdict.best:
-                best_val, best_step = val_loss, step
+                best_val, best_step, best_indexer = val_loss, step, indexer.item()
                 best_state = {k: v.detach().clone() for k, v in model.state_dict().items()}
-            log(f"step {step:5d} | train loss {loss.item():.4f} | val loss {val_loss:.4f} | "
+            log(f"step {step:5d} | train loss {loss.item():.4f} | indexer loss {indexer.item():.4f} | "
+                f"val loss {val_loss:.4f} | "
                 f"{time.time() - t0:.0f}s{verdict.note}")
             return verdict.stop
         return False
@@ -221,13 +225,13 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
         if strategy.is_main:
             checkpoint.save({"signature": signature, "step": step, "model": model.state_dict(),
                              "method": method.state_dict(), "best_val": best_val, "best_model": best_state,
-                             "best_step": best_step})
+                             "best_step": best_step, "best_indexer": best_indexer})
         strategy.barrier()
 
     keeps = checkpoint is not None and settings.checkpoint_every > 0
     model.train()
     t0 = time.time()
-    last = first_step - 1
+    last, indexer = first_step - 1, None
     with _StopSignals(log) as signals:
         for step in range(first_step, settings.steps + 1):
             stop = _step(step)
@@ -244,7 +248,9 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
 
     if best_state is not None:
         model.load_state_dict(best_state)
-    return Trained(best_val, last, best_step if best_state is not None and best_step is not None else last)
+    kept = best_state is not None and best_step is not None
+    return Trained(best_val, last, best_step if kept else last,
+                   best_indexer if kept else (indexer.item() if indexer is not None else None))
 
 
 def _save(path: Path, state):

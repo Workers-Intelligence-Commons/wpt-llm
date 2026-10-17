@@ -23,8 +23,9 @@ ATTRIBUTION = "Fox Stories, copyright (c) 2026 Ada Writer, https://example.org/f
 LICENSE_TEXT = "Copyright (c) 2026 Ada Writer\n\nPermission is hereby granted, free of charge, to any person.\n"
 
 
-TINY_MODEL = {"block_size": 16, "n_layer": 4, "d_model": 16, "kda_heads": 2, "kda_head_dim": 8, "mla_heads": 2,
-              "mla_head_dim": 8, "mla_kv_rank": 8, "n_experts": 4, "top_k": 2, "expert_width": 8, "latent_width": 8,
+TINY_MODEL = {"block_size": 16, "n_layer": 4, "global_attention": ["CSA"], "d_model": 16, "kda_heads": 2,
+              "kda_head_dim": 8, "attention_heads": 2, "attention_head_dim": 128, "query_rank": 8, "output_groups": 1,
+              "output_rank": 8, "index_heads": 2, "index_head_dim": 128, "index_top_k": 2, "n_experts": 4, "top_k": 2, "expert_width": 8, "latent_width": 8,
               "shared_width": 16, "engram_layers": [2], "engram_order": 3, "engram_heads": 2, "engram_dim": 4,
               "engram_table_size": 31}
 ONE_STEP = {"method": "muon", "settings": {}, "steps": 1, "batch_size": 4, "eval_every": 2, "eval_batches": 20,

@@ -5,7 +5,9 @@ tagged `sft` (docs/chat-format.md), turns each one into tokens with the chat
 template (wpt_tokenizer.chat), and trains the model to predict the tokens of
 the assistant's messages only: thinking, text, tool calls and the closing
 <|im_end|>. The other turns are context the model reads and does not learn
-to write.
+to write. The CSA indexers keep learning by their own loss, as in
+pre-training (docs/model.md, "Attention"): its gradient joins the step's,
+and its value is shown beside the loss.
 
 Each conversation must fit the model's context (block_size + 1 tokens, as
 in pre-training); a longer one stops the step, since cutting it would drop
@@ -49,21 +51,22 @@ def run(context):
     order = torch.Generator().manual_seed(SEED)
     model.train()
     for epoch in range(1, EPOCHS + 1):
-        losses = []
+        losses, indexer_losses = [], []
         permutation = torch.randperm(len(examples), generator=order).tolist()
         for start in range(0, len(examples), BATCH):
             inputs, targets = _batch([examples[i] for i in permutation[start:start + BATCH]], device)
-            logits = model(inputs)
+            logits, indexers = model(inputs, indexer_loss=True)
             loss = F.cross_entropy(logits.reshape(-1, logits.size(-1)), targets.reshape(-1), ignore_index=IGNORED)
             if not math.isfinite(loss.item()):
                 model.eval()
                 return Outcome.failure(f"epoch {epoch}: the loss is {loss.item()}; lower LEARNING_RATE")
             optimizer.zero_grad(set_to_none=True)
-            loss.backward()
+            (loss + (indexers - indexers.detach())).backward()  # the indexers' gradient, not their value
             optimizer.step()
             losses.append(loss.item())
-        print(f"sft epoch {epoch}/{EPOCHS}: mean loss {sum(losses) / len(losses):.4f} "
-              f"over {len(examples)} conversations")
+            indexer_losses.append(indexers.item())
+        print(f"sft epoch {epoch}/{EPOCHS}: mean loss {sum(losses) / len(losses):.4f}, indexer loss "
+              f"{sum(indexer_losses) / len(indexer_losses):.4f} over {len(examples)} conversations")
     model.eval()
     return Outcome.success()
 

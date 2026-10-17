@@ -72,10 +72,11 @@ def test_a_step_that_returns_no_outcome_writes_nothing(trained, tmp_path):
     assert list(tmp_path.glob("*tuned*")) == []
 
 
-def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path, monkeypatch):
+def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path, monkeypatch, capsys):
     # the built-in step fine-tunes on the conversations a person adds as a
     # source tagged sft; until one exists it says so and writes nothing, and
-    # once it has trained, the model's NOTICE credits that source
+    # once it has trained, the model's NOTICE credits that source. The CSA
+    # indexers keep learning by their own loss, which the step shows
     recipe = built.recipe("chat", model={"block_size": 64}, posttrain=["sft"])
     train([recipe, built.dataset_id, "--out", "model"])
     base, root = tmp_path / "model", tmp_path  # the step reads the sources of the repository holding the current folder
@@ -106,6 +107,9 @@ def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path
     main([recipe, str(base), str(tmp_path / "tuned")])
     tuned = tmp_path / "tuned"
     assert digest(tuned)["model.safetensors"] != digest(base)["model.safetensors"]
+    assert "indexer loss" in capsys.readouterr().out
+    indexers = [load_model(folder).layers[3].attention.indexer.q.weight for folder in (base, tuned)]
+    assert not torch.equal(*indexers)
     post = json.loads((tuned / "provenance.json").read_text())["post_training"]
     assert post["steps"][0]["file"] == "wpt_posttrain/steps/sft.py" and post["steps"][0]["sources"] == [sid]
     assert post["sources"][sid]["revision"] == commit

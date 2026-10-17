@@ -16,13 +16,14 @@ from wpt_train import main
 ROOT = Path(__file__).resolve().parents[3]
 
 
-def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatch):
+def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatch, capsys):
     store, dataset_id = built.store, built.dataset_id
     recipe = built.recipe("three", training={"steps": 3})
     monkeypatch.setenv("WPT_RECIPE", recipe)  # the recipe and the dataset come from the environment too
     monkeypatch.setenv("WPT_DATASET", dataset_id)
     main(["--out", "model"])
 
+    assert "| indexer loss " in capsys.readouterr().out  # beside the training loss, at each evaluation
     model = load_model(tmp_path / "model")
     assert model.config.n_layer == 4 and model.config.block_size == 16  # the recipe's numbers
     record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
@@ -35,6 +36,7 @@ def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatc
     assert provenance["vocabulary"] == record["tokenizer"]["vocabulary"]
     assert provenance["recipe_name"] == "three" and provenance["recipe"]["training"]["steps"] == 3
     assert provenance["steps_trained"] == 3
+    assert isinstance(provenance["indexer_loss"], float)  # the CSA indexers' loss at the kept step
     assert [s["token_sha256"] for s in provenance["shards"]] == [s["token_sha256"] for s in record["shards"]]
 
 

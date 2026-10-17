@@ -96,7 +96,13 @@ each step.
 
 The `sft` step, in a recipe's `posttrain` list, is supervised fine-tuning:
 it reads the conversations tagged `sft`, turns each into tokens with the
-chat template, and trains the model to predict the assistant's turns only. Until a source
+chat template, and trains the model to predict the assistant's turns only.
+The CSA indexers go on learning by their own loss, as in pre-training
+(model.md, "Attention"): the step asks the model for it, adds its gradient
+and shows its value beside the loss of each epoch. A post-training step
+that changes the weights by gradients does the same:
+`model(inputs, indexer_loss=True)` returns the scores and that loss, and
+the step adds `indexers - indexers.detach()` to its own loss. Until a source
 holds such conversations, it fails with "no conversations" and writes
 nothing. Each conversation must fit the model's context; a longer one
 stops the step, since cutting it would drop the answers it holds. Its

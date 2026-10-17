@@ -69,11 +69,46 @@ the same. The batch must split evenly: `batch_size` a multiple of
 `--recompute` (or `WPT_RECOMPUTE=1`) keeps only each layer's input during
 a pass and runs the layer again during the backward pass, instead of
 keeping everything the layer computed. The result is the same; memory
-drops and each step takes about a third longer. Measured with a 101M model
-(8 layers, width 512), one window's peak memory was 5.5 GiB at 4K tokens
-without it, and with it 1.5 GiB at 4K, 2.7 GiB at 8K and 4.6 GiB at 16K.
-The `watery-tardigrade` and `unimpaired-axolotl` recipes, 32K-token
-windows on one 16 GB or one 8 GB GPU, need it with `--micro-batch 1`.
+drops and each step takes about a third longer. Measured on 2026-10-17
+with `watery-tardigrade` (102M parameters, 8 layers, width 512, CSA and
+HCA, an indexer of 8 heads and top 64, Muon as DeepSeek-V4 runs it) on an
+integrated Radeon 860M, where the Triton kernels compute the attention
+(model.md, "Attention"), one window of random tokens with it:
+
+| Tokens | First step's peak | Later steps' peak | Time of a later step |
+| --- | --- | --- | --- |
+| 4K | 1.48 GiB | 1.95 GiB | 9.7 s |
+| 8K | 2.26 GiB | 2.75 GiB | 14.7 s |
+| 16K | 4.09 GiB | 4.58 GiB | 27.1 s |
+| 32K | 7.74 GiB | 8.24 GiB | 53.2 s |
+
+Later steps add Muon's momentum, about 0.5 GiB. `unimpaired-axolotl`
+(50M parameters) at 32K tokens peaked at 6.28 GiB on its first step and
+6.57 GiB on the next, which took 29.0 s. With the PyTorch form of the
+attention, the same day, the same runs peaked at 1.94, 2.77, 4.62 and
+8.33 GiB (9.2, 16.9, 25.2 and 47.1 s), and `unimpaired-axolotl` at
+6.62 GiB (25.2 s): on this GPU the kernels save under 0.1 GiB and are
+not faster in training, since their backward pass adds each entry's
+gradients by atomic additions, which this GPU runs slowly (about 0.7 s of
+the 1.6 s the backward kernel takes on 32K queries of 8 heads and 192
+entries each). Without gradients, at 8K tokens, a CSA layer's attention
+took 15% less time with them and an HCA layer's half. These times were measured with
+`HIP_LAUNCH_BLOCKING=1`, which makes the CPU wait for each GPU kernel:
+without it, on this GPU (gfx1152, which ROCm supports only through
+`HSA_OVERRIDE_GFX_VERSION`), Muon's 10 Newton-Schulz steps on the
+32-expert recipes crash the process (a segmentation fault in the GPU
+stack) in the first update, while 8 steps do not; the memory is the same
+either way, and the times are an upper bound. With the 4.6M-parameter
+`classics-test` the crash does not occur. Before the indexer was scaled
+and Muon changed, the same model peaked at 1.51, 2.28 and 4.13 GiB on its
+first step at 4K, 8K and 16K tokens (7.4, 14.3 and 34.5 s a step, without
+`HIP_LAUNCH_BLOCKING`); with the gated MLA it had before 2026-10-17, at
+1.73, 2.74 and 5.06 GiB (7.8, 18.9 and 58.2 s); on another GPU it had
+peaked at 5.5 GiB at 4K tokens without `--recompute`. On the Radeon 860M,
+a 4K window without `--recompute` crashes the process (a segmentation
+fault in the GPU stack) with either attention. The `watery-tardigrade` and
+`unimpaired-axolotl` recipes, 32K-token windows on one 16 GB or one 8 GB
+GPU, need it with `--micro-batch 1`.
 
 ### Strategies: how the hardware is used
 
@@ -125,11 +160,13 @@ defaults, and an unknown setting or a value of the wrong type stops before
 training.
 
 - `muon`: how WPT models train (model.md, "Training"). Muon for matrix
-  weights, per head for the query, key and value projections and per
-  expert for routed experts; AdamW for the embedding, the output head,
-  norms and mHC's biases and gating factors; Adam at `table_lr_factor`
-  times the rate, without weight decay, for Engram's tables; QK-Clip at
-  `qk_clip` on MLA layers (0: off). The learning rate warms up over
+  weights as DeepSeek-V4 runs it (8 then 2 Newton-Schulz steps, updates of
+  RMS 0.18), per head for the query, key and value projections, per expert
+  for routed experts and per output group or merging projection in CSA
+  and HCA; AdamW for the embedding, the output head, norms, mHC's biases
+  and gating factors, attention sinks and merging biases; Adam at
+  `table_lr_factor` times the rate, without weight decay, for Engram's
+  tables; no QK-Clip (DeepSeek-V4). The learning rate warms up over
   `warmup` steps to `lr`, then falls to `first_factor` of it after
   `first_drop` of the steps and to `second_factor` after `second_drop`;
   the multi-token prediction loss weighs `mtp_weight`, then
@@ -138,7 +175,7 @@ training.
   0.002, `weight_decay` 0.1, `momentum` 0.95, `beta1` 0.9, `beta2` 0.95,
   `eps` 1e-8, `table_lr_factor` 5, `warmup` 2000, `first_drop` 0.8,
   `first_factor` 0.316, `second_drop` 0.9, `second_factor` 0.1,
-  `mtp_weight` 0.3, `mtp_late_weight` 0.1, `mtp_switch` 0.676, `qk_clip` 100.
+  `mtp_weight` 0.3, `mtp_late_weight` 0.1, `mtp_switch` 0.676.
 - `adamw`: AdamW at a constant learning rate, for every weight. Training stops
   early when the validation loss, smoothed over the last `smoothing`
   evaluations, has not improved by `min_improve` for `patience`
@@ -149,10 +186,18 @@ training.
 
 A method file defines `SETTINGS` (names and defaults, whose types the
 values take) and `start(model, settings, run)`, which returns a
-`wpt_training.Method`: its optimizer, and optionally the loss of a batch
-(by default the next-token loss plus the multi-token prediction loss at
-`mtp_weight`), what happens just before each update (a learning-rate
-schedule, gradient clipping) and just after it (QK-Clip), which evaluation
+`wpt_training.Method`: its optimizer, and optionally the losses of a batch,
+`loss(model, x, y)` returning (training loss, indexer loss): by default the
+next-token loss plus the multi-token prediction loss at `mtp_weight`, plus
+the gradient, not the value, of the CSA indexers' loss, which the model
+returns when asked, `model(x, next_tokens=y, indexer_loss=True)` giving
+(scores, multi-token prediction scores, indexer loss); a method that does
+not ask leaves the indexers untrained. The log shows both losses at each
+evaluation (`train loss`, then `indexer loss`, each of the step's last
+micro-batch), and `provenance.json` records the indexer loss of the step
+whose weights the folder holds. Then, optionally, what happens
+just before each update (a learning-rate schedule, gradient clipping) and
+just after it, which evaluation
 is the best and when to stop, and the state a resumed run needs.
 Evaluations measure the next-token loss alone, at step 1, every
 `eval_every` steps and at the last step. The model folder keeps the weights
@@ -262,7 +307,10 @@ tables, and the tokenizer uses none.
 
 **Training is not bit-exact**: GPU arithmetic differs between GPUs, drivers
 and PyTorch versions, so the same inputs give equivalent but not identical
-weights. The steps themselves are the same: each step's windows, and any
+weights. On a GPU, the attention kernels also add up the entries' gradients
+in the order the GPU's atomic additions take, so two runs on one GPU can
+differ slightly too (docs/model.md, "Attention"); `wpt-train` logs whether
+TileLang, Triton or PyTorch computes the attention. The steps themselves are the same: each step's windows, and any
 random draw a model makes, come from the seed and the step, and a resumed run continues the same
 steps. Around it, everything possible is checked:
 
@@ -272,5 +320,5 @@ steps. Around it, everything possible is checked:
   record, the sources it learned from, the vocabulary, every shard, the recipe's name and content, the command-line options, the strategy and
   method (file, its sha256, the method's settings), how the batch was split, the model shape and
   parameter count, the steps trained and the step whose weights the folder holds (which the
-  model card shows), the repository commit (and whether the working tree had
+  model card shows) and the CSA indexers' loss at that step, the repository commit (and whether the working tree had
   uncommitted changes), the device and the tool versions.

@@ -129,9 +129,12 @@ agreement for NVIDIA software development kits).
 
 | Package | Version | License | Note |
 | --- | --- | --- | --- |
+| apache-tvm-ffi | 0.1.9 | Apache-2.0 | through tilelang; held below 0.1.10, whose later versions break tilelang 0.1.8 on Python 3.14 |
+| cloudpickle | 3.1.2 | BSD-3-Clause | through tilelang |
 | cuda-bindings | 13.4.3 | Apache-2.0 | Python below 3.15 |
 | cuda-pathfinder | 1.8.3 | Apache-2.0 | Python below 3.15 |
 | cuda-toolkit | 13.0.3.0 | none stated | holds only metadata listing the NVIDIA packages, no code |
+| ml-dtypes | 0.6.0 | Apache-2.0 | through tilelang |
 | nvidia-cublas | 13.1.1.3 | NVIDIA proprietary | |
 | nvidia-cuda-cupti | 13.0.85 | NVIDIA proprietary | |
 | nvidia-cuda-nvrtc | 13.0.88 | NVIDIA proprietary | |
@@ -147,7 +150,17 @@ agreement for NVIDIA software development kits).
 | nvidia-nvjitlink | 13.4.92 | NVIDIA proprietary | |
 | nvidia-nvshmem-cu13 | 3.4.5 | NVIDIA proprietary | CUDA Toolkit license agreement, from its license file |
 | nvidia-nvtx | 13.0.85 | Apache-2.0 | from its license file (its metadata also says proprietary) |
+| psutil | 7.2.2 | BSD-3-Clause | through tilelang |
+| tilelang | 0.1.8 | MIT | compiles the attention kernels, DeepSeek's among them ("Code copied from other projects", below); its compiled part bundles TVM (Apache-2.0) and the headers of CUTLASS (BSD-3-Clause) and Composable Kernel (MIT), whose license files the wheel does not carry |
+| tqdm | 4.70.1 | MPL-2.0 AND MIT | through tilelang |
 | triton | 3.8.0 | MIT | Python below 3.15 |
+| z3-solver | 4.15.4.0 | MIT | through tilelang |
+
+### CUDA build, Windows only
+
+| Package | Version | License | Note |
+| --- | --- | --- | --- |
+| triton-windows | 3.8.0.post29 | MIT | compiles the Triton attention kernels; the wheel also carries NVIDIA's `ptxas` and CUDA headers (NVIDIA proprietary) and TinyCC (LGPL-2.1), with only Triton's MIT license file |
 
 ### ROCm build, Linux only
 
@@ -233,6 +246,28 @@ kept in `scripts/names/LICENSE` as it asks):
   4,619 words.
 - `animals.txt`: the nouns under `animal.n.01` that are one lowercase
   ASCII word, minus the same marks: 2,497 words.
+
+### Code copied from other projects
+
+- `packages/wpt-model/src/wpt_model/deepseek_kernels.py`: DeepSeek's
+  sparse attention kernel for TileLang, copied unchanged from
+  `inference/kernel.py` of DeepSeek-V4-Flash
+  (https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash, revision
+  `60d8d70770c6776ff598c94bb586a859a38244f1`), without its other kernels.
+  MIT (Copyright (c) 2023 DeepSeek); the file keeps the license text, as
+  the license asks.
+- `packages/wpt-model/src/wpt_model/deepseek_index_kernel.py`: DeepSeek's
+  FP8 lightning-indexer kernel for TileLang (`fp8_index_kernel` and
+  `fp8_index`), copied unchanged from `inference/kernel.py` of
+  DeepSeek-V3.2 (https://huggingface.co/deepseek-ai/DeepSeek-V3.2,
+  revision `a7e62ac04ecb2c0a54d736dc46601c5606cf10a6`), without its other
+  kernels; its compiler settings come from the file above, since the ones
+  it names no longer exist in TileLang 0.1.8. MIT (Copyright (c) 2023
+  DeepSeek); the file keeps the license text.
+- `packages/wpt-model/src/wpt_model/triton_kernels.py` translates both
+  kernels to Triton; it keeps DeepSeek's MIT notice for the translated
+  parts. `tilelang_kernels.py` adds WPT's own backward kernels, written in
+  the shape of DeepSeek's.
 
 ### Distribution
 

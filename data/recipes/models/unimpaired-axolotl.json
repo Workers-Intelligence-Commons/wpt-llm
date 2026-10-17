@@ -1,5 +1,5 @@
 {
-  "schema": 2,
+  "schema": 3,
   "data": {
     "mixture": "classics",
     "tokenizer": "classics",
@@ -9,12 +9,21 @@
   "model": {
     "block_size": 32768,
     "n_layer": 8,
+    "global_attention": [
+      "CSA",
+      "HCA"
+    ],
     "d_model": 320,
     "kda_heads": 4,
     "kda_head_dim": 80,
-    "mla_heads": 4,
-    "mla_head_dim": 80,
-    "mla_kv_rank": 80,
+    "attention_heads": 4,
+    "attention_head_dim": 128,
+    "query_rank": 80,
+    "output_groups": 1,
+    "output_rank": 320,
+    "index_heads": 5,
+    "index_head_dim": 128,
+    "index_top_k": 40,
     "n_experts": 32,
     "top_k": 4,
     "expert_width": 160,
@@ -40,5 +49,5 @@
     "seed": 1337
   },
   "posttrain": [],
-  "note": "Untested in a full run: half of watery-tardigrade, 50M parameters with 32K-token windows, sized for about 8 GB of GPU memory, trained with --recompute --micro-batch 1. On an integrated Radeon 860M, one 32K window of random tokens peaked at 6.55 GiB and took 105 s, but a real run on the classics hung that GPU in its first step: it is meant for a stronger GPU. Its data is the classics for now (about 4.3M tokens, so the model mostly memorizes); it changes once a larger mixture exists."
+  "note": "Untested in a full run: half of watery-tardigrade, 50M parameters with 32K-token windows, sized for about 8 GB of GPU memory, trained with --recompute --micro-batch 1. Changed on 2026-10-17: gated MLA became DeepSeek-V4's CSA (layer 4: 4 heads of 128 sharing one key-value head, an indexer of 5 heads of 128 and top 40, V4-Flash's scaled to the width) and HCA (layer 8), and the MTP block's attention a 128-token window; weights trained before no longer load. On an integrated Radeon 860M, one 32K window of random tokens peaked at 6.6 GiB; with gated MLA, a real run on the classics hung that GPU in its first step: it is meant for a stronger GPU. Its data is the classics for now (about 4.3M tokens, so the model mostly memorizes); it changes once a larger mixture exists."
 }

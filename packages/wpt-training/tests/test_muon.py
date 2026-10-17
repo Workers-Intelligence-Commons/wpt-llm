@@ -1,13 +1,17 @@
+import json
 import math
+from pathlib import Path
 
+import pytest
 import torch
 
 from wpt_model import WPT, ModelConfig
 from wpt_training import Run, load_method
 from wpt_training.plugins import start_method
 
-TINY = dict(vocab_size=50, block_size=16, n_layer=4, d_model=16, kda_heads=2, kda_head_dim=8, mla_heads=2,
-            mla_head_dim=8, mla_kv_rank=8, n_experts=4, top_k=2, expert_width=8, latent_width=8, shared_width=16,
+TINY = dict(vocab_size=50, block_size=16, n_layer=4, global_attention=["CSA"], d_model=16, kda_heads=2, kda_head_dim=8,
+            attention_heads=2, attention_head_dim=128, query_rank=8, output_groups=1, output_rank=8, index_heads=2,
+            index_head_dim=128, index_top_k=2, n_experts=4, top_k=2, expert_width=8, latent_width=8, shared_width=16,
             engram_layers=[2], engram_order=3, engram_heads=2, engram_dim=4, engram_table_size=31)
 
 
@@ -27,49 +31,93 @@ def test_the_learning_rate_warms_up_then_drops_twice():
     assert seen == {5: [0.005, 0.025], 50: [0.01, 0.05], 85: [0.00316, 0.0158], 95: [0.001, 0.005]}
 
 
-def test_each_head_moves_as_much_whatever_its_gradient_size():
-    # per-head Muon: a head with tiny gradients is not swamped by a head with
-    # large ones; each head's step has the size of an orthogonal matrix's
+@pytest.mark.parametrize("weight", [
+    lambda m: m.layers[0].attention.q.weight,                     # KDA queries, 2 heads
+    lambda m: m.layers[3].attention.q_up.weight,                  # CSA queries, 2 heads
+    lambda m: m.layers[3].attention.indexer.q.weight,             # indexer queries, 2 heads
+    lambda m: m.layers[3].attention.out_down.weight,              # 2 output groups
+    lambda m: m.layers[3].attention.compressor.value.weight,      # C^b and C^a
+    lambda m: m.layers[3].attention.indexer.keys.score.weight,    # the indexer's Z^b and Z^a
+])
+def test_each_head_moves_as_much_whatever_its_gradient_size(weight):
+    # per-head Muon (K3, DeepSeek-V4.1), and V4's "logically independent"
+    # matrices apart: a part with tiny gradients is not swamped by a part
+    # with large ones; each part's step is an orthogonal matrix, whose
+    # singular values V4's last two Newton-Schulz steps settle at 1
     torch.manual_seed(0)
-    model = WPT(ModelConfig(**TINY))
+    model = WPT(ModelConfig(**{**TINY, "output_groups": 2}))
     method = muon(model, lr=0.01, warmup=1, weight_decay=0.0)
-    weight = model.layers[0].attention.q.weight  # KDA, 2 heads of 8 rows
+    weight = weight(model)
     for p in model.parameters():
         p.grad = torch.zeros_like(p)
+    rows = weight.shape[0] // 2
     weight.grad = torch.randn_like(weight)
-    weight.grad[8:] *= 1e-4
+    weight.grad[rows:] *= 1e-4
     before = weight.detach().clone()
     method.before_update(model, 1)
     method.optimizer.step()
-    step = (weight.detach() - before) / (0.01 * 0.2 * math.sqrt(16))
-    for head in (step[:8], step[8:]):
-        singular = torch.linalg.svdvals(head)
-        assert singular.min() > 0.5 and singular.max() < 1.5
+    step = (weight.detach() - before) / (0.01 * 0.18 * math.sqrt(max(rows, weight.shape[1])))
+    for part in (step[:rows], step[rows:]):
+        singular = torch.linalg.svdvals(part)
+        assert singular.min() > 0.98 and singular.max() < 1.02
 
 
-def test_qk_clip_brings_a_head_back_to_the_limit():
-    # a head whose largest query-key score passed tau has its query and key
-    # weights scaled so the score becomes tau; the other head is left alone
+@pytest.mark.parametrize("shape", [(64, 256), (256, 64), (96, 96)])
+def test_a_matrix_s_update_has_an_rms_of_0_18(shape):
+    # DeepSeek-V4: O = O' sqrt(max(n, m)) 0.18, so AdamW's learning rates
+    # carry over: before weight decay, a matrix moves by lr times an update
+    # whose root mean square is 0.18, whatever its shape and gradient size
     torch.manual_seed(0)
-    model = WPT(ModelConfig(**TINY)).train()
-    attention = model.layers[3].attention  # the last layer: MLA
-    with torch.no_grad():
-        attention.q.weight[:8] *= 40
-    ids = torch.randint(50, (2, 16))
+    model = torch.nn.Linear(shape[1], shape[0], bias=False)
+    model.optimizer_roles = lambda: [("weight", model.weight, "matrix", (1, *shape))]
+    method = muon(model, lr=0.01, warmup=1, weight_decay=0.0)
+    model.weight.grad = torch.randn(shape) * 1e3
+    before = model.weight.detach().clone()
+    method.before_update(model, 1)
+    method.optimizer.step()
+    rms = ((model.weight.detach() - before) / 0.01).pow(2).mean().sqrt()
+    assert abs(rms.item() - 0.18) < 0.002
 
-    def largest():
-        model.track_query_keys(True)
-        with torch.no_grad():
-            model(ids)
-        found = attention.score_max.clone()
-        attention.score_max = None
-        return found
 
-    high = largest()
-    assert high[0] > 10 > high[1]
-    untouched = attention.q.weight[8:].clone()
-    model(ids)
-    model.clip_query_keys(10.0, lambda tensor, op: tensor)
-    after = largest()
-    assert math.isclose(after[0].item(), 10.0, rel_tol=1e-3)
-    assert torch.equal(attention.q.weight[8:], untouched)
+def test_every_parameter_takes_a_step():
+    # the new attention's parameters (sinks, merging biases, indexers, the
+    # MTP block's window attention) each belong to one optimizer group, once
+    torch.manual_seed(0)
+    model = WPT(ModelConfig(**TINY))
+    method = muon(model, lr=0.01, warmup=1)
+    grouped = [id(p) for group in method.optimizer.param_groups for p in group["params"]]
+    assert sorted(grouped) == sorted(id(p) for p in model.parameters())
+    for p in model.parameters():
+        p.grad = torch.randn_like(p)
+    before = [p.detach().clone() for p in model.parameters()]
+    method.before_update(model, 1)
+    method.optimizer.step()
+    still = [name for (name, p), old in zip(model.named_parameters(), before) if torch.equal(p, old)]
+    assert still == []
+
+
+def test_the_classics_test_recipe_trains_with_a_falling_loss():
+    # the test recipe's architecture (data/recipes/models/classics-test.json),
+    # on a repeating text it can learn in a few steps: the loss stays finite
+    # and falls, through every part including CSA's indexer
+    path = Path(__file__).parents[3] / "data/recipes/models/classics-test.json"
+    recipe = json.loads(path.read_text(encoding="utf-8"))
+    torch.manual_seed(0)
+    model = WPT(ModelConfig(vocab_size=64, **{**recipe["model"], "block_size": 128})).train()
+    method = muon(model, steps=20, **{**recipe["training"]["settings"], "warmup": 2})
+    text = torch.arange(129).remainder(13)[None].expand(4, -1)  # a period of 13 tokens
+    x, y = text[:, :-1], text[:, 1:]
+    losses, indexer_losses = [], []
+    for step in range(1, 13):
+        method.optimizer.zero_grad()
+        loss, indexer = method.loss(model, x, y)
+        loss.backward()
+        method.before_update(model, step)
+        method.optimizer.step()
+        model.after_update(lambda tensor, op: tensor)
+        method.after_update(model, step, lambda tensor, op: tensor)
+        losses.append(loss.item())
+        indexer_losses.append(indexer.item())
+    assert all(math.isfinite(value) for value in losses + indexer_losses)
+    assert losses[-1] < 0.5 * losses[0]
+
