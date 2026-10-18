@@ -224,15 +224,18 @@ def test_migrating_shape_1_tokenizer_files(kit, repo):
 def test_migrating_a_shape_2_model_recipe_asks_a_person_for_the_new_attention_numbers(kit, repo):
     # gated MLA's numbers go; CSA and HCA's, and which global layer is which,
     # are a person's choice, so the check names the file until they are filled in
-    old = {key: value for key, value in kit.MODEL.items() if key not in (*NEW_ATTENTION, "global_attention")}
+    old = {"block_size": 16, **{key: value for key, value in kit.MODEL.items()
+                                if key not in (*NEW_ATTENTION, "global_attention")}}
     old.update({"mla_heads": 2, "mla_head_dim": 8, "mla_kv_rank": 8})
     path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
-    path.write_text(dump_json({**json.loads(path.read_text()), "schema": 2, "model": old}))
+    training = {key: value for key, value in kit.TRAINING.items() if key != "stages"}
+    path.write_text(dump_json({**json.loads(path.read_text()), "schema": 2, "model": old,
+                               "training": {**training, "steps": 1, "batch_size": 4}}))
 
     with pytest.raises(InvalidFile, match=re.escape(f"{path}: at model/")):
         migrate(repo, log=lambda _: None)
     document = json.loads(path.read_text())
-    assert document["schema"] == 3
+    assert document["schema"] == 4
     assert not any(key.startswith("mla_") for key in document["model"])
     assert {key: document["model"][key] for key in NEW_ATTENTION} == dict.fromkeys(NEW_ATTENTION, 0)
     assert document["model"]["global_attention"] == []
@@ -240,3 +243,16 @@ def test_migrating_a_shape_2_model_recipe_asks_a_person_for_the_new_attention_nu
     document["model"].update({key: kit.MODEL[key] for key in (*NEW_ATTENTION, "global_attention")})  # the person's choice
     path.write_text(dump_json(document))
     assert migrate(repo, log=lambda _: None) == []
+
+
+def test_migrating_a_shape_3_model_recipe_makes_its_window_and_steps_one_stage(kit, repo):
+    # docs/training.md, "Stages": a recipe trained on one window length
+    # becomes one stage of that length, its steps and its batch; nothing
+    # else changes
+    path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
+    new = json.loads(path.read_text())
+    training = {key: value for key, value in kit.TRAINING.items() if key != "stages"}
+    path.write_text(dump_json({**new, "schema": 3, "model": {"block_size": 16, **kit.MODEL},
+                               "training": {**training, "steps": 1, "batch_size": 4}}))
+    assert migrate(repo, log=lambda _: None) == [path]
+    assert json.loads(path.read_text()) == new

@@ -124,6 +124,25 @@ def _model_2_to_3(document, _path):
 MIGRATIONS["model"][2] = _model_2_to_3
 
 
+def _model_3_to_4(document, _path):
+    """Shape 4 trains in stages (docs/training.md, "Stages"), each with its
+    window length, steps and batch: the model's block_size and the
+    training's steps and batch_size become one stage, in the training part
+    where steps were."""
+    model = {key: value for key, value in document["model"].items() if key != "block_size"}
+    old, training = document["training"], {}
+    for key, value in old.items():
+        if key == "steps":
+            training["stages"] = [{"block_size": document["model"]["block_size"], "steps": value,
+                                   "batch_size": old["batch_size"]}]
+        elif key != "batch_size":
+            training[key] = value
+    return {**document, "schema": 4, "model": model, "training": training}
+
+
+MIGRATIONS["model"][3] = _model_3_to_4
+
+
 def _drop_moved_license_files(path, document):
     """Remove the LicenseRef files whose text the written source.json now
     holds exactly; anything else stays for the check to report."""

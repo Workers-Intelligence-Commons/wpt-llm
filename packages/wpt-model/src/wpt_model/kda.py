@@ -38,11 +38,12 @@ def _fla_chunk_kda():
     return _fla
 
 
-def recurrent_kda(q, k, v, g, beta):
+def recurrent_kda(q, k, v, g, beta, initial=None):
     """The formula, token by token. q, k, g: (B, T, H, dk); v: (B, T, H, dv);
-    beta: (B, T, H). Returns o: (B, T, H, dv), in FP32."""
+    beta: (B, T, H); initial: the memory before the first token (B, H, dk,
+    dv), zeros when None. Returns o: (B, T, H, dv), in FP32."""
     B, T, H, dk = q.shape
-    S = q.new_zeros(B, H, dk, v.shape[-1], dtype=torch.float32)
+    S = q.new_zeros(B, H, dk, v.shape[-1], dtype=torch.float32) if initial is None else initial.float()
     out = []
     for t in range(T):
         kt = k[:, t].float()
@@ -53,11 +54,13 @@ def recurrent_kda(q, k, v, g, beta):
     return torch.stack(out, 1)
 
 
-def chunked_kda(q, k, v, g, beta, chunk=CHUNK):
+def chunked_kda(q, k, v, g, beta, initial=None, chunk=CHUNK):
     """The same result as recurrent_kda, chunk tokens at a time: inside a
     chunk the updates are solved together (a triangular system), and only
     the memory passes from chunk to chunk. Decays are factored at each
-    chunk's middle token, so no exponential leaves FP32's range."""
+    chunk's middle token, so no exponential leaves FP32's range. initial:
+    the memory before the first token, zeros when None. Returns (o, the
+    memory after the last token)."""
     with torch.autocast(q.device.type, enabled=False):
         B, T, H, dk = q.shape
         dv = v.shape[-1]
@@ -87,23 +90,25 @@ def chunked_kda(q, k, v, g, beta, chunk=CHUNK):
         end = G[..., -1:, :]
         k_end = k * (end - G).exp()
         decay_end = end.exp().squeeze(-2)[..., None]       # (B, N, H, dk, 1)
-        S = q.new_zeros(B, H, dk, dv)
+        S = q.new_zeros(B, H, dk, dv) if initial is None else initial.float()
         out = []
         for n in range(N):
             W = U[:, n] - Wk[:, n] @ S
             out.append(q_start[:, n] @ S + M[:, n] @ W)
             S = decay_end[:, n] * S + k_end[:, n].transpose(-1, -2) @ W
-        return torch.stack(out, 1).transpose(2, 3).reshape(B, N * chunk, H, dv)[:, :T]
+        return torch.stack(out, 1).transpose(2, 3).reshape(B, N * chunk, H, dv)[:, :T], S
 
 
-def delta_attention(q, k, v, g, beta):
-    """KDA's output for (B, T, H, d) inputs: flash-linear-attention's kernel
-    on a GPU where it imports, else chunked_kda."""
+def delta_attention(q, k, v, g, beta, initial=None):
+    """KDA's output for (B, T, H, d) inputs, and the memory after the last
+    token, starting from initial (B, H, dk, dv; zeros when None):
+    flash-linear-attention's kernel on a GPU where it imports, else
+    chunked_kda."""
     if q.is_cuda and (kernel := _fla_chunk_kda()):
         q, k, v, beta = (t.to(torch.bfloat16) for t in (q, k, v, beta))  # the kernel takes one format; g stays FP32
-        out, _ = kernel(q, k, v, g.float(), beta, scale=1.0, safe_gate=True, lower_bound=-DECAY_BOUND)
-        return out
-    return chunked_kda(q, k, v, g, beta)
+        return kernel(q, k, v, g.float(), beta, scale=1.0, safe_gate=True, lower_bound=-DECAY_BOUND,
+                      initial_state=None if initial is None else initial.float().contiguous(), output_final_state=True)
+    return chunked_kda(q, k, v, g, beta, initial)
 
 
 class KDA(nn.Module):
@@ -123,12 +128,16 @@ class KDA(nn.Module):
         self.norm = nn.RMSNorm(d, eps=EPS)
         self.out = nn.Linear(H * d, D, bias=False)
 
-    def forward(self, x):
+    def forward(self, x, sequence):
+        """x (B, T, D); sequence: where these tokens sit in the window
+        (sequence.py), which gives the convolutions' earlier inputs and the
+        memory's start."""
         B, T, _ = x.shape
         H, d = self.heads, self.head_dim
 
         def heads(projection, conv):
-            return F.silu(conv(projection(x))).view(B, T, H, d)
+            p = projection(x)
+            return F.silu(conv(p, sequence.before(conv, "inputs", p, conv.reach))).view(B, T, H, d)
 
         q = F.normalize(heads(self.q, self.q_conv), dim=-1, eps=EPS)
         k = F.normalize(heads(self.k, self.k_conv), dim=-1, eps=EPS)
@@ -136,5 +145,5 @@ class KDA(nn.Module):
         beta = torch.sigmoid(self.beta(x))
         z = self.decay_up(self.decay_down(x)).view(B, T, H, d)
         g = -DECAY_BOUND * torch.sigmoid(self.A.exp()[:, None] * z.float())
-        o = self.norm(delta_attention(q, k, v, g, beta).to(x.dtype))
+        o = self.norm(sequence.delta(self, q, k, v, g, beta).to(x.dtype))
         return self.out((torch.sigmoid(self.gate(x)).view(B, T, H, d) * o).reshape(B, T, H * d))

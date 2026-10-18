@@ -68,6 +68,23 @@ After a stop, or once the restarts are used up, the same command with
 detached way. Without `--resume`, a leftover checkpoint stops the run, so
 an unfinished run is never overwritten by mistake.
 
+## Long windows
+
+A recipe's stages grow the window (docs/training.md, "Stages"); a stage
+whose window does not fit the GPU, even with `--recompute --micro-batch
+1`, needs one of these options, which change nothing in the training
+(docs/training.md, "Long windows"):
+
+- one GPU: `--segment N`, with N a multiple of 128 that fits (the memory
+  of an N-token window, plus about 31 KiB per token of the window for
+  watery-tardigrade), up to twice the time;
+- several GPUs: `--strategy split` with `--processes N` or torchrun, each
+  window's length a multiple of 128 times the number of processes;
+- several GPUs whose slices still do not fit: `--strategy split` with
+  `--segment N`, each process training its slice in segments of N.
+
+Any of them may be added or changed when resuming.
+
 ## A run over several machines or sessions
 
 With `--run NAME`, the checkpoint is kept in the store (`WPT_STORE`)

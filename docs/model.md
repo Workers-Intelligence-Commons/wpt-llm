@@ -4,15 +4,16 @@ Maintainer's decisions, 2026-10-16; the attention of the global layers
 changed on 2026-10-17 (below), with the decisions of the same day on which
 global layer is CSA and which HCA (the recipe's list), YaRN, the FP8 and
 FP4 formats of the entries, the indexer's size, DeepSeek-V4's Muon and
-the TileLang and Triton kernels. This page describes the architecture WPT
+the TileLang and Triton kernels, and long windows (below, "Long
+windows"). This page describes the architecture WPT
 models use and why; the code is `packages/wpt-model` and the `muon` method
 of `packages/wpt-training`. Every component comes from published research
 (cited at the end) and is trained from scratch: no weights or outputs of
 those models are used.
 
 The design is one family for every size: a mixture-of-experts model that
-reads long texts, aiming at a context of 1M tokens, which later recipe
-stages reach. The numbers of a given size (layers, width, experts, table
+reads long texts, aiming at a context of 1M tokens, which a recipe reaches
+by stages of growing windows (training.md, "Stages"). The numbers of a given size (layers, width, experts, table
 sizes) are not fixed here: each size is a model recipe (below), since a
 small model may not want the ratios of a large one.
 
@@ -103,8 +104,12 @@ global layer, so one kind.
   `q^I_t = W^IUQ c^Q_t` (`n^I` heads), and head weights `w_t = W^w h_t`
   (scaled by `1/sqrt(n^I c^I)`, as V4's code), and scores every visible
   entry `I_{t,s} = sum_h w_{t,h} ReLU(q^I_{t,h} . K^I_s)`. The top `k`
-  entries are kept; HCA keeps all of its entries. Its queries and keys are
-  rotated, then kept in FP4 (below), so `c^I` is a power of 2.
+  entries are kept; HCA keeps all of its entries. The indexer's queries
+  and keys are rotated, then kept in FP4 (below), so `c^I` is a power of
+  2. Equal scores, frequent with FP4 values, go to the earliest entries
+  (WPT's choice: V4 does not say), so the choice depends only on the
+  visible entries, never on how many follow, and a window in parts
+  chooses as the whole window does.
 - **The window.** Merged entries alone would hide a query's own block, so
   each query also attends to the last 128 tokens uncompressed (itself
   included), each token's entry `RMSNorm(W^win h_j)` from a projection of
@@ -132,7 +137,9 @@ global layer, so one kind.
   without YaRN, as V4 does for its window-only layers. Since entries are
   also the values, each output head is rotated back by its query's
   position, so what an entry adds depends on the distance, not the
-  absolute place. KDA layers stay without position encoding.
+  absolute place. KDA layers stay without position encoding. Positions
+  count from the window's first token, also in a segment or slice of a
+  long window (below, "Long windows").
 - **Storage formats** (V4, section 2.3.4 and its inference code). Every
   key-value entry, of the window and merged, is kept in FP8 (E4M3) except
   its 64 rotary dimensions, which keep their precision: each block of 64
@@ -227,6 +234,69 @@ denominators within 0.01%, and the indexer's scores within 0.1%, its top
 `k` as good; a whole CSA layer's output, indexer loss and gradients within
 1% of the PyTorch form on the CPU. They check the PyTorch form against the
 formulas of the paper.
+
+## Long windows
+
+Maintainer's decisions, 2026-10-17: "Target 1M tokens. Training reaches it
+by stages in the recipe"; segment training on one GPU (the RTX 5080) and
+window splitting across rented Linux GPUs; sparse from the start (above).
+The stages are in training.md, "Stages". A window too long for one GPU
+runs in parts, and both ways give exactly the loss and gradients of the
+whole window at once, so they are hardware options (training.md, "Long
+windows"), never part of the recipe:
+
+- **Segments**, on one GPU (`wpt-train --segment N`): the window runs as
+  consecutive segments of `N` tokens, each passing to the next what its
+  layers need of the earlier tokens, and the gradients flow back across
+  every boundary.
+- **Slices**, across processes (`wpt-train --strategy split`):
+  DeepSeek-V4's two-stage contextual parallelism ([V4][v4], section
+  3.4.3). Each process holds a contiguous slice of `s` tokens; stage 1,
+  process `i` sends what the next one needs of its last tokens (for CSA,
+  its last block of uncompressed entries, which process `i + 1` merges
+  with its own); stage 2, an all-gather of every process's merged entries
+  and indexer keys gives each process the window's full set, in order,
+  and the causal masks and the indexer's top `k` name the entries each
+  query sees. V4 pads that set at the tail because its slices hold packed
+  documents of varying lengths; WPT's slices are equal and hold whole
+  blocks, so none is needed.
+- **Slices in segments**, both at once (`--strategy split --segment N`):
+  when a slice is longer than `N`, the window runs as consecutive parts of
+  `N` tokens per process, each split across the processes; process `i`
+  trains the `i`-th segment of every part, the first process takes what
+  the part before handed on, and each part hands on what its last slice
+  ends with, so the gradients flow back across both kinds of boundary.
+
+What crosses a boundary, for each layer kind:
+
+| Layer | What the earlier tokens hand on |
+| --- | --- |
+| KDA | its memory `S` per head; the last 3 inputs of each short convolution |
+| CSA, HCA, the MTP block's window | the last 127 window entries; CSA's last block of `C^b`, `Z^b` (and the indexer's); every merged entry and indexer key so far |
+| Engram | the last `N - 1` token ids; the last `3N` inputs of its convolution, per stream |
+| experts, mHC | nothing: they work token by token |
+
+Across processes, KDA's memory cannot wait for the slice before.
+DeepSeek-V4's two stages (above) exchange tails and merged entries,
+nothing for a KDA memory; WPT combines the slices' transforms of it
+itself (maintainer's decision, 2026-10-17). The memory's update is linear in the memory, `S_end = A S_start + B`, so each process
+computes, in one pass over its slice, how the slice transforms a memory
+(its own `A` and `B`, by starting from `[I | 0]` with values `[0 | v]`),
+the processes exchange these transforms, and each composes those of the
+slices before its own into its starting memory (after the memory the part
+before handed on, with segments) and corrects its output.
+Every process works at once, and the result is exact; it costs a pass
+with the memory as wide as `dk + dv` instead of `dv`. In FP32 the composed
+transforms round differently from the token-by-token memory: on the CPU,
+gradients through KDA differ by up to about `6e-5` of the model's largest
+gradient (the same algebra in float64 agrees to `1e-15`), and the tests
+of split windows keep a tolerance of `2e-4` in FP32 (maintainer's
+decision, 2026-10-17; training.md, "Long windows").
+
+A segment or slice holds a multiple of 128 tokens (HCA's merging), so no
+merged entry straddles two of them; a window's last segment may be
+shorter. The losses are the parts' shares of the whole window's
+(training.md, "Long windows").
 
 ## Experts
 
@@ -412,31 +482,40 @@ and the repository:
 - the data: mixture, tokenizer recipe, total tokens and held-out share
   (what a dataset recipe held before; dataset recipes are folded into
   model recipes);
-- the architecture's numbers: layers, width, context length, KDA heads and
+- the architecture's numbers: layers, width, KDA heads and
   dimensions, the kind of each global layer (`global_attention`), the
   attention heads and dimensions of CSA and HCA (query
   latent, output groups and their width, indexer heads and dimensions, the
   top `k` entries), expert counts and widths, top `k`, latent width,
   Engram orders, heads, table sizes and layers;
-- training: steps, batch, seed, learning rate and schedule points, Muon
-  and AdamW settings, the MTP loss weights;
+- training: the stages (each its window length, steps and batch, in
+  order; the model's context is the last one's), seed, learning rate and
+  schedule points, Muon and AdamW settings, the MTP loss weights;
 - the post-training steps to run after pre-training.
 
 Settings that change the result come only from the recipe. Command-line
-options remain only for what does not: device strategy, number of
-processes, streaming, output folder, run name, resuming, micro-batch,
-recomputing, checkpoints, weight file size and restarts. Mixtures and
+options remain only for what does not: device strategy (splitting windows
+across processes included), number of processes, streaming, output
+folder, run name, resuming, micro-batch, recomputing, segments,
+checkpoints, weight file size and restarts. Mixtures and
 tokenizer recipes stay separate files, since several models share them.
 A model has at least 2 layers: the last is CSA or HCA, the others start
 with KDA. Recipes are shape 3 since 2026-10-17: `wpt-dataset migrate`
 turns a shape 2 recipe's MLA numbers into the new ones at 0 and adds an
 empty `global_attention` (gated MLA's numbers say neither), which a person
-then fills in; `wpt-dataset check` names each file until then.
+then fills in; `wpt-dataset check` names each file until then. They are
+shape 4 since the same day: the model's `block_size` and the training's
+`steps` and `batch_size` became the training's `stages`, each stage with
+its own window length, steps and batch (training.md, "Stages"), and
+`wpt-dataset migrate` turns a shape 3 recipe into one stage of its window
+length, steps and batch.
 
 A new recipe's name is an adjective and an animal drawn by
 `uv run scripts/recipe_name.py`, among about 11.5 million names, so the
 name says nothing about the GPU or size it was made for; the recipe's
-`note` says that. Three recipes exist, all on the admitted public-domain
+`note` says that. Three recipes exist, each of one stage (none yet sets
+V4's 4K, 16K, 64K and 1M stages: the recipes keep one stage for now,
+maintainer's decision, 2026-10-17), all on the admitted public-domain
 books (about 4.3M tokens) until a larger mixture exists:
 
 - `classics-test`: 4.8M parameters, 256-token windows, a test to see every
@@ -480,7 +559,9 @@ papers' ratios untested, and its first runs are the first check of whether
 they hold small. CSA and HCA in particular were built for a million
 tokens and trained by DeepSeek with a dense stage first; WPT trains them
 sparse from the first step, at 32K tokens and fewer, which no paper has
-measured. YaRN's values and the indexer's FP4 were set by DeepSeek for
+measured. No WPT model has yet trained beyond 32K tokens: the stages to
+1M, the segments and the slices are measured only in tests and in single
+steps on random tokens (training.md, "Long windows"). YaRN's values and the indexer's FP4 were set by DeepSeek for
 its sizes and contexts; the indexer scaled down in proportion to the width
 is WPT's choice. The memory of both 32K recipes is measured on one window
 of random tokens (training.md), not in a real run. The details

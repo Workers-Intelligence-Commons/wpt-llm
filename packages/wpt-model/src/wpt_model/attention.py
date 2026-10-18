@@ -13,6 +13,11 @@ projection. The ratio sets the kind:
 A query sees a merged entry only once every token in it is at or before
 the query, so no query sees a later token.
 
+A pass may be part of a longer window (sequence.py): positions then count
+from the window's first token, the window's entries before the pass's first
+token come from the earlier tokens, and the merged entries (and the
+indexer's keys) are those of the whole window so far.
+
 Entries are kept as V4 keeps them (formats.py): the window's and the merged
 entries in FP8 except their 64 rotary dimensions; the indexer's queries and
 keys rotated by a Hadamard matrix, then in FP4, held in FP8.
@@ -30,6 +35,7 @@ import torch.nn.functional as F
 
 from .formats import fp4, fp8, hadamard
 from .layers import EPS
+from .sequence import WHOLE
 from .sparse import index_alignment, sparse_attention, top_entries
 
 WINDOW = 128              # uncompressed tokens each query sees, itself included
@@ -103,7 +109,9 @@ class Compressor(nn.Module):
     entry also takes the block before it through a second pair of
     projections, 2 * ratio tokens in one softmax. (B, T, D) -> (B, T //
     ratio, width), RMS-normalized, rotated at each block's first token.
-    Tokens after the last full block make no entry yet. In FP32, as V4."""
+    Tokens after the last full block make no entry yet. In FP32, as V4.
+    sequence (sequence.py) gives, with overlap, the block before the pass's
+    first one, and the place of its first token, a multiple of ratio."""
 
     def __init__(self, width_in, width, ratio, overlap):
         super().__init__()
@@ -113,7 +121,7 @@ class Compressor(nn.Module):
         self.position = nn.Parameter(torch.zeros(ratio, self.parts * width))  # [B^b | B^a], else B; starting at 0
         self.norm = nn.RMSNorm(width, eps=EPS)
 
-    def forward(self, x, frequencies):
+    def forward(self, x, frequencies, sequence):
         B, T, _ = x.shape
         m, N = self.ratio, T // self.ratio
         with torch.autocast(x.device.type, enabled=False):
@@ -121,17 +129,16 @@ class Compressor(nn.Module):
             value = self.value(x).view(B, N, m, self.parts, self.width)
             score = (self.score(x).view(B, N, m, self.parts * self.width) + self.position).view(value.shape)
             if self.parts == 2:  # entry i: block i through C^a, block i - 1 through C^b (none before the first)
-                value = torch.cat([_previous(value[..., 0, :], 0.0), value[..., 1, :]], 2)
-                score = torch.cat([_previous(score[..., 0, :], float("-inf")), score[..., 1, :]], 2)
+                blocks = torch.stack([value[..., 0, :], score[..., 0, :]], 2)  # (B, N, 2, m, c): C^b and Z^b
+                earlier = sequence.before(self, "block", blocks, 1)
+                start = torch.tensor([False, sequence.offset == 0], device=x.device)[:, None, None]
+                previous = torch.cat([earlier.masked_fill(start, float("-inf")), blocks[:, :-1]], 1)[:, :N]
+                value = torch.cat([previous[:, :, 0], value[..., 1, :]], 2)
+                score = torch.cat([previous[:, :, 1], score[..., 1, :]], 2)
             else:
                 value, score = value[..., 0, :], score[..., 0, :]
             merged = (score.softmax(2) * value).sum(2)
-            return rotate(self.norm(merged), torch.arange(N, device=x.device) * m, frequencies)
-
-
-def _previous(blocks, fill):
-    """(B, N, m, c) -> each block's previous block, fill before the first."""
-    return torch.cat([torch.full_like(blocks[:, :1], fill), blocks[:, :-1]], 1)
+            return rotate(self.norm(merged), sequence.offset + torch.arange(N, device=x.device) * m, frequencies)
 
 
 class Indexer(nn.Module):
@@ -147,12 +154,13 @@ class Indexer(nn.Module):
         self.weights = nn.Linear(config.d_model, n, bias=False)    # W^w
         self.keys = Compressor(config.d_model, c, CSA_RATIO, overlap=True)
 
-    def forward(self, x, latent, positions, frequencies):
-        """(queries, head weights, merged keys) for the scores."""
+    def forward(self, x, latent, positions, frequencies, sequence):
+        """(queries, head weights, merged keys of the window so far) for the
+        scores."""
         B, T, _ = x.shape
         q = indexed(rotate(self.q(latent).view(B, T, self.heads, self.head_dim), positions, frequencies))
         w = self.weights(x) * (self.head_dim * self.heads) ** -0.5  # V4's scale of the weights
-        return q, w, indexed(self.keys(x, frequencies))
+        return q, w, sequence.everything(self, "keys", indexed(self.keys(x, frequencies, sequence)))
 
 
 class Attention(nn.Module):
@@ -175,28 +183,32 @@ class Attention(nn.Module):
         self.compressor = Compressor(D, c, ratio, overlap=ratio == CSA_RATIO) if ratio else None
         self.indexer = Indexer(config) if ratio == CSA_RATIO else None
 
-    def forward(self, x, indexer_loss=False):
+    def forward(self, x, indexer_loss=False, sequence=None):
         """(B, T, D) -> (output, the indexer's loss), the loss only from a
-        CSA layer asked for it (indexer_loss), None otherwise."""
+        CSA layer asked for it (indexer_loss), None otherwise; the loss is
+        the mean over this pass's queries. sequence: where these tokens sit
+        in the window (sequence.py), the whole window when None."""
+        sequence = WHOLE if sequence is None else sequence
         B, T, _ = x.shape
         H, c = self.heads, self.head_dim
-        positions = torch.arange(T, device=x.device)
+        positions = sequence.offset + torch.arange(T, device=x.device)
         turning = frequencies(self.ratio > 0, x.device)
         latent = self.q_norm(self.q_down(x))
         q = F.rms_norm(self.q_up(latent).view(B, T, H, c), (c,), eps=EPS)  # V4 normalizes each head, unweighted
         q = rotate(q, positions, turning)
-        table = stored(rotate(self.kv_norm(self.kv(x)), positions, turning))
-        idx = _window(T, x.device).expand(B, -1, -1)
+        local = stored(rotate(self.kv_norm(self.kv(x)), positions, turning))
+        table = torch.cat([sequence.before(self, "window", local, WINDOW - 1), local], 1)  # the window reaches back
+        idx = _window(T, sequence.offset, x.device).expand(B, -1, -1)
         if self.ratio:
-            merged = stored(self.compressor(x, turning))
+            merged = sequence.everything(self, "entries", stored(self.compressor(x, turning, sequence)))
             visible = (positions + 1) // self.ratio  # entries complete at or before each query
-            if self.indexer is not None:
-                index = self.indexer(x.detach(), latent.detach(), positions, turning)  # its own loss alone trains it
+            if self.indexer is not None:  # its own loss alone trains it
+                index = self.indexer(x.detach(), latent.detach(), positions, turning, sequence)
                 chosen = top_entries(*index, visible, self.indexer.top_k)
             else:
                 every = torch.arange(merged.shape[1], device=x.device)
                 chosen = every.masked_fill(every >= visible[:, None], -1).expand(B, -1, -1)
-            idx = torch.cat([idx, torch.where(chosen >= 0, chosen + T, -1)], -1)
+            idx = torch.cat([idx, torch.where(chosen >= 0, chosen + table.shape[1], -1)], -1)
             table = torch.cat([table, merged.to(table.dtype)], 1)
         asked = indexer_loss and self.indexer is not None
         o, weights = sparse_attention(q, table, self.sink, idx, c ** -0.5, weights=asked)
@@ -211,11 +223,13 @@ class Attention(nn.Module):
         return self.out_up(o.flatten(2)), alignment
 
 
-def _window(T, device):
-    """(1, T, min(T, WINDOW)): the last WINDOW tokens up to each query, in
-    order, -1 for positions before the text (at the end of the row, as
-    DeepSeek's kernel needs a valid entry first)."""
-    width = min(T, WINDOW)
-    t = torch.arange(T, device=device)[:, None]
+def _window(T, offset, device):
+    """(1, T, min(offset + T, WINDOW)): for each of T queries from position
+    offset, its last WINDOW tokens, in order, as rows of a table that holds
+    the WINDOW - 1 tokens before offset, then the T queries' own; -1 for
+    positions before the text (at the end of the row, as DeepSeek's kernel
+    needs a valid entry first)."""
+    width = min(offset + T, WINDOW)
+    t = offset + torch.arange(T, device=device)[:, None]
     rows = (t - width + 1).clamp(min=0) + torch.arange(width, device=device)
-    return rows.masked_fill(rows > t, -1)[None]
+    return (rows - offset + WINDOW - 1).masked_fill(rows > t, -1)[None]

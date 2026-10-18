@@ -19,7 +19,8 @@ Schedule (DeepSeek LLM): linear warm-up to lr over `warmup` steps, then
 first_factor of it after first_drop of the steps and second_factor after
 second_drop. The multi-token prediction loss weighs mtp_weight, then
 mtp_late_weight after mtp_switch of the steps (DeepSeek-V3: after 10T of
-14.8T tokens). The folder keeps the weights of the lowest validation loss.
+14.8T tokens); the steps are those of every stage together. The folder
+keeps the weights of the lowest validation loss of the last stage.
 
 lr and weight_decay default to Kimi Linear's smallest model (2.006e-3) and
 Moonlight (0.1); a recipe sets its own.
@@ -149,6 +150,9 @@ class Muon(Method):
     def _weigh_mtp(self):
         s = self.settings
         self.mtp_weight = s["mtp_weight"] if self.next_step <= s["mtp_switch"] * self.steps else s["mtp_late_weight"]
+
+    def stage(self, number, block_size):
+        self.best = float("inf")  # the folder keeps the best weights of the last stage, at its window length
 
     def evaluated(self, step, val_loss):
         note = f" | lr x{self.factor(step):.3f}"

@@ -16,6 +16,12 @@ counts every token once.
 
 record and replay (experts.Routes) keep the experts the routers chose for
 one sequence and route a later pass the same way (R3).
+
+A pass may be part of a longer window (sequence.py): a segment on one GPU,
+carrying what earlier segments passed on (carried), or one process's slice
+of a window split across processes, or of one part of a window run as
+parts split across processes (split). Each gives exactly the whole
+window's result.
 """
 
 import torch
@@ -29,6 +35,7 @@ from .experts import SHARED_EXPERTS, Experts, Routes
 from .kda import KDA
 from .layers import EPS, FeedForward
 from .mhc import STREAMS, Connection
+from .sequence import WHOLE, Carried, Split
 
 HASH_LAYERS = 3   # the first 3 layers' experts are hash-routed
 RATIOS = {"CSA": CSA_RATIO, "HCA": HCA_RATIO}
@@ -53,20 +60,22 @@ class Layer(nn.Module):
         self.attention_norm, self.experts_norm = nn.RMSNorm(D, eps=EPS), nn.RMSNorm(D, eps=EPS)
         self.attention_streams, self.experts_streams = Connection(D), Connection(D)
 
-    def forward(self, streams, ids, canonical, indexer_loss=False, collect=True, record=None, replay=None):
+    def forward(self, streams, ids, canonical, indexer_loss=False, collect=True, record=None, replay=None,
+                sequence=WHOLE):
         """streams -> (the next streams, the indexer's loss or None). The loss
         comes only from a CSA layer asked for it (indexer_loss). collect:
         record training statistics (False when the layer runs again for the
-        backward pass). record, replay: the routed experts' choices (R3)."""
+        backward pass). record, replay: the routed experts' choices (R3).
+        sequence: where these tokens sit in the window."""
         if self.engram is not None:
-            streams = self.engram(streams, canonical)
+            streams = self.engram(streams, canonical, sequence)
         found = [None]
 
         def attend(h):
             h = self.attention_norm(h)
             if isinstance(self.attention, KDA):
-                return self.attention(h)
-            out, found[0] = self.attention(h, indexer_loss)
+                return self.attention(h, sequence)
+            out, found[0] = self.attention(h, indexer_loss, sequence)
             return out
         streams = self.attention_streams(streams, attend)
         return self.experts_streams(streams, lambda h: self.experts(self.experts_norm(h), ids, collect, record,
@@ -78,9 +87,10 @@ def _first_run_collects(layer, record, replay):
     whose later call, the run again for the backward pass, does not."""
     runs = []
 
-    def run(streams, ids, canonical, indexer_loss):
+    def run(streams, ids, canonical, indexer_loss, sequence):
         runs.append(None)
-        return layer(streams, ids, canonical, indexer_loss, collect=len(runs) == 1, record=record, replay=replay)
+        return layer(streams, ids, canonical, indexer_loss, collect=len(runs) == 1 and sequence.collect, record=record,
+                     replay=replay, sequence=sequence)
     return run
 
 
@@ -101,14 +111,16 @@ class MultiTokenPrediction(nn.Module):
         self.feed_forward = FeedForward(D, SHARED_EXPERTS * config.shared_width)
         self.final_norm = nn.RMSNorm(D, eps=EPS)
 
-    def forward(self, hidden, next_embedding):
+    def forward(self, hidden, next_embedding, sequence=WHOLE):
         h = self.join(torch.cat([self.hidden_norm(hidden), self.embedding_norm(next_embedding)], -1))
-        h = h + self.attention(self.attention_norm(h))[0]
+        h = h + self.attention(self.attention_norm(h), sequence=sequence)[0]
         h = h + self.feed_forward(self.feed_forward_norm(h))
         return self.final_norm(h)
 
 
 class WPT(nn.Module):
+    PART = HCA_RATIO  # a segment or a slice of a window holds a multiple of this many tokens
+
     def __init__(self, config: ModelConfig):
         super().__init__()
         self.config = config
@@ -125,7 +137,7 @@ class WPT(nn.Module):
         self.canonical.copy_(ids)
 
     def forward(self, idx, next_tokens=None, indexer_loss=False, *, record: Routes | None = None,
-                replay: Routes | None = None):
+                replay: Routes | None = None, sequence=None):
         """(B, T) token ids -> (B, T, vocab_size) next-token scores. With
         next_tokens, the (B, T) tokens that follow idx, also returns the
         multi-token prediction block's scores for the token after each next
@@ -134,7 +146,10 @@ class WPT(nn.Module):
         parameters get a gradient from it. Returns the scores alone, or the
         tuple (scores, [mtp scores], [indexer loss]) of what was asked. With
         record or replay (B = 1), the routed layers record their choices into
-        it, or route as it holds."""
+        it, or route as it holds. sequence: where idx sits in a longer window
+        (carried, split), the whole window when None; the indexer loss is
+        then the mean over idx's queries."""
+        sequence = WHOLE if sequence is None else sequence
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=idx.is_cuda):
             canonical = self.canonical[idx]
             streams = self.embedding(idx).float().unsqueeze(2).expand(-1, -1, STREAMS, -1)  # copied into each stream
@@ -143,17 +158,31 @@ class WPT(nn.Module):
             for layer in self.layers:
                 streams, alignment = (
                     checkpoint(_first_run_collects(layer, record, replay), streams, idx, canonical, indexer_loss,
-                               use_reentrant=False)
-                    if recompute else layer(streams, idx, canonical, indexer_loss, record=record, replay=replay))
+                               sequence, use_reentrant=False)
+                    if recompute else layer(streams, idx, canonical, indexer_loss, collect=sequence.collect,
+                                            record=record, replay=replay, sequence=sequence))
                 if alignment is not None:
                     total = total + alignment
             hidden = streams.sum(2)
             outputs = [self.head(self.final_norm(hidden)).float()]
             if next_tokens is not None:
-                outputs.append(self.head(self.mtp(hidden, self.embedding(next_tokens))).float())
+                outputs.append(self.head(self.mtp(hidden, self.embedding(next_tokens), sequence)).float())
             if indexer_loss:
                 outputs.append(total)
             return outputs[0] if len(outputs) == 1 else tuple(outputs)
+
+    @staticmethod
+    def carried(offset, carried, collect=True):
+        """The place of a segment starting at token offset of its window, given
+        what the segment before passed on (sequence.Carried)."""
+        return Carried(offset, carried, collect)
+
+    @staticmethod
+    def split(rank, world, length, start=0, carried=None, collect=True):
+        """The place of process rank's slice, of length tokens, of a window
+        split across world processes, or of the part of it that starts at
+        token start, given what the part before passed on (sequence.Split)."""
+        return Split(rank, world, length, start, carried, collect)
 
     def after_update(self, reduce):
         """After each optimizer step: Quantile Balancing sets the routers'

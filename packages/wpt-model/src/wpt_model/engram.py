@@ -63,11 +63,17 @@ class Engram(nn.Module):
         self.conv = ShortConv(D, kernel=CONV_KERNEL, dilation=self.order)
         nn.init.zeros_(self.conv.conv.weight)  # the module starts as nothing
 
-    def lookup(self, canonical):
-        """(B, T) canonical ids -> e_t (B, T, tables * row width)."""
+    def lookup(self, canonical, earlier=None):
+        """(B, T) canonical ids -> e_t (B, T, tables * row width). earlier:
+        the order - 1 ids before them (B, order - 1), the padding id where
+        the text has not started; all padding when None."""
         T, rows, table = canonical.shape[1], [], 0
+        reach = self.order - 1
+        if earlier is None:
+            earlier = torch.full_like(canonical[:, :reach], self.pad)
+        known = torch.cat([earlier, canonical], 1)
         for n in range(2, self.order + 1):
-            gram = [F.pad(canonical, (back, 0), value=self.pad)[:, :T] for back in range(n - 1, -1, -1)]
+            gram = [known[:, reach - back:reach - back + T] for back in range(n - 1, -1, -1)]
             for head in range(len(self.sizes) // (self.order - 1)):
                 size, index = self.sizes[table], torch.zeros_like(canonical)
                 for ids in gram:
@@ -76,14 +82,20 @@ class Engram(nn.Module):
                 table += 1
         return torch.cat(rows, -1)
 
-    def forward(self, streams, canonical):
-        """streams (B, T, n, D) -> streams with each one's Y added."""
-        e = self.lookup(canonical)
+    def forward(self, streams, canonical, sequence):
+        """streams (B, T, n, D) -> streams with each one's Y added. sequence:
+        where these tokens sit in the window (sequence.py), which gives the
+        earlier ids and convolution inputs."""
+        reach = self.order - 1
+        earlier = sequence.before(self, "ids", canonical, reach)
+        before_text = torch.arange(sequence.offset - reach, sequence.offset, device=canonical.device) < 0
+        e = self.lookup(canonical, earlier.masked_fill(before_text, self.pad))
         value = self.value(e)
         scale = streams.shape[-1] ** -0.5
         added = []
         for s, key in enumerate(self.keys):
             a = torch.sigmoid((self.hidden_norm(streams[:, :, s]) * self.key_norm(key(e))).sum(-1, keepdim=True) * scale)
             V = a * value
-            added.append(F.silu(self.conv(self.value_norm(V))) + V)
+            normed = self.value_norm(V)
+            added.append(F.silu(self.conv(normed, sequence.before(self, f"conv {s}", normed, self.conv.reach))) + V)
         return streams + torch.stack(added, 2)

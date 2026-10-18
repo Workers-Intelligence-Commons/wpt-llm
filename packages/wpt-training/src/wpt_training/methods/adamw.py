@@ -6,7 +6,8 @@ evaluations) has not improved by `min_improve` for `patience` evaluations.
 The smaller the tokens-per-parameter ratio, the more overfitting is
 tolerated: at Chinchilla balance (`chinchilla` tokens per parameter) an
 improvement must be `min_improve`; a data-starved run relaxes toward "never
-stop early, memorizing is the only available mode".
+stop early, memorizing is the only available mode". An early stop ends the
+stage: the next one starts, with its own count.
 """
 
 import torch
@@ -25,6 +26,9 @@ class AdamW(Method):
         run.log(f"tokens: {run.tokens:,} | params: {run.parameters:,} | ratio: {ratio:.3f} tok/param "
                 f"(Chinchilla {settings['chinchilla']}) -> improvement threshold {self.min_improve * 100:.2f}%")
         self.best, self.without_improvement, self.history = float("inf"), 0, []
+
+    def stage(self, number, block_size):
+        self.best, self.without_improvement, self.history = float("inf"), 0, []  # longer windows: another scale
 
     def evaluated(self, step, val_loss):
         self.history.append(val_loss)

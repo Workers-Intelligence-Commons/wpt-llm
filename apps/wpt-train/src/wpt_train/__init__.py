@@ -8,7 +8,8 @@ Usage:
 RECIPE is a file name in data/recipes/models/, without .json, in the
 repository holding the current folder. Everything that changes the
 resulting model comes from it: the architecture's numbers, the method and
-its settings, the steps, the batch and the seed. DATASET_ID is what
+its settings, the stages (each its window length, steps and batch,
+trained in order) and the seed. DATASET_ID is what
 `wpt-dataset build RECIPE` prints; the dataset comes from the store named
 by WPT_STORE (environment or .env), and a dataset built from another data
 part than the recipe's is refused. Training never builds anything: it
@@ -17,12 +18,17 @@ reads the dataset and checks every input against its recorded hash first.
 The options say only how the hardware runs it. --strategy names how the
 hardware is used (`single`: one device; `ddp`: several processes, started
 by --processes on this machine or by torchrun on one machine or several),
-a built-in name or a .py file (see wpt_training).
+a built-in name or a .py file (see wpt_training); `split` divides each
+window between the processes instead, for windows too long for one GPU.
+On one GPU, --segment runs a longer window as consecutive segments of that
+many tokens; with `split`, each process runs its slice of a longer window
+in segments of that many tokens. Each gives the same training as whole
+windows.
 
-The recipe's batch is the number of windows per update over every process
+A stage's batch is the number of windows per update over every process
 together, so the same recipe trains the same way on any hardware. Each
-process takes --micro-batch windows per pass (default: all of its share)
-and adds passes up until the batch is complete. Lower --micro-batch when a
+process takes --micro-batch windows per pass (default: all of its share of
+each stage's batch) and adds passes up until the batch is complete. Lower --micro-batch when a
 GPU runs out of memory; the training does not change.
 
 Every option can also come from an environment variable, WPT_ plus the
@@ -87,7 +93,7 @@ from wpt_store.shards import ShardStream, sources_of, token_file
 from wpt_telemetry import JOIN_FOLDER, RECORD_FAILED, RecordError, Telemetry, file_hashes, set_ref, short
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_training import (Checkpoint, FolderCheckpoint, Interrupted, PluginError, RunSettings, SettingsMismatch,
-                          load_method, load_strategy, train)
+                          batching, load_method, load_strategy, train)
 from wpt_training.launch import REFUSED, STOPPED, launch
 from wpt_utils.device import describe
 from wpt_utils.programs import repository
@@ -118,10 +124,13 @@ def parse_size(text):
 # option name, type, default, help
 OPTIONS = [
     ("out", str, "runs/default", "model folder to write"),
-    ("micro-batch", int, None, "windows per pass in one process (default: its whole share)"),
+    ("micro-batch", int, None, "windows per pass in one process (default: its whole share of each stage's batch)"),
     ("checkpoint-every", int, 500, "write a checkpoint every N steps (0: never)"),
+    ("segment", int, 0, "run a window longer than this many tokens as consecutive segments (with --strategy split, "
+                        "each process's slice): the same training with less memory, each segment but the last run "
+                        "twice (a multiple of 128; 0: whole windows)"),
     ("strategy", str, "single", "how the hardware is used: a built-in name or a .py file"),
-    ("processes", int, 1, "start this many processes on this machine, one per GPU (with --strategy ddp)"),
+    ("processes", int, 1, "start this many processes on this machine, one per GPU (with --strategy ddp or split)"),
     ("max-shard-size", parse_size, None, "split the weights into files of at most this size, e.g. 500MB"),
     ("stream-shards", int, 8, "with --stream: dataset shards in use at once (windows are drawn from them)"),
     ("run", str, None, "keep the checkpoint in the store under this name, so any machine using the store can "
@@ -235,11 +244,12 @@ def provenance(args, recipe, record, record_object, sources, model_config, n_par
                      "processes": strategy.world_size},
         "method": {"name": method_plugin.name, "file": method_plugin.file, "file_sha256": method_plugin.sha256,
                    "settings": method_settings},
-        "batch": batch,
+        "batch": batch,  # each stage's windows, micro-batch and accumulation (wpt_training.batching)
         "model": asdict(model_config),
         "parameters": n_params,
         "best_validation_loss": trained.best_val,
         "steps_trained": trained.steps,  # the last step reached: fewer than the recipe's when the method stopped early
+        "stages": list(trained.stages),  # each stage's window length, steps, first step and the last step it trained
         "weights_step": trained.weights_step,  # the step whose weights the folder holds
         "indexer_loss": trained.indexer_loss,  # the CSA indexers' loss at that step (docs/model.md, "Attention")
         **repository(),  # repository_commit, repository_dirty
@@ -439,22 +449,21 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
         telemetry.input(recipe=args.recipe, dataset=args.dataset, dataset_record=record_object,
                         vocabulary=record["tokenizer"]["vocabulary"])
         shape, training = recipe["model"], recipe["training"]
-        settings = RunSettings(block_size=shape["block_size"], batch_size=training["batch_size"],
-                               micro_batch=args.micro_batch or training["batch_size"] // strategy.world_size,
-                               steps=training["steps"], eval_every=training["eval_every"],
-                               eval_batches=training["eval_batches"], checkpoint_every=args.checkpoint_every,
-                               seed=training["seed"])
+        settings = RunSettings(stages=training["stages"], micro_batch=args.micro_batch or 0,
+                               eval_every=training["eval_every"], eval_batches=training["eval_batches"],
+                               checkpoint_every=args.checkpoint_every, seed=training["seed"], segment=args.segment)
     except (StoreError, InputError) as error:
         raise Refused(f"{type(error).__name__}: {error}") from None
-    if len(train_data) <= settings.block_size + 1:
+    if len(train_data) <= settings.longest + 1:
         raise Refused(f"the dataset has {len(train_data):,} training tokens, fewer than one window of "
-                      f"{settings.block_size}")
+                      f"{settings.longest}")
     log(f"device: {describe(strategy.device)}" + (f", {strategy.world_size} processes" if strategy.world_size > 1 else ""))
     log(f"dataset {args.dataset}: {len(train_data):,} training tokens, {len(val_data):,} held-out tokens, "
         f"vocabulary {tokenizer.vocab_size:,} tokens")
 
     torch.manual_seed(settings.seed)  # the same initial weights in every process
-    model_config = ModelConfig(vocab_size=tokenizer.vocab_size, **shape)
+    # the model's context: the last stage's windows
+    model_config = ModelConfig(vocab_size=tokenizer.vocab_size, block_size=settings.stages[-1].block_size, **shape)
     model = WPT(model_config)
     model.set_canonical_ids(canonical_ids(tokenizer.decode, tokenizer.vocab_size))  # Engram's, from the vocabulary
     model.recompute = args.recompute
@@ -491,8 +500,8 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
     if not strategy.is_main:
         return
 
-    batch = {"windows": settings.batch_size, "micro_batch": settings.micro_batch, "processes": strategy.world_size,
-             "accumulation": settings.batch_size // (settings.micro_batch * strategy.world_size)}
+    # each stage's windows, micro-batch and accumulation, as the run split them
+    batch = batching(settings, 1 if strategy.splits_windows else strategy.world_size)
     named = record["tokenizer"]
     # written beside the target, then renamed: a failure midway leaves the target as it was
     out.parent.mkdir(parents=True, exist_ok=True)

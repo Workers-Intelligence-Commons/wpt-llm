@@ -125,7 +125,7 @@ def card(config, provenance, evals) -> str:
         f"- Context: {config['block_size']} tokens; vocabulary: {config['vocab_size']:,} tokens", "",
         "## Training", "",
         f"- Dataset: `{provenance['dataset']}`",
-        f"- {_steps(provenance)}, batch {provenance['batch']['windows']} windows",
+        f"- {_steps(provenance)}, {_batch(provenance)}",
         f"- Method: {provenance['method']['name']} "
         f"({', '.join(f'{k} {v}' for k, v in sorted(provenance['method']['settings'].items()))})",
         f"- Best validation loss: {provenance['best_validation_loss']:.4f}",
@@ -179,11 +179,28 @@ def _model_kind(provenance):
 
 
 def _steps(provenance):
-    limit = provenance["recipe"]["training"]["steps"]
+    training = provenance["recipe"]["training"]
+    stages = training.get("stages")  # recipes before shape 4 had one window length and its steps
+    limit = sum(stage["steps"] for stage in stages) if stages else training["steps"]
     if "steps_trained" not in provenance:  # trained before the steps were recorded
         return f"Steps: at most {limit:,}"
-    return (f"Steps: {provenance['steps_trained']:,} trained (limit {limit:,}); "
+    text = (f"Steps: {provenance['steps_trained']:,} trained (limit {limit:,}); "
             f"the weights are those of step {provenance['weights_step']:,}")
+    if stages and len(stages) > 1:
+        text += "; stages: " + ", ".join(f"{stage['block_size']:,}-token windows"
+                                         + (f", {stage['batch_size']:,} a step" if "batch_size" in stage else "")
+                                         + f", for {stage['steps']:,} steps" for stage in stages)
+    return text
+
+
+def _batch(provenance):
+    batch = provenance["batch"]
+    if isinstance(batch, dict):  # trained before each stage had its own batch: one for the run
+        return f"batch {batch['windows']:,} windows"
+    sizes = [stage["windows"] for stage in batch]
+    if len(set(sizes)) == 1:
+        return f"batch {sizes[0]:,} windows"
+    return "batches of " + ", ".join(f"{size:,}" for size in sizes) + " windows, by stage"
 
 
 def _built_from(provenance):
