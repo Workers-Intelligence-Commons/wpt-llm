@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { pages } from "./pages";
+import { GitStatus } from "./parts";
 
 // The address after "#/" picks the page: #/sources/<id> gives page "sources"
 // the rest ["<id>"]. Links are plain <a href="#/...">.
@@ -24,6 +25,7 @@ export function App() {
             {p.title}
           </a>
         ))}
+        <GitStatus />
       </nav>
       <main>
         <page.Component rest={parts.slice(1)} />

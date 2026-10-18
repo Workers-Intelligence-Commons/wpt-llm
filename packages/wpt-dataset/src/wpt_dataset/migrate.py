@@ -6,8 +6,9 @@ the step here:
 
     MIGRATIONS["source"][1] = lambda doc, path: {**doc, "schema": 2, ...}
 
-A step gets the file's path too, for the rare step that reads a file next
-to it.
+A step gets where the file lives too (repo.Located: its name for
+messages, and the text of a file next to it, for the rare step that reads
+one).
 
 `wpt-dataset migrate` then rewrites every file that is behind, and checks
 the result against the new schema. A file migrate cannot rewrite, such as
@@ -15,11 +16,8 @@ a source's chat file (upstream's bytes), is brought to the current shape in
 memory by upgrade() each time it is read.
 """
 
-import json
-from pathlib import Path
-
 from .errors import DatasetError, OutdatedSchema
-from .repo import CURRENT_SCHEMA, IMAGE_FILES, Repo, dump_json, load_json
+from .repo import CURRENT_SCHEMA, Repo
 
 MIGRATIONS: dict[str, dict[int, callable]] = {kind: {} for kind in CURRENT_SCHEMA}
 
@@ -45,17 +43,18 @@ def _source_2_to_3(document, _path):
 MIGRATIONS["source"][2] = _source_2_to_3
 
 
-def _license_file(entry, path):
-    """The LicenseRef-<name>.txt next to source.json that shape 3 kept for a
-    LicenseRef license, or None."""
+def _license_file(entry, where) -> tuple[str, str] | None:
+    """(name, text) of the LicenseRef-<name>.txt next to source.json that
+    shape 3 kept for a LicenseRef license, or None."""
     for alternative in entry["license"].split(" OR "):
-        candidate = path.parent / f"{alternative.partition(' WITH ')[0]}.txt"
-        if alternative.startswith("LicenseRef-") and candidate.is_file():
-            return candidate
+        name = f"{alternative.partition(' WITH ')[0]}.txt"
+        text = where.sibling_text(name) if alternative.startswith("LicenseRef-") else None
+        if text is not None:
+            return name, text
     return None
 
 
-def _source_3_to_4(document, path):
+def _source_3_to_4(document, where):
     """Shape 4 keeps every license's text in its entry (`text`), so that it
     travels into each dataset record and model NOTICE. A LicenseRef text
     moves in from its file; any other text is only on the source's side, so
@@ -63,8 +62,8 @@ def _source_3_to_4(document, path):
     fill in."""
     licenses = []
     for entry in document["licenses"]:
-        found = _license_file(entry, path)
-        text = found.read_text(encoding="utf-8") if found else entry.get("text", "")
+        found = _license_file(entry, where)
+        text = found[1] if found else entry.get("text", "")
         licenses.append({**entry, "text": text})
     return {**document, "schema": 4, "licenses": licenses}
 
@@ -176,13 +175,23 @@ def _conversation_1_to_2(document, _path):
 MIGRATIONS["conversation"][1] = _conversation_1_to_2
 
 
-def _drop_moved_license_files(path, document):
+def _conversation_2_to_3(document, _path):
+    """Shape 3 adds a message's optional `metadata`, which records a model
+    draft (docs/chat-format.md, "Model drafts"); a shape 2 conversation has
+    none, so only its number changes."""
+    return {**document, "schema": 3}
+
+
+MIGRATIONS["conversation"][2] = _conversation_2_to_3
+
+
+def _drop_moved_license_files(where, document):
     """Remove the LicenseRef files whose text the written source.json now
     holds exactly; anything else stays for the check to report."""
     for entry in document["licenses"]:
-        found = _license_file(entry, path)
-        if found and found.read_text(encoding="utf-8") == entry["text"]:
-            found.unlink()
+        found = _license_file(entry, where)
+        if found and found[1] == entry["text"]:
+            where.remove_sibling(found[0])
 
 
 def _tokenizer_1_to_2(document, _path):
@@ -201,21 +210,6 @@ def _lock_1_to_2(document, _path):
 
 
 MIGRATIONS["lock"][1] = _lock_1_to_2
-
-
-def _files(repo: Repo):
-    for sid in repo.source_ids():
-        yield "source", repo.data / "sources" / sid / "source.json"
-    for kind in ("mixture", "tokenizer", "model"):
-        for name in repo.recipe_names(kind):
-            yield kind, repo.recipe_path(kind, name)
-    for name in repo.recipe_names("tokenizer"):
-        if repo.lock_path(name).exists():
-            yield "lock", repo.lock_path(name)
-    for name in repo.image_names():
-        for kind in IMAGE_FILES:
-            if repo.image_file(name, kind).exists():
-                yield kind, repo.image_file(name, kind)
 
 
 def upgrade(document, kind: str, path, migrations=None, current=None):
@@ -237,22 +231,22 @@ def upgrade(document, kind: str, path, migrations=None, current=None):
     return document
 
 
-def migrate(repo: Repo, migrations=None, current=None, log=print) -> list[Path]:
-    """Rewrite every file whose shape is behind. Returns the files changed."""
+def migrate(repo: Repo, migrations=None, current=None, log=print) -> list[str]:
+    """Rewrite every file whose shape is behind, through the service layer
+    (Repo.rewrite). Returns the places of the files changed (data/...)."""
     migrations = MIGRATIONS if migrations is None else migrations
     current = CURRENT_SCHEMA if current is None else current
     changed = []
-    for kind, path in _files(repo):
-        document = json.loads(path.read_text(encoding="utf-8"))
-        start = document.get("schema")
-        document = upgrade(document, kind, path, migrations, current)
-        if document.get("schema") != start:
-            path.write_text(dump_json(document), encoding="utf-8", newline="\n")
-            changed.append(path)
+    for kind, name in repo.versioned():
+        document, where = repo.raw(kind, name), repo.located(kind, name)
+        start = document.get("schema") if isinstance(document, dict) else None
+        document = upgrade(document, kind, where, migrations, current)
+        if isinstance(document, dict) and document.get("schema") != start:
+            changed.append(repo.rewrite(kind, name, document))
             if kind == "source" and start < 4 <= document["schema"]:
-                _drop_moved_license_files(path, document)
-            log(f"{path.relative_to(repo.root)}: shape {start} -> {document['schema']}")
+                _drop_moved_license_files(where, document)
+            log(f"{changed[-1]}: shape {start} -> {document['schema']}")
     if current is CURRENT_SCHEMA:  # the real shapes: every file must now validate
-        for kind, path in _files(repo):
-            load_json(path, kind)
+        for kind, name in repo.versioned():
+            repo.validate_file(kind, name)
     return changed

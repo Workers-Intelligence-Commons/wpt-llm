@@ -67,8 +67,9 @@ def built(tmp_path, monkeypatch):
     (root / "data" / "sources" / source_id).mkdir(parents=True)
     (root / "data" / "sources" / source_id / "source.json").write_text(dump_json(data))
     def write(kind, name, document):
-        repo.recipe_path(kind, name).parent.mkdir(parents=True, exist_ok=True)
-        repo.recipe_path(kind, name).write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}))
+        path = root / "data" / "recipes" / f"{kind}s" / f"{name}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}))
         return name
 
     def recipe(name="d", model=None, training=None, drafter=None, posttrain=()):

@@ -141,8 +141,8 @@ exclude them in `extract`.
 ### Patches
 
 Patches use git's format and are applied with `git apply` inside a temporary
-git index, so no file is written to a disk and modes and symlinks behave the
-same everywhere. Git is therefore a dependency of data processing. A patch
+git index, each patch handed to git on its standard input, so no file is
+written to a disk and modes and symlinks behave the same everywhere. Git is therefore a dependency of data processing. A patch
 can add, change, delete files and change modes.
 
 Patches are not written by hand: `wpt-dataset unpack <id> <folder>` writes a
@@ -247,15 +247,158 @@ The store also holds the record of every run of `wpt-dataset build`,
 `records/`, written by name rather than by content
 ([observability.md](observability.md)).
 
+## The service layer
+
+`packages/wpt-dataset/src/wpt_dataset/repo.py` is the only code that reads
+or writes the repository's data: the
+sources and their patches, the chat files and task files inside them, the
+model, tokenizer and mixture recipes, the image Dockerfiles, and the two
+signer lists (`allowed-signers`, `allowed-gpg-keys.asc`). Every command
+that uses this data goes through it: `wpt-dataset` (`check`, `migrate`,
+`build`, `check-commits` and the rest), `wpt-train`, `wpt-posttrain`, the
+image commands of `wpt-agent`, and `wpt-web`. It hands out documents, bytes
+and versions, never a path under `data/`.
+
+- Every file has a version: the sha256 of its bytes, or `""` for a file
+  that does not exist yet. A source's files share one version, over its
+  `source.json` and every patch. A save names the version it started from
+  and is refused when the file changed since (a stale save).
+- Every write applies the rules of `wpt-dataset check` to the new content
+  first, and replaces the file in one step (a temporary file, then a
+  rename), so a refused or interrupted save leaves the old file. Text files
+  are written with `\n` line endings.
+- One lock per repository holds each version check together with the
+  write it allows, across processes as well as threads (maintainer's
+  decision, 2026-10-18): two saves of one version, from two tabs of
+  `wpt-web`, a double click, or `wpt-web` and `wpt-dataset` at the same
+  moment, cannot both pass; the second is a stale save. Between processes
+  it is a lock the operating system holds on the file `wpt-data.lock` in
+  the repository's git folder (`.git`, or the folder a worktree's `.git`
+  file names; `.wpt-data.lock` at the root of a folder that is not a git
+  working tree), with `fcntl.flock` on Linux and macOS and
+  `msvcrt.locking` on Windows. The system releases it when the process
+  ends, a crash included, so a lock is never left behind to block the next
+  save. Inside a process, the threads share one lock per repository
+  (`wpt-web` serves each request on its own thread).
+- A write through a symbolic link writes the link's target when that
+  target is inside the repository, and is refused otherwise (maintainer's
+  decision, 2026-10-18): a data file that is a link, or lies in a folder
+  that is one, is written at the place the links lead to, after every link
+  is resolved, and a place outside the repository refuses the write. So a
+  write never lands outside the repository, whatever a link points to.
+  The same rule holds for a link inside a source's own files (maintainer's
+  decision, 2026-10-18): a change to a source's file whose path is a link,
+  or lies under one, lands on the link's target when that target is inside
+  the source, and is refused otherwise; removing the link itself stays
+  allowed, whatever it points to. A link's target may be anywhere inside
+  the repository, and the lock file stays in the git folder, or at the
+  root of a folder that is not a git working tree (maintainer's decision,
+  2026-10-18: kept as built).
+- A license entry's `text` may be empty only while the source's decision
+  is refused (maintainer's decision, 2026-10-18): the schema says so, and a
+  person writes the text later (`wpt-dataset save source`, or the "Sources"
+  page). Every reader of the sources (`wpt-dataset build`, the post-training
+  readers of chat and task files, `check --fetch`, `check --changed`)
+  leaves such a source out with a note naming it, instead of failing, and
+  `wpt-dataset check` names it too, as a note that is not a failure. A
+  source that is not refused needs its text, and a source with an empty
+  text takes no files until it is written.
+- JSON is written with two spaces of indent, characters outside ASCII kept
+  as they are, except U+2028, U+2029 and U+0085, always written as
+  escapes, even in values a save keeps unchanged, so that no line splitter
+  cuts a line (maintainer's decision, 2026-10-18). A save over an existing
+  JSON file keeps its bytes when its meaning is the same (key order and
+  those escapes aside), and otherwise rewrites only the values that
+  changed, the rest keeping its layout and key order; a new key goes after
+  the key the saved document puts before it, and a new key or item is
+  written with the indent and spacing of the last member of its object or
+  array (maintainer's decision, 2026-10-18).
+- Conversations and tasks are written only in an `empty` source, text
+  written for WPT ([chat-format.md](chat-format.md), "Writing a chat file";
+  [post-training.md](post-training.md), "Tasks").
+- A source's text changes only through a patch: the layer unpacks the
+  source into a temporary folder, puts the change in, and records the
+  difference as the next patch, kept only when the source then gives
+  exactly those files and passes the checks of `wpt-dataset check --fetch`
+  ([Patches](#patches)). A new chat file or task folder gets its own
+  format entry in `source.json` when none covers it.
+- Generated files (a tokenizer's `.lock.json`, an image's `lock.json` and
+  `licenses.json`) are readable everywhere and written only by the command
+  that makes them (`wpt-dataset build-tokenizer`, `wpt-agent lock-image`),
+  through the layer, which checks them against their schema.
+- The signer lists are checked too: each line of `allowed-signers` that is
+  neither empty nor a comment holds a key (a key type such as
+  `ssh-ed25519`, then the key), and `allowed-gpg-keys.asc` holds an
+  ASCII-armored public key block.
+
+Two checks hold the rule. A test
+(`packages/wpt-dataset/tests/test_data_access.py`) reads the source code of
+every package, application and script and fails when code outside
+`repo.py` names the data folder in a way that could open a file under it:
+the name `data` as a part of a path (either side of `/`, or an argument of
+a call that builds or reaches a path, such as `Path()`, `joinpath()`,
+`os.path.join()`, `os.walk()`, `os.listdir()`, `glob()` or `open()`), a
+name bound to `"data"` or a comparison with it, a string or an f-string
+that starts with `data/` or holds `/data/` or `:data/`, or a private
+member of the service layer used from outside. A docstring, a command's
+help text and a message (inside a `raise`, or given to `print()`, a log
+call or `sys.exit()`) may name the folder for people. A syntax scan cannot
+follow every way to build a path, so the service layer also sets an audit
+hook (Python's `sys.addaudithook`) in every process, when its first `Repo`
+is made (maintainer's decision, 2026-10-18): any opening, listing, removal
+or renaming of a path under a `Repo`'s data folder, as written or with its
+symbolic links resolved, whose nearest caller in the project's own code
+(not Python's library, not an installed package) is neither `repo.py` nor
+a test fails with `DataAccessRefused` before it happens, in every command
+and in the test suite. A test is a `conftest.py` or a file under a
+`tests` folder, both inside the project's checkout (maintainer's decision,
+2026-10-18): a folder named `tests` above the checkout, or a `conftest.py`
+outside it, does not make its code a test. The tests are left out of both: they build the repositories
+they check and read what a command wrote.
+
+### Two interfaces
+
+Every kind of data has two interfaces, both thin layers over the service
+layer: the HTTP API of `wpt-web`,
+described in OpenAPI 3.1 at `/api/openapi.json` (the server checks every
+request body against the same description), and `wpt-dataset` commands.
+
+| Kind | `wpt-dataset` | `wpt-web` |
+| --- | --- | --- |
+| any kind of file: list, read, write | `kinds`, `list KIND`, `show KIND NAME`, `save KIND NAME FILE --version V` | `/api/kinds`, `/api/documents/{kind}[/{name}]`, `/api/schemas/{kind}`; pages "Recipes", "Images", "Signers" |
+| a new empty source | `new-source ORIGIN [ITEM] NAME ...` (without `--license-text`, a person writes the license text later; an empty `--license-text` file is an error; `--format FORMAT=PATTERN` declares a format entry with no file) | `POST /api/sources`; page "New source" |
+| a source's description | `show source ID`, `save source ID FILE --version V` | `/api/sources/{id}`; page "Sources" |
+| a source's files | `files ID`, `read ID PATH`, `write ID PATH FILE`, `remove ID PATH`, `tags ID PATH [TAG ...]` | `/api/sources/{id}/files[/{path}]`, `/api/sources/{id}/tags/{path}` |
+| conversations | `conversations ID PATH`, `conversation ID PATH LINE`, `save-conversation ID PATH LINE` (or `new`) | `/api/sources/{id}/conversations/{path}[/{line}]`, `POST /api/drafts`; page "Conversations" |
+| tasks | `tasks ID`, `task ID FOLDER`, `save-task ID FOLDER` | `/api/sources/{id}/tasks[/{folder}]`; page "Tasks" |
+| git's status of `data/` | `status` | `/api/status`, on every page |
+
+The HTTP API answers 404 when the thing does not exist, 409 for a stale
+save, 422 for content the rules refuse (with their messages) and 503 when
+a tool or the store is missing on this machine. Both interfaces write files
+and show git's status; commits stay in git.
+
+`wpt-web` listens only on 127.0.0.1 and checks neither the `Host` header
+nor a request's `Content-Type`: like
+the commands, it asks for no login and no header. What that leaves open
+while it runs: a web page open in the same browser can send it a
+cross-origin `POST` with `Content-Type: text/plain`, which the browser
+sends without asking first, so such a page can start sources
+(`POST /api/sources`) or ask for drafts (`POST /api/drafts`); and a site
+that makes its own name resolve to 127.0.0.1 (DNS rebinding) can reach
+every route, reading people's texts and changing data files in the working
+tree. Nothing is committed by `wpt-web`, so every change shows in
+`git status` and in the page's list of changed files before a commit.
+
 ## Packages
 
 | Package | Role |
 | --- | --- |
-| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; command `wpt-dataset` |
+| `wpt-dataset` | all data rules: sources, manifests, cuts, patches, pools, builds, the checks CI runs, migrations; the service layer (`repo.py`), the only code that reads or writes `data/`; command `wpt-dataset` |
 | `wpt-store` | the content-addressed store (local or S3), its record folders, and the token shard format with its checked reader, so training and evaluation read data without depending on the data rules |
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
-| `wpt-web` | a local web interface: one small server on 127.0.0.1, one file per page (Python routes, React page); its interface is built with Bun when it starts; command `wpt-web` |
+| `wpt-web` | a local web interface over the service layer: one small server on 127.0.0.1, one file per page (Python routes, React page), an editor for every kind of data, a conversation editor that asks a WPT model folder for drafts, and its OpenAPI description; its interface is built with Bun when it starts; command `wpt-web` |
 | `wpt-model` | the WPT network ([model.md](model.md)) and its drafter, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
 | `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` and `wpt-posttrain` run at the end of every run, so it uses `wpt-model` |

@@ -64,7 +64,13 @@ where a step needs them, run through Docker Desktop.
 | lock an image of agentic tasks | `uv run wpt-agent lock-image NAME [--force]` (needs Docker; `--force` replaces an existing lock) | `data/images/NAME/Dockerfile`, the base image's registry, the dated package archive | `data/images/NAME/lock.json` and `licenses.json` (commit them) |
 | build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-posttrain` with `grpo` or `token-efficiency`) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
 | continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a post-trained model; `--scheduler-costs RECORD_FOLDER` reads the scheduler's pass times a run recorded on the same setup instead of measuring them) | the folder; with `--scheduler-costs`, the store | |
-| review and edit sources in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ | `data/`, `packages/wpt-web/ui` | `source.json` through the source rules; `ui/node_modules`, `ui/dist` |
+| the kinds of data files, their names, one file | `uv run wpt-dataset kinds`, `list KIND`, `show KIND NAME` | `data/`, through the service layer | prints them (version and problems on stderr) |
+| write a data file people write | `uv run wpt-dataset save KIND NAME FILE --version VERSION` (`''`: a new file) | the file | that file, after the rules of `check`; refused when it changed since VERSION |
+| a source's files, tags and git status | `uv run wpt-dataset files ID`, `tags ID PATH [TAG ...] --version V`, `remove ID PATH --patch NAME --version V`, `status` | the source | `source.json`, or the next patch |
+| a new empty source, without its texts | `uv run wpt-dataset new-source ORIGIN [ITEM] NAME --license L --attribution TEXT --by NAME [--tag TAG ...] [--chat PATH ...] [--format FORMAT=PATTERN ...]` (never `--file` or `--license-text`: the person writes the license text, then the files) | | `data/sources/ID/source.json`, its license text empty |
+| a person's texts (people only, never an AI assistant) | `read`, `write`, `conversation`, `save-conversation`, `task`, `save-task`, and `new-source --file` and `--license-text` (marked `*` in `--help`) | | |
+| conversation and task structure | `uv run wpt-dataset conversations ID PATH` (roles, drafts), `tasks ID` (image, limits, files) | the source | prints them |
+| edit every kind of data in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ (HTTP API described at `/api/openapi.json`) | `data/`, a WPT model folder for drafts, `packages/wpt-web/ui` | data files through the service layer; `ui/node_modules`, `ui/dist` |
 
 Everything that changes a model comes from its model recipe
 (`data/recipes/models/NAME.json`: data, architecture, method and settings,
@@ -107,6 +113,24 @@ rule they do not hold: a case they do not settle is a question for the
 maintainer, and the answer goes into the documentation with its date. Only
 a maintainer admits a source, in a signed commit.
 
+## The service layer
+
+`wpt_dataset/repo.py` is the only code that reads or writes `data/`
+(docs/architecture.md, "The service layer"): sources and patches, chat and
+task files, recipes, Dockerfiles, the signer lists, and the generated
+locks and license lists, which only the command that makes them writes.
+Code elsewhere asks it for documents, bytes and versions, never for a path
+under `data/`; `packages/wpt-dataset/tests/test_data_access.py` fails
+otherwise, and an audit hook the layer sets refuses such an access at run
+time (`DataAccessRefused`), except from tests. Every write applies the
+rules of `wpt-dataset check`, refuses a stale save (one lock, across
+processes, holds the version check and the write), writes a symbolic
+link's target only inside the repository, writes U+2028, U+2029 and
+U+0085 as escapes, and keeps a JSON file's layout where its meaning did
+not change. A new kind of data gets both interfaces, a
+`wpt-dataset` command and a `wpt-web` route with its JSON Schema, both thin
+layers over the service layer.
+
 ## Patches and text written for WPT
 
 Never write a patch by hand. `wpt-dataset unpack` writes a source's final
@@ -125,6 +149,17 @@ files of such a source, one folder per task, tagged `grpo`; the
 (docs/post-training.md). Committed text
 stays in the repository's history for good.
 
+As an AI assistant, use the `wpt-dataset` commands only for structure and
+metadata, never to read or write people's texts (CONTRIBUTING.md, "Models
+and generated text"): never run `read`, `write`, `conversation`,
+`save-conversation`, `task` or `save-task`, and never call the matching
+`wpt-web` routes. You may run `new-source` without `--file` and
+`--license-text`, never with them (maintainer's decision, 2026-10-18). People write
+their texts in `wpt-web` or with those commands themselves. An `assistant`
+message may start as a WPT model's draft that a person edited or
+confirmed; its `metadata.draft` records it (docs/chat-format.md, "Model
+drafts").
+
 ## Formatting a person's text
 
 A person may hand you raw text to turn into source files, asking you to
@@ -139,7 +174,8 @@ company's model may enter the data, so:
   mechanically (line endings, spacing, splitting into files), never by
   writing their text yourself.
 - Pass the result to the tools with shell commands: `unpack`, copy the
-  formatted files into the folder, `patch`, then `scripts/check.py`.
+  formatted files into the folder, `patch`, then `scripts/check.py`;
+  never through the commands marked `*` in `wpt-dataset --help`.
 - From a session with an AI assistant, keep only the person's own
   messages.
 

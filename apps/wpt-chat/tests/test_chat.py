@@ -1,3 +1,4 @@
+import json
 import subprocess
 import sys
 
@@ -97,3 +98,17 @@ def test_the_scheduler_s_times_can_be_read_from_a_run_s_record_on_the_same_setup
         main([str(folder), "--scheduler-costs", "other"])
     with pytest.raises(SystemExit, match="MissingObject"):
         main([str(folder), "--scheduler-costs", "none"])
+
+
+def test_a_chat_is_a_conversation_in_the_current_shape(tmp_path, monkeypatch):
+    # what --chat holds is a chat-format conversation that the data rules accept as it is
+    from wpt_dataset.repo import validate
+
+    folder = model_folder(tmp_path / "model")
+    typed = iter(["hello", ""])
+    monkeypatch.setattr("builtins.input", lambda prompt: next(typed))
+    asked = []
+    monkeypatch.setattr("wpt_chat.answer", lambda model, tokenizer, conversation, *rest: (
+        asked.append(json.loads(json.dumps(conversation))) or ([{"type": "text", "text": "hi"}], "hi")))
+    main([str(folder), "--chat"])
+    validate(asked[0], "conversation", "wpt-chat --chat")

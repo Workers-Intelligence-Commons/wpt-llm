@@ -88,7 +88,7 @@ def parse(source_id: str, entries: dict, store, repo: Repo) -> dict[str, Task]:
             raise InvalidFile(f"{where}{TASK}: {error}") from error
         validate(document, "task", f"{where}{TASK}")
         try:
-            repo.image_folder(document["image"])
+            repo.check_image(document["image"])
         except RuleViolation as error:
             raise InvalidFile(f"{where}{TASK}: {error}") from None
         container = {name: max(size, document.get("container", {}).get(name, 0)) for name, size in SIZES.items()}
@@ -118,12 +118,13 @@ def of_source(source, tree, store, repo: Repo) -> dict[str, Task]:
     return parse(source.id, entries, store, repo)
 
 
-def read(repo: Repo, store, tag: str) -> tuple[list[Task], dict]:
+def read(repo: Repo, store, tag: str, log=print) -> tuple[list[Task], dict]:
     """([Task], {source id: address, revision, licenses}) for every task of
     an admitted source whose task.json is tagged `tag`, in source and folder
-    order."""
+    order. A source whose license text is empty is left out, and log is
+    called with a note naming it."""
     found, sources = [], {}
-    for source in repo.sources():
+    for source in repo.sources(log):
         if not source.admitted:
             continue
         tree, _ = source_tree(source, store)

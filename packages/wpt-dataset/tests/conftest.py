@@ -137,7 +137,7 @@ def add_source(repo, store, origin, item, data, patches=(), compute_checksum=Tru
     if compute_checksum:
         data["checksum"] = manifest.checksum(compute_upstream(data, data["address"], store))
     sid = "-".join([origin] + ([item] if item else []) + [address_hash(data["address"])])
-    folder = repo.data / "sources" / sid
+    folder = repo.root / "data" / "sources" / sid
     folder.mkdir()
     (folder / "source.json").write_text(dump_json(data), encoding="utf-8", newline="\n")
     for i, patch in enumerate(patches, start=1):
@@ -162,7 +162,7 @@ def write_model_recipe(repo, name, data):
 
 
 def write_recipe(repo, kind, name, document):
-    path = repo.recipe_path(kind, name)
+    path = repo.root / "data" / "recipes" / f"{kind}s" / f"{name}.json"
     path.write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}, indent=2) + "\n", encoding="utf-8", newline="\n")
     return path
 

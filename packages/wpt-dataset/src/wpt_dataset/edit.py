@@ -4,12 +4,14 @@
         writes the source's final files (after cuts and patches) into folder
     write_patch(repo, source, store, folder, name)
         writes the difference between those files and folder as the source's
-        next patch, NNNN-name.patch, and returns its path
+        next patch, NNNN-name.patch, through Repo.add_patch, and returns its
+        place in the repository
 
-Patches made this way are always well formed. write_patch checks its own
+Patches made this way are always well formed. The service layer checks the
 result: the source with the new patch must give exactly the folder's files
-and pass its license map. Otherwise the patch file is removed again and the
-error raised (a patch that applies to the wrong result is PatchFailed).
+and pass the rules of `wpt-dataset check --fetch`. Otherwise the patch file
+is removed again and the error raised (a patch that applies to the wrong
+result is PatchFailed).
 
 The folder must lie outside the repository, so unpacked upstream content is
 never committed by accident. On Windows, which has no executable bit, a
@@ -22,7 +24,7 @@ import tempfile
 from pathlib import Path
 
 from . import manifest
-from .errors import EditError, PatchFailed
+from .errors import EditError
 from .manifest import EXECUTABLE, FILE, SYMLINK, Entry
 from .repo import PATCH, Repo, Source
 from .sources import load_index, source_tree, temporary_git
@@ -48,13 +50,14 @@ def unpack(repo: Repo, source: Source, store, folder) -> int:
     return len(tree)
 
 
-def write_patch(repo: Repo, source: Source, store, folder, name: str) -> Path:
+def write_patch(repo: Repo, source: Source, store, folder, name: str) -> str:
     """Record the difference between the source's final files and folder as
-    its next patch. Returns the patch's path."""
+    its next patch, through the service layer (Repo.add_patch, which keeps
+    it only if the source then gives exactly the folder's files and passes
+    the rules of `wpt-dataset check --fetch`). Returns the patch's place in
+    the repository."""
     folder = _outside(repo, folder)
-    number = len(source.patches) + 1
-    patch_path = source.folder / f"{number:04d}-{name}.patch"
-    if not PATCH.fullmatch(patch_path.name):
+    if not PATCH.fullmatch(f"0001-{name}.patch"):
         raise EditError(f"patch name {name!r}: use letters, digits, '.', '_' and '-'")
     before, _ = source_tree(source, store)
     after = read_folder(folder, store, before)
@@ -62,15 +65,7 @@ def write_patch(repo: Repo, source: Source, store, folder, name: str) -> Path:
     diff = _diff(before, after, store)
     if not diff:
         raise EditError(f"{folder} holds exactly the source's files: nothing to record")
-    patch_path.write_bytes(diff)
-    try:
-        result, _ = source_tree(repo.source(source.id), store)  # applies every patch and checks the license map
-        if result != after:
-            raise PatchFailed(f"{source.id}: {patch_path.name} does not give the folder's files")
-    except BaseException:
-        patch_path.unlink()
-        raise
-    return patch_path
+    return repo.add_patch(source.id, name, diff, after, store)
 
 
 def read_folder(folder: Path, store, known: dict[str, Entry]) -> dict[str, Entry]:

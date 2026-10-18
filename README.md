@@ -89,7 +89,7 @@ the same command with `--resume` continues.
 | teach the model to finish tasks as an agent | tasks tagged `grpo` in a source, their images in `data/images/` locked with `wpt-agent lock-image NAME` and built with `wpt-agent build-image NAME`, and a recipe whose `posttrain` list holds `grpo` (needs Docker; [post-training](docs/post-training.md)) |
 | teach the agent to reach the same result with fewer tokens | `token-efficiency` after `grpo` in the recipe's `posttrain` list: it trains on the same tasks ([post-training](docs/post-training.md)) |
 | train long windows on a small GPU | `--recompute`: layers run again in the backward pass instead of keeping their values |
-| review sources in a browser | `wpt-web` (needs Bun), then http://127.0.0.1:8410/ |
+| write your own texts, conversations and tasks, and edit recipes, in a browser | `wpt-web` (needs Bun), then http://127.0.0.1:8410/; the same through `wpt-dataset` commands ([architecture](docs/architecture.md), "Two interfaces") |
 
 Every option also comes from the environment (`--micro-batch` is
 `WPT_MICRO_BATCH`), and `--help` lists them all. Details:

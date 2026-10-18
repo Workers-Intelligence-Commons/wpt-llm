@@ -1,64 +1,127 @@
-"""The sources page: list every source with its problems, show one as its
-file says, and save an edited one through Repo.save_source, which applies
-the same rules as `wpt-dataset check` (without downloading: `wpt-dataset
-check --fetch ID` still checks the license and format maps)."""
+"""The sources pages: list every source with its problems; show and save its
+source.json (the same rules as `wpt-dataset check`, without downloading:
+`wpt-dataset check --fetch ID` still checks the license and format maps);
+start a new empty source for a person's own text; list, read and change
+its files, always as a new patch; give a path its own tags. Every route
+goes through the service layer (wpt_dataset.repo), as the `wpt-dataset`
+commands of the same names do."""
 
-import json
+import base64
 
-from wpt_dataset.errors import InvalidFile, OutdatedSchema, RuleViolation, StaleFile
-from wpt_dataset.repo import file_version, schema
+from wpt_dataset.errors import NotFound, RuleViolation
+from wpt_dataset.repo import empty_source
 
 from ..server import Route
+from .common import PATCH, SAVED, STRING, VERSION, refusals
+
+FORMATS = ["text", "markdown", "chat"]  # a person's own text, or conversations (written in the conversation editor)
+FILE = {"type": "object", "required": ["mode", "size", "format", "tags"],
+        "properties": {"mode": STRING, "size": {"type": "integer"}, "format": {"type": ["string", "null"]},
+                       "tags": {"type": "array", "items": STRING}}}
 
 
-def routes(repo):
-    def path(sid):
-        return repo.data / "sources" / sid / "source.json"
-
-    def raw(sid):
-        try:
-            return json.loads(path(sid).read_text(encoding="utf-8"))
-        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
-            return None
+def routes(context):
+    repo = context.repo
 
     def summary(sid):
-        document = raw(sid)
+        """One source's line in the list, its problems from the one read that
+        checks it; a folder with no readable source.json is listed with its
+        problem, never a failure of the list."""
+        try:
+            found = repo.read("source", sid)
+            document, problems = found.document, found.problems
+        except (NotFound, RuleViolation):
+            document, problems = None, repo.check_source(sid)
         document = document if isinstance(document, dict) else {}
         decision = document.get("decision") if isinstance(document.get("decision"), dict) else {}
         licenses = document.get("licenses") if isinstance(document.get("licenses"), list) else []
         return {"id": sid, "address": document.get("address"), "schema": document.get("schema"),
-                "decision": decision.get("decision"), "reason": decision.get("reason"),
+                "type": document.get("type"), "decision": decision.get("decision"), "reason": decision.get("reason"),
                 "licenses": [e.get("license") for e in licenses if isinstance(e, dict)],
-                "problems": repo.check_source(sid)}
+                "problems": problems}
 
     def list_sources(values, body):
         return 200, [summary(sid) for sid in repo.source_ids()]
 
+    @refusals
     def read_source(values, body):
-        sid = values["id"]
-        if sid not in repo.source_ids():
-            return 404, {"problems": [f"no source {sid}"]}
-        return 200, {"id": sid, "document": raw(sid), "version": file_version(path(sid)),
-                     "problems": repo.check_source(sid)}
+        found = repo.read("source", values["id"])
+        return 200, {"id": values["id"], "document": found.document, "version": found.version,
+                     "problems": found.problems}
 
+    @refusals
     def save_source(values, body):
-        sid = values["id"]
-        if sid not in repo.source_ids():
-            return 404, {"problems": [f"no source {sid}"]}
-        if not isinstance(body, dict) or "document" not in body or not isinstance(body.get("version"), str):
-            return 400, {"problems": ["send {document, version}"]}
+        if values["id"] not in repo.source_ids():
+            return 404, {"problems": [f"no source {values['id']}"]}
+        return 200, {"version": repo.save_source(values["id"], body["document"], body["version"]), "problems": []}
+
+    @refusals
+    def new_source(values, body):
+        formats = {path: file["format"] for path, file in body["files"].items()}
+        document = empty_source(body["name"], license=body["license"], attribution=body["attribution"],
+                                text=body["license_text"], by=body["by"], formats=formats, tags=body.get("tags", []))
+        files = {path: file["text"].encode("utf-8") for path, file in body["files"].items() if file["text"]}
+        sid = repo.create_source(body["origin"], body.get("item") or None, document, files, body["patch"],
+                                 context.store if files else None)
+        return 200, {"id": sid}
+
+    @refusals
+    def list_files(values, body):
+        version, files = repo.source_files(values["id"], context.store)
+        return 200, {"version": version, "files": files}
+
+    @refusals
+    def read_file(values, body):
+        version, data = repo.read_source_file(values["id"], values["path"], context.store)
         try:
-            version = repo.save_source(sid, body["document"], body["version"])
-        except StaleFile as error:
-            return 409, {"problems": [str(error)]}
-        except (InvalidFile, OutdatedSchema, RuleViolation) as error:
-            return 422, {"problems": [str(error)]}
-        return 200, {"version": version, "problems": []}
+            return 200, {"version": version, "text": data.decode("utf-8")}
+        except UnicodeDecodeError:
+            return 200, {"version": version, "base64": base64.b64encode(data).decode()}
 
-    def source_schema(values, body):
-        return 200, schema("source")
+    @refusals
+    def write_file(values, body):
+        content = None if body["text"] is None else body["text"].encode("utf-8")
+        return 200, {"version": repo.change_source_files(values["id"], {values["path"]: content}, body["patch"],
+                                                         body["version"], context.store)}
 
-    return [Route("GET", "/api/sources", list_sources),
-            Route("GET", "/api/sources/{id}", read_source),
-            Route("PUT", "/api/sources/{id}", save_source),
-            Route("GET", "/api/schemas/source", source_schema)]
+    @refusals
+    def set_tags(values, body):
+        return 200, {"version": repo.set_tags(values["id"], values["path"], body["tags"], body["version"])}
+
+    new_file = {"type": "object", "required": ["format", "text"],
+                "properties": {"format": {"enum": FORMATS}, "text": STRING}}
+    return [
+        Route("GET", "/api/sources", list_sources, "every source, with what the check finds in it",
+              answer={"type": "array", "items": {"type": "object"}}),
+        Route("GET", "/api/sources/{id}", read_source, "a source's source.json, its version and problems",
+              answer={"type": "object", "required": ["document", "version", "problems"]}),
+        Route("PUT", "/api/sources/{id}", save_source, "write source.json through the source rules",
+              body={"type": "object", "required": ["document", "version"],
+                    "properties": {"document": {}, "version": VERSION}}, answer=SAVED),
+        Route("POST", "/api/sources", new_source,
+              "start an empty source for a person's own text (under review): each file's format entry, and the "
+              "files with text as its first patch (a chat file with no text yet gets only its entry)",
+              body={"type": "object", "required": ["origin", "name", "license", "attribution", "license_text", "by",
+                                                   "files", "patch"],
+                    "properties": {"origin": STRING, "item": {"type": ["string", "null"]}, "name": STRING,
+                                   "license": STRING, "attribution": STRING, "license_text": STRING, "by": STRING,
+                                   "tags": {"type": "array", "items": STRING},
+                                   "files": {"type": "object", "additionalProperties": new_file}, "patch": PATCH}},
+              answer={"type": "object", "required": ["id"], "properties": {"id": STRING}}),
+        Route("GET", "/api/sources/{id}/files", list_files, "a source's final files (after cuts and patches)",
+              answer={"type": "object", "required": ["version", "files"],
+                      "properties": {"version": STRING, "files": {"type": "object", "additionalProperties": FILE}}}),
+        Route("GET", "/api/sources/{id}/files/{path}", read_file,
+              "one final file: its text, or base64 when it is not UTF-8 (a person's text)",
+              answer={"type": "object", "required": ["version"],
+                      "properties": {"version": STRING, "text": STRING, "base64": STRING}}),
+        Route("PUT", "/api/sources/{id}/files/{path}", write_file,
+              "add, replace (text) or remove (null) a final file, recorded as the next patch (a person's text)",
+              body={"type": "object", "required": ["text", "patch", "version"],
+                    "properties": {"text": {"type": ["string", "null"]}, "patch": PATCH, "version": VERSION}},
+              answer=SAVED),
+        Route("PUT", "/api/sources/{id}/tags/{path}", set_tags,
+              "give exactly that path its own tags entry in source.json (no tags: remove it)",
+              body={"type": "object", "required": ["tags", "version"],
+                    "properties": {"tags": {"type": "array", "items": STRING}, "version": VERSION}}, answer=SAVED),
+    ]

@@ -113,7 +113,7 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     # only a person raising the recipe's version trains a new one
     setup_recipes(kit, repo, store, corpus, total_tokens=1000)
     first = record_of(store, build_dataset(repo, "small", store, log=lambda _: None))
-    lock_path = repo.lock_path("main")
+    lock_path = (repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json")
     lock = json.loads(lock_path.read_text())
     assert lock["vocabulary_sha256"] == first["tokenizer"]["vocabulary"] and len(lock["documents"]) == 10
     assert first["tokenizer"]["recipe_version"] == 1
@@ -131,7 +131,7 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
     assert record_of(fresh, build_dataset(repo, "small", fresh, log=lambda _: None))["tokenizer"]["vocabulary"] \
         == lock["vocabulary_sha256"]
 
-    recipe_path = repo.recipe_path("tokenizer", "main")
+    recipe_path = (repo.root / "data" / "recipes" / "tokenizers" / "main.json")
     recipe = json.loads(recipe_path.read_text())
     recipe_path.write_text(json.dumps({**recipe, "note": "a note changes nothing"}))
     build_dataset(repo, "small", store, log=lambda _: None)
@@ -149,7 +149,7 @@ def test_the_locked_vocabulary_stays_until_its_version_is_raised(kit, repo, stor
 def test_a_locked_vocabulary_that_cannot_be_rebuilt_the_same_is_refused(kit, repo, store, corpus, tmp_path):
     setup_recipes(kit, repo, store, corpus, total_tokens=1000)
     build_dataset(repo, "small", store, log=lambda _: None)
-    lock_path = repo.lock_path("main")
+    lock_path = (repo.root / "data" / "recipes" / "tokenizers" / "main.lock.json")
     lock = json.loads(lock_path.read_text())
     lock_path.write_text(json.dumps({**lock, "vocabulary_sha256": "f" * 64}))  # as if another machine trained another
     with pytest.raises(LockMismatch):

@@ -35,7 +35,7 @@ def test_a_lock_pins_the_base_the_archive_date_and_packages_and_every_machine_bu
     # the lock records what the image holds, and apt reads the dated
     # archive, so a build from the lock installs exactly the pinned versions
     root, tags = root
-    lock = images.lock(root, "tiny", log=lambda _: None)
+    lock = root / images.lock(root, "tiny", log=lambda _: None)
     pinned = json.loads(lock.read_text())
     assert pinned["base"].startswith("ubuntu@sha256:") and re.fullmatch(r"\d{8}T\d{6}Z", pinned["snapshot"])
     assert pinned["packages"]["hello"] and pinned["packages"]["bash"]

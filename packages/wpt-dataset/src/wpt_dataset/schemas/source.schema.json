@@ -48,7 +48,7 @@
           "paths": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/glob"}},
           "attribution": {"type": "string", "minLength": 1, "description": "the credit this license asks for, written by a person: authors, title, copyright line, link"},
           "values": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}, "description": "records files only: the values of a record's license field that this entry covers, exactly as the records hold them; a record whose value no entry lists is left out"},
-          "text": {"type": "string", "minLength": 1, "description": "the license text as the source gives it (its LICENSE file, with its copyright line, and an Apache NOTICE file's content); for LicenseRef-public-domain, why the work is in the public domain. Every model trained on the source carries it in its NOTICE"},
+          "text": {"type": "string", "description": "the license text as the source gives it (its LICENSE file, with its copyright line, and an Apache NOTICE file's content); for LicenseRef-public-domain, why the work is in the public domain. Every model trained on the source carries it in its NOTICE. Empty only while the source's decision is refused (a person writes it later); any other decision needs a text"},
           "note": {"type": "string"}
         }
       }
@@ -156,6 +156,10 @@
     "note": {"type": "string"}
   },
   "allOf": [
+    {
+      "if": {"required": ["decision"], "properties": {"decision": {"required": ["decision"], "properties": {"decision": {"const": "refused"}}}}},
+      "else": {"properties": {"licenses": {"items": {"properties": {"text": {"minLength": 1}}}}}}
+    },
     {
       "if": {"properties": {"type": {"const": "git"}}},
       "then": {"properties": {"revision": {"pattern": "^([0-9a-f]{40}|[0-9a-f]{64})$"}}}

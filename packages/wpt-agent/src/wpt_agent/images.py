@@ -35,6 +35,10 @@ accepts the dated archive's expired Release files.
 
 A built image is tagged wpt-agent/<name>:<hash of the folder's files
 except licenses.json>, so a changed Dockerfile or lock builds again.
+
+The folder is read and the two files written through the service layer
+(wpt_dataset.repo): docker gets the folder's files as a tar archive on its
+standard input, never a path in the repository.
 """
 
 import hashlib
@@ -45,7 +49,7 @@ import tarfile
 from datetime import UTC, datetime
 
 from wpt_dataset.errors import DatasetError
-from wpt_dataset.repo import Repo, dump_json, load_json
+from wpt_dataset.repo import Repo
 
 from . import docker
 from .docker import DockerFailed
@@ -74,32 +78,34 @@ class ImageError(Exception):
     may keep the untagged layers of a failed build."""
 
 
-def folder(root, name):
+def files(root, name) -> dict[str, tuple[bool, bytes]]:
+    """{path: (executable, content)} of every file in data/images/<name>/."""
     try:
-        return Repo(root).image_folder(name)
+        return Repo(root).image_files(name)
     except DatasetError as error:
         raise ImageError(str(error)) from None
 
 
 def tag(root, name) -> str:
     """The local tag of the image built from the folder as it is now."""
-    where, licenses = folder(root, name), Repo(root).image_file(name, "image-licenses")
     digest = hashlib.sha256()
-    for path in sorted(p for p in where.rglob("*") if p.is_file() and p != licenses):
-        digest.update(path.relative_to(where).as_posix().encode() + b"\0" + path.read_bytes() + b"\0")
+    for path, (_, content) in sorted(files(root, name).items()):
+        if path != "licenses.json":
+            digest.update(path.encode() + b"\0" + content + b"\0")
     return f"wpt-agent/{name}:{digest.hexdigest()[:16]}"
 
 
-def lock(root, name, *, force=False, log=print):
+def lock(root, name, *, force=False, log=print) -> str:
     """Pin the image's inputs: write lock.json and licenses.json; with
-    force, replace earlier ones. Returns lock.json's path."""
-    where, repo = folder(root, name), Repo(root)
-    locked, licensed = repo.image_file(name, "image-lock"), repo.image_file(name, "image-licenses")
-    if locked.exists() and not force:
+    force, replace earlier ones. Returns lock.json's place in the
+    repository (data/images/<name>/lock.json)."""
+    where, repo = files(root, name), Repo(root)
+    locked, licensed = repo.relative("image-lock", name), repo.relative("image-licenses", name)
+    if repo.exists("image-lock", name) and not force:
         raise ImageError(f"{locked} exists; pass --force to lock the image again and replace it")
-    found = BASE.search(repo.dockerfile(name).read_text(encoding="utf-8"))
+    found = BASE.search(where["Dockerfile"][1].decode("utf-8"))
     if not found:
-        raise ImageError(f"{repo.dockerfile(name)}: no `ARG BASE=<image>` line naming its base")
+        raise ImageError(f"{repo.relative('dockerfile', name)}: no `ARG BASE=<image>` line naming its base")
     log(f"pulling {found[1]}")
     _docker("pull", "-q", found[1])
     digests = json.loads(_docker("image", "inspect", "--format", "{{json .RepoDigests}}", found[1]))
@@ -107,15 +113,14 @@ def lock(root, name, *, force=False, log=print):
         raise ImageError(f"{found[1]} has no registry digest to pin")
     base, snapshot = digests[0], datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
     log(f"building {name} on {base}, packages as on {snapshot}")
-    image = _build(where, repo.dockerfile(name), base, snapshot, [])
+    image = _build(where, base, snapshot, [])
     try:
         installed = _installed(image)
         licenses = _licenses(image, installed)
     finally:
         _docker("rmi", image)
-    locked.write_text(dump_json({"schema": 1, "base": base, "snapshot": snapshot, "packages": installed}),
-                      encoding="utf-8", newline="\n")
-    licensed.write_text(dump_json({"schema": 1, "packages": licenses}), encoding="utf-8", newline="\n")
+    repo.write_generated("image-lock", name, {"schema": 1, "base": base, "snapshot": snapshot, "packages": installed})
+    repo.write_generated("image-licenses", name, {"schema": 1, "packages": licenses})
     log(f"{len(installed)} packages locked in {locked}, their licenses in {licensed}; "
         f"build the image with `wpt-agent build-image {name}`")
     return locked
@@ -124,20 +129,20 @@ def lock(root, name, *, force=False, log=print):
 def build(root, name, log=print) -> str:
     """Build the image from the folder and its lock, unless this machine
     has it already. Returns its tag."""
-    where, wanted, locked = folder(root, name), tag(root, name), Repo(root).image_file(name, "image-lock")
-    if not locked.exists():
-        raise ImageError(f"{locked} does not exist: run `wpt-agent lock-image {name}` and commit it")
+    where, wanted, repo = files(root, name), tag(root, name), Repo(root)
+    locked = repo.relative("image-lock", name)
     try:
-        pinned = load_json(locked, "image-lock")
+        pinned = repo.generated("image-lock", name)
     except DatasetError as error:
         raise ImageError(str(error)) from None
+    if pinned is None:
+        raise ImageError(f"{locked} does not exist: run `wpt-agent lock-image {name}` and commit it")
     if docker_has(wanted):
         log(f"{wanted} is built already")
         return wanted
     log(f"building {wanted} from its lock")
     packages = [f"{package}={version}" for package, version in sorted(pinned["packages"].items())]
-    image = _build(where, Repo(root).dockerfile(name), pinned["base"], pinned["snapshot"],
-                   ["--build-arg", f"PACKAGES={' '.join(packages)}"])
+    image = _build(where, pinned["base"], pinned["snapshot"], ["--build-arg", f"PACKAGES={' '.join(packages)}"])
     installed = _installed(image)
     if installed != pinned["packages"]:
         _docker("rmi", image)
@@ -163,10 +168,12 @@ def docker_has(image) -> bool:
     return bool(_docker("image", "ls", "-q", image).strip())
 
 
-def _build(where, dockerfile, base, snapshot, arguments) -> str:
-    """The id of the dockerfile's image, built in the folder `where` on
-    base with apt set to the snapshot; first ImageError unless apt on that
-    layer reads its package lists only from the snapshot hosts."""
+def _build(where, base, snapshot, arguments) -> str:
+    """The id of the image the folder's Dockerfile builds, from its files
+    `where` ({path: (executable, content)}, sent to docker as the build's
+    context), on base with apt set to the snapshot; first ImageError unless
+    apt on that layer reads its package lists only from the snapshot
+    hosts."""
     layer = f"wpt-agent/snapshot:{hashlib.sha256(f'{base} {snapshot}'.encode()).hexdigest()[:16]}"
     context = io.BytesIO()
     with tarfile.open(fileobj=context, mode="w") as archive:
@@ -179,10 +186,21 @@ def _build(where, dockerfile, base, snapshot, arguments) -> str:
     _docker("build", "-q", "-t", layer, "--build-arg", f"BASE={base}", "-", stdin=context.getvalue())
     try:
         _check_snapshot(layer, base)
-        return _docker("build", "-q", "-f", str(dockerfile), "--build-arg", f"BASE={layer}", *arguments,
-                       str(where)).strip()
+        return _docker("build", "-q", "--build-arg", f"BASE={layer}", *arguments, "-",
+                       stdin=_context(where)).strip()
     finally:
         _docker("rmi", layer)  # only the tag: the image built on it keeps the layer
+
+
+def _context(where) -> bytes:
+    """The folder's files as a tar archive, docker's build context."""
+    context = io.BytesIO()
+    with tarfile.open(fileobj=context, mode="w") as archive:
+        for path, (executable, content) in sorted(where.items()):
+            info = tarfile.TarInfo(path)
+            info.size, info.mode = len(content), 0o755 if executable else 0o644
+            archive.addfile(info, io.BytesIO(content))
+    return context.getvalue()
 
 
 def _check_snapshot(layer, base):

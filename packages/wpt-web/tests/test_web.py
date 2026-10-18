@@ -50,7 +50,7 @@ def test_a_source_is_listed_read_and_saved_only_through_the_source_rules(web):
     # as every data file is; anything the check would refuse is not written
     request, path = web
     status, listing = request("GET", "/api/sources")
-    assert status == 200 and listing == [{"id": SID, "address": ADDRESS, "schema": 5, "decision": "refused",
+    assert status == 200 and listing == [{"id": SID, "address": ADDRESS, "schema": 5, "type": "git", "decision": "refused",
                                           "reason": "under review", "licenses": ["MIT"], "problems": []}]
     status, detail = request("GET", f"/api/sources/{SID}")
     assert status == 200 and detail["document"] == DOCUMENT and detail["problems"] == []

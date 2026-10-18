@@ -22,6 +22,10 @@ class StaleFile(DatasetError):
     Read it again and redo the change."""
 
 
+class NotFound(DatasetError):
+    """The repository holds no such file, source, conversation or task."""
+
+
 class OutdatedSchema(DatasetError):
     """A file uses an older shape; `wpt-dataset migrate` rewrites it."""
 
@@ -105,3 +109,11 @@ class RoundTripFailed(DatasetError):
 class SignatureError(DatasetError):
     """A commit lacks its DCO sign-off, or changes a decision (or the list of
     allowed keys) without a signature from an allowed key."""
+
+
+class DataAccessRefused(RuntimeError):
+    """Code outside the service layer (wpt_dataset/repo.py) opened, listed,
+    removed or renamed a path under the repository's data folder; the audit
+    hook repo.py sets refuses it before it happens (docs/architecture.md,
+    "The service layer"). Not a DatasetError: no command treats it as a
+    refusal of the data, it is a fault of the code."""

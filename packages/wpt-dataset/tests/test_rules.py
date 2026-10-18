@@ -31,10 +31,10 @@ def test_check_reports_each_broken_rule(kit, repo, store, git_upstream):
     unexplained = kit.add_source(repo, store, "example", "unexplained", {
         "type": "git", "address": git_upstream[0] + "/./", "revision": git_upstream[1],
         "decision": {"decision": "refused", "by": "Test Reviewer", "date": "2026-10-14"}})  # a refusal must say why
-    wrong_id = repo.data / "sources" / "example-wrong-00000000"
+    wrong_id = repo.root / "data" / "sources" / "example-wrong-00000000"
     wrong_id.mkdir()
-    (wrong_id / "source.json").write_text((repo.data / "sources" / good / "source.json").read_text())
-    (repo.data / "sources" / good / "0002-skipped.patch").write_text("")
+    (wrong_id / "source.json").write_text((repo.root / "data" / "sources" / good / "source.json").read_text())
+    (repo.root / "data" / "sources" / good / "0002-skipped.patch").write_text("")
     kit.write_recipe(repo, "mixture", "half", {"pools": [{"name": "a", "select": "a", "weight": 0.5}]})
 
     problems = "\n".join(repo.check())
@@ -48,14 +48,14 @@ def test_check_reports_each_broken_rule(kit, repo, store, git_upstream):
 def test_migrate_rewrites_files_that_are_behind(kit, repo, store, git_upstream):
     sid = kit.add_source(repo, store, "example", "ok", {
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
-    path = repo.data / "sources" / sid / "source.json"
+    path = repo.root / "data" / "sources" / sid / "source.json"
     # a made-up next shape: "type" renamed to "kind"
     step = {5: lambda doc, _path: {**{k: v for k, v in doc.items() if k != "type"}, "kind": doc["type"], "schema": 6}}
     current = {"source": 6, "mixture": 1, "model": 1, "tokenizer": 1, "lock": 1}
 
     changed = migrate(repo, migrations={"source": step, "mixture": {}, "model": {}, "tokenizer": {}, "lock": {}},
                       current=current, log=lambda _: None)
-    assert changed == [path]
+    assert changed == [path.relative_to(repo.root).as_posix()]
     document = json.loads(path.read_text())
     assert document["schema"] == 6 and document["kind"] == "git" and "type" not in document
     assert path.read_text() == dump_json(document)
@@ -64,7 +64,7 @@ def test_migrate_rewrites_files_that_are_behind(kit, repo, store, git_upstream):
 def test_migrating_a_shape_1_source_asks_a_person_for_attribution_text_and_formats(kit, repo, store, git_upstream):
     sid = kit.add_source(repo, store, "example", "ok", {
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1]})
-    path = repo.data / "sources" / sid / "source.json"
+    path = repo.root / "data" / "sources" / sid / "source.json"
     old = json.loads(path.read_text())
     old["schema"] = 1
     del old["licenses"][0]["attribution"]
@@ -115,7 +115,7 @@ def test_a_license_expression_passes_when_one_alternative_is_allowed(kit, repo, 
 def test_the_check_reads_the_lock_and_licenses_of_each_image(repo):
     # data/images/<name>/ follows the data-file rules: its two written files
     # match their schemas, and every image folder has its Dockerfile
-    folder = repo.data / "images" / "tiny"
+    folder = repo.root / "data" / "images" / "tiny"
     folder.mkdir(parents=True)
     (folder / "Dockerfile").write_text("ARG BASE=debian:trixie-slim\nFROM ${BASE}\n")
     lock = {"schema": 1, "base": "debian@sha256:" + "a" * 64, "snapshot": "20261017T120000Z",
@@ -127,7 +127,7 @@ def test_the_check_reads_the_lock_and_licenses_of_each_image(repo):
     assert repo.check() == []
 
     (folder / "lock.json").write_text(dump_json({**lock, "snapshot": "2026-10-17"}))
-    (repo.data / "images" / "other").mkdir()
+    (repo.root / "data" / "images" / "other").mkdir()
     problems = repo.check()
     assert problems == ["no image 'other': data/images/other/Dockerfile does not exist",
                         f"{folder / 'lock.json'}: at snapshot: '2026-10-17' does not match '^[0-9]{{8}}T[0-9]{{6}}Z$'"]
@@ -138,13 +138,13 @@ def test_migrating_to_shape_4_moves_a_licenseref_text_into_source_json(kit, repo
         "type": "git", "address": git_upstream[0], "revision": git_upstream[1],
         "licenses": [{"license": "LicenseRef-public-domain", "paths": ["**"], "attribution": "A. Author, Book"}]},
         compute_checksum=False)
-    folder = repo.data / "sources" / sid
+    folder = repo.root / "data" / "sources" / sid
     path = folder / "source.json"
     proof = "Public domain: the author died in 1850.\n"
     (folder / "LicenseRef-public-domain.txt").write_text(proof, encoding="utf-8", newline="\n")
     path.write_text(dump_json({**json.loads(path.read_text()), "schema": 3}))
 
-    assert migrate(repo, log=lambda _: None) == [path]
+    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
     assert json.loads(path.read_text())["licenses"][0]["text"] == proof
     assert not (folder / "LicenseRef-public-domain.txt").exists()
     assert repo.check() == []
@@ -164,7 +164,7 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
     assert main(["--root", str(repo.root), "build", "d"]) == 0
     dataset_id = capsys.readouterr().out.strip().splitlines()[-1]
     assert store.get_ref("datasets", dataset_id)
-    assert repo.lock_path("t").exists()
+    assert (repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json").exists()
     # the build's record names the dataset it wrote, which training records as its input,
     # and each source it read
     [folder] = store.record_folders()
@@ -177,7 +177,7 @@ def test_command_line_builds_a_dataset_and_prints_its_id(kit, repo, store, git_u
     assert fetched == set(repo.source_ids())
     [locked] = [e["attributes"] for e in events if e.get("name") == "tokenizer.lock"]  # the lock file it wrote
     assert locked == {"path": "data/recipes/tokenizers/t.lock.json",
-                      "vocabulary": json.loads(repo.lock_path("t").read_text())["vocabulary_sha256"]}
+                      "vocabulary": json.loads((repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json").read_text())["vocabulary_sha256"]}
     assert json.loads(store.read_record(folder, "end.json"))["status"] == "succeeded"
 
 
@@ -204,14 +204,14 @@ def test_a_build_whose_record_breaks_writes_no_lock_file(kit, repo, store, git_u
     monkeypatch.setattr(LocalStore, "_raw_append_record", disk_full_at_the_lock)
     assert main(["--root", str(repo.root), "build", "d"]) == 3
     assert "No space left on device" in capsys.readouterr().err
-    assert not repo.lock_path("t").exists()
+    assert not (repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json").exists()
 
 
 def test_migrating_shape_1_tokenizer_files(kit, repo):
     # recipes start at vocabulary version 1; an old lock lists no documents, so it cannot be kept
     recipe = kit.write_recipe(repo, "tokenizer", "t", {"mixture": "m", "vocab_size": 556})
     recipe.write_text(json.dumps({**json.loads(recipe.read_text()), "schema": 1}))
-    lock = repo.lock_path("t")
+    lock = (repo.root / "data" / "recipes" / "tokenizers" / "t.lock.json")
     lock.write_text(json.dumps({"schema": 1, "fingerprint": "0" * 64, "vocabulary_sha256": "1" * 64}))
     with pytest.raises(OutdatedSchema, match=re.escape(f"{lock}: a shape 1 lock does not list the documents")):
         migrate(repo, log=lambda _: None)
@@ -254,7 +254,7 @@ def test_migrating_a_shape_3_model_recipe_makes_its_window_and_steps_one_stage(k
     training = {key: value for key, value in kit.TRAINING.items() if key != "stages"}
     path.write_text(dump_json({**new, "schema": 3, "model": {"block_size": 16, **kit.MODEL},
                                "training": {**training, "steps": 1, "batch_size": 4}}))
-    assert migrate(repo, log=lambda _: None) == [path]
+    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
     assert json.loads(path.read_text()) == new
 
 
@@ -265,7 +265,7 @@ def test_migrating_a_shape_4_model_recipe_adds_the_drafter_s_training_values_aft
     path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
     new = json.loads(path.read_text())
     path.write_text(dump_json({**{key: value for key, value in new.items() if key != "drafter"}, "schema": 4}))
-    assert migrate(repo, log=lambda _: None) == [path]
+    assert migrate(repo, log=lambda _: None) == [path.relative_to(repo.root).as_posix()]
     migrated = json.loads(path.read_text())
     assert migrated["drafter"] == {"prompts": 256, "prompt_tokens": 64, "answer_tokens": 256, "epochs": 10,
                                    "learning_rate": 6e-4, "held_out": 0.1, "anchors": 512, "batch": 8, "seed": 0}

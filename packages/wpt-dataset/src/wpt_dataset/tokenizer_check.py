@@ -13,7 +13,7 @@ from dataclasses import dataclass
 
 from .build import build_tokenizer, gather
 from .errors import RoundTripFailed
-from .repo import Repo, load_json
+from .repo import Repo
 
 
 @dataclass
@@ -33,7 +33,7 @@ def check_tokenizer(repo: Repo, name: str, store, log=print) -> list[SourceRepor
     """One report per admitted source, in source order. Raises RoundTripFailed
     on the first document that does not decode back to its bytes."""
     tokenizer, _, _ = build_tokenizer(repo, name, store, log)
-    trained = {doc_id.split("/", 1)[0] for doc_id, _ in load_json(repo.lock_path(name), "lock")["documents"]}
+    trained = {doc_id.split("/", 1)[0] for doc_id, _ in repo.generated("lock", name)["documents"]}
     documents, _, _ = gather(repo, store, log)
     reports = {}
     for document in documents:

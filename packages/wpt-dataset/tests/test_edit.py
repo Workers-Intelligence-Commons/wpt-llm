@@ -77,7 +77,7 @@ def test_patch_refuses_what_it_cannot_record_and_leaves_no_patch(kit, repo, stor
         unpack(repo, repo.source(sid), store, repo.root / "unpacked")
 
     # a file no license entry covers: the license map fails and the patch is removed again
-    source_json = repo.data / "sources" / sid / "source.json"
+    source_json = repo.root / "data" / "sources" / sid / "source.json"
     document = kit.json.loads(source_json.read_text())
     document["licenses"][0]["paths"] = ["texts/**"]
     source_json.write_text(kit.dump_json(document))
