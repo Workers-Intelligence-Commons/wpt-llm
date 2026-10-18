@@ -1,0 +1,92 @@
+name: "Model behavior"
+description: "What a trained WPT model wrote"
+title: "[model behavior] "
+labels: ["model behavior"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for what a trained model writes. For a tool that fails or a command that gives a wrong result, use the bug form. Do not paste personal data or secrets, and do not paste output of another company's model.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Part concerned
+      description: The part of WPT this is about. Pick the closest one.
+      options:
+        - sources and data rules
+        - tokenizer
+        - dataset build
+        - training
+        - post-training
+        - evaluation
+        - generation and chat
+        - web interface
+        - model architecture
+        - documentation
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: "Prompt"
+      description: "The exact text you gave the model, or the whole conversation if you used `wpt-chat --chat`."
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: "Output"
+      description: "The exact text the model gave back."
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "What you expected"
+      description: "What would have been right, and why."
+    validations:
+      required: true
+  - type: textarea
+    id: sampling
+    attributes:
+      label: "Sampling settings"
+      description: "Every setting of the generation: the command with its options (`--max-new-tokens`, `--chat`). `wpt-chat` samples at temperature 0.8 with top-k 40; write the temperature and top-k you used only if you called the model through code with other values, and add any seed. Write \"defaults\" if you changed none."
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: "The model folder's provenance"
+      description: "The content of `provenance.json` from the model folder (dataset id, recipe, base model, steps), and the sha256 of its weight files."
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: evals
+    attributes:
+      label: "Eval results"
+      description: "The results in the `evals/*.json` files of the model folder (or its `README.md` model card). Write \"none\" if the model was never evaluated."
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: "Commit"
+      description: "The commit of this repository you ran (`git rev-parse HEAD`). Say if the working tree had changes."
+      placeholder: "0123456789abcdef"
+    validations:
+      required: true
+  - type: textarea
+    id: system
+    attributes:
+      label: "System, GPU and PyTorch build"
+      description: "Operating system, CPU, GPU and driver, Python version, and the PyTorch build (`uv run python -c 'import torch; print(torch.__version__, torch.version.cuda)'`). The `start.json` of the run record holds the tool versions."
+    validations:
+      required: true
+  - type: textarea
+    id: more
+    attributes:
+      label: "Anything else"
+      description: "How often it happens (for example 3 times in 10) and other prompts that give the same result."

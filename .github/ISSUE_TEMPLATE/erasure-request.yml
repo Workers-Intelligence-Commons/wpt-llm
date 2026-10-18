@@ -1,0 +1,57 @@
+name: "Erasure request"
+description: "Ask for content to be removed from future builds"
+title: "[erasure] "
+labels: ["erasure request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every erasure request is honored, including a copyright holder's request about content that is properly licensed. See `docs/erasure.md`.
+
+        **This issue is public.** Do not post your home address, phone number, email address, identity documents or any other personal detail here, and do not copy the text you want erased. If the request itself should not be public, report it privately instead: the repository's **Security** tab, then **Report a vulnerability** (https://github.com/Workers-Intelligence-Commons/wpt-llm/security/advisories/new). It needs a GitHub account.
+
+        An erasure removes a range of bytes from one file of a source, in future builds and models only. Models already trained and published are not changed. Only the text of an `empty` source (text written for WPT and committed to this repository) stays in the repository's history, clones and forks. A person named in a license notice that a license requires keeping has the notice and everything they made removed. Requests under the GDPR are answered within one month.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Part concerned
+      description: The part of WPT this is about. Pick the closest one.
+      options:
+        - sources and data rules
+        - tokenizer
+        - dataset build
+        - training
+        - post-training
+        - evaluation
+        - generation and chat
+        - web interface
+        - model architecture
+        - documentation
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: "Source"
+      description: "The id of the source (`data/sources/<id>`) or its address, and the path of the file inside it. Write \"unknown\" if you cannot find it, and say where you saw the content."
+    validations:
+      required: true
+  - type: textarea
+    id: where
+    attributes:
+      label: "Where the content is"
+      description: "Where in the file: a chapter, a line, a heading. Give no more of the text than needed to find it."
+    validations:
+      required: true
+  - type: textarea
+    id: who
+    attributes:
+      label: "Your relation to the content"
+      description: "Whether you are the author, the copyright holder, a person named in the content, or someone acting for one of them. Write no contact details here."
+    validations:
+      required: true
+  - type: textarea
+    id: vocabulary
+    attributes:
+      label: "Reaching the vocabulary"
+      description: "Whether the erased text must also leave the tokenizer's vocabulary (for example a rare name). That needs a new tokenizer recipe `version` (`docs/tokenizer.md`). Write \"no\" or \"not sure\"."

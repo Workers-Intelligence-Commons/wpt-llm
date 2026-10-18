@@ -1,0 +1,75 @@
+name: "Source proposal"
+description: "Propose a work or a collection as training data"
+title: "[source] "
+labels: ["source proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        WPT trains only on content whose license is clear. A maintainer decides every source, after the license check of `docs/licenses.md`. You can also open a pull request with the `source.json` yourself (CONTRIBUTING.md, "Adding a source").
+  - type: dropdown
+    id: area
+    attributes:
+      label: Part concerned
+      description: The part of WPT this is about. Pick the closest one.
+      options:
+        - sources and data rules
+        - tokenizer
+        - dataset build
+        - training
+        - post-training
+        - evaluation
+        - generation and chat
+        - web interface
+        - model architecture
+        - documentation
+    validations:
+      required: true
+  - type: input
+    id: address
+    attributes:
+      label: "Address"
+      description: "The exact address of the source: the archive's web address, the git repository without `.git`, or the Hugging Face dataset."
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: "Revision"
+      description: "The commit, version or date you looked at. Write \"unknown\" if there is none."
+    validations:
+      required: true
+  - type: textarea
+    id: license
+    attributes:
+      label: "License"
+      description: "The license of the content as the source states it, with the address of its text. If paths have different licenses, say which paths have which."
+    validations:
+      required: true
+  - type: textarea
+    id: allowed
+    attributes:
+      label: "Why it is allowed"
+      description: "Why this license is on the allowed list of `docs/licenses.md`, and what you checked in its \"What to check\" column. For public domain, say why it holds in the United States and in the work's country of origin."
+    validations:
+      required: true
+  - type: textarea
+    id: ai_wish
+    attributes:
+      label: "Wish about AI training"
+      description: "What you found when you looked for a \"no AI training\" wish from the owner: README, terms of use, a machine-readable text-and-data-mining reservation, robots.txt. Say what you looked at."
+    validations:
+      required: true
+  - type: textarea
+    id: personal
+    attributes:
+      label: "Personal data"
+      description: "Whether the source holds personal data, and how you know."
+    validations:
+      required: true
+  - type: textarea
+    id: content
+    attributes:
+      label: "What it holds"
+      description: "What the works are, their language, their size, and why WPT would want them."

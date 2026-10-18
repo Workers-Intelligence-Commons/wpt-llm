@@ -1,0 +1,119 @@
+name: "Enhancement"
+description: "A change to a tool or to the model"
+title: "[enhancement] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An enhancement is a new capability or a change of behavior, in the tooling or in the model. Every decision lives in the documentation, so a change of a rule is a change of a document first.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Part concerned
+      description: The part of WPT this is about. Pick the closest one.
+      options:
+        - sources and data rules
+        - tokenizer
+        - dataset build
+        - training
+        - post-training
+        - evaluation
+        - generation and chat
+        - web interface
+        - model architecture
+        - documentation
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: "The need"
+      description: "What you cannot do today, or what is wrong today, and who it affects."
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: "The evidence"
+      description: "What shows the need is real: a measurement, a run record, a document, a number. Name the commit and the command that produced it."
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives"
+      description: "The other ways to meet the need that you considered, with what each one costs. Include doing nothing."
+    validations:
+      required: true
+  - type: textarea
+    id: data_rules
+    attributes:
+      label: "What it changes for data rules"
+      description: "Which license rules, source rules or checks change, and which sources would be admitted, refused or retired differently. Write \"nothing\" if nothing changes."
+    validations:
+      required: true
+  - type: textarea
+    id: recipe_shapes
+    attributes:
+      label: "What it changes for recipe shapes"
+      description: "Which recipe, `source.json` or other data file shapes change, and the migration (`wpt-dataset migrate`) that carries the existing files. Write \"nothing\" if nothing changes."
+    validations:
+      required: true
+  - type: textarea
+    id: weights
+    attributes:
+      label: "Whether earlier weights still load"
+      description: "Whether model folders trained before the change still load and give the same output, or need a new training. Write \"not applicable\" if the model is untouched."
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: "Commit"
+      description: "The commit of this repository you ran (`git rev-parse HEAD`). Say if the working tree had changes."
+      placeholder: "0123456789abcdef"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: "Exact command"
+      description: "The full command line, copied, with its options and the `WPT_*` environment variables you set. Write \"none\" if no command was involved."
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: recipe
+    attributes:
+      label: "Recipe"
+      description: "The name of the model recipe (`data/recipes/models/NAME.json`), tokenizer recipe or mixture involved. Write \"none\" if no recipe was involved."
+      placeholder: "unimpaired-axolotl"
+    validations:
+      required: true
+  - type: textarea
+    id: ids
+    attributes:
+      label: "Dataset id and model weights' sha256"
+      description: "The dataset id, and the sha256 of the first weight file of the model, that you used or produced. Write \"none\" if there is none."
+    validations:
+      required: true
+  - type: input
+    id: record
+    attributes:
+      label: "Run record's folder"
+      description: "The folder under `records/` in the store (such as `20261017T120501Z-wpt-train-5d41402a-3fa2b1c9`). Its `start.json`, `events.jsonl` and `end.json` say what the run did. Write \"none\" if the run left no record."
+    validations:
+      required: true
+  - type: textarea
+    id: system
+    attributes:
+      label: "System, GPU and PyTorch build"
+      description: "Operating system, CPU, GPU and driver, Python version, and the PyTorch build (`uv run python -c 'import torch; print(torch.__version__, torch.version.cuda)'`). The `start.json` of the run record holds the tool versions."
+    validations:
+      required: true
+  - type: textarea
+    id: more
+    attributes:
+      label: "Anything else"
+      description: "Links, related issues, drafts."
