@@ -2082,10 +2082,14 @@ version = "0.1.0"
 source = { editable = "packages/wpt-inference" }
 dependencies = [
     { name = "wpt-model" },
+    { name = "wpt-utils" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "wpt-model", editable = "packages/wpt-model" }]
+requires-dist = [
+    { name = "wpt-model", editable = "packages/wpt-model" },
+    { name = "wpt-utils", editable = "packages/wpt-utils" },
+]
 
 [[package]]
 name = "wpt-llm"

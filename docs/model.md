@@ -610,10 +610,38 @@ and has not read yet:
   run's record as `scheduler-costs.json` (maintainer's decision,
   2026-10-17), with the setup they were measured on: the model's config,
   the drafter's block (the drafts per round), the writer's rows (1) and
-  the device, by its kind and name ("cpu", or such as "cuda (NVIDIA
-  GeForce RTX 5080 Laptop GPU)"), never its number among GPUs of one name
-  (maintainer's decision, 2026-10-18). `wpt-train --scheduler-costs
-  FOLDER` and `wpt-posttrain --scheduler-costs FOLDER` replay the times
+  the device, by its kind and name (such as "cuda (NVIDIA GeForce RTX
+  5080 Laptop GPU)"), never its number among GPUs of one name
+  (maintainer's decision, 2026-10-18). On the CPU, the name is the
+  processor's, such as "cpu (AMD Ryzen AI 7 450 w/ Radeon 860M)", so times
+  measured on one processor are never replayed on another (maintainer's
+  decision, 2026-10-18). `wpt_utils.device.processor_name` reads it from
+  what each system reports: the first `model name` line of `/proc/cpuinfo`
+  on Linux, the registry's `ProcessorNameString` of the first processor on
+  Windows, `sysctl -n machdep.cpu.brand_string` on macOS, with runs of
+  spaces made one (`platform.processor()` is empty on many Linux systems
+  and names only the architecture elsewhere). A Linux `/proc/cpuinfo`
+  without a `model name` line, as on most Arm processors, gets a name
+  built from its `CPU implementer` and `CPU part` codes, as `lscpu` does:
+  the implementer, then each kind of core once, such as "cpu (Arm Limited
+  Cortex-X925 + Cortex-A725)" (maintainer's decision, 2026-10-18). WPT
+  writes its own table of these names from the facts Arm publishes (the
+  implementers in Arm's register reference, DDI 0601, `MIDR_EL1`; each
+  part in its core's Technical Reference Manual), never from `lscpu`'s
+  code, and keeps it to the cores of common Arm machines that run PyTorch
+  under Linux; a part it does not hold is named by its implementer and its
+  code in hexadecimal, such as "Arm Limited part 0xd0d", and an
+  implementer Arm does not publish by its code, such as "implementer 0x61
+  part 0x22". Only when those codes are missing too is it the machine's
+  architecture, such as `aarch64`, the last resort (maintainer's decision,
+  2026-10-18). On macOS, a `sysctl` that is not on the search path never
+  stops a run: the name is then the architecture (maintainer's decision,
+  2026-10-18). The file's shape stays 2 (maintainer's decision,
+  2026-10-18): only the device's text changed, so a file recorded on the
+  CPU before, whose device is `cpu` alone, is refused like any other
+  setup.
+  `wpt-train --scheduler-costs FOLDER` and
+  `wpt-posttrain --scheduler-costs FOLDER` replay the times
   an earlier run recorded in its record folder `FOLDER` instead of
   measuring them, and `wpt-chat --scheduler-costs FOLDER` reads them
   instead of measuring them when it loads the model; each refuses times

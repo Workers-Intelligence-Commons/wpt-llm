@@ -450,15 +450,23 @@ checkpoint stays, and `--resume` continues from it, takes no step, loads
 the best weights and trains the drafter again. The drafter reads the
 training shards once at the end of the run, one shard at a time, to draw
 its prompts; from a remote store, each shard's local copy is released
-once read, as `--stream` releases them (maintainer's decision,
-2026-10-18), so the disk holds at most one shard. Drafter settings that
-cannot be (feature layers the model does not have, an unknown setting)
-are refused before training starts (maintainer's decision, 2026-10-18).
+once read (maintainer's decision, 2026-10-18). The disk then holds at
+most one shard only when the shards were not already local: with
+`--stream`, which released each one once its tokens were in the token
+file, and in `wpt-posttrain`, where nothing before the drafter reads
+them. Without `--stream`, the shards training fetched to build its token
+file are still on disk when the drafter starts, and each one goes as the
+drafter reads it, not every shard: a run resumed with its token file
+already built fetched none (maintainer's decision, 2026-10-18). Drafter settings
+that cannot be (feature layers the model does not have, an unknown
+setting) are refused before training starts (maintainer's decision,
+2026-10-18).
 
 Then the run measures the drafter scheduler's pass times once and writes
 them into its record as `scheduler-costs.json`, with the setup they were
 measured on: the model's config, the drafter's block (the drafts per
-round), the rows (1) and the device (its kind and name). `--scheduler-costs
+round), the rows (1) and the device (its kind and name; on the CPU, the
+processor's, maintainer's decision, 2026-10-18). `--scheduler-costs
 FOLDER` replays those an earlier run recorded in its record folder
 `FOLDER` instead; times measured on another setup are refused before
 training starts (maintainer's decision, 2026-10-18).
@@ -509,8 +517,18 @@ of them into place by hand. Whenever the rename was tried and the target
 is missing afterward, whatever error stopped the run (a first rename
 refused, or a record that broke meanwhile), the new model is kept and
 named on the error output, with the earlier folder when there is one.
-When the earlier folder cannot be removed, or
-its removal is interrupted, it stays beside the new one, as
+Without `--run`, the target holds the checkpoint saved just before the
+drafter; when that checkpoint is all it holds and the new folder cannot
+take its place, the checkpoint folder is moved back and the new model is
+kept beside it and named on the error output, as when there was no
+target, since no other model is there to go back to: move it into place
+by hand, or run again with `--resume`, which trains the drafter again
+from the checkpoint, then remove the kept folder by hand, since the
+resumed run writes a new one (maintainer's decision, 2026-10-18). This
+applies only without `--run`: with `--run`, the checkpoint is in the
+store, not in the target (maintainer's decision, 2026-10-18). When the
+earlier folder cannot be removed, or its removal is interrupted, it
+stays beside the new one, as
 `.<folder name>-replaced-<random>`, named in a warning and in the record:
 remove it by hand. The run still succeeds, unless it was interrupted.
 

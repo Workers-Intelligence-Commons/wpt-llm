@@ -9,6 +9,7 @@ from wpt_inference import DRAFT, costs_file, costs_setup, measure_costs, replaye
 from wpt_inference import drafting
 from wpt_inference.drafting import DrafterFailed, Settings, settings, train_drafter
 from wpt_model import WPT, DrafterConfig, ModelConfig
+from wpt_utils.device import processor_name
 
 CONFIG = ModelConfig(vocab_size=50, block_size=16, n_layer=4, global_attention=["CSA"], d_model=16, kda_heads=2,
                      kda_head_dim=8, attention_heads=2, attention_head_dim=128, query_rank=8, output_groups=1,
@@ -134,14 +135,16 @@ def test_the_recipe_s_drafter_section_gives_the_shape_and_the_training():
 
 def test_the_scheduler_s_pass_times_are_replayed_only_on_the_setup_they_were_measured_on():
     # measured once per run, written into its record with the model config,
-    # rows, drafter block and device they were measured on; a replay on
-    # another setup is refused, naming each difference (maintainer's
-    # decision, 2026-10-18)
+    # rows, drafter block and device they were measured on, the CPU by its
+    # processor's name; a replay on another setup, another processor
+    # included, is refused, naming each difference (maintainer's decisions,
+    # 2026-10-18)
     costs = measure_costs(model(), 1, DRAFT, context=8, repeats=1)
     assert len(costs) == DRAFT + 1 and all(seconds > 0 for seconds in costs)
     setup = costs_setup(CONFIG, 1, DRAFT, "cpu")
-    assert setup == {"model": json.loads(json.dumps(dataclasses.asdict(CONFIG))), "rows": 1, "draft": DRAFT,
-                     "device": "cpu"}
+    here = f"cpu ({processor_name()})"
+    assert processor_name().strip() and setup == {"model": json.loads(json.dumps(dataclasses.asdict(CONFIG))),
+                                                  "rows": 1, "draft": DRAFT, "device": here}
     recorded = costs_file(costs, setup)
     assert replayed_costs(recorded, costs_setup(CONFIG, 1, DRAFT, torch.device("cpu"))) == costs
     with pytest.raises(ValueError, match=r"another setup: draft 5, here 4$"):
@@ -149,7 +152,10 @@ def test_the_scheduler_s_pass_times_are_replayed_only_on_the_setup_they_were_mea
     wider = dataclasses.replace(CONFIG, d_model=32)
     with pytest.raises(ValueError, match=r"another setup: model d_model 16, here 32; rows 1, here 2$"):
         replayed_costs(recorded, costs_setup(wider, 2, DRAFT, "cpu"))
-    with pytest.raises(ValueError, match=r"another setup: device 'cpu', here 'cuda \(GPU\)'$"):
+    with pytest.raises(ValueError, match=r"another setup: device 'cpu \(Other Processor 9\)', here ") as refused:
+        replayed_costs(costs_file(costs, {**setup, "device": "cpu (Other Processor 9)"}), setup)
+    assert str(refused.value).endswith(f"here {here!r}")
+    with pytest.raises(ValueError, match=r"another setup: device 'cpu \(.+\)', here 'cuda \(GPU\)'$"):
         replayed_costs(recorded, {**setup, "device": "cuda (GPU)"})
     with pytest.raises(ValueError, match="shape 1, which names no setup"):
         replayed_costs(json.dumps({"schema": 1, "rows": 1, "draft": DRAFT, "seconds": costs}).encode(), setup)

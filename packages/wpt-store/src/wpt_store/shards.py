@@ -99,9 +99,12 @@ def documents(store, shards):
     """Yield (document id, source id, tokens) of every document in these
     shards once, in shard order (a document the mixture repeats comes
     once), each shard checked (read_verified) before its documents are
-    given; one shard is in memory at a time, and for a remote store its
-    local copy is released once read, as ShardStream does, so the disk
-    holds at most one shard."""
+    given; one shard is in memory at a time, and for a remote store each
+    shard's local copy is released once read. The disk then holds at most
+    one shard only when the shards were not already local (wpt-train
+    --stream, whose ShardStream released each one, and wpt-posttrain);
+    copies already there, as after wpt-train without --stream, go one by
+    one as they are read."""
     seen = set()
     for shard in shards:
         rows = read_verified(store, shard)

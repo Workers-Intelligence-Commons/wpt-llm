@@ -60,6 +60,8 @@ from dataclasses import asdict
 import torch
 import torch.nn.functional as F
 
+from wpt_utils.device import processor_name
+
 DRAFT = 5  # draft tokens per row and step: the most DSpark's production drafter proposes (docs/model.md)
 COSTS_FILE = "scheduler-costs.json"  # a run's measured costs, in its record (costs_file, replayed_costs)
 
@@ -288,11 +290,15 @@ def costs_setup(model_config, rows, draft, device) -> dict:
     """What a table of pass times is measured on, and what a replay must
     match: the model's config (a dataclass, such as wpt_model.ModelConfig),
     the writer's rows, the drafts per round (the drafter's block), and the
-    device, by its kind and name ("cpu", or such as "cuda (NVIDIA GeForce
-    RTX 5080 Laptop GPU)"), never its number among several of one name."""
+    device, by its kind and name: the processor's for the CPU, as
+    wpt_utils.device.processor_name reads it (such as "cpu (AMD Ryzen AI 7
+    450 w/ Radeon 860M)"), the GPU's otherwise (such as "cuda (NVIDIA
+    GeForce RTX 5080 Laptop GPU)"), never its number among several of one
+    name."""
     device = torch.device(device)
-    name = "cpu" if device.type == "cpu" else f"{device.type} ({getattr(torch, device.type).get_device_name(device)})"
-    return json.loads(json.dumps({"model": asdict(model_config), "rows": rows, "draft": draft, "device": name}))
+    name = processor_name() if device.type == "cpu" else getattr(torch, device.type).get_device_name(device)
+    return json.loads(json.dumps({"model": asdict(model_config), "rows": rows, "draft": draft,
+                                  "device": f"{device.type} ({name})"}))
 
 
 def costs_file(costs, setup) -> bytes:

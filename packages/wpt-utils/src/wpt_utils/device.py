@@ -4,9 +4,11 @@ Order: an NVIDIA or AMD GPU (both appear as "cuda" in PyTorch), then an Intel
 GPU ("xpu"), then the CPU. Among several GPUs of one kind, the one with the
 most memory wins. Which of these PyTorch can use depends on the build that
 scripts/setup.py installed; a missing build or driver falls back to the CPU.
+processor_name() names the CPU the same way on Linux, Windows and macOS.
 """
 
 import os
+import platform
 import subprocess
 import sys
 
@@ -47,6 +49,96 @@ def describe(device: torch.device) -> str:
     if device.type == "cpu":
         return "cpu"
     return f"{device} ({getattr(torch, device.type).get_device_name(device)})"
+
+
+# The names Arm publishes for the codes /proc/cpuinfo shows on Arm processors
+# ("CPU implementer", "CPU part": the fields of the MIDR_EL1 register), written
+# for WPT from these facts. Implementers: Arm's "Arm Architecture Registers"
+# for A-profile (DDI 0601, release 2026-03), MIDR_EL1, Implementer field.
+# Parts of Arm Limited (0x41): the MIDR_EL1 PartNum value in each core's
+# Technical Reference Manual. Only the cores of common Arm machines that run
+# PyTorch under Linux: Raspberry Pi 3 to 5 (Cortex-A53, A72, A76), many other
+# boards (Cortex-A55), NVIDIA Jetson Orin (Cortex-A78AE) and Jetson Thor
+# (Neoverse-V3AE), NVIDIA DGX Spark (Cortex-X925, Cortex-A725), NVIDIA Grace
+# (Neoverse-V2), and the Neoverse servers of cloud providers (N1, V1, N2, V3).
+# Any other part is named by its implementer and its code, such as "Arm
+# Limited part 0xd0d"; an implementer Arm does not publish (Apple's 0x61) is
+# named by its code, such as "implementer 0x61 part 0x22".
+IMPLEMENTERS = {0x41: "Arm Limited", 0x42: "Broadcom Corporation", 0x43: "Cavium Inc.",
+                0x44: "Digital Equipment Corporation", 0x46: "Fujitsu Ltd.", 0x49: "Infineon Technologies AG",
+                0x4D: "Motorola or Freescale Semiconductor Inc.", 0x4E: "NVIDIA Corporation",
+                0x50: "Applied Micro Circuits Corporation", 0x51: "Qualcomm Inc.", 0x56: "Marvell International Ltd.",
+                0x69: "Intel Corporation", 0xC0: "Ampere Computing"}
+PARTS = {0x41: {0xD03: "Cortex-A53", 0xD05: "Cortex-A55", 0xD08: "Cortex-A72", 0xD0B: "Cortex-A76",
+                0xD0C: "Neoverse-N1", 0xD40: "Neoverse-V1", 0xD42: "Cortex-A78AE", 0xD49: "Neoverse-N2",
+                0xD4F: "Neoverse-V2", 0xD83: "Neoverse-V3AE", 0xD84: "Neoverse-V3", 0xD85: "Cortex-X925",
+                0xD87: "Cortex-A725"}}
+
+
+def processor_name() -> str:
+    """The processor's name as its maker writes it (such as "AMD Ryzen AI 7
+    450 w/ Radeon 860M" or "Apple M2"), read from what the system itself
+    reports on each: /proc/cpuinfo on Linux (cpuinfo_name), the registry's
+    ProcessorNameString of the first processor on Windows, and `sysctl -n
+    machdep.cpu.brand_string` on macOS, with runs of spaces made one.
+    platform.processor() is not used: it is empty on many Linux systems and
+    names only the architecture on Windows and macOS. Where the system names
+    nothing (no sysctl on the search path, no /proc/cpuinfo, or one with
+    neither a model name nor Arm's codes), it is the machine's architecture,
+    such as "aarch64"; a missing sysctl never stops the run."""
+    name = ""
+    try:
+        if sys.platform == "win32":
+            import winreg
+            with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
+                                r"HARDWARE\DESCRIPTION\System\CentralProcessor\0") as key:
+                name = winreg.QueryValueEx(key, "ProcessorNameString")[0]
+        elif sys.platform == "darwin":
+            from wpt_utils.programs import MissingTool, program
+            try:
+                name = subprocess.run([program("sysctl"), "-n", "machdep.cpu.brand_string"], capture_output=True,
+                                      text=True, check=True).stdout
+            except MissingTool:
+                name = ""
+        else:
+            with open("/proc/cpuinfo", encoding="utf-8", errors="replace") as cpuinfo:
+                name = cpuinfo_name(cpuinfo.read())
+    except (OSError, subprocess.CalledProcessError):
+        name = ""
+    return " ".join(name.split()) or platform.machine()
+
+
+def cpuinfo_name(text: str) -> str:
+    """The processor's name in the text of a Linux /proc/cpuinfo: its first
+    "model name" line; without one (Linux on most Arm processors), a name
+    built from the "CPU implementer" and "CPU part" codes of every core, as
+    lscpu does, with IMPLEMENTERS and PARTS: the implementer, then each
+    distinct part in the order the cores give them, such as "Arm Limited
+    Cortex-X925 + Cortex-A725"; without those codes either, "" (the caller
+    then names the architecture)."""
+    implementer, cores = None, []
+    for line in text.splitlines():
+        key, _, value = (part.strip() for part in line.partition(":"))
+        if key == "model name" and value:
+            return value
+        try:
+            if key == "CPU implementer":
+                implementer = int(value, 16)
+            elif key == "CPU part" and implementer is not None:
+                core = (implementer, int(value, 16))
+                if core not in cores:
+                    cores.append(core)
+        except ValueError:
+            continue
+    names = []
+    for implementer, part in cores:
+        maker = IMPLEMENTERS.get(implementer, f"implementer {implementer:#x}")
+        names.append((maker, PARTS.get(implementer, {}).get(part, f"part {part:#x}")))
+    if not names:
+        return ""
+    if len({maker for maker, _ in names}) == 1:
+        return f"{names[0][0]} " + " + ".join(part for _, part in names)
+    return " + ".join(f"{maker} {part}" for maker, part in names)
 
 
 def _largest(backend, usable=None):
