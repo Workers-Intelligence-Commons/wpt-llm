@@ -6,7 +6,8 @@
   "additionalProperties": false,
   "required": ["schema", "messages"],
   "properties": {
-    "schema": {"const": 1, "description": "shape version of the conversation"},
+    "schema": {"const": 2, "description": "shape version of the conversation"},
+    "metadata": {"type": "object", "description": "what identifies the conversation where it was recorded, such as a post-training attempt's step, task and round; never read as tokens"},
     "tools": {
       "type": "array",
       "description": "the tools offered in the conversation",

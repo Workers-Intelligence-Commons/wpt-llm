@@ -18,7 +18,10 @@ from wpt_dataset.repo import address_hash, dump_json
 from wpt_dataset.sources import compute_upstream
 from wpt_model import load_model
 from wpt_eval import main as evaluate
+from wpt_dataset import conversations
 from wpt_posttrain import agentic, main
+from wpt_store import LocalStore
+from wpt_telemetry import RECORD_FAILED, Telemetry
 from wpt_train import main as train
 
 ZERO_WEIGHTS = ("import torch\nfrom wpt_posttrain import Outcome\n\n"
@@ -318,8 +321,54 @@ def test_grpo_fails_and_writes_nothing_when_every_attempt_of_a_round_is_dropped(
     monkeypatch.setattr(wpt_agent, "Sandbox", refused)
     recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=["grpo"])
     with pytest.raises(SystemExit, match=r"step grpo failed: round 1: every attempt was dropped, Docker failed "
-                                         r"\d+ times; the last time: docker create: no space left on device"):
+                                         r"8 times; the last time: docker create: no space left on device"):
         main([recipe, str(tmp_path / "model"), str(tmp_path / "tuned")])
+    assert not (tmp_path / "tuned").exists()
+    # the dropped attempts are kept too, each as the conversation it would have
+    # started from, and the round's event names their lines
+    [post] = built.records("wpt-posttrain")
+    lines = attempt_lines(built.store, post.folder, "grpo-attempts.jsonl")
+    assert [(line["metadata"]["round"], line["metadata"]["group"], line["metadata"]["attempt"]) for line in lines] == [
+        (1, 1, i) for i in range(1, 9)]
+    for line in lines:
+        metadata = line["metadata"]
+        assert metadata["dropped"] and "no space left" in metadata["error"]
+        assert metadata["ended"] is metadata["score"] is metadata["reward"] is metadata["written"] is None
+        assert [m["role"] for m in line["messages"]] == ["user"]
+        assert line["messages"][0]["content"][0]["text"] == TASK["instructions"]
+    [round_] = [e for e in post.events if e.get("name") == "grpo.round"]
+    assert round_["attributes"]["file"] == "grpo-attempts.jsonl" and round_["attributes"]["lines"] == [1, 8]
+
+
+def attempt_lines(store, folder, name) -> list[dict]:
+    """The attempts file's lines, each checked as a chat-format conversation."""
+    return conversations.parse("record", name, store.read_record(folder, name))
+
+
+def test_a_refused_attempt_line_stops_the_run_with_the_record_error_code(built, tmp_path, monkeypatch):
+    # an attempt the record cannot keep stops the command at once, as any
+    # part of the record does: exit code 3, nothing written
+    recipe = built.recipe("agent", model={"block_size": 1024})
+    train([recipe, built.dataset_id, "--out", "model"])
+    task_source(built, tmp_path, tmp_path / "tasks")
+
+    def refused(*args, **kwargs):
+        raise wpt_agent.SandboxError("docker create: no space left on device")
+
+    real = LocalStore._raw_append_record
+
+    def disk_full(self, folder, name, data):
+        if name == "grpo-attempts.jsonl":
+            raise OSError(28, "No space left on device")
+        real(self, folder, name, data)
+
+    monkeypatch.setattr(images, "built", lambda root, name: f"wpt-agent/{name}:test")
+    monkeypatch.setattr(wpt_agent, "Sandbox", refused)  # a dropped attempt is kept too: no Docker needed
+    monkeypatch.setattr(LocalStore, "_raw_append_record", disk_full)
+    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=["grpo"])
+    with pytest.raises(SystemExit) as stopped:
+        main([recipe, str(tmp_path / "model"), str(tmp_path / "tuned")])
+    assert stopped.value.code == RECORD_FAILED
     assert not (tmp_path / "tuned").exists()
 
 
@@ -353,6 +402,23 @@ def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, 
     assert post["steps"][0]["file"] == "grpo.py" and post["steps"][0]["sources"] == [sid]
     notice = (tuned / "NOTICE").read_text()
     assert "Tasks, by Cy Author, 2026" in notice and "dedicates these tasks" in notice
+    # every attempt is kept in the run's record, as a conversation in the chat format, and its span names its line
+    record = built.records("wpt-posttrain")[-1]
+    lines = attempt_lines(built.store, record.folder, "grpo-attempts.jsonl")
+    assert [tuple(line["metadata"][key] for key in ("step", "task", "round", "group", "attempt")) for line in lines] == [
+        ("grpo", f"{sid}/hello", 1, 1, 1), ("grpo", f"{sid}/hello", 1, 1, 2)]
+    for line in lines:
+        metadata = line["metadata"]
+        assert not metadata["dropped"] and metadata["error"] is None
+        assert metadata["reward"] == metadata["score"] and 0 <= metadata["score"] <= 1 and metadata["written"] > 0
+        assert metadata["ended"] in ("answered", "ended", "turns", "tokens", "context", "full")
+        assert line["messages"][0]["content"][0]["text"] == TASK["instructions"]
+        assert line["messages"][1]["role"] == "assistant"
+    spans = [e for e in record.events if e["kind"] == "span_end" and e["name"] == "grpo.attempt"]
+    assert [(span["attributes"]["file"], span["attributes"]["line"]) for span in spans] == [
+        ("grpo-attempts.jsonl", 1), ("grpo-attempts.jsonl", 2)]
+    [group] = [e for e in record.events if e.get("name") == "grpo.group"]
+    assert group["attributes"]["lines"] == [1, 2]
 
 
 def attempt_of(written, read=3):
@@ -381,7 +447,10 @@ def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_b
     step = step_module(TOKEN_EFFICIENCY)
     plays = {"mixed": [(0.5, 4), (0.75, 10), (0.25, 2), (0.75, 20)], "zero": [(0.0, 3), (0.0, 7)], "lost": []}
 
-    class Learner:
+    class Learner(agentic.Learner):
+        def __init__(self):  # no model: play() stands for the attempts, attempt() keeps them as the step does
+            self.name, self.file, self.telemetry = "token-efficiency", "token-efficiency-attempts.jsonl", Telemetry.off()
+
         def play(self, task):
             if not plays[task.id]:
                 raise wpt_agent.SandboxError("docker create: no space left on device")
@@ -389,7 +458,7 @@ def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_b
             return attempt_of(length - 1), None, score
 
     step.REFERENCE = 4
-    tasks = [type("Task", (), {"id": name}) for name in plays]
+    tasks = [type("Task", (), {"id": name, "instructions": "Say hello."}) for name in plays]
     references, zero, lost = step._references(Learner(), tasks)
     assert references == {"mixed": (0.75, pytest.approx(15.0))}
     assert (zero, lost) == (1, 1)
@@ -440,3 +509,12 @@ def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, 
     post = json.loads((tuned / "provenance.json").read_text())["post_training"]
     assert post["steps"][0]["file"] == "token-efficiency.py" and post["steps"][0]["sources"] == [sid]
     assert "Tasks, by Cy Author, 2026" in (tuned / "NOTICE").read_text()
+    # the reference attempts are kept first, with no round and no reward, then the rounds' attempts
+    [record] = built.records("wpt-posttrain")
+    lines = attempt_lines(built.store, record.folder, "token-efficiency-attempts.jsonl")
+    metadata = [line["metadata"] for line in lines]
+    assert [(m["round"], m["attempt"]) for m in metadata] == (
+        [(None, i) for i in range(1, 17)] + [(r, i) for r in (1, 2) for i in range(1, 9)])
+    assert all(m["step"] == "token-efficiency" for m in metadata)
+    assert all(m["reward"] is None for m in metadata[:16])
+    assert all(m["reward"] is not None for m in metadata[16:] if not m["dropped"])

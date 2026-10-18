@@ -13,6 +13,7 @@ tool turn, the start of each assistant turn) comes from the chat template.
 
 from dataclasses import dataclass
 
+from wpt_dataset.repo import CURRENT_SCHEMA
 from wpt_tokenizer import END, chat
 
 from .sandbox import SandboxFull
@@ -38,7 +39,7 @@ class Attempt:
 def opening(task) -> dict:
     """The conversation an attempt starts from: the tools and the task's
     instructions as the user's message."""
-    return {"schema": 1, "tools": TOOLS,
+    return {"schema": CURRENT_SCHEMA["conversation"], "tools": TOOLS,
             "messages": [{"role": "user", "content": [{"type": "text", "text": task.instructions}]}]}
 
 

@@ -154,7 +154,9 @@ lock file a build writes.
 Every data file carries its shape version (`schema`). To change a shape:
 bump `CURRENT_SCHEMA` in `wpt_dataset/repo.py`, update the schema file,
 register the step in `wpt_dataset/migrate.py`, and run `wpt-dataset
-migrate`. Never edit data files by hand for a shape change. A field only a
+migrate`. A file `migrate` cannot rewrite, such as a source's `chat`
+file (upstream's bytes), goes through `migrate.upgrade` where it is read.
+Never edit data files by hand for a shape change. A field only a
 person can fill is left empty by the migration, and the check then names
 each file to fill in.
 
@@ -254,7 +256,9 @@ def run(context):  # context: model (change it in place), tokenizer, device,
 
 The built-in steps are `sft`, `grpo` and `token-efficiency` (after `grpo`,
 on the same tasks: the same result with fewer written tokens); `grpo` and
-`token-efficiency` share `wpt_posttrain/agentic.py`.
+`token-efficiency` share `wpt_posttrain/agentic.py`, which keeps every
+attempt as a line of `<step>-attempts.jsonl` in the run's record folder: a
+chat-format conversation whose `metadata` identifies the attempt.
 
 A step reports only whether it managed to do its part, and why not. The
 first failure stops the run and nothing is written. Details:

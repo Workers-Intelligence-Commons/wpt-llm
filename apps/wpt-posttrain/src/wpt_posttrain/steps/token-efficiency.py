@@ -32,12 +32,15 @@ attempt beats a longer one.
 
 Sampling draws from one generator seeded with SEED, for the reference and
 then the rounds, so a run gives the same attempts again on the same
-machine and setup. The settings below are the step's whole configuration;
-to change them, copy this file and give its path to wpt-posttrain. The
-machinery is wpt_posttrain/agentic.py, shared with steps/grpo.py.
+machine and setup. Every attempt, the reference's (round null) and the
+dropped ones included, is kept as one line of
+token-efficiency-attempts.jsonl in the run's record folder, as grpo keeps
+its own (steps/grpo.py). The settings below are the step's whole
+configuration; to change them, copy this file and give its path to
+wpt-posttrain. The machinery is wpt_posttrain/agentic.py, shared with
+steps/grpo.py.
 """
 
-import wpt_agent
 from wpt_posttrain import Outcome, agentic
 
 TAG = "grpo"  # the tasks it trains on: grpo's own
@@ -63,7 +66,7 @@ def run(context):
                                 CHECK_SECONDS, RESULT_BYTES, SEED)
     with agentic.frozen_routers(context.model):
         learner = agentic.Learner("token-efficiency", context.model, context.tokenizer, context.device, built,
-                                  limit, settings)
+                                  limit, settings, context.telemetry)
         context.model.eval()
         references, zero, lost = _references(learner, tasks)
         kept = [task for task in tasks if task.id in references]
@@ -79,15 +82,12 @@ def _references(learner, tasks):
     how many were left out because every reference attempt scored 0, and
     how many because Docker failed every one)."""
     references, zero, lost = {}, 0, 0
-    for task in tasks:
+    for number, task in enumerate(tasks, start=1):
         scored = []  # (score, length) of the reference attempts Docker did not drop
-        for _ in range(REFERENCE):
-            try:
-                attempt, _, score = learner.play(task)
-            except wpt_agent.SandboxError as error:
-                print(f"token-efficiency: {task.id}: reference attempt dropped, Docker failed: {error}")
-                continue
-            scored.append((score, agentic.written(attempt)))
+        for index in range(1, REFERENCE + 1):
+            kept = learner.attempt(task, None, number, index)  # kept as round None, never trained on
+            if kept.attempt is not None:
+                scored.append((kept.score, agentic.written(kept.attempt)))
         reference = _reference(scored)
         if reference is None and scored:
             print(f"token-efficiency: {task.id}: left out, its {len(scored)} reference attempts all scored 0")

@@ -10,7 +10,9 @@ A step gets the file's path too, for the rare step that reads a file next
 to it.
 
 `wpt-dataset migrate` then rewrites every file that is behind, and checks
-the result against the new schema.
+the result against the new schema. A file migrate cannot rewrite, such as
+a source's chat file (upstream's bytes), is brought to the current shape in
+memory by upgrade() each time it is read.
 """
 
 import json
@@ -124,6 +126,15 @@ def _model_2_to_3(document, _path):
 MIGRATIONS["model"][2] = _model_2_to_3
 
 
+def _conversation_1_to_2(document, _path):
+    """Shape 2 adds the optional `metadata` object; a shape 1 conversation
+    has none, so only its number changes."""
+    return {**document, "schema": 2}
+
+
+MIGRATIONS["conversation"][1] = _conversation_1_to_2
+
+
 def _drop_moved_license_files(path, document):
     """Remove the LicenseRef files whose text the written source.json now
     holds exactly; anything else stays for the check to report."""
@@ -166,6 +177,25 @@ def _files(repo: Repo):
                 yield kind, repo.image_file(name, kind)
 
 
+def upgrade(document, kind: str, path, migrations=None, current=None):
+    """The document brought to the current shape of its kind, step by step;
+    the document itself when it is current, or not a versioned object (the
+    check then says what is wrong). path names it in errors and goes to
+    each step."""
+    migrations = MIGRATIONS if migrations is None else migrations
+    current = CURRENT_SCHEMA if current is None else current
+    while isinstance(document, dict) and isinstance(document.get("schema"), int) \
+            and document["schema"] < current[kind]:
+        step = migrations[kind].get(document["schema"])
+        if step is None:
+            raise KeyError(f"{path}: no migration for {kind} shape {document['schema']}")
+        try:
+            document = step(document, path)
+        except DatasetError as error:
+            raise type(error)(f"{path}: {error}") from None
+    return document
+
+
 def migrate(repo: Repo, migrations=None, current=None, log=print) -> list[Path]:
     """Rewrite every file whose shape is behind. Returns the files changed."""
     migrations = MIGRATIONS if migrations is None else migrations
@@ -174,14 +204,7 @@ def migrate(repo: Repo, migrations=None, current=None, log=print) -> list[Path]:
     for kind, path in _files(repo):
         document = json.loads(path.read_text(encoding="utf-8"))
         start = document.get("schema")
-        while document.get("schema", current[kind]) < current[kind]:
-            step = migrations[kind].get(document["schema"])
-            if step is None:
-                raise KeyError(f"{path}: no migration for {kind} shape {document['schema']}")
-            try:
-                document = step(document, path)
-            except DatasetError as error:
-                raise type(error)(f"{path}: {error}") from None
+        document = upgrade(document, kind, path, migrations, current)
         if document.get("schema") != start:
             path.write_text(dump_json(document), encoding="utf-8", newline="\n")
             changed.append(path)

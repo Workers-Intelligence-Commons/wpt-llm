@@ -2,7 +2,9 @@
 
 A file in the `chat` format is JSON Lines: one conversation per line, each
 matching schemas/conversation.schema.json, and each tool_result answering a
-tool_call made earlier in the same conversation. Such a file is never a
+tool_call made earlier in the same conversation. A line in an earlier
+shape is brought to the current one in memory (migrate.upgrade), since an
+upstream file cannot be rewritten. Such a file is never a
 pre-training document (markdown.py gives it no Markdown); a post-training
 step reads it through read(), which picks the files tagged with the step's
 name.
@@ -18,7 +20,8 @@ from pathlib import Path
 
 from . import markdown, records
 from .errors import InvalidFile
-from .repo import Repo, validate
+from .migrate import upgrade
+from .repo import CURRENT_SCHEMA, Repo, validate
 from .sources import source_tree, tags_of
 
 
@@ -33,6 +36,7 @@ def parse(source_id: str, path: str, data: bytes) -> list[dict]:
             conversation = json.loads(line)
         except json.JSONDecodeError as error:
             raise InvalidFile(f"{where}: {error}") from error
+        conversation = upgrade(conversation, "conversation", where)
         validate(conversation, "conversation", where)
         calls = set()
         for message in conversation["messages"]:
@@ -99,8 +103,8 @@ def from_tree(source_id: str, path: str, file: Path, spec: dict) -> list[tuple[s
         if not kept or key in seen:
             continue
         seen.add(key)
-        conversation = {"schema": 1, "messages": [{"role": role, "content": [{"type": "text", "text": text}]}
-                                                  for role, text in key]}
+        turns = [{"role": role, "content": [{"type": "text", "text": text}]} for role, text in key]
+        conversation = {"schema": CURRENT_SCHEMA["conversation"], "messages": turns}
         validate(conversation, "conversation", f"{where} message {kept[-1][0]}")
         found.append((kept[-1][0], conversation))
     return found

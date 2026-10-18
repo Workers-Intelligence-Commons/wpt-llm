@@ -7,6 +7,7 @@ step").
     frozen_routers(model)      the routed expert layers' routers, unchanged while it lasts
     written(attempt)           how many tokens the model wrote in an attempt
     Learner(...).play(task)    one attempt in a fresh container, its routes (R3) and its score
+    Learner(...).attempt(...)  play, and keep the attempt as a line of the step's attempts file
     Learner(...).train(...)    rounds of groups of attempts: advantage = reward minus the group
                                mean, the loss over the tokens the model wrote, one update per
                                TASKS_PER_UPDATE tasks; drops, skips and failures as grpo says
@@ -14,8 +15,19 @@ step").
 Each step says what an attempt's reward is: grpo uses the check's score
 as it is, token-efficiency its own rule on the score and the attempt's
 length. Everything else is the same for both.
+
+Every attempt, a dropped one included, becomes one line of
+`<step>-attempts.jsonl` in the run's record folder (context.telemetry;
+docs/post-training.md, "Runs"): a conversation in the chat format
+(docs/chat-format.md) whose `metadata` identifies the attempt; a dropped
+attempt's conversation is only its opening (wpt_agent.opening). The
+attempt's span, its
+group's event and its round's event name the file and the line numbers.
+A line the store refuses raises wpt_telemetry.RecordError, which stops
+the command (exit code 3).
 """
 
+import json
 import math
 from contextlib import contextmanager
 from dataclasses import dataclass
@@ -30,7 +42,12 @@ from wpt_inference import sample_tokens
 from wpt_model import Routes
 from wpt_model.experts import Experts
 from wpt_posttrain import Outcome
+from wpt_telemetry import Telemetry
 from wpt_tokenizer import chat
+
+# the lines already in each attempts file, by (record folder, file name): a
+# recipe that runs a step twice adds to the same file, and its lines go on counting
+_lines: dict[tuple[str | None, str], int] = {}
 
 
 @dataclass(frozen=True)
@@ -95,12 +112,16 @@ def written(attempt) -> int:
 class Learner:
     """One step's attempts and updates on one model. Sampling draws from a
     generator seeded with settings.seed when the learner is made, so every
-    attempt it plays, before and during train, comes from one sequence."""
+    attempt it plays, before and during train, comes from one sequence.
+    attempt() keeps each attempt in telemetry's record, as a line of
+    `<name>-attempts.jsonl`."""
 
-    def __init__(self, name, model, tokenizer, device, built, limit, settings):
+    def __init__(self, name, model, tokenizer, device, built, limit, settings, telemetry=None):
         self.name, self.model, self.tokenizer, self.device = name, model, tokenizer, device
         self.built, self.limit, self.settings = built, limit, settings
         self.sampling = torch.Generator(device=device).manual_seed(settings.seed)
+        self.telemetry = telemetry or Telemetry.off()
+        self.file = f"{name}-attempts.jsonl"
 
     def play(self, task):
         """(attempt, its routes, score) of one attempt in a fresh container;
@@ -122,6 +143,45 @@ class Learner:
             print(f"{self.name}: {task.id}: no score, counted as 0: {why}")
         return attempt, routes, score or 0.0
 
+    def attempt(self, task, round_, group, index, reward=None) -> "Kept":
+        """Play one attempt and keep it as a line of self.file. round_ is
+        None for an attempt made before any round (token-efficiency's
+        reference), group and index say which group of the round (or which
+        task) and which attempt of it, from 1; reward(task, attempt, score)
+        is what the attempt is worth, None for one never trained on. A
+        dropped attempt (Docker failed) is kept too. RecordError when the
+        store refuses the line."""
+        with self.telemetry.span(f"{self.name}.attempt", task=task.id, round=round_, group=group,
+                                 attempt=index) as span:
+            try:
+                attempt, routes, score = self.play(task)
+            except wpt_agent.SandboxError as error:
+                print(f"{self.name}: {task.id}: {'reference ' if round_ is None else ''}attempt dropped, "
+                      f"Docker failed: {error}")
+                kept = Kept(0, None, None, None, None, error)
+            else:
+                kept = Kept(0, attempt, routes, score, None if reward is None else reward(task, attempt, score), None)
+            kept.line = self._keep(task, round_, group, index, kept)
+            span.set(file=self.file, line=kept.line, dropped=kept.attempt is None,
+                     **({} if kept.attempt is None else {"ended": kept.attempt.ended, "score": kept.score,
+                                                         "reward": kept.reward, "written": written(kept.attempt)}))
+        return kept
+
+    def _keep(self, task, round_, group, index, kept) -> int:
+        """Add the attempt's line to self.file, its conversation with the
+        attempt's metadata; its line number, from 1."""
+        attempt = kept.attempt
+        metadata = {"step": self.name, "task": task.id, "round": round_, "group": group, "attempt": index,
+                    "dropped": attempt is None, "error": None if kept.error is None else str(kept.error),
+                    "ended": None if attempt is None else attempt.ended, "score": kept.score,
+                    "reward": kept.reward, "written": None if attempt is None else written(attempt)}
+        conversation = wpt_agent.opening(task) if attempt is None else attempt.conversation
+        line = {**conversation, "metadata": metadata}
+        self.telemetry.append_file(self.file, (json.dumps(line, ensure_ascii=False) + "\n").encode("utf-8"))
+        key = (self.telemetry.folder, self.file)
+        _lines[key] = _lines.get(key, 0) + 1
+        return _lines[key]
+
     def train(self, tasks, reward=lambda task, attempt, score: score, measure="score"):
         """settings.rounds passes over the tasks; reward(task, attempt,
         score) is what an attempt is worth, and measure names it in what the
@@ -132,29 +192,32 @@ class Learner:
         order = torch.Generator().manual_seed(settings.seed)
         total = equal = small = 0  # updates, and groups skipped because their rewards were equal or they were too small
         for round_ in range(1, settings.rounds + 1):
-            rewards, updates, dropped, indexers = [], 0, [], []
+            rewards, updates, dropped, indexers, lines = [], 0, [], [], []
             permutation = torch.randperm(len(tasks), generator=order).tolist()
+            number = 0  # the round's groups, from 1
             for start in range(0, len(tasks), settings.tasks_per_update):
                 model.eval()
                 groups = []
                 for task in [tasks[i] for i in permutation[start:start + settings.tasks_per_update]]:
-                    group = []
-                    for _ in range(settings.group):
-                        try:
-                            attempt, routes, score = self.play(task)
-                        except wpt_agent.SandboxError as error:
-                            print(f"{self.name}: {task.id}: attempt dropped, Docker failed: {error}")
-                            dropped.append(error)
-                            continue
-                        group.append((attempt, routes, reward(task, attempt, score)))
+                    number += 1
+                    played = [self.attempt(task, round_, number, index, reward)
+                              for index in range(1, settings.group + 1)]
+                    lines += [kept.line for kept in played]
+                    dropped += [kept.error for kept in played if kept.attempt is None]
+                    group = [(kept.attempt, kept.routes, kept.reward) for kept in played if kept.attempt is not None]
                     rewards += [value for *_, value in group]
                     if len(group) < 2:
                         print(f"{self.name}: {task.id}: group skipped, {len(group)} attempt left")
                         small += 1
+                        outcome = "skipped: fewer than 2 attempts"
                     elif len({value for *_, value in group}) == 1:  # every advantage is 0: nothing to learn
                         equal += 1
+                        outcome = f"skipped: every {measure} equal"
                     else:
                         groups.append(group)
+                        outcome = "learned"
+                    self.telemetry.event(f"{self.name}.group", task=task.id, round=round_, group=number,
+                                         file=self.file, lines=[kept.line for kept in played], outcome=outcome)
                 model.train()
                 loss, indexer = update(model, optimizer, groups, self.device)
                 if loss is not None and not math.isfinite(loss):
@@ -163,11 +226,15 @@ class Learner:
                 updates += loss is not None
                 if indexer is not None:
                     indexers.append(indexer)
+            mean = sum(rewards) / len(rewards) if rewards else None
+            self.telemetry.event(f"{self.name}.round", values=None if mean is None else {f"mean_{measure}": mean},
+                                 round=round_, file=self.file, lines=[lines[0], lines[-1]], attempts=len(lines),
+                                 dropped=len(dropped), updates=updates)
             if not rewards:  # every attempt was dropped, so no update could be made
                 model.eval()
                 return Outcome.failure(f"round {round_}: every attempt was dropped, Docker failed {len(dropped)} "
                                        f"times; the last time: {dropped[-1]}")
-            print(f"{self.name} round {round_}/{settings.rounds}: mean {measure} {sum(rewards) / len(rewards):.4f} "
+            print(f"{self.name} round {round_}/{settings.rounds}: mean {measure} {mean:.4f} "
                   f"over {len(rewards)} attempts at {len(tasks)} tasks, {updates} updates"
                   + (f", indexer loss {sum(indexers) / len(indexers):.4f}" if indexers else ""))
             total += updates
@@ -176,6 +243,19 @@ class Learner:
             return Outcome.failure(f"no update in {settings.rounds} rounds: every group was skipped, {equal} because "
                                    f"its {measure}s were all equal, {small} because it kept fewer than 2 attempts")
         return Outcome.success()
+
+
+@dataclass
+class Kept:
+    """An attempt Learner.attempt played and kept: its line number in the
+    learner's file, then the attempt, its routes, score and reward, or the
+    error that dropped it (the others None)."""
+    line: int
+    attempt: wpt_agent.Attempt | None
+    routes: Routes | None
+    score: float | None
+    reward: float | None
+    error: Exception | None
 
 
 class _Recording(torch.nn.Module):

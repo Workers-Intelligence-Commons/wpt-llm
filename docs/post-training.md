@@ -367,11 +367,56 @@ indexers go on learning by their own loss in each loss pass, as in `sft`.
 The order of the tasks in each round and every sampled token come from
 generators seeded with `SEED`, so a run gives the same attempts again on
 the same machine and setup (the same model, tasks, images and devices);
-the checks themselves may differ, as any program may. WPT's own attempts
-live in memory only: each one is dropped after its update, and nothing is
-kept on disk yet. The step prints one line per round (`ROUNDS`, passes
-over every task): the mean score, the number of attempts and of updates,
-and the indexers' mean loss over the round's loss passes.
+the checks themselves may differ, as any program may. The step prints one
+line per round (`ROUNDS`, passes over every task): the mean score, the
+number of attempts and of updates, and the indexers' mean loss over the
+round's loss passes.
+
+Every attempt is kept in the run's record folder
+([observability.md](observability.md)), as one line of
+`grpo-attempts.jsonl` (maintainer's decisions, 2026-10-17: "GRPO attempts
+later: chat JSON Lines in the post-training run's folder, linked from
+traces", and "Add metadata to chat"), written through `context.telemetry`
+as soon as the attempt is scored, so a line on a local store is on the
+disk before the next attempt starts. Each line is a conversation in the
+chat format ([chat-format.md](chat-format.md)) whose `metadata` says which
+attempt it is, so the file passes the same check as any `chat` file:
+
+```json
+{"schema": 2, "tools": [...], "messages": [...],
+ "metadata": {"step": "grpo", "task": "<task id>", "round": 1, "group": 3, "attempt": 2,
+              "dropped": false, "error": null, "ended": "answered", "score": 0.5, "reward": 0.5,
+              "written": 412}}
+```
+
+- `tools`, `messages`: the attempt: the tools, the instructions, every
+  assistant turn as the model's tokens read, every tool result as the
+  model received it. A dropped attempt has only the tools and the
+  instructions, the conversation it would have started from.
+- `step`, `task`: the step and the task's id.
+- `round`: the round, from 1; `null` for an attempt made before the rounds
+  (the `token-efficiency` step's reference, below).
+- `group`: the group within the round, from 1, in the order played (for a
+  reference attempt, the task's place in the list of tasks); `attempt`:
+  the attempt within its group, from 1.
+- `dropped`: `true` when Docker failed; then `error` says how, and
+  `ended`, `score`, `reward` and `written` are `null`.
+- `ended`: why the attempt ended (`answered`, `ended`, `turns`, `tokens`,
+  `context` or `full`; Attempts, above).
+- `score`: the check's score; `reward`: what the attempt is worth to the
+  step (for `grpo`, the score), `null` for an attempt never trained on.
+- `written`: the tokens the model wrote, the tokens the loss learns.
+
+The trace names each line: each attempt is a span `grpo.attempt`
+(`task`, `round`, `group`, `attempt`, then `file` and `line`, its line
+number from 1, with `dropped`, `ended`, `score`, `reward` and `written`);
+each group is an event `grpo.group` (`task`, `round`, `group`, `file`,
+`lines`, and `outcome`: `learned`, or why it was skipped); each round is an
+event `grpo.round` (`file`, `lines`: its first and last, `attempts`,
+`dropped`, `updates`, and the value `mean_score`). A recipe that runs the
+step twice adds to the same file, and the line numbers go on. A line the
+store refuses stops the command at once with exit code 3, as any part of
+the record does.
 Its settings are the constants at the top of `steps/grpo.py`; to change
 them, copy the file and put its path in the recipe's `posttrain` list. The
 containers' sizes are not among them: they belong to each task.
@@ -416,7 +461,13 @@ passing attempts the shorter one is worth more. The step prints one line
 per task for the reference (its best start score and reference length) and
 one line per round (the mean reward, the number of attempts and of
 updates). Sampling draws from one generator seeded with `SEED`, for the
-reference and then the rounds. Its settings are the constants at the top
+reference and then the rounds. Every attempt is kept as `grpo` keeps its
+own (Runs, above), in `token-efficiency-attempts.jsonl`, under the spans
+and events `token-efficiency.attempt`, `.group` and `.round`: the
+reference attempts first, with `round` and `reward` `null` in their
+`metadata`, then the
+rounds' attempts with their reward (the round's value is `mean_reward`).
+Its settings are the constants at the top
 of `steps/token-efficiency.py`, `TAG` (the tag of the tasks it reads) and
 `REFERENCE` among them; to change them, copy the file and put its path in
 the recipe's `posttrain` list.
