@@ -178,3 +178,33 @@ def test_a_shard_stream_keeps_only_the_shards_in_use_on_disk(tmp_path, monkeypat
         assert not any((store.cache / s["object"][:2] / s["object"]).exists() for s in shards)  # copies released
         stream.close()
         assert on_disk() == []
+
+
+def test_reading_documents_from_a_remote_store_keeps_at_most_one_shard_on_disk(tmp_path, monkeypatch):
+    # the drafter reads the training shards once at the end of a run: each
+    # shard's local copy goes once its rows are read, as a shard stream's do
+    from wpt_store.shards import documents, write_shard
+
+    for name, value in {"AWS_ACCESS_KEY_ID": "test", "AWS_SECRET_ACCESS_KEY": "test", "AWS_DEFAULT_REGION": "us-east-1",
+                        "XDG_CACHE_HOME": str(tmp_path / "cache"), "LOCALAPPDATA": str(tmp_path / "cache")}.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.delenv("AWS_ENDPOINT_URL", raising=False)
+    monkeypatch.delenv("AWS_PROFILE", raising=False)
+    with mock_aws():
+        boto3.client("s3").create_bucket(Bucket="wpt-test")
+        store = open_store("s3://wpt-test/documents")
+        shards = []
+        for i in range(3):
+            path = tmp_path / f"{i}.parquet"
+            rows = [([i, 0], "s", f"s/{i}", "p", 0), ([i, 0], "s", "s/again", "p", 1)]
+            token_sha256 = write_shard(path, rows)
+            shards.append({"object": store.put_file(path), "token_sha256": token_sha256, "tokens": 4})
+
+        def copies():
+            return [s["object"] for s in shards if (store.cache / s["object"][:2] / s["object"]).exists()]
+
+        seen = []
+        for document, source, tokens in documents(store, shards):
+            assert copies() == []  # the shard being read is already released
+            seen.append((document, source, tokens.tolist()))
+        assert seen == [("s/0", "s", [0, 0]), ("s/again", "s", [0, 0]), ("s/1", "s", [1, 0]), ("s/2", "s", [2, 0])]

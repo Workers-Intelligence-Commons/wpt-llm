@@ -203,12 +203,17 @@ class Trained:
 
 
 def train(model, strategy, method_plugin, method_settings, train_tokens, val_tokens, settings: RunSettings,
-          checkpoint: Checkpoint | None = None, resume=False, identity=None, log=print, telemetry=None) -> Trained:
+          checkpoint: Checkpoint | None = None, resume=False, identity=None, log=print, telemetry=None,
+          save_last=False) -> Trained:
     """Train model in place, then load the weights of the evaluation the
     method judged best back into it; returns a Trained. train_tokens and val_tokens are 1-D arrays of token ids (np.memmap
     works); train_tokens may instead be a stream (see _tokens_at). With a
     checkpoint and settings.checkpoint_every, the main process saves there
-    every N steps; resume=True continues from it. identity: what a resumed
+    every N steps; with a checkpoint and save_last, it also saves there
+    after the last step (unless that step's save already did), so whatever
+    the caller does next with the trained model can fail and still be
+    resumed: the resumed run takes no step, loads the best weights and
+    returns. resume=True continues from it. identity: what a resumed
     run must share with the checkpoint besides the settings (for example the
     dataset id and the model shape).
 
@@ -388,6 +393,9 @@ def train(model, strategy, method_plugin, method_settings, train_tokens, val_tok
                         log(f"stage {index + 1} ended at step {last}")
                         break
 
+    saved = keeps and last % settings.checkpoint_every == 0  # the last step's own save
+    if save_last and checkpoint is not None and last >= first_step and not saved:
+        save(last, settings.steps + 1)  # every step is done: a resumed run takes none
     if best_state is not None:
         model.load_state_dict(best_state)
     kept = best_state is not None and best_step is not None

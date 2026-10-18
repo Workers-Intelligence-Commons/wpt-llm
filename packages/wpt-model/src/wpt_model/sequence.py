@@ -1,22 +1,23 @@
-"""Where a pass's tokens sit in a longer window (docs/model.md, "Long
-windows"). A layer that reads earlier tokens asks its pass's place for what
-came before its first token, in three ways:
+"""Where a pass's tokens sit (docs/model.md, "What a layer passes on"). A
+module that reads earlier tokens says once what it passes on to later
+tokens (carry.py: Tail, Entries, Memory), and asks the place of its pass
+for what came before its first token:
 
-    before(module, name, x, n)   the n time steps of x before this pass
-                                 (zeros before the window's first token)
-    everything(module, name, x)  x's entries after every earlier pass's
-                                 (the merged entries of CSA and HCA, the
-                                 indexer's keys), indexed from the window's
-                                 first token
-    delta(module, q, k, v, g, beta)
-                                 KDA's output, its memory starting from what
-                                 the earlier tokens left
+    before(module, name, x)          a Tail's steps before x's first token
+    everything(module, name, new)    an Entries': every entry so far, the
+                                     new ones (those this pass completes)
+                                     after the earlier ones
+    delta(module, q, k, v, g, beta)  KDA's output, its Memory starting from
+                                     what the earlier tokens left
 
-Three places answer them:
+A place also gives the pass's positions (positions), the entries it can
+complete (blocks), and whether training statistics are recorded (collect).
+
+Four places answer, from that one description:
 
     Whole    the pass is the whole window: nothing came before
     Carried  one segment of a window trained on one GPU (wpt_training's
-             runner): what the segment before passed on, as tensors whose
+             parts.py): what the segment before passed on, as tensors whose
              gradients the runner carries back across the boundary
     Split    one process's slice of a window, or of one part of it,
              split across processes (DeepSeek-V4's contextual
@@ -25,31 +26,52 @@ Three places answer them:
              by combining every slice's transform of it; rank 0 gets what
              the part before passed on, as Carried does, and the part
              passes on what its last slice ends with
+    Reading  generation (cache.py): B rows, each at its own place, reading
+             what the cache keeps and keeping it up to date, with undo
 
-Every answer is exact: a window trained in segments or split across
+Training's places are exact: a window trained in segments or split across
 processes gives the loss and gradients of the whole window at once. A
 segment or slice holds a multiple of the longest merging's tokens
-(WPT.PART), so no merged entry straddles two of them; a window's last
-segment may be shorter.
+(WPT.PART); a window's last segment may be shorter.
 """
 
 import torch
 import torch.distributed as dist
 
+from .carry import described
 from .kda import delta_attention
 
 
-class Whole:
+class Place:
+    """Where a pass's tokens sit. start: the first token's position, an int
+    for every row alike, or (B,) for rows at different places; latest: the
+    largest start, an int."""
+
+    start = 0
+    latest = 0
+    collect = True  # training statistics (expert balancing) are recorded
+
+    def positions(self, T, device):
+        """The pass's T positions: (T,), or (B, T) for rows at different places."""
+        steps = torch.arange(T, device=device)
+        return self.start + steps if isinstance(self.start, int) else self.start[:, None] + steps
+
+    def blocks(self, ratio, T):
+        """(the index of the first entry a merging of ratio tokens can
+        complete in this pass, the most entries any row completes): an int,
+        or (B,) for rows at different places."""
+        first = self.start // ratio
+        return first, (self.start + T) // ratio - first
+
+
+class Whole(Place):
     """The pass is the whole window."""
 
-    offset = 0       # the pass's first token's place in the window
-    collect = True   # training statistics (expert balancing) are recorded
+    def before(self, module, name, x):
+        return described(module, name).start(x, x.shape[0])
 
-    def before(self, module, name, x, n):
-        return x.new_zeros(x.shape[0], n, *x.shape[2:])
-
-    def everything(self, module, name, x):
-        return x
+    def everything(self, module, name, new):
+        return new
 
     def delta(self, module, q, k, v, g, beta):
         return delta_attention(q, k, v, g, beta)[0]
@@ -58,7 +80,7 @@ class Whole:
 WHOLE = Whole()
 
 
-class Carried:
+class Carried(Place):
     """One segment of a window: carried holds what the segment before passed
     on (empty for the first), by key (module, name). After the pass, passed
     holds what this one passes on (each module's tails and KDA memories), and
@@ -67,30 +89,33 @@ class Carried:
     collect: record training statistics in this pass."""
 
     def __init__(self, offset, carried, collect=True):
-        self.offset, self.carried, self.collect = offset, carried, collect
+        self.start = self.latest = offset
+        self.carried, self.collect = carried, collect
         self.passed, self.added = {}, {}
 
-    def before(self, module, name, x, n):
-        key = (id(module), name)
+    def before(self, module, name, x):
+        key, tail = (id(module), name), described(module, name)
         earlier = self.carried.get(key)
         if earlier is None:
-            earlier = x.new_zeros(x.shape[0], n, *x.shape[2:])
-        self.passed[key] = torch.cat([earlier, x], 1)[:, -n:]
+            earlier = tail.start(x, x.shape[0])
+        self.passed[key] = torch.cat([earlier, x], 1)[:, -tail.steps:]
         return earlier
 
-    def everything(self, module, name, x):
+    def everything(self, module, name, new):
         key = (id(module), name)
-        self.added[key] = x
+        described(module, name)
+        self.added[key] = new
         earlier = self.carried.get(key)
-        return x if earlier is None else torch.cat([earlier.to(x.dtype), x], 1)
+        return new if earlier is None else torch.cat([earlier.to(new.dtype), new], 1)
 
     def delta(self, module, q, k, v, g, beta):
         key = (id(module), "memory")
+        described(module, "memory")
         out, self.passed[key] = delta_attention(q, k, v, g, beta, self.carried.get(key))
         return out
 
 
-class Split:
+class Split(Place):
     """Process rank's slice of a window split across world processes, each
     slice of `length` tokens, in order from token start of the window: the
     whole window, or one part of it when the window runs as consecutive
@@ -107,23 +132,25 @@ class Split:
 
     def __init__(self, rank, world, length, start=0, carried=None, collect=True, group=None):
         self.rank, self.world, self.group = rank, world, group
-        self.offset, self.collect = start + rank * length, collect
+        self.start = self.latest = start + rank * length
+        self.collect = collect
         self.carried, self.passed, self.added = carried or {}, {}, {}
-        self.first = torch.tensor(float(rank > 0))  # 0 on the first slice: what came before it is the part before's
+        self.later = torch.tensor(rank > 0)  # False on the first slice: what came before it is the part before's
 
-    def before(self, module, name, x, n):
-        key = (id(module), name)
+    def before(self, module, name, x):
+        key, tail = (id(module), name), described(module, name)
+        n = tail.steps
         tails = gather(x[:, x.shape[1] - n:], self.group)  # stage 1: each rank's last n steps
         self.passed[key] = tails[self.world - 1]  # the part's last n steps: its last slice's
         earlier = self.carried.get(key)
         if earlier is None:  # the window's start: nothing came before
-            earlier = x.new_zeros(x.shape[0], n, *x.shape[2:])
-        first = self.first.to(x.device, tails.dtype)
-        return tails[(self.rank - 1) % self.world] * first + earlier * (1 - first)
+            earlier = tail.start(x, x.shape[0])
+        return torch.where(self.later.to(x.device), tails[(self.rank - 1) % self.world], earlier.to(tails.dtype))
 
-    def everything(self, module, name, x):
+    def everything(self, module, name, new):
         key = (id(module), name)
-        entries = gather(x, self.group).transpose(0, 1).flatten(1, 2)  # stage 2: every rank's entries, in order
+        described(module, name)
+        entries = gather(new, self.group).transpose(0, 1).flatten(1, 2)  # stage 2: every rank's entries, in order
         self.added[key] = entries
         earlier = self.carried.get(key)
         return entries if earlier is None else torch.cat([earlier.to(entries.dtype), entries], 1)
@@ -137,6 +164,7 @@ class Split:
         before its own, after the memory the part before passed on, into its
         starting memory, and its output follows exactly. The last slice's
         composed end is what the part passes on."""
+        described(module, "memory")
         B, T, H, dk = q.shape
         dv = v.shape[-1]
         start = torch.cat([torch.eye(dk, device=q.device).expand(B, H, dk, dk),

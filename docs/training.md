@@ -369,9 +369,16 @@ weights of the evaluation the method judged best in the last stage.
 
 ### Checkpoints and resuming
 
-Every `--checkpoint-every` steps (default 500, 0 for never), the main
-process writes a checkpoint: the step, the weights, the method's state and
-the best weights so far. The same command with `--resume` continues from
+Every `--checkpoint-every` steps (default 500, 0 for none during
+training), the main process writes a checkpoint: the step, the weights,
+the method's state and the best weights so far. After the last step it
+always writes one, just before training the drafter (maintainer's
+decision, 2026-10-18; "The drafter", below), unless the last step's own
+checkpoint was just written. It stays until the model folder is written, so any
+failure after training (the drafter, the record, writing the folder)
+leaves it, and the same command with `--resume` takes no step and
+finishes the run; without `--run` it lives in the model folder, so a
+failed run leaves `checkpoint/` in an earlier folder at that place. The same command with `--resume` continues from
 it, on other hardware too: the number of processes, `--micro-batch`,
 `--recompute` and `--segment` may change; the recipe and the other options may not (the
 run stops with `SettingsMismatch`).
@@ -429,6 +436,36 @@ read it. A checkpoint folder without `--run` is only on the main
 process's machine. torchrun restarts after any failed process, refusals
 included.
 
+After the last step, the main process trains the model's drafter
+(maintainer's decisions, 2026-10-17; [model.md](model.md), "The
+drafter"): a model and its drafter are one unit, so every run trains one,
+against the final weights, the model frozen, with the recipe's `drafter`
+section. Its prompts are the beginnings of the dataset's training
+documents, and the model alone writes the answers. No option skips it. A
+drafter that cannot be trained refuses the run (exit code 2) and writes no
+model folder. So that such a failure can always be resumed, the run
+saves its checkpoint just before training the drafter, whatever
+`--checkpoint-every` says (maintainer's decision, 2026-10-18): the
+checkpoint stays, and `--resume` continues from it, takes no step, loads
+the best weights and trains the drafter again. The drafter reads the
+training shards once at the end of the run, one shard at a time, to draw
+its prompts; from a remote store, each shard's local copy is released
+once read, as `--stream` releases them (maintainer's decision,
+2026-10-18), so the disk holds at most one shard. Drafter settings that
+cannot be (feature layers the model does not have, an unknown setting)
+are refused before training starts (maintainer's decision, 2026-10-18).
+
+Then the run measures the drafter scheduler's pass times once and writes
+them into its record as `scheduler-costs.json`, with the setup they were
+measured on: the model's config, the drafter's block (the drafts per
+round), the rows (1) and the device (its kind and name). `--scheduler-costs
+FOLDER` replays those an earlier run recorded in its record folder
+`FOLDER` instead; times measured on another setup are refused before
+training starts (maintainer's decision, 2026-10-18).
+[model.md](model.md), "The drafter", says exactly what a replay
+guarantees, and [observability.md](observability.md) what the file
+holds.
+
 The model folder holds:
 
 - `config.json`, the model's numbers;
@@ -446,6 +483,11 @@ The model folder holds:
 - `LICENSE`, the AGPL text; `NOTICE`, the licenses of the weights and of
   generated text, every source with the credit it asks for, and the output
   notice; `README.md`, the model card, with the licenses at the top;
+- `drafter/`, the drafter for speculative decoding trained against these
+  weights (below), with its `config.json`, weights (the same header) and
+  `provenance.json`, which names the sha256 of every weight file it was
+  trained against: `load_model` refuses a folder without it or whose
+  drafter names other weights ([model.md](model.md), "The drafter");
 - `evals/`, results written by `wpt-eval` (see [evaluation.md](evaluation.md)),
   shown in the model card.
 
@@ -481,7 +523,11 @@ is; `wpt-chat <model folder> --about` prints the folder's `NOTICE`. A pre-traine
 talks to a model post-trained on conversations: it keeps the history,
 writes it with the chat template ([chat-format.md](chat-format.md)), and
 shows the model's thinking and tool calls with their tags, without running
-the calls.
+the calls. It measures the drafter scheduler's pass times when it loads
+the model; `--scheduler-costs FOLDER` reads instead those a run recorded
+in its record folder `FOLDER` of the store, refused when they were
+measured on another setup (maintainer's decision, 2026-10-18;
+[model.md](model.md), "The drafter").
 
 ## What is exactly repeatable
 

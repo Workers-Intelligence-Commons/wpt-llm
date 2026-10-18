@@ -14,7 +14,8 @@ import torch
 from safetensors import safe_open
 from safetensors.torch import load_file
 
-from wpt_model import load_model, load_tokenizer, tokenizer_identity
+from wpt_inference import COSTS_FILE, DRAFT, costs_setup, replayed_costs
+from wpt_model import load_drafter, load_model, load_tokenizer, tokenizer_identity, weight_hashes
 import wpt_telemetry
 from wpt_store import LocalStore
 from wpt_telemetry import FLUSH_THREAD
@@ -77,6 +78,82 @@ def test_a_training_run_records_what_it_read_every_step_and_what_it_wrote(built,
     assert {"LICENSE", "README.md", "provenance.json", "tokenizer.json", "config.json"} <= set(files)
     logged = "".join(e["text"] + "\n" for e in run.events if e["kind"] == "log")
     assert logged == printed  # every line it printed, nothing else
+
+
+def test_training_ends_with_the_drafter_against_the_final_weights_and_the_scheduler_s_times(built, tmp_path,
+                                                                                             capsys):
+    # maintainer's decision, 2026-10-17: a model and its drafter are one
+    # unit; the run trains the drafter at its end, the model frozen, and
+    # measures the scheduler's pass times once, into its record; a later run
+    # replays them
+    main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
+    folder = tmp_path / "model"
+    drafter = load_drafter(folder).provenance
+    assert drafter["target"] == {"weights": weight_hashes(folder)}
+    assert drafter["trained_by"] == {"command": "wpt-train", "recipe_name": "three"}
+    assert drafter["dataset"] == built.dataset_id and drafter["prompts"]["count"] == 4
+    [run] = built.records("wpt-train")
+    names = [e.get("name") for e in run.events]
+    assert names.index("drafter.settings") > max(i for i, name in enumerate(names) if name == "training.step")
+    assert run.ids["outputs"]["drafter"] == hashlib.sha256((folder / "drafter" / "model.safetensors").read_bytes()
+                                                           ).hexdigest()
+    recorded = built.store.read_record(run.folder, COSTS_FILE)
+    # maintainer's decision, 2026-10-18: the times carry the setup they were measured on
+    setup = costs_setup(load_model(folder).config, 1, DRAFT, "cpu")
+    assert json.loads(recorded)["setup"] == setup
+    costs = replayed_costs(recorded, setup)
+    assert len(costs) == DRAFT + 1 and all(seconds > 0 for seconds in costs)
+
+    main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "again", "--scheduler-costs",
+          run.folder])
+    replayed = built.records("wpt-train")[-1]
+    assert built.store.read_record(replayed.folder, COSTS_FILE) == recorded
+    # refused before training, not after: no such record, or times measured on another setup
+    for recipe, record, why in ((built.recipe("three", training=one_stage(3)), "no-such-run", "MissingObject"),
+                                (built.recipe("block", training=one_stage(3), drafter={"block": 4}), run.folder,
+                                 "another setup: draft 5, here 4"),
+                                (built.recipe("longer", training=one_stage(3, block_size=32)), run.folder,
+                                 "another setup: model block_size 16, here 32")):
+        with pytest.raises(SystemExit) as refused:
+            main([recipe, built.dataset_id, "--out", "never", "--scheduler-costs", record])
+        assert refused.value.code == 2 and not (tmp_path / "never").exists()
+        assert why in capsys.readouterr().err
+        assert not [e for e in built.records("wpt-train")[-1].events if e.get("name") == "training.step"]
+
+
+def test_drafter_feature_layers_the_model_does_not_have_are_refused_before_training(built, tmp_path, capsys):
+    # maintainer's decision, 2026-10-18: checked against the model's layers at startup
+    with pytest.raises(SystemExit) as refused:
+        main([built.recipe("three", training=one_stage(3), drafter={"features": [9]}), built.dataset_id, "--out",
+              "model"])
+    assert refused.value.code == 2 and "9 is not a layer of a" in capsys.readouterr().err
+    assert not [e for e in built.records("wpt-train")[-1].events if e.get("name") == "training.step"]
+
+
+def test_a_drafter_that_cannot_be_trained_refuses_the_run_and_can_always_be_resumed(built, tmp_path, capsys):
+    # held_out keeps both prompts apart: nothing is left to learn from. The
+    # run saved its checkpoint just before the drafter, even with no
+    # checkpoint during training (maintainer's decision, 2026-10-18), so
+    # --resume takes no step and trains the drafter again
+    failing = built.recipe("three", training=one_stage(3), drafter={"prompts": 2, "held_out": 0.9})
+    with pytest.raises(SystemExit) as refused:
+        main([failing, built.dataset_id, "--out", "model", "--checkpoint-every", "0"])
+    assert refused.value.code == 2
+    checkpoint = tmp_path / "model" / "checkpoint"
+    assert capsys.readouterr().err.strip().endswith(
+        f"DrafterFailed: held_out 0.9 keeps every one of the 2 prompts apart; nothing was written; model{os.sep}checkpoint "
+        "stays: --resume continues from it and trains the drafter again")
+    assert not (tmp_path / "model" / "config.json").exists() and checkpoint.exists()
+    [run] = built.records("wpt-train")
+    names = [e.get("name") for e in run.events if e["kind"] != "span_start"]
+    assert names.count("training.checkpoint") == 1
+    assert names.index("training.checkpoint") > max(i for i, name in enumerate(names) if name == "training.step")
+    # the drafter's section takes no part in the training's settings: a fixed one resumes the same checkpoint
+    main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model", "--resume"])
+    resumed = built.records("wpt-train")[-1]
+    assert not [e for e in resumed.events if e.get("name") == "training.step"]
+    assert load_drafter(tmp_path / "model").provenance["target"] == {"weights": weight_hashes(tmp_path / "model")}
+    assert not checkpoint.exists()
 
 
 def test_a_record_the_store_refuses_stops_the_run_once_its_checkpoint_is_saved(built, tmp_path, monkeypatch, capsys):
@@ -164,8 +241,10 @@ def test_training_into_a_model_folder_replaces_it_whole_and_only_once_recorded(b
     assert stopped.value.code == 3
     assert {path.name: path.read_bytes() for path in folder.iterdir() if path.is_file()} == before
     assert (folder / "evals" / "memorization.json").exists()
+    # the checkpoint saved after the last step, before the drafter, stays: --resume finishes the run
+    assert (folder / "checkpoint").exists()
 
-    main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
+    main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model", "--resume"])
     assert not (folder / "evals").exists() and not (folder / "notes.txt").exists()
     assert json.loads((folder / "provenance.json").read_text())["recipe_name"] == "three"
     run = built.records("wpt-train")[-1]
@@ -186,7 +265,8 @@ def test_on_s3_the_model_folder_is_replaced_only_once_its_record_is_in_the_bucke
     with pytest.raises(SystemExit) as stopped:
         main(["d", built.dataset_id, "--out", "model"])
     assert stopped.value.code == 3
-    assert [path.name for path in folder.iterdir()] == ["notes.txt"]
+    # as it was, but for the checkpoint saved after the last step, before the drafter, which --resume continues
+    assert sorted(path.name for path in folder.iterdir()) == ["checkpoint", "notes.txt"]
     assert [path.name for path in tmp_path.iterdir() if path.name.startswith(".model")] == []
 
 
@@ -604,7 +684,8 @@ def test_a_crashed_run_starts_again_on_its_own(built, tmp_path):
 
 
 def test_a_new_model_that_cannot_take_an_empty_place_is_kept_and_named(built, tmp_path, monkeypatch, capsys):
-    # with no earlier folder, a refused rename must not delete the only copy of the new model
+    # with no earlier folder, a refused rename must not delete the only copy of the new model; the checkpoint
+    # lives in the store (--run), so no checkpoint folder takes the target's place first
     real = os.replace
 
     def refuse_the_target(source, target):
@@ -614,7 +695,7 @@ def test_a_new_model_that_cannot_take_an_empty_place_is_kept_and_named(built, tm
 
     monkeypatch.setattr(os, "replace", refuse_the_target)
     with pytest.raises(PermissionError):
-        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model", "--run", "fox-2"])
     [kept] = [path for path in tmp_path.iterdir() if path.name.startswith(".model-")]
     assert not (tmp_path / "model").exists()
     assert json.loads((kept / "provenance.json").read_text())["recipe_name"] == "three"

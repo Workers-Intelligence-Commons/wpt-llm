@@ -128,7 +128,7 @@ def test_recomputing_layers_trains_the_same_and_counts_each_token_once():
     # indexers' too), the indexers' loss counted once, and the layers'
     # second run adds nothing to balancing
     torch.manual_seed(0)
-    model = WPT(ModelConfig(**{**TINY, "block_size": 64})).train()
+    model = WPT(ModelConfig(**{**TINY, "block_size": 256})).train()
     ids, after = torch.randint(50, (2, 64)), torch.randint(50, (2, 64))
     results = []
     for recompute in (False, True):
@@ -161,7 +161,7 @@ def test_the_indexers_learn_only_when_the_caller_asks_for_their_loss():
     # the only thing that trains the indexers; a pass that does not ask
     # returns the scores alone and leaves the indexers without a gradient
     torch.manual_seed(0)
-    model = WPT(ModelConfig(**{**TINY, "block_size": 64})).train()
+    model = WPT(ModelConfig(**{**TINY, "block_size": 256})).train()
     ids, after = torch.randint(50, (2, 64)), torch.randint(50, (2, 64))
     indexer = model.layers[3].attention.indexer
     logits, ahead = model(ids, next_tokens=after)
@@ -172,3 +172,21 @@ def test_the_indexers_learn_only_when_the_caller_asks_for_their_loss():
     assert logits.shape == (2, 64, 50) and indexers > 0
     indexers.backward()
     assert all(p.grad is not None and p.grad.abs().sum() > 0 for p in indexer.parameters())
+
+
+def test_the_same_pass_gives_the_same_gradients_every_time():
+    # a resumed run trains exactly as a run never interrupted only if every
+    # gradient adds up in a fixed order: CSA's merging biases by place among
+    # them, which indexing by place would add up in any order
+    torch.manual_seed(0)
+    model = WPT(ModelConfig(**{**TINY, "block_size": 256}))
+    ids = torch.randint(50, (2, 257), generator=torch.Generator().manual_seed(0))
+
+    def gradients():
+        model.zero_grad()
+        scores, ahead, indexer = model(ids[:, :-1], next_tokens=ids[:, 1:], indexer_loss=True)
+        (scores.float().logsumexp(-1).mean() + ahead.float().logsumexp(-1).mean() + indexer).backward()
+        return {name: p.grad.clone() for name, p in model.named_parameters() if p.grad is not None}
+
+    first, second = gradients(), gradients()
+    assert first.keys() == second.keys() and all(torch.equal(first[k], second[k]) for k in first)

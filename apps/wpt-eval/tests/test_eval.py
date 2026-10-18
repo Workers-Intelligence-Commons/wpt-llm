@@ -45,6 +45,15 @@ def test_memorization_counts_the_training_documents_a_model_reproduces(trained):
     assert data["held_out"]["exact"] == 0 and data["held_out"]["documents"] == len(held_out)
 
 
+def test_a_folder_whose_drafter_was_trained_against_other_weights_is_refused(trained):
+    # a model and its drafter are one unit (docs/model.md, "The drafter")
+    provenance = trained.folder / "drafter" / "provenance.json"
+    provenance.write_text(json.dumps({"target": {"weights": {"model.safetensors": "0" * 64}}}))
+    with pytest.raises(SystemExit, match="EvalError: .*its drafter was trained against weights"):
+        main([str(trained.folder)])
+    assert not (trained.folder / "evals").exists()
+
+
 def test_the_command_runs_every_built_in_test_into_the_model_card(trained, capsys):
     folder = trained.folder
     main([str(folder)])

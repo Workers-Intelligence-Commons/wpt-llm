@@ -5,7 +5,9 @@ Reads the tasks of every admitted source whose task files are tagged
 `grpo` (docs/post-training.md). Each task's image must be built on this
 machine first (`wpt-agent build-image NAME`). For each task the model makes
 GROUP attempts, each in a fresh container of the task's image with no
-network and limited sizes (wpt_agent): it writes a turn, its read, write,
+network and limited sizes (wpt_agent), written together in one batch from
+one reading of the task's opening (the model's generation cache): it
+writes a turn, its read, write,
 edit and bash calls run in the container as a non-root user, their results
 come back as the next turn, until it stops or a limit is reached. Then the
 attempt's processes are stopped and the task's check scores, from 0 to 1,
@@ -33,14 +35,16 @@ routers chose while the model wrote the attempt (R3: wpt_model.Routes), so
 the loss scores each token through the experts that wrote it; the routers'
 weights do not change during the step. Hash-routed layers need neither.
 
-Each attempt must fit the model's context (block_size + 1 tokens): an
-attempt that fills it ends there and is scored as it is; a task whose
-instructions alone fill it stops the step. Sampling draws from a generator
-seeded with SEED, so a run gives the same attempts again on the same
-machine and setup. Every attempt, a dropped one included, is kept as one
-line of grpo-attempts.jsonl in the run's record folder: a conversation
-in the chat format whose metadata identifies the attempt; the attempt's
-span names the line. The settings below are the step's whole configuration; to
+An attempt ends at the latest at the task's max_tokens, past the model's
+block_size if need be: the model reads it through its generation cache,
+which has no length limit. The model alone writes the attempts, without a
+drafter (the weights change at every update, and the drafter is trained
+only at the end of the run). Sampling draws from a generator seeded with
+SEED, so a run gives the same attempts again on the same machine and
+setup. Every attempt, a dropped one included, is kept as one line of
+grpo-attempts.jsonl in the run's record folder: a conversation in the chat
+format whose metadata identifies the attempt; the attempt's span names the
+line. The settings below are the step's whole configuration; to
 change them, copy this file and give its path to wpt-posttrain. The
 machinery is wpt_posttrain/agentic.py, which steps/token-efficiency.py
 shares.
@@ -62,12 +66,12 @@ SEED = 0  # the order of the tasks in each round, and the sampled tokens
 
 def run(context):
     try:
-        tasks, built, limit = agentic.prepare(context)
+        tasks, built = agentic.prepare(context)
     except agentic.Unready as error:
         return Outcome.failure(str(error))
     settings = agentic.Settings(ROUNDS, TASKS_PER_UPDATE, GROUP, LEARNING_RATE, WEIGHT_DECAY, TEMPERATURE, TOP_K,
                                 CHECK_SECONDS, RESULT_BYTES, SEED)
     with agentic.frozen_routers(context.model):
-        learner = agentic.Learner("grpo", context.model, context.tokenizer, context.device, built, limit, settings,
+        learner = agentic.Learner("grpo", context.model, context.tokenizer, context.device, built, settings,
                                   context.telemetry)
         return learner.train(tasks)

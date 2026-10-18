@@ -4,7 +4,7 @@ import time
 
 import pytest
 
-from wpt_agent import AGENT, Limits, Sandbox, SandboxError, attempt, docker, opening, score
+from wpt_agent import AGENT, Limits, Sandbox, SandboxError, attempt, attempts, docker, opening, score
 from wpt_agent.loop import ANSWERED, CONTEXT, FULL, TOKENS, TURNS
 from wpt_agent.sandbox import ROOT
 from wpt_agent.tools import call
@@ -38,10 +38,25 @@ def bash(command, n=1):
     return {"type": "tool_call", "id": f"call-{n}", "name": "bash", "arguments": {"command": command}}
 
 
+class Scripted:
+    """A model whose row r writes writes[r](limit) at each call, whatever it
+    read; called as attempts' start, it gives itself as the writer."""
+
+    def __init__(self, *writes):
+        self.writes, self.read = writes, []
+
+    def __call__(self, ids, rows, stops):
+        self.read.append((ids, rows))
+        return self
+
+    def write(self, inputs, limits):
+        return {row: self.writes[row](limit) for row, limit in limits.items()}
+
+
 def scripted(*turns):
-    """A model that writes the given turns, one per call, whatever it read."""
+    """A model that writes the given turns, one per call."""
     pending = list(turns)
-    return lambda ids, count: iter(pending.pop(0)[:count])
+    return Scripted(lambda count: pending.pop(0)[:count])
 
 
 def results(done):
@@ -60,7 +75,7 @@ def test_tool_calls_run_in_the_container_and_the_check_scores_what_they_left(ima
                   {"type": "tool_call", "id": "call-2", "name": "read", "arguments": {"path": "out.txt"}}),
              turn({"type": "text", "text": "Done."})]
     with sandbox(image) as box:
-        done = attempt(task(), box, TOKENIZER, scripted(*turns), context=100_000, result_bytes=1000)
+        done = attempt(task(), box, TOKENIZER, scripted(*turns), result_bytes=1000)
         assert score(box, task().check, 10) == (1.0, "")
 
     assert done.ended == ANSWERED
@@ -77,8 +92,7 @@ def test_limits_stop_a_command_cut_a_long_result_and_end_the_attempt(image):
     turns = [turn(bash("sleep 60", 1), bash("seq 1 1000", 2))]
     started = time.monotonic()
     with sandbox(image, {}) as box:
-        done = attempt(task(max_turns=1, command_seconds=1), box, TOKENIZER, scripted(*turns), context=100_000,
-                       result_bytes=30)
+        done = attempt(task(max_turns=1, command_seconds=1), box, TOKENIZER, scripted(*turns), result_bytes=30)
     assert time.monotonic() - started < 30
     assert done.ended == TURNS
     stopped, cut = results(done)
@@ -163,7 +177,7 @@ def test_a_model_that_fills_its_process_limit_ends_its_attempt_and_is_scored(ima
     turns = [turn(bash("echo hello > out.txt; for i in $(seq 100); do setsid sleep 1000 & done")),
              turn(bash("echo still here"))]
     with sandbox(image, {}, limits) as box:
-        done = attempt(task(command_seconds=5), box, TOKENIZER, scripted(*turns), context=100_000, result_bytes=1000)
+        done = attempt(task(command_seconds=5), box, TOKENIZER, scripted(*turns), result_bytes=1000)
         assert score(box, task().check, 10) == (1.0, "")
     assert done.ended == FULL
     assert len(results(done)) == 1 and "OCI" not in results(done)[0]
@@ -178,8 +192,8 @@ def test_a_model_whose_files_fill_the_memory_ends_its_attempt_and_is_scored(imag
     limits = Limits(memory=64, disk=48, processes=64, cpus=1.0)
     filling = turn(bash("echo hello > out.txt; head -c 40M /dev/zero > big; head -c 8M /dev/zero > /tmp/$RANDOM"))
     with sandbox(image, {}, limits) as box:
-        done = attempt(task(command_seconds=5, max_turns=20), box, TOKENIZER, lambda ids, count: iter(filling[:count]),
-                       context=100_000, result_bytes=1000)
+        done = attempt(task(command_seconds=5, max_turns=20), box, TOKENIZER, Scripted(lambda count: filling[:count]),
+                       result_bytes=1000)
         scored, why = score(box, task().check, 10)
     assert done.ended == FULL and scored in (0.0, 1.0) and why == ""
     assert not any("OCI" in text for text in results(done))
@@ -292,13 +306,26 @@ def test_the_check_sees_only_the_attempt_s_work_folder_once_its_processes_are_st
 def test_an_attempt_ends_at_its_token_limit_and_at_the_models_context():
     # no call runs once a limit cuts a turn, and the attempt never holds
     # more tokens than the model can read
-    endless = lambda ids, count: iter([ord("a")] * count)
+    endless = Scripted(lambda count: [ord("a")] * count)
     start = len(chat.prompt(TOKENIZER, opening(task())))
-    done = attempt(task(max_tokens=7), None, TOKENIZER, endless, context=100_000, result_bytes=10)
+    done = attempt(task(max_tokens=7), None, TOKENIZER, endless, result_bytes=10)
     assert (done.ended, sum(done.learn), len(done.ids)) == (TOKENS, 7, start + 7)
     done = attempt(task(), None, TOKENIZER, endless, context=start + 5, result_bytes=10)
     assert (done.ended, len(done.ids)) == (CONTEXT, start + 5)
     assert done.conversation["messages"][-1] == {"role": "assistant", "content": [{"type": "text", "text": "aaaaa"}]}
+
+
+def test_attempts_written_together_read_the_opening_once_and_end_apart():
+    # one row answers in two short pieces, the other writes without end
+    # until the task's max_tokens: each ends on its own, and the model read
+    # the task's opening once, for both
+    pieces = [[ord("o"), ord("k")], [chat.IM_END]]
+    model = Scripted(lambda count: pieces.pop(0)[:count], lambda count: [ord("a")] * min(count, 3))
+    answered, cut = attempts(task(max_tokens=10), [None, None], TOKENIZER, model, result_bytes=10)
+    prompt = chat.prompt(TOKENIZER, opening(task()))
+    assert model.read == [(prompt, 2)]
+    assert answered.ended == ANSWERED and answered.ids == prompt + [ord("o"), ord("k"), chat.IM_END]
+    assert cut.ended == TOKENS and cut.ids == prompt + [ord("a")] * 10 and sum(cut.learn) == 10
 
 
 def test_a_check_that_prints_no_score_gives_none_and_says_why(image):

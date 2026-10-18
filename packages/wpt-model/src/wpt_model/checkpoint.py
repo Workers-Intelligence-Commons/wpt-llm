@@ -5,6 +5,7 @@
     model-00001-of-00003.safetensors     or one file per shard,
     model.safetensors.index.json         plus an index: tensor name -> shard file
     tokenizer.json                       the vocabulary the model was trained with
+    drafter/                             its drafter for speculative decoding (drafter.py)
     LICENSE, NOTICE, README.md           license documents and model card (notice.py)
 
 safetensors stores only tensors, so loading never runs code (unlike torch.load).
@@ -12,6 +13,12 @@ Every weight file's header names the tokenizer (`tokenizer`, such as
 "classics version 1") and the sha256 of tokenizer.json (`tokenizer_sha256`),
 so a model never runs with another vocabulary than its own: load_tokenizer
 refuses a tokenizer.json that does not match (TokenizerMismatch).
+
+A model and its drafter are one unit, with separate weights: load_model
+refuses a folder whose drafter is missing, or whose drafter's provenance
+names other weights than the folder's (their sha256, weight_hashes), as
+DrafterMismatch. No option skips it: wpt-train and wpt-posttrain write the
+drafter with the weights it was trained against.
 """
 
 import hashlib
@@ -25,12 +32,18 @@ from wpt_utils.files import sha256_file
 
 from .config import ModelConfig
 from .model import WPT
+from .notice import DRAFTER_NAME
 
 CONFIG_NAME = "config.json"
 SINGLE_NAME = "model.safetensors"
 INDEX_NAME = "model.safetensors.index.json"
 TOKENIZER_NAME = "tokenizer.json"
 METADATA = {"format": "pt"}
+
+
+class DrafterMismatch(ValueError):
+    """The model folder has no drafter, or its drafter was trained against
+    other weights than the folder's."""
 
 
 class TokenizerMismatch(ValueError):
@@ -82,8 +95,11 @@ def _save_shards(shards, state, directory, metadata):
 
 
 def load_model(directory, device="cpu") -> WPT:
-    """Rebuild the model from config.json and load its weights, split or not."""
+    """Rebuild the model from config.json and load its weights, split or
+    not; DrafterMismatch when its drafter is missing or was trained against
+    other weights (check_drafter)."""
     directory = Path(directory)
+    check_drafter(directory)
     config = ModelConfig.load(directory / CONFIG_NAME)
     state = {}
     for name in weight_files(directory):
@@ -91,6 +107,26 @@ def load_model(directory, device="cpu") -> WPT:
     model = WPT(config)
     model.load_state_dict(state)
     return model.to(device)
+
+
+def check_drafter(directory):
+    """DrafterMismatch unless the folder holds a drafter (drafter/) whose
+    provenance names the folder's weights, by their sha256, as those it was
+    trained against."""
+    directory = Path(directory)
+    drafter = directory / DRAFTER_NAME
+    try:
+        provenance = json.loads((drafter / "provenance.json").read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        raise DrafterMismatch(f"{directory}: no drafter ({DRAFTER_NAME}/); a model folder holds the drafter "
+                              "wpt-train or wpt-posttrain trained for its weights") from None
+    if not (drafter / CONFIG_NAME).exists():
+        raise DrafterMismatch(f"{directory}: its drafter ({DRAFTER_NAME}/) was not saved whole")
+    trained = (provenance.get("target") or {}).get("weights")
+    weights = weight_hashes(directory)
+    if trained != weights:
+        raise DrafterMismatch(f"{directory}: its drafter was trained against weights {trained}, the folder holds "
+                              f"{weights}; train the model again, or post-train it, to train its drafter")
 
 
 def tokenizer_identity(directory) -> tuple[str, str]:

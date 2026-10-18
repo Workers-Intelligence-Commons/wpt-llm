@@ -256,9 +256,9 @@ The store also holds the record of every run of `wpt-dataset build`,
 | `wpt-telemetry` | the record of one command run in the store, sent live to an OpenTelemetry backend when one is set ([observability.md](observability.md)) |
 | `wpt-tokenizer` | the byte-level BPE tokenizer, Rust inside |
 | `wpt-web` | a local web interface: one small server on 127.0.0.1, one file per page (Python routes, React page); its interface is built with Bun when it starts; command `wpt-web` |
-| `wpt-model` | the WPT network ([model.md](model.md)), its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
+| `wpt-model` | the WPT network ([model.md](model.md)) and its drafter, its safetensors model folders, and their license documents (`LICENSE`, `NOTICE`, model card) |
 | `wpt-training` | the training loop (global batch, evaluation, checkpoints, resuming), with two plug points: strategies (how the hardware is used) and methods (how the model learns) |
-| `wpt-inference` | token-by-token sampling |
+| `wpt-inference` | sampling through the model's generation cache: several rows from one prompt, speculative decoding with a drafter and its scheduler, the scheduler's pass times (measured, recorded, replayed); training a model's drafter (`drafting.py`), which `wpt-train` and `wpt-posttrain` run at the end of every run, so it uses `wpt-model` |
 | `wpt-utils` | helpers several packages share, one submodule each: `wpt_utils.device` picks the best GPU, else the CPU; `wpt_utils.programs` starts the outside programs WPT runs (`program(name)`, with a clear error when one is missing) and reads the repository commit (`repository()`), without importing PyTorch; `wpt_utils.files.sha256_file` is the one way a file is hashed, by the store, the model folders and the run records alike |
 | `wpt-agent` | the agent harness of agentic post-training: the four tools, one Docker container per attempt, the images of `data/images/` and their locks, the agent loop and the task's check; commands `wpt-agent lock-image` and `wpt-agent build-image` |
 | `wpt-train`, `wpt-eval`, `wpt-posttrain`, `wpt-chat` | the applications |

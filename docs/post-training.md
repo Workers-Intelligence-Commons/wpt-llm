@@ -90,7 +90,9 @@ and if not, why.
 The steps run in order, and the first failure stops the run: the command
 prints that step's reason and writes no model folder (its record in the
 store keeps what happened, with that reason). When every step succeeded, it
-writes the new folder: the weights, the tokenizer, and the base model's
+trains the new weights' drafter ("The drafter", below), and once that
+succeeded too, it writes the new folder: the weights, the tokenizer, the
+drafter, and the base model's
 `provenance.json` with a `post_training` section (the sha256 of the base
 weights, each step's file and its sha256, the repository commit, the device
 and the tools), then `LICENSE`, `NOTICE` and the model card, which lists the
@@ -128,6 +130,51 @@ recipe's `posttrain` list instead.
 The base model must use a vocabulary of tokenizer 0.3.0 or later, which
 reserves the chat template's ids. Talk to the result with
 `uv run wpt-chat NEW --chat`.
+
+## The drafter
+
+Maintainer's decisions, 2026-10-17: a model and its drafter for
+speculative decoding ([model.md](model.md), "The drafter") are one unit
+and a hard dependency, with separate weights, and the drafter is no longer
+a post-training step. After the last step succeeded, every run trains a
+fresh drafter against the post-trained weights; the base folder's drafter,
+trained against other weights, is never used or copied. A base folder
+whose drafter is missing or was trained against other weights is refused
+before any step runs (`load_model`), and no option skips either.
+
+The drafter's shape and training come from the model recipe's `drafter`
+section, as after pre-training. Its prompts are the beginnings of the base
+model's training documents (the dataset its `provenance.json` names, read
+from the store), each the document start and its first tokens, and the
+post-trained model alone writes the answers, each up to the end of a
+document or `<|im_end|>`, the end of a turn (maintainer's decision,
+2026-10-18): no text people wrote as an answer, and no conversation of a
+step, reaches it. The model is frozen
+while the drafter learns DSpark's three losses from random anchors in the
+answers; a tenth of the prompts is held out, and on them the drafter
+drafts for the model, every draft verified, to calibrate its confidence on
+the drafts the model kept and rejected and to measure how many it keeps.
+The run records its settings, each update's losses, the calibration (each
+position's temperature, the calibration error before and after) and the
+measure through the run's record. A drafter that cannot be trained (too
+few prompts, a loss that is not finite, no draft verified) fails the run
+with `DrafterFailed`, and nothing is written.
+
+Then the run measures the drafter scheduler's pass times for the new
+weights once and writes them into its record as `scheduler-costs.json`,
+with the setup they were measured on; `--scheduler-costs FOLDER` replays
+those an earlier run recorded in its record folder `FOLDER` instead,
+and times recorded on another setup are refused before any step runs
+(maintainer's decision, 2026-10-18; [model.md](model.md), "The drafter",
+says exactly what a replay guarantees). Drafter settings that cannot be,
+such as feature layers the model does not have, are refused before any
+step runs too.
+
+The new folder holds it in `drafter/`, with its own `provenance.json`: the
+command and recipe that trained it, the dataset, the sha256 of each weight
+file it was trained against, its settings, its losses, the calibration and
+the measure. Its prompts come from the dataset's sources, which `NOTICE`
+already credits, so it adds none; the model card describes it.
 
 ## The `grpo` step
 
@@ -243,8 +290,13 @@ a new build.
 
 ### Attempts
 
-For each task, the model makes several attempts (`GROUP`). Each attempt
-runs in a fresh container of the task's image, removed after the attempt.
+For each task, the model makes several attempts (`GROUP`), written
+together: the model reads the task's opening once, through its generation
+cache ([model.md](model.md), "Generation"), copies it into one row per
+attempt, and writes the attempts' turns in one batch; while one attempt's
+tool calls run, the others wait. Each attempt runs in a fresh container of
+the task's image, removed after the attempt; a group's containers run at
+the same time.
 The container has no network and a read-only root: it can write only
 `/work`, its working folder holding the task's `files/`, and `/tmp`, two
 folders kept in memory. Its sizes are the defaults of the task format
@@ -271,9 +323,10 @@ turn; each tool call in it runs in the container (a relative path starts at
 results come back as a tool turn; and the model writes the next turn. The
 attempt ends when a turn closes without a tool call, when the model writes
 the end of a document, after `max_turns` turns (the last turn's calls still
-run), or when `max_tokens` or the model's context (`block_size + 1`
-tokens) is reached in the middle of a turn, whose calls then do not run;
-an attempt that fills the context is scored as it is. The attempt also
+run), or when `max_tokens` is reached in the middle of a turn, whose calls
+then do not run (maintainer's decision, 2026-10-17). The model's
+`block_size` does not limit an attempt: the cache reads it past
+`block_size`, and the loss pass reads it whole. The attempt also
 ends when the model's own processes or files fill its container, so that
 Docker can start no command there: processes left running reach the
 process limit, or files in `/work` and `/tmp` exhaust the memory. That
@@ -293,8 +346,7 @@ NUL character or text that is not UTF-8, `write`'s content and `edit`'s
 strings included: such a call fails with a message to the model. A file
 holding a NUL byte, or other bytes that are not UTF-8 text, is written
 through `bash`, with a command that prints them from escapes, such as
-`printf '\0'`. A task whose instructions and tools alone fill the model's
-context stops the step.
+`printf '\0'`.
 
 ### Scores
 
@@ -355,7 +407,8 @@ assumes.
 
 The routed expert layers ([model.md](model.md), "Experts") choose experts
 for each token while the model writes an attempt. The step records those
-choices, and the loss pass routes each token through the same experts
+choices, each attempt's apart, as the generation cache reads its tokens,
+and the loss pass routes each token through the same experts
 instead of choosing again (routing replay, "R3"), so the loss scores the
 tokens through the experts that wrote them. The routers' weights do not
 change during the step, and their balancing biases do not either. The
@@ -367,10 +420,16 @@ indexers go on learning by their own loss in each loss pass, as in `sft`.
 The order of the tasks in each round and every sampled token come from
 generators seeded with `SEED`, so a run gives the same attempts again on
 the same machine and setup (the same model, tasks, images and devices);
-the checks themselves may differ, as any program may. The step prints one
-line per round (`ROUNDS`, passes over every task): the mean score, the
-number of attempts and of updates, and the indexers' mean loss over the
-round's loss passes.
+the checks themselves may differ, as any program may. The model alone
+writes the attempts, without a drafter (maintainer's decision,
+2026-10-17): the weights change at every update, the drafter is trained
+only at the end of the run ("The drafter", above), and the attempts then
+depend on the seed alone, never on this machine's times. A task's
+attempts are written together in one batch, from one reading of the
+task's opening (model.md, "Generation"). The step prints one line per
+round (`ROUNDS`, passes over every task): the mean score, the number of
+attempts and of updates, and the indexers' mean loss over the round's
+loss passes.
 
 Every attempt is kept in the run's record folder
 ([observability.md](observability.md)), as one line of
@@ -378,9 +437,14 @@ Every attempt is kept in the run's record folder
 later: chat JSON Lines in the post-training run's folder, linked from
 traces", and "Add metadata to chat"), written through `context.telemetry`
 as soon as the attempt is scored, so a line on a local store is on the
-disk before the next attempt starts. Each line is a conversation in the
-chat format ([chat-format.md](chat-format.md)) whose `metadata` says which
-attempt it is, so the file passes the same check as any `chat` file:
+disk before the next attempt is scored. A group's attempts are written
+together, then scored one by one, in order, each attempt's container
+removed and its line kept before the next attempt is scored
+(maintainer's decision, 2026-10-18: each attempt's line is kept as soon
+as that attempt is scored, even though attempts are written together).
+Each line is a conversation in
+the chat format ([chat-format.md](chat-format.md)) whose `metadata` says
+which attempt it is, so the file passes the same check as any `chat` file:
 
 ```json
 {"schema": 2, "tools": [...], "messages": [...],
@@ -407,16 +471,17 @@ attempt it is, so the file passes the same check as any `chat` file:
   step (for `grpo`, the score), `null` for an attempt never trained on.
 - `written`: the tokens the model wrote, the tokens the loss learns.
 
-The trace names each line: each attempt is a span `grpo.attempt`
-(`task`, `round`, `group`, `attempt`, then `file` and `line`, its line
-number from 1, with `dropped`, `ended`, `score`, `reward` and `written`);
-each group is an event `grpo.group` (`task`, `round`, `group`, `file`,
-`lines`, and `outcome`: `learned`, or why it was skipped); each round is an
-event `grpo.round` (`file`, `lines`: its first and last, `attempts`,
-`dropped`, `updates`, and the value `mean_score`). A recipe that runs the
-step twice adds to the same file, and the line numbers go on. A line the
-store refuses stops the command at once with exit code 3, as any part of
-the record does.
+The trace names each line: the attempts of a group are written, scored
+and kept in a span `grpo.play` (`task`, `round`, `group`, `attempts`);
+inside it, each attempt's line is kept in a span `grpo.attempt` (`task`, `round`, `group`, `attempt`, then `file` and
+`line`, its line number from 1, with `dropped`, `ended`, `score`,
+`reward` and `written`); each group is an event `grpo.group` (`task`,
+`round`, `group`, `file`, `lines`, and `outcome`: `learned`, or why it was
+skipped); each round is an event `grpo.round` (`file`, `lines`: its first
+and last, `attempts`, `dropped`, `updates`, and the value `mean_score`). A
+recipe that runs the step twice adds to the same file, and the line
+numbers go on. A line the store refuses stops the command at once with
+exit code 3, as any part of the record does.
 Its settings are the constants at the top of `steps/grpo.py`; to change
 them, copy the file and put its path in the recipe's `posttrain` list. The
 containers' sizes are not among them: they belong to each task.
@@ -436,8 +501,8 @@ share is `apps/wpt-posttrain/src/wpt_posttrain/agentic.py`. Until a source
 holds tasks tagged `grpo`, it fails with "no tasks" and writes nothing.
 
 First, the reference. Before any update, the incoming model makes
-`REFERENCE` attempts at each task (by default `GROUP`), run and scored as
-`grpo`'s are. A task's best start score is the best score among them. An
+`REFERENCE` attempts at each task (by default `GROUP`), written together,
+run and scored as `grpo`'s are. A task's best start score is the best score among them. An
 attempt passes when its score is at least that best score, and the task's
 reference length is the mean length of its passing attempts. A length
 counts only the tokens the model wrote, the same tokens the loss learns,

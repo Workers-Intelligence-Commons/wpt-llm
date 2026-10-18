@@ -40,7 +40,9 @@ class Routes:
     sequence (batch of 1), in position order: a forward pass given
     record=routes adds the positions it has not recorded yet, one given
     replay=routes routes its positions as recorded. A recording pass must
-    start at the sequence's first token."""
+    start at the sequence's first token. A cache (cache.py) records its
+    rows' routes as they are written, each in its own Routes (append), and
+    cuts the positions it undoes (keep)."""
 
     def __init__(self):
         self.chosen = {}  # Experts module -> (positions, k) expert indices
@@ -51,6 +53,20 @@ class Routes:
             self.chosen[experts] = chosen.detach().clone()
         elif len(chosen) > len(known):
             self.chosen[experts] = torch.cat([known, chosen[len(known):].detach()])
+
+    def append(self, experts, chosen):
+        """Adds the choices of the positions that follow those recorded."""
+        known = self.chosen.get(experts)
+        self.chosen[experts] = chosen.detach().clone() if known is None else torch.cat([known, chosen.detach()])
+
+    def keep(self, positions):
+        """Forgets every choice after the first `positions` positions."""
+        self.chosen = {experts: known[:positions] for experts, known in self.chosen.items()}
+
+    def copy(self):
+        routes = Routes()
+        routes.chosen = dict(self.chosen)  # tensors are replaced, never changed in place
+        return routes
 
     def replay(self, experts, positions):
         """The recorded choices of the first `positions` positions;
@@ -133,7 +149,7 @@ class Experts(nn.Module):
 
     def forward(self, x, ids, collect=True, record=None, replay=None):
         B, T, D = x.shape
-        if B != 1 and (record is not None or replay is not None):
+        if B != 1 and (isinstance(record, Routes) or replay is not None):  # a cache's recorder takes rows
             raise ValueError("routes are recorded and replayed for one sequence at a time")
         flat = x.reshape(-1, D)
         y = sum(expert(flat) for expert in self.shared)

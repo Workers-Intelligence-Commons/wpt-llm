@@ -3,9 +3,12 @@
 Maintainer's decisions, 2026-10-16; the attention of the global layers
 changed on 2026-10-17 (below), with the decisions of the same day on which
 global layer is CSA and which HCA (the recipe's list), YaRN, the FP8 and
-FP4 formats of the entries, the indexer's size, DeepSeek-V4's Muon and
-the TileLang and Triton kernels, and long windows (below, "Long
-windows"). This page describes the architecture WPT
+FP4 formats of the entries, the indexer's size, DeepSeek-V4's Muon, the
+TileLang and Triton kernels, long windows (below, "Long windows"), the
+generation cache ("Generation") and the drafter ("The drafter"); what a
+layer passes on to later tokens ("What a layer passes on") and the
+drafter's place beside the model were decided on 2026-10-17 too. This page
+describes the architecture WPT
 models use and why; the code is `packages/wpt-model` and the `muon` method
 of `packages/wpt-training`. Every component comes from published research
 (cited at the end) and is trained from scratch: no weights or outputs of
@@ -106,10 +109,12 @@ global layer, so one kind.
   entry `I_{t,s} = sum_h w_{t,h} ReLU(q^I_{t,h} . K^I_s)`. The top `k`
   entries are kept; HCA keeps all of its entries. The indexer's queries
   and keys are rotated, then kept in FP4 (below), so `c^I` is a power of
-  2. Equal scores, frequent with FP4 values, go to the earliest entries
-  (WPT's choice: V4 does not say), so the choice depends only on the
-  visible entries, never on how many follow, and a window in parts
-  chooses as the whole window does.
+  2. Equal scores, frequent with FP4 values and with ReLU's zeros in small
+  indexers, go to the earliest entries (WPT's choice: V4 does not say),
+  so the choice depends only on the visible entries, never on how many
+  follow: a window in parts and the generation cache ("Generation",
+  below) choose as the whole window does. One rule serves all three
+  (`sparse.py`).
 - **The window.** Merged entries alone would hide a query's own block, so
   each query also attends to the last 128 tokens uncompressed (itself
   included), each token's entry `RMSNorm(W^win h_j)` from a projection of
@@ -267,14 +272,9 @@ windows"), never part of the recipe:
   the part before handed on, and each part hands on what its last slice
   ends with, so the gradients flow back across both kinds of boundary.
 
-What crosses a boundary, for each layer kind:
-
-| Layer | What the earlier tokens hand on |
-| --- | --- |
-| KDA | its memory `S` per head; the last 3 inputs of each short convolution |
-| CSA, HCA, the MTP block's window | the last 127 window entries; CSA's last block of `C^b`, `Z^b` (and the indexer's); every merged entry and indexer key so far |
-| Engram | the last `N - 1` token ids; the last `3N` inputs of its convolution, per stream |
-| experts, mHC | nothing: they work token by token |
+What crosses a boundary is what each layer passes on to later tokens
+("What a layer passes on", below), the same description the generation
+cache keeps.
 
 Across processes, KDA's memory cannot wait for the slice before.
 DeepSeek-V4's two stages (above) exchange tails and merged entries,
@@ -297,6 +297,38 @@ A segment or slice holds a multiple of 128 tokens (HCA's merging), so no
 merged entry straddles two of them; a window's last segment may be
 shorter. The losses are the parts' shares of the whole window's
 (training.md, "Long windows").
+
+### What a layer passes on
+
+Maintainer's decision, 2026-10-17: what a layer passes on to later tokens
+is said once, per layer, and both training's segments and slices
+(`sequence.py`) and generation's cache (`cache.py`) carry exactly that.
+Each module that reads earlier tokens describes what it passes on
+(`passes_on()`, `carry.py`), as one of three kinds:
+
+- **a tail**: the last `n` time steps of a value each token has, with what
+  stands before the text (zeros, or Engram's padding id);
+- **entries**: merged from every `m` tokens, every one kept;
+- **a memory**: a state updated token by token.
+
+| Layer | What it passes on |
+| --- | --- |
+| KDA | its memory `S` per head; a tail of the last 3 inputs of each short convolution |
+| CSA, HCA, the MTP block's window | a tail of the last 127 window entries; a tail of the rows not merged into an entry yet (CSA's last 8 rows, the block before the current one included; HCA's last 128); every merged entry, and in CSA every indexer key |
+| Engram | a tail of the last `N - 1` canonical ids; a tail of the last `3N` inputs of its convolution, per stream |
+| experts, mHC | nothing: they work token by token |
+
+A query sees itself and the 127 entries before it in the window, so 127
+is all a later token needs (DeepSeek-V4's inference code keeps 128, one
+more than is read). A segment, a slice and a cache take the same values
+from the same description, so they cannot drift apart: a test checks that
+a segment and a cache carry exactly the described values and no other,
+and that both give the whole window's results. The merging of rows into
+entries is one computation for all of them: the rows passed on from
+before, then this part's rows, gathered block by block. Taking tokens back
+(generation, below) needs one rule per kind: a tail is cut back to the
+tokens kept, a memory is replayed from the one before, and entries past a
+row's tokens are never read, so they need nothing.
 
 ## Experts
 
@@ -417,8 +449,256 @@ published code; [MiMo-V2-Flash][mimo] chose a sliding window for its MTP
 block too, so that the block stays light when it drafts tokens. It never
 sees further back than 128 tokens. Its loss is added with weight 0.3,
 then 0.1 (DeepSeek-V3 switched after 10T of 14.8T tokens; the recipe sets
-the switch). At generation time it can serve as a draft that guesses one
-token ahead; the model works without it.
+the switch). The model works without it at generation time; speculative
+decoding uses a separate drafter instead ("The drafter", below), and the
+block's window is kept in the generation cache for a drafter that reads
+it.
+
+## Generation
+
+Maintainer's decisions, 2026-10-17. Generation reads every token once,
+through a cache of what each layer passes on ("What a layer passes on",
+above; `packages/wpt-model`, `cache.py`), instead of reading the whole
+text again for each new token. The cache is forward's own pass, with the
+tokens at each row's place: the same code as training, which reads the
+earlier tokens' values from the cache instead of from a segment before.
+
+- **KDA** keeps its memory `S` and the last 3 inputs of each short
+  convolution: a fixed size, whatever the text's length.
+- **CSA, HCA and the MTP block's window** keep the window's last 127
+  entries, the merged entries (FP8 but their rotary dimensions), CSA's
+  merged indexer keys (FP4, held in FP8), and the rows not merged into an
+  entry yet (as V4's `kv_state` and `score_state`: the current block's
+  rows, and in CSA the block before it, whose second projection pair the
+  next entry reads).
+- **Engram** keeps each attempt's last `N - 1` canonical ids and the last
+  inputs of its convolution; its tables stay on the model's device.
+- The experts keep nothing, but a cache can record each attempt's routed
+  experts as its tokens are read, for R3 (post-training.md).
+
+Only the merged entries grow, a quarter of the tokens in CSA (and as many
+indexer keys) and 1/128 in HCA, so generation goes on past `block_size`
+with no limit. It is the same computation as reading the whole text, so the
+same scores within rounding: on the CPU, tests check each kind of layer
+(KDA, CSA, HCA, the window alone, Engram, the MTP block) and the whole
+model over 300 tokens read in pieces (past `block_size`, the window and
+HCA's first entries) within 0.1% of the largest score, and the tokens that
+sampling draws with one seed; on a GPU, each kind of attention layer
+within 3% (BF16). A rounding can still fall the other way (an FP8 or FP4
+value, a near tie in the indexer's or the routers' choice), which changes
+a score by more than the rounding itself; the tests allow for that.
+
+A cache holds several rows, the attempts of one task, read together in one
+batch: each row has its own length, and each call gives each row its own
+number of new tokens, the rest of the row being padding that changes
+nothing (KDA's padded tokens write nothing and do not decay). A prompt
+shared by the attempts is read once and copied into every row: KDA's
+states and V4's entries alike.
+
+**Speculative decoding.** A drafter proposes a few tokens for each row
+(`DRAFT`, 5, the most DSpark's production drafter proposes); the model
+reads those worth verifying in one pass (the scheduler, "The drafter",
+below); each is kept with probability `min(1, p/q)` (`p` the model's
+probability, `q` the drafter's), a rejected one is replaced by a draw from
+`max(0, p - q)`, normalized, and when all are kept the model adds one more
+token. This leaves the model's own distribution unchanged.
+The cache then undoes the rejected tokens, by kind ("What a layer passes
+on"): KDA replays the kept tokens' cached inputs from the `S` before the
+pass ([Kimi K3][k3]'s way; flash-linear-attention's chunked kernel on a
+GPU where it imports), each tail is cut back to the kept tokens, merged
+entries past a row's tokens are left unread and merged again when the row
+reaches them, and the recorded routes are cut. WPT's drafter is DSpark's
+("The drafter", below); the machinery takes any drafter (`wpt_inference`
+says what one gives), and generation without one samples a token at a
+time through the cache.
+
+**Kernels.** Plain PyTorch on every device; on a GPU where
+flash-linear-attention imports, its fused recurrent KDA kernel for fewer
+than 16 new tokens and its chunked kernel for more; the attention through
+the same TileLang or Triton kernels as training, where they run.
+
+`wpt_inference.Writer` writes through the cache (`sample_tokens` for one
+text); `wpt-chat`, the sample `wpt-train` prints, the drafter's training
+and the attempts of the `grpo` and `token-efficiency` steps use it.
+`wpt-chat` and `wpt-train`'s sample draft with the model's drafter. The
+attempts of `grpo` and `token-efficiency` are written by the model alone,
+without a drafter (maintainer's decision, 2026-10-17): the weights change
+at every update, a drafter is trained only at the end of a run, and the
+attempts then depend on the seed alone, never on this machine's times.
+
+## The drafter
+
+Maintainer's decisions, 2026-10-17: a separate drafter like DSpark, built
+with the published values of DeepSeek's production drafter, learned only
+from answers WPT's own model writes. [DSpark][dspark] is DeepSeek's
+drafter for V4, on the parallel backbone of [DFlash][dflash]. The code is
+`wpt_model.drafter`, and its training `wpt_inference.drafting`; its
+weights live in the model folder's `drafter/` (`config.json`,
+`model.safetensors`, `provenance.json`), under the model's license and
+header ([licenses.md](licenses.md)).
+
+**One unit** (maintainer's decision, 2026-10-17). The model and its
+drafter are one unit and a hard dependency, with separate weights:
+
+- `wpt-train` trains a drafter at the end of every run, against the final
+  weights, the model frozen (training.md); `wpt-posttrain` trains a fresh
+  one at the end of every run, against the post-trained weights
+  (post-training.md). The drafter is not a post-training step.
+- The drafter's `provenance.json` names the sha256 of every weight file it
+  was trained against (`target.weights`). `wpt_model.load_model` refuses a
+  folder whose drafter is missing, was not saved whole, or names other
+  weights (`DrafterMismatch`), and no option skips the check.
+- A drafter that cannot be trained (too few prompts, a loss that is not
+  finite, no draft verified) fails the run, which writes nothing.
+- The prompts are the beginnings of the dataset's training documents,
+  after training and after post-training alike (each the document start
+  and its first `prompt_tokens` tokens; the rest of the document is never
+  read), and the model alone writes the answers, each up to the end of a
+  document, and after post-training also up to `<|im_end|>`, the end of a
+  turn a post-trained model writes (maintainer's decision, 2026-10-18). A
+  test checks that no text past a prompt reaches the drafter's training.
+
+**Settings.** The model recipe's `drafter` section (recipe shape 5, "Model
+recipes") gives the drafter's shape (`features`, `layers`, `block`,
+`markov_rank`) and its training (`epochs`, `learning_rate`,
+`weight_decay`, `warm_up`, `clip`, `anchors`, `batch`, `prompts`,
+`prompt_tokens`, `answer_tokens`, `temperature`, `top_k`, `held_out`,
+`ece_bins`, `seed`); a setting left out keeps its default below. The
+three recipes state the training values explicitly (maintainer's
+decision, 2026-10-18; "Model recipes"), equal to today's defaults, so a
+later change of a default does not change their drafters. `features`
+numbers the model's layers from 1 to its `n_layer`;
+`DrafterConfig.for_model` checks them against the model's layers when a
+run starts, so `wpt-train` refuses a layer the model does not have before
+it trains, and `wpt-posttrain` before any step runs (maintainer's
+decision, 2026-10-18).
+
+A round drafts a block after the anchor, the last token the model wrote
+and has not read yet:
+
+- **Context** (DFlash). The hidden states of 5 target layers, spread
+  evenly from the 2nd to the third-to-last (fewer in a short model: the
+  2nd alone in 4 layers), at each of the last 128 tokens the model read,
+  side by side, projected to the model's width and RMS-normalized.
+- **Backbone** (DSpark's production values). 3 layers, each with mHC's 4
+  streams, a window attention of 128 tokens and experts. The block is the
+  anchor's embedding and 4 mask vectors (DSpark's anchor-first block: 5
+  places give 5 drafts), read in one pass. Every layer reads the context
+  as keys and values through its own key-value projection (DFlash's KV
+  injection).
+- **Scores.** The target's output head, frozen, gives each place's base
+  scores `U_k`; the target's embedding, frozen, reads the anchor.
+- **Markov head** (DSpark's default, and its production head):
+  `p_k(v) = softmax(U_k + W1[x_{k-1}] W2)`, sampled from left to right,
+  `x_0` the anchor. DSpark's rank is 256 at V4's width of 4096; WPT's
+  default rank follows the width, `256 * d / 4096` (maintainer's decision,
+  2026-10-17): 8 at width 128, 20 at 320 and 32 at 512, as the indexer
+  scales with the width. With a vocabulary of 8,192, the head holds 131K
+  of the drafter's 1.5M parameters at width 128, 328K of 11.7M at 320 and
+  524K of 28.9M at 512; at rank 256 it held 4.2M of 5.6M, 4.2M of 15.6M
+  and 4.2M of 32.6M.
+- **Confidence head**: `c_k = sigmoid(w . [h_k ; W1[x_{k-1}]] / T_k)`,
+  the chance that draft `k` is kept when every draft before it was;
+  `T_k` comes from DSpark's Sequential Temperature Scaling after training.
+- **Scheduler** (DSpark's Hardware-Aware Prefix Scheduler, its Algorithm
+  1). A draft is kept with the product of the confidences up to it; drafts
+  are verified while the expected tokens per second of the model's pass
+  grow, from a table of the pass's times, and the first that does not pay
+  stops the admission, so a draft's admission never depends on the draft
+  itself. The times are measured once per run of `wpt-train` and of
+  `wpt-posttrain` (`wpt_inference.measure_costs`) and written into the
+  run's record as `scheduler-costs.json` (maintainer's decision,
+  2026-10-17), with the setup they were measured on: the model's config,
+  the drafter's block (the drafts per round), the writer's rows (1) and
+  the device, by its kind and name ("cpu", or such as "cuda (NVIDIA
+  GeForce RTX 5080 Laptop GPU)"), never its number among GPUs of one name
+  (maintainer's decision, 2026-10-18). `wpt-train --scheduler-costs
+  FOLDER` and `wpt-posttrain --scheduler-costs FOLDER` replay the times
+  an earlier run recorded in its record folder `FOLDER` instead of
+  measuring them, and `wpt-chat --scheduler-costs FOLDER` reads them
+  instead of measuring them when it loads the model; each refuses times
+  recorded on another setup, naming each difference, `wpt-train` before
+  training and `wpt-posttrain` before any step. A writer given no times
+  verifies every draft.
+
+  What a replay guarantees, exactly: the scheduler uses the recorded
+  seconds, so for the same drafter confidences it admits the same drafts
+  as the run that measured them. With the same weights (model and
+  drafter), the same prompt, the same sampling settings and the same
+  seed, on a device whose passes give the same numbers, the writer then
+  verifies the same drafts and draws the same tokens as a writer given
+  that same table. The setup check compares only what the file records:
+  the model's config, the block, the rows and the device's kind and name.
+  It does not compare the weights, the drivers, the library versions or
+  the machine's load, and it does not check that the times are true for
+  this machine: times that are wrong here make writing slower, never
+  change the model's distribution.
+
+Training (DSpark, section 3.3): the model writes an answer to each prompt,
+then reads each answer whole; random anchors in the answer start blocks
+of 5; the drafter learns
+`0.1 L_ce + 0.9 L_tv + 1.0 L_conf`, each place `k` (from 1) weighed
+`exp(-(k - 1) / 5)`: cross-entropy on the answer's tokens, the total
+variation distance to the model's distribution, and binary cross-entropy
+of the confidence against `c*_k = 1 - ||p_d - p_t||_1 / 2`. The target is
+frozen; only the drafter learns.
+
+Details DSpark leaves open, and WPT's choice for each:
+
+- Width: the model's, which sharing its embedding and head requires.
+- The backbone's layers: V4's attention with no merged entries, as the
+  multi-token prediction block's (rotary base 10,000), and the model's
+  experts (latent SiTU-GLU experts, 2 shared, the model's numbers), every
+  layer routed by its router and balanced by Quantile Balancing (no hash
+  routing); DSpark says only "MoE layers with mHC".
+- Each target layer's hidden state: its 4 output streams summed, as the
+  model's last layer is read.
+- What each place sees: the whole block both ways (DFlash), and the
+  context tokens within 128 positions of it, so the window is each place's
+  own.
+- The mask vector: learned, starting from a normal draw at the embedding's
+  scale. The final RMSNorm before the head: the drafter's own.
+- Starting values: `W2` at zero, so the Markov head starts as nothing; the
+  confidence projection has a bias.
+- The drafts' distribution: the writer's temperature and top `k` applied to
+  the drafter's scores, so it follows what the model samples.
+- Calibration (maintainer's decision, 2026-10-17): on real outcomes. On
+  the held-out prompts, the drafter drafts for the model, every draft
+  verified, its temperatures at 1, and each round records each draft's
+  confidence and whether the model kept it (a draft after a rejected one
+  counts as not kept). Each position's temperature is chosen among 200
+  values evenly spaced in log from 0.05 to 20 to lower the expected
+  calibration error over 15 equal-width bins on those outcomes, position
+  by position (Sequential Temperature Scaling). The same rounds measure
+  how many drafts the model keeps, recorded in the drafter's
+  provenance.
+- The scheduler: DSpark's production server schedules from the confidences
+  of two steps before and drops the early stop, for its zero-overhead
+  scheduling, which WPT does not have; WPT runs the lossless Algorithm 1 as
+  published. WPT's batch reads every row as wide as its widest, so a pass's
+  cost follows its width alone: widths are admitted from the narrowest,
+  each with every row's draft at that place, instead of drafts one by one
+  (a draft inside a width already paid for costs nothing). The time
+  table holds, for each width, the fastest of 3 passes through a cache
+  that has read 256 tokens, measured once per run for one row.
+- A row whose pending tokens are more than its anchor (a tool result)
+  first has them read in a pass of their own, so the drafter's context
+  reaches its anchor.
+- Training values DSpark does not give come from DFlash: AdamW at 6e-4,
+  gradients clipped at 1, a cosine schedule after a 4% warm-up, 512 anchors
+  per answer redrawn each epoch; DSpark's 10 epochs; weight decay 0, 8
+  answers per update, 256 prompts of at most 64 tokens each drawn from the
+  training documents by a seeded reservoir, answers of at most 256 tokens
+  written at temperature 1 without top `k`, and 10% of the prompts held
+  out (WPT's).
+
+Conflicts with DeepSeek-V4's published values: none; the drafter replaces
+V4's MTP-1 for drafting, as DSpark replaced it in V4's production. A cost
+of the scheduler: it follows this machine's measured times, so a seeded
+generator may draw other tokens from one run to the next (never another
+distribution), unless the run replays the times an earlier one recorded.
+Post-training attempts are written without a drafter, so they never
+depend on the times.
 
 ## Training
 
@@ -491,6 +771,8 @@ and the repository:
 - training: the stages (each its window length, steps and batch, in
   order; the model's context is the last one's), seed, learning rate and
   schedule points, Muon and AdamW settings, the MTP loss weights;
+- the drafter (`drafter`): its shape and how it is trained ("The
+  drafter"; an empty section keeps every default);
 - the post-training steps to run after pre-training.
 
 Settings that change the result come only from the recipe. Command-line
@@ -508,7 +790,16 @@ shape 4 since the same day: the model's `block_size` and the training's
 `steps` and `batch_size` became the training's `stages`, each stage with
 its own window length, steps and batch (training.md, "Stages"), and
 `wpt-dataset migrate` turns a shape 3 recipe into one stage of its window
-length, steps and batch.
+length, steps and batch. They are shape 5 since the same day
+(maintainer's decision, 2026-10-17): the `drafter` section, after
+`training`, which `wpt-dataset migrate` adds to a shape 4 recipe with the
+drafter's training values every recipe states (maintainer's decision,
+2026-10-18): 256 prompts of at most 64 tokens, answers of at most 256
+tokens, 10 epochs, learning rate 6e-4, 10% held out, 512 anchors, 8
+answers per update, seed 0. The three recipes hold exactly these values;
+the settings a section leaves out (the drafter's shape, `weight_decay`,
+`warm_up`, `clip`, `temperature`, `top_k`, `ece_bins`) keep their
+defaults.
 
 A new recipe's name is an adjective and an animal drawn by
 `uv run scripts/recipe_name.py`, among about 11.5 million names, so the
@@ -561,7 +852,10 @@ tokens and trained by DeepSeek with a dense stage first; WPT trains them
 sparse from the first step, at 32K tokens and fewer, which no paper has
 measured. No WPT model has yet trained beyond 32K tokens: the stages to
 1M, the segments and the slices are measured only in tests and in single
-steps on random tokens (training.md, "Long windows"). YaRN's values and the indexer's FP4 were set by DeepSeek for
+steps on random tokens (training.md, "Long windows"). The drafter's
+production values were set for V4-Flash and V4-Pro; WPT scales its Markov
+head with the width ("The drafter"), and no drafter has yet been measured
+on a real WPT run. YaRN's values and the indexer's FP4 were set by DeepSeek for
 its sizes and contexts; the indexer scaled down in proportion to the width
 is WPT's choice. The memory of both 32K recipes is measured on one window
 of random tokens (training.md), not in a real run. The details
@@ -585,6 +879,8 @@ marked as such above.
 - [mHC: Manifold-Constrained Hyper-Connections](https://arxiv.org/abs/2512.24880)
 - [Moonlight: Muon at scale](https://arxiv.org/abs/2502.16982)
 - [DeepSeek LLM: scaling laws](https://arxiv.org/abs/2401.02954)
+- [DSpark: confidence-scheduled speculative decoding](https://arxiv.org/abs/2607.05147)
+- [DFlash: block diffusion for flash speculative decoding](https://arxiv.org/abs/2602.06036)
 
 [kimi-linear]: https://arxiv.org/abs/2510.26692
 [k3]: https://arxiv.org/abs/2607.24653
@@ -598,3 +894,5 @@ marked as such above.
 [mhc]: https://arxiv.org/abs/2512.24880
 [moonlight]: https://arxiv.org/abs/2502.16982
 [llm]: https://arxiv.org/abs/2401.02954
+[dspark]: https://arxiv.org/abs/2607.05147
+[dflash]: https://arxiv.org/abs/2602.06036

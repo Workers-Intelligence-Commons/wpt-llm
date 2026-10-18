@@ -14,6 +14,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from .carry import Tail
 from .layers import CONV_KERNEL, EPS, ShortConv
 
 # odd constants below 2^32, one per hash head (WPT's own): with table sizes
@@ -60,17 +61,15 @@ class Engram(nn.Module):
         self.value = nn.Linear(width, D, bias=False)                                           # W_V, shared
         self.keys = nn.ModuleList(nn.Linear(width, D, bias=False) for _ in range(streams))     # W_K per stream
         self.hidden_norm, self.key_norm, self.value_norm = (nn.RMSNorm(D, eps=EPS) for _ in range(3))
-        self.conv = ShortConv(D, kernel=CONV_KERNEL, dilation=self.order)
+        self.conv = ShortConv(D, kernel=CONV_KERNEL, dilation=self.order, streams=streams)
         nn.init.zeros_(self.conv.conv.weight)  # the module starts as nothing
 
-    def lookup(self, canonical, earlier=None):
+    def lookup(self, canonical, earlier):
         """(B, T) canonical ids -> e_t (B, T, tables * row width). earlier:
         the order - 1 ids before them (B, order - 1), the padding id where
-        the text has not started; all padding when None."""
+        the text has not started."""
         T, rows, table = canonical.shape[1], [], 0
         reach = self.order - 1
-        if earlier is None:
-            earlier = torch.full_like(canonical[:, :reach], self.pad)
         known = torch.cat([earlier, canonical], 1)
         for n in range(2, self.order + 1):
             gram = [known[:, reach - back:reach - back + T] for back in range(n - 1, -1, -1)]
@@ -82,14 +81,16 @@ class Engram(nn.Module):
                 table += 1
         return torch.cat(rows, -1)
 
+    def passes_on(self):
+        """Its last order - 1 canonical ids (the pad id before the text);
+        its convolution passes on each stream's last inputs (layers.ShortConv)."""
+        return {"ids": Tail(self.order - 1, lambda empty: empty.fill_(self.pad))}
+
     def forward(self, streams, canonical, sequence):
         """streams (B, T, n, D) -> streams with each one's Y added. sequence:
-        where these tokens sit in the window (sequence.py), which gives the
-        earlier ids and convolution inputs."""
-        reach = self.order - 1
-        earlier = sequence.before(self, "ids", canonical, reach)
-        before_text = torch.arange(sequence.offset - reach, sequence.offset, device=canonical.device) < 0
-        e = self.lookup(canonical, earlier.masked_fill(before_text, self.pad))
+        where these tokens sit (sequence.py), which gives the earlier ids and
+        convolution inputs."""
+        e = self.lookup(canonical, sequence.before(self, "ids", canonical))
         value = self.value(e)
         scale = streams.shape[-1] ** -0.5
         added = []
@@ -97,5 +98,5 @@ class Engram(nn.Module):
             a = torch.sigmoid((self.hidden_norm(streams[:, :, s]) * self.key_norm(key(e))).sum(-1, keepdim=True) * scale)
             V = a * value
             normed = self.value_norm(V)
-            added.append(F.silu(self.conv(normed, sequence.before(self, f"conv {s}", normed, self.conv.reach))) + V)
+            added.append(F.silu(self.conv(normed, sequence.before(self.conv, f"inputs {s}", normed))) + V)
         return streams + torch.stack(added, 2)

@@ -2,15 +2,19 @@
 and `token-efficiency` steps share (docs/post-training.md, "The grpo
 step").
 
-    prepare(context, tag)      the tasks tagged `tag`, their built images and the context size,
-                               or Unready when the step cannot start
-    frozen_routers(model)      the routed expert layers' routers, unchanged while it lasts
-    written(attempt)           how many tokens the model wrote in an attempt
-    Learner(...).play(task)    one attempt in a fresh container, its routes (R3) and its score
-    Learner(...).attempt(...)  play, and keep the attempt as a line of the step's attempts file
-    Learner(...).train(...)    rounds of groups of attempts: advantage = reward minus the group
-                               mean, the loss over the tokens the model wrote, one update per
-                               TASKS_PER_UPDATE tasks; drops, skips and failures as grpo says
+    prepare(context, tag)          the tasks tagged `tag` and their built images, or Unready when
+                                   the step cannot start
+    frozen_routers(model)          the routed expert layers' routers, unchanged while it lasts
+    written(attempt)               how many tokens the model wrote in an attempt
+    Learner(...).play(task, n, k)  n attempts, each in a fresh container, written together in one
+                                   batch from one reading of the task's opening (the model's
+                                   generation cache), by the model alone (no drafter); then each
+                                   one's routes (R3) and score, handed to k as soon as it is scored
+    Learner(...).attempts(...)     play, and keep each attempt as a line of the step's attempts
+                                   file as soon as it is scored
+    Learner(...).train(...)        rounds of groups of attempts: advantage = reward minus the group
+                                   mean, the loss over the tokens the model wrote, one update per
+                                   TASKS_PER_UPDATE tasks; drops, skips and failures as grpo says
 
 Each step says what an attempt's reward is: grpo uses the check's score
 as it is, token-efficiency its own rule on the score and the attempt's
@@ -38,12 +42,11 @@ import torch.nn.functional as F
 import wpt_agent
 from wpt_agent import images
 from wpt_dataset.repo import Repo
-from wpt_inference import sample_tokens
+from wpt_inference import Writer
 from wpt_model import Routes
 from wpt_model.experts import Experts
 from wpt_posttrain import Outcome
 from wpt_telemetry import Telemetry
-from wpt_tokenizer import chat
 
 # the lines already in each attempts file, by (record folder, file name): a
 # recipe that runs a step twice adds to the same file, and its lines go on counting
@@ -66,28 +69,24 @@ class Settings:
 
 
 class Unready(Exception):
-    """The step cannot start: no task is tagged, a task's instructions fill
-    the model's context, or an image is not built. Nothing has changed."""
+    """The step cannot start: no task is tagged, or an image is not built.
+    Nothing has changed."""
 
 
 def prepare(context, tag=None):
     """(tasks tagged `tag`, by default the running step's name, {image name:
-    built image}, the most tokens an attempt may hold), or Unready."""
+    built image}), or Unready. An attempt has no context limit: the model
+    reads it through its generation cache, past block_size, until the
+    task's max_tokens."""
     tasks = context.tasks(tag)
     if not tasks:
         raise Unready(f"no tasks: no admitted source has task files tagged {tag or context.step}")
-    limit = context.model.config.block_size + 1
-    for task in tasks:
-        opening = len(chat.prompt(context.tokenizer, wpt_agent.opening(task)))
-        if opening >= limit:
-            raise Unready(f"{task.id}: its instructions and the tools take {opening} tokens, as much as "
-                          f"the model's context ({limit} with the first token)")
     try:
         root = Repo.find().root
         built = {name: images.built(root, name) for name in sorted({task.image for task in tasks})}
     except wpt_agent.ImageError as error:
         raise Unready(str(error)) from None
-    return tasks, built, limit
+    return tasks, built
 
 
 @contextmanager
@@ -113,59 +112,97 @@ class Learner:
     """One step's attempts and updates on one model. Sampling draws from a
     generator seeded with settings.seed when the learner is made, so every
     attempt it plays, before and during train, comes from one sequence.
-    attempt() keeps each attempt in telemetry's record, as a line of
+    The model alone writes the attempts, never a drafter: the tokens drawn
+    then depend on the seed alone, never on how fast this machine's passes
+    are. attempts() keeps each attempt in telemetry's record, as a line of
     `<name>-attempts.jsonl`."""
 
-    def __init__(self, name, model, tokenizer, device, built, limit, settings, telemetry=None):
+    def __init__(self, name, model, tokenizer, device, built, settings, telemetry=None):
         self.name, self.model, self.tokenizer, self.device = name, model, tokenizer, device
-        self.built, self.limit, self.settings = built, limit, settings
+        self.built, self.settings = built, settings
         self.sampling = torch.Generator(device=device).manual_seed(settings.seed)
         self.telemetry = telemetry or Telemetry.off()
         self.file = f"{name}-attempts.jsonl"
 
-    def play(self, task):
-        """(attempt, its routes, score) of one attempt in a fresh container;
-        raises wpt_agent.SandboxError when Docker failed."""
-        routes = Routes()
-        recording = _Recording(self.model, routes)
+    def play(self, task, count, keep):
+        """count attempts at the task, each in a fresh container, written
+        together; then, attempt by attempt in order, its score and its
+        container's removal, and at once keep(index, outcome), index from
+        1, outcome (attempt, its routes, score) or the wpt_agent.SandboxError
+        that dropped it (Docker failed). Returns what keep returned, in
+        order."""
         settings = self.settings
-
-        def generate(ids, count):  # every call starts at the attempt's first token, as Routes needs
-            return sample_tokens(recording, ids, context_size=self.model.config.block_size, max_new_tokens=count,
-                                 temperature=settings.temperature, top_k=settings.top_k, generator=self.sampling)
-
         limits = wpt_agent.Limits(**task.container)  # the task format's sizes, raised by the task (wpt_dataset.tasks)
-        with wpt_agent.Sandbox(self.built[task.image], task.files, user=wpt_agent.AGENT, limits=limits) as sandbox:
-            attempt = wpt_agent.attempt(task, sandbox, self.tokenizer, generate, context=self.limit,
-                                        result_bytes=settings.result_bytes)
-            score, why = wpt_agent.score(sandbox, task.check, settings.check_seconds)
-        if score is None:
-            print(f"{self.name}: {task.id}: no score, counted as 0: {why}")
-        return attempt, routes, score or 0.0
-
-    def attempt(self, task, round_, group, index, reward=None) -> "Kept":
-        """Play one attempt and keep it as a line of self.file. round_ is
-        None for an attempt made before any round (token-efficiency's
-        reference), group and index say which group of the round (or which
-        task) and which attempt of it, from 1; reward(task, attempt, score)
-        is what the attempt is worth, None for one never trained on. A
-        dropped attempt (Docker failed) is kept too. RecordError when the
-        store refuses the line."""
-        with self.telemetry.span(f"{self.name}.attempt", task=task.id, round=round_, group=group,
-                                 attempt=index) as span:
+        outcomes, boxes, writers = {}, {}, []
+        for i in range(count):
             try:
-                attempt, routes, score = self.play(task)
+                boxes[i] = wpt_agent.Sandbox(self.built[task.image], task.files, user=wpt_agent.AGENT, limits=limits)
             except wpt_agent.SandboxError as error:
-                print(f"{self.name}: {task.id}: {'reference ' if round_ is None else ''}attempt dropped, "
-                      f"Docker failed: {error}")
-                kept = Kept(0, None, None, None, None, error)
-            else:
-                kept = Kept(0, attempt, routes, score, None if reward is None else reward(task, attempt, score), None)
-            kept.line = self._keep(task, round_, group, index, kept)
-            span.set(file=self.file, line=kept.line, dropped=kept.attempt is None,
-                     **({} if kept.attempt is None else {"ended": kept.attempt.ended, "score": kept.score,
-                                                         "reward": kept.reward, "written": written(kept.attempt)}))
+                outcomes[i] = error
+
+        def start(ids, rows, stops):  # the opening read once, every attempt's routes recorded (R3)
+            writers.append(Writer(self.model, ids, rows, temperature=settings.temperature, top_k=settings.top_k,
+                                  generator=self.sampling, stops=stops, routes=True))
+            return writers[-1]
+
+        kept = []
+        try:
+            rows = {i: row for row, i in enumerate(boxes)}
+            if boxes:
+                done = wpt_agent.attempts(task, list(boxes.values()), self.tokenizer, start,
+                                          result_bytes=settings.result_bytes)
+                outcomes.update(zip(boxes, done))
+            for i in range(count):
+                outcome, why = outcomes[i], None
+                if not isinstance(outcome, wpt_agent.SandboxError):
+                    try:
+                        score, why = wpt_agent.score(boxes[i], task.check, settings.check_seconds)
+                        outcome = outcome, writers[-1].routes[rows[i]], score or 0.0
+                    except wpt_agent.SandboxError as error:
+                        outcome = error
+                if i in boxes:
+                    try:
+                        boxes.pop(i).close()
+                    except wpt_agent.SandboxError as error:
+                        outcome = error
+                if why is not None and not isinstance(outcome, wpt_agent.SandboxError):
+                    print(f"{self.name}: {task.id}: no score, counted as 0: {why}")
+                kept.append(keep(i + 1, outcome))  # its line, before the next attempt is scored
+        finally:
+            for box in boxes.values():  # left open only when an error stops the attempts
+                try:
+                    box.close()
+                except wpt_agent.SandboxError:
+                    pass  # the error that stopped them goes on
         return kept
+
+    def attempts(self, task, round_, group, count, reward=None) -> list["Kept"]:
+        """Play count attempts at the task together and keep each as a line
+        of self.file, in order, as soon as it is scored. round_ is None for
+        attempts made before any round (token-efficiency's reference), group
+        says which group of the round (or which task), and each attempt is
+        numbered from 1; reward(task, attempt, score) is what an attempt is
+        worth, None for one never trained on. A dropped attempt (Docker
+        failed) is kept too. RecordError when the store refuses a line."""
+        def keep(index, outcome):
+            with self.telemetry.span(f"{self.name}.attempt", task=task.id, round=round_, group=group,
+                                     attempt=index) as span:
+                if isinstance(outcome, wpt_agent.SandboxError):
+                    print(f"{self.name}: {task.id}: {'reference ' if round_ is None else ''}attempt dropped, "
+                          f"Docker failed: {outcome}")
+                    one = Kept(0, None, None, None, None, outcome)
+                else:
+                    attempt, routes, score = outcome
+                    one = Kept(0, attempt, routes, score, None if reward is None else reward(task, attempt, score),
+                               None)
+                one.line = self._keep(task, round_, group, index, one)
+                span.set(file=self.file, line=one.line, dropped=one.attempt is None,
+                         **({} if one.attempt is None else {"ended": one.attempt.ended, "score": one.score,
+                                                            "reward": one.reward, "written": written(one.attempt)}))
+            return one
+
+        with self.telemetry.span(f"{self.name}.play", task=task.id, round=round_, group=group, attempts=count):
+            return self.play(task, count, keep)
 
     def _keep(self, task, round_, group, index, kept) -> int:
         """Add the attempt's line to self.file, its conversation with the
@@ -200,8 +237,7 @@ class Learner:
                 groups = []
                 for task in [tasks[i] for i in permutation[start:start + settings.tasks_per_update]]:
                     number += 1
-                    played = [self.attempt(task, round_, number, index, reward)
-                              for index in range(1, settings.group + 1)]
+                    played = self.attempts(task, round_, number, settings.group, reward)
                     lines += [kept.line for kept in played]
                     dropped += [kept.error for kept in played if kept.attempt is None]
                     group = [(kept.attempt, kept.routes, kept.reward) for kept in played if kept.attempt is not None]
@@ -247,7 +283,7 @@ class Learner:
 
 @dataclass
 class Kept:
-    """An attempt Learner.attempt played and kept: its line number in the
+    """An attempt Learner.attempts played and kept: its line number in the
     learner's file, then the attempt, its routes, score and reward, or the
     error that dropped it (the others None)."""
     line: int
@@ -256,17 +292,6 @@ class Kept:
     score: float | None
     reward: float | None
     error: Exception | None
-
-
-class _Recording(torch.nn.Module):
-    """The model, keeping the experts its routers choose in routes."""
-
-    def __init__(self, model, routes):
-        super().__init__()
-        self.model, self.routes = model, routes
-
-    def forward(self, idx):
-        return self.model(idx, record=self.routes)
 
 
 def update(model, optimizer, groups, device):

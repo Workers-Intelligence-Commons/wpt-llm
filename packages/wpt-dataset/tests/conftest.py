@@ -157,7 +157,8 @@ TRAINING = {"method": "adamw", "settings": {}, "stages": [{"block_size": 16, "st
 def write_model_recipe(repo, name, data):
     """A model recipe whose data part is data; its model and training parts
     are the smallest that train."""
-    return write_recipe(repo, "model", name, {"data": data, "model": MODEL, "training": TRAINING, "posttrain": []})
+    return write_recipe(repo, "model", name, {"data": data, "model": MODEL, "training": TRAINING,
+                                              "drafter": {}, "posttrain": []})
 
 
 def write_recipe(repo, kind, name, document):

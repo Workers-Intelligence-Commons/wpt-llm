@@ -95,6 +95,23 @@ def read_verified(store, shard) -> list:
     return rows
 
 
+def documents(store, shards):
+    """Yield (document id, source id, tokens) of every document in these
+    shards once, in shard order (a document the mixture repeats comes
+    once), each shard checked (read_verified) before its documents are
+    given; one shard is in memory at a time, and for a remote store its
+    local copy is released once read, as ShardStream does, so the disk
+    holds at most one shard."""
+    seen = set()
+    for shard in shards:
+        rows = read_verified(store, shard)
+        store.release(shard["object"])  # its rows are in memory now
+        for tokens, source, document, _, _ in rows:
+            if document not in seen:
+                seen.add(document)
+                yield document, source, tokens
+
+
 def token_file(store, shards) -> Path:
     """A local file holding the tokens of these shards' rows, in order, as
     little-endian uint32, for reading from disk on demand (np.memmap).

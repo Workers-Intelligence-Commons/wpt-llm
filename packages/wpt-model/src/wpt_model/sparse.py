@@ -252,9 +252,12 @@ def top_entries(q, w, keys, visible, k):
     """The indexer's choice: for each query, the indices of its k best
     entries among the first visible[t], -1 where fewer are visible. Equal
     scores (frequent: the indexer's values are FP4) go to the earliest
-    entries, so the choice does not depend on how many entries follow,
-    and a window in parts chooses as the whole window (sequence.py).
-    q: (B, T, n, c); w: (B, T, n); keys: (B, N, c); visible: (T,).
+    entries (_first_best), so the choice does not depend on how many
+    entries follow: a window in parts (sequence.py) and a generation
+    cache, whose table holds no entry past the text read, choose as the
+    whole window.
+    q: (B, T, n, c); w: (B, T, n); keys: (B, N, c); visible: (T,), or (B, T)
+    for rows at different places.
     Returns (B, T, min(k, N)). On a GPU with kernels, the FP8 indexer kernel
     computes the scores."""
     B, T, n, c = q.shape
@@ -262,6 +265,7 @@ def top_entries(q, w, keys, visible, k):
     chosen = torch.full((B, T, min(k, N)), -1, dtype=torch.long, device=q.device)
     if N == 0:
         return chosen
+    visible = visible.expand(B, T)
     kernel = kernels(q.device)
     with torch.autocast(q.device.type, enabled=False):
         q, w, keys = q.float(), w.float(), keys.float()
@@ -280,9 +284,9 @@ def top_entries(q, w, keys, visible, k):
             else:
                 scores = torch.einsum("brh,brhn->brn", w[:, part],
                                       torch.einsum("brhc,bnc->brhn", q[:, part], keys).relu_())
-            hidden = positions >= visible[part, None]  # (R, N): entries not complete before the query
+            hidden = positions >= visible[:, part, None]  # (B, R, N): entries not complete before the query
             best = _first_best(scores.masked_fill_(hidden, float("-inf")), chosen.shape[-1], earliest)
-            chosen[:, part] = best.masked_fill(best >= visible[part][None, :, None], -1)
+            chosen[:, part] = best.masked_fill(best >= visible[:, part, None], -1)
     return chosen
 
 
