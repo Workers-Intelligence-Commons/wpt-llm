@@ -44,20 +44,31 @@ def wpt():
     return WPT(CONFIG).eval()
 
 
-def test_rows_written_through_the_cache_get_the_tokens_the_whole_text_gives():
+def test_rows_written_through_the_cache_get_the_tokens_the_whole_text_gives(routing):
     # 3 attempts from one prompt, written together past block_size (16),
     # one of them reading a tool result midway: the same seed draws the
-    # same tokens as reading each row's whole text again for every token
+    # same tokens as reading each row's whole text again for every token.
+    # The cache's routes may differ from the whole text's at near ties only
+    # (maintainer's decision, 2026-10-18): a row's tokens are then the
+    # same up to the token drawn from the first position that went to other
+    # experts, and the same everywhere when no position did
     model = wpt()
 
-    def written(model):
-        writer = Writer(model, [0, 5, 7, 9], 3, temperature=1.0, top_k=None, generator=torch.Generator().manual_seed(3))
+    def written(model, **options):
+        writer = Writer(model, [0, 5, 7, 9], 3, temperature=1.0, top_k=None, generator=torch.Generator().manual_seed(3),
+                        **options)
         for step in range(60):
             inputs = {1: [11, 12, 13, 14, 15]} if step == 20 else {}
             writer.write(inputs, {0: 1, 1: 1, 2: 1} if step % 7 else {0: 1, 2: 1})
-        return writer.histories
+        return writer
 
-    assert written(model) == written(Uncached(model))
+    cached, whole = written(model, routes=True), written(Uncached(model))
+    for row, (history, history_whole) in enumerate(zip(cached.histories, whole.histories, strict=True)):
+        assert len(history) == len(history_whole)
+        differ = next((i for i, (a, b) in enumerate(zip(history, history_whole)) if a != b), None)
+        read = len(history) - 1 if differ is None else differ  # the tokens read before the first one that differs
+        first = routing.first_difference(model, history[:read], cached.routes[row])
+        assert differ is None or first is not None, "a token differs although every route is the whole text's"
 
 
 class Uniform:
@@ -179,7 +190,11 @@ def test_the_dspark_drafter_reads_what_the_whole_text_gives(prompt):
 
 def test_a_trained_dspark_drafter_is_kept_more_often_than_a_uniform_one():
     # a short training on answers the model wrote itself (DSpark's losses)
-    # makes its drafts kept more often than drafts drawn uniformly
+    # makes its drafts kept more often than drafts drawn uniformly (0.473):
+    # 0.492 with avx512 and 0.516 with avx2 on 2 threads, 0.522 on GitHub's
+    # runner, and the value also moves with the tests run before it in the
+    # same process; so the test asks for 0.01 (maintainer's decision,
+    # 2026-10-18)
     model, prompt = wpt(), [0, 5, 7, 9]
     teacher = Writer(model, prompt, 8, temperature=1.0, top_k=None, generator=torch.Generator().manual_seed(1))
     for _ in range(48):
@@ -208,7 +223,7 @@ def test_a_trained_dspark_drafter_is_kept_more_often_than_a_uniform_one():
             writer.write({}, {row: DRAFT + 1 for row in range(32)})
         return writer.accepted / writer.verified
 
-    assert kept(drafter) > kept(Uniform()) + 0.05
+    assert kept(drafter) > kept(Uniform()) + 0.01
 
 
 def test_the_scheduler_verifies_drafts_while_they_pay_for_their_pass():

@@ -262,6 +262,69 @@ GiB by that growth, an estimate), the RTX 5080, `split` on GPUs (NCCL,
 rented NVIDIA machines, DeepSeek's TileLang kernels), and real runs on
 real data; `split` was only run on the CPU, by the tests.
 
+### Comparing routing in tests
+
+Two passes over the same tokens that compute in another order (whole or
+in segments, other CPU instructions, other thread counts) give router
+scores that differ by rounding: on x86 CPUs, whole and in segments, up to
+6e-8 at the first routed layer and 7.6e-6 at the last, the FP32 rounding
+of every earlier layer added up. A choice whose two deciding values lie
+within that rounding of each other can then go either way: a token whose
+k-th and (k+1)-th biased scores nearly tie can go to other experts, and a
+token whose `s_j - alpha` lies on the edge between two of balancing's
+4096 bins (model.md, "Experts") can be counted in the next bin. Every
+token's (k+1)-th expert has an offset of 0, on an edge, by construction.
+
+So a test that compares routing or balancing counts between two such
+passes keeps them exact for every token whose choice is clear, and lets
+only near ties differ (maintainer's decision, 2026-10-18). A token is near
+a tie when the two values that decide a choice are no farther apart than
+the two passes moved them. The bound on those moves is the one the test
+asserts: the scores each pass counted agree within ROUNDING, 2^-14 (about
+6.1e-5, the `routing` fixture in `conftest.py`). That score bound is what
+limits the differences to near ties (maintainer's decision, 2026-10-18).
+The other checks document it and do not enforce it: they test, for the
+scores at hand, that the experts differ only where the k-th and (k+1)-th
+biased scores lie within two such moves of each other (plus 4 units of FP32
+rounding, ARITHMETIC, for the comparison's own arithmetic), that each
+pass's counts are exactly the bins of the scores it counted, and that a
+count moves only where its `s_j - alpha` lies that close to a bin's edge,
+by one bin at most (`assert_routed_alike` in
+`packages/wpt-training/tests/test_parts.py`; split windows compare each
+process's counts with those of its tokens in the whole window, and the
+sum of the processes' counts with the whole window's: the processes'
+scores, put back in the window's order, are compared with the whole
+window's under the same bounds, so a sum differs from the whole window's
+counts only where a token's bin may differ; maintainer's decision,
+2026-10-18). A test of
+that comparison builds scores one unit of rounding apart, with an exact
+edge and a near tie, so the near-tie path runs the same on any processor.
+
+A test that reads text through the generation cache and compares the result
+with the whole text (`test_cache.py`, `test_sampling.py`) records the
+cache's routes, reads the text whole recording its own
+(`routing.first_difference`), and accepts a position whose routes differ
+only when the whole pass's k-th and (k+1)-th biased scores lie within two
+ROUNDING plus ARITHMETIC of each other (maintainer's decision, 2026-10-18).
+It then compares scores or tokens exactly, as it did, before the first
+position that differs, and in full when none does. Two passes that run the
+same operations on the same shapes, such as `--recompute`'s
+(`test_model.py`), give the same scores bit for bit, and their counts are
+compared exactly. The exact comparison of balancing counts in segments
+failed on GitHub's runners on 2026-10-18; the same failure shows on an
+x86 machine with `ATEN_CPU_CAPABILITY=avx512 OMP_NUM_THREADS=2` (or
+`avx2`), where one to six tokens' counts in a layer move to the next bin
+and no token goes to other experts.
+
+The drafter test (`test_sampling.py`) asks that a drafter trained for 40
+steps be kept more often than a uniform one by 0.01 of the drafts. The
+uniform drafter is kept at 0.473; the trained one at 0.492 with
+`ATEN_CPU_CAPABILITY=avx512` and 0.516 with `avx2` on 2 threads, and 0.522
+on GitHub's runner, when the whole file runs, and the value also moves with
+the tests run before it in the same process. The margin was 0.05 and is
+lowered because the processor's rounding moves the trained drafter's
+choices (maintainer's decision, 2026-10-18).
+
 ### Strategies: how the hardware is used
 
 `--strategy` names a built-in or a Python file:

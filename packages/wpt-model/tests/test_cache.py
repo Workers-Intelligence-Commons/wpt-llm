@@ -108,14 +108,17 @@ def model():
     return randomized(WPT(CONFIG)).eval()
 
 
-def test_the_model_reads_through_its_cache_as_through_the_whole_text_past_block_size():
+def test_the_model_reads_through_its_cache_as_through_the_whole_text_past_block_size(routing):
     # with the multi-token prediction block's window, which reads the
     # (hidden state, next token) pairs as they come. On a GPU, BF16's
     # rounding sends some tokens of this random model to other experts, so
-    # the whole model is compared on the CPU only
+    # the whole model is compared on the CPU only. On the CPU, the cache's
+    # routes differ from the whole text's at near ties only (maintainer's
+    # decision, 2026-10-18), and a row's scores are compared before the
+    # first position that went to other experts
     wpt = model()
     ids = torch.randint(50, (2, 301), generator=torch.Generator().manual_seed(0))
-    cache = wpt.new_cache(2)
+    cache = wpt.new_cache(2, routes=True)
     with torch.no_grad():
         scores, ahead = wpt(ids[:, :300], next_tokens=ids[:, 1:])
         got, got_ahead, start = [], [], 0
@@ -124,7 +127,11 @@ def test_the_model_reads_through_its_cache_as_through_the_whole_text_past_block_
             got.append(piece)
             got_ahead.append(wpt.extend_mtp(hidden, ids[:, start + 1:start + size + 1], cache))
             start += size
-    assert close(torch.cat(got, 1), scores) and close(torch.cat(got_ahead, 1), ahead)
+    got, got_ahead = torch.cat(got, 1), torch.cat(got_ahead, 1)
+    for row in range(2):
+        first = routing.first_difference(wpt, ids[row, :300].tolist(), cache.routes[row])
+        n = 300 if first is None else first
+        assert close(got[row, :n], scores[row, :n]) and close(got_ahead[row, :n], ahead[row, :n])
     assert cache.lengths.tolist() == [300, 300] and cache.mtp.lengths.tolist() == [300, 300]
 
 
@@ -155,15 +162,17 @@ def by_itself(wpt, ids):
         return wpt(torch.tensor([ids]))[0]
 
 
-def test_a_shared_prompt_and_rows_read_together_give_each_row_s_own_scores():
+def test_a_shared_prompt_and_rows_read_together_give_each_row_s_own_scores(routing):
     # one prompt read once and copied into 3 rows; then the rows go on with
     # their own tokens, in one batch, each its own number per call (the
-    # rest of its row padding), so they end up at different places
+    # rest of its row padding), so they end up at different places; each
+    # row's scores are compared before the first position whose routes
+    # differ from the whole text's (at near ties only)
     wpt = model()
     generator = torch.Generator().manual_seed(0)
     prompt = torch.randint(50, (140,), generator=generator).tolist()
     texts = [prompt + torch.randint(50, (n,), generator=generator).tolist() for n in (170, 10, 61)]
-    shared = wpt.new_cache(1)
+    shared = wpt.new_cache(1, routes=True)
     with torch.no_grad():
         wpt.extend(torch.tensor([prompt]), shared)
         cache = shared.select([0, 0, 0])
@@ -180,15 +189,19 @@ def test_a_shared_prompt_and_rows_read_together_give_each_row_s_own_scores():
                 place[row] += count
     assert place == [len(text) for text in texts]
     for row, text in enumerate(texts):
-        assert close(torch.cat(got[row]), by_itself(wpt, text)[len(prompt):])
+        first = routing.first_difference(wpt, text, cache.routes[row])
+        n = len(text) if first is None else first
+        assert n > len(prompt) and close(torch.cat(got[row])[:n - len(prompt)], by_itself(wpt, text)[len(prompt):n])
     assert shared.lengths.tolist() == [len(prompt)]  # the copies changed apart from it
 
 
-def test_undoing_rejected_draft_tokens_leaves_the_cache_as_if_only_the_kept_ones_were_read():
+def test_undoing_rejected_draft_tokens_leaves_the_cache_as_if_only_the_kept_ones_were_read(routing):
     # each round, every row reads 4 draft tokens and keeps a different
     # number of them; the kept ones are the text's own, so every score
     # (each round's reads what the undone rounds left) must be the text's
-    # read whole, and the routes recorded those of the kept tokens alone
+    # read whole, and the routes recorded those of the kept tokens alone;
+    # the scores are compared before the first position whose routes differ
+    # from the whole text's (at near ties only)
     wpt = model()
     generator = torch.Generator().manual_seed(0)
     texts = [torch.randint(50, (330,), generator=generator).tolist() for _ in range(2)]
@@ -208,9 +221,12 @@ def test_undoing_rejected_draft_tokens_leaves_the_cache_as_if_only_the_kept_ones
                 place[row] += kept[row]
         assert cache.lengths.tolist() == place
         for row in range(2):
-            assert close(torch.cat(got[row]), by_itself(wpt, texts[row][:place[row]])[120:])
+            whole = by_itself(wpt, texts[row][:place[row]])
+            first = routing.first_difference(wpt, texts[row][:place[row]], cache.routes[row])
+            n = place[row] if first is None else first
+            assert n > 120 and close(torch.cat(got[row])[:n - 120], whole[120:n])
             routed = wpt(torch.tensor([texts[row][:place[row]]]), replay=cache.routes[row])
-            assert close(routed[0], by_itself(wpt, texts[row][:place[row]]))
+            assert close(routed[0, :n], whole[:n])
             assert all(len(chosen) == place[row] for chosen in cache.routes[row].chosen.values())
 
 
