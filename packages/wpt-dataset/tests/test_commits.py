@@ -6,6 +6,7 @@ import subprocess
 import pytest
 
 from wpt_dataset.commits import check_commits
+from wpt_dataset.repo import Repo
 
 
 @pytest.fixture
@@ -33,14 +34,14 @@ def commit(kit, root, decision, *flags):
 def test_signed_and_signed_off_decisions_pass(kit, wpt_git):
     commit(kit, wpt_git, "admitted", "-s", "-S")
     commit(kit, wpt_git, "retired", "-s", "-S")
-    assert check_commits(wpt_git, "HEAD") == []
+    assert check_commits(Repo(wpt_git), "HEAD") == []
 
 
 def test_unsigned_decision_and_missing_sign_off_are_reported(kit, wpt_git):
     commit(kit, wpt_git, "admitted", "-s", "-S")
     commit(kit, wpt_git, "refused", "-s")          # signed off, not signed
     commit(kit, wpt_git, "admitted", "-S")         # signed, not signed off
-    problems = check_commits(wpt_git, "HEAD~2..HEAD")
+    problems = check_commits(Repo(wpt_git), "HEAD~2..HEAD")
     assert len(problems) == 2
     assert "is not signed by an allowed key" in problems[0]
     assert "no 'Signed-off-by: T <t@example.org>' line" in problems[1]
@@ -55,7 +56,7 @@ def test_a_key_can_only_be_added_by_an_allowed_key(kit, wpt_git, tmp_path):
     kit.run("git", "add", "-A", cwd=wpt_git)
     # signed with the new key itself, which the list does not hold yet
     kit.run("git", "-c", f"user.signingkey={other}", "commit", "-q", "-s", "-S", "-m", "add my key", cwd=wpt_git)
-    assert check_commits(wpt_git, "HEAD~1..HEAD") == [
+    assert check_commits(Repo(wpt_git), "HEAD~1..HEAD") == [
         f"{kit.run('git', 'rev-parse', 'HEAD', cwd=wpt_git).decode()[:12]}: changes data/allowed-signers "
         "but is not signed by an allowed key"]
 
@@ -75,4 +76,4 @@ def test_gpg_signed_decisions_pass_with_an_allowed_gpg_key(kit, wpt_git, tmp_pat
     kit.run("git", "add", "-A", cwd=wpt_git)
     kit.run("git", "-c", "gpg.format=openpgp", "-c", f"gpg.program={shutil.which('gpg')}", "-c", "user.signingkey=t@example.org", "commit", "-q", "-s", "-S",
             "-m", "gpg decision", cwd=wpt_git, env={"GNUPGHOME": str(home)})
-    assert check_commits(wpt_git, "HEAD~1..HEAD") == []
+    assert check_commits(Repo(wpt_git), "HEAD~1..HEAD") == []

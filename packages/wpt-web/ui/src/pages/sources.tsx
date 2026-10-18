@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
-import { get, put } from "../api";
+import { get, part, put } from "../api";
+import { Problems } from "../parts";
 import { SchemaForm, type Schema } from "../schema-form";
+import { Files } from "./files";
 import type { Page } from "./index";
 
 type Summary = {
   id: string;
   address: string | null;
   schema: number | null;
+  type: string | null;
   decision: string | null;
   reason: string | null;
   licenses: string[];
@@ -15,17 +18,6 @@ type Summary = {
 type Detail = { id: string; document: Record<string, unknown> | null; version: string; problems: string[] };
 
 const DECISIONS = ["refused", "admitted", "retired", "all"];
-
-function Problems({ problems }: { problems: string[] }) {
-  if (problems.length === 0) return null;
-  return (
-    <ul className="problems">
-      {problems.map((p) => (
-        <li key={p}>{p}</li>
-      ))}
-    </ul>
-  );
-}
 
 function List() {
   const [rows, setRows] = useState<Summary[] | null>(null);
@@ -50,6 +42,7 @@ function List() {
   return (
     <section>
       <h1>Sources</h1>
+      <p><a href="#/new-source">New source</a>: write or paste your own text.</p>
       <Problems problems={problems} />
       <div className="filters">
         <label>
@@ -129,6 +122,11 @@ function Editor({ id }: { id: string }) {
     <section>
       <p><a href="#/sources">All sources</a></p>
       <h1>{id}</h1>
+      <p className="filters">
+        <a href={`#/sources/${part(id)}/files`}>Files</a>
+        <a href={`#/conversations/${part(id)}`}>Conversations</a>
+        <a href={`#/tasks/${part(id)}`}>Tasks</a>
+      </p>
       <p className="links">
         {[draft?.address as string | undefined, ...mirrors.map((m) => m.address)]
           .filter((a): a is string => !!a && /^https?:/.test(a))
@@ -155,6 +153,7 @@ function Editor({ id }: { id: string }) {
 }
 
 function SourcesPage({ rest }: { rest: string[] }) {
+  if (rest[0] && rest[1] === "files") return <Files id={rest[0]} path={rest[2]} />;
   return rest[0] ? <Editor id={rest[0]} /> : <List />;
 }
 

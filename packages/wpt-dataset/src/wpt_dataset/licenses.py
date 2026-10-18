@@ -13,8 +13,6 @@ apply at once with AND ("MIT AND Apache-2.0"): it is allowed when every
 one of them is. AND binds before OR, as in SPDX; parentheses are not read.
 """
 
-from pathlib import Path
-
 from .errors import RuleViolation
 
 ALLOWED = frozenset({
@@ -49,7 +47,7 @@ def _allowed(term: str) -> bool:
     return license_id in ALLOWED and (not exception or exception in EXCEPTIONS)
 
 
-def check_license(expression: str, source_folder: Path):
+def check_license(expression: str, source_id: str):
     if not any(all(_allowed(term) for term in alternative.split(" AND ")) for alternative in expression.split(" OR ")):
         what = "license" if all(word not in expression for word in (" OR ", " AND ", " WITH ")) else "license expression"
-        raise RuleViolation(f"{source_folder.name}: {what} {expression} is not on the allowed list")
+        raise RuleViolation(f"{source_id}: {what} {expression} is not on the allowed list")

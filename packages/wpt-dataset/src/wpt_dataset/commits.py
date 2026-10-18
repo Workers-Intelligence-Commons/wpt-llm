@@ -9,10 +9,11 @@ A commit that changes any source's `decision`, or the lists of keys allowed
 to sign decisions (data/allowed-signers for SSH keys, data/allowed-gpg-keys.asc
 for GPG keys), must be signed by a key from those lists as they stood before
 the commit; the very first commit is checked against its own lists. A
-Signed-off-by line alone proves nothing: anyone can type it.
+Signed-off-by line alone proves nothing: anyone can type it. The lists
+and the decisions are read from the commits through the service layer
+(Repo.signer_lists_at, Repo.signature_reasons).
 """
 
-import json
 import os
 import subprocess
 import tempfile
@@ -20,17 +21,11 @@ from pathlib import Path
 
 from wpt_utils.programs import program
 
-SSH_SIGNERS = "data/allowed-signers"
-GPG_KEYS = "data/allowed-gpg-keys.asc"
+from .repo import Repo
 
 
 def _git(root, *args, check=True, env=None):
     return subprocess.run(["git", "-C", str(root), *args], capture_output=True, check=check, env=env)
-
-
-def _show(root, commit, path) -> bytes | None:
-    result = _git(root, "show", f"{commit}:{path}", check=False)
-    return result.stdout if result.returncode == 0 else None
 
 
 def _changed_paths(root, base, commit) -> list[str]:
@@ -41,22 +36,11 @@ def _changed_paths(root, base, commit) -> list[str]:
     return [p.decode() for p in out.split(b"\0") if p]
 
 
-def _decision(root, commit, path):
-    if commit is None:
-        return None
-    data = _show(root, commit, path)
-    if data is None:
-        return None
-    try:
-        return json.loads(data).get("decision")
-    except (json.JSONDecodeError, AttributeError):
-        return "unreadable"
-
-
-def _signed_by_allowed(root, commit, lists_at) -> bool:
+def _signed_by_allowed(repo: Repo, commit, lists_at) -> bool:
+    root = repo.root
     raw = _git(root, "cat-file", "commit", commit).stdout
+    signers, keys = repo.signer_lists_at(lists_at)
     if b"-----BEGIN SSH SIGNATURE-----" in raw:
-        signers = _show(root, lists_at, SSH_SIGNERS)
         if not signers:
             return False
         with tempfile.TemporaryDirectory() as tmp:
@@ -66,7 +50,6 @@ def _signed_by_allowed(root, commit, lists_at) -> bool:
                           "verify-commit", commit, check=False)
         return result.returncode == 0
     if b"-----BEGIN PGP SIGNATURE-----" in raw:
-        keys = _show(root, lists_at, GPG_KEYS)
         if not keys:
             return False
         with tempfile.TemporaryDirectory() as home:
@@ -78,9 +61,9 @@ def _signed_by_allowed(root, commit, lists_at) -> bool:
     return False
 
 
-def check_commits(root, revision_range: str) -> list[str]:
+def check_commits(repo: Repo, revision_range: str) -> list[str]:
     """One line per problem in the commits of revision_range (e.g. origin/main..HEAD)."""
-    problems = []
+    root, problems = repo.root, []
     commits = _git(root, "rev-list", "--reverse", "--parents", revision_range).stdout.decode().split("\n")
     for line in filter(None, commits):
         commit, *parents = line.split()
@@ -93,11 +76,7 @@ def check_commits(root, revision_range: str) -> list[str]:
         if f"Signed-off-by: {author}" not in message.splitlines():
             problems.append(f"{short}: no 'Signed-off-by: {author}' line (commit with `git commit -s`)")
         changed = _changed_paths(root, base, commit)
-        reasons = [p for p in changed if p in (SSH_SIGNERS, GPG_KEYS)]
-        for path in changed:
-            if path.startswith("data/sources/") and path.endswith("/source.json"):
-                if _decision(root, base, path) != _decision(root, commit, path):
-                    reasons.append(f"decision in {path}")
-        if reasons and not _signed_by_allowed(root, commit, base or commit):
+        reasons = repo.signature_reasons(base, commit, changed)
+        if reasons and not _signed_by_allowed(repo, commit, base or commit):
             problems.append(f"{short}: changes {', '.join(reasons)} but is not signed by an allowed key")
     return problems

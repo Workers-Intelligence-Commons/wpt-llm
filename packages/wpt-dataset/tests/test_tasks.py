@@ -17,8 +17,8 @@ FORMATS = [{"format": "task", "paths": ["tasks/**"]}, {"format": "text", "paths"
 
 
 def add(kit, repo, store, folder, files, tags):
-    (repo.data / "images" / "tiny").mkdir(parents=True, exist_ok=True)
-    (repo.data / "images" / "tiny" / "Dockerfile").write_text("ARG BASE=debian:trixie-slim\nFROM ${BASE}\n")
+    (repo.root / "data" / "images" / "tiny").mkdir(parents=True, exist_ok=True)
+    (repo.root / "data" / "images" / "tiny" / "Dockerfile").write_text("ARG BASE=debian:trixie-slim\nFROM ${BASE}\n")
     address, commit = kit.git_project(folder, files=files, executable={p for p in files if p.endswith("/check")},
                                       symlinks={})
     sid = kit.add_source(repo, store, "example", folder.name, {"type": "git", "address": address, "revision": commit,
@@ -83,6 +83,6 @@ def test_a_changed_image_folder_checks_every_source_with_tasks(kit, repo, store,
     assert main(["--root", str(repo.root), "check", "--changed", "HEAD"]) == 0  # nothing changed, nothing fetched
     assert "entries" not in capsys.readouterr().out
 
-    shutil.rmtree(repo.data / "images" / "tiny")
+    shutil.rmtree(repo.root / "data" / "images" / "tiny")
     assert main(["--root", str(repo.root), "check", "--changed", "HEAD"]) == 1
     assert "tasks/a/task.json: no image 'tiny': data/images/tiny/Dockerfile does not exist" in capsys.readouterr().err

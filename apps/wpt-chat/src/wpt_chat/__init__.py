@@ -36,6 +36,9 @@ from wpt_store import StoreError, store_from_settings
 from wpt_tokenizer import Tokenizer, chat
 from wpt_utils.device import describe, select_device
 
+# the current shape of a conversation, wpt-chat's own constant (maintainer's decision, 2026-10-18):
+# wpt_dataset.repo.CURRENT_SCHEMA["conversation"], which a test keeps equal
+CONVERSATION_SHAPE = 3
 MAX_NEW_TOKENS = 200
 
 
@@ -120,7 +123,7 @@ def main(argv=None):
     print(f"model loaded ({tokenizer.vocab_size} tokens, with its drafter) on {describe(device)}. {what}, "
           "empty line quits.")
     print(licenses_line(args.model))
-    conversation = {"schema": 2, "messages": []}  # docs/chat-format.md
+    conversation = {"schema": CONVERSATION_SHAPE, "messages": []}  # docs/chat-format.md
     while args.chat:
         text = input("you> ")
         if not text:

@@ -2,7 +2,9 @@
 
 A file in the `chat` format is JSON Lines: one conversation per line, each
 matching schemas/conversation.schema.json, and each tool_result answering a
-tool_call made earlier in the same conversation. A line in an earlier
+tool_call made earlier in the same conversation, and each model draft
+(a message's metadata.draft) says truly whether the person changed it. A
+line in an earlier
 shape is brought to the current one in memory (migrate.upgrade), since an
 upstream file cannot be rewritten. Such a file is never a
 pre-training document (markdown.py gives it no Markdown); a post-training
@@ -15,6 +17,7 @@ every path from a first message to a last one becomes a conversation (see
 from_tree).
 """
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -23,6 +26,57 @@ from .errors import InvalidFile
 from .migrate import upgrade
 from .repo import CURRENT_SCHEMA, Repo, validate
 from .sources import source_tree, tags_of
+
+
+def content_sha256(content: list) -> str:
+    """The sha256 of a message's content, as a model draft records it: its
+    JSON with sorted keys, no spaces, UTF-8, a whole number written as an
+    integer (2.0 as 2, as a browser writes it back; maintainer's decision,
+    2026-10-18)."""
+    return hashlib.sha256(json.dumps(_whole(content), sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+                          .encode("utf-8")).hexdigest()
+
+
+def _whole(value):
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    if isinstance(value, dict):
+        return {key: _whole(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_whole(item) for item in value]
+    return value
+
+
+def mark_drafts(conversation: dict) -> dict:
+    """The conversation with each model draft's `edited` set from whether
+    its message's content still gives the drafted sha256: the service layer
+    computes it when a conversation is saved, whatever the editor sent
+    (docs/chat-format.md, "Model drafts"). Anything that is not a draft is
+    left for the chat rules to judge."""
+    messages = conversation.get("messages") if isinstance(conversation, dict) else None
+    if not isinstance(messages, list):
+        return conversation
+    marked = []
+    for message in messages:
+        metadata = message.get("metadata") if isinstance(message, dict) else None
+        draft = metadata.get("draft") if isinstance(metadata, dict) else None
+        if isinstance(draft, dict) and isinstance(draft.get("sha256"), str) and isinstance(message.get("content"), list):
+            edited = content_sha256(message["content"]) != draft["sha256"]
+            message = {**message, "metadata": {**metadata, "draft": {**draft, "edited": edited}}}
+        marked.append(message)
+    return {**conversation, "messages": marked}
+
+
+def check_drafts(conversation: dict, where: str):
+    """InvalidFile unless every model draft's `edited` says truly whether its
+    message's content still gives the drafted sha256 (docs/chat-format.md,
+    "Model drafts")."""
+    for number, message in enumerate(conversation["messages"], start=1):
+        draft = message.get("metadata", {}).get("draft")
+        if draft is not None and draft["edited"] != (content_sha256(message["content"]) != draft["sha256"]):
+            truth = "changed" if not draft["edited"] else "not changed"
+            raise InvalidFile(f"{where}: message {number}: its model draft was {truth}, but metadata.draft.edited "
+                              f"is {str(draft['edited']).lower()}")
 
 
 def parse(source_id: str, path: str, data: bytes) -> list[dict]:
@@ -45,6 +99,7 @@ def parse(source_id: str, path: str, data: bytes) -> list[dict]:
                     calls.add(block["id"])
                 elif block["type"] == "tool_result" and block["call"] not in calls:
                     raise InvalidFile(f"{where}: tool_result answers {block['call']!r}, which no earlier tool_call made")
+        check_drafts(conversation, where)
         conversations.append(conversation)
     return conversations
 
@@ -124,14 +179,15 @@ def of_file(source_id: str, path: str, entry: dict, store, sha256: str) -> list[
     return list(enumerate(parse(source_id, path, store.get_bytes(sha256)), start=1))
 
 
-def read(repo: Repo, store, tag: str, telemetry=None) -> tuple[list[tuple[str, dict]], dict]:
+def read(repo: Repo, store, tag: str, telemetry=None, log=print) -> tuple[list[tuple[str, dict]], dict]:
     """([(conversation id, conversation)], {source id: address, revision,
     licenses}) for every chat file tagged `tag` in an admitted source, in
     source and path order. A conversation id is "<source>/<path>:<line>", or
     with `tree` "<source>/<path>:<id of its last message>". telemetry: as
-    for source_tree."""
+    for source_tree. A source whose license text is empty is left out, and
+    log is called with a note naming it."""
     conversations, sources = [], {}
-    for source in repo.sources():
+    for source in repo.sources(log):
         if not source.admitted:
             continue
         tree, _ = source_tree(source, store, telemetry)

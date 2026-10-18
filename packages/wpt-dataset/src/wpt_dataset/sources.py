@@ -35,7 +35,7 @@ from . import huggingface, manifest, retry, robots
 from .errors import (ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed,
                      UnsupportedEntry)
 from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match
-from .repo import Source
+from .repo import Patch, Source
 
 VERSION = importlib.metadata.version("wpt-dataset")
 USER_AGENT = f"wpt-dataset/{VERSION} (+https://github.com/Workers-Intelligence-Commons/wpt-llm)"
@@ -219,7 +219,7 @@ def apply_cuts(source_id: str, tree: dict[str, Entry], cuts: list[dict], store) 
     return tree
 
 
-def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Path], store) -> dict[str, Entry]:
+def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Patch], store) -> dict[str, Entry]:
     """Apply git-format patches to the tree inside a temporary git index:
     no files are written out, so modes and symlinks behave the same on every
     operating system."""
@@ -230,7 +230,7 @@ def apply_patches(source_id: str, tree: dict[str, Entry], patches: list[Path], s
         load_index(git, tree, store)
         for patch in patches:
             try:
-                git("apply", "--cached", "--whitespace=nowarn", str(patch.resolve()))
+                git("apply", "--cached", "--whitespace=nowarn", "-", input=patch.data)
             except subprocess.CalledProcessError as error:
                 raise PatchFailed(f"{source_id}: {patch.name}: {error.stderr.decode(errors='replace').strip()}") from error
         listing = [r for r in git("ls-files", "-s", "-z").split(b"\0") if r]
@@ -281,7 +281,7 @@ def tree_key(source: Source) -> str:
         "wpt_dataset": VERSION,
         "checksum": source.data["checksum"],
         "cuts": source.data.get("cuts", []),
-        "patches": [[p.name, hashlib.sha256(p.read_bytes()).hexdigest()] for p in source.patches],
+        "patches": [[p.name, hashlib.sha256(p.data).hexdigest()] for p in source.patches],
     })
 
 

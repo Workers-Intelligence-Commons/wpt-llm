@@ -16,13 +16,15 @@ recording anything again.
 Recording everything does not widen what may be recorded: the rules of
 [post-training.md](post-training.md) still apply to every element. An
 `assistant` message in a demonstration is written by a person, never by
-another company's model.
+another company's model; it may start as a draft of a WPT model that the
+person then edits or confirms, and its metadata records that
+([Model drafts](#model-drafts)).
 
 ## The object
 
 ```json
 {
-  "schema": 2,
+  "schema": 3,
   "tools": [
     {"name": "read_file", "description": "Read a file of the project.",
      "parameters": {"type": "object", "properties": {"path": {"type": "string"}}, "required": ["path"]}}
@@ -36,7 +38,9 @@ another company's model.
     {"role": "tool", "content": [
       {"type": "tool_result", "call": "c1", "content": [{"type": "text", "text": "..."}]}
     ]},
-    {"role": "assistant", "content": [{"type": "text", "text": "The PyTorch build for this machine's GPU."}]}
+    {"role": "assistant", "content": [{"type": "text", "text": "The PyTorch build for this machine's GPU."}],
+     "metadata": {"draft": {"model": "wpt-small", "weights": {"model.safetensors": "<sha256>"},
+                            "sha256": "<sha256 of the draft's content>", "edited": true}}}
   ],
   "metadata": {"step": "grpo", "task": "<task id>", "round": 1}
 }
@@ -49,7 +53,9 @@ another company's model.
 - `messages`: in order. Each message has a `role` (`system`, `user`,
   `assistant` or `tool`) and a `content` list of blocks, in the order they
   happened: thinking, then a call, then more thinking, then text, stays in
-  that order.
+  that order. A message may also hold `metadata`, a JSON object never
+  written as tokens; its one named field is `draft`
+  ([Model drafts](#model-drafts)).
 - `metadata`: optional. What identifies the conversation where it was
   recorded, as any JSON object: a post-training attempt's step, task,
   round and score ([post-training.md](post-training.md), "Runs"). It is
@@ -57,9 +63,60 @@ another company's model.
   metadata to chat").
 
 Shape 2 added `metadata`; a shape 1 conversation is the same without it.
-`wpt-dataset migrate` rewrites the repository's own files, and a source's
-`chat` file, whose bytes are upstream's, is brought to shape 2 as it is
-read (`wpt_dataset.migrate.upgrade`), so a shape 1 file stays valid.
+Shape 3 added a message's `metadata`; a shape 2 conversation is the same
+without it. `wpt-dataset migrate` rewrites the repository's own files, and
+a source's `chat` file, whose bytes may be upstream's, is brought to the
+current shape as it is read (`wpt_dataset.migrate.upgrade`), so a shape 1
+or 2 file stays valid.
+
+## Model drafts
+
+In the conversation editor of `wpt-web`, a person can ask a WPT model
+folder for the next `assistant` message. The reply appears as a draft that
+the person edits or confirms as it is; only then does it join the
+conversation. The message's
+`metadata.draft` records where it started:
+
+- `model`: the name of the model folder that wrote the draft.
+- `weights`: the sha256 of each weights file of that folder, by file name,
+  so the exact model is known even after the folder is renamed.
+- `sha256`: the sha256 of the draft's `content` as the model wrote it: the
+  JSON text of the block list with sorted keys, no spaces, and characters
+  outside ASCII kept as they are (`wpt_dataset.conversations.content_sha256`).
+- `edited`: whether the person changed it, which is exactly whether the
+  sha256 of the message's `content` now differs from `sha256`. The
+  service layer (`Repo.save_conversation`, behind `wpt-web` and
+  `wpt-dataset save-conversation`) computes it when the conversation is
+  saved, whatever the editor sent.
+
+In `sha256`, a whole number is written as an integer (`2.0` as `2`), as a
+browser writes it back, so a draft the editor sends back unchanged still
+gives its sha256 (maintainer's decision, 2026-10-18).
+
+`metadata.draft` is a claim the client makes, which the server does not
+check (maintainer's decision, 2026-10-18): neither `wpt-web` nor
+`wpt-dataset save-conversation` checks that a WPT model wrote the draft,
+nor its `model`, `weights` or `sha256`. They set only `edited`, from
+whether the message's `content` still gives the `sha256` the client sent.
+
+`wpt-dataset check` refuses a `draft` on any message but an `assistant`
+one, and an `edited` that does not match the content (a chat file made
+another way, such as with `unpack` and `patch`). An unedited
+confirmed draft is allowed: confirming it is the person's choice that the
+reply is right. A message with no `draft` was written by the person from
+the start.
+
+## Writing a chat file
+
+The conversation editor and `wpt-dataset save-conversation` write only in
+a chat file of an `empty` source, text written for WPT; an upstream
+source's chat file stays upstream's. Each line is the conversation's JSON
+on one line, with U+2028, U+2029 and U+0085 always written as `\u2028`,
+`\u2029` and `\u0085`, even in a value a save keeps unchanged:
+the same JSON, and no line splitter cuts the line in two (maintainer's
+decision, 2026-10-18). A
+replaced line keeps its layout where its meaning did not change, and every
+other line keeps its bytes.
 
 ## Blocks
 

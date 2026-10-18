@@ -122,7 +122,13 @@ together.
 ## Adding your own texts
 
 Text written for WPT, by you, lives in the repository itself, as the
-patches of an `empty` source (see [docs/architecture.md](docs/architecture.md)):
+patches of an `empty` source (see [docs/architecture.md](docs/architecture.md)).
+The simplest way is the "New source" page of `uv run wpt-web`: write or
+paste your text, and the page makes the source, under review, with your
+text as its first patch; its "Conversations" and "Tasks" pages write
+post-training conversations and tasks the same way, and every page shows
+which data files git sees as changed. `uv run wpt-dataset new-source` does
+the same on the command line. By hand:
 
 1. Choose its id: `uv run wpt-dataset source-id <origin> [<item>] empty:<name>`.
 2. Create `data/sources/<id>/source.json` with `"type": "empty"`, the
@@ -185,9 +191,47 @@ See [docs/erasure.md](docs/erasure.md).
 ## Models and generated text
 
 No output of another company's model is accepted, in data or in
-post-training. If a contribution ever uses WPT's own bigger model (to
-produce data, or in any post-training role), it must say exactly what that
-model did; such use is not planned today.
+post-training. A contribution that uses a WPT model (to produce data, or in
+any post-training role) must say exactly what that model did; the one such
+use today is a model's draft of a conversation's reply, below.
+
+A conversation's `assistant` message may start as a draft of a WPT model:
+in the conversation editor of
+`wpt-web`, a WPT model folder writes the next reply, and you edit it or
+confirm it as it is. The message's `metadata.draft` says exactly what the
+model did: the model folder's name, the sha256 of each of its weights
+files, the sha256 of the draft as the model wrote it, and `edited`,
+whether you changed it, which the service layer computes from the content
+when the conversation is saved; the check refuses an `edited` that does
+not match the content in any other chat file. An unedited confirmed draft
+is allowed. The rest of `metadata.draft` is a claim the client makes,
+which the server does not check (maintainer's decision, 2026-10-18): that
+a WPT model wrote the draft, and its model, weights and sha256. See
+[docs/chat-format.md](docs/chat-format.md), "Model drafts".
+
+An AI assistant (a coding agent helping you) uses the `wpt-dataset`
+commands only for structure and metadata: the kinds and names of files,
+`source.json`, recipes, file lists, tags, git's status; never to read or
+write people's texts, so it never runs the commands and options that do
+(`read`, `write`, `conversation`, `save-conversation`, `task`,
+`save-task`, and `new-source`'s `--file` and `--license-text`, marked `*`
+in `uv run wpt-dataset --help`). It may start a new source with
+`new-source` without `--file` and `--license-text` (maintainer's
+decision, 2026-10-18): the source is made with its license, attribution,
+format entries and tags, and the license text left empty (`--format
+FORMAT=PATTERN` declares a format entry, such as `markdown=**/*.md` or
+`text=notes/*.txt`, without any file; an empty `--license-text` file is an
+error, not a text to write later); you then write the license text
+(`wpt-dataset save source`, or the "Sources" page of `wpt-web`), and the
+check names the source until you do (maintainer's decision, 2026-10-18:
+the text may be empty only while the decision is refused, and builds and
+checks leave such a source out with a note), then add your files, in any
+format. People write their texts themselves. When a
+person asks an assistant only to change the form of a text they wrote
+(line endings, spacing, splitting into files), the assistant may move it
+with scripts that transform whole files mechanically and report only its
+shape, never its words, then pass it to `unpack` and `patch`; it never
+reads or writes the words itself.
 
 ## Post-training records
 

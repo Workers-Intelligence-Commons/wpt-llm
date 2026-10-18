@@ -54,7 +54,7 @@ from wpt_tokenizer import __version__ as TOKENIZER_VERSION
 
 from . import manifest, markdown, pools
 from .errors import DatasetError, LockedDocumentsMissing, LockMismatch, PoolError, TokenizerVersionNeeded
-from .repo import Repo, dump_json, load_json
+from .repo import Repo
 from .sources import VERSION, check_license_map, fingerprint, source_tree, tags_of, tree_key
 
 DEFAULT_MAX_EPOCHS = 4
@@ -76,10 +76,12 @@ def gather(repo: Repo, store, log=print, skipped=None, telemetry=None):
     records files gets `credits` in its info: the store object listing, one
     JSON line per document it gives, the document id, its license and the
     credit fields of its record. With a list as skipped, a failing source is
-    left out and added to it (see _skip); otherwise its error stops."""
+    left out and added to it (see _skip); otherwise its error stops. A
+    source whose license text is empty is left out, and log is called with
+    a note naming it."""
     telemetry = telemetry or Telemetry.off()
     documents, info, seen, duplicates = [], {}, set(), 0
-    for source in repo.sources():
+    for source in repo.sources(log):
         if not source.admitted:
             continue
         with telemetry.span("source", source=source.id, checksum=source.data["checksum"]) as span:
@@ -154,13 +156,14 @@ def _fetched(source, folder: Path):
     return scratch, tree, tree_object
 
 
-def streamed_documents(repo: Repo, telemetry=None):
+def streamed_documents(repo: Repo, telemetry=None, log=print):
     """(document, Markdown) of every admitted source, exact duplicates left
     out as in gather, each source fetched into a throwaway store that is
-    removed before the next one."""
+    removed before the next one. A source whose license text is empty is
+    left out, and log is called with a note naming it."""
     telemetry = telemetry or Telemetry.off()
     seen = set()
-    for source in repo.sources():
+    for source in repo.sources(log):
         if not source.admitted:
             continue
         with tempfile.TemporaryDirectory(prefix="wpt-stream-") as tmp:
@@ -224,7 +227,7 @@ def gather_streamed(repo: Repo, store, tokenizer, vocabulary: str, log=print, sk
     telemetry = telemetry or Telemetry.off()
     documents, info, seen, duplicates = [], {}, set(), 0
     tokens = PackedDocuments(store)
-    for source in repo.sources():
+    for source in repo.sources(log):
         if not source.admitted:
             continue
         with telemetry.span("source", source=source.id, checksum=source.data["checksum"]) as span:
@@ -316,22 +319,21 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
     """
     telemetry = telemetry or Telemetry.off()
     recipe = repo.recipe("tokenizer", name)
-    lock_path = repo.lock_path(name)
-    lock = load_json(lock_path, "lock") if lock_path.exists() else None
+    lock = repo.generated("lock", name)
 
     locked = lock is not None and lock["recipe"]["version"] == recipe["version"]
     if locked:
         if _training_part(lock["recipe"]) != _training_part(recipe) or lock["wpt_tokenizer"] != TOKENIZER_VERSION:
             changed = "the recipe" if _training_part(lock["recipe"]) != _training_part(recipe) else f"the tokenizer code ({lock['wpt_tokenizer']} -> {TOKENIZER_VERSION})"
             raise TokenizerVersionNeeded(f"tokenizer {name}: {changed} changed since version {recipe['version']} was "
-                                         f"locked; raise `version` in {repo.recipe_path('tokenizer', name).name}")
+                                         f"locked; raise `version` in {name}.json")
         trained = lock["documents"]
     elif stream:
         trees = _pool_trees(repo.recipe("mixture", recipe["mixture"]))
         trained = []
 
         def selected_texts():
-            for document, text in streamed_documents(repo, telemetry):
+            for document, text in streamed_documents(repo, telemetry, log):
                 if _pool_of(document, trees) is not None:
                     trained.append([document.id, document.sha256])
                     yield text
@@ -359,7 +361,7 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
             wanted, found = {tuple(d) for d in trained}, set()
 
             def locked_texts():
-                for document, text in streamed_documents(repo, telemetry):
+                for document, text in streamed_documents(repo, telemetry, log):
                     if (document.id, document.sha256) in wanted:
                         found.add((document.id, document.sha256))
                         yield text
@@ -399,12 +401,10 @@ def build_tokenizer(repo: Repo, name: str, store, log=print, stream=False, telem
 
     if not locked:
         # recorded, and in the store, before the lock changes: a record that cannot be written leaves it as it was
-        telemetry.irreversible("tokenizer.lock", path=lock_path.relative_to(repo.root).as_posix(),
-                               vocabulary=vocabulary)
-        lock_path.write_text(dump_json({"schema": 2, "recipe": recipe, "wpt_tokenizer": TOKENIZER_VERSION,
-                                        "documents": trained, "vocabulary_sha256": vocabulary}),
-                             encoding="utf-8", newline="\n")
-        log(f"wrote {lock_path.relative_to(repo.root)}: commit it so every machine uses this vocabulary")
+        telemetry.irreversible("tokenizer.lock", path=repo.relative("lock", name), vocabulary=vocabulary)
+        written = repo.write_generated("lock", name, {"schema": 2, "recipe": recipe, "wpt_tokenizer": TOKENIZER_VERSION,
+                                                      "documents": trained, "vocabulary_sha256": vocabulary})
+        log(f"wrote {written}: commit it so every machine uses this vocabulary")
     return tokenizer, vocabulary, key
 
 

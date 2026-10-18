@@ -13,6 +13,18 @@ is systematic.
 - Text written by people: existing sources under allowed licenses, original
   texts written for the project, and contributions under the DCO.
 - No output of another company's language model.
+- A demonstration's `assistant` message may start as a draft written by a
+  WPT model, in the conversation editor of `wpt-web`: the person edits it or
+  confirms it as it is, and the message's `metadata.draft` records the model
+  folder, the sha256 of its weights and of the draft, and whether the
+  person changed it ([chat-format.md](chat-format.md), "Model drafts"). An
+  unedited confirmed draft is allowed.
+- An AI assistant (a coding agent helping a contributor) works with the
+  data only through the `wpt-dataset` commands for structure and metadata,
+  never through the ones that read or write people's texts; it may start a
+  source with `new-source` without `--file` and `--license-text`
+  (CONTRIBUTING.md, "Models and generated text"; maintainer's decision,
+  2026-10-18).
 - Environments use no fake web pages or apps: they replay recorded content,
   only when the project has the authorization to use it.
 - Scores come from programs or from humans, never from another company's
@@ -232,6 +244,20 @@ change merges. The same check refuses a task whose sizes break the rule
 on `disk` and `memory` above, naming its `task.json`. The step reads the tasks whose `task.json` carries the tag.
 Like every file of a source, task files are UTF-8 text.
 
+The task editor of `wpt-web` and `wpt-dataset save-task` write a task
+folder through the service layer:
+
+- only in an `empty` source;
+- never at the source's root: a `task.json` there (folder "") is shown,
+  and changed only with `unpack` and `patch`;
+- as a patch that holds only the files whose bytes change, so every other
+  file keeps its bytes and its mode, and a changed file keeps its
+  execute bit; `task.json` keeps its layout where its meaning did not
+  change;
+- the text of each file is UTF-8, and a file that is not refuses the read;
+  a symbolic link under `files/` is not shown as text, stays as it is, and
+  a save that gives it text is refused, so no write goes through a link.
+
 ### Images
 
 The containers come from Dockerfiles in the repository,
@@ -447,7 +473,7 @@ the chat format ([chat-format.md](chat-format.md)) whose `metadata` says
 which attempt it is, so the file passes the same check as any `chat` file:
 
 ```json
-{"schema": 2, "tools": [...], "messages": [...],
+{"schema": 3, "tools": [...], "messages": [...],
  "metadata": {"step": "grpo", "task": "<task id>", "round": 1, "group": 3, "attempt": 2,
               "dropped": false, "error": null, "ended": "answered", "score": 0.5, "reward": 0.5,
               "written": 412}}

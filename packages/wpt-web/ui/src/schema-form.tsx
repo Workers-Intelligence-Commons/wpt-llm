@@ -25,7 +25,8 @@ function resolve(schema: Schema, root: Schema): Schema {
   return found ? resolve(found, root) : schema;
 }
 
-function initial(schema: Schema, root: Schema): Json {
+// A new value of that schema: its required fields, each at its own start.
+export function initial(schema: Schema, root: Schema): Json {
   const s = resolve(schema, root);
   if (s.const !== undefined) return s.const;
   if (s.enum) return s.enum[0];
