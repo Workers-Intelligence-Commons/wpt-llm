@@ -27,12 +27,13 @@ The drafter scheduler's pass times are measured once per run of
 `scheduler-costs.json` (maintainer's decision, 2026-10-17): its shape
 (`schema`: 2), the `setup` they were measured on (`model`: the model's
 config; `rows`: 1; `draft`: the drafter's block; `device`: its kind and
-name, maintainer's decision, 2026-10-18), and `seconds`, the seconds of a
-pass for each width. A later run replays them with `--scheduler-costs
-FOLDER` (`wpt-train`, `wpt-posttrain`; `wpt-chat` reads them the same
-way), naming the earlier run's record folder; times recorded on another
-setup are refused. [model.md](model.md), "The drafter", says exactly what
-a replay guarantees.
+name, the processor's on the CPU, maintainer's decisions, 2026-10-18),
+and `seconds`, the seconds of a pass for each width. A later run
+replays them with `--scheduler-costs FOLDER` (`wpt-train`,
+`wpt-posttrain`; `wpt-chat` reads them the same way), naming the earlier
+run's record folder; times recorded on another setup are refused.
+[model.md](model.md), "The drafter", says exactly what a replay
+guarantees.
 
 Each command also records every store ref it sets, before setting it, as
 the event `store.ref_set` (`ref`: such as `datasets/<id>` or

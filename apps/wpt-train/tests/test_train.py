@@ -702,6 +702,33 @@ def test_a_new_model_that_cannot_take_an_empty_place_is_kept_and_named(built, tm
     assert str(kept) in capsys.readouterr().err
 
 
+def test_a_new_model_that_cannot_take_the_place_of_its_own_checkpoint_is_kept_and_named(built, tmp_path, monkeypatch,
+                                                                                      capsys):
+    # without --run, the checkpoint saved before the drafter is the target's
+    # only content: a refused rename keeps the new model, which has no other
+    # copy, names it, and leaves the checkpoint for --resume (maintainer's
+    # decision, 2026-10-18)
+    real = os.replace
+
+    def refuse_the_new_one(source, target):
+        if Path(target).name == "model" and not Path(source).name.startswith(".model-replaced-"):
+            raise PermissionError(13, "Permission denied", str(source))
+        real(source, target)
+
+    monkeypatch.setattr(os, "replace", refuse_the_new_one)
+    with pytest.raises(PermissionError):
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
+    assert [path.name for path in (tmp_path / "model").iterdir()] == ["checkpoint"]
+    [kept] = [path for path in tmp_path.iterdir() if path.name.startswith(".model-")]
+    assert json.loads((kept / "provenance.json").read_text())["recipe_name"] == "three"
+    err = capsys.readouterr().err
+    assert str(kept) in err and f"run again with --resume and then remove {kept}" in err
+    monkeypatch.setattr(os, "replace", real)
+    main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model", "--resume"])
+    assert (tmp_path / "model" / "config.json").exists() and not (tmp_path / "model" / "checkpoint").exists()
+    assert kept.is_dir()  # the resumed run wrote its own folder: the kept one is left to remove by hand
+
+
 def test_a_restore_failure_inside_a_broken_record_still_keeps_both_models(built, tmp_path, monkeypatch, capsys):
     # a broken record turns RestoreFailed into RecordError on its way out of
     # the span: the folders, not the error's type, decide what is kept

@@ -84,7 +84,11 @@ LICENSE, NOTICE and README.md (the model card). It is written beside the
 target as a hidden folder, recorded, then renamed into place: a run that
 fails before leaves the target as it was. A folder already there, with
 everything in it (an earlier model, its checkpoint, the results wpt-eval
-wrote for other weights), is replaced as a whole.
+wrote for other weights), is replaced as a whole. When the new folder
+cannot take the target's place and the target is then missing, or holds
+only the checkpoint this run saved before the drafter (without --run),
+the new folder is kept and named on the error output, to be moved into
+place by hand (or, after a --resume that writes another, removed).
 """
 
 import argparse
@@ -598,6 +602,13 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
                 print(f"{out} is missing: the new model is kept in {staging}"
                       + "".join(f", the earlier one in {folder.absolute()}" for folder in earlier)
                       + f"; move one of them to {out} by hand", file=sys.stderr)
+        elif (renaming and not args.run and staging.exists() and out.is_dir()
+              and [path.name for path in out.iterdir()] == [CHECKPOINT_FOLDER]):
+            # the target holds only this run's checkpoint, saved before the drafter: no other model to go back to
+            print(f"the new model could not take the place of {out}, which holds only {out / CHECKPOINT_FOLDER}: "
+                  f"it is kept in {staging}; move it to {out} by hand (the checkpoint goes with the folder it "
+                  f"replaces), or run again with --resume and then remove {staging}, which the resumed run does "
+                  "not use", file=sys.stderr)
         else:
             shutil.rmtree(staging, ignore_errors=True)
         raise
