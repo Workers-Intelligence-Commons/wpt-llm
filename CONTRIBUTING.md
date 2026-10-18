@@ -22,6 +22,49 @@ For a commit that adds or changes a source, signing off also certifies that:
 
 You take responsibility for those three checks.
 
+## Issues and pull requests
+
+Open an issue from one of the forms in
+[.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE): **Bug**, **Enhancement**
+(both cover the tooling and the model), **Model behavior**, **Source
+proposal** and **Erasure request**. Each form asks for the part concerned.
+The Bug and Enhancement forms also ask for the commit, the exact command,
+the recipe, the dataset id and the weights' sha256, the run record's
+folder, and your system, GPU and PyTorch build. The other forms ask for
+what fits their kind. A blank issue stays possible. For an
+erasure request that should not be public, or for a security problem, use
+the repository's **Security** tab, **Report a vulnerability**, and never
+post personal details in a public issue.
+
+A pull request starts from
+[.github/pull_request_template.md](.github/pull_request_template.md): what
+the change does, the part it touches, and the checks the template lists.
+
+### Labels
+
+Every form adds the label of its kind: `bug`, `enhancement`,
+`model behavior`, `source proposal` or `erasure request`. Every form also
+asks for the part concerned, and the workflow
+[.github/workflows/area-label.yml](.github/workflows/area-label.yml) adds
+the matching area label when the issue is opened:
+
+- `area: sources and data rules`
+- `area: tokenizer`
+- `area: dataset build`
+- `area: training`
+- `area: post-training`
+- `area: evaluation`
+- `area: generation and chat`
+- `area: web interface`
+- `area: model architecture`
+- `area: documentation`
+
+The three labels of kind (`model behavior`, `source proposal` and
+`erasure request`) must exist too, like the 10 area labels. A maintainer
+creates every label before its first use. The words of the dropdown and of
+the workflow are the area label names without `area: `: change them
+together.
+
 ## Adding a source
 
 1. Check the license against [docs/licenses.md](docs/licenses.md). It must be

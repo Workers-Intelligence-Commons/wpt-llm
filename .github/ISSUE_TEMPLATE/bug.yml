@@ -1,0 +1,91 @@
+name: "Bug"
+description: "A tool or a model does not work as documented"
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A bug is a tool or a model that does not do what the documentation says. Search the open issues first. Do not paste personal data or secrets: terminal output and paths can hold them.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Part concerned
+      description: The part of WPT this is about. Pick the closest one.
+      options:
+        - sources and data rules
+        - tokenizer
+        - dataset build
+        - training
+        - post-training
+        - evaluation
+        - generation and chat
+        - web interface
+        - model architecture
+        - documentation
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: "What happened"
+      description: "What you saw, and what you expected instead. Paste the error text in full."
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: "Commit"
+      description: "The commit of this repository you ran (`git rev-parse HEAD`). Say if the working tree had changes."
+      placeholder: "0123456789abcdef"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: "Exact command"
+      description: "The full command line, copied, with its options and the `WPT_*` environment variables you set. Write \"none\" if no command was involved."
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: recipe
+    attributes:
+      label: "Recipe"
+      description: "The name of the model recipe (`data/recipes/models/NAME.json`), tokenizer recipe or mixture involved. Write \"none\" if no recipe was involved."
+      placeholder: "unimpaired-axolotl"
+    validations:
+      required: true
+  - type: textarea
+    id: ids
+    attributes:
+      label: "Dataset id and model weights' sha256"
+      description: "The dataset id, and the sha256 of the first weight file of the model, that you used or produced. Write \"none\" if there is none."
+    validations:
+      required: true
+  - type: input
+    id: record
+    attributes:
+      label: "Run record's folder"
+      description: "The folder under `records/` in the store (such as `20261017T120501Z-wpt-train-5d41402a-3fa2b1c9`). Its `start.json`, `events.jsonl` and `end.json` say what the run did. Write \"none\" if the run left no record."
+    validations:
+      required: true
+  - type: textarea
+    id: system
+    attributes:
+      label: "System, GPU and PyTorch build"
+      description: "Operating system, CPU, GPU and driver, Python version, and the PyTorch build (`uv run python -c 'import torch; print(torch.__version__, torch.version.cuda)'`). The `start.json` of the run record holds the tool versions."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to reproduce"
+      description: "The smallest steps that give the same result from a clean clone."
+    validations:
+      required: true
+  - type: textarea
+    id: more
+    attributes:
+      label: "Anything else"
+      description: "Logs, what you already tried."

@@ -1,0 +1,41 @@
+# Adds the "area: <part>" label that matches the "Part concerned" dropdown of
+# an issue form (.github/ISSUE_TEMPLATE/). The issue text is untrusted: it
+# reaches the script only through an environment variable, and only a value
+# equal to one of the dropdown's options gives a label. Create every label before
+# use (CONTRIBUTING.md, "Labels").
+name: area-label
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Add the label of the part concerned
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          # The form renders "### Part concerned", a blank line, the chosen option.
+          part="$(printf '%s\n' "$ISSUE_BODY" | tr -d '\r' | awk '
+            /^### / { found = ($0 == "### Part concerned"); next }
+            found && NF { print; exit }
+          ')"
+          for option in \
+            "sources and data rules" "tokenizer" "dataset build" "training" \
+            "post-training" "evaluation" "generation and chat" "web interface" \
+            "model architecture" "documentation"; do
+            if [ "$part" = "$option" ]; then
+              gh api --method POST "repos/$GH_REPO/issues/$ISSUE_NUMBER/labels" \
+                -f "labels[]=area: $option"
+              exit 0
+            fi
+          done
+          echo "No known part concerned in issue $ISSUE_NUMBER: no label added."
