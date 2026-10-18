@@ -46,7 +46,7 @@ import torch
 from wpt_model import WPT, TokenizerMismatch, load_model, load_tokenizer, weight_hashes
 from wpt_model.notice import CARD_NAME, EVALS_NAME, documents
 from wpt_store import Store, StoreError, store_from_settings
-from wpt_store.shards import read_verified
+from wpt_store.shards import documents as documents_of
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, short
 from wpt_tokenizer import Tokenizer
 from wpt_utils.device import describe, select_device
@@ -93,12 +93,9 @@ class Context:
         call again to read them again."""
         if part not in ("training", "held_out"):
             raise ValueError(f"part {part!r}: choose 'training' or 'held_out'")
-        seen = set()
-        for shard in self.provenance["shards" if part == "training" else "held_out_shards"]:
-            for tokens, source, document, _, _ in read_verified(self.store, shard):
-                if document not in seen:
-                    seen.add(document)
-                    yield Document(document, source, tokens)
+        for document, source, tokens in documents_of(self.store,
+                                                     self.provenance["shards" if part == "training" else "held_out_shards"]):
+            yield Document(document, source, tokens)
 
 
 def built_in_names() -> list[str]:
@@ -178,9 +175,10 @@ def open_context(folder, store, device, telemetry=None) -> Context:
         raise EvalError(f"{folder}: provenance shape {provenance.get('schema')}, this wpt-eval reads 4; train it again")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(folder))
-    except (TokenizerMismatch, ValueError) as error:  # ValueError: a vocabulary of another tokenizer version
+        model = load_model(folder, device)  # refuses a folder whose drafter is missing or of other weights
+    # ValueError: a vocabulary of another tokenizer version, or a DrafterMismatch
+    except (TokenizerMismatch, ValueError) as error:
         raise EvalError(str(error)) from None
-    model = load_model(folder, device)
     model.eval()
     return Context(folder, model, tokenizer, device, provenance, store, telemetry or Telemetry.off())
 

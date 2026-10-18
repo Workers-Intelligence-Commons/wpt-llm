@@ -7,7 +7,7 @@ are tagged `grpo` (docs/post-training.md), with the same images, which
 must be built on this machine first (`wpt-agent build-image NAME`).
 
 First the reference. The incoming model makes REFERENCE attempts at each
-task, exactly as grpo's attempts run and are scored. A task's best start
+task, written together, exactly as grpo's attempts run and are scored. A task's best start
 score is the best score among them; an attempt "passes" when its score is
 at least that best score, and the task's reference length is the mean
 length of its passing attempts. A length counts only the tokens the model
@@ -32,7 +32,8 @@ attempt beats a longer one.
 
 Sampling draws from one generator seeded with SEED, for the reference and
 then the rounds, so a run gives the same attempts again on the same
-machine and setup. Every attempt, the reference's (round null) and the
+machine and setup; the model alone writes them, without a drafter, as in
+steps/grpo.py. Every attempt, the reference's (round null) and the
 dropped ones included, is kept as one line of
 token-efficiency-attempts.jsonl in the run's record folder, as grpo keeps
 its own (steps/grpo.py). The settings below are the step's whole
@@ -59,14 +60,14 @@ SEED = 0  # the reference attempts, the order of the tasks in each round, and th
 
 def run(context):
     try:
-        tasks, built, limit = agentic.prepare(context, TAG)
+        tasks, built = agentic.prepare(context, TAG)
     except agentic.Unready as error:
         return Outcome.failure(str(error))
     settings = agentic.Settings(ROUNDS, TASKS_PER_UPDATE, GROUP, LEARNING_RATE, WEIGHT_DECAY, TEMPERATURE, TOP_K,
                                 CHECK_SECONDS, RESULT_BYTES, SEED)
     with agentic.frozen_routers(context.model):
         learner = agentic.Learner("token-efficiency", context.model, context.tokenizer, context.device, built,
-                                  limit, settings, context.telemetry)
+                                  settings, context.telemetry)
         context.model.eval()
         references, zero, lost = _references(learner, tasks)
         kept = [task for task in tasks if task.id in references]
@@ -84,8 +85,7 @@ def _references(learner, tasks):
     references, zero, lost = {}, 0, 0
     for number, task in enumerate(tasks, start=1):
         scored = []  # (score, length) of the reference attempts Docker did not drop
-        for index in range(1, REFERENCE + 1):
-            kept = learner.attempt(task, None, number, index)  # kept as round None, never trained on
+        for kept in learner.attempts(task, None, number, REFERENCE):  # kept as round None, never trained on
             if kept.attempt is not None:
                 scored.append((kept.score, agentic.written(kept.attempt)))
         reference = _reference(scored)

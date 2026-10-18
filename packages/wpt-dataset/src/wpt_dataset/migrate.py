@@ -145,6 +145,28 @@ def _model_3_to_4(document, _path):
 MIGRATIONS["model"][3] = _model_3_to_4
 
 
+# the drafter's training values every recipe states (maintainer's decision, 2026-10-18)
+DRAFTER_5 = {"prompts": 256, "prompt_tokens": 64, "answer_tokens": 256, "epochs": 10, "learning_rate": 6e-4,
+             "held_out": 0.1, "anchors": 512, "batch": 8, "seed": 0}
+
+
+def _model_4_to_5(document, _path):
+    """Shape 5 adds the `drafter` section (docs/model.md, "The drafter";
+    maintainer's decisions, 2026-10-17 and 2026-10-18): the drafter that
+    wpt-train and wpt-posttrain train at the end of every run. It goes in
+    after `training`, with the training values every recipe states
+    (DRAFTER_5); the settings it leaves out keep their defaults."""
+    migrated = {}
+    for key, value in document.items():
+        migrated[key] = 5 if key == "schema" else value
+        if key == "training":
+            migrated["drafter"] = dict(DRAFTER_5)
+    return migrated
+
+
+MIGRATIONS["model"][4] = _model_4_to_5
+
+
 def _conversation_1_to_2(document, _path):
     """Shape 2 adds the optional `metadata` object; a shape 1 conversation
     has none, so only its number changes."""

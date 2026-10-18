@@ -2010,6 +2010,7 @@ source = { editable = "apps/wpt-chat" }
 dependencies = [
     { name = "wpt-inference" },
     { name = "wpt-model" },
+    { name = "wpt-store" },
     { name = "wpt-tokenizer" },
     { name = "wpt-utils" },
 ]
@@ -2018,6 +2019,7 @@ dependencies = [
 requires-dist = [
     { name = "wpt-inference", editable = "packages/wpt-inference" },
     { name = "wpt-model", editable = "packages/wpt-model" },
+    { name = "wpt-store", editable = "packages/wpt-store" },
     { name = "wpt-tokenizer", editable = "packages/wpt-tokenizer" },
     { name = "wpt-utils", editable = "packages/wpt-utils" },
 ]
@@ -2078,6 +2080,12 @@ requires-dist = [
 name = "wpt-inference"
 version = "0.1.0"
 source = { editable = "packages/wpt-inference" }
+dependencies = [
+    { name = "wpt-model" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "wpt-model", editable = "packages/wpt-model" }]
 
 [[package]]
 name = "wpt-llm"

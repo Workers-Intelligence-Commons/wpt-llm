@@ -235,7 +235,7 @@ def test_migrating_a_shape_2_model_recipe_asks_a_person_for_the_new_attention_nu
     with pytest.raises(InvalidFile, match=re.escape(f"{path}: at model/")):
         migrate(repo, log=lambda _: None)
     document = json.loads(path.read_text())
-    assert document["schema"] == 4
+    assert document["schema"] == 5
     assert not any(key.startswith("mla_") for key in document["model"])
     assert {key: document["model"][key] for key in NEW_ATTENTION} == dict.fromkeys(NEW_ATTENTION, 0)
     assert document["model"]["global_attention"] == []
@@ -256,3 +256,18 @@ def test_migrating_a_shape_3_model_recipe_makes_its_window_and_steps_one_stage(k
                                "training": {**training, "steps": 1, "batch_size": 4}}))
     assert migrate(repo, log=lambda _: None) == [path]
     assert json.loads(path.read_text()) == new
+
+
+def test_migrating_a_shape_4_model_recipe_adds_the_drafter_s_training_values_after_training(kit, repo):
+    # docs/model.md, "The drafter": shape 5 adds the recipe's drafter
+    # section, with the training values every recipe states (maintainer's
+    # decision, 2026-10-18), and nothing else changes
+    path = kit.write_model_recipe(repo, "d", {"mixture": "m", "tokenizer": "t", "total_tokens": 50, "held_out": 0})
+    new = json.loads(path.read_text())
+    path.write_text(dump_json({**{key: value for key, value in new.items() if key != "drafter"}, "schema": 4}))
+    assert migrate(repo, log=lambda _: None) == [path]
+    migrated = json.loads(path.read_text())
+    assert migrated["drafter"] == {"prompts": 256, "prompt_tokens": 64, "answer_tokens": 256, "epochs": 10,
+                                   "learning_rate": 6e-4, "held_out": 0.1, "anchors": 512, "batch": 8, "seed": 0}
+    assert migrated == {**new, "drafter": migrated["drafter"]}
+    assert list(migrated) == ["schema", "data", "model", "training", "drafter", "posttrain"]

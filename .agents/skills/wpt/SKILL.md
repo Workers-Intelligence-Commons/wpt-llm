@@ -57,18 +57,18 @@ where a step needs them, run through Docker Desktop.
 | build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (`--stream`: one source at a time, only tokens kept; `--skip-failed`: a failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; prints the dataset id |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
-| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
+| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [--scheduler-costs RECORD_FOLDER] [options]`, started detached (skill `wpt-training-run`; ends by training the model's drafter; `--scheduler-costs`: replay the drafter scheduler's pass times an earlier run recorded on the same setup; a checkpoint is always written just before the drafter, so a drafter failure resumes with `--resume`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
 | train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]`, or `--strategy split` to split each window between the GPUs (windows too long for one; DeepSeek-V4's contextual parallelism) (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store |
-| post-train | `uv run wpt-posttrain RECIPE BASE NEW` (the steps are the recipe's `posttrain` list) | the model recipe, the base folder, the store | the new folder, only if every step succeeded; its run record `records/<folder>/` in the store, always |
+| post-train | `uv run wpt-posttrain RECIPE BASE NEW [--scheduler-costs RECORD_FOLDER]` (the steps are the recipe's `posttrain` list; ends by training a fresh drafter and measuring, or replaying, the scheduler's pass times) | the model recipe, the base folder, the store | the new folder, only if every step succeeded; its run record `records/<folder>/` in the store, always |
 | lock an image of agentic tasks | `uv run wpt-agent lock-image NAME [--force]` (needs Docker; `--force` replaces an existing lock) | `data/images/NAME/Dockerfile`, the base image's registry, the dated package archive | `data/images/NAME/lock.json` and `licenses.json` (commit them) |
 | build an image of agentic tasks | `uv run wpt-agent build-image NAME` (needs Docker; before `wpt-posttrain` with `grpo` or `token-efficiency`) | `data/images/NAME/`, the base image's registry, the dated package archive | a local Docker image |
-| continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a post-trained model) | the folder | |
+| continue text | `uv run wpt-chat FOLDER` (`--about` prints its NOTICE; `--chat` talks to a post-trained model; `--scheduler-costs RECORD_FOLDER` reads the scheduler's pass times a run recorded on the same setup instead of measuring them) | the folder; with `--scheduler-costs`, the store | |
 | review and edit sources in a browser | `uv run wpt-web` (needs Bun), then http://127.0.0.1:8410/ | `data/`, `packages/wpt-web/ui` | `source.json` through the source rules; `ui/node_modules`, `ui/dist` |
 
 Everything that changes a model comes from its model recipe
 (`data/recipes/models/NAME.json`: data, architecture, method and settings,
-stages, seed, post-training steps; docs/model.md). `training.stages` lists
+stages, seed, the drafter, post-training steps; docs/model.md). `training.stages` lists
 the window lengths in order, each with its steps and its `batch_size`,
 which is global (over every process) (docs/training.md, "Stages"); the
 model's context is the last one's. Segments and split windows give
@@ -177,6 +177,15 @@ reads only the folder's own files: change what they say there, never by
 editing a generated folder. `wpt-train` writes the folder beside its
 target and renames it into place; training into an existing folder replaces
 it as a whole (its `evals/`, checkpoint and any other file go with it).
+Every model folder holds `drafter/` (`config.json`, weights with the same
+header, `provenance.json`): the drafter for speculative decoding, which
+`wpt-train` and `wpt-posttrain` train at the end of every run against the
+final weights. A model and its drafter are one unit: `load_model` and
+`load_drafter` refuse a folder whose drafter is missing or names other
+weights' sha256 (`DrafterMismatch`), and nothing skips the check; a
+folder written by hand gets one through `save_drafter`, whose provenance
+names `{"target": {"weights": weight_hashes(folder)}}`. `NOTICE` and the
+card describe it (docs/model.md, "The drafter").
 
 Weights are AGPL-3.0-or-later; generated text is CC0-1.0 under
 `OUTPUT-NOTICE`. `packages/wpt-model/src/wpt_model/LICENSE` and
@@ -261,13 +270,48 @@ def run(context):  # context: model (change it in place), tokenizer, device,
 
 The built-in steps are `sft`, `grpo` and `token-efficiency` (after `grpo`,
 on the same tasks: the same result with fewer written tokens); `grpo` and
-`token-efficiency` share `wpt_posttrain/agentic.py`, which keeps every
-attempt as a line of `<step>-attempts.jsonl` in the run's record folder: a
-chat-format conversation whose `metadata` identifies the attempt.
+`token-efficiency` share `wpt_posttrain/agentic.py`, which writes their
+attempts with the model alone (no drafter) and keeps every attempt as a
+line of `<step>-attempts.jsonl` in the run's record folder: a chat-format
+conversation whose `metadata` identifies the attempt. After the last step,
+every run trains a fresh drafter for the new weights; the drafter is not a
+step (docs/post-training.md, "The drafter").
 
 A step reports only whether it managed to do its part, and why not. The
 first failure stops the run and nothing is written. Details:
 `docs/post-training.md`.
+
+## Generating text
+
+Anything that makes a model write (a chat, an evaluation, a step's
+attempts) goes through `wpt_inference`, never through a loop of its own
+over `model(ids)`:
+
+```python
+from wpt_inference import Writer, sample_tokens
+
+for token in sample_tokens(model, ids, max_new_tokens=200):  # one text
+    ...
+writer = Writer(model, prompt, rows=8, stops=[...], routes=True)  # several attempts from one prompt
+written = writer.write({row: tokens_it_reads_first}, {row: most_tokens_it_may_write})
+```
+
+They read through the model's generation cache (`WPT.new_cache`,
+`extend`, `undo`; docs/model.md, "Generation"): each token once, the
+prompt once for every row, the rows in one batch, with no length limit
+(past `block_size`). A `drafter` (`wpt_model.Drafter`, from
+`load_drafter`) turns on speculative decoding: the same distribution,
+fewer passes. Its scheduler needs `costs=`, the pass times a run measures
+once (`measure_costs`) and records with the setup they were measured on
+(`costs_setup`, `costs_file`), or replays on the same setup only
+(`replayed_costs`); without them every draft is verified. For agentic
+tasks, `wpt_agent.attempts` runs several attempts in one batch, and
+`agentic.Learner.attempts(...)` scores them one by one and keeps each line as soon as it is scored. What a layer passes
+on to later tokens is said once, in its `passes_on()` (`carry.py`), which
+training's segments and slices (`sequence.py`) and the cache (`cache.py`)
+both read: a change to a layer's computation changes its description
+there, and `test_cache.py` and `test_parts.py` check that both still give
+what the whole text gives (docs/model.md, "What a layer passes on").
 
 ## Rules that keep the checks green
 

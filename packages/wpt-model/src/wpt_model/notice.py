@@ -13,8 +13,12 @@ Next to its weights, a model folder carries:
                   model is, how it was built, and its evaluation results
 
 write_documents(folder) generates them (documents(folder) gives their text)
-from the folder's own records (config.json, provenance.json, evals/*.json),
-so they cannot disagree with what the folder holds. WEIGHT_METADATA goes into the header of every weight
+from the folder's own records (config.json, provenance.json, evals/*.json,
+drafter/config.json and drafter/provenance.json), so they cannot disagree
+with what the folder holds. The drafter's weights are the model's, under
+the same license and header; its prompts are the beginnings of the
+dataset's training documents, so it reads no source the model did not.
+WEIGHT_METADATA goes into the header of every weight
 file, so the licenses travel with the weights even alone.
 
 OUTPUT-NOTICE and LICENSE in this package are copies of the repository's
@@ -30,6 +34,7 @@ LICENSE = "AGPL-3.0-or-later"
 OUTPUT_LICENSE = "CC0-1.0"
 REPOSITORY = "https://github.com/Workers-Intelligence-Commons/wpt-llm"
 NOTICE_NAME, CARD_NAME, LICENSE_NAME, EVALS_NAME, CREDITS_NAME = "NOTICE", "README.md", "LICENSE", "evals", "CREDITS"
+DRAFTER_NAME = "drafter"  # the drafter's folder (drafter.py)
 WEIGHT_METADATA = {"license": LICENSE, "output_license": OUTPUT_LICENSE,
                    "notice": f"NOTICE in the model folder; {REPOSITORY}"}
 SUMMARY = (f"Weights: {LICENSE}. Generated text: {OUTPUT_LICENSE}, waived by the authors of WPT; "
@@ -52,7 +57,11 @@ def documents(folder) -> dict[str, str]:
     config = _read(folder / "config.json")
     provenance = _read(folder / "provenance.json")
     evals = [_read(path) for path in sorted((folder / EVALS_NAME).glob("*.json"))]
-    return {LICENSE_NAME: license_text(), NOTICE_NAME: notice(provenance), CARD_NAME: card(config, provenance, evals)}
+    drafter = folder / DRAFTER_NAME
+    drafter = ({"config": _read(drafter / "config.json"), "provenance": _read(drafter / "provenance.json")}
+               if (drafter / "config.json").exists() else None)
+    return {LICENSE_NAME: license_text(), NOTICE_NAME: notice(provenance),
+            CARD_NAME: card(config, provenance, evals, drafter)}
 
 
 def write_documents(folder):
@@ -108,7 +117,7 @@ def notice(provenance) -> str:
     return "\n".join(lines) + "\n\n\n" + output_notice()
 
 
-def card(config, provenance, evals) -> str:
+def card(config, provenance, evals, drafter=None) -> str:
     lines = [
         "---", "license: agpl-3.0", "---", "",
         f"# WPT model, dataset {provenance['dataset'][:12]}", "",
@@ -133,6 +142,7 @@ def card(config, provenance, evals) -> str:
         f"- Device: {provenance['device']}",
         f"- Every input and tool version: [provenance.json](provenance.json)", "",
         *_post_training(provenance.get("post_training")),
+        *_drafter(drafter),
         "## Sources", "",
         "| Source | Revision | Licenses |", "|---|---|---|",
         *(f"| {sid} | `{source['revision']}` | {', '.join(sorted({e['license'] for e in source['licenses']}))} |"
@@ -151,8 +161,34 @@ def card(config, provenance, evals) -> str:
 
 def learned_from(provenance) -> dict:
     """Every source the model learned from: the pre-training dataset's, then
-    those post-training steps read."""
+    those post-training steps read. The drafter adds none: its prompts are
+    the beginnings of the dataset's training documents."""
     return {**provenance["sources"], **(provenance.get("post_training") or {}).get("sources", {})}
+
+
+def _drafter(drafter):
+    if drafter is None:
+        return []
+    config, provenance = drafter["config"], drafter["provenance"]
+    lines = ["## Drafter", "",
+             f"A DSpark drafter for speculative decoding (`drafter/`): {config['layers']} layers that read the "
+             f"hidden states of layers {', '.join(map(str, config['features']))}, up to {config['block']} drafts per "
+             "round. The model checks every draft and keeps it only by the rule that leaves its own distribution "
+             "unchanged: the drafter changes how fast the model writes, never what it writes.", ""]
+    trained, target = provenance.get("trained_by"), (provenance.get("target") or {}).get("weights")
+    if trained:
+        dataset = provenance.get("dataset")
+        lines.append(f"- Trained by `{trained['command']}`, recipe `{trained['recipe_name']}`, the model frozen, on "
+                     "answers the model wrote itself to the beginnings of the training documents of dataset "
+                     f"`{(dataset or 'unknown')[:12]}`")
+    if target:
+        lines.append("- Against the weights " + ", ".join(f"`{name}` (sha256 `{sha[:12]}`)"
+                                                           for name, sha in target.items()))
+    measure = provenance.get("acceptance")
+    if measure:
+        lines.append(f"- On held-out prompts: {measure['accepted']} of {measure['verified']} drafts kept, "
+                     f"{measure['tokens_per_round']:.2f} tokens per pass of the model")
+    return lines + [""]
 
 
 def _post_training(post_training):

@@ -39,7 +39,8 @@ from WPT_RECIPE and the dataset id from WPT_DATASET.
 Every --checkpoint-every steps the main process writes MODEL/checkpoint/,
 or with --run NAME the store's checkpoint of that name, which any machine
 using the same store can continue. Run the same command with --resume to
-continue (on other hardware too). The checkpoint is removed once the model
+continue (on other hardware too). After the last step it always writes one,
+just before training the drafter. The checkpoint is removed once the model
 is saved. Ctrl+C or SIGTERM finishes the step and saves before stopping.
 After a crash, every process starts again, up to --max-restarts times
 (default 3), and continues from the checkpoint; 0 runs in this process.
@@ -51,12 +52,33 @@ launcher keeps one folder over its restarts. When that record cannot be
 written, the run finishes its step unrecorded, saves its checkpoint
 (which the broken record does not name), and stops with code 3.
 
+After the last step, the main process trains the model's drafter for
+speculative decoding against the final weights, the model frozen, with the
+recipe's `drafter` section (wpt_inference.drafting; docs/model.md, "The
+drafter"): its prompts are the beginnings of the dataset's training
+documents, and the model alone writes the answers. A model and its drafter
+are one unit: no option skips it, and a drafter that cannot be trained
+refuses the run (code 2) and writes nothing; the run saves its checkpoint
+just before training the drafter, whatever --checkpoint-every says, so
+--resume continues from it, takes no step and trains the drafter again.
+Drafter settings no drafter can have (feature layers the model does not
+have, an unknown setting) are refused before training starts. Then it
+measures the scheduler's pass times once (wpt_inference.measure_costs) and
+writes them into the run's record as scheduler-costs.json, with the setup
+they were measured on (the model's config, the drafter's block, the
+device); --scheduler-costs FOLDER replays those an earlier run recorded
+instead, refused before training when they were measured on another
+setup.
+
 Exit codes: 0 done, 2 refused (bad input, other settings than the
-checkpoint's; never restarted), 3 the record could not be written (never
-restarted), 130 stopped by a signal, others a crash.
+checkpoint's, a drafter that could not be trained; never restarted), 3 the
+record could not be written (never restarted), 130 stopped by a signal,
+others a crash.
 
 The model folder gets config.json, the weights (their headers name the
-licenses), tokenizer.json (the dataset's vocabulary, for wpt-chat),
+licenses), tokenizer.json (the dataset's vocabulary, for wpt-chat), the
+drafter (drafter/: config.json, model.safetensors, and provenance.json,
+which names the sha256 of the weights it was trained against),
 provenance.json (what produced it, with the sources it learned from), and
 LICENSE, NOTICE and README.md (the model card). It is written beside the
 target as a hidden folder, recorded, then renamed into place: a run that
@@ -66,6 +88,7 @@ wrote for other weights), is replaced as a whole.
 """
 
 import argparse
+import hashlib
 import importlib.metadata
 import json
 import os
@@ -83,13 +106,15 @@ import torch
 
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
-from wpt_inference import sample_tokens
-from wpt_model import WPT, ModelConfig, canonical_ids, save_model, weight_files
+from wpt_inference import COSTS_FILE, costs_file, costs_setup, measure_costs, replayed_costs, sample_tokens
+from wpt_inference.drafting import DrafterFailed, train_drafter
+from wpt_inference.drafting import settings as drafter_settings
+from wpt_model import WPT, ModelConfig, canonical_ids, save_drafter, save_model, weight_files, weight_hashes
 from wpt_model.notice import WEIGHT_METADATA, write_credits, write_documents
 from wpt_model.sparse import KernelUnavailable, kernels
 from wpt_store import NAME as STORE_NAME
 from wpt_store import StoreError, store_from_settings
-from wpt_store.shards import ShardStream, sources_of, token_file
+from wpt_store.shards import ShardStream, documents, sources_of, token_file
 from wpt_telemetry import JOIN_FOLDER, RECORD_FAILED, RecordError, Telemetry, file_hashes, set_ref, short
 from wpt_tokenizer import RUSTC_VERSION, Tokenizer
 from wpt_training import (Checkpoint, FolderCheckpoint, Interrupted, PluginError, RunSettings, SettingsMismatch,
@@ -125,7 +150,8 @@ def parse_size(text):
 OPTIONS = [
     ("out", str, "runs/default", "model folder to write"),
     ("micro-batch", int, None, "windows per pass in one process (default: its whole share of each stage's batch)"),
-    ("checkpoint-every", int, 500, "write a checkpoint every N steps (0: never)"),
+    ("checkpoint-every", int, 500, "write a checkpoint every N steps (0: none during training); one is always "
+                                   "written after the last step, before the drafter is trained"),
     ("segment", int, 0, "run a window longer than this many tokens as consecutive segments (with --strategy split, "
                         "each process's slice): the same training with less memory, each segment but the last run "
                         "twice (a multiple of 128; 0: whole windows)"),
@@ -135,6 +161,9 @@ OPTIONS = [
     ("stream-shards", int, 8, "with --stream: dataset shards in use at once (windows are drawn from them)"),
     ("run", str, None, "keep the checkpoint in the store under this name, so any machine using the store can "
                        "continue the run"),
+    ("scheduler-costs", str, None, "replay the drafter scheduler's pass times that an earlier run recorded on the "
+                                   f"same setup: the name of its record folder, which holds {COSTS_FILE} (default: "
+                                   "measure them)"),
     ("max-restarts", int, 3, "after a crash, start every process again this many times at most, continuing from "
                              "the checkpoint (0: run in this process, never restart)"),
 ]
@@ -464,6 +493,13 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
     torch.manual_seed(settings.seed)  # the same initial weights in every process
     # the model's context: the last stage's windows
     model_config = ModelConfig(vocab_size=tokenizer.vocab_size, block_size=settings.stages[-1].block_size, **shape)
+    try:  # the drafter trained at the end, and the scheduler's pass times replayed: refused now, not after training
+        drafter_config, drafting = drafter_settings(model_config, recipe["drafter"])  # its feature layers included
+        setup = costs_setup(model_config, 1, drafter_config.block, strategy.device)  # what the times are measured on
+        replayed = (replayed_costs(store.read_record(args.scheduler_costs, COSTS_FILE), setup)
+                    if args.scheduler_costs else None)
+    except (ValueError, StoreError) as error:
+        raise Refused(f"{type(error).__name__}: {error}") from None
     model = WPT(model_config)
     model.set_canonical_ids(canonical_ids(tokenizer.decode, tokenizer.vocab_size))  # Engram's, from the vocabulary
     model.recompute = args.recompute
@@ -490,7 +526,7 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
                             identity={"dataset": args.dataset, "model": asdict(model_config), "training": training,
                                       # the shards in use decide the windows, so a resumed run must stream the same way
                                       **({"stream_shards": args.stream_shards} if args.stream else {})},
-                            log=log, telemetry=telemetry)
+                            log=log, telemetry=telemetry, save_last=True)  # the drafter's failure can be resumed
             span.set(**asdict(trained))
     except (ValueError, SettingsMismatch, PluginError) as error:
         raise Refused(f"{type(error).__name__}: {error}") from None
@@ -499,6 +535,23 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
             train_data.close()
     if not strategy.is_main:
         return
+
+    # the drafter, against the final weights, the model frozen; a failure writes nothing and keeps the
+    # checkpoint saved after the last step
+    try:
+        with telemetry.span("drafter", **asdict(drafter_config)):
+            drafter = train_drafter(model, (tokens for _, _, tokens in documents(store, record["shards"])),
+                                    drafter_config, drafting, end=Tokenizer.END, stops=(Tokenizer.END,),
+                                    device=strategy.device, telemetry=telemetry)
+    except DrafterFailed as error:
+        raise Refused(f"DrafterFailed: {error}; nothing was written; {checkpoint} stays: --resume continues from "
+                      "it and trains the drafter again") from None
+    drafter.provenance = {**drafter.provenance, "trained_by": {"command": "wpt-train", "recipe_name": args.recipe},
+                          "dataset": args.dataset}
+    # the scheduler's pass times, once per run, in the record; or those an earlier run recorded, replayed
+    with telemetry.span("scheduler.costs", replayed=args.scheduler_costs):
+        costs = replayed if replayed is not None else measure_costs(model, 1, drafter.block)
+        telemetry.write_file(COSTS_FILE, costs_file(costs, setup))
 
     # each stage's windows, micro-batch and accumulation, as the run split them
     batch = batching(settings, 1 if strategy.splits_windows else strategy.world_size)
@@ -510,9 +563,13 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
     try:
         with telemetry.span("model.write", folder=str(out)):
             with telemetry.span("model.weights"):
-                save_model(model, staging, store.get_bytes(named["vocabulary"]),
-                           f"{named['recipe']} version {named['recipe_version']}", max_shard_bytes=args.max_shard_size,
+                vocabulary = store.get_bytes(named["vocabulary"])
+                tokenizer_name = f"{named['recipe']} version {named['recipe_version']}"
+                save_model(model, staging, vocabulary, tokenizer_name, max_shard_bytes=args.max_shard_size,
                            metadata=WEIGHT_METADATA)
+                save_drafter(drafter, staging, tokenizer_name, hashlib.sha256(vocabulary).hexdigest(),
+                             metadata=WEIGHT_METADATA,
+                             provenance={**drafter.provenance, "target": {"weights": weight_hashes(staging)}})
             with telemetry.span("model.provenance") as span:
                 sources = sources_of(store, record["shards"])
                 written = provenance(args, recipe, record, record_object, sources, model_config, n_params, strategy,
@@ -527,7 +584,7 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
             telemetry.event("model.files", files=files)
             # recorded before the folder appears: a record that cannot be written leaves the target as it was
             telemetry.output(model_folder=str(out), weights={name: files[name] for name in weight_files(staging)},
-                             provenance=files["provenance.json"])
+                             provenance=files["provenance.json"], drafter=files["drafter/model.safetensors"])
             # the run is complete; recorded before the checkpoint goes (a FolderCheckpoint goes with the old folder)
             telemetry.event("training.checkpoint_removed", checkpoint=str(checkpoint))
             telemetry.irreversible("model.folder_replaced", folder=str(out))
@@ -548,5 +605,5 @@ def _train(args, recipe, strategy, plugins, store, telemetry):
     log(f"saved {out} (licenses and sources: {out / 'NOTICE'})")
     # show a sample so you immediately see what it learned
     model.eval()
-    ids = sample_tokens(model, [Tokenizer.END], context_size=model_config.block_size, max_new_tokens=120)
+    ids = sample_tokens(model, [Tokenizer.END], max_new_tokens=120, drafter=drafter, costs=costs)
     log(tokenizer.decode(list(ids)).decode("utf-8", errors="replace"))

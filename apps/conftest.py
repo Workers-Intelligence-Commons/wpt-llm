@@ -30,6 +30,9 @@ TINY_MODEL = {"n_layer": 4, "global_attention": ["CSA"], "d_model": 16, "kda_hea
               "engram_table_size": 31}
 ONE_STEP = {"method": "muon", "settings": {}, "stages": [{"block_size": 16, "steps": 1, "batch_size": 4}],
             "eval_every": 2, "eval_batches": 20, "seed": 1337}
+# the drafter every run trains at its end, as small and short as still trains and calibrates one
+TINY_DRAFTER = {"epochs": 1, "prompts": 4, "prompt_tokens": 8, "answer_tokens": 8, "batch": 2, "anchors": 4,
+                "held_out": 0.25}
 
 
 @pytest.fixture
@@ -40,9 +43,9 @@ def built(tmp_path, monkeypatch):
     WPT_STORE. Gives store, records(command) (the record folders of that
     command's runs, oldest first), dataset_id (built from the model recipe "d", a
     tiny model trained one step), source_id, attribution, and
-    recipe(name, model=..., training=..., posttrain=...), which writes a
-    model recipe of the same data part, with those changes to "d", and
-    returns its name."""
+    recipe(name, model=..., training=..., drafter=..., posttrain=...), which
+    writes a model recipe of the same data part, with those changes to "d",
+    and returns its name."""
     upstream = tmp_path / "upstream"
     upstream.mkdir()
     for i in range(16):
@@ -68,10 +71,11 @@ def built(tmp_path, monkeypatch):
         repo.recipe_path(kind, name).write_text(json.dumps({"schema": CURRENT_SCHEMA[kind], **document}))
         return name
 
-    def recipe(name="d", model=None, training=None, posttrain=()):
+    def recipe(name="d", model=None, training=None, drafter=None, posttrain=()):
         return write("model", name, {"data": {"mixture": "m", "tokenizer": "t", "total_tokens": 3000, "held_out": 0.5},
                                      "model": {**TINY_MODEL, **(model or {})},
-                                     "training": {**ONE_STEP, **(training or {})}, "posttrain": list(posttrain)})
+                                     "training": {**ONE_STEP, **(training or {})},
+                                     "drafter": {**TINY_DRAFTER, **(drafter or {})}, "posttrain": list(posttrain)})
 
     write("mixture", "m", {"pools": [{"name": "en", "select": "en", "weight": 1}]})
     write("tokenizer", "t", {"version": 1, "mixture": "m", "vocab_size": 556})

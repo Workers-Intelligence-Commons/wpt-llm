@@ -4,12 +4,12 @@
   "title": "WPT model recipe (data/recipes/models/<name>.json): everything that changes the resulting model",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "data", "model", "training", "posttrain"],
+  "required": ["schema", "data", "model", "training", "drafter", "posttrain"],
   "$defs": {
     "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
   },
   "properties": {
-    "schema": {"const": 4},
+    "schema": {"const": 5},
     "data": {
       "description": "what `wpt-dataset build` builds; recipes with the same data share one dataset",
       "type": "object",
@@ -83,6 +83,32 @@
         },
         "eval_every": {"type": "integer", "minimum": 1},
         "eval_batches": {"type": "integer", "minimum": 1, "description": "global batches of the stage averaged per evaluation"},
+        "seed": {"type": "integer", "minimum": 0}
+      }
+    },
+    "drafter": {
+      "description": "the drafter wpt-train trains at the end of the run, and wpt-posttrain at the end of every run (docs/model.md, \"The drafter\"; wpt_inference.drafting); a setting left out keeps its default",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "features": {"type": "array", "items": {"type": "integer", "minimum": 1}, "minItems": 1, "description": "the model layers whose hidden states the drafter reads, numbered from 1 to the model's n_layer (a run refuses another before it trains); default: wpt_model.drafter.feature_layers"},
+        "layers": {"type": "integer", "minimum": 1, "description": "the drafter's backbone layers"},
+        "block": {"type": "integer", "minimum": 1, "description": "tokens drafted per round"},
+        "markov_rank": {"type": "integer", "minimum": 1, "description": "rank of the Markov head; default 256 x d_model / 4096"},
+        "epochs": {"type": "integer", "minimum": 1},
+        "learning_rate": {"type": "number", "exclusiveMinimum": 0},
+        "weight_decay": {"type": "number", "minimum": 0},
+        "warm_up": {"type": "number", "minimum": 0, "maximum": 1, "description": "share of the updates the learning rate rises over"},
+        "clip": {"type": "number", "exclusiveMinimum": 0, "description": "gradient norm clipping"},
+        "anchors": {"type": "integer", "minimum": 1, "description": "anchors drawn from each answer per epoch"},
+        "batch": {"type": "integer", "minimum": 1, "description": "answers per update"},
+        "prompts": {"type": "integer", "minimum": 2, "description": "training documents whose beginnings are prompts"},
+        "prompt_tokens": {"type": "integer", "minimum": 1, "description": "the most tokens of a document's beginning in its prompt"},
+        "answer_tokens": {"type": "integer", "minimum": 1, "description": "the most tokens of each answer the model writes"},
+        "temperature": {"type": "number", "exclusiveMinimum": 0},
+        "top_k": {"type": ["integer", "null"], "minimum": 1},
+        "held_out": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1, "description": "share of the prompts kept apart for calibration and the measure"},
+        "ece_bins": {"type": "integer", "minimum": 1},
         "seed": {"type": "integer", "minimum": 0}
       }
     },

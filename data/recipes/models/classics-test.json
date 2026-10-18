@@ -1,5 +1,5 @@
 {
-  "schema": 4,
+  "schema": 5,
   "data": {
     "mixture": "classics",
     "tokenizer": "classics",
@@ -50,6 +50,17 @@
     "eval_every": 200,
     "eval_batches": 20,
     "seed": 1337
+  },
+  "drafter": {
+    "prompts": 256,
+    "prompt_tokens": 64,
+    "answer_tokens": 256,
+    "epochs": 10,
+    "learning_rate": 0.0006,
+    "held_out": 0.1,
+    "anchors": 512,
+    "batch": 8,
+    "seed": 0
   },
   "posttrain": [],
   "note": "A test to see every step work on one machine: 4.8M parameters, 256-token windows. Its one global layer (layer 4) is CSA with a top 16 of its 64 merged entries, so the selection is exercised even in short windows; with 4 layers it has no room for an HCA layer. Changed on 2026-10-17: gated MLA became DeepSeek-V4's CSA (4 heads of 128 sharing one key-value head, an indexer of 2 heads of 128, V4-Flash's scaled to the width) and the MTP block's attention a 128-token window; it grew from 4.6M to 4.8M parameters, and weights trained before no longer load. Since 2026-10-17 (recipe shape 4) its training is one stage: 3000 steps of 64 windows of 256 tokens; it does not reach longer windows (maintainer's decision, 2026-10-17: recipes keep one stage for now)."

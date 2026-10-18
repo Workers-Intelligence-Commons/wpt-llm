@@ -4,7 +4,8 @@ from pathlib import Path
 import pytest
 import torch
 
-from wpt_model import WPT, ModelConfig, TokenizerMismatch, load_model, load_tokenizer, save_model, tokenizer_identity
+from wpt_model import (WPT, Drafter, DrafterConfig, DrafterMismatch, ModelConfig, TokenizerMismatch, load_drafter,
+                       load_model, load_tokenizer, save_drafter, save_model, tokenizer_identity, weight_hashes)
 from wpt_model.notice import license_text, output_notice
 
 VOCABULARY = b'{"format":"wpt-bpe","merges":[],"tokenizer_version":"0.2.0"}\n'
@@ -20,6 +21,7 @@ def test_split_model_loads_back_identical(tmp_path):
     model.set_canonical_ids(torch.arange(50) // 2)  # buffers travel with the weights too
     model.layers[3].experts.bias.fill_(0.25)
     save_model(model, tmp_path, VOCABULARY, "test version 1", max_shard_bytes=20_000)
+    with_drafter(model, tmp_path)
 
     assert len(list(tmp_path.glob("model-*-of-*.safetensors"))) > 1
     loaded = load_model(tmp_path)
@@ -28,6 +30,37 @@ def test_split_model_loads_back_identical(tmp_path):
     assert original.keys() == restored.keys()
     assert all(torch.equal(original[k], restored[k]) for k in original)
     assert tokenizer_identity(tmp_path) == ("test version 1", hashlib.sha256(VOCABULARY).hexdigest())  # in every shard
+
+
+def with_drafter(model, folder):
+    """An untrained drafter, named as trained against the folder's weights."""
+    save_drafter(Drafter(model.config, DrafterConfig.for_model(model.config)), folder, *tokenizer_identity(folder),
+                 provenance={"target": {"weights": weight_hashes(folder)}})
+
+
+def test_a_model_loads_only_with_the_drafter_trained_against_its_weights(tmp_path):
+    # maintainer's decision, 2026-10-17: a model and its drafter are one
+    # unit; load_model refuses a folder whose drafter is missing, was not
+    # saved whole, or names other weights by their sha256, and no option
+    # skips the check
+    model = WPT(ModelConfig(**TINY))
+    save_model(model, tmp_path, VOCABULARY, "test version 1")
+    with pytest.raises(DrafterMismatch, match="no drafter"):
+        load_model(tmp_path)
+    with_drafter(model, tmp_path)
+    load_model(tmp_path)
+    assert load_drafter(tmp_path).provenance == {"target": {"weights": weight_hashes(tmp_path)}}
+
+    model.layers[3].experts.bias.fill_(0.5)  # other weights in the same folder: the drafter was not trained for them
+    save_model(model, tmp_path, VOCABULARY, "test version 1")
+    with pytest.raises(DrafterMismatch, match="trained against weights"):
+        load_model(tmp_path)
+    with pytest.raises(DrafterMismatch, match="trained against weights"):
+        load_drafter(tmp_path)
+    with_drafter(model, tmp_path)
+    (tmp_path / "drafter" / "config.json").unlink()  # a save that stopped midway
+    with pytest.raises(DrafterMismatch, match="not saved whole"):
+        load_model(tmp_path)
 
 
 def test_a_model_runs_only_with_the_vocabulary_its_weights_name(tmp_path):

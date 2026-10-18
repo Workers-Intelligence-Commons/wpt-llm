@@ -24,8 +24,25 @@ the task folders whose task.json carries the step's name (the `grpo` step
 reads those tagged `grpo`), or context.tasks(tag) those of another tag
 (the `token-efficiency` step reads the tasks tagged `grpo`).
 
-NEW_FOLDER is written only when every step succeeded: the weights, the
-tokenizer, and the base model's provenance.json with a "post_training"
+After the last step, the run trains a fresh drafter for the new weights
+(wpt_inference.drafting; docs/model.md, "The drafter"), the model frozen,
+with the recipe's `drafter` section: its prompts are the beginnings of the
+base model's training documents (the dataset its provenance names, read
+from the store), and the post-trained model alone writes the answers. The
+base folder's drafter is never used: it was trained against other weights.
+A drafter that cannot be trained fails the run, and nothing is written.
+Its training answers stop at the end of a document or at <|im_end|>, the
+end of a turn, which a post-trained model writes. Then the run measures
+the scheduler's pass times for the new weights once and writes them into
+its record as scheduler-costs.json, with the setup they were measured on
+(the model's config, the drafter's block, the device); --scheduler-costs
+RECORD_FOLDER replays those an earlier run recorded instead, refused
+before any step runs when they were measured on another setup.
+
+NEW_FOLDER is written only when every step succeeded and the drafter was
+trained: the weights, the tokenizer, the drafter (drafter/, with its own
+provenance.json: the command and recipe that trained it, the dataset, the
+sha256 of the weights it was trained against), and the base model's provenance.json with a "post_training"
 section (the recipe's name, the base weights' sha256, each step's file
 sha256, outcome and the sources it read, those sources' revisions and licenses, the repository
 commit, the tools), then LICENSE, NOTICE and README.md, which list the
@@ -51,7 +68,7 @@ import platform
 import shutil
 import sys
 import tempfile
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 import torch
@@ -60,12 +77,16 @@ from wpt_dataset import conversations as chat_files
 from wpt_dataset import tasks as task_files
 from wpt_dataset.errors import DatasetError
 from wpt_dataset.repo import Repo
-from wpt_model import (WPT, TokenizerMismatch, load_model, load_tokenizer, save_model, tokenizer_identity, weight_files,
-                       weight_hashes)
+from wpt_inference import COSTS_FILE, costs_file, costs_setup, measure_costs, replayed_costs
+from wpt_inference.drafting import DrafterFailed, train_drafter
+from wpt_inference.drafting import settings as drafter_settings
+from wpt_model import (WPT, TokenizerMismatch, load_model, load_tokenizer, save_drafter, save_model,
+                       tokenizer_identity, weight_files, weight_hashes)
 from wpt_model.notice import CREDITS_NAME, WEIGHT_METADATA, write_documents
 from wpt_store import Store, StoreError, store_from_settings
+from wpt_store.shards import documents
 from wpt_telemetry import RECORD_FAILED, RecordError, Telemetry, file_hashes, short
-from wpt_tokenizer import RUSTC_VERSION, Tokenizer
+from wpt_tokenizer import RUSTC_VERSION, Tokenizer, chat
 from wpt_utils.device import describe, select_device
 from wpt_utils.files import sha256_file
 from wpt_utils.programs import repository
@@ -75,8 +96,11 @@ VERSION = importlib.metadata.version("wpt-posttrain")
 
 
 class StepError(Exception):
-    """A step cannot run: the recipe is missing or names no step, the base
-    folder is not a trained model, NEW_FOLDER exists, the step is unknown,
+    """A step cannot run: the recipe is missing, names no step or has
+    drafter settings no drafter can have, the scheduler's times to replay
+    are missing or were measured on another setup, the base folder is not a trained
+    model or its drafter is missing or was trained against other weights,
+    NEW_FOLDER exists, the step is unknown,
     has no run(context), or returned something other than an Outcome.
     Nothing has been written."""
 
@@ -188,33 +212,63 @@ def open_context(base, store, device, telemetry=None) -> Context:
         raise StepError(f"{base}: provenance shape {provenance.get('schema')}, this wpt-posttrain reads 4")
     try:
         tokenizer = Tokenizer.from_bytes(load_tokenizer(base))
-    except (TokenizerMismatch, ValueError) as error:  # ValueError: a vocabulary of another tokenizer version
+        model = load_model(base, device)  # refuses a folder whose drafter is missing or of other weights
+    # ValueError: a vocabulary of another tokenizer version, or a DrafterMismatch
+    except (TokenizerMismatch, ValueError) as error:
         raise StepError(str(error)) from None
-    return Context(base, load_model(base, device), tokenizer, device, provenance, store,
-                   telemetry=telemetry or Telemetry.off())
+    return Context(base, model, tokenizer, device, provenance, store, telemetry=telemetry or Telemetry.off())
 
 
-def recipe_steps(name) -> list[str]:
-    """The post-training steps of the model recipe of that name."""
+def recipe_parts(name) -> tuple[list[str], dict]:
+    """(the post-training steps, the drafter section) of the model recipe
+    of that name."""
     try:
-        steps = Repo.find().recipe("model", name)["posttrain"]
+        recipe = Repo.find().recipe("model", name)
     except DatasetError as error:
         raise StepError(str(error)) from None
-    if not steps:
+    if not recipe["posttrain"]:
         raise StepError(f"model recipe {name!r} names no post-training step")
-    return steps
+    return recipe["posttrain"], recipe["drafter"]
 
 
-def post_train(context, recipe_name, steps, new_folder, base_weights) -> Path:
-    """Run every step, then write new_folder. A failure leaves nothing.
-    base_weights: wpt_model.weight_hashes(context.base)."""
+def post_train(context, recipe_name, steps, drafter_section, new_folder, base_weights, scheduler_costs=None) -> Path:
+    """Run every step, train a fresh drafter for the new weights, measure
+    the scheduler's pass times (or replay those of the record folder
+    scheduler_costs) into the run's record, then write new_folder. A
+    failure (StepFailed, DrafterFailed) leaves nothing. drafter_section:
+    the recipe's `drafter` section; base_weights:
+    wpt_model.weight_hashes(context.base)."""
     new_folder = Path(new_folder)
     if new_folder.exists():
         raise StepError(f"{new_folder} exists; give a new folder")
     for step in steps:
         find(step)  # an unknown step stops the run before any step has run
+    # settings no drafter can have, and times recorded on another setup, stop the run before any step has run
+    try:
+        drafter_config, drafting = drafter_settings(context.model.config, drafter_section)
+        setup = costs_setup(context.model.config, 1, drafter_config.block, context.device)
+        replayed = (replayed_costs(context.store.read_record(scheduler_costs, COSTS_FILE), setup)
+                    if scheduler_costs else None)
+    except (ValueError, StoreError) as error:
+        raise StepError(str(error)) from None
     context.telemetry.input(recipe=recipe_name, base_weights=base_weights, dataset=context.provenance.get("dataset"))
-    records = [run_step(context, step) for step in steps]
+    records = []
+    for step in steps:
+        records.append(run_step(context, step))
+    # a fresh drafter, against the post-trained weights, on the beginnings of the base model's training documents
+    with context.telemetry.span("drafter", **asdict(drafter_config)):
+        beginnings = (tokens for _, _, tokens in documents(context.store, context.provenance["shards"]))
+        # a post-trained model ends its answers with <|im_end|> as well as the end of a document
+        drafter = train_drafter(context.model, beginnings, drafter_config, drafting, end=Tokenizer.END,
+                                stops=(Tokenizer.END, chat.IM_END), device=context.device,
+                                telemetry=context.telemetry)
+    drafter.provenance = {**drafter.provenance,
+                          "trained_by": {"command": "wpt-posttrain", "recipe_name": recipe_name},
+                          "dataset": context.provenance.get("dataset")}
+    # the scheduler's pass times for the new weights, once per run, in the record; or an earlier run's, replayed
+    with context.telemetry.span("scheduler.costs", replayed=scheduler_costs):
+        costs = replayed if replayed is not None else measure_costs(context.model, 1, drafter.block)
+        context.telemetry.write_file(COSTS_FILE, costs_file(costs, setup))
     sources = {sid: source for record in records for sid, source in record["sources"].items()}
     context.telemetry.input(sources={sid: source["revision"] for sid, source in sorted(sources.items())})
     provenance = {**context.provenance, "post_training": {
@@ -237,6 +291,8 @@ def post_train(context, recipe_name, steps, new_folder, base_weights) -> Path:
             with telemetry.span("model.weights"):
                 save_model(context.model, staging, load_tokenizer(context.base), tokenizer_identity(context.base)[0],
                            metadata=WEIGHT_METADATA)  # the base model's vocabulary, under the same name
+                save_drafter(drafter, staging, *tokenizer_identity(context.base), metadata=WEIGHT_METADATA,
+                             provenance={**drafter.provenance, "target": {"weights": weight_hashes(staging)}})
             with telemetry.span("model.provenance"):
                 (staging / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n",
                                                          encoding="utf-8", newline="\n")
@@ -248,7 +304,8 @@ def post_train(context, recipe_name, steps, new_folder, base_weights) -> Path:
             telemetry.event("model.files", files=files)
             # recorded before the folder appears: a record that cannot be written leaves no new folder
             weights = {name: files[name] for name in weight_files(staging)}
-            telemetry.output(model_folder=str(new_folder), weights=weights, provenance=files["provenance.json"])
+            telemetry.output(model_folder=str(new_folder), weights=weights, provenance=files["provenance.json"],
+                             drafter=files["drafter/model.safetensors"])
             telemetry.irreversible("model.folder_written", folder=str(new_folder))
             renaming = True
             os.replace(staging, new_folder)
@@ -269,6 +326,10 @@ def main(argv=None):
                                        "without .json")
     parser.add_argument("base", help="model folder written by wpt-train")
     parser.add_argument("new", help="model folder to write; must not exist")
+    parser.add_argument("--scheduler-costs", metavar="RECORD_FOLDER",
+                        help="replay the drafter scheduler's pass times that an earlier run recorded on the same "
+                             f"setup: the name of its record folder, which holds {COSTS_FILE} (default: measure "
+                             "them)")
     args = parser.parse_args(argv)
     try:
         store = store_from_settings(Path.cwd() / ".env")
@@ -285,12 +346,13 @@ def main(argv=None):
                              env_file=Path.cwd() / ".env") as telemetry:
             try:
                 with telemetry.span("inputs"):
-                    steps = recipe_steps(args.recipe)
+                    steps, drafter_section = recipe_parts(args.recipe)
                     device = select_device()
                     telemetry.log(f"device: {describe(device)}")
                     context = open_context(args.base, store, device, telemetry)
-                new_folder = post_train(context, args.recipe, steps, args.new, base_weights)
-            except (StoreError, StepError, StepFailed, DatasetError) as error:
+                new_folder = post_train(context, args.recipe, steps, drafter_section, args.new, base_weights,
+                                        args.scheduler_costs)
+            except (StoreError, StepError, StepFailed, DrafterFailed, DatasetError) as error:
                 sys.exit(f"{type(error).__name__}: {error}\nnothing was written")  # end.json records it
             telemetry.log(f"saved {new_folder} (licenses and sources: {new_folder / 'NOTICE'})")
     except RecordError as error:

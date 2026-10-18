@@ -17,11 +17,19 @@ counts every token once.
 record and replay (experts.Routes) keep the experts the routers chose for
 one sequence and route a later pass the same way (R3).
 
-A pass may be part of a longer window (sequence.py): a segment on one GPU,
+Every layer says once what it passes on to later tokens (carry.py), and a
+pass may follow earlier tokens (sequence.py): a segment on one GPU,
 carrying what earlier segments passed on (carried), or one process's slice
 of a window split across processes, or of one part of a window run as
 parts split across processes (split). Each gives exactly the whole
 window's result.
+
+Generation reads tokens through a cache (cache.py) that keeps the same
+description: new_cache, then extend with each call's new tokens, undo to
+take back the last tokens of an undoable extend, and extend_mtp for the
+multi-token prediction block. extend is forward's own pass through the
+cache's place, so the same scores within rounding, and it has no length
+limit.
 """
 
 import torch
@@ -29,6 +37,7 @@ import torch.nn as nn
 from torch.utils.checkpoint import checkpoint
 
 from .attention import CSA_RATIO, HCA_RATIO, Attention, Compressor
+from .cache import Cache, Recorder
 from .config import ModelConfig, global_layers
 from .engram import Engram
 from .experts import SHARED_EXPERTS, Experts, Routes
@@ -80,6 +89,14 @@ class Layer(nn.Module):
         streams = self.attention_streams(streams, attend)
         return self.experts_streams(streams, lambda h: self.experts(self.experts_norm(h), ids, collect, record,
                                                                      replay)), found[0]
+
+
+def _counts(ids, counts):
+    """counts (B,) as a tensor on ids' device: every one of ids' n tokens when None."""
+    B, n = ids.shape
+    if counts is None:
+        return torch.full((B,), n, dtype=torch.long, device=ids.device)
+    return torch.as_tensor(counts, dtype=torch.long, device=ids.device)
 
 
 def _first_run_collects(layer, record, replay):
@@ -137,39 +154,53 @@ class WPT(nn.Module):
         self.canonical.copy_(ids)
 
     def forward(self, idx, next_tokens=None, indexer_loss=False, *, record: Routes | None = None,
-                replay: Routes | None = None, sequence=None):
+                replay: Routes | None = None, sequence=None, features=()):
         """(B, T) token ids -> (B, T, vocab_size) next-token scores. With
         next_tokens, the (B, T) tokens that follow idx, also returns the
         multi-token prediction block's scores for the token after each next
         token. With indexer_loss, also returns the CSA indexers' loss of this
         pass, summed over CSA layers (0 without one); only the indexers'
         parameters get a gradient from it. Returns the scores alone, or the
-        tuple (scores, [mtp scores], [indexer loss]) of what was asked. With
-        record or replay (B = 1), the routed layers record their choices into
-        it, or route as it holds. sequence: where idx sits in a longer window
-        (carried, split), the whole window when None; the indexer loss is
-        then the mean over idx's queries."""
+        tuple (scores, [mtp scores], [indexer loss], [features]) of what was
+        asked. With record or replay (B = 1), the routed layers record their
+        choices into it, or route as it holds. sequence: where idx sits in a
+        longer window (carried, split), the whole window when None; the
+        indexer loss is then the mean over idx's queries. features: layer
+        numbers (from 1) whose hidden states (each layer's output streams,
+        summed) come back side by side, (B, T, len(features) * d_model),
+        what a drafter reads (drafter.py)."""
         sequence = WHOLE if sequence is None else sequence
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=idx.is_cuda):
-            canonical = self.canonical[idx]
-            streams = self.embedding(idx).float().unsqueeze(2).expand(-1, -1, STREAMS, -1)  # copied into each stream
-            recompute = self.recompute and self.training and torch.is_grad_enabled()
-            total = streams.new_zeros(())
-            for layer in self.layers:
-                streams, alignment = (
-                    checkpoint(_first_run_collects(layer, record, replay), streams, idx, canonical, indexer_loss,
-                               sequence, use_reentrant=False)
-                    if recompute else layer(streams, idx, canonical, indexer_loss, collect=sequence.collect,
-                                            record=record, replay=replay, sequence=sequence))
-                if alignment is not None:
-                    total = total + alignment
-            hidden = streams.sum(2)
+            hidden, total, found = self._hidden(idx, indexer_loss, record, replay, sequence, features)
             outputs = [self.head(self.final_norm(hidden)).float()]
             if next_tokens is not None:
                 outputs.append(self.head(self.mtp(hidden, self.embedding(next_tokens), sequence)).float())
             if indexer_loss:
                 outputs.append(total)
+            if features:
+                outputs.append(found)
             return outputs[0] if len(outputs) == 1 else tuple(outputs)
+
+    def _hidden(self, idx, indexer_loss, record, replay, sequence, features):
+        """(the final hidden states, the indexers' loss, the features' hidden
+        states side by side or None) of idx at its place, inside forward's
+        autocast."""
+        canonical = self.canonical[idx]
+        streams = self.embedding(idx).float().unsqueeze(2).expand(-1, -1, STREAMS, -1)  # copied into each stream
+        recompute = self.recompute and self.training and torch.is_grad_enabled()
+        total = streams.new_zeros(())
+        found = {}
+        for number, layer in enumerate(self.layers, start=1):
+            streams, alignment = (
+                checkpoint(_first_run_collects(layer, record, replay), streams, idx, canonical, indexer_loss,
+                           sequence, use_reentrant=False)
+                if recompute else layer(streams, idx, canonical, indexer_loss, collect=sequence.collect,
+                                        record=record, replay=replay, sequence=sequence))
+            if alignment is not None:
+                total = total + alignment
+            if number in features:
+                found[number] = streams.sum(2).float()
+        return streams.sum(2), total, torch.cat([found[number] for number in features], -1) if features else None
 
     @staticmethod
     def carried(offset, carried, collect=True):
@@ -183,6 +214,58 @@ class WPT(nn.Module):
         split across world processes, or of the part of it that starts at
         token start, given what the part before passed on (sequence.Split)."""
         return Split(rank, world, length, start, carried, collect)
+
+    def new_cache(self, rows, routes=False) -> Cache:
+        """An empty cache of `rows` rows (cache.py); with routes, it records
+        each row's routed experts (R3) as its tokens are read."""
+        return Cache(self, rows, routes)
+
+    @torch.no_grad()
+    def extend(self, ids, cache, counts=None, undoable=False, features=()):
+        """Reads ids (B, n), the next tokens of the cache's B rows: the
+        first counts[b] of row b (all n by default), the rest padding.
+        Returns (B, n, vocab_size) next-token scores, the same as forward's
+        over each row's whole text within rounding (padding's are
+        meaningless), and the (B, n, D) final hidden states, which
+        extend_mtp reads; with features (layer numbers), also those layers'
+        hidden states as forward gives them. With undoable, undo can then
+        take back the last tokens of this call."""
+        counts = _counts(ids, counts)
+        reading = cache.text.reading(counts, undoable)
+        record = Recorder(cache.routes, counts.tolist()) if cache.routes is not None else None
+        with torch.autocast("cuda", dtype=torch.bfloat16, enabled=ids.is_cuda):
+            hidden, _, found = self._hidden(ids, False, record, None, reading, features)
+            scores = self.head(self.final_norm(hidden)).float()
+        reading.finish()
+        return (scores, hidden, found) if features else (scores, hidden)
+
+    @torch.no_grad()
+    def undo(self, cache, kept):
+        """After an undoable extend: keeps only its first kept[b] tokens of
+        row b, as if the others had never been read (the routes recorded
+        for them too)."""
+        cache.text.undo(torch.as_tensor(kept, dtype=torch.long, device=cache.lengths.device))
+        if cache.routes is not None:
+            for routes, length in zip(cache.routes, cache.lengths.tolist()):
+                routes.keep(length)
+
+    @torch.no_grad()
+    def extend_mtp(self, hidden, next_ids, cache, counts=None, undoable=False):
+        """The multi-token prediction block's scores (B, n, vocab_size) for
+        the token after next, through its window in the cache: hidden, the
+        final hidden states extend returned for n positions, and next_ids,
+        the token that follows each. The block reads these pairs in order,
+        apart from extend; undo_mtp takes back those of an undoable call."""
+        reading = cache.mtp.reading(_counts(next_ids, counts), undoable)
+        with torch.autocast("cuda", dtype=torch.bfloat16, enabled=next_ids.is_cuda):
+            scores = self.head(self.mtp(hidden, self.embedding(next_ids), reading)).float()
+        reading.finish()
+        return scores
+
+    @torch.no_grad()
+    def undo_mtp(self, cache, kept):
+        """undo, for the pairs of the last undoable extend_mtp."""
+        cache.mtp.undo(torch.as_tensor(kept, dtype=torch.long, device=cache.lengths.device))
 
     def after_update(self, reduce):
         """After each optimizer step: Quantile Balancing sets the routers'

@@ -4,6 +4,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from .carry import Tail
+
 EPS = 1e-6
 CONV_KERNEL = 4
 
@@ -12,12 +14,24 @@ class ShortConv(nn.Module):
     """A depthwise causal convolution over time: each channel sees its own
     last `kernel` values, `dilation` tokens apart. (B, T, C) -> (B, T, C).
     earlier: the `reach` inputs before x (B, reach, C), zeros when None
-    (before the text)."""
+    (before the text). It passes on its last `reach` inputs (carry.py):
+    "inputs", or "inputs s" for each stream s when one convolution serves
+    `streams` streams (Engram's)."""
 
-    def __init__(self, channels, kernel=CONV_KERNEL, dilation=1):
+    def __init__(self, channels, kernel=CONV_KERNEL, dilation=1, streams=None):
         super().__init__()
-        self.reach = (kernel - 1) * dilation
         self.conv = nn.Conv1d(channels, channels, kernel, groups=channels, dilation=dilation, bias=False)
+        self.streams = streams
+
+    @property
+    def reach(self):
+        """How many inputs before a token its output reads."""
+        return (self.conv.kernel_size[0] - 1) * self.conv.dilation[0]
+
+    def passes_on(self):
+        if self.streams is None:
+            return {"inputs": Tail(self.reach)}
+        return {f"inputs {s}": Tail(self.reach) for s in range(self.streams)}
 
     def forward(self, x, earlier=None):
         if earlier is None:

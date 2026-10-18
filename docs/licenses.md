@@ -11,7 +11,12 @@ copyleft, never the reverse.
 The weights of WPT models are under AGPL-3.0-or-later too. Each model folder
 carries the license text (`LICENSE`), a `NOTICE` naming every source the
 model learned from with the credit it asks for, and a model card; the weight
-files' headers name the licenses (see [training.md](training.md)).
+files' headers name the licenses (see [training.md](training.md)). A
+model's drafter (`drafter/`, [model.md](model.md), "The drafter") is part of
+its weights: the same license, the same header in its weight file. Its
+prompts are the beginnings of the model's own training documents, whose
+sources the same `NOTICE` already credits, and it learns only from answers
+WPT's own model writes, never from another company's model (below).
 
 Data built by WPT's tools (token shards, vocabularies, dataset records) is
 under AGPL-3.0-or-later too, by the same logic as code: every source is

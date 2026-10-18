@@ -16,12 +16,14 @@ from wpt_agent import images
 from wpt_dataset import manifest
 from wpt_dataset.repo import address_hash, dump_json
 from wpt_dataset.sources import compute_upstream
-from wpt_model import load_model
+from wpt_inference import COSTS_FILE, DRAFT, costs_setup, replayed_costs
+from wpt_model import load_drafter, load_model, weight_hashes
 from wpt_eval import main as evaluate
 from wpt_dataset import conversations
 from wpt_posttrain import agentic, main
 from wpt_store import LocalStore
 from wpt_telemetry import RECORD_FAILED, Telemetry
+from wpt_tokenizer import Tokenizer, chat
 from wpt_train import main as train
 
 
@@ -65,6 +67,83 @@ def test_steps_that_succeed_give_a_new_folder_and_leave_the_base_untouched(train
     card = (tuned / "README.md").read_text()
     assert "## Post-training" in card and "1. `zero_weights.py`" in card and "2. `check_records.py`" in card
     assert not (tuned / "evals").exists()
+
+
+def test_every_run_trains_a_fresh_drafter_against_the_new_weights(trained, tmp_path, monkeypatch):
+    # maintainer's decision, 2026-10-17: a model and its drafter are one
+    # unit; after the steps, the run trains a new drafter, the model frozen,
+    # on the beginnings of the base model's training documents, and the new
+    # folder holds it, named against the new weights. Maintainer's decision,
+    # 2026-10-18: its training answers stop at <|im_end|> too
+    stops, real = [], wpt_posttrain.train_drafter
+    monkeypatch.setattr(wpt_posttrain, "train_drafter", lambda *args, **kwargs: stops.append(kwargs["stops"])
+                        or real(*args, **kwargs))
+    step = tmp_path / "zero_weights.py"
+    step.write_text(ZERO_WEIGHTS)
+    main([trained.recipe("tune", posttrain=[str(step)]), str(trained.folder), str(tmp_path / "tuned")])
+    assert stops == [(Tokenizer.END, chat.IM_END)]
+
+    tuned = tmp_path / "tuned"
+    drafter, base = load_drafter(tuned).provenance, load_drafter(trained.folder).provenance
+    assert drafter["target"] == {"weights": weight_hashes(tuned)} != base["target"]
+    assert drafter["trained_by"] == {"command": "wpt-posttrain", "recipe_name": "tune"}
+    assert drafter["dataset"] == trained.dataset_id and drafter["prompts"]["count"] == 4
+    assert all(torch.count_nonzero(p) == 0 for p in load_model(tuned).parameters())  # the model learned nothing more
+    [run] = trained.records("wpt-posttrain")
+    names = {event.get("name") for event in run.events}
+    assert {"drafter", "drafter.settings", "drafter.update", "drafter.calibration", "drafter.acceptance"} <= names
+    assert "## Drafter" in (tuned / "README.md").read_text()
+    assert "Trained by `wpt-posttrain`, recipe `tune`" in (tuned / "README.md").read_text()
+
+
+def test_post_training_records_the_scheduler_s_times_and_replays_them_only_on_their_setup(trained, tmp_path):
+    # maintainer's decision, 2026-10-18: wpt-posttrain measures the
+    # scheduler's pass times for the new weights, records them with their
+    # setup, and replays an earlier run's; another setup is refused before
+    # any step runs
+    check = tmp_path / "check.py"
+    check.write_text("from wpt_posttrain import Outcome\n\ndef run(context):\n    return Outcome.success()\n")
+    main([trained.recipe("tune", posttrain=[str(check)]), str(trained.folder), str(tmp_path / "tuned")])
+    [run] = trained.records("wpt-posttrain")
+    recorded = trained.store.read_record(run.folder, COSTS_FILE)
+    setup = costs_setup(load_model(tmp_path / "tuned").config, 1, DRAFT, "cpu")
+    assert len(replayed_costs(recorded, setup)) == DRAFT + 1
+    assert "scheduler.costs" in {event.get("name") for event in run.events}
+
+    main([trained.recipe("tune", posttrain=[str(check)]), str(trained.folder), str(tmp_path / "again"),
+          "--scheduler-costs", run.folder])
+    assert trained.store.read_record(trained.records("wpt-posttrain")[-1].folder, COSTS_FILE) == recorded
+    never = tmp_path / "never.py"
+    never.write_text("raise SystemExit('this step must not run')\n")
+    with pytest.raises(SystemExit, match=r"StepError: the recorded costs were measured on another setup: draft 5, "
+                                         r"here 4\nnothing was written"):
+        main([trained.recipe("tune", drafter={"block": 4}, posttrain=[str(never)]), str(trained.folder),
+              str(tmp_path / "never"), "--scheduler-costs", run.folder])
+    assert not (tmp_path / "never").exists()
+
+
+def test_a_drafter_that_cannot_be_trained_fails_the_run_and_writes_nothing(trained, tmp_path):
+    # held_out keeps both prompts apart: nothing is left to learn from
+    check = tmp_path / "check.py"
+    check.write_text("from wpt_posttrain import Outcome\n\ndef run(context):\n    return Outcome.success()\n")
+    recipe = trained.recipe("tune", drafter={"prompts": 2, "held_out": 0.9}, posttrain=[str(check)])
+    with pytest.raises(SystemExit, match=r"DrafterFailed: held_out 0.9 keeps every one of the 2 prompts apart\n"
+                                         r"nothing was written"):
+        main([recipe, str(trained.folder), str(tmp_path / "tuned")])
+    assert not (tmp_path / "tuned").exists()
+    assert not list(tmp_path.glob(".tuned-*"))
+
+
+def test_a_base_folder_whose_drafter_was_trained_against_other_weights_is_refused(trained, tmp_path):
+    # no option skips the check
+    provenance = trained.folder / "drafter" / "provenance.json"
+    document = json.loads(provenance.read_text())
+    provenance.write_text(json.dumps({**document, "target": {"weights": {"model.safetensors": "0" * 64}}}))
+    check = tmp_path / "check.py"
+    check.write_text("raise SystemExit('this step must not run')\n")
+    with pytest.raises(SystemExit, match=r"DrafterMismatch|StepError: .*its drafter was trained against weights"):
+        main([trained.recipe("tune", posttrain=[str(check)]), str(trained.folder), str(tmp_path / "tuned")])
+    assert not (tmp_path / "tuned").exists()
 
 
 def test_a_failed_step_stops_the_run_with_its_reason_and_writes_nothing(trained, tmp_path, capsys):
@@ -167,6 +246,7 @@ def test_on_s3_the_new_folder_appears_only_once_its_record_is_in_the_bucket(trai
     # be in the bucket before the folder appears, so a refused send leaves none
     step = tmp_path / "nothing.py"
     step.write_text("from wpt_posttrain import Outcome\n\ndef run(context):\n    return Outcome.success()\n")
+    s3.copy(trained.store)  # the dataset, whose training documents' beginnings the drafter's prompts are
     s3.refuse(b'"model.files"')
     with pytest.raises(SystemExit) as stopped:
         main([trained.recipe("tune", posttrain=[str(step)]), str(trained.folder), str(tmp_path / "tuned")])
@@ -291,10 +371,10 @@ def test_a_group_whose_scores_are_all_equal_never_dilutes_the_update(monkeypatch
     scores = {"differ": [1.0, 0.0], "equal": [0.5, 0.5]}
     played = {}
 
-    def play(task):
+    def play(task, count, keep):
         ids = [0, 1, 2, 3] if task.id == "differ" else [0, 4, 5, 6, 7, 1, 2]
         attempt = wpt_agent.Attempt({}, ids, [False] + [True] * (len(ids) - 1), "answered")
-        return attempt, None, next(played[task.id])
+        return [keep(index, (attempt, None, next(played[task.id]))) for index in range(1, count + 1)]
 
     losses, update = [], agentic.update
     monkeypatch.setattr(agentic, "update", lambda *args: losses.append(update(*args)) or losses[-1])
@@ -307,7 +387,7 @@ def test_a_group_whose_scores_are_all_equal_never_dilutes_the_update(monkeypatch
     for names in (["differ", "equal"], ["differ"]):
         played = {name: iter(values) for name, values in scores.items()}
         tasks = [task(name) for name in names]
-        learner = agentic.Learner("grpo", _Logits(), None, "cpu", {"tiny": None}, 100, settings)
+        learner = agentic.Learner("grpo", _Logits(), None, "cpu", {"tiny": None}, settings)
         learner.play = play
         assert learner.train(tasks).succeeded
     assert len(losses) == 2 and losses[0] == pytest.approx(losses[1])
@@ -382,15 +462,17 @@ def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, 
     # each attempt runs in a container of the task's image and its check
     # scores it; attempts that score apart change the weights, but not the
     # routers', and the new model's NOTICE credits the source of the tasks;
-    # the image must be built first, and the step says how
-    recipe = built.recipe("agent", training=one_stage(1, 1024))  # the four tools' descriptions take most of it
+    # the image must be built first, and the step says how. The opening
+    # alone (the four tools' descriptions) is longer than block_size: the
+    # model reads the attempts through its cache, up to the task's max_tokens
+    recipe = built.recipe("agent", training=one_stage(1, 64))
     train([recipe, built.dataset_id, "--out", "model"])
     base, root = tmp_path / "model", tmp_path
     sid = task_source(built, root, tmp_path / "tasks")
     images.lock(root, "tiny", log=lambda _: None)  # no image built yet
 
     step = step_copy(tmp_path, ROUNDS="1", GROUP="2", TASKS_PER_UPDATE="1", LEARNING_RATE="1e-2")
-    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[str(step)])
+    recipe = built.recipe("agent", training=one_stage(1, 64), posttrain=[str(step)])
     with pytest.raises(SystemExit, match="image 'tiny' is not built on this machine.*wpt-agent build-image tiny"):
         main([recipe, str(base), str(tmp_path / "tuned")])
     try:
@@ -446,6 +528,44 @@ def test_token_efficiency_rewards_a_passing_attempt_by_how_few_tokens_it_wrote()
     assert step.reward(reference, attempt_of(23), 0.5) == pytest.approx(0.5)  # twice as long
 
 
+def test_each_attempt_s_line_is_kept_as_soon_as_it_is_scored(monkeypatch):
+    # maintainer's decision, 2026-10-18: a task's attempts are written
+    # together, but each attempt's line is kept right after it is scored,
+    # before the next one is, as when attempts ran one by one; a dropped
+    # attempt takes its place in the order
+    class Box:
+        made = 0
+
+        def __init__(self, *args, **kwargs):
+            Box.made += 1
+            if Box.made == 2:
+                raise wpt_agent.SandboxError("docker create: no space left on device")
+
+        def close(self):
+            pass
+
+    def attempts(task, boxes, tokenizer, start, result_bytes):
+        start([0], len(boxes), ())
+        return [wpt_agent.Attempt({}, [0, 1], [False, True], "answered") for _ in boxes]
+
+    kept, scored = [], []
+    monkeypatch.setattr(wpt_agent, "Sandbox", Box)
+    monkeypatch.setattr(wpt_agent, "attempts", attempts)
+    monkeypatch.setattr(wpt_agent, "score", lambda box, check, seconds: scored.append(list(kept)) or (1.0, None))
+    monkeypatch.setattr(agentic, "Writer", lambda model, ids, rows, **kwargs: type("W", (), {"routes": [None] * rows}))
+    grpo = step_module(GRPO)
+    settings = agentic.Settings(rounds=1, tasks_per_update=1, group=3, learning_rate=grpo.LEARNING_RATE,
+                                weight_decay=grpo.WEIGHT_DECAY, temperature=grpo.TEMPERATURE, top_k=grpo.TOP_K,
+                                check_seconds=grpo.CHECK_SECONDS, result_bytes=grpo.RESULT_BYTES, seed=grpo.SEED)
+    learner = agentic.Learner("grpo", _Logits(), None, "cpu", {"tiny": None}, settings)
+    monkeypatch.setattr(learner, "_keep", lambda task, round_, group, index, one: kept.append(index) or len(kept))
+    task = type("Task", (), {"id": "t", "image": "tiny", "files": None, "check": None,
+                         "container": {"memory": 1, "disk": 1, "processes": 1, "cpus": 1}})
+    played = learner.attempts(task, 1, 1, 3, lambda task, attempt, score: score)
+    assert scored == [[], [1, 2]]  # attempt 1 scored before any line, attempt 3 after the lines of 1 and 2
+    assert kept == [1, 2, 3] and [one.attempt is None for one in played] == [False, True, False]
+
+
 def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_best_start_score():
     # per task: the best score the incoming model reached, and the mean
     # length of its attempts that reach it; a task the model always scored
@@ -454,14 +574,15 @@ def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_b
     plays = {"mixed": [(0.5, 4), (0.75, 10), (0.25, 2), (0.75, 20)], "zero": [(0.0, 3), (0.0, 7)], "lost": []}
 
     class Learner(agentic.Learner):
-        def __init__(self):  # no model: play() stands for the attempts, attempt() keeps them as the step does
+        def __init__(self):  # no model: play() stands for the attempts, attempts() keeps them as the step does
             self.name, self.file, self.telemetry = "token-efficiency", "token-efficiency-attempts.jsonl", Telemetry.off()
 
-        def play(self, task):
-            if not plays[task.id]:
-                raise wpt_agent.SandboxError("docker create: no space left on device")
-            score, length = plays[task.id].pop(0)
-            return attempt_of(length - 1), None, score
+        def play(self, task, count, keep):
+            outcomes = [(score, length) for score, length in plays[task.id][:count]]
+            outcomes += [wpt_agent.SandboxError("docker create: no space left on device")] * (count - len(outcomes))
+            return [keep(index, outcome if isinstance(outcome, Exception)
+                         else (attempt_of(outcome[1] - 1), None, outcome[0]))
+                    for index, outcome in enumerate(outcomes, 1)]
 
     step.REFERENCE = 4
     tasks = [type("Task", (), {"id": name, "instructions": "Say hello."}) for name in plays]
