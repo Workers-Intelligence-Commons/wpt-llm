@@ -24,9 +24,14 @@ from wpt_train import main
 ROOT = Path(__file__).resolve().parents[3]
 
 
+def one_stage(steps, block_size=16, batch_size=4):
+    """A recipe's training part of one stage (docs/training.md, "Stages")."""
+    return {"stages": [{"block_size": block_size, "steps": steps, "batch_size": batch_size}]}
+
+
 def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatch, capsys):
     store, dataset_id = built.store, built.dataset_id
-    recipe = built.recipe("three", training={"steps": 3})
+    recipe = built.recipe("three", training=one_stage(3))
     monkeypatch.setenv("WPT_RECIPE", recipe)  # the recipe and the dataset come from the environment too
     monkeypatch.setenv("WPT_DATASET", dataset_id)
     main(["--out", "model"])
@@ -42,7 +47,8 @@ def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatc
     provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
     assert provenance["dataset"] == dataset_id
     assert provenance["vocabulary"] == record["tokenizer"]["vocabulary"]
-    assert provenance["recipe_name"] == "three" and provenance["recipe"]["training"]["steps"] == 3
+    assert provenance["recipe_name"] == "three"
+    assert provenance["recipe"]["training"]["stages"] == [{"block_size": 16, "steps": 3, "batch_size": 4}]
     assert provenance["steps_trained"] == 3
     assert isinstance(provenance["indexer_loss"], float)  # the CSA indexers' loss at the kept step
     assert [s["token_sha256"] for s in provenance["shards"]] == [s["token_sha256"] for s in record["shards"]]
@@ -51,7 +57,7 @@ def test_training_writes_a_model_with_its_provenance(built, tmp_path, monkeypatc
 def test_a_training_run_records_what_it_read_every_step_and_what_it_wrote(built, tmp_path, capsys):
     # afterwards one must know exactly what happened, from the store alone:
     # the dataset read, each step's loss, the evaluations, the files written
-    main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+    main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
     printed = capsys.readouterr().out
 
     [run] = built.records("wpt-train")
@@ -86,7 +92,7 @@ def test_a_record_the_store_refuses_stops_the_run_once_its_checkpoint_is_saved(b
 
     monkeypatch.setattr(LocalStore, "_raw_append_record", disk_full_at_step_3)
     with pytest.raises(SystemExit) as stopped:
-        main([built.recipe("five", training={"steps": 5}), built.dataset_id, "--out", "model"])
+        main([built.recipe("five", training=one_stage(5)), built.dataset_id, "--out", "model"])
 
     assert stopped.value.code == 3 and "No space left on device" in capsys.readouterr().err
     [run] = built.records("wpt-train")
@@ -136,7 +142,7 @@ def test_training_into_a_model_folder_replaces_it_whole_and_only_once_recorded(b
     # the folder appears only after the record names its files, so a record
     # that fails leaves the earlier folder as it was; a run that succeeds
     # replaces it as a whole, results of other weights and stray files included
-    recipe = built.recipe("two", training={"steps": 2})
+    recipe = built.recipe("two", training=one_stage(2))
     main([recipe, built.dataset_id, "--out", "model"])
     folder = tmp_path / "model"
     (folder / "evals").mkdir()
@@ -154,12 +160,12 @@ def test_training_into_a_model_folder_replaces_it_whole_and_only_once_recorded(b
     with monkeypatch.context() as patch:
         patch.setattr(LocalStore, "_raw_append_record", disk_full_at_the_files)
         with pytest.raises(SystemExit) as stopped:
-            main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+            main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
     assert stopped.value.code == 3
     assert {path.name: path.read_bytes() for path in folder.iterdir() if path.is_file()} == before
     assert (folder / "evals" / "memorization.json").exists()
 
-    main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+    main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
     assert not (folder / "evals").exists() and not (folder / "notes.txt").exists()
     assert json.loads((folder / "provenance.json").read_text())["recipe_name"] == "three"
     run = built.records("wpt-train")[-1]
@@ -196,7 +202,7 @@ def test_every_checkpoint_deleted_from_the_store_is_named_in_the_record_first(bu
         real(self, sha)
 
     monkeypatch.setattr(LocalStore, "delete", delete)
-    main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model", "--checkpoint-every", "1",
+    main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model", "--checkpoint-every", "1",
           "--run", "fox-1"])
     assert len({sha for sha, _ in deleted}) == 3 and all(named for _, named in deleted)
     assert built.store.get_ref("checkpoints", "fox-1") is None
@@ -212,7 +218,7 @@ def test_on_s3_a_checkpoint_is_deleted_only_once_its_deletion_is_in_the_bucket(b
     monkeypatch.setattr(S3Store, "delete", lambda self, sha: deleted.append(sha))
     s3.refuse(b'"training.checkpoint_deleted"')
     with pytest.raises(SystemExit) as stopped:
-        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model",
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model",
               "--checkpoint-every", "1", "--run", "fox-1"])
     assert stopped.value.code == 3 and deleted == []
     assert s3.store.get_ref("checkpoints", "fox-1") is not None
@@ -260,7 +266,7 @@ def test_an_earlier_folder_is_put_back_when_the_new_one_cannot_take_its_place(bu
 
     monkeypatch.setattr(os, "replace", refuse_the_new_one)
     with pytest.raises(PermissionError):
-        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
     assert {path.name: path.read_bytes() for path in (tmp_path / "model").iterdir() if path.is_file()} == before
     assert [path.name for path in tmp_path.iterdir() if path.name.startswith(".model")] == []
 
@@ -281,7 +287,7 @@ def test_an_earlier_folder_that_cannot_be_put_back_is_named_with_the_new_one(bui
 
     monkeypatch.setattr(os, "replace", refuse_every_move_into_the_target)
     with pytest.raises(RestoreFailed) as failed:
-        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
     assert not (tmp_path / "model").exists() and str(failed.value.aside) in str(failed.value)
     assert (failed.value.aside / "model.safetensors").read_bytes() == earlier
     assert json.loads((failed.value.new / "provenance.json").read_text())["recipe_name"] == "three"
@@ -351,7 +357,7 @@ def test_two_processes_train_the_same_model_as_one(built, tmp_path, starter):
     # the batch is global: 2 processes of 2 windows each, or 1 process adding up
     # 2 passes of 2 windows, must take the same steps, dropout included
     env = {**os.environ, **ON_CPU}
-    recipe = built.recipe("four", training={"steps": 4})
+    recipe = built.recipe("four", training=one_stage(4))
     for out, command in [("one", ["-m", "wpt_train", "--micro-batch", "2"]), ("two", [*starter, "--strategy", "ddp"])]:
         subprocess.run([sys.executable, *command, recipe, built.dataset_id, "--out", out],
                        cwd=tmp_path, env=env, check=True)
@@ -361,26 +367,52 @@ def test_two_processes_train_the_same_model_as_one(built, tmp_path, starter):
     # gloo adds gradients in varying order: up to 4e-6 apart; other dropout gives 2e-3
     assert all(torch.allclose(one[k], two[k], atol=1e-4) for k in one)
     provenance = json.loads((tmp_path / "two" / "provenance.json").read_text())
-    assert provenance["strategy"]["processes"] == 2 and provenance["batch"]["accumulation"] == 1
+    assert provenance["strategy"]["processes"] == 2
+    assert provenance["batch"] == [{"windows": 4, "micro_batch": 2, "accumulation": 1}]
 
 
-def interrupting(built, tmp_path, at_step_3):
+def test_split_windows_in_segments_train_the_same_model_as_one_process(built, tmp_path):
+    # docs/training.md, "Long windows": 2 processes split each 512-token
+    # window, each running its slice in segments of 128 tokens, one window
+    # per pass; the batch of 2 windows takes 2 passes in each process, which
+    # provenance.json records, and the model is the one a single process
+    # trains on whole windows
+    env = {**os.environ, **ON_CPU}
+    recipe = built.recipe("split", training=one_stage(2, 512, 2))
+    for out, options in [("one", []), ("two", ["--processes", "2", "--strategy", "split", "--micro-batch", "1",
+                                              "--segment", "128"])]:
+        subprocess.run([sys.executable, "-m", "wpt_train", recipe, built.dataset_id, "--out", out, *options],
+                       cwd=tmp_path, env=env, check=True)
+
+    one, two = weights(tmp_path / "one"), weights(tmp_path / "two")
+    assert one.keys() == two.keys()
+    assert all(torch.allclose(one[k], two[k], atol=1e-4) for k in one)
+    provenance = json.loads((tmp_path / "two" / "provenance.json").read_text())
+    assert provenance["strategy"]["processes"] == 2
+    assert provenance["batch"] == [{"windows": 2, "micro_batch": 1, "accumulation": 2}]
+
+
+def interrupting(built, tmp_path, at_step_3, at_step=3, best=None):
     """The recipe and options of a 5-step run on the CPU whose method does
-    at_step_3 (Python code) at step 3, just before the update."""
+    at_step_3 (Python code) at step 3 (or at_step), just before the update;
+    with best (a step), it judges only that step's evaluation the best."""
     strategy = tmp_path / "cpu.py"
     strategy.write_text("import torch\nfrom wpt_training import Strategy\n\n"
                         "def start():\n    return Strategy(torch.device('cpu'))\n")
     method = tmp_path / "interrupting.py"
     method.write_text(
-        "import os\nimport signal\nimport torch\nfrom wpt_training import Method\n\nSETTINGS = {'lr': 0.01}\n\n"
+        "import os\nimport signal\nimport torch\nfrom wpt_training import Method, Verdict\n\nSETTINGS = {'lr': 0.01}\n\n"
         "class Interrupting(Method):\n"
         "    def __init__(self, model, settings):\n"
         "        self.optimizer = torch.optim.AdamW(model.parameters(), lr=settings['lr'])\n\n"
         "    def before_update(self, model, step):\n"
-        "        if step == 3:\n"
+        f"        if step == {at_step}:\n"
         f"            {at_step_3}\n\n"
-        "def start(model, settings, run):\n    return Interrupting(model, settings)\n")
-    return [built.recipe("interrupting", training={"steps": 5, "method": str(method)}), built.dataset_id,
+        + ("" if best is None else
+           "    def evaluated(self, step, val_loss):\n"
+           f"        return Verdict(best=step == {best}, stop=False)\n\n")
+        + "def start(model, settings, run):\n    return Interrupting(model, settings)\n")
+    return [built.recipe("interrupting", training={**one_stage(5), "method": str(method)}), built.dataset_id,
             "--strategy", str(strategy)]
 
 
@@ -405,6 +437,82 @@ def test_a_crashed_run_resumes_where_its_checkpoint_left_it(built, tmp_path, mon
     assert not (tmp_path / "resumed" / "checkpoint").exists()
 
 
+def staged(built, tmp_path, crash_at, best=None):
+    """The options of a run of two stages on the CPU (docs/training.md,
+    "Stages"): 2 steps of 4 windows of 16 tokens, then 4 steps of 2 windows
+    of 256 tokens, whose method raises at step crash_at when CRASH is set."""
+    options = interrupting(built, tmp_path, "if os.environ.get('CRASH'): raise RuntimeError('power cut')", crash_at,
+                           best)
+    options[0] = built.recipe("staged", training={
+        "stages": [{"block_size": 16, "steps": 2, "batch_size": 4}, {"block_size": 256, "steps": 4, "batch_size": 2}],
+        "method": str(tmp_path / "interrupting.py")})
+    return [*options, "--checkpoint-every", "2"]
+
+
+def stage_spans(run):
+    return [event["attributes"] for event in run.events
+            if event["kind"] == "span_start" and event["name"] == "training.stage"]
+
+
+def step_windows(run):
+    return [(event["attributes"]["step"], event["attributes"]["block_size"]) for event in run.events
+            if event.get("name") == "training.step"]
+
+
+def test_stages_train_in_order_and_a_run_resumes_across_their_boundary(built, tmp_path, monkeypatch):
+    # a crash at the first step of the second stage resumes from the
+    # checkpoint the first stage's end wrote, and gives the model of a run
+    # never interrupted (the long windows in segments of 128 tokens, as a
+    # 16 GB GPU would run them); each stage draws its own batch
+    options = staged(built, tmp_path, 3)
+    main([*options, "--out", "whole", "--segment", "128"])
+    monkeypatch.setenv("CRASH", "1")
+    with pytest.raises(RuntimeError, match="power cut"):
+        main([*options, "--out", "resumed"])
+    monkeypatch.delenv("CRASH")
+    main([*options, "--out", "resumed", "--segment", "128", "--resume"])
+
+    whole, resumed = weights(tmp_path / "whole"), weights(tmp_path / "resumed")
+    assert all(torch.equal(whole[k], resumed[k]) for k in whole)
+    assert load_model(tmp_path / "resumed").config.block_size == 256  # the model's context: the last stage's
+    provenance = json.loads((tmp_path / "resumed" / "provenance.json").read_text())
+    assert provenance["stages"] == [
+        {"block_size": 16, "steps": 2, "batch_size": 4, "first_step": 1, "last_step": 2},
+        {"block_size": 256, "steps": 4, "batch_size": 2, "first_step": 3, "last_step": 6}]
+    assert provenance["batch"] == [{"windows": 4, "micro_batch": 4, "accumulation": 1},
+                                   {"windows": 2, "micro_batch": 2, "accumulation": 1}]
+
+    uninterrupted, crashed, again = built.records("wpt-train")
+    assert [(s["stage"], s["block_size"], s["batch_size"], s["first_step"], s["last_step"])
+            for s in stage_spans(uninterrupted)] == [(1, 16, 4, 1, 2), (2, 256, 2, 3, 6)]
+    assert step_windows(uninterrupted) == [(1, 16), (2, 16), (3, 256), (4, 256), (5, 256), (6, 256)]
+    assert [(s["stage"], s["resumed_at"]) for s in stage_spans(again)] == [(2, 3)]
+    assert step_windows(again) == [(3, 256), (4, 256), (5, 256), (6, 256)]
+
+
+def test_a_run_resumed_in_the_middle_of_a_later_stage_keeps_its_best_weights(built, tmp_path, monkeypatch):
+    # the method judges only step 4's evaluation the best: a crash at step 5
+    # resumes from step 4's checkpoint, inside the second stage, with that
+    # best kept, so the folder holds the same weights from the same step as
+    # a run never interrupted, and the resumed run trains steps 5 and 6 only
+    options = staged(built, tmp_path, 5, best=4)
+    main([*options, "--out", "whole"])
+    monkeypatch.setenv("CRASH", "1")
+    with pytest.raises(RuntimeError, match="power cut"):
+        main([*options, "--out", "resumed"])
+    monkeypatch.delenv("CRASH")
+    main([*options, "--out", "resumed", "--resume"])
+
+    whole, resumed = weights(tmp_path / "whole"), weights(tmp_path / "resumed")
+    assert all(torch.equal(whole[k], resumed[k]) for k in whole)
+    for out in ("whole", "resumed"):
+        provenance = json.loads((tmp_path / out / "provenance.json").read_text())
+        assert (provenance["weights_step"], provenance["steps_trained"]) == (4, 6)
+    uninterrupted, crashed, again = built.records("wpt-train")
+    assert [(s["stage"], s["first_step"], s["resumed_at"]) for s in stage_spans(again)] == [(2, 3, 5)]
+    assert step_windows(again) == [(5, 256), (6, 256)]
+
+
 def test_the_model_card_names_the_steps_trained_and_the_step_of_its_weights(built, tmp_path):
     # a published model says how far it trained and which step its weights
     # come from, even when its method stopped early and kept an earlier step
@@ -420,7 +528,7 @@ def test_the_model_card_names_the_steps_trained_and_the_step_of_its_weights(buil
         "    def evaluated(self, step, val_loss):\n"
         "        return Verdict(best=step == 2, stop=step == 4)\n\n"
         "def start(model, settings, run):\n    return Early(model)\n")
-    recipe = built.recipe("early", training={"steps": 10, "method": str(method)})
+    recipe = built.recipe("early", training={**one_stage(10), "method": str(method)})
     main([recipe, built.dataset_id, "--out", "model", "--strategy", str(strategy)])
 
     provenance = json.loads((tmp_path / "model" / "provenance.json").read_text())
@@ -433,7 +541,7 @@ def test_streamed_training_never_copies_the_whole_dataset_to_disk(built, tmp_pat
     # --stream trains from a few shards at a time, so a machine needs disk
     # only for those, and the model folder names its sources as usual
     store, dataset_id = built.store, built.dataset_id
-    main([built.recipe("two", training={"steps": 2}), dataset_id, "--out", "model", "--stream", "--stream-shards", "1"])
+    main([built.recipe("two", training=one_stage(2)), dataset_id, "--out", "model", "--stream", "--stream-shards", "1"])
 
     record = json.loads(store.get_bytes(store.get_ref("datasets", dataset_id)))
     held_out_only = [p.name for p in (store.scratch / "tokens").glob("*.u32")]
@@ -506,7 +614,7 @@ def test_a_new_model_that_cannot_take_an_empty_place_is_kept_and_named(built, tm
 
     monkeypatch.setattr(os, "replace", refuse_the_target)
     with pytest.raises(PermissionError):
-        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
     [kept] = [path for path in tmp_path.iterdir() if path.name.startswith(".model-")]
     assert not (tmp_path / "model").exists()
     assert json.loads((kept / "provenance.json").read_text())["recipe_name"] == "three"
@@ -537,7 +645,7 @@ def test_a_restore_failure_inside_a_broken_record_still_keeps_both_models(built,
     monkeypatch.setattr(os, "replace", refuse_every_move_into_the_target)
     monkeypatch.setattr(wpt_train, "_replace_folder", replace_while_the_record_breaks)
     with pytest.raises(SystemExit) as stopped:
-        main([built.recipe("three", training={"steps": 3}), built.dataset_id, "--out", "model"])
+        main([built.recipe("three", training=one_stage(3)), built.dataset_id, "--out", "model"])
     assert stopped.value.code == 3 and not (tmp_path / "model").exists()
     [aside] = [path for path in tmp_path.iterdir() if path.name.startswith(".model-replaced-")]
     [new] = [path for path in tmp_path.iterdir() if path.name.startswith(".model-") and path != aside]

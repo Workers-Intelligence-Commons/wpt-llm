@@ -10,15 +10,19 @@ CONV_KERNEL = 4
 
 class ShortConv(nn.Module):
     """A depthwise causal convolution over time: each channel sees its own
-    last `kernel` values, `dilation` tokens apart. (B, T, C) -> (B, T, C)."""
+    last `kernel` values, `dilation` tokens apart. (B, T, C) -> (B, T, C).
+    earlier: the `reach` inputs before x (B, reach, C), zeros when None
+    (before the text)."""
 
     def __init__(self, channels, kernel=CONV_KERNEL, dilation=1):
         super().__init__()
-        self.conv = nn.Conv1d(channels, channels, kernel, groups=channels, dilation=dilation,
-                              padding=(kernel - 1) * dilation, bias=False)
+        self.reach = (kernel - 1) * dilation
+        self.conv = nn.Conv1d(channels, channels, kernel, groups=channels, dilation=dilation, bias=False)
 
-    def forward(self, x):
-        return self.conv(x.transpose(1, 2))[..., :x.shape[1]].transpose(1, 2)
+    def forward(self, x, earlier=None):
+        if earlier is None:
+            earlier = x.new_zeros(x.shape[0], self.reach, x.shape[2])
+        return self.conv(torch.cat([earlier.to(x.dtype), x], 1).transpose(1, 2)).transpose(1, 2)
 
 
 def situ_glu(gate, up):

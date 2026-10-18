@@ -21,6 +21,12 @@ from wpt_eval import main as evaluate
 from wpt_posttrain import agentic, main
 from wpt_train import main as train
 
+
+def one_stage(steps, block_size=16, batch_size=4):
+    """A recipe's training part of one stage (docs/training.md, "Stages")."""
+    return {"stages": [{"block_size": block_size, "steps": steps, "batch_size": batch_size}]}
+
+
 ZERO_WEIGHTS = ("import torch\nfrom wpt_posttrain import Outcome\n\n"
              "def run(context):\n"
              "    with torch.no_grad():\n"
@@ -85,7 +91,7 @@ def test_sft_learns_from_the_sources_tagged_sft_and_credits_them(built, tmp_path
     # source tagged sft; until one exists it says so and writes nothing, and
     # once it has trained, the model's NOTICE credits that source. The CSA
     # indexers keep learning by their own loss, which the step shows
-    recipe = built.recipe("chat", model={"block_size": 64}, posttrain=["sft"])
+    recipe = built.recipe("chat", training=one_stage(1, 64), posttrain=["sft"])
     train([recipe, built.dataset_id, "--out", "model"])
     base, root = tmp_path / "model", tmp_path  # the step reads the sources of the repository holding the current folder
     with pytest.raises(SystemExit, match="step sft failed: no conversations: no admitted source has chat files tagged sft"):
@@ -248,14 +254,14 @@ def test_grpo_fails_and_writes_nothing_when_no_group_ever_teaches_anything(docke
                                                                            monkeypatch):
     # a check that always prints 0 gives every group equal scores: the run
     # makes no update at all, and the step fails, saying why
-    recipe = built.recipe("agent", model={"block_size": 1024})
+    recipe = built.recipe("agent", training=one_stage(1, 1024))
     train([recipe, built.dataset_id, "--out", "model"])
     task_source(built, tmp_path, tmp_path / "tasks", check="#!/bin/sh\necho 0\n")
     if subprocess.run(["docker", "image", "inspect", "ubuntu:24.04"], capture_output=True).returncode:
         subprocess.run(["docker", "pull", "-q", "ubuntu:24.04"], capture_output=True, check=True)
     monkeypatch.setattr(images, "built", lambda root, name: "ubuntu:24.04")  # a plain image is enough here
     step = step_copy(tmp_path, ROUNDS="2", GROUP="2", TASKS_PER_UPDATE="1")
-    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=[str(step)])
+    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[str(step)])
     with pytest.raises(SystemExit, match=r"step grpo failed: no update in 2 rounds: every group was skipped, 2 "
                                          r"because its scores were all equal, 0 because it kept fewer than 2 "
                                          r"attempts\nnothing was written"):
@@ -307,7 +313,7 @@ def test_a_group_whose_scores_are_all_equal_never_dilutes_the_update(monkeypatch
 def test_grpo_fails_and_writes_nothing_when_every_attempt_of_a_round_is_dropped(built, tmp_path, monkeypatch):
     # a sandbox that never starts is not the model's doing, but a round that
     # could make no update at all stops the step, naming the round and why
-    recipe = built.recipe("agent", model={"block_size": 1024})
+    recipe = built.recipe("agent", training=one_stage(1, 1024))
     train([recipe, built.dataset_id, "--out", "model"])
     task_source(built, tmp_path, tmp_path / "tasks")
 
@@ -316,7 +322,7 @@ def test_grpo_fails_and_writes_nothing_when_every_attempt_of_a_round_is_dropped(
 
     monkeypatch.setattr(images, "built", lambda root, name: f"wpt-agent/{name}:test")  # no image to build
     monkeypatch.setattr(wpt_agent, "Sandbox", refused)
-    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=["grpo"])
+    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=["grpo"])
     with pytest.raises(SystemExit, match=r"step grpo failed: round 1: every attempt was dropped, Docker failed "
                                          r"\d+ times; the last time: docker create: no space left on device"):
         main([recipe, str(tmp_path / "model"), str(tmp_path / "tuned")])
@@ -328,14 +334,14 @@ def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, 
     # scores it; attempts that score apart change the weights, but not the
     # routers', and the new model's NOTICE credits the source of the tasks;
     # the image must be built first, and the step says how
-    recipe = built.recipe("agent", model={"block_size": 1024})  # the four tools' descriptions take most of it
+    recipe = built.recipe("agent", training=one_stage(1, 1024))  # the four tools' descriptions take most of it
     train([recipe, built.dataset_id, "--out", "model"])
     base, root = tmp_path / "model", tmp_path
     sid = task_source(built, root, tmp_path / "tasks")
     images.lock(root, "tiny", log=lambda _: None)  # no image built yet
 
     step = step_copy(tmp_path, ROUNDS="1", GROUP="2", TASKS_PER_UPDATE="1", LEARNING_RATE="1e-2")
-    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=[str(step)])
+    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[str(step)])
     with pytest.raises(SystemExit, match="image 'tiny' is not built on this machine.*wpt-agent build-image tiny"):
         main([recipe, str(base), str(tmp_path / "tuned")])
     try:
@@ -398,14 +404,14 @@ def test_token_efficiency_takes_the_mean_length_of_the_attempts_that_reach_the_b
 def test_token_efficiency_fails_and_writes_nothing_when_no_task_is_left(docker_runs, built, tmp_path, monkeypatch):
     # the incoming model scores 0 on every reference attempt: the task has
     # no result to keep, and with no task left the step fails, saying why
-    recipe = built.recipe("agent", model={"block_size": 1024})
+    recipe = built.recipe("agent", training=one_stage(1, 1024))
     train([recipe, built.dataset_id, "--out", "model"])
     task_source(built, tmp_path, tmp_path / "tasks", check="#!/bin/sh\necho 0\n")
     if subprocess.run(["docker", "image", "inspect", "ubuntu:24.04"], capture_output=True).returncode:
         subprocess.run(["docker", "pull", "-q", "ubuntu:24.04"], capture_output=True, check=True)
     monkeypatch.setattr(images, "built", lambda root, name: "ubuntu:24.04")  # a plain image is enough here
     step = step_copy(tmp_path, TOKEN_EFFICIENCY, REFERENCE="2")
-    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=[str(step)])
+    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[str(step)])
     with pytest.raises(SystemExit, match=r"step token-efficiency failed: no task left of the 1 tasks tagged grpo: 1 "
                                          r"scored 0 on every reference attempt, Docker failed every reference "
                                          r"attempt of 0\nnothing was written"):
@@ -417,7 +423,7 @@ def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, 
     # the incoming model's attempts at grpo's own tasks set the reference,
     # then attempts that pass and fail it change the weights, but not the
     # routers', and the new model credits the source of the tasks
-    recipe = built.recipe("agent", model={"block_size": 1024})
+    recipe = built.recipe("agent", training=one_stage(1, 1024))
     train([recipe, built.dataset_id, "--out", "model"])
     base, root = tmp_path / "model", tmp_path
     sid = task_source(built, root, tmp_path / "tasks", check="#!/bin/bash\necho $((RANDOM % 2))\n")
@@ -425,7 +431,7 @@ def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, 
     # 16 reference attempts all fail 1 time in 65536; 8 attempts all equal, in each of 2 rounds, 1 time in 16384
     step = step_copy(tmp_path, TOKEN_EFFICIENCY, ROUNDS="2", GROUP="8", REFERENCE="16", TASKS_PER_UPDATE="1",
                      LEARNING_RATE="1e-2")
-    recipe = built.recipe("agent", model={"block_size": 1024}, posttrain=[str(step)])
+    recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[str(step)])
     try:
         images.build(root, "tiny", log=lambda _: None)
         main([recipe, str(base), str(tmp_path / "tuned")])

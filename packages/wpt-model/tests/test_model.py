@@ -4,7 +4,7 @@ import torch
 from wpt_model import WPT, ModelConfig, Routes
 from wpt_model.attention import CSA_RATIO, HCA_RATIO, Attention
 from wpt_model.experts import Experts
-from wpt_model.kda import _fla_chunk_kda, chunked_kda, recurrent_kda
+from wpt_model.kda import _fla_chunk_kda, chunked_kda, delta_attention, recurrent_kda
 from wpt_utils.device import select_device
 
 TINY = dict(vocab_size=50, block_size=16, n_layer=4, global_attention=["CSA"], d_model=16, kda_heads=2, kda_head_dim=8,
@@ -29,7 +29,19 @@ def test_the_chunked_kda_gives_the_formula_s_result():
     # docs/model.md: the step-by-step formula is the reference, and the
     # faster form must agree with it, over several chunks and a partial one
     q, k, v, g, beta = kda_inputs()
-    assert torch.allclose(chunked_kda(q, k, v, g, beta), recurrent_kda(q, k, v, g, beta), atol=1e-4)
+    assert torch.allclose(chunked_kda(q, k, v, g, beta)[0], recurrent_kda(q, k, v, g, beta), atol=1e-4)
+
+
+def test_the_chunked_kda_starts_from_a_given_memory_and_returns_the_last():
+    # a window in segments (docs/model.md, "Long windows"): the memory the
+    # first part leaves, given to the second, gives the whole's output
+    q, k, v, g, beta = kda_inputs(T=64)
+    whole, last = chunked_kda(q, k, v, g, beta)
+    first, memory = chunked_kda(*(t[:, :32] for t in (q, k, v, g, beta)))
+    second, end = chunked_kda(*(t[:, 32:] for t in (q, k, v, g, beta)), initial=memory)
+    assert torch.allclose(torch.cat([first, second], 1), whole, atol=1e-5)
+    assert torch.allclose(end, last, atol=1e-5)
+    assert torch.allclose(second, recurrent_kda(*(t[:, 32:] for t in (q, k, v, g, beta)), initial=memory), atol=1e-4)
 
 
 @pytest.mark.skipif(select_device().type != "cuda" or not _fla_chunk_kda(),  # select_device: AMD GPUs need it
@@ -38,6 +50,19 @@ def test_the_gpu_kernel_gives_the_formula_s_result():
     q, k, v, g, beta = kda_inputs(T=300, H=2, d=64, device=select_device(), dtype=torch.bfloat16)
     out, _ = _fla_chunk_kda()(q, k, v, g, beta, scale=1.0, safe_gate=True, lower_bound=-5.0)
     assert torch.allclose(out.float(), recurrent_kda(q, k, v, g, beta), atol=3e-2)
+
+
+@pytest.mark.skipif(select_device().type != "cuda" or not _fla_chunk_kda(),
+                    reason="needs a GPU where flash-linear-attention imports")
+def test_the_gpu_kernel_starts_from_a_given_memory_and_returns_the_last():
+    # segments and slices of a long window (docs/model.md, "Long windows")
+    # hand the kernel the memory earlier tokens left, and read the one it leaves
+    q, k, v, g, beta = kda_inputs(T=300, H=2, d=64, device=select_device(), dtype=torch.bfloat16)
+    initial = torch.randn(2, 2, 64, 64, generator=torch.Generator().manual_seed(1)).to(q.device) * 0.1
+    out, last = delta_attention(q, k, v, g, beta, initial)
+    expected, expected_last = chunked_kda(*(t.float() for t in (q, k, v, g, beta)), initial=initial)
+    assert torch.allclose(out.float(), expected, atol=3e-2)
+    assert torch.allclose(last.float(), expected_last, atol=3e-2)
 
 
 def test_a_token_never_changes_the_scores_before_it():

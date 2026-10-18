@@ -57,8 +57,8 @@ where a step needs them, run through Docker Desktop.
 | build a dataset | `uv run wpt-dataset build NAME [--stream] [--skip-failed]` (`--stream`: one source at a time, only tokens kept; `--skip-failed`: a failing source is left out and listed in the record instead of stopping) | the data part of the model recipe NAME | the store; its run record `records/<folder>/`; prints the dataset id |
 | migrate data files | `uv run wpt-dataset migrate` | `data/` | rewrites files whose shape is behind |
 | check the Markdown of sources | `uv run wpt-dataset markdown-check [ID ...]` | the sources | prints notes and problems per source |
-| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--run NAME] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
-| train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]` (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
+| train | `uv run wpt-train RECIPE DATASET_ID [--out FOLDER] [--stream] [--recompute] [--segment N] [--run NAME] [options]`, started detached (skill `wpt-training-run`; `--stream`: a few shards on disk at a time; `--recompute`: much less memory, about a third slower; `--segment N`: windows longer than N tokens run as segments of N, the same training in the memory of N tokens plus what the segments hand on, up to twice the time; with `--strategy split`, each process's slice runs in segments of N; `--run`: the checkpoint in the store, so another machine can continue) | the model recipe, the store | a model folder; its run record `records/<folder>/` in the store (one per command, over restarts); `scratch/` token files in the store's local folder; with `--run`, the store's `checkpoints/NAME` until the model is saved |
+| train on several GPUs | `uv run wpt-train RECIPE DATASET_ID --strategy ddp --processes N [options]`, or `--strategy split` to split each window between the GPUs (windows too long for one; DeepSeek-V4's contextual parallelism) (several machines: `torchrun ... -m wpt_train`, Linux only) | the store | the same |
 | evaluate | `uv run wpt-eval FOLDER [EVAL ...]` | the folder, the store | `FOLDER/evals/<name>.json`, `README.md`; its run record `records/<folder>/` in the store |
 | post-train | `uv run wpt-posttrain RECIPE BASE NEW` (the steps are the recipe's `posttrain` list) | the model recipe, the base folder, the store | the new folder, only if every step succeeded; its run record `records/<folder>/` in the store, always |
 | lock an image of agentic tasks | `uv run wpt-agent lock-image NAME [--force]` (needs Docker; `--force` replaces an existing lock) | `data/images/NAME/Dockerfile`, the base image's registry, the dated package archive | `data/images/NAME/lock.json` and `licenses.json` (commit them) |
@@ -68,8 +68,12 @@ where a step needs them, run through Docker Desktop.
 
 Everything that changes a model comes from its model recipe
 (`data/recipes/models/NAME.json`: data, architecture, method and settings,
-steps, batch, seed, post-training steps; docs/model.md); the recipe's
-`batch_size` is global (over every process). The `wpt-train` options only
+stages, seed, post-training steps; docs/model.md). `training.stages` lists
+the window lengths in order, each with its steps and its `batch_size`,
+which is global (over every process) (docs/training.md, "Stages"); the
+model's context is the last one's. Segments and split windows give
+the whole window's loss and gradients, so they are options, never part of
+the recipe (docs/training.md, "Long windows"). The `wpt-train` options only
 say how the hardware runs it, and each also comes from `WPT_<OPTION>` in the
 environment (`--micro-batch` -> `WPT_MICRO_BATCH`); `--help` on any command
 lists them. A crash restarts the processes on their own, up to
@@ -205,7 +209,8 @@ A strategy (how the hardware is used) is one Python file, a built-in in
 ```python
 from wpt_training import Strategy
 
-def start():  # a subclass overrides wrap, no_sync, mean, reduce, broadcast, barrier, close
+def start():  # a subclass overrides wrap, no_sync, synchronize, mean, reduce, broadcast, barrier, close;
+                # splits_windows = True: every process trains its slice of the same windows
     return Strategy(device, rank=0, world_size=1, local_rank=0)
 ```
 
@@ -218,8 +223,8 @@ from wpt_training import Method, Verdict
 
 SETTINGS = {"lr": 3e-4}  # changed by the recipe's training.settings, typed from these defaults
 
-class Mine(Method):  # may override loss, validation_loss, before_update, after_update, evaluated,
-                     # state_dict, load_state_dict
+class Mine(Method):  # may override loss (then part_loss too, for windows in parts), validation_loss,
+                     # stage, before_update, after_update, evaluated, state_dict, load_state_dict
     def __init__(self, model, settings, run):  # run: tokens, parameters, steps, log
         self.optimizer = ...
 
@@ -227,8 +232,8 @@ def start(model, settings, run):
     return Mine(model, settings, run)
 ```
 
-The runner in `wpt_training/runner.py` owns the data, the global batch,
-evaluation and checkpoints: a strategy or a method never draws windows or
+The runner in `wpt_training/runner.py` owns the data, the stages, each
+stage's global batch, windows in parts (`parts.py`), evaluation and checkpoints: a strategy or a method never draws windows or
 seeds randomness itself, so runs stay the same on any hardware. Anything a
 resumed run needs goes in the method's `state_dict`. Details:
 `docs/training.md`.

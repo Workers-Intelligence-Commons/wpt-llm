@@ -22,7 +22,11 @@ class PluginError(Exception):
 
 class Strategy:
     """One process training alone on one device. A strategy for several
-    processes overrides what differs."""
+    processes overrides what differs. With splits_windows, every process
+    takes the same windows and trains its own slice of each (wpt_training's
+    parts.py); its synchronize then adds the processes' gradients up."""
+
+    splits_windows = False
 
     def __init__(self, device, rank=0, world_size=1, local_rank=0):
         self.device, self.rank, self.world_size, self.local_rank = device, rank, world_size, local_rank
@@ -44,6 +48,10 @@ class Strategy:
     def no_sync(self, wrapped):
         """A context for a micro-batch whose gradients need not be shared yet."""
         return contextlib.nullcontext()
+
+    def synchronize(self, model):
+        """Called once a step's gradients are complete in this process, before
+        the update: share them, when wrap does not."""
 
     def mean(self, value: float) -> float:
         """The average of value over every process."""
@@ -99,13 +107,31 @@ class Method:
         gradient of the CSA indexers' loss too, which reaches only the
         indexers (DeepSeek-V3.2). The indexer loss is that loss's value,
         which the log shows beside it."""
+        return self.part_loss(model, x, y, None, x.shape[1])
+
+    def part_loss(self, model, x, y, following, window):
+        """The share of a part of the windows, x and y (B, t), in loss()'s
+        two values over the whole windows, so that the parts' shares add up
+        to them (parts.py): model computes the part where it sits in the
+        windows; following is the token after y's last (B, 1), None at the
+        windows' end; window is the windows' length. A method that defines
+        its own loss defines this too, or trains whole windows only."""
         logits, ahead, indexers = model(x, next_tokens=y, indexer_loss=True)
-        loss = _cross_entropy(logits, y) + self.mtp_weight * _cross_entropy(ahead[:, :-1], y[:, 1:])
-        return loss + (indexers - indexers.detach()), indexers.detach()
+        B, t = y.shape
+        targets = y[:, 1:] if following is None else torch.cat([y[:, 1:], following], 1)  # the token after next
+        loss = (_cross_entropy(logits, y, "sum") / (B * window)
+                + self.mtp_weight * _cross_entropy(ahead[:, :targets.shape[1]], targets, "sum") / (B * (window - 1)))
+        share = indexers * (t / window)  # the model's is the mean over the part's queries
+        return loss + (share - share.detach()), share.detach()
 
     def validation_loss(self, model, x, y):
         """The next-token loss alone, which evaluations compare."""
         return _cross_entropy(model(x), y)
+
+    def stage(self, number: int, block_size: int):
+        """Called when a stage after the first starts (number from 1): the
+        windows are now block_size tokens long, and the evaluations that
+        follow are not comparable with earlier ones."""
 
     def before_update(self, model, step: int):
         """Called after the gradients of a step are complete, before the optimizer steps."""
@@ -125,8 +151,8 @@ class Method:
         self.optimizer.load_state_dict(state["optimizer"])
 
 
-def _cross_entropy(logits, targets):
-    return F.cross_entropy(logits.reshape(-1, logits.size(-1)), targets.reshape(-1))
+def _cross_entropy(logits, targets, reduction="mean"):
+    return F.cross_entropy(logits.reshape(-1, logits.size(-1)), targets.reshape(-1), reduction=reduction)
 
 
 @dataclass(frozen=True)

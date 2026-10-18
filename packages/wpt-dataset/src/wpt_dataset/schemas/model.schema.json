@@ -9,7 +9,7 @@
     "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
   },
   "properties": {
-    "schema": {"const": 3},
+    "schema": {"const": 4},
     "data": {
       "description": "what `wpt-dataset build` builds; recipes with the same data share one dataset",
       "type": "object",
@@ -23,15 +23,14 @@
       }
     },
     "model": {
-      "description": "the architecture's numbers (docs/model.md; wpt_model.ModelConfig without vocab_size, which the tokenizer gives)",
+      "description": "the architecture's numbers (docs/model.md; wpt_model.ModelConfig without vocab_size, which the tokenizer gives, and block_size, the last stage's window)",
       "type": "object",
       "additionalProperties": false,
-      "required": ["block_size", "n_layer", "global_attention", "d_model", "kda_heads", "kda_head_dim", "attention_heads",
+      "required": ["n_layer", "global_attention", "d_model", "kda_heads", "kda_head_dim", "attention_heads",
                    "attention_head_dim", "query_rank", "output_groups", "output_rank", "index_heads",
                    "index_head_dim", "index_top_k", "n_experts", "top_k", "expert_width", "latent_width", "shared_width",
                    "engram_layers", "engram_order", "engram_heads", "engram_dim", "engram_table_size"],
       "properties": {
-        "block_size": {"type": "integer", "minimum": 2, "description": "tokens per training window"},
         "n_layer": {"type": "integer", "minimum": 2, "description": "a global layer (CSA or HCA) every 4th layer and the last, KDA elsewhere"},
         "global_attention": {"type": "array", "items": {"enum": ["CSA", "HCA"]}, "minItems": 1,
                              "description": "the kind of each global layer, in order: one per 4th layer and the last"},
@@ -63,15 +62,27 @@
     "training": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["method", "settings", "steps", "batch_size", "eval_every", "eval_batches", "seed"],
+      "required": ["method", "settings", "stages", "eval_every", "eval_batches", "seed"],
       "properties": {
         "method": {"type": "string", "minLength": 1, "description": "a built-in method of wpt_training, or a .py file"},
         "settings": {"type": "object", "additionalProperties": {"type": ["number", "string", "boolean"]},
                      "description": "the method's settings; those left out keep the method's defaults"},
-        "steps": {"type": "integer", "minimum": 1, "description": "maximum number of updates"},
-        "batch_size": {"type": "integer", "minimum": 1, "description": "windows per update, over every process together"},
+        "stages": {
+          "type": "array", "minItems": 1,
+          "description": "trained in order, each on windows of its length (docs/training.md, \"Stages\"); the model's context is the last one's",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["block_size", "steps", "batch_size"],
+            "properties": {
+              "block_size": {"type": "integer", "minimum": 2, "description": "tokens per training window in this stage"},
+              "steps": {"type": "integer", "minimum": 1, "description": "maximum number of updates in this stage"},
+              "batch_size": {"type": "integer", "minimum": 1, "description": "windows per update in this stage, over every process together"}
+            }
+          }
+        },
         "eval_every": {"type": "integer", "minimum": 1},
-        "eval_batches": {"type": "integer", "minimum": 1, "description": "global batches averaged per evaluation"},
+        "eval_batches": {"type": "integer", "minimum": 1, "description": "global batches of the stage averaged per evaluation"},
         "seed": {"type": "integer", "minimum": 0}
       }
     },

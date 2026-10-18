@@ -232,7 +232,9 @@ def recipe_rows(B, T, k, generator):
     q = torch.randn(B, T, 2, 128, generator=generator)
     keys, w = torch.randn(B, T // CSA_RATIO, 128, generator=generator), torch.rand(B, T, 2, generator=generator)
     chosen = top_entries(q, w, keys, (torch.arange(T) + 1) // CSA_RATIO, k)
-    return torch.cat([_window(T, "cpu").expand(B, -1, -1), torch.where(chosen >= 0, chosen + T, -1)], -1)
+    window = _window(T, 0, "cpu")  # rows of a table that starts WINDOW - 1 rows before the first token: here, none
+    window = torch.where(window >= 0, window - (WINDOW - 1), -1)
+    return torch.cat([window.expand(B, -1, -1), torch.where(chosen >= 0, chosen + T, -1)], -1)
 
 
 def relative_error(got, expected):

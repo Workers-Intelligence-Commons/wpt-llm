@@ -250,7 +250,10 @@ def sparse_attention(q, kv, sink, idx, scale, weights=False):
 @torch.no_grad()
 def top_entries(q, w, keys, visible, k):
     """The indexer's choice: for each query, the indices of its k best
-    entries among the first visible[t], -1 where fewer are visible.
+    entries among the first visible[t], -1 where fewer are visible. Equal
+    scores (frequent: the indexer's values are FP4) go to the earliest
+    entries, so the choice does not depend on how many entries follow,
+    and a window in parts chooses as the whole window (sequence.py).
     q: (B, T, n, c); w: (B, T, n); keys: (B, N, c); visible: (T,).
     Returns (B, T, min(k, N)). On a GPU with kernels, the FP8 indexer kernel
     computes the scores."""
@@ -268,6 +271,7 @@ def top_entries(q, w, keys, visible, k):
             keys, key_scale = fp8_parts(keys, c)
             keys, key_scale = keys.to(torch.float8_e4m3fn).contiguous(), key_scale[..., 0].contiguous()
         positions = torch.arange(N, device=q.device)
+        earliest = (N - positions).float()  # the larger, the earlier: what breaks ties
         rows = _rows(B, n, N)
         for start in range(0, T, rows):
             part = slice(start, start + rows)
@@ -277,9 +281,20 @@ def top_entries(q, w, keys, visible, k):
                 scores = torch.einsum("brh,brhn->brn", w[:, part],
                                       torch.einsum("brhc,bnc->brhn", q[:, part], keys).relu_())
             hidden = positions >= visible[part, None]  # (R, N): entries not complete before the query
-            best = scores.masked_fill_(hidden, float("-inf")).topk(chosen.shape[-1], -1).indices
+            best = _first_best(scores.masked_fill_(hidden, float("-inf")), chosen.shape[-1], earliest)
             chosen[:, part] = best.masked_fill(best >= visible[part][None, :, None], -1)
     return chosen
+
+
+def _first_best(scores, k, earliest):
+    """The indices of the k best scores of each row, ties going to the
+    earliest: those above the k-th best, then the earliest of those equal
+    to it. In order of index."""
+    kth = scores.topk(k, -1).values[..., -1:]
+    above = scores > kth
+    tied = scores == kth
+    keep = above | (tied & (tied.cumsum(-1) <= k - above.sum(-1, keepdim=True)))
+    return (keep * earliest).topk(k, -1).indices
 
 
 class _IndexAlignment(torch.autograd.Function):

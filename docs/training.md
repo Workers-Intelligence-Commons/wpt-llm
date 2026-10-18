@@ -18,8 +18,8 @@ output to `runs/logs/<date-time>.log` and print how to follow and stop it.
 builds: build and training fail separately. A dataset built from another
 data part than the recipe's is refused. Everything that changes the
 resulting model comes from the recipe: the architecture's numbers, the
-method and its settings, the steps, the batch, the evaluations and the
-seed. The command-line options say only how the hardware runs it; each
+method and its settings, the stages (each its window length, steps and
+batch), the evaluations and the seed. The command-line options say only how the hardware runs it; each
 also comes from an environment variable (`WPT_` + the option name in
 capitals, `--micro-batch` -> `WPT_MICRO_BATCH`; the recipe and the dataset
 id from `WPT_RECIPE` and `WPT_DATASET`). `uv run wpt-train --help` lists
@@ -69,15 +69,78 @@ The held-out shards are copied whole, as without `--stream`.
 
 ### The batch is the same on any hardware
 
-The recipe's `batch_size` is the number of windows in one update, over
-every process together. Each process takes `--micro-batch` windows per
-pass (by default its whole share) and adds the passes up until the batch
-is complete. Which windows a step uses depends only on the recipe's `seed`
-and the step, never on the number of processes: one GPU with two passes
-and two GPUs with one pass each take the same steps. When a GPU runs out of
-memory, lower `--micro-batch`, then add `--recompute`; the training stays
-the same. The batch must split evenly: `batch_size` a multiple of
-`--micro-batch` times the number of processes.
+A stage's `batch_size` ("Stages", below) is the number of windows in one
+update of that stage, over every process together. Each process takes
+`--micro-batch` windows per pass (by default its whole share of the
+stage's batch) and adds the passes up until the batch is complete. Which
+windows a step uses depends only on the recipe's `seed` and the step,
+never on the number of processes: one GPU with two passes and two GPUs
+with one pass each take the same steps. When a GPU runs out of memory,
+lower `--micro-batch`, then add `--recompute`; the training stays the
+same. Every stage's batch must split evenly: its `batch_size` a multiple
+of `--micro-batch` times the number of processes (with `--strategy
+split`, every process takes every window, so a multiple of
+`--micro-batch`). `provenance.json` records how each stage's batch was
+split (`batch`: its windows, the micro-batch and the passes each process
+added up).
+
+### Stages
+
+Maintainer's decisions, 2026-10-17: "Target 1M tokens. Training reaches
+it by stages in the recipe"; the window lengths follow DeepSeek-V4 (section
+4.2.2: 4K, then 16K, 64K and 1M tokens); V4 states no tokens or steps per
+stage, so each recipe sets them. A recipe's `training.stages` lists them
+in order, each with its window length, its length in steps and its batch
+(maintainer's decisions, 2026-10-17: a stage's length is given in steps,
+and each stage sets its own `batch_size`):
+
+```json
+"stages": [
+  {"block_size": 4096, "steps": 2000, "batch_size": 256},
+  {"block_size": 16384, "steps": 500, "batch_size": 64},
+  {"block_size": 65536, "steps": 200, "batch_size": 16},
+  {"block_size": 1048576, "steps": 50, "batch_size": 1}
+]
+```
+
+(an example of the shape, not a recipe's numbers). The steps are counted
+over every stage together: step 1 is the first stage's first, the
+learning-rate schedule and the multi-token prediction weight's switch
+(model.md, "Training") run over them all, and a step's windows depend
+only on the seed and the step, as before. Each stage draws batches of its
+own `batch_size` windows of its own length, so a stage puts
+`batch_size` times `block_size` tokens in each step. A stage's `batch_size` is global,
+over every process together ("The batch is the same on any hardware",
+above), and its evaluations average `eval_batches` batches of its own
+size. The model's context (`config.json`'s `block_size`) is the last
+stage's length.
+
+Each stage is evaluated at its first and last steps and every
+`eval_every` steps, on windows of its length: a longer window predicts
+better, so losses are compared within a stage only. When a stage after
+the first starts, the method hears of it (`Method.stage`) and the best
+evaluation so far is forgotten: `muon` and `adamw` start counting again,
+and the model folder keeps the best weights of the last stage
+(maintainer's decision, 2026-10-17). A method's early stop (`adamw`'s
+patience) ends its stage, and the next stage starts (maintainer's
+decision, 2026-10-17). A held-out part shorter than a stage's window
+measures that stage's validation loss on the training text, which the log
+says (maintainer's decision, 2026-10-17).
+
+Checkpoints and `--resume` cross stage boundaries: the checkpoint holds
+the step to continue from, and a resumed run starts within its stage.
+Each stage is a span of the run's record (`training.stage`, with its
+number, window length, first and last steps, and the step a resumed run
+started at), each step's event names its window length, and
+`provenance.json` lists the stages with the last step each trained
+(`stages`). Recipes written before stages (shape 3) migrate to one stage
+of their window length, steps and batch (`wpt-dataset migrate`). The
+recipes keep one stage for now (maintainer's decision, 2026-10-17;
+model.md, "Model recipes").
+
+DeepSeek-V4 trains dense attention first and turns sparse attention on at
+64K tokens; WPT is sparse from the first step, at every stage (model.md,
+"Attention").
 
 ### Recomputing layers: long windows on a small GPU
 
@@ -125,6 +188,80 @@ fault in the GPU stack) with either attention. The `watery-tardigrade` and
 `unimpaired-axolotl` recipes, 32K-token windows on one 16 GB or one 8 GB
 GPU, need it with `--micro-batch 1`.
 
+### Long windows: segments and slices
+
+A window too long for one GPU's memory, even with `--recompute`, runs in
+parts, which give exactly the loss and gradients of the whole window at
+once (model.md, "Long windows"; maintainer's decisions, 2026-10-17):
+
+- `--segment N` (or `WPT_SEGMENT`), on one GPU: a window longer than `N`
+  tokens runs as consecutive segments of `N` (the last may be shorter). A
+  first pass without gradients runs every segment but the last, each
+  handing the next what its layers need of the earlier tokens; then the
+  segments run again from the last to the first with gradients, each
+  starting from what the one before handed on, and its backward pass adds
+  the gradient the later segments sent back to what it handed on. Memory
+  holds one segment's activations plus what the segments hand on, which
+  grows with the window (below); every segment but the last runs twice,
+  up to twice the time (15% more than whole with `--recompute`, below). `N` is a multiple of 128. Windows of `N` tokens or fewer run
+  whole.
+- `--strategy split`, on several processes (GPUs of one or several
+  machines, started as for `ddp`): every process takes the same windows,
+  and process `r` trains the `r`-th of equal, consecutive slices of each
+  (DeepSeek-V4's contextual parallelism); the processes exchange what
+  crosses the slices, and their gradients are added up before each update.
+  Each stage's window length must split into slices of a multiple of 128
+  tokens.
+- Both, `--strategy split` with `--segment N`, when a slice is longer
+  than `N`: every process trains its slice in segments of `N` tokens. The
+  window runs as consecutive parts of `N` tokens per process (`N` times
+  the number of processes; the last part may be shorter), each part split
+  across the processes as above, so process `r` trains the `r`-th segment
+  of every part, and each part hands the next what segments hand on, with
+  the same two passes. Memory holds one segment's activations per
+  process; the result stays exact. Windows whose slices are `N` tokens or
+  fewer are split without segments.
+
+These are options of the hardware, not of the recipe: a run may resume
+with another `--segment`, or none. The training loss and the indexer loss
+are the parts' shares of the whole window's (`Method.part_loss`, below);
+the validation loss in parts is each part's validation loss weighted by
+its share of the window's tokens (maintainer's decision, 2026-10-17). The
+tests check, on the CPU, that 448 tokens in segments of 128 (three
+boundaries, the last segment shorter), 512 tokens split over 2 and 4
+processes (gloo), and 768 tokens split over 2 processes in segments of 128
+(three parts) give the whole window's losses, gradients, validation loss
+and expert balancing, each with the layers' activations kept and with
+`--recompute`, for a model with every layer kind (KDA, CSA with its
+indexer choosing, HCA, the windows, Engram, the experts, mHC, the MTP
+block). Split windows are checked in FP32 to `2e-4` of the largest
+gradient, against `1e-6` for segments, since KDA's composed transforms
+round differently (model.md, "Long windows"; maintainer's decision,
+2026-10-17: the split tests keep that tolerance in FP32). A run of
+`wpt-train` with `--strategy split --processes 2 --segment 128` trains the
+same model as one process on whole windows.
+
+Measured on 2026-10-17 on a Radeon 860M (an integrated AMD GPU sharing
+the machine's memory; `HIP_LAUNCH_BLOCKING=1`, which its 32-expert
+recipes need), with watery-tardigrade's model, Muon, `--recompute`, one
+window of random tokens, the second step of each:
+
+| window | parts | peak memory | time of a step |
+| --- | --- | --- | --- |
+| 32,768 | whole | 8.24 GiB | 53 s |
+| 32,768 | segments of 8,192 | 7.46 GiB | 61 s |
+| 65,536 | segments of 8,192 | 8.43 GiB | 121 s |
+| 131,072 | segments of 8,192 | 10.39 GiB | 289 s |
+
+Most of that memory is the weights and the optimizer's state, the same at
+every length; what grows with the window, about 31 KiB per token, is what
+the segments hand on (the merged entries and each segment's starting
+state, kept for the backward pass). The first step's loss is the same
+whole or in segments (11.922). Not measured: 1M-token windows (about 37
+GiB by that growth, an estimate), the RTX 5080, `split` on GPUs (NCCL,
+rented NVIDIA machines, DeepSeek's TileLang kernels), and real runs on
+real data; `split` was only run on the CPU, by the tests.
+
 ### Strategies: how the hardware is used
 
 `--strategy` names a built-in or a Python file:
@@ -133,12 +270,17 @@ GPU, need it with `--micro-batch 1`.
 - `ddp`: several processes, one per GPU. Each process holds a full copy of
   the model, and their gradients are averaged after each pass (PyTorch's
   `DistributedDataParallel`).
+- `split`: several processes, one per GPU, that split each window between
+  them ("Long windows", above). Each holds a full copy of the model, and
+  their gradients are added up before each update.
 
 On one machine, `--processes` starts them:
 
 ```sh
 uv run wpt-train <recipe> <dataset id> --strategy ddp --processes 2
 ```
+
+(`split` starts the same ways.)
 
 On several machines, `torchrun` (which comes with PyTorch) starts them:
 each machine runs the same command with its `--nnodes`, `--node-rank` and
@@ -162,7 +304,8 @@ the model folder.
 A strategy file defines `start()`, which returns a `wpt_training.Strategy`:
 the device, which process this is among how many, how the model is
 wrapped, and how processes average a number, share a value and wait for
-each other. A model too large for one GPU needs a strategy that splits the
+each other; a strategy that splits windows sets `splits_windows` and adds
+the gradients up in `synchronize`. A model too large for one GPU needs a strategy that splits the
 model itself (PyTorch's FSDP, or a library such as DeepSpeed): it is
 written as such a file, without changes to the training loop. None ships
 yet.
@@ -210,21 +353,27 @@ returns when asked, `model(x, next_tokens=y, indexer_loss=True)` giving
 not ask leaves the indexers untrained. The log shows both losses at each
 evaluation (`train loss`, then `indexer loss`, each of the step's last
 micro-batch), and `provenance.json` records the indexer loss of the step
-whose weights the folder holds. Then, optionally, what happens
+whose weights the folder holds. A method that defines its own `loss`
+defines `part_loss(model, x, y, following, window)` too, the share of a
+part of the windows (`following`: the token after `y`'s last, or None at
+the windows' end; `window`: the windows' length) in what `loss` gives
+over whole windows, or it trains whole windows only (the run refuses
+`--segment` and `split` with it). Then, optionally, what happens at the
+start of each stage after the first (`stage`), what happens
 just before each update (a learning-rate schedule, gradient clipping) and
 just after it, which evaluation
 is the best and when to stop, and the state a resumed run needs.
-Evaluations measure the next-token loss alone, at step 1, every
-`eval_every` steps and at the last step. The model folder keeps the weights
-of the evaluation the method judged best.
+Evaluations measure the next-token loss alone, at each stage's first and
+last steps and every `eval_every` steps. The model folder keeps the
+weights of the evaluation the method judged best in the last stage.
 
 ### Checkpoints and resuming
 
 Every `--checkpoint-every` steps (default 500, 0 for never), the main
 process writes a checkpoint: the step, the weights, the method's state and
 the best weights so far. The same command with `--resume` continues from
-it, on other hardware too: the number of processes, `--micro-batch` and
-`--recompute` may change; the recipe and the other options may not (the
+it, on other hardware too: the number of processes, `--micro-batch`,
+`--recompute` and `--segment` may change; the recipe and the other options may not (the
 run stops with `SettingsMismatch`).
 Without `--resume`, a leftover checkpoint stops the run, so a crashed run
 is never overwritten by mistake. The checkpoint is removed once the model
@@ -363,7 +512,7 @@ steps. Around it, everything possible is checked:
   record, each shard (file sha256 and token hash), and the vocabulary;
 - `provenance.json` records what produced the model: the dataset id and
   record, the sources it learned from, the vocabulary, every shard, the recipe's name and content, the command-line options, the strategy and
-  method (file, its sha256, the method's settings), how the batch was split, the model shape and
-  parameter count, the steps trained and the step whose weights the folder holds (which the
+  method (file, its sha256, the method's settings), how each stage's batch was split, the model shape and
+  parameter count, the stages (each with the last step it trained), the steps trained and the step whose weights the folder holds (which the
   model card shows) and the CSA indexers' loss at that step, the repository commit (and whether the working tree had
   uncommitted changes), the device and the tool versions.
