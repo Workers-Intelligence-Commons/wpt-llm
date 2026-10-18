@@ -91,7 +91,7 @@ def main(argv=None):
     what = "type a message" if args.chat else "type text to continue"
     print(f"model loaded ({tokenizer.vocab_size} tokens) on {describe(device)}. {what}, empty line quits.")
     print(licenses_line(args.model))
-    conversation = {"schema": 1, "messages": []}
+    conversation = {"schema": 2, "messages": []}  # docs/chat-format.md
     while args.chat:
         text = input("you> ")
         if not text:

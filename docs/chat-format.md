@@ -22,7 +22,7 @@ another company's model.
 
 ```json
 {
-  "schema": 1,
+  "schema": 2,
   "tools": [
     {"name": "read_file", "description": "Read a file of the project.",
      "parameters": {"type": "object", "properties": {"path": {"type": "string"}}, "required": ["path"]}}
@@ -37,7 +37,8 @@ another company's model.
       {"type": "tool_result", "call": "c1", "content": [{"type": "text", "text": "..."}]}
     ]},
     {"role": "assistant", "content": [{"type": "text", "text": "The PyTorch build for this machine's GPU."}]}
-  ]
+  ],
+  "metadata": {"step": "grpo", "task": "<task id>", "round": 1}
 }
 ```
 
@@ -49,6 +50,16 @@ another company's model.
   `assistant` or `tool`) and a `content` list of blocks, in the order they
   happened: thinking, then a call, then more thinking, then text, stays in
   that order.
+- `metadata`: optional. What identifies the conversation where it was
+  recorded, as any JSON object: a post-training attempt's step, task,
+  round and score ([post-training.md](post-training.md), "Runs"). It is
+  never written as tokens (maintainer's decision, 2026-10-17: "Add
+  metadata to chat").
+
+Shape 2 added `metadata`; a shape 1 conversation is the same without it.
+`wpt-dataset migrate` rewrites the repository's own files, and a source's
+`chat` file, whose bytes are upstream's, is brought to shape 2 as it is
+read (`wpt_dataset.migrate.upgrade`), so a shape 1 file stays valid.
 
 ## Blocks
 
@@ -128,6 +139,7 @@ END
 - `json` blocks are written as JSON text.
 - Recorded but not written as tokens yet: `file` blocks (no model reads
   media yet) and a `tool_result`'s `error` flag.
+- Never written as tokens: `metadata`.
 
 A model learns to predict only the assistant's turns: their content and
 their closing `<|im_end|>`. The other turns are context it reads.

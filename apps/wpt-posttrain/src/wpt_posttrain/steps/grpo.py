@@ -37,8 +37,10 @@ Each attempt must fit the model's context (block_size + 1 tokens): an
 attempt that fills it ends there and is scored as it is; a task whose
 instructions alone fill it stops the step. Sampling draws from a generator
 seeded with SEED, so a run gives the same attempts again on the same
-machine and setup. Attempts live in memory only and are dropped after
-their update. The settings below are the step's whole configuration; to
+machine and setup. Every attempt, a dropped one included, is kept as one
+line of grpo-attempts.jsonl in the run's record folder: a conversation
+in the chat format whose metadata identifies the attempt; the attempt's
+span names the line. The settings below are the step's whole configuration; to
 change them, copy this file and give its path to wpt-posttrain. The
 machinery is wpt_posttrain/agentic.py, which steps/token-efficiency.py
 shares.
@@ -66,5 +68,6 @@ def run(context):
     settings = agentic.Settings(ROUNDS, TASKS_PER_UPDATE, GROUP, LEARNING_RATE, WEIGHT_DECAY, TEMPERATURE, TOP_K,
                                 CHECK_SECONDS, RESULT_BYTES, SEED)
     with agentic.frozen_routers(context.model):
-        learner = agentic.Learner("grpo", context.model, context.tokenizer, context.device, built, limit, settings)
+        learner = agentic.Learner("grpo", context.model, context.tokenizer, context.device, built, limit, settings,
+                                  context.telemetry)
         return learner.train(tasks)

@@ -26,7 +26,7 @@ from .errors import InvalidFile, OutdatedSchema, RuleViolation, StaleFile
 from .licenses import check_license
 from .pools import parse
 
-CURRENT_SCHEMA = {"source": 5, "mixture": 1, "model": 4, "tokenizer": 2, "lock": 2, "conversation": 1, "task": 1,
+CURRENT_SCHEMA = {"source": 5, "mixture": 1, "model": 4, "tokenizer": 2, "lock": 2, "conversation": 2, "task": 1,
                   "image-lock": 1, "image-licenses": 1}
 IMAGE_FILES = {"image-lock": "lock.json", "image-licenses": "licenses.json"}  # kind -> file in data/images/<name>/
 IMAGES, DOCKERFILE = "images", "Dockerfile"  # data/images/<name>/Dockerfile, written by a person
