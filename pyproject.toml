@@ -18,7 +18,7 @@ exclude = ["apps/__pycache__"]  # left by apps/conftest.py, the apps' shared tes
 
 [dependency-groups]
 # `uv sync` installs every app, and through them every library (but not torch).
-dev = ["wpt-train", "wpt-chat", "wpt-eval", "wpt-posttrain", "wpt-dataset", "wpt-web", "pytest>=8", "moto[s3]>=5"]
+dev = ["wpt-train", "wpt-chat", "wpt-eval", "wpt-posttrain", "wpt-dataset", "wpt-web", "pytest>=8", "pytest-xdist>=3", "moto[s3]>=5"]
 cpu = ["torch>=2.14"]
 # NVIDIA, CUDA 13.0: needs driver 580 or newer. The attention kernels: TileLang under Linux (DeepSeek's
 # version; apache-tvm-ffi 0.1.10 and later break it on Python 3.14), Triton on Windows through triton-windows
@@ -78,3 +78,5 @@ explicit = true
 testpaths = ["packages", "apps"]
 # test files in different members may share a name
 addopts = "--import-mode=importlib"
+# scripts/check.py deselects it unless the push changes image code (docs/architecture.md, "Checks")
+markers = ["image_build: locks and builds a real image with Docker"]

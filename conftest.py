@@ -1,12 +1,29 @@
-"""Shared setup for the tests of every package and application: whether
-Docker runs on this machine, and how two passes over the same tokens may
-differ in routing. Test files reach it as fixtures (they cannot import this
-file under --import-mode=importlib)."""
+"""Shared setup for the tests of every package and application: one
+PyTorch thread per test process when pytest-xdist runs the tests in
+parallel (scripts/check.py), whether Docker runs on this machine, and how
+two passes over the same tokens may differ in routing. Test files reach the
+last two as fixtures (they cannot import this file under
+--import-mode=importlib)."""
 
+import os
 import shutil
 import subprocess
 
 import pytest
+
+
+def pytest_configure(config):
+    """In a pytest-xdist worker, PyTorch and the programs it starts use 1
+    thread: every worker taking every core makes the machine unusable. Set
+    before the test modules import torch; a serial run keeps the default."""
+    if "PYTEST_XDIST_WORKER" not in os.environ:
+        return
+    os.environ["OMP_NUM_THREADS"] = os.environ["MKL_NUM_THREADS"] = "1"
+    try:
+        import torch
+    except ImportError:
+        return
+    torch.set_num_threads(1)
 
 
 @pytest.fixture(scope="session")

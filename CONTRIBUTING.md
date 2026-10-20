@@ -260,4 +260,12 @@ uv run scripts/check.py      # every check CI runs, before you push
 `scripts/check.py` is what CI runs too: the tests of every package, the Rust
 tests, the data rules, and the checks on changed sources and on your
 commits, compared with the upstream branch. A green run means a green CI.
-There is no local hook.
+There is no local hook. The tests run in parallel on all cores but 2, each
+with one PyTorch thread. The image build test runs only when your push
+changes image code (`packages/wpt-agent/src/wpt_agent/images.py`, the
+wpt-agent tests `test_images.py` and `conftest.py`, the image lock and
+image licenses schemas of wpt-dataset, or `data/images/`); otherwise
+`uv run pytest` runs it. The GRPO tests keep their pinned and built image
+in `.pytest_cache/` and in Docker, so only the first check on a machine,
+and every CI run, which starts empty, pays for locking and building it
+(maintainer's decision, 2026-10-20; `docs/architecture.md`, "Checks").

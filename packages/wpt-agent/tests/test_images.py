@@ -31,6 +31,7 @@ def root(tmp_path, image):
         subprocess.run(["docker", "rmi", "-f", tag], capture_output=True)
 
 
+@pytest.mark.image_build
 def test_a_lock_pins_the_base_the_archive_date_and_packages_and_every_machine_builds_from_it(root):
     # the lock records what the image holds, and apt reads the dated
     # archive, so a build from the lock installs exactly the pinned versions
