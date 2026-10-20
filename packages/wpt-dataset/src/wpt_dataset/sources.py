@@ -34,7 +34,7 @@ from wpt_utils.programs import program
 from . import huggingface, manifest, retry, robots
 from .errors import (ChecksumMismatch, CrawlForbidden, CutFailed, FetchFailed, LicenseMapError, NotText, PatchFailed,
                      UnsupportedEntry)
-from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match
+from .manifest import FILE, SYMLINK, Entry, Extractor, glob_match_any
 from .repo import Patch, Source
 
 VERSION = importlib.metadata.version("wpt-dataset")
@@ -63,9 +63,8 @@ def upstream_tree(source: Source, store, telemetry=None) -> dict[str, Entry]:
         except CrawlForbidden as error:  # that site's wish only; another site may allow it
             forbidden.append(str(error))
             continue
-        except (OSError, urllib.error.URLError, subprocess.CalledProcessError) as error:
-            detail = error.stderr.decode(errors="replace").strip() if isinstance(error, subprocess.CalledProcessError) and error.stderr else error
-            unreachable.append(f"{address}: {detail}")
+        except UNREACHABLE as error:
+            unreachable.append(f"{address}: {_reason(error)}")
             continue
         actual = manifest.checksum(tree)
         if actual == expected:
@@ -81,6 +80,15 @@ def upstream_tree(source: Source, store, telemetry=None) -> dict[str, Entry]:
     raise FetchFailed(f"{source.id}: " + "; ".join(unreachable))
 
 
+UNREACHABLE = (OSError, urllib.error.URLError, subprocess.CalledProcessError)  # what a failed download raises
+
+
+def _reason(error) -> str:
+    if isinstance(error, subprocess.CalledProcessError) and error.stderr:
+        return error.stderr.decode(errors="replace").strip()
+    return str(error)
+
+
 def compute_upstream(data: dict, address: str, store) -> dict[str, Entry]:
     """The upstream tree of a description, without checking its checksum
     (used to fill in `checksum` for a new source). For a huggingface source
@@ -89,38 +97,91 @@ def compute_upstream(data: dict, address: str, store) -> dict[str, Entry]:
     return _fetch(data, address, store, listing_only=True)
 
 
-def _fetch(data: dict, address: str, store, listing_only=False) -> dict[str, Entry]:
+def fill_checksum(source: Source, store, telemetry=None) -> tuple[dict, list[str]]:
+    """For a draft source (checksum all zeros): (its description with the
+    checksum filled in, the paths it now excludes). One fetch of the main
+    address gives the upstream tree; every file of the final tree that is
+    not UTF-8 text, as source_tree finds them, is excluded by its exact
+    path (exact_pattern), and the tree is read again from what that fetch
+    downloaded, since an exclusion also changes the history files. The tree
+    is kept under upstream/<checksum> as upstream_tree keeps it, so checking
+    the source fetches nothing more. A huggingface source's checksum comes
+    from the Hub's listing (compute_upstream) and nothing is excluded: its
+    check downloads it, as before."""
+    data = json.loads(json.dumps(source.data))
+    address = data["address"]
+    with tempfile.TemporaryDirectory(prefix="wpt-fetch-") as tmp:
+        try:
+            tree = _fetch(data, address, store, listing_only=True, tmp=Path(tmp))
+        except UNREACHABLE as error:
+            raise FetchFailed(f"{source.id}: {address}: {_reason(error)}") from error
+        if data["type"] == "huggingface":
+            data["checksum"] = manifest.checksum(tree)
+            return data, []
+        try:
+            final = apply_patches(source.id, apply_cuts(source.id, tree, data.get("cuts", []), store), source.patches,
+                                  store)
+        except (CutFailed, PatchFailed):
+            final = {}  # the check names that failure, before any text is read
+        found = not_text(source, final, store)
+        if made := [path for path in found if path not in tree]:
+            raise NotText(f"{source.id}: {made[0]} is not UTF-8 text and comes from a patch, not upstream; "
+                          f"extract cannot leave it out")
+        if found:
+            data.setdefault("extract", {}).setdefault("exclude", []).extend(map(exact_pattern, found))
+            tree = _fetch(data, address, store, tmp=Path(tmp), again=True)
+    data["checksum"] = manifest.checksum(tree)
+    set_ref(store, "upstream", data["checksum"].removeprefix("sha256:"), store.put_bytes(manifest.manifest_bytes(tree)),
+            telemetry or Telemetry.off())
+    return data, found
+
+
+def exact_pattern(path: str) -> str:
+    """An extract pattern matching only that path: each `*`, `?` and `[`
+    written as a class of that one letter."""
+    return manifest.WILDCARD.sub(lambda letter: f"[{letter[0]}]", path)
+
+
+def _fetch(data: dict, address: str, store, listing_only=False, tmp: Path | None = None, again=False) \
+        -> dict[str, Entry]:
+    """The upstream tree, downloaded into tmp (default: a temporary folder
+    of its own). again: tmp holds what an earlier call downloaded, and it
+    is read from there, with no robots.txt or download (a git source still
+    asks for any object it needs and lacks)."""
+    if tmp is None:
+        with tempfile.TemporaryDirectory(prefix="wpt-fetch-") as folder:
+            return _fetch(data, address, store, listing_only, Path(folder))
     extractor = Extractor(store, data.get("extract", {}))
     kind, revision = data["type"], data["revision"]
-    if kind != "empty":
+    if kind != "empty" and not again:
         robots.check(address, kind, USER_AGENT)  # before anything is downloaded
-    with tempfile.TemporaryDirectory(prefix="wpt-fetch-") as tmp:
-        tmp = Path(tmp)
-        if kind == "http-file":
-            name = data.get("extract", {}).get("name") or unquote(urlparse(address).path.rsplit("/", 1)[-1])
-            if not name:
-                raise OSError(f"{address}: no file name in the address; set extract.name")
-            extractor.add(name, FILE, _download(address, tmp / "download").read_bytes())
-        elif kind == "http-archive":
-            manifest.read_archive(_download(address, tmp / "download"), extractor)
-        elif kind == "git":
-            _read_git_source(data, address, tmp, extractor)
-        elif kind == "huggingface":
-            huggingface.read(address, revision, extractor, tmp, USER_AGENT, listing_only)
-        elif kind == "mercurial":
-            hg = program("hg")
+    if kind == "http-file":
+        name = data.get("extract", {}).get("name") or unquote(urlparse(address).path.rsplit("/", 1)[-1])
+        if not name:
+            raise OSError(f"{address}: no file name in the address; set extract.name")
+        download = tmp / "download" if again else _download(address, tmp / "download")
+        extractor.add(name, FILE, download.read_bytes())
+    elif kind == "http-archive":
+        manifest.read_archive(tmp / "download" if again else _download(address, tmp / "download"), extractor)
+    elif kind == "git":
+        _read_git_source(data, address, tmp, extractor, again)
+    elif kind == "huggingface":
+        huggingface.read(address, revision, extractor, tmp, USER_AGENT, listing_only)
+    elif kind == "mercurial":
+        hg = program("hg")
 
-            def clone():
-                shutil.rmtree(tmp / "repo", ignore_errors=True)  # a cut clone leaves a folder hg refuses
-                subprocess.run([hg, "clone", "-q", "-U", "-r", revision, address, str(tmp / "repo")],
-                               capture_output=True, check=True)
+        def clone():
+            shutil.rmtree(tmp / "repo", ignore_errors=True)  # a cut clone leaves a folder hg refuses
+            subprocess.run([hg, "clone", "-q", "-U", "-r", revision, address, str(tmp / "repo")],
+                           capture_output=True, check=True)
 
+        if not again:
             retry.call(clone, address)
-            manifest.read_mercurial(tmp / "repo", revision, extractor)
-        elif kind == "empty":
-            pass  # its patches hold every file
-        else:
-            raise ValueError(f"unknown source type {kind!r}")
+        manifest.read_mercurial(tmp / "repo", revision, extractor)
+    elif kind == "empty":
+        pass  # its patches hold every file
+    else:
+        raise ValueError(f"unknown source type {kind!r}")
     return extractor.finish()
 
 
@@ -138,10 +199,11 @@ def _download(address: str, target: Path) -> Path:
     return target
 
 
-def _read_git_source(data: dict, address: str, tmp: Path, extractor: Extractor):
+def _read_git_source(data: dict, address: str, tmp: Path, extractor: Extractor, again=False):
     """The commit, its history when asked, and each kept submodule at the
     commit it pins, from the address `submodules` lists for it, recursively.
-    Only the contents of kept files are downloaded."""
+    Only the contents of kept files are downloaded. again: each repository
+    is in tmp already (_fetch)."""
     since = data["history"]["since"] if data.get("history") else None
     listed, found = data.get("submodules", {}), set()
     pending = [("", address, data["revision"], since)]
@@ -150,7 +212,8 @@ def _read_git_source(data: dict, address: str, tmp: Path, extractor: Extractor):
             break
         prefix, address, revision, since = pending.pop(0)
         repo = tmp / f"repo-{number}"
-        _git_fetch(address, revision, repo, full=since is not None)
+        if not again:
+            _git_fetch(address, revision, repo, full=since is not None)
         _git_fetch_blobs(address, repo, manifest.git_blobs_needed(repo, revision, extractor, since, prefix))
         submodules = manifest.read_git(repo, revision, extractor, prefix)
         if since:
@@ -158,7 +221,8 @@ def _read_git_source(data: dict, address: str, tmp: Path, extractor: Extractor):
         for path, commit in submodules.items():
             if path not in listed:
                 raise UnsupportedEntry(f"{path}: a submodule with no address in `submodules`; list it or exclude it")
-            robots.check(listed[path], "git", USER_AGENT)
+            if not again:
+                robots.check(listed[path], "git", USER_AGENT)
             found.add(path)
             pending.append((path + "/", listed[path], commit, None))
     if unused := sorted(set(listed) - found):
@@ -296,28 +360,40 @@ def source_tree(source: Source, store, telemetry=None) -> tuple[dict[str, Entry]
         tree = upstream_tree(source, store, telemetry)
         tree = apply_cuts(source.id, tree, source.data.get("cuts", []), store)
         tree = apply_patches(source.id, tree, source.patches, store)
-        for path, entry in tree.items():
-            if entry.mode != SYMLINK and not is_records(source, path) and not is_message_tree(source, path):
-                try:
-                    store.get_bytes(entry.sha256).decode("utf-8")
-                except UnicodeDecodeError as error:
-                    raise NotText(f"{source.id}: {path} is not UTF-8 text; exclude it in extract") from error
+        if found := not_text(source, tree, store, first=True):
+            raise NotText(f"{source.id}: {found[0]} is not UTF-8 text; exclude it in extract")
         known = store.put_bytes(manifest.manifest_bytes(tree))
         set_ref(store, "source-trees", key, known, telemetry or Telemetry.off())
     check_license_map(source, tree)
     return tree, known
 
 
+def not_text(source: Source, tree: dict[str, Entry], store, first=False) -> list[str]:
+    """The files of a final tree that must be UTF-8 text and are not, in
+    the tree's order (symlinks, records files and message trees are read
+    otherwise); with first, only the first one."""
+    found = []
+    for path, entry in tree.items():
+        if entry.mode != SYMLINK and not is_records(source, path) and not is_message_tree(source, path):
+            try:
+                store.get_bytes(entry.sha256).decode("utf-8")
+            except UnicodeDecodeError:
+                found.append(path)
+                if first:
+                    break
+    return found
+
+
 def is_records(source: Source, path: str) -> bool:
     """Whether a path is in the records format (see records.py)."""
-    return any(e["format"] == "records" and any(glob_match(path, g) for g in e["paths"])
+    return any(e["format"] == "records" and glob_match_any(path, e["paths"])
                for e in source.data["formats"])
 
 
 def is_message_tree(source: Source, path: str) -> bool:
     """Whether a path is a chat file read as a message tree, which is read
     like a records file (JSON Lines, compressed or not, or Parquet)."""
-    return any(e["format"] == "chat" and "tree" in e and any(glob_match(path, g) for g in e["paths"])
+    return any(e["format"] == "chat" and "tree" in e and glob_match_any(path, e["paths"])
                for e in source.data["formats"])
 
 
@@ -326,7 +402,7 @@ def check_license_map(source: Source, tree: dict[str, Entry]):
     records file instead matches one or more, each listing the license
     values of the records it covers, with no value listed twice."""
     for path in tree:
-        found = [e for e in source.data["licenses"] if any(glob_match(path, g) for g in e["paths"])]
+        found = [e for e in source.data["licenses"] if glob_match_any(path, e["paths"])]
         names = ", ".join(e["license"] for e in found)
         if not is_records(source, path):
             if len(found) != 1:
@@ -345,5 +421,5 @@ def check_license_map(source: Source, tree: dict[str, Entry]):
 
 
 def tags_of(source: Source, path: str) -> frozenset[str]:
-    return frozenset(t for e in source.data.get("tags", []) if any(glob_match(path, g) for g in e["paths"])
+    return frozenset(t for e in source.data.get("tags", []) if glob_match_any(path, e["paths"])
                      for t in e["tags"])

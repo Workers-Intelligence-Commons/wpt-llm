@@ -127,7 +127,14 @@ sha256 is that of the target text). Empty folders do not appear, so a git
 checkout and an archive of the same release give the same checksum and can
 be mirrors of each other. The checksum is `sha256:` + the sha256 of the
 manifest. `wpt-dataset manifest <id>` prints a source's manifest and
-checksum, to fill in a new `source.json`.
+checksum. `wpt-dataset fill-checksum <id> ...` fills in the checksum of a
+new `source.json` (all zeros until then) from one download: it excludes in
+`extract` each file that is not UTF-8 text by its exact path (`*`, `?` and
+`[` written `[*]`, `[?]` and `[[]`), reads the download again with those
+exclusions (they change the history files too), keeps the upstream tree in
+the store as the check keeps it, and checks that source as `check --fetch`
+does, without downloading it again. A huggingface source's checksum comes
+from the Hub's listing, with nothing excluded; its check downloads it.
 
 The manifest is computed from the downloaded data itself (git's objects,
 mercurial's manifest, archive headers), never from files written to a disk,

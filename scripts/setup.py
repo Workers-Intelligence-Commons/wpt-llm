@@ -11,13 +11,19 @@ Usage:
 Run it once per machine, and again after a plain `uv sync`, which removes
 PyTorch because no build is part of the default install. uv runs this script
 in its own empty environment, so it works before anything is installed.
+
+On Windows it ends with a note: the folders to leave out of Microsoft
+Defender's scanning, and the command that does it. It changes nothing itself.
 """
 
 import argparse
 import os
+import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 # PCI vendor ids, in order of preference when a machine has several GPUs
@@ -54,6 +60,41 @@ def pick_backend(vendors):
     return None, "cpu"
 
 
+def store_folder():
+    """The local folder WPT_STORE names (environment, else .env at the
+    root), as wpt_store reads it; None when it names no local folder."""
+    # mirrors wpt_store.store_from_settings, which this cannot import: it runs before anything is installed
+    url = os.environ.get("WPT_STORE")
+    if not url:
+        try:
+            lines = (ROOT / ".env").read_text(encoding="utf-8").splitlines()
+        except FileNotFoundError:
+            lines = []
+        for line in map(str.strip, lines):
+            if line and not line.startswith("#") and line.split("=", 1)[0].strip() == "WPT_STORE":
+                url = line.split("=", 1)[1].strip().strip("'\"")
+    parsed = urlparse(url or "")
+    if parsed.scheme != "file":
+        return None
+    path = unquote(parsed.path)
+    return path[1:] if re.match(r"/[A-Za-z]:", path) else path  # file:///C:/x -> C:/x
+
+
+def defender_note():
+    """Where fetches write many files on Windows, and how to leave those
+    folders out of Microsoft Defender's scanning."""
+    store = store_folder()
+    folders = ([str(Path(store))] if store else []) + [tempfile.gettempdir()]
+    named = ("the store (WPT_STORE) and " if store else "") + "the temporary folder where fetches clone"
+    quoted = ",".join("'" + folder.replace("'", "''") + "'" for folder in folders)
+    print(f"\nMicrosoft Defender scans every file and process the fetches create, which can slow them. To leave "
+          f"{named} out of its scanning, run in a PowerShell opened as administrator:\n\n"
+          f"    Add-MpPreference -ExclusionPath {quoted}\n\n"
+          f"Defender then never scans the files in these folders. This script changed nothing.")
+    if not store:
+        print("WPT_STORE names no local folder (file://...), so only the temporary folder is listed.")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--backend", choices=["cpu", "cuda", "rocm", "xpu"], help="skip detection")
@@ -67,7 +108,10 @@ def main():
         print(f"PyTorch build: {backend} ({f'{name} GPU found' if name else 'no supported GPU found'})")
 
     uv = os.environ.get("UV", "uv")  # uv tells the scripts it runs where it is
-    sys.exit(subprocess.run([uv, "sync", "--group", backend], cwd=ROOT).returncode)
+    code = subprocess.run([uv, "sync", "--group", backend], cwd=ROOT).returncode
+    if sys.platform == "win32":
+        defender_note()
+    sys.exit(code)
 
 
 if __name__ == "__main__":

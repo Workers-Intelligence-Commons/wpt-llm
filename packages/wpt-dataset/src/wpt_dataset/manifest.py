@@ -16,8 +16,12 @@ Linux and Windows compute the same manifest.
 
 import concurrent.futures
 import contextlib
+import functools
+import glob
 import hashlib
+import itertools
 import os
+import re
 import stat
 import subprocess
 import tarfile
@@ -62,6 +66,49 @@ def glob_match(path: str, pattern: str) -> bool:
     return PurePosixPath(path).full_match(pattern)
 
 
+WILDCARD = re.compile(r"[*?[]")  # what fnmatch reads as more than its own letter
+
+
+def _normal(path: str) -> str:
+    """A path or pattern as full_match sees it: PurePosixPath's spelling,
+    with "" for an empty path rather than "."."""
+    pure = PurePosixPath(path)
+    return str(pure) if pure.parts else ""
+
+
+class Globs:
+    """A list of patterns compiled once, where `match` gives what any of
+    glob_match gives for one of them. A pattern with no `*`, `?` or `[`
+    matches only its own spelling, so those are a set; the others become one
+    regular expression, each the very one full_match compiles (glob.translate,
+    recursive, hidden files included, "/" as separator, letter case kept)."""
+
+    def __init__(self, patterns):
+        self.exact, wild = set(), []
+        for pattern in map(_normal, patterns):
+            if WILDCARD.search(pattern):
+                wild.append(pattern)
+            else:
+                self.exact.add(pattern)
+        translated = (glob.translate(p, recursive=True, include_hidden=True, seps="/") for p in dict.fromkeys(wild))
+        self.wild = re.compile("|".join(translated)).match if wild else None
+
+    def match(self, path: str) -> bool:
+        path = _normal(path)
+        return path in self.exact or (self.wild is not None and self.wild(path) is not None)
+
+
+@functools.lru_cache(maxsize=4096)
+def _globs(patterns: tuple[str, ...]) -> Globs:
+    return Globs(patterns)
+
+
+def glob_match_any(path: str, patterns) -> bool:
+    """Whether path matches any of patterns (see glob_match); each list of
+    patterns is compiled once, on its first use."""
+    return _globs(tuple(patterns)).match(path)
+
+
 def check_paths(tree: dict[str, Entry]):
     """Paths must work on Linux and Windows alike."""
     seen = {}
@@ -82,12 +129,20 @@ class Extractor:
     def __init__(self, store, extract: dict):
         self.store = store
         self.strip = extract.get("strip", 0)
-        self.exclude = extract.get("exclude", [])
+        # compiled here once, not through glob_match_any, which turns the whole list into its cache key on
+        # every call (once per entry read) and keeps it compiled after this fetch
+        self.excluded = Globs(extract.get("exclude", []))
+        self.paths: dict[bytes | str, str | None] = {}  # kept's answers: history commits repeat paths
         self.tree: dict[str, Entry] = {}
 
     def kept(self, raw_path: bytes | str) -> str | None:
         """The path an entry keeps after `strip`, or None when it is stripped
         away or excluded."""
+        if raw_path not in self.paths:
+            self.paths[raw_path] = self._kept(raw_path)
+        return self.paths[raw_path]
+
+    def _kept(self, raw_path: bytes | str) -> str | None:
         if isinstance(raw_path, bytes):
             try:
                 raw_path = raw_path.decode("utf-8")
@@ -97,7 +152,7 @@ class Extractor:
         if len(parts) <= self.strip:
             return None  # gone with the stripped folders, like tar --strip-components
         path = "/".join(parts[self.strip:])
-        if any(glob_match(path, pattern) for pattern in self.exclude):
+        if self.excluded.match(path):
             return None
         return path
 
@@ -234,21 +289,67 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
     meet a file of the commit itself."""
     commits = _history_commits(repo, since, revision)
     changed = {commit: [path for path, _ in changes] for commit, changes in _changed_paths(repo, commits).items()}
+    limits = {}  # commit -> None when every path it changes is kept, else the kept paths
+    for commit in commits:
+        paths = [p for p in changed[commit] if extractor.kept(p) is not None]
+        if paths:
+            limits[commit] = None if len(paths) == len(changed[commit]) else paths
 
     def patch(commit):
-        paths = [p for p in changed[commit] if extractor.kept(p) is not None]
-        if not paths:
-            return commit, None
-        limit = [] if len(paths) == len(changed[commit]) else ["--", *(f":(literal){p}" for p in paths)]
-        text = _git(repo, "format-patch", "-1", "--root", "--stdout", "--no-signature", "--no-renames", "--no-binary",
-                    commit, *limit)
-        # a diff may hold bytes in any encoding; the file must be UTF-8 text
-        return commit, text.decode("utf-8", errors="replace").encode("utf-8")
+        paths = limits[commit]
+        specs = [f":(literal){p}" for p in paths]
+        if any("\n" in p or "\r" in p for p in paths):  # no line of standard input can hold such a path
+            return commit, _git(repo, *FORMAT_PATCH, "-1", commit, "--", *specs)
+        # the paths go on standard input, after "--": a command line has a limit (32,767 characters on
+        # Windows) that a commit changing thousands of files passes
+        lines = "".join(line + "\n" for line in (commit, "--", *specs))
+        return commit, _git(repo, *FORMAT_PATCH, "-1", "--stdin", input=lines.encode("utf-8", "surrogateescape"))
 
     with concurrent.futures.ThreadPoolExecutor(8) as pool:
-        for commit, text in pool.map(patch, commits):
-            if text is not None:
-                extractor.add(HISTORY + commit, FILE, text)
+        limited = pool.map(patch, [c for c, paths in limits.items() if paths is not None])
+        for commit, text in itertools.chain(_whole_patches(repo, [c for c, paths in limits.items() if paths is None]),
+                                            limited):
+            # a diff may hold bytes in any encoding; the file must be UTF-8 text
+            extractor.add(HISTORY + commit, FILE, text.decode("utf-8", errors="replace").encode("utf-8"))
+
+
+FORMAT_PATCH = ("format-patch", "--root", "--stdout", "--no-signature", "--no-renames", "--no-binary")
+HEADER = re.compile(rb"(?<![^\n])From ([0-9a-f]+) Mon Sep 17 00:00:00 2001\n")  # a patch's first line
+
+
+PATCH_GROUP = 500  # commits per git call, so one call's output is in memory at a time
+
+
+def _whole_patches(repo, commits):
+    """(commit, what `format-patch -1 <commit>` writes) for commits given
+    newest first, one group of PATCH_GROUP commits at a time, so only one
+    group's patches are in memory: from one `git format-patch --stdin` per
+    group (_group_patches), or one call per commit for a group that cannot
+    be cut."""
+    for start in range(0, len(commits), PATCH_GROUP):
+        group = commits[start:start + PATCH_GROUP]
+        cut = _group_patches(repo, group)
+        for commit in group:
+            yield commit, cut[commit] if commit in cut else _git(repo, *FORMAT_PATCH, "-1", commit)
+
+
+def _group_patches(repo, commits) -> dict[str, bytes]:
+    """{commit: its patch} from one `git format-patch --stdin`, which writes
+    the commits oldest first with one blank line between two patches. Each
+    patch is cut where the next commit's first line starts. A message or a
+    diff may hold such a line too: when the commits' first lines appear more
+    than once, or out of order, nothing is cut and the result is empty."""
+    if not commits:
+        return {}
+    out = _git(repo, *FORMAT_PATCH, "--stdin", "--no-walk=unsorted", "-N", input="".join(c + "\n" for c in commits).encode())
+    asked, order = set(commits), commits[::-1]
+    found = [(match[1].decode(), match.start()) for match in HEADER.finditer(out) if match[1].decode() in asked]
+    if [commit for commit, _ in found] != order or found[0][1] != 0:
+        return {}
+    ends = [start - 1 for _, start in found[1:]] + [len(out)]  # the next patch's start, less the blank line
+    if any(out[end - 1:end + 1] != b"\n\n" for end in ends[:-1]):
+        return {}
+    return {commit: out[start:end] for (commit, start), end in zip(found, ends)}
 
 
 def _history_commits(repo, since, revision) -> list[str]:

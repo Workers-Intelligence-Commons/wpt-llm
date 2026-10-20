@@ -97,6 +97,7 @@ ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*-[0-9a-f]{8}")
 PATCH = re.compile(r"(\d{4})-[A-Za-z0-9._-]+\.patch")
 NAME = re.compile(r"[a-z0-9][a-z0-9._-]*")
 EMPTY_CHECKSUM = "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"  # an empty manifest
+DRAFT_CHECKSUM = "sha256:" + "0" * 64  # a new source's, until fill-checksum (CONTRIBUTING.md, "Adding a source")
 SOURCE_FILE = "source.json"
 # a key type of an allowed-signers line (ssh-keygen ALLOWED SIGNERS), followed by the key in base64
 SIGNER_KEY = re.compile(r"(?:^|\s)(?:ssh-[a-z0-9-]+|ecdsa-sha2-[a-z0-9-]+|sk-[a-z0-9@.-]+)\s+[A-Za-z0-9+/]+=*(?:\s|$)")
@@ -844,6 +845,22 @@ class Repo:
         skipped = {}
         converted = sum(1 for _ in documents(source, tree, store, self, skipped))
         return len(tree), converted, skipped
+
+    def fill_checksum(self, sid: str, store) -> tuple[str, list[str]]:
+        """Fill in a draft source's checksum, excluding each file that is not
+        UTF-8 text by its exact path, from one fetch (sources.fill_checksum),
+        and write source.json. Returns (checksum, the paths excluded).
+        RuleViolation when the checksum is not DRAFT_CHECKSUM."""
+        from .sources import fill_checksum
+
+        version = self.version("source", sid)
+        source = self.source(sid)
+        if source.data["checksum"] != DRAFT_CHECKSUM:
+            raise RuleViolation(f"{sid}: its checksum is filled in already; `wpt-dataset manifest {sid}` prints the "
+                                f"upstream's, `wpt-dataset check --fetch {sid}` checks it")
+        document, excluded = fill_checksum(source, store)
+        self.save_source(sid, document, version)
+        return document["checksum"], excluded
 
     def _check_source_document(self, sid, document):
         if not ID.fullmatch(sid):

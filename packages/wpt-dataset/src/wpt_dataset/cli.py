@@ -11,6 +11,13 @@
                                           the id a new source must use
     wpt-dataset manifest ID               fetch a source without checking its checksum and
                                           print its manifest and checksum (to fill in source.json)
+    wpt-dataset fill-checksum ID [ID ...] for draft sources (checksum all zeros): fetch each once,
+                                          exclude every file that is not UTF-8 text by its exact
+                                          path, write the checksum into source.json, and check the
+                                          source as `check --fetch` does, without fetching it again;
+                                          every source is filled, and the failures listed at the end.
+                                          It checks only the named sources, not the repository-wide
+                                          rules `check` runs: run `wpt-dataset check` too
     wpt-dataset unpack ID FOLDER          write a source's final files into a new folder
                                           outside the repository, to edit them
     wpt-dataset patch ID FOLDER NAME      record the folder's differences from the source's
@@ -129,18 +136,33 @@ def cmd_check(args, repo):
     if ids:
         store = _store(repo)
         for sid in ids:  # every source is checked, so one run names every failure
-            try:
-                entries, converted, skipped = repo.check_fetched(sid, store)
-            except (DatasetError, StoreError, MissingTool) as error:
-                failed.append(f"{sid}: {type(error).__name__}: {error}")
-                print(f"{sid}: FAILED ({type(error).__name__})", file=sys.stderr)
-                continue
-            print(f"{sid}: {entries} entries, checksum, cuts, patches, license and format maps OK; "
-                  f"{converted} Markdown documents")
-            _print_skipped(skipped)
+            _check_fetched(repo, sid, store, failed)
     print(f"checked {len(repo.source_ids())} sources and their recipes")
+    return _failures(failed, len(ids))
+
+
+def _check_fetched(repo, sid, store, failed: list[str]):
+    """Check one fetched source as `check --fetch` does; a failure is
+    printed and added to failed."""
+    try:
+        entries, converted, skipped = repo.check_fetched(sid, store)
+    except (DatasetError, StoreError, MissingTool) as error:
+        _failed(sid, error, failed)
+        return
+    print(f"{sid}: {entries} entries, checksum, cuts, patches, license and format maps OK; "
+          f"{converted} Markdown documents")
+    _print_skipped(skipped)
+
+
+def _failed(sid, error, failed: list[str]):
+    failed.append(f"{sid}: {type(error).__name__}: {error}")
+    print(f"{sid}: FAILED ({type(error).__name__})", file=sys.stderr)
+
+
+def _failures(failed: list[str], count: int) -> int:
+    """Exit code 1 and the list of failures, if any."""
     if failed:
-        print(f"{len(failed)} of {len(ids)} fetched sources failed:", file=sys.stderr)
+        print(f"{len(failed)} of {count} fetched sources failed:", file=sys.stderr)
         print("\n".join(failed), file=sys.stderr)
         return 1
     return 0
@@ -183,6 +205,25 @@ def cmd_manifest(args, repo):
     sys.stdout.write(manifest.manifest_bytes(tree).decode())
     print(f"checksum: {manifest.checksum(tree)}", file=sys.stderr)
     return 0
+
+
+def cmd_fill_checksum(args, repo):
+    store, failed = _store(repo), []
+    for sid in args.ids:  # every source is filled and checked, so one run names every failure
+        try:
+            checksum, excluded = repo.fill_checksum(sid, store)
+        except (DatasetError, StoreError, MissingTool) as error:
+            _failed(sid, error, failed)
+            continue
+        print(f"{sid}: checksum {checksum}; {len(excluded)} files that are not UTF-8 text excluded")
+        for path in excluded:
+            print(f"{sid}: excluded {path}")
+        source = repo.source(sid)
+        if source.unwritten:  # as `check` does: no text to check yet
+            print(source.note)
+            continue
+        _check_fetched(repo, sid, store, failed)
+    return _failures(failed, len(args.ids))
 
 
 def cmd_unpack(args, repo):
@@ -446,6 +487,9 @@ def main(argv=None):
     show = commands.add_parser("manifest")
     show.add_argument("id")
     show.set_defaults(run=cmd_manifest)
+    fill = commands.add_parser("fill-checksum")
+    fill.add_argument("ids", nargs="+", metavar="ID")
+    fill.set_defaults(run=cmd_fill_checksum)
     unpack_ = commands.add_parser("unpack")
     unpack_.add_argument("id")
     unpack_.add_argument("folder")
