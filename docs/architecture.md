@@ -430,8 +430,7 @@ branch, as a push would:
 - The tests of every package, and the Rust tests. None needs a server: the
   S3 test runs against moto, which answers S3 requests inside the test
   process. The tests run in parallel (pytest-xdist), each process limited
-  to one PyTorch thread, so the machine stays usable (maintainer's
-  decision, 2026-10-20). The number of processes is the smaller of 75% of
+  to one PyTorch thread (maintainer's decision, 2026-10-20). The number of processes is the smaller of 75% of
   the cores and 75% of the memory available when the check starts divided
   by 2.5 GB, the measured memory of one test process rounded up, and at
   least 1; where the memory cannot be read, the cores alone decide. The

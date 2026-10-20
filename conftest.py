@@ -11,14 +11,20 @@ import subprocess
 
 import pytest
 
+# In a pytest-xdist worker, PyTorch and the programs it starts use 1 thread:
+# every worker taking every core makes the machine unusable. The threading
+# libraries read these variables when torch is first imported, and
+# apps/conftest.py imports it before pytest_configure runs, so they are set
+# here, when pytest loads this file; a serial run keeps the default.
+if "PYTEST_XDIST_WORKER" in os.environ:
+    os.environ["OMP_NUM_THREADS"] = os.environ["MKL_NUM_THREADS"] = "1"
+
 
 def pytest_configure(config):
-    """In a pytest-xdist worker, PyTorch and the programs it starts use 1
-    thread: every worker taking every core makes the machine unusable. Set
-    before the test modules import torch; a serial run keeps the default."""
+    """In a pytest-xdist worker, also limits torch's own thread pool to 1,
+    which applies even when torch was imported before this hook."""
     if "PYTEST_XDIST_WORKER" not in os.environ:
         return
-    os.environ["OMP_NUM_THREADS"] = os.environ["MKL_NUM_THREADS"] = "1"
     try:
         import torch
     except ImportError:

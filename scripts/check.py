@@ -12,10 +12,10 @@ In order, each one run even when an earlier one failed:
     lock      uv.lock matches every pyproject.toml
     tests     the tests of every package, in parallel with one PyTorch thread
               each, on as many processes as 75% of the cores and 75% of the
-              available memory (2.5 GB each) both allow; the image build test (marked
-              image_build) only when BASE..HEAD changes IMAGE_CODE or an
-              image's folder
-              (plain `uv run pytest` runs every test, serially)
+              available memory (2.5 GB each) both allow; the image build
+              test (marked image_build) only when BASE..HEAD changes
+              IMAGE_CODE or an image's folder (plain `uv run pytest` runs
+              every test, serially)
     rust      the tokenizer's Rust tests
     data      wpt-dataset check: the data rules
     sources   wpt-dataset check --changed BASE: changed sources fetched and checked
