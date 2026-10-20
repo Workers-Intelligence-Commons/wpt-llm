@@ -46,6 +46,7 @@ def upstream_with_binaries(kit, folder):
 def draft(kit, repo, store, address, since, revision):
     return kit.add_source(repo, store, "example", "project", {
         "type": "git", "address": address, "revision": revision, "history": {"since": since},
+        "licenses": kit.WITH_HISTORY,
         "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                     {"format": "text", "paths": ["*", "src/**", "data/**"]}]}, compute_checksum=False)
 

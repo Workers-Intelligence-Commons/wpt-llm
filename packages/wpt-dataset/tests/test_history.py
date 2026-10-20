@@ -1,7 +1,10 @@
+import re
+
 import pytest
 
 from wpt_dataset import manifest
 from wpt_dataset.build import gather
+from wpt_dataset.sources import compute_upstream, source_tree
 
 
 def commit(kit, folder, message, files):
@@ -28,7 +31,7 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
     vendored = commit(kit, folder, "update the vendored library", {"vendor/lib.py": b"x = 2\n"})
     sid = kit.add_source(repo, store, "example", "history", {
         "type": "git", "address": str(folder), "revision": vendored, "history": {"since": since},
-        "extract": {"exclude": ["vendor/**"]},
+        "extract": {"exclude": ["vendor/**"]}, "licenses": kit.WITH_HISTORY,
         "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
                     {"format": "code", "language": "python", "paths": ["**/*.py"]},
                     {"format": "text", "paths": ["LICENSE"]}]})
@@ -44,10 +47,64 @@ def test_a_git_history_gives_one_patch_per_commit_since_the_license_limited_to_k
     assert "-print(1)\n+print(2)" in patch and "vendor/lib.py" not in patch
 
 
-def plumbing_commit(kit, folder, message, changes, parents=()):
+def test_a_tree_entry_written_everywhere_leaves_the_history_files_to_their_own_entry(kit, repo, store, tmp_path):
+    # maintainer's decision, 2026-10-20: a history file counts only against entries whose patterns start with
+    # .git/history/, so `**` means every file of the tree; each file then maps to exactly one entry
+    folder = tmp_path / "upstream"
+    folder.mkdir()
+    kit.run("git", "init", "-q", cwd=folder)
+    since = commit(kit, folder, "add the license", {"LICENSE": kit.LICENSE_TEXT.encode(), "main.py": b"print(1)\n"})
+    head = commit(kit, folder, "print two", {"main.py": b"print(2)\n"})
+    sid = kit.add_source(repo, store, "example", "history", {
+        "type": "git", "address": str(folder), "revision": head, "history": {"since": since},
+        "licenses": kit.WITH_HISTORY,
+        "formats": [{"format": "code", "language": "patch", "paths": [".git/history/**"]},
+                    {"format": "text", "paths": ["LICENSE", "main.py"]}]})
+
+    tree, _ = source_tree(repo.source(sid), store)  # the license map check passes
+
+    history = [f".git/history/{c}" for c in (head, since)]
+    entry_for_history, entry_for_tree = kit.WITH_HISTORY
+    assert sorted(tree) == sorted([*history, "LICENSE", "main.py"])
+    for path in tree:
+        expected = entry_for_history if path in history else entry_for_tree
+        assert manifest.license_entries(kit.WITH_HISTORY, path) == [expected]
+
+
+def test_a_submodule_replacing_a_folder_keeps_the_folder_s_excluded_file_out_of_the_patch(kit, store, tmp_path):
+    # a commit replaces a folder's files by a submodule of the same name, one of those files excluded: git reads
+    # the kept path `frontend` as a folder too, so a patch limited to the kept paths would also show the excluded
+    # file, whose content a partial fetch never downloads (the fetch then fails)
+    library, folder = tmp_path / "library", tmp_path / "upstream"
+    for each in (library, folder):
+        each.mkdir()
+        kit.run("git", "init", "-q", cwd=each)
+        for setting in ("uploadpack.allowFilter", "uploadpack.allowAnySHA1InWant"):  # partial fetches, as on GitHub
+            kit.run("git", "config", setting, "true", cwd=each)
+    library_commit = plumbing_commit(kit, library, "the library", {"lib.js": b"export {}\n"})
+    since = plumbing_commit(kit, folder, "start", {"main.go": b"package main\n", "frontend/app.js": b"go()\n",
+                                                   "frontend/favicon.ico": b"\x00\xff icon"})
+    head = plumbing_commit(kit, folder, "move the frontend to a submodule",
+                           {"frontend/app.js": None, "frontend/favicon.ico": None, "main.go": b"package main\n\n"},
+                           [since], gitlinks={"frontend": library_commit})
+    for each, tip in ((library, library_commit), (folder, head)):
+        kit.run("git", "update-ref", "refs/heads/main", tip, cwd=each)
+
+    tree = compute_upstream({"type": "git", "revision": head, "history": {"since": since},
+                             "extract": {"exclude": ["frontend/favicon.ico"]}, "submodules": {"frontend": str(library)}},
+                            str(folder), store)
+
+    patch = store.get_bytes(tree[f".git/history/{head}"].sha256).decode()
+    assert re.findall(r"^diff --git a/(\S+) ", patch, re.M) == ["frontend", "frontend/app.js", "main.go"]
+    assert f"+Subproject commit {library_commit}" in patch and "favicon" not in patch
+    assert "frontend/lib.js" in tree
+
+
+def plumbing_commit(kit, folder, message, changes, parents=(), gitlinks=()):
     """A commit made from git objects only, no file on a disk (so any path
     git accepts, Windows or not): the first parent's tree with changes
-    applied, path -> content, or None to remove the path."""
+    applied, path -> content, or None to remove the path, and gitlinks,
+    path -> the commit a submodule there points to."""
     env = {"GIT_INDEX_FILE": str(folder / ".git" / "plumbing-index")}
     kit.run("git", "read-tree", *(parents[:1] or ["--empty"]), cwd=folder, env=env)
     for path, content in changes.items():
@@ -56,6 +113,8 @@ def plumbing_commit(kit, folder, message, changes, parents=()):
         else:
             blob = kit.run("git", "hash-object", "-w", "--stdin", cwd=folder, input=content).decode().strip()
             kit.run("git", "update-index", "--add", "--cacheinfo", f"100644,{blob},{path}", cwd=folder, env=env)
+    for path, commit in dict(gitlinks).items():
+        kit.run("git", "update-index", "--add", "--cacheinfo", f"160000,{commit},{path}", cwd=folder, env=env)
     tree = kit.run("git", "write-tree", cwd=folder, env=env).decode().strip()
     return kit.run("git", "commit-tree", tree, *(a for p in parents for a in ("-p", p)), "-m", message,
                    cwd=folder).decode().strip()
@@ -71,7 +130,7 @@ def history_one_call_per_commit(repo, since, revision, extractor):
         paths = [p for p in changed if extractor.kept(p) is not None]
         if not paths:
             continue
-        limit = [] if len(paths) == len(changed) else ["--", *(f":(literal){p}" for p in paths)]
+        limit = [] if len(paths) == len(changed) else ["--", *manifest._only(paths, changed)]
         text = manifest._git(repo, "format-patch", "-1", "--root", "--stdout", "--no-signature", "--no-renames",
                              "--no-binary", commit, *limit)
         files[manifest.HISTORY + commit] = text.decode("utf-8", errors="replace").encode("utf-8")

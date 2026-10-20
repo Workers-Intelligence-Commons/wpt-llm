@@ -534,7 +534,12 @@ BSD-4-Clause, the old OpenSSL license, "responsible AI" and model licenses
   folders included, so its license entry is the AND of every license in
   the source, with every credit (maintainer's decision, 2026-10-16). Commit
   authors' names and emails stay as git wrote them: the repository
-  publishes them under its license.
+  publishes them under its license. A path under `.git/history/` is
+  counted only against license entries whose patterns start with
+  `.git/history/`, so a tree entry written `**` means every file of the
+  tree and does not match the history files (maintainer's
+  decision, 2026-10-20); a pattern starting with `.git/history/` matches
+  no file of the tree.
 - **Every file whose license allows it comes in.** Only binary files (the
   repository reads UTF-8 text), license refusals and doubts leave a file
   out; configuration, build files, license files and edition pages are

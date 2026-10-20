@@ -52,7 +52,7 @@ from lxml import etree
 
 from . import conversations, records, tasks
 from .errors import FormatMapError, NotText
-from .manifest import SYMLINK, glob_match_any
+from .manifest import SYMLINK, glob_match_any, license_entries
 
 EPUB_TYPE = "{http://www.idpf.org/2007/ops}type"
 SKIPPED = {"head", "script", "style", "img", "svg", "math", "audio", "video", "object", "template", "noscript"}
@@ -133,8 +133,7 @@ def documents(source, tree, store, repo, skipped: dict | None = None) -> Iterato
 
 
 def _records(source, path, entry, file, skipped):
-    licenses = {value: license_entry["license"] for license_entry in source.data["licenses"]
-                if glob_match_any(path, license_entry["paths"])
+    licenses = {value: license_entry["license"] for license_entry in license_entries(source.data["licenses"], path)
                 for value in license_entry.get("values", [])}
     report = records.Skipped({})
     if skipped is not None:

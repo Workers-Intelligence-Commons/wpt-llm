@@ -402,7 +402,7 @@ def check_license_map(source: Source, tree: dict[str, Entry]):
     records file instead matches one or more, each listing the license
     values of the records it covers, with no value listed twice."""
     for path in tree:
-        found = [e for e in source.data["licenses"] if glob_match_any(path, e["paths"])]
+        found = manifest.license_entries(source.data["licenses"], path)
         names = ", ".join(e["license"] for e in found)
         if not is_records(source, path):
             if len(found) != 1:

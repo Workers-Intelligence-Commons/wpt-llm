@@ -126,6 +126,9 @@ def repo(tmp_path):
 DECISION = {"decision": "admitted", "by": "Test Reviewer", "date": "2026-10-14"}  # an admission needs no reason
 ATTRIBUTION = "Copyright (c) 2026 Test Author, https://example.org/project"
 LICENSE_TEXT = "Copyright (c) 2026 Test Author\n\nPermission is hereby granted, free of charge, to any person.\n"
+# a source with a git history: the history files' own entry, then the tree's, whose `**` leaves them out
+WITH_HISTORY = [{"license": "MIT", "paths": [".git/history/**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT},
+                {"license": "MIT", "paths": ["**"], "attribution": ATTRIBUTION, "text": LICENSE_TEXT}]
 
 
 def add_source(repo, store, origin, item, data, patches=(), compute_checksum=True):
