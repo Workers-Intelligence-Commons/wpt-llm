@@ -52,7 +52,7 @@ from lxml import etree
 
 from . import conversations, records, tasks
 from .errors import FormatMapError, NotText
-from .manifest import SYMLINK, glob_match
+from .manifest import SYMLINK, glob_match_any
 
 EPUB_TYPE = "{http://www.idpf.org/2007/ops}type"
 SKIPPED = {"head", "script", "style", "img", "svg", "math", "audio", "video", "object", "template", "noscript"}
@@ -72,7 +72,7 @@ REPOSITORIES = {"git", "mercurial"}  # source types whose paths start at a repos
 
 
 def format_of(source, path: str) -> dict:
-    found = [e for e in source.data["formats"] if any(glob_match(path, g) for g in e["paths"])]
+    found = [e for e in source.data["formats"] if glob_match_any(path, e["paths"])]
     if len(found) != 1:
         what = "no format entry" if not found else f"{len(found)} format entries"
         raise FormatMapError(f"{source.id}: {path} matches {what}; every path must match exactly 1")
@@ -134,7 +134,7 @@ def documents(source, tree, store, repo, skipped: dict | None = None) -> Iterato
 
 def _records(source, path, entry, file, skipped):
     licenses = {value: license_entry["license"] for license_entry in source.data["licenses"]
-                if any(glob_match(path, g) for g in license_entry["paths"])
+                if glob_match_any(path, license_entry["paths"])
                 for value in license_entry.get("values", [])}
     report = records.Skipped({})
     if skipped is not None:

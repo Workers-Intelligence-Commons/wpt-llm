@@ -80,12 +80,18 @@ together.
    [docs/architecture.md](docs/architecture.md)), with `checksum` set to
    `sha256:` followed by 64 zeros for now, and a `decision` stating
    `"refused"` with the reason "under review".
-4. `uv run wpt-dataset manifest <id>` downloads it and prints its manifest and
-   checksum. Put the checksum in `source.json`. A publisher that rebuilds
-   its archives gives another checksum on a later fetch: fetch again and
-   update `revision` and `checksum` together. Exclude binary files in
-   `extract`, map every path to exactly one license in `licenses`, and to
-   exactly one format in `formats` (how it becomes Markdown, below). In
+4. `uv run wpt-dataset fill-checksum <id>` downloads it once, excludes in
+   `extract` every file that is not UTF-8 text (binary files), each by its
+   exact path, writes the checksum in `source.json`, and checks the source
+   as `check --fetch` does (step 5) without downloading it again. It takes
+   several ids, fills each, and lists the failures at the end. Map record
+   and chat files in `formats` before running it: a file no such format
+   reads is checked as text, and excluded when it is not UTF-8.
+   `uv run wpt-dataset manifest <id>` only prints a source's manifest and
+   checksum. A publisher that rebuilds its archives gives another checksum
+   on a later fetch: update `revision`, set `checksum` back to the zeros,
+   and fill it again. Map every path to exactly one license in `licenses`,
+   and to exactly one format in `formats` (how it becomes Markdown, below). In
    each license entry, write in `attribution` the credit that license asks
    for, as the source gives it: authors, title, copyright line, link, and
    in `text` the license as the source gives it (its license file with its
@@ -93,8 +99,11 @@ together.
    domain, why). Every model trained on the source repeats both in its
    notice.
    A dataset on huggingface.co is `"type": "huggingface"`, pinned to the
-   dataset's commit; `manifest` then reads the Hub's listing and downloads
-   only its small files. A file holding many documents, each with its own
+   dataset's commit; `fill-checksum` and `manifest` then read the Hub's
+   listing and download only its small files. `fill-checksum` excludes
+   nothing there, and its check downloads the dataset: exclude each file
+   the check names as not UTF-8 text, then put in the checksum `manifest`
+   prints. A file holding many documents, each with its own
    license (JSON Lines, optionally `.gz` or `.zst`, or Parquet), is in the
    `records` format: it names the record's `text`, `license`, `id` and
    `credit` fields, and each license entry covering it lists in `values`
