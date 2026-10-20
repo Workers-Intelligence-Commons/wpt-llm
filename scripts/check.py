@@ -11,7 +11,7 @@ In order, each one run even when an earlier one failed:
 
     lock      uv.lock matches every pyproject.toml
     tests     the tests of every package, in parallel with one PyTorch thread
-              each, on as many processes as 75% of the cores and 75% of the
+              each and no GPU, on as many processes as 75% of the cores and 75% of the
               available memory (2.5 GB each) both allow; the image build
               test (marked image_build) only when BASE..HEAD changes
               IMAGE_CODE or an image's folder (plain `uv run pytest` runs
