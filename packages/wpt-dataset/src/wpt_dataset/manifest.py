@@ -280,6 +280,17 @@ PLAIN_GIT = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.d
              "GIT_NO_LAZY_FETCH": "1"}
 
 
+def license_entries(licenses: list[dict], path: str) -> list[dict]:
+    """The license entries covering path, in their order. A history file is
+    matched only by patterns that start with `.git/history/`, so an entry
+    written `**` covers every file of the tree and no history file
+    (maintainer's decision, 2026-10-20); such patterns match no other path.
+    Every place that maps a path to its license entries goes through here."""
+    history = path.startswith(HISTORY)
+    return [e for e in licenses
+            if glob_match_any(path, [p for p in e["paths"] if p.startswith(HISTORY)] if history else e["paths"])]
+
+
 def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor):
     """One file per commit from `since` to `revision`, merges left out:
     `.git/history/<commit>`, holding what `git format-patch` writes for the
@@ -289,16 +300,15 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
     meet a file of the commit itself."""
     commits = _history_commits(repo, since, revision)
     changed = {commit: [path for path, _ in changes] for commit, changes in _changed_paths(repo, commits).items()}
-    limits = {}  # commit -> None when every path it changes is kept, else the kept paths
+    limits = {}  # commit -> None when every path it changes is kept, else the pathspecs of the kept paths
     for commit in commits:
         paths = [p for p in changed[commit] if extractor.kept(p) is not None]
         if paths:
-            limits[commit] = None if len(paths) == len(changed[commit]) else paths
+            limits[commit] = None if len(paths) == len(changed[commit]) else _only(paths, changed[commit])
 
     def patch(commit):
-        paths = limits[commit]
-        specs = [f":(literal){p}" for p in paths]
-        if any("\n" in p or "\r" in p for p in paths):  # no line of standard input can hold such a path
+        specs = limits[commit]
+        if any("\n" in s or "\r" in s for s in specs):  # no line of standard input can hold such a path
             return commit, _git(repo, *FORMAT_PATCH, "-1", commit, "--", *specs)
         # the paths go on standard input, after "--": a command line has a limit (32,767 characters on
         # Windows) that a commit changing thousands of files passes
@@ -311,6 +321,18 @@ def read_git_history(repo: Path, since: str, revision: str, extractor: Extractor
                                             limited):
             # a diff may hold bytes in any encoding; the file must be UTF-8 text
             extractor.add(HISTORY + commit, FILE, text.decode("utf-8", errors="replace").encode("utf-8"))
+
+
+def _only(kept, changed) -> list[str]:
+    """Pathspecs that limit a commit's diff to the kept paths among the
+    changed ones. git reads a literal pathspec naming a folder as a prefix,
+    so a kept path that is also the folder of changed paths not kept (a
+    submodule replacing a folder of the same name) would bring them in:
+    those are excluded by name, and only then."""
+    folders = set(kept)
+    excluded = [p for p in changed if p not in folders
+                and any(p[:i] in folders for i, letter in enumerate(p) if letter == "/")]
+    return [f":(literal){p}" for p in kept] + [f":(exclude,literal){p}" for p in excluded]
 
 
 FORMAT_PATCH = ("format-patch", "--root", "--stdout", "--no-signature", "--no-renames", "--no-binary")

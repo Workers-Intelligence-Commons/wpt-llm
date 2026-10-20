@@ -114,7 +114,9 @@ together.
    revision (merges left out), in `git format-patch` layout and limited
    to the files `extract` keeps. `since` is the commit from which the root
    license file holds the license the source lists; give these files a
-   `code` format with the language `patch`.
+   `code` format with the language `patch` and a license entry of their
+   own, `.git/history/**`: an entry written `**` covers only the tree's
+   files ([docs/licenses.md](docs/licenses.md), "Rules").
    A git source downloads only the contents of the files it keeps. A
    submodule (a folder pointing to a commit of another repository) is
    either excluded in `extract` or read at that commit from the address

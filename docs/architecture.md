@@ -93,7 +93,13 @@ recipe then needs the old commit of this repository.
 - `tags`: describe paths (language, domain); pools select documents by tags.
 - `mirrors`: other addresses expected to give the same checksum.
 - `history` (git only): adds one file per commit from `since` to the
-  revision, `.git/history/<commit>`, in `git format-patch` layout.
+  revision, `.git/history/<commit>`, in `git format-patch` layout. A
+  commit that also changes files `extract` leaves out gets a diff limited
+  to the kept paths; when a kept path is also the folder of paths left out
+  (a submodule replacing a folder of the same name), those paths are
+  excluded from the diff by name. Only patterns starting with
+  `.git/history/` give these files their license entry: `**` covers the
+  tree's files only (docs/licenses.md, "Rules").
 - `submodules` (git only): the address of each submodule the source reads,
   by its path.
 - `cuts`: erasure cuts; see [erasure.md](erasure.md).
