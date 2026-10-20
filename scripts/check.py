@@ -10,8 +10,9 @@ Usage:
 In order, each one run even when an earlier one failed:
 
     lock      uv.lock matches every pyproject.toml
-    tests     the tests of every package, in parallel on all cores but 2 with
-              one PyTorch thread each; the image build test (marked
+    tests     the tests of every package, in parallel with one PyTorch thread
+              each, on as many processes as 75% of the cores and 75% of the
+              available memory (2.5 GB each) both allow; the image build test (marked
               image_build) only when BASE..HEAD changes IMAGE_CODE or an
               image's folder
               (plain `uv run pytest` runs every test, serially)
@@ -29,6 +30,7 @@ Exits with 1 when a check failed.
 """
 
 import argparse
+import ctypes
 import os
 import subprocess
 import sys
@@ -38,7 +40,8 @@ ROOT = Path(__file__).resolve().parent.parent
 UV = os.environ.get("UV", "uv")  # uv tells the scripts it runs where it is
 # this script runs in its own environment; the checks run in the project's
 ENVIRON = {k: v for k, v in os.environ.items() if k != "VIRTUAL_ENV"}
-WORKERS = max(1, (os.cpu_count() or 1) - 2)  # 2 cores left for the rest of the machine
+WORKER_MEMORY = 2.5e9  # bytes: the measured memory of one test worker (about 2.2 GB, rounded up)
+SHARE = 0.75  # the share of the cores and of the available memory the test workers may take
 # what the image build test covers: a change to any of these, or to an image's folder, runs it
 IMAGE_CODE = ("packages/wpt-agent/src/wpt_agent/images.py", "packages/wpt-agent/tests/test_images.py",
               "packages/wpt-agent/tests/conftest.py",
@@ -46,6 +49,50 @@ IMAGE_CODE = ("packages/wpt-agent/src/wpt_agent/images.py", "packages/wpt-agent/
               "packages/wpt-dataset/src/wpt_dataset/schemas/image-licenses.schema.json")
 # whether an image's folder changed since the revision: only the service layer names the data folder
 IMAGES_CHANGED = "import sys; from wpt_dataset.repo import Repo; print(Repo('.').changed_since(sys.argv[1])[1])"
+
+
+def available_memory():
+    """Bytes of memory available to new processes, or None when this
+    machine does not say: MemAvailable on Linux, free, inactive and
+    speculative pages on macOS, ullAvailPhys on Windows."""
+    try:
+        if sys.platform == "linux":
+            for line in Path("/proc/meminfo").read_text().splitlines():
+                if line.startswith("MemAvailable:"):
+                    return int(line.split()[1]) * 1024
+        elif sys.platform == "darwin":
+            lines = subprocess.run(["vm_stat"], capture_output=True, text=True, check=True).stdout.splitlines()
+            page = int(lines[0].split("page size of")[1].split()[0])
+            pages = {name.strip(): int(count.strip(" .")) for name, count in (line.split(":", 1) for line in lines[1:])
+                     if count.strip(" .").isdigit()}
+            return page * sum(pages[name] for name in ("Pages free", "Pages inactive", "Pages speculative"))
+        elif sys.platform == "win32":
+            class MemoryStatus(ctypes.Structure):
+                _fields_ = [("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                            *((name, ctypes.c_ulonglong) for name in ("ullTotalPhys", "ullAvailPhys",
+                              "ullTotalPageFile", "ullAvailPageFile", "ullTotalVirtual", "ullAvailVirtual",
+                              "ullAvailExtendedVirtual"))]
+            status = MemoryStatus(dwLength=ctypes.sizeof(MemoryStatus))
+            if ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(status)):
+                return status.ullAvailPhys
+    except (OSError, ValueError, IndexError, KeyError, subprocess.CalledProcessError):
+        pass
+    return None
+
+
+def workers():
+    """How many test processes to run, and the line that says why: the
+    smaller of 75% of the cores and 75% of the available memory divided by
+    WORKER_MEMORY, at least 1; the cores alone when the memory is unknown."""
+    cores = os.cpu_count() or 1
+    by_cores = max(1, int(cores * SHARE))
+    memory = available_memory()
+    if memory is None:
+        return by_cores, f"{by_cores} test workers: {SHARE:.0%} of {cores} cores (the available memory is unknown here)"
+    by_memory = max(1, int(memory * SHARE / WORKER_MEMORY))
+    count = min(by_cores, by_memory)
+    return count, (f"{count} test workers: the fewer of {SHARE:.0%} of {cores} cores ({by_cores}) and {SHARE:.0%} of "
+                   f"{memory / 1e9:.1f} GB available at {WORKER_MEMORY / 1e9} GB each ({by_memory})")
 
 
 def upstream_base():
@@ -81,9 +128,11 @@ def checks(base, range_):
     # Rust build finds the project's Python even where none is on the search path
     rust = ROOT / "packages" / "wpt-tokenizer" / "rust"
     deselect, why = image_tests(base)
+    count, sizing = workers()
     return [
         ("lock", [[UV, "lock", "--check"]], ROOT, None),
-        ("tests", [[UV, "run", "pytest", "-rs", "-n", str(WORKERS), "--dist", "loadgroup", *deselect]], ROOT, why),
+        ("tests", [[UV, "run", "pytest", "-rs", "-n", str(count), "--dist", "loadgroup", *deselect]], ROOT,
+         f"{sizing}\n{why}"),
         ("rust", [[UV, "run", "rustc", "--version"], [UV, "run", "cargo", "test"]], rust, None),
         ("data", [[UV, "run", "wpt-dataset", "check"]], ROOT, None),
         ("sources", [[UV, "run", "wpt-dataset", "check", "--changed", base]], ROOT, None),
