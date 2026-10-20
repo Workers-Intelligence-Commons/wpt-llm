@@ -97,6 +97,29 @@ def test_a_base_whose_apt_ignores_the_snapshot_is_neither_locked_nor_built(root)
         images.build(root, "tiny", log=lambda _: None)
 
 
+UPDATE_ERROR = "apt-get update failed\nE: Failed to fetch https://snapshot.debian.org/ 503  Service Unavailable\n"
+GOOD_POLICY = " 500 https://snapshot.debian.org/archive/debian/20260101T000000Z trixie/main amd64 Packages\n"
+
+
+def test_a_failed_apt_update_is_tried_again_and_then_told_as_it_is(monkeypatch):
+    # the snapshot server refused requests for a while: that is no old apt,
+    # so the message names apt's error, not the base
+    runs = []
+    answers = [UPDATE_ERROR, UPDATE_ERROR, GOOD_POLICY]
+    monkeypatch.setattr(images, "UPDATE_PAUSE", 0)
+    monkeypatch.setattr(images, "_docker", lambda *args, **_: runs.append(args) or answers[len(runs) - 1])
+    images._check_snapshot("layer", "debian:trixie")
+    assert len(runs) == 3
+
+    runs.clear()
+    answers[:] = [UPDATE_ERROR] * 3
+    with pytest.raises(ImageError, match=r"^debian:trixie: apt-get update failed in the snapshot layer.*"
+                                         r"E: Failed to fetch https://snapshot\.debian\.org/ 503") as refused:
+        images._check_snapshot("layer", "debian:trixie")
+    assert len(runs) == 3
+    assert "use a base of" not in str(refused.value)
+
+
 def a_repository(tmp_path):
     for folder in ("data/sources", "data/images/tiny"):
         (tmp_path / folder).mkdir(parents=True)
