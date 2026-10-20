@@ -28,10 +28,12 @@ base plus one layer that sets apt to the snapshot (SNAPSHOT): apt then
 reads the archive as it was at that moment, so a lock keeps building for
 years. Both first check that layer the same way (_check_snapshot), and
 refuse it unless apt, after `apt-get update`, reads its package lists only
-from the snapshot hosts. apt fetches the archive over HTTPS without
-checking the server's certificate (the base images hold none; apt checks
-the archive's signatures and every package's checksum itself), and
-accepts the dated archive's expired Release files.
+from the snapshot hosts; an update that fails (the archive's server
+refusing requests) is tried 3 times in all before the layer is refused
+with apt's errors. apt fetches the archive over HTTPS without checking
+the server's certificate (the base images hold none; apt checks the
+archive's signatures and every package's checksum itself), and accepts
+the dated archive's expired Release files.
 
 A built image is tagged wpt-agent/<name>:<hash of the folder's files
 except licenses.json>, so a changed Dockerfile or lock builds again.
@@ -46,6 +48,7 @@ import io
 import json
 import re
 import tarfile
+import time
 from datetime import UTC, datetime
 
 from wpt_dataset.errors import DatasetError
@@ -65,6 +68,11 @@ Acquire::https::snapshot.ubuntu.com::Verify-Peer "false";
 """
 SNAPSHOT_FILE = "/etc/apt/apt.conf.d/50wpt-snapshot"
 SNAPSHOT_HOSTS = ("https://snapshot.debian.org/", "https://snapshot.ubuntu.com/")
+UPDATE_ATTEMPTS = 3  # `apt-get update` in the snapshot layer: the archive's server may refuse requests for a while
+UPDATE_PAUSE = 10  # seconds between two attempts
+UPDATE_FAILED = "apt-get update failed"  # first line the check prints when the update fails, then apt's errors
+CHECK = (f"if apt-get update -q >/tmp/update.log 2>&1; then apt-cache policy; "
+         f"else echo '{UPDATE_FAILED}'; grep -E '^[EW]:' /tmp/update.log || tail -n 5 /tmp/update.log; fi")
 READ_FROM = re.compile(r"^ +-?\d+ (\S+) ", re.MULTILINE)  # a package list's address in `apt-cache policy`
 
 
@@ -206,8 +214,16 @@ def _context(where) -> bytes:
 def _check_snapshot(layer, base):
     """ImageError unless every package list apt reads, after an update,
     comes from a snapshot host: an apt older than APT::Snapshot ignores it
-    and reads today's archive, which no lock pins."""
-    policy = _docker("run", "--rm", layer, "sh", "-c", "apt-get update -qq >/dev/null && apt-cache policy")
+    and reads today's archive, which no lock pins. A failed update is tried
+    again, UPDATE_ATTEMPTS times in all, then refused with apt's errors."""
+    for attempt in range(1, UPDATE_ATTEMPTS + 1):
+        policy = _docker("run", "--rm", layer, "sh", "-c", CHECK)
+        if not policy.startswith(UPDATE_FAILED):
+            break
+        if attempt == UPDATE_ATTEMPTS:
+            errors = policy.removeprefix(UPDATE_FAILED).strip()
+            raise ImageError(f"{base}: apt-get update failed in the snapshot layer after {attempt} attempts: {errors}")
+        time.sleep(UPDATE_PAUSE)
     lists = [address for address in READ_FROM.findall(policy) if not address.startswith("/")]  # not dpkg's own status
     other = sorted({address for address in lists if not address.startswith(SNAPSHOT_HOSTS)})
     if not lists or other:
