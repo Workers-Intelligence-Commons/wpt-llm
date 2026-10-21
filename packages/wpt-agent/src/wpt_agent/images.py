@@ -28,9 +28,9 @@ base plus one layer that sets apt to the snapshot (SNAPSHOT): apt then
 reads the archive as it was at that moment, so a lock keeps building for
 years. Both first check that layer the same way (_check_snapshot), and
 refuse it unless apt, after `apt-get update`, reads its package lists only
-from the snapshot hosts; an update that fails (the archive's server
-refusing requests) is tried 3 times in all before the layer is refused
-with apt's errors. apt fetches the archive over HTTPS without checking
+from the snapshot hosts; an update that fails, or succeeds but fetches no
+package list (the archive's server misbehaving), is tried 3 times in all
+before the layer is refused with apt's errors. apt fetches the archive over HTTPS without checking
 the server's certificate (the base images hold none; apt checks the
 archive's signatures and every package's checksum itself), and accepts
 the dated archive's expired Release files.
@@ -71,7 +71,10 @@ SNAPSHOT_HOSTS = ("https://snapshot.debian.org/", "https://snapshot.ubuntu.com/"
 UPDATE_ATTEMPTS = 3  # `apt-get update` in the snapshot layer: the archive's server may refuse requests for a while
 UPDATE_PAUSE = 10  # seconds between two attempts
 UPDATE_FAILED = "apt-get update failed"  # first line the check prints when the update fails, then apt's errors
-CHECK = (f"if apt-get update -q >/tmp/update.log 2>&1; then apt-cache policy; "
+# The update counts as failed when it exits non-zero, and also when it exits 0 but leaves no remote package
+# list (a misbehaving server): the policy then shows only dpkg's own status, an address starting with "/".
+CHECK = (f"if apt-get update -q >/tmp/update.log 2>&1 && apt-cache policy >/tmp/policy.log "
+         f"&& grep -Eq '^ +-?[0-9]+ [^/ ]' /tmp/policy.log; then cat /tmp/policy.log; "
          f"else echo '{UPDATE_FAILED}'; grep -E '^[EW]:' /tmp/update.log || tail -n 5 /tmp/update.log; fi")
 READ_FROM = re.compile(r"^ +-?\d+ (\S+) ", re.MULTILINE)  # a package list's address in `apt-cache policy`
 
@@ -214,8 +217,9 @@ def _context(where) -> bytes:
 def _check_snapshot(layer, base):
     """ImageError unless every package list apt reads, after an update,
     comes from a snapshot host: an apt older than APT::Snapshot ignores it
-    and reads today's archive, which no lock pins. A failed update is tried
-    again, UPDATE_ATTEMPTS times in all, then refused with apt's errors."""
+    and reads today's archive, which no lock pins. A failed update, or one
+    that fetches no package list, is tried again, UPDATE_ATTEMPTS times in
+    all, then refused with apt's errors."""
     for attempt in range(1, UPDATE_ATTEMPTS + 1):
         policy = _docker("run", "--rm", layer, "sh", "-c", CHECK)
         if not policy.startswith(UPDATE_FAILED):
@@ -226,8 +230,8 @@ def _check_snapshot(layer, base):
         time.sleep(UPDATE_PAUSE)
     lists = [address for address in READ_FROM.findall(policy) if not address.startswith("/")]  # not dpkg's own status
     other = sorted({address for address in lists if not address.startswith(SNAPSHOT_HOSTS)})
-    if not lists or other:
-        raise ImageError(f"{base}: apt reads {', '.join(other) or 'no package list'}, not the dated archive "
+    if other:  # CHECK passes only a policy with a remote list, so `lists` is not empty here
+        raise ImageError(f"{base}: apt reads {', '.join(other)}, not the dated archive "
                          f"(snapshot.debian.org, snapshot.ubuntu.com), so its apt ignores APT::Snapshot; "
                          f"use a base of Debian 13 (trixie) or Ubuntu 24.04 (noble) or later")
 
