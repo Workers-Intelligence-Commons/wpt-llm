@@ -1,12 +1,38 @@
-"""Shared setup for the tests of every package and application: whether
-Docker runs on this machine, and how two passes over the same tokens may
-differ in routing. Test files reach it as fixtures (they cannot import this
-file under --import-mode=importlib)."""
+"""Shared setup for the tests of every package and application: one
+PyTorch thread and no GPU per test process when pytest-xdist runs the tests
+in parallel (scripts/check.py), whether Docker runs on this machine, and how
+two passes over the same tokens may differ in routing. Test files reach the
+last two as fixtures (they cannot import this file under
+--import-mode=importlib)."""
 
+import os
 import shutil
 import subprocess
 
 import pytest
+
+# In a pytest-xdist worker, PyTorch and the programs it starts use 1 thread
+# and no GPU, as in CI: every worker taking every core makes the machine
+# unusable, and on a GPU that shares the machine's memory every worker
+# holds its own share of it. The threading libraries read these variables
+# when torch is first imported, and apps/conftest.py imports it before
+# pytest_configure runs, so they are set here, when pytest loads this file;
+# a serial run keeps the defaults and the GPU.
+if "PYTEST_XDIST_WORKER" in os.environ:
+    os.environ["OMP_NUM_THREADS"] = os.environ["MKL_NUM_THREADS"] = "1"
+    os.environ["CUDA_VISIBLE_DEVICES"] = os.environ["HIP_VISIBLE_DEVICES"] = ""
+
+
+def pytest_configure(config):
+    """In a pytest-xdist worker, also limits torch's own thread pool to 1,
+    which applies even when torch was imported before this hook."""
+    if "PYTEST_XDIST_WORKER" not in os.environ:
+        return
+    try:
+        import torch
+    except ImportError:
+        return
+    torch.set_num_threads(1)
 
 
 @pytest.fixture(scope="session")

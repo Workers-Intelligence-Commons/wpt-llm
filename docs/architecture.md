@@ -429,7 +429,34 @@ branch, as a push would:
 - `uv.lock` matches every `pyproject.toml`.
 - The tests of every package, and the Rust tests. None needs a server: the
   S3 test runs against moto, which answers S3 requests inside the test
-  process.
+  process. The tests run in parallel (pytest-xdist), each process limited to
+  one PyTorch thread and kept off the GPU, as in CI, since a GPU that shares
+  the machine's memory gives every process its own share of it; a plain
+  `uv run pytest` still uses the GPU (maintainer's decisions, 2026-10-20). The
+  number of processes is the smaller of 75% of the cores and 75% of the
+  memory available when the check starts divided by 2.5 GB, the measured
+  memory of one test process rounded up, and at least 1; where the memory
+  cannot be read, the cores alone decide. The check prints the number and
+  both inputs (maintainer's decision, 2026-10-20).
+- The image build test (marked `image_build`, in
+  `packages/wpt-agent/tests/test_images.py`) locks and builds a real image,
+  which takes minutes. It runs only when the push changes image code:
+  `packages/wpt-agent/src/wpt_agent/images.py`,
+  `packages/wpt-agent/tests/test_images.py`,
+  `packages/wpt-agent/tests/conftest.py`, the schemas
+  `image-lock.schema.json` and `image-licenses.schema.json` in
+  `packages/wpt-dataset/src/wpt_dataset/schemas/`, or anything under
+  `data/images/`. Otherwise the check leaves it out and says so; a plain
+  `uv run pytest` runs it with every other test (maintainer's decision,
+  2026-10-20).
+- The two GRPO tests that run attempts in a real image
+  (`apps/wpt-posttrain/tests/test_posttrain.py`) keep its lock in
+  `.pytest_cache/` and the built image in Docker, for as long as the
+  image's files and `wpt_agent/images.py` stay the same. Only the first
+  check on a machine, and every CI run (which starts empty), pays for
+  locking and building it; when those files change, the next check locks
+  and builds again and removes the old image (maintainer's decision,
+  2026-10-20).
 - `wpt-dataset check`: every file matches its schema and current shape,
   source ids match their address, licenses are on the allowed list (with
   their text), patches are numbered without gaps, mixture

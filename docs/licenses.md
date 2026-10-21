@@ -59,6 +59,7 @@ packages must stay compatible with AGPL-3.0-or-later.
 | colorama | 0.4.6 | BSD-3-Clause | Windows only, through pytest |
 | cryptography | 50.0.2 | Apache-2.0 OR BSD-3-Clause | tests, through moto; its compiled part includes OpenSSL (Apache-2.0), statically linked |
 | einops | 0.8.2 | MIT | through fla-core |
+| execnet | 2.1.2 | MIT | tests, through pytest-xdist |
 | fla-core | 0.5.2 | MIT | KDA's GPU kernel (flash-linear-attention), used where Triton runs |
 | googleapis-common-protos | 1.75.5 | Apache-2.0 | through opentelemetry-exporter-otlp-proto-http |
 | idna | 3.20 | BSD-3-Clause | through requests |
@@ -86,6 +87,7 @@ packages must stay compatible with AGPL-3.0-or-later.
 | pycparser | 3.11 | BSD-3-Clause | tests, through moto (cffi) |
 | pygments | 2.21.0 | BSD-2-Clause | through pytest |
 | pytest | 9.1.1 | MIT | tests |
+| pytest-xdist | 3.8.0 | MIT | tests: runs them in parallel (scripts/check.py) |
 | python-dateutil | 2.9.0.post0 | Apache-2.0 AND BSD-3-Clause | newer code is also under Apache-2.0; all of it is under BSD-3-Clause |
 | pyyaml | 6.0.3 | MIT | tests, through moto |
 | referencing | 0.37.0 | MIT | |

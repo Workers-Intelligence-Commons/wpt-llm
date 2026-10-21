@@ -311,6 +311,45 @@ def task_source(built, root, upstream, check='#!/bin/bash\necho "0.$RANDOM"\n') 
     return sid
 
 
+# a lock of data/images/tiny/ whose image no machine builds: its tag is absent
+NEVER_BUILT = {"schema": 1, "base": f"ubuntu@sha256:{'0' * 64}", "snapshot": "20000101T000000Z",
+               "packages": {"hello": "0"}}
+TINY_IMAGE = "wpt-posttrain/tiny-image"  # in pytest's cache (.pytest_cache/): the pinned and built image of tiny
+
+
+@pytest.fixture(scope="session")
+def tiny_image(request, docker_runs):
+    """Gives pinned(root), which pins and builds data/images/tiny/ of root,
+    as task_source writes it, and returns the image's tag. The lock and the
+    image are kept, in pytest's cache and in Docker, for as long as the
+    folder's files (but its lock) and wpt_agent/images.py stay the same: a
+    later pinned() writes the kept lock.json and licenses.json into the
+    folder, and builds again only when Docker lost the image. When they
+    change, the image kept for the old ones is removed."""
+    cache = request.config.cache
+
+    def pinned(root):
+        digest = hashlib.sha256(Path(images.__file__).read_bytes())
+        for path, (executable, content) in sorted(images.files(root, "tiny").items()):
+            if path not in ("lock.json", "licenses.json"):
+                digest.update(path.encode() + b"\0" + str(executable).encode() + b"\0" + content + b"\0")
+        key, folder = digest.hexdigest(), root / "data" / "images" / "tiny"
+        kept = cache.get(TINY_IMAGE, None)
+        if kept and kept["key"] == key:
+            (folder / "lock.json").write_text(kept["lock"])
+            (folder / "licenses.json").write_text(kept["licenses"])
+            return images.build(root, "tiny", log=lambda _: None)  # at once when Docker has it
+        if kept:
+            subprocess.run(["docker", "rmi", "-f", kept["tag"]], capture_output=True)
+        images.lock(root, "tiny", force=True, log=lambda _: None)
+        tag = images.build(root, "tiny", log=lambda _: None)
+        cache.set(TINY_IMAGE, {"key": key, "tag": tag, "lock": (folder / "lock.json").read_text(),
+                               "licenses": (folder / "licenses.json").read_text()})
+        return tag
+
+    return pinned
+
+
 GRPO = Path(wpt_posttrain.__file__).parent / "steps" / "grpo.py"
 TOKEN_EFFICIENCY = Path(wpt_posttrain.__file__).parent / "steps" / "token-efficiency.py"
 
@@ -458,7 +497,8 @@ def test_a_refused_attempt_line_stops_the_run_with_the_record_error_code(built, 
     assert not (tmp_path / "tuned").exists()
 
 
-def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, built, tmp_path):
+@pytest.mark.xdist_group("tiny-image")  # one worker: the first of these tests pins and builds the image
+def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, built, tmp_path, tiny_image):
     # each attempt runs in a container of the task's image and its check
     # scores it; attempts that score apart change the weights, but not the
     # routers', and the new model's NOTICE credits the source of the tasks;
@@ -469,17 +509,14 @@ def test_grpo_learns_from_scored_attempts_at_the_tasks_tagged_grpo(docker_runs, 
     train([recipe, built.dataset_id, "--out", "model"])
     base, root = tmp_path / "model", tmp_path
     sid = task_source(built, root, tmp_path / "tasks")
-    images.lock(root, "tiny", log=lambda _: None)  # no image built yet
+    (root / "data" / "images" / "tiny" / "lock.json").write_text(dump_json(NEVER_BUILT))  # no image built yet
 
     step = step_copy(tmp_path, ROUNDS="1", GROUP="2", TASKS_PER_UPDATE="1", LEARNING_RATE="1e-2")
     recipe = built.recipe("agent", training=one_stage(1, 64), posttrain=[str(step)])
     with pytest.raises(SystemExit, match="image 'tiny' is not built on this machine.*wpt-agent build-image tiny"):
         main([recipe, str(base), str(tmp_path / "tuned")])
-    try:
-        images.build(root, "tiny", log=lambda _: None)
-        main([recipe, str(base), str(tmp_path / "tuned")])
-    finally:
-        subprocess.run(["docker", "rmi", "-f", images.tag(root, "tiny")], capture_output=True)
+    tiny_image(root)
+    main([recipe, str(base), str(tmp_path / "tuned")])
 
     tuned = tmp_path / "tuned"
     before, after = load_file(base / "model.safetensors"), load_file(tuned / "model.safetensors")
@@ -609,7 +646,8 @@ def test_token_efficiency_fails_and_writes_nothing_when_no_task_is_left(docker_r
     assert not (tmp_path / "tuned").exists()
 
 
-def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, tmp_path):
+@pytest.mark.xdist_group("tiny-image")
+def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, tmp_path, tiny_image):
     # the incoming model's attempts at grpo's own tasks set the reference,
     # then attempts that pass and fail it change the weights, but not the
     # routers', and the new model credits the source of the tasks
@@ -617,16 +655,12 @@ def test_token_efficiency_learns_from_the_tasks_tagged_grpo(docker_runs, built, 
     train([recipe, built.dataset_id, "--out", "model"])
     base, root = tmp_path / "model", tmp_path
     sid = task_source(built, root, tmp_path / "tasks", check="#!/bin/bash\necho $((RANDOM % 2))\n")
-    images.lock(root, "tiny", log=lambda _: None)
+    tiny_image(root)
     # 16 reference attempts all fail 1 time in 65536; 8 attempts all equal, in each of 2 rounds, 1 time in 16384
     step = step_copy(tmp_path, TOKEN_EFFICIENCY, ROUNDS="2", GROUP="8", REFERENCE="16", TASKS_PER_UPDATE="1",
                      LEARNING_RATE="1e-2")
     recipe = built.recipe("agent", training=one_stage(1, 1024), posttrain=[str(step)])
-    try:
-        images.build(root, "tiny", log=lambda _: None)
-        main([recipe, str(base), str(tmp_path / "tuned")])
-    finally:
-        subprocess.run(["docker", "rmi", "-f", images.tag(root, "tiny")], capture_output=True)
+    main([recipe, str(base), str(tmp_path / "tuned")])
 
     tuned = tmp_path / "tuned"
     before, after = load_file(base / "model.safetensors"), load_file(tuned / "model.safetensors")
