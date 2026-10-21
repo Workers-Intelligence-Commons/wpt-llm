@@ -261,3 +261,13 @@ uv run scripts/check.py      # every check CI runs, before you push
 tests, the data rules, and the checks on changed sources and on your
 commits, compared with the upstream branch. A green run means a green CI.
 There is no local hook.
+
+A test checks that the code works, not that it works well (maintainer's
+decision, 2026-10-21): it runs without crashing, its computation is valid
+(finite numbers, values in their range, tokens come out, training changes
+the weights it reaches), and two routes the code says are the same give the
+same result within rounding. Whether a method is efficient or a good idea
+is a question for an evaluation (`wpt-eval`, docs/evaluation.md), never for
+a test: a test that asks for a quality, such as a trained part beating a
+simple one, fails on one processor and passes on another, by rounding and
+chance, not by a bug.
