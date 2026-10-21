@@ -394,7 +394,7 @@ class S3Store(Store):
             os.close(fd)
             try:
                 self.client.download_file(self.bucket, self._object_key(sha), tmp)
-                os.replace(tmp, local)
+                _replace_object(tmp, local)
             except BaseException:
                 Path(tmp).unlink(missing_ok=True)
                 raise
@@ -581,10 +581,22 @@ def _atomic_copy(source, target: Path):
         with os.fdopen(fd, "wb") as out, open(source, "rb") as src:
             while block := src.read(CHUNK):
                 out.write(block)
-        os.replace(tmp, target)
+        _replace_object(tmp, target)
     except BaseException:
         Path(tmp).unlink(missing_ok=True)
         raise
+
+
+def _replace_object(tmp, target: Path):
+    """os.replace for a file named by its hash. On Windows, replacing a file
+    another process has open is refused; the name is the content's hash, so a
+    target that exists already holds the same bytes."""
+    try:
+        os.replace(tmp, target)
+    except PermissionError:
+        if not target.is_file():
+            raise
+        Path(tmp).unlink(missing_ok=True)
 
 
 def _atomic_write(target: Path, data: bytes, durable=False):
